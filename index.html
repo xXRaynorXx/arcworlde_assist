@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcWorlde - Asistente de Turno</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo-zone">
+      <h1>ArcWorlde</h1>
+      <span class="subtitle">Asistente de Turno · Edición 2.2</span>
+    </div>
+    <nav id="phase-buttons" class="phase-nav"></nav>
+  </header>
+
+  <main class="app-layout">
+    <!-- Columna Izquierda: Lista de Acciones y Categorías -->
+    <section class="list-panel">
+      <div id="phase-description" class="phase-desc-box"></div>
+      <div id="actions-container" class="actions-container"></div>
+    </section>
+
+    <!-- Columna Derecha: Detalle de la Acción Seleccionada -->
+    <section class="detail-panel">
+      <div id="action-detail" class="detail-card">
+        <div class="empty-state">
+          <div class="icon">🎲</div>
+          <h3>Selecciona una Acción</h3>
+          <p>Haz clic en cualquier acción de la izquierda para ver el coste de AP, tiradas necesarias y detalles de resolución.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Carga primero la base de datos y luego la lógica de la aplicación -->
+  <script src="reglas_arcworlde.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
