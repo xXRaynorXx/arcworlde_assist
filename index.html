@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcWorlde - Asistente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* slate-900 */
+            color: #cbd5e1; /* slate-300 */
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased">
+
+    <aside class="w-72 bg-slate-950 border-r border-slate-800 flex flex-col transition-all duration-300 absolute md:relative z-20 h-full transform -translate-x-full md:translate-x-0" id="sidebar">
+        <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-white tracking-wide">ArcWorlde</h1>
+                <p class="text-xs text-slate-400 mt-1">Asistente v2.2</p>
+            </div>
+            <button id="close-sidebar" class="md:hidden text-slate-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2" id="nav-menu">
+            <!-- Menú dinámico inyectado por JS -->
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <header class="md:hidden flex items-center justify-between p-4 bg-slate-950 border-b border-slate-800">
+            <h1 class="text-lg font-bold text-white">ArcWorlde</h1>
+            <button id="open-sidebar" class="text-slate-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6 md:p-10" id="main-content">
+            <div class="flex items-center justify-center h-full">
+                <div class="text-center animate-pulse">
+                    <p class="text-slate-500 text-lg">Cargando Compendio...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-arcdeck" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-950">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🃏</span>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Tablas del ArcDeck</h3>
+                        <p class="text-xs text-emerald-400">Eventos de Entorno y Clima Arcana</p>
+                    </div>
+                </div>
+                <button id="close-modal" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-slate-300">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-md">
+                    <div class="bg-emerald-900/30 border-b border-emerald-800/40 px-5 py-3 flex items-center justify-between">
+                        <h4 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                            <span>🌲</span> Bosque de Mildaark
+                        </h4>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-500/30">Entorno Boscoso</span>
+                    </div>
+                    <div class="p-4 divide-y divide-slate-800/60">
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">2</span><p class="text-sm"><strong>Alijo Oculto:</strong> Hazaña Fácil para coger un objeto gratis de la Armería Común.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">3</span><p class="text-sm"><strong>Bosque Viviente:</strong> Aparecen 3 árboles nuevos en zonas abiertas sin personajes.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">4</span><p class="text-sm"><strong>Portal Élfico:</strong> 2 tokens de portal; entrar en uno te teletransporta al otro.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">5</span><p class="text-sm"><strong>Bestia Salvaje:</strong> Entra una Bestia neutral con reglas Rogue Warband.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">6</span><p class="text-sm"><strong>Brote de Arcanita:</strong> Aparecen 3 Fichas de Arcanita aleatorias en el tablero.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">7</span><p class="text-sm"><strong>Aura Temporal:</strong> Todos los personajes ganan +2 AP durante esta ronda.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">8</span><p class="text-sm"><strong>Arbusto Curativo:</strong> Token de 40mm en el centro; el contacto de peana cura D6 HP.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">9</span><p class="text-sm"><strong>Viento Mágico:</strong> Las cartas extra al lanzar hechizos no cuestan AP adicional.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">10</span><p class="text-sm"><strong>Niebla Densa:</strong> Todas las Hazañas para Disparar (Shots) sufren Desventaja.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">J</span><p class="text-sm"><strong>Polvo Arcano:</strong> Todas las Hazañas (Feats) se realizan con Ventaja.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">Q</span><p class="text-sm"><strong>Vegetación Furiosa:</strong> Moverse o activarse a 6" o menos del borde inflige D6 Hits.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">K</span><p class="text-sm"><strong>Criatura Salvaje:</strong> Entra un Monstruo neutral en el borde más cercano (Rogue).</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">As</span><p class="text-sm"><strong>Reliquia Mágica:</strong> Aparece un Artefacto Legendario aleatorio (Hazaña Media).</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-rose-400 bg-slate-900 px-2 py-0.5 rounded border border-rose-500/30 min-w-[36px] text-center">🃏</span><p class="text-sm"><strong>Niebla de Confusión:</strong> Controlas al Comandante del bando rival esta ronda.</p></div>
+                    </div>
+                    <div class="bg-red-900/30 border-b border-red-800/40 px-5 py-3 flex items-center justify-between">
+                        <h4 class="text-lg font-bold text-red-400 flex items-center gap-2">
+                            <span>🦇</span> Tierras de Vauhaemia.
+                        </h4>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-red-500/20 text-red-300 rounded-full border border-red-500/30">Entorno Gótico</span>
+                    </div>
+                    <div class="p-4 divide-y divide-slate-800/60">
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">2</span><p class="text-sm"><strong>Trueno Estremecedor:</strong> Chequeo de Valentía inmediato para personajes Vivos.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">3</span><p class="text-sm"><strong>Nieblas Serpenteantes:</strong> Las Hazañas para Disparar sufren Desventaja.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">4</span><p class="text-sm"><strong>Horda Espectral:</strong> Token errante a 4" que causa D6 Hits (ignora Armadura).</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">5</span><p class="text-sm"><strong>Tumba Abierta:</strong> Emergen unidades No-Muertas neutrales con reglas Rogue.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">6</span><p class="text-sm"><strong>Luna Llena:</strong> Repetir tiradas de Ataque fallidas; se revelan Hombres Lobo.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">7</span><p class="text-sm"><strong>Catacumba Abierta:</strong> Fosa de terreno impasable (Hazaña Media para salir).</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">8</span><p class="text-sm"><strong>Ojos de Estatua:</strong> Aparecen D3 Fichas de Arcanita repartidas en el mapa.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">9</span><p class="text-sm"><strong>Espíritus Aliados:</strong> Puedes reemplazar temporalmente a un personaje Noqueado.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-amber-400 bg-slate-900 px-2 py-0.5 rounded border border-amber-500/30 min-w-[36px] text-center">10</span><p class="text-sm"><strong>Enjambre de Murciélagos:</strong> Aparecen D6 Crypt Bats neutrales con reglas Rogue.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">J</span><p class="text-sm"><strong>Música de Órgano:</strong> Todas las Hazañas Narrativas se tiran con Ventaja.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">Q</span><p class="text-sm"><strong>Sombra Acechante:</strong> Entra un personaje Heavy No-Muerto neutral (Rogue).</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">K</span><p class="text-sm"><strong>Altar del Cáliz:</strong> Aparece temporalmente el 'Chalice of Blood'.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-indigo-400 bg-slate-900 px-2 py-0.5 rounded border border-indigo-500/30 min-w-[36px] text-center">As</span><p class="text-sm"><strong>Van Halfsing:</strong> Entra el cazador Van Halfsing hostil contra todos los jugadores.</p></div>
+                        <div class="py-2.5 flex items-start gap-3"><span class="font-bold text-rose-400 bg-slate-900 px-2 py-0.5 rounded border border-rose-500/30 min-w-[36px] text-center">🃏</span><p class="text-sm"><strong>Amanecer / Noche:</strong> Chequeo de Valentía para No-Muertos (1er Joker) o Vivos (2º).</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
+                <button id="close-modal-btn" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-medium transition-colors text-sm">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
+
+    <script>
+        const datosCampana = {
+            "juego": "ArcWorlde - Reglamento de Campañas",
+            "version": "1.3 (Edición Oficial Marzo 2024)",
+            "secciones_campana": [
+                {
+                    "id_seccion": "ciclo_capitulo",
+                    "nombre": "1. El Ciclo de Capítulos",
+                    "descripcion": "Estructura en 6 pasos que sigue cada partida en una campaña de ArcWorlde.",
+                    "categorias": [
+                        {
+                            "nombre_categoria": "Los 6 Pasos del Capítulo",
+                            "acciones": [
+                                { "id": "paso_1_escenario", "nombre": "Paso 1: Elección de Escenario y Misiones Secretas", "etiqueta": "Paso 1", "resumen": "Definición del escenario, valor de juego (Game Value) y misiones secretas.", "detalles": "Los jugadores o el GM eligen el escenario (oficial, generado por ArcDeck o personalizado) y fijan el Game Value. Se asignan Misiones Secretas que otorgan +1 VP adicional si se completan sin que el rival las descubra." },
+                                { "id": "paso_2_comerciante", "nombre": "Paso 2: El Comerciante Ambulante", "etiqueta": "Paso 2", "resumen": "Mercado dinámico, fluctuación de precios (1D6), Armas Finas y Arcanita.", "detalles": "Antes de equipar a la banda, cada jugador tira 1D6 para determinar el humor del comerciante. Se pueden comprar/vender objetos de la Armería Común o de Facción, contratar Mercenarios (Swords for Hire) al 50% de coste y adquirir Armas Finas (+1 Power, doble coste, máx 1 por capítulo). La Arcanita siempre se vende a precio Caro (+25%)." },
+                                { "id": "paso_3_preparar_banda", "nombre": "Paso 3: Preparación de la Banda", "etiqueta": "Paso 3", "resumen": "Selección de miniaturas del Campamento y equipo del Cofre.", "detalles": "Se eligen los personajes contratados del Campaign Camp y se les equipa con objetos del Campaign Chest sin superar el Game Value de la partida." },
+                                { "id": "paso_4_jugar_batalla", "nombre": "Paso 4: Jugar la Batalla y Elección de MVP", "etiqueta": "Paso 4", "resumen": "Disputar el combate, sumar VP de escenario y votar al Jugador Más Valioso.", "detalles": "Se juega la partida. Al finalizar, además de los VP de misión y misiones secretas, todos los jugadores eligen de mutuo acuerdo al MVP (Jugador Más Valioso), quien recibe D3 VP directos para invertir en sus rasgos." },
+                                { "id": "paso_5_secuelas_lesiones", "nombre": "Paso 5: Las Secuelas y Tabla de Lesiones", "etiqueta": "Paso 5", "resumen": "Asignación de VP a Rasgos de Campaña y tiradas de lesión para noqueados.", "detalles": "Los VP ganados se gastan en subir niveles de Rasgos de Campaña. Cualquier personaje que haya sido Knocked Out en la batalla debe tirar 1D6 en la Tabla de Lesiones." },
+                                { "id": "paso_6_aventura_intermedia", "nombre": "Paso 6: Aventuras Intermedias", "etiqueta": "Paso 6", "resumen": "Tirada de 2D6 + D6 para determinar eventos narrativos entre partidas.", "detalles": "Se tiran 2D6 (el primer dado es la decena y el segundo la unidad: de 1/1 a 6/6) para consultar el evento en el camino, y luego un D6 extra para determinar la resolución (1-2, 3-4 o 5-6)." }
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Tablas Auxiliares del Ciclo",
+                            "acciones": [
+                                { "id": "humor_comerciante_tabla", "nombre": "Tabla de Humor del Comerciante (1D6)", "etiqueta": "1D6", "resumen": "Fluctuación de precios de compra y venta según el dado.", "pasos_resolucion": ["1 - Tiempos Difíciles: Compras a Caro (+25%), Ventas a Chollo (-25%).", "2 - Calidad Fina: Compras a Caro (+25%), Ventas a Caro (+25%).", "3 u 4 - Día Normal: Compras y ventas a su valor oficial exacto en GP.", "5 - Cliente Preferido: Compras a Chollo (-25%), Ventas a Chollo (-25%).", "6 - Gran Humor / Negociación: Compras a Chollo (-25%), Ventas a Caro (+25%)."] },
+                                { "id": "tabla_lesiones_completa", "nombre": "Tabla Oficial de Lesiones (1D6)", "etiqueta": "1D6", "resumen": "Efectos en personajes noqueados para el siguiente capítulo.", "pasos_resolucion": ["1 - Wounded (Herido): Descansa la siguiente partida.", "2 - Limping (Cojera): -1 al Move en la siguiente partida.", "3 - Bumped Head (Golpe en Cabeza): No puede usar su Rasgo de mayor nivel.", "4 - Black Eye (Ojo Morado): Repetir todas las tiradas de disparo con éxito.", "5 - Arm in a Sling (Brazo en Cabestrillo): No puede usar Escudo.", "6 - Lucky (Afortunado): Ileso."] }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id_seccion": "gestion_campana",
+                    "nombre": "2. Gestión del Campamento y Cofre",
+                    "descripcion": "Estructura del Campamento de la Banda (Campaign Camp) y Cofre de Suministros (Campaign Chest).",
+                    "categorias": [
+                        {
+                            "nombre_categoria": "Conceptos de Campaña",
+                            "acciones": [
+                                { "id": "campaign_camp", "nombre": "El Campamento (Campaign Camp)", "etiqueta": "Banda", "resumen": "Plantilla fija de tropas contratadas.", "detalles": "Se inicia con 500 GP. Los personajes se conservan entre partidas y acumulan VP." },
+                                { "id": "campaign_chest", "nombre": "El Cofre (Campaign Chest)", "etiqueta": "Inventario", "resumen": "Almacén compartido de equipamiento y oro.", "detalles": "Alberga todo el equipo. Se pueden reasignar objetos libremente antes de cada batalla." }
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Armería Común de Campaña",
+                            "acciones": [
+                                { "id": "arcanite_token", "nombre": "Cristal de Arcanita (10 GP)", "etiqueta": "Consumible", "resumen": "1 solo uso que concede ventajas arcanas inmediatas.", "detalles": "Efectos: +1 AP, +1D6 a una tirada, permitir lanzar otro hechizo o repetir 1D6 fallido." },
+                                { "id": "shield", "nombre": "Escudo (15 GP)", "etiqueta": "Equipo", "resumen": "Permite repetir una Tirada de Defensa fallida por ronda.", "detalles": "Se puede repetir 1 dado de defensa en cada ronda." },
+                                { "id": "spear", "nombre": "Lanza (10 GP)", "etiqueta": "Equipo", "resumen": "Ataques cuerpo a cuerpo hasta 2 pulgadas de distancia.", "detalles": "Permite atacar a objetivos a 2\" incluso a través de aliados." }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        const datosReglas = {
+            "juego": "ArcWorlde (Segunda Edición)",
+            "version_reglas": "2.2",
+            "secuencia_turno": [
+                {
+                    "id_fase": "fase_1_inicio_ronda",
+                    "nombre": "1. Inicio de Ronda",
+                    "descripcion": "Fase preparatoria y eventos ambientales globales antes de la activación de personajes.",
+                    "acciones": [
+                        { "id": "evento_arcdeck", "nombre": "Robar Carta del ArcDeck", "coste_ap": 0, "tipo_tirada": "Roba 1 Carta", "resumen": "Determina el evento mágico que afectará a la mesa. (Haz clic aquí para ver las tablas)", "detalles": "Se roba la carta superior del ArcDeck y se consulta la tabla del entorno activo.", "interactivo": true },
+                        { "id": "recuperar_prone_gratis", "nombre": "Levantarse de Prone", "coste_ap": 0, "tipo_tirada": "Automático", "resumen": "Un personaje tumbado se pone de pie gratis.", "detalles": "Si el personaje cayó Prone en la ronda anterior, se levanta al comienzo de su activación sin gastar AP." },
+                        { "id": "tirada_iniciativa", "nombre": "Tirada de Iniciativa", "coste_ap": 0, "tipo_tirada": "1D6 Enfrentado", "resumen": "Determina qué jugador activa la primera miniatura.", "detalles": "El número más alto elige quién activa primero." }
+                    ]
+                },
+                {
+                    "id_fase": "fase_2_activaciones",
+                    "nombre": "2. Fase de Activaciones",
+                    "descripcion": "Los jugadores alternan activando 1 miniatura a la vez. Cada miniatura usa sus AP en acciones.",
+                    "categorias": [
+                        {
+                            "nombre_categoria": "Movimiento y Posicionamiento",
+                            "acciones": [
+                                { "id": "movimiento_gratuito", "nombre": "Movimiento Gratuito Base", "coste_ap": 0, "tipo_tirada": "Ninguna", "resumen": "Desplazamiento de hasta el atributo Movement.", "detalles": "Se puede usar en cualquier momento de la activación. Incompatible si está Prone o Engaged.", "restriccion": ["Terreno Difícil: Movimiento se reduce a la mitad (halved)", "Terreno Impasable: Bloquea el paso. Requiere Hazaña para escalar/saltar."]},
+                                { "id": "correr_legit", "nombre": "Correr (Legging It)", "coste_ap": 1, "tipo_tirada": "1D6", "resumen": "Ganar movimiento adicional.", "detalles": "Avanza las pulgadas indicadas en el D6. Un 6 implica tropezar y caer Prone.", "restriccion": "Solo antes de realizar otra Acción." },
+                                { "id": "levantarse_prone_ap", "nombre": "Levantarse de Prone (Misma Ronda)", "coste_ap": "1 o más AP", "tipo_tirada": "Hazaña Fácil (1 Éxito)", "resumen": "Intentar ponerse de pie en la misma ronda en la que caíste tumbado.", "detalles": "Requiere superar una Hazaña Fácil (un dado con resultado 4, 5 o 6)."},
+                                { "id": "ayudar_aliado_prone", "nombre": "Levantar a un Aliado Tumbado", "coste_ap": "1 o más AP", "tipo_tirada": "Hazaña (Feat)", "resumen": "Un personaje activo ayuda a ponerse de pie a un aliado en contacto de peana.", "detalles": "Hazaña Fácil (1 Éxito) si el aliado tiene una peana igual o menor. Hazaña Media (2 Éxitos) si el aliado tiene una peana mayor."},
+                                { "id": "cargar", "nombre": "Cargar (Charge)", "coste_ap": 1, "tipo_tirada": "1D6 (Legging It)", "resumen": "Entrar en contacto de peana con un enemigo usando Legging It.", "detalles": "Si el movimiento de Legging It te pone en contacto de peana con un rival, cuenta como Carga. Otorga +1 AP inmediatamente para esta activación.", "restriccion": "No se considera carga con el movimiento gratuito"},
+                                { "id": "destrabarse", "nombre": "Destrabarse de Combate (Disengage)", "coste_ap": "Variable (AP invertidos)", "tipo_tirada": "Hazaña (Feat)", "resumen": "Liberarse de enemigos en combate cuerpo a cuerpo para poder moverte.", "dificultad_escalada": ["1 enemigo trabado = Hazaña Fácil (1 Éxito)", "2 enemigos trabados = Hazaña Media (2 Éxitos)", "3 enemigos trabados = Hazaña Difícil (3 Éxitos)", "4+ enemigos trabados = Hazaña Legendaria (4 Éxitos)"], "detalles": "Si la tirada falla, el personaje NO se mueve y sufre 1 punto de daño automático (pierde 1 HP) por cada enemigo que esté en contacto de peana con él."}
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Combate Cuerpo a Cuerpo",
+                            "acciones": [
+                                { "id": "ataque_melee", "nombre": "Ataque Cuerpo a Cuerpo", "coste_ap": "Variable", "tipo_tirada": "Power vs Armour/Def", "resumen": "Atacar a un objetivo en contacto.", "pasos_resolucion": ["1. Tirada de Potencia: 1D6 por Power (4+ Impacto, 6 Crítico=2).", "2. Armadura: Resta el Armour del defensor a los impactos.", "3. Defensa: 1D6 por impacto restante (4+ bloquea 1, 6 bloquea 2)."] }
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Combate a Distancia (Ranged)",
+                            "acciones": [
+                                { "id": "disparo_shot", "nombre": "Disparar (Taking a Shot)", "coste_ap": "Variable (1 o más AP a elección)", "tipo_tirada": "Hazaña Fácil (Apuntar) + Potencia del Arma", "resumen": "Realizar un ataque a distancia contra un enemigo en línea de visión.", "detalles": "Gastas AP para tirar dados en la Hazaña de disparo (cada AP es 1D6, necesitas al menos un 4+). Si se supera, tiras la Potencia del arma. Si fallas disparando a una melee, el impacto va a tu aliado."},
+                                { "id": "cobertura", "nombre": "Regla de Cobertura (Cover)", "coste_ap": 0, "tipo_tirada": "Modificador de Defensa", "resumen": "Si el terreno tapa el 50% o más de la miniatura atacada.", "detalles": "El defensor tira sus dados de defensa con Ventaja (Advantage), pudiendo elegir el mejor resultado.", "restriccion": "Esto también se aplica si la miniatura es objetivo directo de un Hechizo en fase de magia"}
+                            ]
+                        },
+                        {   
+                            "nombre_categoria": "Magia y Hechizos",
+                            "acciones": [
+                                { "id": "lanzar_hechizo", "nombre": "Lanzar Hechizo", "coste_ap": 2, "tipo_tirada": "Robo del ArcDeck (Suma de Cartas)", "resumen": "Un Mago (Mage) intenta canalizar energía para lanzar un hechizo.", "pasos_resolucion": [ "1. Declarar el hechizo y su número objetivo.", "2. Robar 2 cartas del ArcDeck y sumar sus valores (Figuras=10, Ases=1 u 11, Jokers=1 a 11).", "3. Si la suma es menor a la dificultad, se puede gastar 1 AP extra o 1 Arcanita para robar otra carta.", "4. Si la suma supera 21, el hechizo se Lanza pero queda Sobrecargado (Overpowered): el Mago pierde D6 HP."]},
+                                { "id": "linea_vision", "nombre": "Línea de visión Hechizo", "coste_ap": 0, "tipo_tirada": "Ninguna", "resumen": "Para que un personaje pueda ser elegido como blanco directo de un hechizo o ataque, el atacante debe ser capaz de ver al menos alguna parte de la miniatura.", "restriccion": "Magia de Área: Ignora Cobertura e impacta a objetivos ocultos."}
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Hazañas Narrativas y Consumibles",
+                            "acciones": [
+                                { "id": "hazana_narrativa", "nombre": "Hazaña Narrativa (Narrative Feat)", "coste_ap": "Variable (Según AP invertidos)", "tipo_tirada": "Hazaña de dificultad acordada", "resumen": "Realizar acciones creativas utilizando el terreno u objetos de la mesa.", "dificultades": { "Easy" : "1 Éxito (Acciones simples como saltar un murete bajo).", "Medium" : "2 Éxitos (Trepar a un tejado, saltar un arroyo).", "Hard" : "3 Éxitos (Forzar una puerta blindada, empujar una estatua).", "Legendary" : "4 Éxitos (Acciones heroicas de alto riesgo)."}},
+                                { "id": "usar_arcanita", "nombre": "Usar Ficha de Arcanite", "coste_ap": 0, "tipo_tirada": "Consumible (1 solo uso)", "resumen": "Gastar un cristal de Arcanita para obtener una ventaja inmediata.", "efectos_disponibles": [ "Ganar +1 AP inmediato para la activación actual.", "Añadir 1D6 extra a cualquier tirada.", "Repetir cualquier dado (D6) fallido.", "Robar una carta adicional del ArcDeck al lanzar un hechizo."]},
+                                { "id": "robar_objeto", "nombre": "Robar (Stealing Items)", "coste_ap": 1, "tipo_tirada": "Hazaña Fácil", "resumen": "Realizar una Hazaña Fácil para robar un Objeto a un jugador (Prone) con el que se tiene contacto de peana", "restriccion": "No se puede robar equipamiento equipado, excepto que una habilidad, escenario o arma lo permita expresamente."}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id_fase": "fase_3_fin_ronda",
+                    "nombre": "3. Fin de Ronda",
+                    "descripcion": "Resolución de condiciones de victoria, reseteo de estados y mantenimiento.",
+                    "acciones": [
+                        { "id": "comprobar_escenario", "nombre": "Comprobar Objetivos del Escenario", "coste_ap": 0, "tipo_tirada": "Verificación", "resumen": "Comprobar Puntos de Victoria (VP) o condiciones de final de partida.", "detalles": "Verificar si se ha alcanzado el límite de rondas o los requisitos de victoria." },
+                        { "id": "reset_habilidades", "nombre": "Restablecer Habilidades y Tokens", "coste_ap": 0, "tipo_tirada": "Automático", "resumen": "Las habilidades que dicen '1 vez por ronda' (ej. Escudo) se recargan.", "detalles": "Se verifica que todas las miniaturas hayan completado su activación." }
+                    ]
+                }
+            ]
+        };
+
+         // Datos de Escenarios (Autocompletando la parte truncada)
+        const datosEscenarios = {
+            "juego": "ArcWorlde - Libro de Escenarios y Generador",
+            "version": "1.1 (Diciembre 2023) / Generator v2.1",
+            "secciones_escenarios": [
+    {
+      "id_seccion": "escenarios_predisenados",
+      "nombre": "1. Escenarios Pre-Diseñados",
+      "descripcion": "Escenarios oficiales con objetivos tácticos y condiciones de victoria específicas.",
+      "categorias": [
+        {
+          "nombre_categoria": "Escenarios Estándar",
+          "acciones": [
+            {
+              "id": "scen_arcanite_hunt",
+              "nombre": "Arcanite Hunt (Caza de Arcanita)",
+              "etiqueta": "Misión Base",
+              "resumen": "Recolectar cristales de Arcanita esparcidos por la mesa tras una tormenta arcana.",
+              "detalles": "Despliegue: A 6\" de bordes opuestos. Se colocan 5 Fichas de Arcanita fuera de las zonas de despliegue.\nRegla: Las bandas deben recoger las fichas y depositarlas en su zona de despliegue.\nVictoria: 1 VP por cada Ficha de Arcanita en tu zona de despliegue al final del juego (las compradas previamente no cuentan)."
+            },
+            {
+              "id": "scen_siege",
+              "nombre": "Siege (El Asedio)",
+              "etiqueta": "Defensa / Asedio",
+              "resumen": "Un defensor atrincherado soporta las oleadas del atacante.",
+              "detalles": "Despliegue: Defensores dentro de las fortificaciones; atacantes a 6\" de cualquier borde.\nEstructuras: Light (6HP), Medium (15HP), Heavy (30HP), Impregnable (50HP). Se pueden reparar con Hazañas (Easy: D3 HP, Medium: D6 HP, Hard: 2D6 HP, Legendary: 4D6 HP).\nVictoria: Atributo de VP asignado según el % de Game Value en la zona fortified al final del juego."
+            },
+            {
+              "id": "scen_exploration",
+              "nombre": "Exploration into the Unknown (Exploración)",
+              "etiqueta": "Avance",
+              "resumen": "Cruzar un territorio desconocido mientras los defensores emboscan desde las sombras.",
+              "detalles": "Despliegue: El tablero se divide en 4 secciones. El atacante despliega en un borde. El defensor aparece desplegando D6 miniaturas cada vez que un atacante entra en una nueva sección.\nVictoria: 1 VP por cada 20% de Game Value que el atacante logre cruzar al borde opuesto."
+            },
+            {
+              "id": "scen_vip",
+              "nombre": "VIP (Persona de Interés)",
+              "etiqueta": "Escolta",
+              "resumen": "Proteger o capturar a una personalidad clave no combatiente.",
+              "detalles": "Reglas: El VIP no cae Prone y se mueve por Legging It. Al estar en contacto de peana con un personaje, se desplaza junto a él.\nVictoria: Conseguir o mantener el control del VIP en la zona de evacuación."
+            },
+            {
+              "id": "scen_hunters",
+              "nombre": "Hunters (Cazadores de Pelambres)",
+              "etiqueta": "Caza de Bestias",
+              "resumen": "Cazar criaturas salvajes neutrales por sus valiosas pieles.",
+              "detalles": "Presas: Tienen HP según peana (30mm=6HP, 40mm=9HP, 50mm=12HP, 60mm=20HP). Se mueven aleatoriamente al inicio de cada ronda (1D6). Al ser eliminadas dejan un 'Pelt' (Piel).\nVictoria: 1 VP por cada Piel en posesión al final de la partida."
+            },
+            {
+              "id": "scen_neverending_horde",
+              "nombre": "Never-ending Horde (Horda Infina)",
+              "etiqueta": "Supervivencia",
+              "resumen": "Supervivencia desesperada contra oleadas inagotables de enemigos.",
+              "detalles": "Despliegue: Defensores en el centro; atacantes a 6\" de los bordes.\nOleadas: En cada ronda el atacante tira 1D6 para desplegar tropas nuevas (1-2: 2-3 Unidades, 3-4: 4 Unidades o Mago, 5-6: 5 Unidades o Monstruo).\nVictoria: 1 VP al defensor por cada 20% de Game Value superviviente; 5 VP al atacante si elimina a todos."
+            },
+            {
+              "id": "scen_night_ambush",
+              "nombre": "Night Ambush (Emboscada Nocturna)",
+              "etiqueta": "Visibilidad Reducida",
+              "resumen": "Ataque por sorpresa en la oscuridad alrededor de una fogata.",
+              "detalles": "Reglas: La visibilidad y los disparos sufren penalización por la noche a menos que estén cerca de la fogata o porten Antorchas.\nVictoria: 1 VP por cada 20% de Game Value enemigo noqueado."
+            },
+            {
+              "id": "scen_escape_arcstorm",
+              "nombre": "Escape the Arcstorm! (Huir de la Tormenta)",
+              "etiqueta": "Entorno Mortal",
+              "resumen": "Correr hacia un refugio antes de que la tormenta de arcanita consuma la mesa.",
+              "detalles": "Reglas: Al inicio de cada ronda, los personajes fuera de la zona segura sufren daño directo que ignora armadura (R2: 1 Hit, R3: 2 Hits, R4: 4 Hits, R5: 8 Hits).\nVictoria: 1 VP por cada 20% de Game Value resguardado al final."
+            }
+          ]
+        },
+        {
+          "nombre_categoria": "Escenarios de Expansión (Duel of the Dead)",
+          "acciones": [
+            {
+              "id": "scen_dead_rise",
+              "nombre": "Scenario 1: The Dead Rise Again",
+              "etiqueta": "Vauhaemia Campaña",
+              "resumen": "Los Antiguos Muertos emergen de sus tumbas en las tierras de Vauhaemia.",
+              "detalles": "Se colocan 5 Fichas de Tumba (20 HP cada una) mediante cuadrícula aleatoria. Los Vampiros despliegan a 3\" de los bordes alternando sentidos.\nReglas Especiales: Los Antiguos Muertos pueden activar una Ficha de Tumba para desplegar un personaje.\nVictoria (5 rondas): 1 VP a los Antiguos Muertos por cada Tumba intacta; 1 VP a los Vampiros por cada Tumba destruida."
+            },
+            {
+              "id": "scen_gates_bloodheim",
+              "nombre": "Scenario 2: The Gates of Castle Bloodheim",
+              "etiqueta": "Asedio / Vauhaemia",
+              "resumen": "Asalto desesperado para derribar las portonas de roble del castillo Bloodheim.",
+              "detalles": "Los Vampiros despliegan tras los muros (a 6\" del borde) y los Antiguos Muertos a 6\" del borde opuesto.\nReglas Especiales: La puerta de roble tiene 80 HP y se puede romper. Los muros son impasables pero pueden escalarse con una Hazaña Legendaria.\nVictoria (5 rondas): Atacante gana 1 VP por romper la puerta + 1 VP por cada 25% de Game Value dentro del castillo. Defensor gana 1 VP si la puerta aguanta + 1 VP por cada 25% de Game Value enemigo que NO logre entrar."
+            },
+            {
+              "id": "scen_wolf_bloodheim",
+              "nombre": "Scenario 3: The Wolf of Castle Bloodheim",
+              "etiqueta": "Supervivencia",
+              "resumen": "Supervivencia en los pasillos oscuros del castillo bajo la cacería de un letal Hombre Lobo.",
+              "detalles": "Ambos jugadores despliegan a 6\" de bordes opuestos. Se coloca un Werewolf (peana de 60mm) en el centro.\nReglas Especiales: El Lobo es una criatura renegada con +10 HP y +3 AP extra que realiza siempre acciones de Rampage.\nVictoria (5 rondas): +1 VP por cada 25% de Game Value que siga con vida al final. Si el Lobo sigue con vida al terminar la ronda 5, TODOS los jugadores pierden 1 VP."
+            },
+            {
+              "id": "scen_hidden_catacombs",
+              "nombre": "Scenario 4: The Hidden Catacombs",
+              "etiqueta": "Recuperación / Búsqueda",
+              "resumen": "Incursión a las catacumbas para descansar heridas y buscar un Artefacto Legendario.",
+              "detalles": "El defensor despliega en el centro (los personajes noqueados en la partida previa empiezan a 1 HP y Prone). Se colocan 5 fichas de búsqueda.\nReglas Especiales: Estar Prone al final de la activación recupera D6 HP gratis. Investigar una ficha (Hazaña Difícil) permite hallar un Artefacto Legendario.\nVictoria (5 rondas): +1 VP por cada 25% de Game Value que permanezca en mesa. Quien posea el Artefacto al final se lo queda para la campaña."
+            },
+            {
+              "id": "scen_duel_dead",
+              "nombre": "Scenario 5: The Duel of the Dead",
+              "etiqueta": "Duelo Final",
+              "resumen": "Enfrentamiento directo 1 vs 1 entre los Comandantes en la aguja del castillo.",
+              "detalles": "Despliegue libre a 6\" de bordes opuestos.\nReglas Especiales: Los Comandantes obtienen +10 HP extra. Si una tropa o esbirro hace daño a un Comandante, ese mismo daño se le devuelve automáticamente al atacante.\nVictoria: La partida no finaliza por rondas, sino cuando solo un Comandante queda en pie. El vencedor recibe 3 VP directos."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id_seccion": "generador_escenarios",
+      "nombre": "2. Generador de Escenarios (ArcDeck v2.1)",
+      "descripcion": "Creación aleatoria de partidas extrayendo cartas del mazo ArcDeck.",
+      "categorias": [
+        {
+          "nombre_categoria": "Misiones Principales (Palo de la Carta)",
+          "acciones": [
+            {
+              "id": "mission_hearts",
+              "nombre": "♥️ Corazones: Dominion (Dominio Territorial)",
+              "etiqueta": "Control",
+              "resumen": "Controlar la mayor cantidad de cuadrantes en el mapa.",
+              "detalles": "El tablero se divide en 4 cuadrantes. Al final de la partida se suma la HP restante en cada sección.\n• 5 VP: Mayor HP en los 4 cuadrantes.\n• 3 VP: Mayor HP en 2 cuadrantes.\n• 1 VP: Mayor HP en 1 cuadrante."
+            },
+            {
+              "id": "mission_spades",
+              "nombre": "♠️ Espadas: Take or Hold (Tomar o Mantener)",
+              "etiqueta": "Área Objetivo",
+              "resumen": "Capturar y asegurar una zona central estratégica de 6\"x6\".",
+              "detalles": "• 5 VP: Sin enemigos en la zona y al menos 1 aliado dentro.\n• 3 VP: Mayor total de HP aliada que enemiga dentro de la zona.\n• 1 VP: Al menos 1 aliado dentro del área al final."
+            },
+            {
+              "id": "mission_diamonds",
+              "nombre": "♦️ Diamantes: Arcanite Scavenge (Cosecha)",
+              "etiqueta": "Recolección",
+              "resumen": "Acaparar 6 Fichas de Arcanite distribuidas en el campo.",
+              "detalles": "Se dispersan 6 fichas neutrales.\n• 5 VP: Tener 5 o más fichas al final.\n• 3 VP: Tener 3 o más fichas.\n• 1 VP: Tener al menos 1 ficha."
+            },
+            {
+              "id": "mission_clubs",
+              "nombre": "♣️ Tréboles: Brawl (Trifulca Total)",
+              "etiqueta": "Combate",
+              "resumen": "Aniquilar a la banda enemiga hasta que no quede nadie en pie.",
+              "detalles": "• 5 VP: Todos los enemigos Noqueados o Broken.\n• 3 VP: Queda menos del 25% del GP total enemigo en mesa.\n• 1 VP: Queda menos del 50% del GP total enemigo en mesa."
+            }
+          ]
+        },
+        {
+          "nombre_categoria": "Misiones Secundarias (Número/Valor de Carta)",
+          "acciones": [
+            {
+              "id": "sec_3_plunder",
+              "nombre": "Carta 3: Plunder (Saqueo)",
+              "etiqueta": "2 VP",
+              "resumen": "Robar el 25% del valor total en GP del equipo del rival."
+            },
+            {
+              "id": "sec_4_fortify",
+              "nombre": "Carta 4: Fortify (Fortificar)",
+              "etiqueta": "2 VP",
+              "resumen": "Construir una zona cercada con muros (Hazaña Hard) sin enemigos dentro."
+            },
+            {
+              "id": "sec_5_hoarder",
+              "nombre": "Carta 5: Arcanite Hoarder (Acaparador)",
+              "etiqueta": "2 VP",
+              "resumen": "El Comandante debe finalizar la partida sosteniendo 3 o más fichas de Arcanita."
+            },
+            {
+              "id": "sec_7_vendetta",
+              "nombre": "Carta 7: Vendetta (Venganza)",
+              "etiqueta": "2 VP",
+              "resumen": "El Comandante debe noquear a 3 o más enemigos que iniciaron con 5+ HP."
+            },
+            {
+              "id": "sec_9_capture",
+              "nombre": "Carta 9: Capture (Captura)",
+              "etiqueta": "2 VP",
+              "resumen": "Apresar al Comandante rival (a 20% HP o menos) mediante una Hazaña."
+            },
+            {
+              "id": "sec_J_assassinate",
+              "nombre": "Carta J: Assassinate (Asesinato)",
+              "etiqueta": "2 VP",
+              "resumen": "Noquear al personaje enemigo que comenzó con la mayor HP de su banda."
+            },
+            {
+              "id": "sec_K_epic_duel",
+              "nombre": "Carta K: Epic Duel (Duelo Épico)",
+              "etiqueta": "2 VP",
+              "resumen": "Tu Comandante debe noquear personalmente al Comandante rival."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id_seccion": "secundarias_faccion",
+      "nombre": "3. Misiones Secundarias por Facción",
+      "descripcion": "Objetivos temáticos propios de cada grupo de ArcWorlde.",
+      "categorias": [
+        {
+          "nombre_categoria": "Misiones de Facción",
+          "acciones": [
+            {
+              "id": "sec_ourks",
+              "nombre": "Ourks: Party Boys / Sticky Fingers",
+              "etiqueta": "Ourks",
+              "resumen": "Party Boys: Consumir brebajes Ourk (2 VP por 6+ personajes, 1 VP por 3+).\nSticky Fingers: Robar equipamiento rival (2 VP por 6+ objetos robados, 1 VP por 3+)."
+            },
+            {
+              "id": "sec_halflings",
+              "nombre": "Halflings: Finest Ingredients / Pesky Sheep!",
+              "etiqueta": "Halflings",
+              "resumen": "Ingredients: Recoger hierbas culinarias en el mapa (2 VP por todas, 1 VP por la mitad).\nPesky Sheep!: Rescatar ovejas y llevarlas a la zona de despliegue (2 VP por 5 ovejas, 1 VP por 3)."
+            },
+            {
+              "id": "sec_imperials",
+              "nombre": "Imperials: Hold Steady! / By My Command!",
+              "etiqueta": "Imperiales",
+              "resumen": "Hold Steady!: Que ningún soldado quede Broken (2 VP).\nBy My Command!: Noquear enemigos cumpliendo órdenes del oficial (2 VP por 5 KO, 1 VP por 3)."
+            },
+            {
+              "id": "sec_elves",
+              "nombre": "Wild Elves: Open the Portal / Sacrifice",
+              "etiqueta": "Elfos Silvanos",
+              "resumen": "Open the Portal: Activar un portal místico y cruzar 3 personajes (2 VP).\nSacrifice: Realizar acciones de sacrificio ritual durante el combate (2 VP por 3 sacrificios)."
+            },
+            {
+              "id": "sec_wizards",
+              "nombre": "Wizards: Field Exercise / Overpower",
+              "etiqueta": "Magos",
+              "resumen": "Field Exercise: Lanzar 6 hechizos con éxito mediante Aprendices (2 VP).\nOverpower: Sobrecargar hechizos con éxito (>21) para impresionar (2 VP por 3 sobrecargas)."
+            },
+            {
+              "id": "sec_darklords",
+              "nombre": "Dark Lords: Subjugate / Master of the Battlefield",
+              "etiqueta": "Dark Lords",
+              "resumen": "Subjugate: Capturar prisioneros enemigos durante la incursión.\nMaster of the Battlefield: Demostrar la fuerza destructiva del Señor Oscuro en combate (2 VP si el Dark Lord noquea personalmente a 6 enemigos; 1 VP si noquea a 3)"
+            },
+            {
+              "id": "sec_nodeads",
+              "nombre": "Ancient Dead: The Tomb / Unearthed Brethren",
+              "etiqueta": "Antiguos Muertos (Ancient Dead)",
+              "resumen": "The Tomb: Defender las arcanitas de la tumba familiar en tu zona de despliegue evitando que las roben (2 VP si no roban ninguna).\nUnearthed Brethren: Desenterrar sepulturas mediante Hazañas Medias para despertar a guerreros Skelts e incorporarlos a la partida (2 VP por despertar a los 4)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
+        const dbUnificada = [
+            {
+                id: 'core_rules',
+                titulo: 'Reglas Básicas',
+                subtitulo: `${datosReglas.juego} - v${datosReglas.version_reglas}`,
+                secciones: datosReglas.secuencia_turno.map(fase => ({
+                    titulo: fase.nombre,
+                    descripcion: fase.descripcion,
+                    categorias: fase.categorias ? fase.categorias : [{ nombre_categoria: 'Acciones de Fase', acciones: fase.acciones }]
+                }))
+            },
+            {
+                id: 'campaign',
+                titulo: 'Reglas de Campaña',
+                subtitulo: `${datosCampana.juego} - ${datosCampana.version}`,
+                secciones: datosCampana.secciones_campana.map(sec => ({
+                    titulo: sec.nombre,
+                    descripcion: sec.descripcion,
+                    categorias: sec.categorias
+                }))
+            },
+            {
+                id: 'scenarios',
+                titulo: 'Escenarios',
+                subtitulo: `${datosEscenarios.juego} - ${datosEscenarios.version}`,
+                secciones: datosEscenarios.secciones_escenarios.map(sec => ({
+                    titulo: sec.nombre,
+                    descripcion: sec.descripcion,
+                    categorias: sec.categorias
+                }))
+            }
+        ];
+
+        let currentSectionId = dbUnificada[0].id;
+        const navMenu = document.getElementById('nav-menu');
+        const mainContent = document.getElementById('main-content');
+        
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const btnOpen = document.getElementById('open-sidebar');
+        const btnClose = document.getElementById('close-sidebar');
+
+        function toggleSidebar() {
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        btnOpen.addEventListener('click', toggleSidebar);
+        btnClose.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        function renderSidebar() {
+            navMenu.innerHTML = '';
+            dbUnificada.forEach(mainSection => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium ${
+                    currentSectionId === mainSection.id 
+                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' 
+                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                }`;
+                
+                let iconSvg = '';
+                if(mainSection.id === 'core_rules') {
+                    iconSvg = `<svg class="w-5 h-5 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>`;
+                } else if(mainSection.id === 'campaign') {
+                    iconSvg = `<svg class="w-5 h-5 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                } else {
+                    iconSvg = `<svg class="w-5 h-5 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`;
+                }
+
+                btn.innerHTML = `${iconSvg} ${mainSection.titulo}`;
+                btn.onclick = () => {
+                    currentSectionId = mainSection.id;
+                    renderSidebar();
+                    renderContent();
+                    if(window.innerWidth < 768) toggleSidebar();
+                };
+                navMenu.appendChild(btn);
+            });
+
+            // Opción de Buscador Global al final del menú lateral
+            const searchBtn = document.createElement('button');
+            searchBtn.className = `w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium mt-4 border-t border-slate-800 pt-4 ${
+                currentSectionId === 'search' 
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' 
+                : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+            }`;
+            const searchIcon = `<svg class="w-5 h-5 mr-3 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>`;
+            searchBtn.innerHTML = `${searchIcon} Buscador`;
+            searchBtn.onclick = () => {
+                currentSectionId = 'search';
+                renderSidebar();
+                renderSearch();
+                if(window.innerWidth < 768) toggleSidebar();
+            };
+            navMenu.appendChild(searchBtn);
+        }
+
+        function renderTags(acc) {
+            let tagsHtml = '<div class="flex flex-wrap gap-2 mb-3">';
+            if (acc.etiqueta) {
+                tagsHtml += `<span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-md font-medium">${acc.etiqueta}</span>`;
+            }
+            if (acc.coste_ap !== undefined) {
+                tagsHtml += `<span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md font-medium">AP: ${acc.coste_ap}</span>`;
+            }
+            if (acc.tipo_tirada) {
+                tagsHtml += `<span class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-md font-medium">${acc.tipo_tirada}</span>`;
+            }
+            tagsHtml += '</div>';
+            return tagsHtml;
+        }
+
+        function renderList(title, listData, isObject = false) {
+            if (!listData) return '';
+            let html = `<div class="mt-3 pt-3 border-t border-slate-800/60"><h6 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">${title}:</h6><ul class="space-y-1.5 text-sm text-slate-300">`;
+            if (isObject) {
+                for (const [key, value] of Object.entries(listData)) {
+                    html += `<li class="flex items-start"><span class="font-semibold text-emerald-400 min-w-[80px]">${key}:</span> <span class="text-slate-400">${value}</span></li>`;
+                }
+            } else {
+                listData.forEach(item => {
+                    html += `<li class="flex items-start text-slate-400"><span class="text-emerald-500 mr-2">•</span><span>${item}</span></li>`;
+                });
+            }
+            html += `</ul></div>`;
+            return html;
+        }
+
+        function renderCard(acc) {
+            const isClickable = acc.interactivo || acc.id === 'evento_arcdeck';
+            const hoverStyles = isClickable ? 'cursor-pointer hover:border-amber-500/80 hover:bg-slate-900/80 group' : 'hover:border-emerald-500/50';
+            const onClickAttr = isClickable ? `onclick="openArcdeckModal()"` : '';
+
+            return `
+                <article ${onClickAttr} class="bg-slate-950 rounded-xl p-5 border border-slate-800/60 transition-all duration-300 ${hoverStyles}">
+                    <div class="flex items-center justify-between mb-2">
+                        <h5 class="text-lg font-bold text-white ${isClickable ? 'group-hover:text-amber-400 transition-colors flex items-center gap-2' : ''}">
+                            ${acc.nombre}
+                            ${isClickable ? '<span class="text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-normal">👁️ Ver Tabla</span>' : ''}
+                        </h5>
+                    </div>
+                    ${renderTags(acc)}
+                    ${acc.resumen ? `<p class="text-sm text-slate-300 italic mb-3 border-l-2 border-emerald-500 pl-3 py-1 bg-slate-900/50 rounded-r">${acc.resumen}</p>` : ''}
+                    ${acc.detalles ? `<p class="text-sm text-slate-400 leading-relaxed">${acc.detalles}</p>` : ''}
+                    
+                    ${renderList("Pasos de Resolución", acc.pasos_resolucion)}
+                    ${renderList("Dificultades", acc.dificultades, true)}
+                    ${renderList("Dificultad Escalada", acc.dificultad_escalada)}
+                    ${renderList("Efectos Disponibles", acc.efectos_disponibles)}
+                    
+                    ${acc.restriccion ? `
+                        <div class="mt-4 p-3 bg-rose-950/30 border border-rose-900/50 rounded-lg flex items-start">
+                            <svg class="w-5 h-5 text-rose-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <p class="text-xs text-rose-200">${acc.restriccion}</p>
+                        </div>
+                    ` : ''}
+                </article>
+            `;
+        }
+
+        function openArcdeckModal() {
+            const modal = document.getElementById('modal-arcdeck');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeArcdeckModal() {
+            const modal = document.getElementById('modal-arcdeck');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function toggleCategory(catId) {
+            const container = document.getElementById(catId);
+            const icon = document.getElementById(`icon-${catId}`);
+            if (container) {
+                container.classList.toggle('hidden');
+                if (icon) {
+                    icon.classList.toggle('rotate-180');
+                }
+            }
+        }
+
+        function renderContent() {
+            if (currentSectionId === 'search') {
+                renderSearch();
+                return;
+            }
+
+            const data = dbUnificada.find(s => s.id === currentSectionId);
+            if (!data) return;
+
+            let html = `
+                <div class="max-w-4xl mx-auto pb-12">
+                    <header class="mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">${data.titulo}</h2>
+                        <p class="text-emerald-500 font-medium mt-2">${data.subtitulo}</p>
+                    </header>
+            `;
+
+            data.secciones.forEach((sec, secIndex) => {
+                html += `
+                    <section class="mb-12 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl shadow-black/20">
+                        <div class="bg-slate-800/50 p-6 border-b border-slate-800">
+                            <h3 class="text-2xl font-bold text-white">${sec.titulo}</h3>
+                            ${sec.descripcion ? `<p class="text-slate-400 mt-2">${sec.descripcion}</p>` : ''}
+                        </div>
+                        
+                        <div class="p-6 space-y-6">
+                `;
+
+                sec.categorias.forEach((cat, catIndex) => {
+                    const catId = `cat-${secIndex}-${catIndex}`;
+                    html += `
+                        <div class="bg-slate-950/40 border border-slate-800/60 rounded-xl overflow-hidden">
+                            <button onclick="toggleCategory('${catId}')" class="w-full flex justify-between items-center text-left px-5 py-4 font-semibold text-emerald-400 hover:bg-slate-800/40 transition-colors focus:outline-none">
+                                <span class="text-lg">${cat.nombre_categoria}</span>
+                                <svg id="icon-${catId}" class="w-5 h-5 transform transition-transform duration-200 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="${catId}" class="hidden p-5 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-800/60 bg-slate-950/20">
+                    `;
+
+                    cat.acciones.forEach(acc => {
+                        html += renderCard(acc);
+                    });
+
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </section>
+                `;
+            });
+
+            html += `</div>`;
+            mainContent.innerHTML = html;
+            mainContent.scrollTop = 0;
+        }
+
+        function renderSearch() {
+            let html = `
+                <div class="max-w-4xl mx-auto pb-12">
+                    <header class="mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Buscador Universal</h2>
+                        <p class="text-emerald-500 font-medium mt-2">Encuentra reglas, objetos de campaña o escenarios al instante</p>
+                        
+                        <div class="mt-6 relative">
+                            <input type="text" id="search-input" placeholder="Ej: Arcanita, Prone, Escudo, MVP..." class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-4 pl-12 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all text-lg shadow-inner">
+                            <svg class="w-6 h-6 text-slate-400 absolute left-4 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                    </header>
+
+                    <div id="search-results" class="space-y-6">
+                        <div class="text-center py-10 opacity-50">
+                            <svg class="w-16 h-16 mx-auto text-slate-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p class="text-slate-400">Escribe en la barra superior para empezar a buscar...</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            mainContent.innerHTML = html;
+            mainContent.scrollTop = 0;
+
+            const searchInput = document.getElementById('search-input');
+            searchInput.focus();
+            searchInput.addEventListener('input', executeSearch);
+        }
+
+        function executeSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('search-results');
+
+            if (query.length < 2) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center py-10 opacity-50">
+                        <svg class="w-16 h-16 mx-auto text-slate-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="text-slate-400">Escribe al menos 2 letras para buscar...</p>
+                    </div>`;
+                return;
+            }
+
+            let resultados = [];
+
+            dbUnificada.forEach(mainSec => {
+                mainSec.secciones.forEach(sec => {
+                    sec.categorias.forEach(cat => {
+                        cat.acciones.forEach(acc => {
+                            const textoBuscable = [
+                                acc.nombre,
+                                acc.resumen,
+                                acc.detalles,
+                                acc.etiqueta,
+                                mainSec.titulo,
+                                cat.nombre_categoria
+                            ].filter(Boolean).join(' ').toLowerCase();
+
+                            if (textoBuscable.includes(query)) {
+                                resultados.push({ acc });
+                            }
+                        });
+                    });
+                });
+            });
+
+            if (resultados.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center py-10">
+                        <p class="text-slate-400 text-lg">No se encontraron resultados para "<span class="text-white">${query}</span>"</p>
+                    </div>`;
+                return;
+            }
+
+            let html = `<p class="text-sm text-emerald-500 mb-4 font-medium">Se han encontrado ${resultados.length} resultados:</p>`;
+            html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+
+            resultados.forEach(res => {
+                html += renderCard(res.acc);
+            });
+
+            html += `</div>`;
+            resultsContainer.innerHTML = html;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSidebar();
+            renderContent();
+
+            document.getElementById('close-modal').addEventListener('click', closeArcdeckModal);
+            document.getElementById('close-modal-btn').addEventListener('click', closeArcdeckModal);
+            document.getElementById('modal-arcdeck').addEventListener('click', (e) => {
+                if (e.target.id === 'modal-arcdeck') closeArcdeckModal();
+            });
+        });
+    </script>
+</body>
+</html>
