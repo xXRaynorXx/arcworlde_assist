@@ -310,7 +310,7 @@
             },
             {
               "id": "scen_neverending_horde",
-              "nombre": "Never-ending Horde (Horda Infina)",
+              "nombre": "Never-ending Horde (Horda Infinita)",
               "etiqueta": "Supervivencia",
               "resumen": "Supervivencia desesperada contra oleadas inagotables de enemigos.",
               "detalles": "Despliegue: Defensores en el centro; atacantes a 6\" de los bordes.\nOleadas: En cada ronda el atacante tira 1D6 para desplegar tropas nuevas (1-2: 2-3 Unidades, 3-4: 4 Unidades o Mago, 5-6: 5 Unidades o Monstruo).\nVictoria: 1 VP al defensor por cada 20% de Game Value superviviente; 5 VP al atacante si elimina a todos."
@@ -415,6 +415,12 @@
           "nombre_categoria": "Misiones Secundarias (Número/Valor de Carta)",
           "acciones": [
             {
+              "id": "sec_2_warband1",
+              "nombre": "Carta 2: Warband Specific 1",
+              "etiqueta": "2 VP",
+              "resumen": "Activa la primera Misión Secundaria específica de la facción que juegas."
+            },
+            {
               "id": "sec_3_plunder",
               "nombre": "Carta 3: Plunder (Saqueo)",
               "etiqueta": "2 VP",
@@ -433,11 +439,23 @@
               "resumen": "El Comandante debe finalizar la partida sosteniendo 3 o más fichas de Arcanita."
             },
             {
+              "id": "sec_6_hunter",
+              "nombre": "Carta 6: Hunter (Cazador)",
+              "etiqueta": "2 VP",
+              "resumen": "Cazar Bestias neutrales colocadas en el centro que sueltan Trofeos (Items) al ser noqueadas y terminar con la mayor cantidad de trofeos."
+            },            
+            {
               "id": "sec_7_vendetta",
               "nombre": "Carta 7: Vendetta (Venganza)",
               "etiqueta": "2 VP",
               "resumen": "El Comandante debe noquear a 3 o más enemigos que iniciaron con 5+ HP."
             },
+            {
+              "id": "sec_8_overrun",
+              "nombre": "Carta 8: Overrun (Invasión)",
+              "etiqueta": "2 VP",
+              "resumen": " Tener al menos el 50% de la HP total de tu banda dentro de la zona de despliegue enemiga al final."
+            },            
             {
               "id": "sec_9_capture",
               "nombre": "Carta 9: Capture (Captura)",
@@ -445,17 +463,41 @@
               "resumen": "Apresar al Comandante rival (a 20% HP o menos) mediante una Hazaña."
             },
             {
+              "id": "sec_10_demoler",
+              "nombre": "Carta 10: Demolish (Demoler)",
+              "etiqueta": "2 VP",
+              "resumen": "Destruir un elemento de terreno designado de 50 HP ubicado a más de 12\" de tu zona de despliegue."
+            },            
+            {
               "id": "sec_J_assassinate",
               "nombre": "Carta J: Assassinate (Asesinato)",
               "etiqueta": "2 VP",
               "resumen": "Noquear al personaje enemigo que comenzó con la mayor HP de su banda."
             },
             {
+              "id": "sec_Q_unscathed",
+              "nombre": "Carta Q (Queen): Unscathed (Indemne)",
+              "etiqueta": "2 VP",
+              "resumen": "Proteger a un personaje elegido de tu banda para que no pierda ningún punto de HP durante la batalla."
+            },            
+            {
               "id": "sec_K_epic_duel",
               "nombre": "Carta K: Epic Duel (Duelo Épico)",
               "etiqueta": "2 VP",
               "resumen": "Tu Comandante debe noquear personalmente al Comandante rival."
-            }
+            },
+            {
+              "id": "sec_A_warband2",
+              "nombre": "Carta As (A): Warband Specific 2",
+              "etiqueta": "2 VP",
+              "resumen": "Activa la segunda Misión Secundaria específica de tu facción."
+            },
+            {
+              "id": "sec_JK_legend",
+              "nombre": "Joker: Stories of Legend (Historias Legendarias)",
+              "etiqueta": "2 VP",
+              "resumen": "Completar con éxito 3 Hazañas Legendarias (Legendary Feats) durante la partida."
+            }                        
           ]
         }
       ]
@@ -504,6 +546,30 @@
               "etiqueta": "Dark Lords",
               "resumen": "Subjugate: Capturar prisioneros enemigos durante la incursión.\nMaster of the Battlefield: Demostrar la fuerza destructiva del Señor Oscuro en combate (2 VP si el Dark Lord noquea personalmente a 6 enemigos; 1 VP si noquea a 3)"
             },
+            {
+              "id": "sec_beastfolk",
+              "nombre": "Beast Folks: Prove Yeselves, Scallies! / Ruckus",
+              "etiqueta": "Beast Folks",
+              "resumen": "Prove Yeselves, Scallies!: Noquear enemigos utilizando tropas Vermen (2 VP por 5 KO, 1 VP por 3).\n Ruckus: Poner a la banda bajo los tres efectos de las baladas del Warbard (2 VP por los 3 efectos, 1 VP por al menos 1)."
+            },  
+            {
+              "id": "sec_undeadraiders",
+              "nombre": "Undead Raiders: Deadshot / Treasure Chest",
+              "etiqueta": "Undead Raiders",
+              "resumen": "Deadshot: Noquear enemigos a distancia con pistolas Arcloque robadas (2 VP por 3 KO, 1 VP por 1).\n Treasure Chest: Proteger el cofre del tesoro en tu zona de despliegue sin que el rival lo tome (2 VP si nunca lo tomaron, 1 VP si lo conservas al final)."
+            }, 
+            {
+              "id": "sec_vampires",
+              "nombre": "Vampires: Blood Drinkers / Feed, my Children!",
+              "etiqueta": "Vampires",
+              "resumen": "Blood Drinkers: Cautivar (Enthralled) mentes enemigas (2 VP por 4+ cautivos, 1 VP por 1).\n Feed, my Children!: Noquear enemigos usando murciélagos de la cripta (Crypt Bats) (2 VP por 3 KO, 1 VP por 1)."
+            }, 
+            {
+              "id": "sec_bestiary",
+              "nombre": "Bestiary: The Hunt / Ambush",
+              "etiqueta": "Bestiary",
+              "resumen": "The Hunt: Digerir o engullir (Gobble) aventureros enemigas (2 VP por digerir a 1, 1 VP por engullir a 4+).\n Ambush: Ocultarse en la escenografía para emboscar al rival (2 VP por 3+ emboscadas, 1 VP por 1)."
+            },                                                  
             {
               "id": "sec_nodeads",
               "nombre": "Ancient Dead: The Tomb / Unearthed Brethren",
