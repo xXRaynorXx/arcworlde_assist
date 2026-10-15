@@ -36,7 +36,7 @@
         <div class="p-6 border-b border-slate-800 flex justify-between items-center">
             <div>
                 <h1 class="text-xl font-bold text-white tracking-wide">ArcWorlde</h1>
-                <p class="text-xs text-slate-400 mt-1">Asistente v2.2</p>
+                <p class="text-xs text-slate-400 mt-1">Asistente v2.3</p>
             </div>
             <button id="close-sidebar" class="md:hidden text-slate-400 hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -1096,6 +1096,482 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
 
     <script>
+        const datosFacciones = {
+            "juego": "ArcWorlde - Reglas de Facciones",
+            "version": "2.23",
+            "secciones_facciones": [
+                {
+                    "id_seccion": "halfling_faction",
+                    "nombre": "Facción Halfling",
+                    "descripcion": "Armamento y Habilidades de la facción Halfling.",
+                    "categorias": [
+                        {
+                            "nombre_categoria": "Armamento Halfling",
+                            "acciones": [
+                            {
+    "id": "packed_lunch",
+    "nombre": "Almuerzo Para Llevar / Packed Lunch (10 GP)",
+    "etiqueta": "Objeto / Consumible (Halflings)",
+    "resumen": "Paquete de delicias preparado con cariño para un Halfling hambriento.",
+    "detalles": "Efectos: El personaje recupera D6 HP al consumirse. Puede usarse para curar a un aliado en contacto de peana.",
+    "restriccion": "De un solo uso (One use only)."
+  },
+  {
+    "id": "halfling_ranged_weapon",
+    "nombre": "Arma a Distancia Halfling / Halfling Ranged Weapon (15 GP)",
+    "etiqueta": "Equipo / Arma a Distancia (Halflings)",
+    "resumen": "Desde hondas simples hasta arcos y ballestas adaptadas.",
+    "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 5, Alcance 12\").",
+    "restriccion": "Uso continuo mientras esté equipada."
+  },
+  {
+    "id": "town_banner",
+    "nombre": "Estandarte del Pueblo / Town Banner (15 GP)",
+    "etiqueta": "Objeto / Apoyo (Halflings)",
+    "resumen": "Estandarte con el escudo de la villa natal que inspira a los combatientes.",
+    "detalles": "Efectos: Mientras lo porta un personaje aliado, todos los aliados a 12\" o menos pueden repetir Chequeos de Valentía fallidos.",
+    "restriccion": "Debe ser portado por un personaje aliado."
+  },
+  {
+    "id": "halfling_mount",
+    "nombre": "Montura Halfling / Halfling Mount (30 GP)",
+    "etiqueta": "Equipo / Montura (Halflings)",
+    "resumen": "Ovejas de lana de hierro (Ironwool) u otras bestias domesticadas.",
+    "detalles": "Efectos: Otorga +5 HP, +4 al Movimiento y el rasgo Ágil (Agile). Cambia la peana a 40mm.",
+    "restriccion": "Solo se puede equipar en Sheriffs, Militia y Town Guard."
+  },
+  {
+    "id": "potbelly_cauldron",
+    "nombre": "Caldero Panzón / Potbelly Cauldron (30 GP)",
+    "etiqueta": "Equipo / Vehículo Mágico (Halflings)",
+    "resumen": "Caldero encantado con patas que transporta al Cocinero de Batalla.",
+    "detalles": "Efectos: Otorga +1 al Valor de Armadura. Al inicio de cada ronda, tira 1D6: si tiene éxito, genera 1 Ficha de Arcanita. Cambia la peana a 40mm.",
+    "restriccion": "Solo se puede equipar al Battle Cook."
+  },
+  {
+    "id": "ranger_cloak",
+    "nombre": "Capa de Explorador / Ranger Cloak (10 GP)",
+    "etiqueta": "Equipo / Camuflaje (Halflings)",
+    "resumen": "Capa de camuflaje para mimetizarse con la vegetación del bosque.",
+    "detalles": "Efectos: Si el personaje se encuentra a 2\" o menos de una cobertura o terreno, los ataques a distancia recibidos sufren +1 a la dificultad de la Hazaña.",
+    "restriccion": "Requiere estar a 2\" o menos de un elemento de terreno."
+  }
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Habilidades Halfling",
+                            "acciones": [
+                            {
+    "id": "settler_nation",
+    "nombre": "Nación Colonizadora / Settler Nation",
+    "etiqueta": "Regla de Facción (Halflings)",
+    "resumen": "Alianzas tácticas con otros colonos del bosque de Mildaark.",
+    "detalles": "Efectos: Al construir tu banda, puedes incluir personajes de las facciones Imperial y Njorsvald.",
+    "restriccion": "Aplica en la fase de creación de banda."
+  },
+  {
+    "id": "make_orders",
+    "nombre": "Dar Órdenes / Make Orders",
+    "etiqueta": "Habilidad de Liderazgo (Halflings)",
+    "resumen": "Capacidad de mando para coordinar a las tropas de la milicia.",
+    "detalles": "Efectos: Con una Hazaña Fácil, emite una orden a aliados con Take Orders a 12\". Pasa la activación al grupo receptor (Ej. '¡Como Uno!': activa hasta 3 minis juntas; '¡Manteneos Firmes!': superan automáticamente chequeos de Valentía).",
+    "restriccion": "Afecta solo a aliados a 12\" que tengan la regla Take Orders."
+  },
+  {
+    "id": "take_orders",
+    "nombre": "Recibir Órdenes / Take Orders",
+    "etiqueta": "Rasgo de Tropa (Halflings)",
+    "resumen": "Disciplina de la milicia para responder a las órdenes de sus mandos.",
+    "detalles": "Efectos: Permite al personaje activarse mediante las órdenes emitidas por un líder con Make Orders.",
+    "restriccion": "Requiere estar a 12\" del personaje que emite la orden."
+  },
+  {
+    "id": "rousing_cheer",
+    "nombre": "Ánimo Entusiasta / Rousing Cheer",
+    "etiqueta": "Habilidad de Comandante (Halflings)",
+    "resumen": "Palabras de aliento del Sheriff que elevan la moral de los milicianos.",
+    "detalles": "Efectos: Todos los aliados con Take Orders a 8\" o menos del Sheriff utilizan el atributo de Valentía del Sheriff (Valor 9).",
+    "restriccion": "Afecta solo a aliados con Take Orders a 8\" o menos."
+  },
+  {
+    "id": "bodyguard",
+    "nombre": "Guardaespaldas / Bodyguard",
+    "etiqueta": "Habilidad de Élite (Halflings)",
+    "resumen": "Lealtad de la Guardia del Pueblo para interceptar ataques dirigidos al Comandante.",
+    "detalles": "Efectos: Si la Guardia del Pueblo está en contacto de peana con un Comandante aliado, puede redirigir a sí misma cualquier número de impactos exitosos sufridos por el Comandante.",
+    "restriccion": "Requiere estar en contacto de peana con el Comandante."
+  },
+  {
+    "id": "crew_and_payload",
+    "nombre": "Tripulación y Carga Aleatoria / Crew & Random Payload",
+    "etiqueta": "Regla de Maquinaria (Halflings)",
+    "resumen": "Catapulta Thing-Flinger que dispara proyectiles caóticos impulsados por la milicia.",
+    "detalles": "Efectos: La milicia en contacto de peana puede donar su AP sobrante al Thing-Flinger. Al disparar, tira 1D6 para determinar la carga: (1) Tripulación desafortunada, (2) Verduras podridas/terreno difícil, (3) Cuchillos y tenedores/ignora armadura, (4) Amigos de granja/daño en área, (5) Piedra honesta/+4 Power, (6) Brebaje explosivo/Tumbados en área.",
+    "restriccion": "Requiere una Hazaña Difícil para disparar."
+  },
+  {
+    "id": "grand_cookbook",
+    "nombre": "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb",
+    "etiqueta": "Saber Mágico (Halflings)",
+    "resumen": "Hechizos gastronómicos infundidos con Arcanita preparados por el Cocinero de Batalla.",
+    "detalles": "Efectos: Recetas mágicas: Sopa de Verduras (Sana 3 HP), Estofado de Oveja (Repite Leg It), Hamburguesas Bullox (Repite defensas fallidas), Madras de Cocklegriff (Ataque Power 8 +1 vs Inflamables), Sorpresa de Carne Misteriosa (Aplica 2 recetas juntas).",
+    "restriccion": "Exclusivo de personajes Mago de la facción Halfling (Battle Cook)."
+  }
+                            ]
+                        },
+                        {
+                            "nombre_categoria": "Rasgos de Unidad Halflings",
+                            "acciones": [
+                            {
+    "id": "make_orders",
+    "nombre": "Dar Órdenes / Make Orders",
+    "etiqueta": "Rasgo de Unidad / Mando (Sheriff & Battle Cook)",
+    "resumen": "Permite al líder emitir comandos tácticos a las tropas de la milicia.",
+    "detalles": "Efectos: Mediante una Hazaña Fácil, finaliza la activación del líder y emite una orden a aliados con Take Orders a 12\" (ej. 'As One!' para activar hasta 3 minis juntas o 'Stand Firm!' para superar Valentía automáticamente).",
+    "restriccion": "Requiere superar una Hazaña Fácil y afectar a aliados con Take Orders a 12\"."
+  },
+  {
+    "id": "rousing_cheer",
+    "nombre": "Ánimo Entusiasta / Rousing Cheer",
+    "etiqueta": "Rasgo de Unidad / Liderazgo (Halfling Sheriff)",
+    "resumen": "Aura de valentía del Sheriff para inspirar a la milicia.",
+    "detalles": "Efectos: Todos los personajes aliados con el rasgo Take Orders a 8\" o menos del Sheriff utilizan el atributo de Valentía del Sheriff (Valor 9).",
+    "restriccion": "Afecta a aliados con Take Orders a 8\" o menos."
+  },
+  {
+    "id": "take_orders",
+    "nombre": "Recibir Órdenes / Take Orders",
+    "etiqueta": "Rasgo de Unidad / Tropa (Militia & Town Guard)",
+    "resumen": "Disciplina de la tropa para responder a las órdenes del mando.",
+    "detalles": "Efectos: Permite a las unidades activarse juntas o recibir beneficios de las órdenes emitidas por un líder con Make Orders.",
+    "restriccion": "Requiere estar a 12\" del líder que emite la orden."
+  },
+  {
+    "id": "bodyguard",
+    "nombre": "Guardaespaldas / Bodyguard",
+    "etiqueta": "Rasgo de Unidad / Élite (Town Guard)",
+    "resumen": "Protección de la Guardia del Pueblo para interceptar ataques dirigidos al Comandante.",
+    "detalles": "Efectos: Si está en contacto de peana con un Comandante aliado, el jugador puede redirigir cualquier número de impactos exitosos sufridos por el Comandante a la Guardia del Pueblo (se defienden normalmente).",
+    "restriccion": "Requiere estar en contacto de peana con un Comandante aliado."
+  },
+  {
+    "id": "crew",
+    "nombre": "Tripulación / Crew",
+    "etiqueta": "Rasgo de Unidad / Apoyo (Thing-Flinger)",
+    "resumen": "Asistencia de la milicia para alimentar de acción a la catapulta.",
+    "detalles": "Efectos: Si hay miembros de la Halfling Militia en contacto de peana con el Thing-Flinger, durante su activación pueden donar sus Puntos de Acción (AP) no utilizados al Thing-Flinger.",
+    "restriccion": "Requiere que la Halfling Militia esté en contacto de peana con la catapulta."
+  },
+  {
+    "id": "random_payload",
+    "nombre": "Carga Aleatoria / Random Payload",
+    "etiqueta": "Rasgo de Unidad / Maquinaria (Thing-Flinger)",
+    "resumen": "Disparo de proyectiles caóticos con diversos efectos según la tirada.",
+    "detalles": "Efectos: Antes de intentar la Hazaña Difícil para disparar FIRE!, tira 1D6: (1) Unfortunate Crew: lanza un miliciano al objetivo dándole D6 Hits y Prone; (2) Rotten Veggies: terreno difícil a 3\"; (3) Knives & Forks: -2 Power pero ignora armadura; (4) Farmyard Friends: D3 Hits a 3\"; (5) Honest Stone: +4 Power; (6) Bomb Brew: Prone al objetivo y personajes a 3\".",
+    "restriccion": "Efecto determinado al azar con 1D6 antes del disparo."
+  },
+  {
+    "id": "traps",
+    "nombre": "Trampas / Traps",
+    "etiqueta": "Rasgo de Unidad / Especialista (Monster Hunter)",
+    "resumen": "Colocación de cepos y trampas mortales para detener monstruos y enemigos.",
+    "detalles": "Efectos: Una vez por activación, puede intentar una Hazaña Media para colocar un marcador de trampa a 2\". Cualquier personaje a 2\" o menos del marcador debe superar una Hazaña Media o activar la trampa y sufrir 6 Hits.",
+    "restriccion": "Una vez activada la trampa, el marcador se retira del tablero."
+  },
+  {
+    "id": "cling_on",
+    "nombre": "Morder y Agarrarse / Cling On",
+    "etiqueta": "Rasgo de Unidad / Bestia (Trollhound)",
+    "resumen": "Presa tenaz del sabueso sobre monstruos y titanes.",
+    "detalles": "Efectos: Si realiza un ataque exitoso sobre un Monstruo o Titán en contacto de peana, la víctima sufre un ataque de Bite (Power 5) cada vez que se active. Si el Trollhound es atacado y falla 1D6, pierde el agarre.",
+    "restriccion": "Solo contra Monstruos o Titanes en contacto de peana."
+  },
+  {
+    "id": "expert_poacher",
+    "nombre": "Cazador Furtivo Experto / Expert Poacher",
+    "etiqueta": "Rasgo de Unidad / Mercenario (Rabbin Tood)",
+    "resumen": "Precisión legendaria con arco contra grandes bestias y recolección de raciones.",
+    "detalles": "Efectos: Al realizar ataques a distancia contra Bestias, Monstruos o Titanes, tira 2D6 para apuntar (elige el más alto) e ignora coberturas. Obtiene Packed Lunches al noquear a estas criaturas (1 por Bestia, 2 por Monstruo, 5 por Titán).",
+    "restriccion": "Aplica contra Bestias, Monstruos y Titanes."
+  },
+  {
+    "id": "the_scarlet_blur",
+    "nombre": "El Borrón Escarlata / The Scarlet Blur",
+    "etiqueta": "Rasgo de Unidad / Mercenario (Bruno Focaccia)",
+    "resumen": "Destreza en duelo para esquivar ataques cuando combate mano a mano.",
+    "detalles": "Efectos: Si solo hay un personaje enemigo en contacto de peana, Bruno puede repetir todas sus tiradas de Defensa fallidas.",
+    "restriccion": "Aplica únicamente cuando hay exactamente 1 enemigo en contacto de peana."
+  },
+  {
+    "id": "hater_of_the_dead",
+    "nombre": "Odiador de los Muertos / Hater of the Dead",
+    "etiqueta": "Rasgo de Unidad / Mercenario (Van Halfsing)",
+    "resumen": "Furia sagrada que inflige daño aumentado a todas las criaturas no-muertas.",
+    "detalles": "Efectos: Otorga +1 al Poder (Power) en todos los ataques contra personajes de las facciones Undead Raiders, Ancient Dead o Vampires. Además, su ataque Stake Through the Heart duplica el daño contra no-muertos Tumbados (Prone).",
+    "restriccion": "Aplica contra facciones No-Muertas."
+  },
+  {
+    "id": "van_halfsings_crossbow",
+    "nombre": "Ballesta de Van Halfsing / Van Halfsing's Crossbow",
+    "etiqueta": "Equipo Especial / Mercenario (Van Halfsing)",
+    "resumen": "Ballesta de repetición artesanal para acribillar a los no-muertos.",
+    "detalles": "Efectos: Otorga el ataque a distancia Rapid Shot (Power 4, Alcance 12\"). Por cada tirada de Hazaña exitosa realizada para disparar, realiza dos disparos.",
+    "restriccion": "Uso exclusivo de Van Halfsing."
+  }
+                        ]
+                        }
+                    ]
+                },
+                {
+                    "id_seccion": "imperial_faction",
+                    "nombre": "Facción Imperial",
+                    "descripcion": "Armamento y Habilidades de la facción Imperial.",
+                    "categorias": [
+                        {
+                            "nombre_categoria": "Armamento Imperial",
+                            "acciones": [
+                            {
+    "id": "medical_kit",
+    "nombre": "Botiquín Médico / Medical Kit (10 GP)",
+    "etiqueta": "Objeto / Consumible (Imperiales)",
+    "resumen": "Un paquete de ungüentos y vendas para curar heridas en el campo de batalla.",
+    "detalles": "Efectos: El personaje recupera D6 HP al consumirse. Puede usarse para curar a un aliado en contacto de peana.",
+    "restriccion": "De un solo uso (One use only)."
+  },
+  {
+    "id": "imperial_crossbow",
+    "nombre": "Ballesta Imperial / Imperial Crossbow (15 GP)",
+    "etiqueta": "Equipo / Arma a Distancia (Imperiales)",
+    "resumen": "Arma a distancia tradicional preferida por soldados veteranos de la milicia.",
+    "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 5, Alcance 16\").",
+    "restriccion": "Uso continuo mientras esté equipada."
+  },
+  {
+    "id": "imperial_gryphon",
+    "nombre": "Grifo Imperial / Imperial Gryphon (15 GP)",
+    "etiqueta": "Objeto / Apoyo (Imperiales)",
+    "resumen": "Estandarte con la figura pulida de un grifo que inspira valor a las tropas.",
+    "detalles": "Efectos: Mientras lo porta un personaje aliado, todos los aliados a 12\" o menos pueden repetir Chequeos de Valentía fallidos.",
+    "restriccion": "Debe ser portado por un personaje aliado."
+  },
+  {
+    "id": "imperial_mount",
+    "nombre": "Montura Imperial / Imperial Mount (30 GP)",
+    "etiqueta": "Equipo / Montura (Imperiales)",
+    "resumen": "Cabalgaduras criadas a partir de unicornios o bestias autóctonas domesticadas.",
+    "detalles": "Efectos: Otorga +5 HP, +4 al Movimiento y el rasgo Ágil (Agile). Cambia el tamaño de peana a 50mm.",
+    "restriccion": "Solo se puede equipar en Capitanes, Troopers y Dragoons."
+  },
+  {
+    "id": "arcloque_rifle",
+    "nombre": "Rifle Arcloque / Arcloque Rifle (20 GP)",
+    "etiqueta": "Equipo / Arma a Distancia (Imperiales)",
+    "resumen": "Rifle de pólvora de arcanita de gran poder destructivo y alcance devastador.",
+    "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 8, Alcance 20\"). Se realiza máximo una vez por activación. Si sacas más fallos que éxitos al disparar, el usuario sufre 1 Hit que ignora armadura.",
+    "restriccion": "Máximo 1 disparo por activación. Riesgo de retroceso/sobrecarga."
+  },
+  {
+    "id": "arcloque_pistol",
+    "nombre": "Pistola Arcloque / Arcloque Pistol (15 GP)",
+    "etiqueta": "Equipo / Arma a Distancia (Imperiales)",
+    "resumen": "Versión compacta del rifle Arcloque reservada a oficiales y especialistas.",
+    "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 7, Alcance 8\"). Se realiza máximo una vez por pistola y activación. Si hay más fallos que éxitos, el usuario sufre 1 Hit que ignora armadura.",
+    "restriccion": "Solo para Capitanes, Manitas (Tinkerers) y Dragoons. Riesgo de fallo."
+  },
+  {
+    "id": "sergeants_chevrons",
+    "nombre": "Galones de Sargento / Sergeant's Chevrons (10 GP)",
+    "etiqueta": "Equipo / Mando (Imperiales)",
+    "resumen": "Insignias de veterano que otorgan capacidad de mando al soldado.",
+    "detalles": "Efectos: Otorga +1 a la Valentía y concede la regla Dar Órdenes (Make Orders). Si recibe una orden de un Capitán, puede emitir esa misma orden en la misma activación.",
+    "restriccion": "Solo para Imperial Troopers. No puede recibir órdenes de otro Sargento."
+  }
+                        ]
+                        },
+                        {
+                            "nombre_categoria": "Habilidades Imperiales",
+                            "acciones": [
+                            {
+    "id": "settler_nation_imperial",
+    "nombre": "Nación Colonizadora / Settler Nation",
+    "etiqueta": "Regla de Facción (Imperiales)",
+    "resumen": "Expansión militar e integración con otros pobladores del bosque de Mildaark.",
+    "detalles": "Efectos: Al construir tu banda imperial, puedes incluir personajes de las facciones Halflings y Njorsvald.",
+    "restriccion": "Aplica durante la fase de creación de la banda."
+  },
+  {
+    "id": "make_orders_imperial",
+    "nombre": "Dar Órdenes / Make Orders",
+    "etiqueta": "Habilidad de Liderazgo (Imperiales)",
+    "resumen": "Disciplina militar para coordinar maniobras tácticas del ejército.",
+    "detalles": "Efectos: Con una Hazaña Fácil, emite una orden a aliados con Take Orders a 12\": '¡Juntos!' (+1 Power a 4 minis), '¡Resistid!' (Superan Valentía), '¡Salva!' (Repiten fallos a distancia), o '¡Formación!' (Movimiento extra de 2\").",
+    "restriccion": "Afecta a hasta 4 aliados de la misma Clase a 12\" con Take Orders."
+  },
+  {
+    "id": "take_orders_imperial",
+    "nombre": "Recibir Órdenes / Take Orders",
+    "etiqueta": "Rasgo de Tropa (Imperiales)",
+    "resumen": "Adiestramiento de la tropa para reaccionar a la voz de mando.",
+    "detalles": "Efectos: Permite a los soldados activarse o beneficiarse de las órdenes de un superior con Make Orders.",
+    "restriccion": "Requiere estar a 12\" del personaje que emite la orden."
+  },
+  {
+    "id": "order_together",
+    "nombre": "Órden: ¡Juntos! / Order: Together!",
+    "etiqueta": "Comando Táctico (Imperiales)",
+    "resumen": "Ataque coordinado de infantería para golpear con mayor contundencia.",
+    "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase juntos. Si atacan al mismo objetivo, ganan +1 al Poder (Power).",
+    "restriccion": "Emitido vía Make Orders. Requiere atacar al mismo objetivo."
+  },
+  {
+    "id": "order_hold",
+    "nombre": "Órden: ¡Resistid! / Order: Hold!",
+    "etiqueta": "Comando Táctico (Imperiales)",
+    "resumen": "Orden de mantener la línea y resistir el pánico frente al enemigo.",
+    "detalles": "Efectos: Hasta cuatro personajes de la misma clase superan automáticamente todos los Chequeos de Valentía hasta el final de la ronda.",
+    "restriccion": "Emitido vía Make Orders."
+  },
+  {
+    "id": "order_volley",
+    "nombre": "Órden: ¡Salva! / Order: Volley!",
+    "etiqueta": "Comando Táctico (Imperiales)",
+    "resumen": "Fuego de cobertura y descargas coordinadas a distancia.",
+    "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase. Permite repetir cualquier tirada de Hazaña fallida en ataques a distancia.",
+    "restriccion": "Emitido vía Make Orders. Aplica a ataques a distancia."
+  },
+  {
+    "id": "order_form_up",
+    "nombre": "Órden: ¡Formación! / Order: Form Up!",
+    "etiqueta": "Comando Táctico (Imperiales)",
+    "resumen": "Reposicionamiento táctico rápido de las tropas.",
+    "detalles": "Efectos: Incluso si ya se han activado, hasta cuatro personajes de la misma clase pueden realizar un movimiento de hasta 2\" si no están en combate.",
+    "restriccion": "Emitido vía Make Orders. Solo si no están en contacto de peana."
+  },
+  {
+    "id": "leaders_of_men",
+    "nombre": "Líderes de Hombres / Leaders of Men",
+    "etiqueta": "Habilidad de Comandante (Imperiales)",
+    "resumen": "Aura de mando del Capitán que inspira disciplina a los soldados.",
+    "detalles": "Efectos: Todos los personajes con Take Orders a 10\" o menos del Capitán utilizan su atributo de Valentía (Valor 9).",
+    "restriccion": "Afecta a aliados con Take Orders a 10\" o menos."
+  },
+  {
+    "id": "mounted_specialist",
+    "nombre": "Especialista Montado / Mounted Specialist",
+    "etiqueta": "Habilidad de Carga (Imperiales)",
+    "resumen": "Carga de caballería devastadora impulsada por los Dragoons.",
+    "detalles": "Efectos: Si el personaje está montado, gana +1 al Poder (Power) en todos sus ataques si realiza una Carga en esa activación.",
+    "restriccion": "Requiere estar montado y realizar una Carga."
+  },
+  {
+    "id": "contraption_trunk",
+    "nombre": "Baúl de Inventos / Contraption Trunk",
+    "etiqueta": "Regla de Acompañante (Imperiales)",
+    "resumen": "Baúl mecánico sobre patas de latón alimentadas por arcanita que sigue al Manitas.",
+    "detalles": "Efectos: Acompañante en peana de 30mm. Se mueve hasta 6\" por activación del Tinkerer. Intenta Hazañas usando los AP del Tinkerer y no puede ser noqueado.",
+    "restriccion": "Exclusivo del Imperial Tinkerer."
+  },
+  {
+    "id": "arclance_trait",
+    "nombre": "Lanza Mágica / Arclance",
+    "etiqueta": "Regla de Arma (Imperiales)",
+    "resumen": "Lanza electrificada experimental de gran potencia y alto riesgo.",
+    "detalles": "Efectos: Cuenta como una Lanza (Spear). Puedes gastar 1 Ficha de Arcanita para ganar +2 Power en todos tus ataques en esa activación, pero sufres D3 Hits.",
+    "restriccion": "Provoca autocastigo de D3 Hits al sobrecargarse."
+  },
+  {
+    "id": "tinkerers_creations",
+    "nombre": "Creaciones del Manitas / The Tinkerer's Creations",
+    "etiqueta": "Saber Mágico (Imperiales)",
+    "resumen": "Artefactos y mecanismos arcanos desplegados en batalla por el Tinkerer.",
+    "detalles": "Efectos: Inventos: Griffling Mecánico (Invocación), Pistola Giratoria (Power 5 repite D6 por éxito), Escudo Arcano (+1 Armadura en área), Bala Teledirigida (Disparo sin cobertura y éxito gratis), Devorador Mágico (Intercepta hechizos enemigos y genera Arcanita).",
+    "restriccion": "Exclusivo del Mago de la facción Imperial (Tinkerer)."
+  }
+                        ]
+                        },
+                        {
+                            "nombre_categoria": "Rasgos de Unidad Imperiales",
+                            "acciones": [
+                            {
+    "id": "make_orders_imperial",
+    "nombre": "Dar Órdenes / Make Orders",
+    "etiqueta": "Rasgo de Unidad / Mando (Imperial Captain & Sergeant)",
+    "resumen": "Permite al oficial emitir órdenes tácticas militares a las tropas imperiales.",
+    "detalles": "Efectos: Con una Hazaña Fácil, finaliza la activación del oficial y emite una orden a hasta 4 aliados con Take Orders a 12\" (ej. 'Together!' para +1 Power, 'Hold!' para superar Valentía, 'Volley!' para repetir fallos a distancia, o 'Form Up!' para movimiento extra de 2\").",
+    "restriccion": "Afecta a hasta 4 aliados de la misma Clase a 12\" con Take Orders."
+  },
+  {
+    "id": "leaders_of_men",
+    "nombre": "Líderes de Hombres / Leaders of Men",
+    "etiqueta": "Rasgo de Unidad / Liderazgo (Imperial Captain)",
+    "resumen": "Aura de mando del Capitán para mantener la disciplina y el valor de los soldados.",
+    "detalles": "Efectos: Todos los personajes aliados con el rasgo Take Orders a 10\" o menos del Capitán Imperial utilizan el atributo de Valentía del Capitán (Valor 9).",
+    "restriccion": "Afecta a aliados con Take Orders a 10\" o menos."
+  },
+  {
+    "id": "take_orders_imperial",
+    "nombre": "Recibir Órdenes / Take Orders",
+    "etiqueta": "Rasgo de Unidad / Tropa (Troopers, Dragoons, Ogres, Arclancers)",
+    "resumen": "Adiestramiento militar para responder con rapidez a los comandos del mando.",
+    "detalles": "Efectos: Permite a los soldados activarse coordinadamente o recibir los beneficios tácticos de las órdenes emitidas por un superior con Make Orders.",
+    "restriccion": "Requiere estar a 12\" del oficial que emite la orden."
+  },
+  {
+    "id": "mounted_specialist",
+    "nombre": "Especialista Montado / Mounted Specialist",
+    "etiqueta": "Rasgo de Unidad / Élite (Imperial Dragoon)",
+    "resumen": "Impacto devastador al realizar una carga de caballería sobre una montura.",
+    "detalles": "Efectos: Si el personaje está montado, obtiene un bono adicional de +1 al Poder (Power) en todos sus ataques durante la activación en que realice una Carga.",
+    "restriccion": "Requiere estar montado y realizar una acción de Carga."
+  },
+  {
+    "id": "contraption_trunk",
+    "nombre": "Baúl de Inventos / Contraption Trunk",
+    "etiqueta": "Rasgo de Unidad / Mago (Imperial Tinkerer)",
+    "resumen": "Acompañante mecánico en forma de baúl con patas de latón que transporta los artefactos del Manitas.",
+    "detalles": "Efectos: Personaje en peana de 30mm sin atributos propios que no puede ser Noqueado. Se mueve hasta 6\" en cada activación del Tinkerer. Consume AP del Tinkerer para realizar Hazañas. El Tinkerer solo puede lanzar hechizos si está en contacto de peana con el baúl.",
+    "restriccion": "El Tinkerer requiere contacto de peana con el baúl para lanzar hechizos."
+  },
+  {
+    "id": "volley_gun_trait",
+    "nombre": "Arma de Ráfaga / Volley Gun",
+    "etiqueta": "Equipo Especial / Pesado (Imperial Ogre)",
+    "resumen": "Arma multicañón experimental Arcloque de potencia devastadora contra grupos.",
+    "detalles": "Efectos: Otorga el ataque a distancia Volley Gun Shot (Power 6, Alcance 16\"). Requiere Hazaña Difícil. Traza una línea hasta el objetivo; todos los personajes a 2\" o menos de la línea sufren el ataque. Si hay más fallos que éxitos, el Ogro sufre D3 Hits que ignoran armadura.",
+    "restriccion": "Equipable al Imperial Ogre (+40 GP). Riesgo de sobrecarga."
+  },
+  {
+    "id": "arclance_trait",
+    "nombre": "Lanza Eléctrica / Arclance",
+    "etiqueta": "Equipo Especial / Irregular (Imperial Arclancer)",
+    "resumen": "Lanza cargada con energía de arcanita para infligir descargas brutales.",
+    "detalles": "Efectos: Cuenta como una Lanza (Spear). Puede consumir 1 Ficha de Arcanita para ganar +2 Power en todos sus ataques durante esa activación, pero el usuario sufre D3 Hits inmediatamente. Además, los ataques fallidos contra el objetivo dañan a enemigos a 3\".",
+    "restriccion": "Provoca autocastigo de D3 Hits al sobrecargarse."
+  },
+  {
+    "id": "reloader",
+    "nombre": "Recargador / Reloader",
+    "etiqueta": "Rasgo de Unidad / Bestia (Ammo Monkey)",
+    "resumen": "Asistencia constante para recargar armas de fuego de pólvora de arcanita.",
+    "detalles": "Efectos: Si está en contacto de peana con un personaje aliado equipado con un arma Arcloque (Rifle o Pistola), permite a ese aliado realizar dos ataques a distancia con el arma en la misma activación.",
+    "restriccion": "Aplica a un único personaje por ronda y requiere contacto de peana."
+  },
+  {
+    "id": "sergeants_chevrons_trait",
+    "nombre": "Galones de Sargento / Sergeant's Chevrons",
+    "etiqueta": "Equipo Especial / Mando Intermedio (Imperial Trooper)",
+    "resumen": "Insignia de oficial subalterno que otorga valentía y capacidad de retransmitir órdenes.",
+    "detalles": "Efectos: Otorga +1 a la Valentía y concede la regla Make Orders. Si el Sargento recibe una orden de un Capitán, puede emitir esa misma orden a sus subordinados en la misma activación.",
+    "restriccion": "Equipable solo a Imperial Troopers (+10 GP). No puede recibir órdenes de otro Sargento."
+  }
+                        ]
+                        }
+                    ]
+                }
+
+            ]
+        };
+
         const datosCampana = {
             "juego": "ArcWorlde - Reglamento de Campañas",
             "version": "1.3 (Edición Oficial Marzo 2024)",
@@ -1143,6 +1619,27 @@
                                 { "id": "heavy_armour", "nombre": "Armadura Pesada (35 GP)", "etiqueta": "Equipo", "resumen": "Armadura que bloquea dados de daño.", "detalles": "Efectos: Otorga +2 al Valor de Armadura.","restriccion": "Aumenta en +1 la dificultad de todas las tiradas de Leg It."}
                             ]
                         },
+                        {
+                            "nombre_categoria": "Artefactos Legendarios",
+                            "acciones": [
+                                { "id": "bloodoak_armour", "nombre": "Armadura de Roble Sangriento / Bloodoak Armour", "etiqueta": "Artefacto Legendario (Equipo)", "resumen": "Armadura hecha de corteza dura como el hierro que se repara absorbiendo la salud del usuario.", "detalles": "Efectos: Cuenta como Armadura Pesada. Si la armadura resulta dañada o rota de alguna forma, se repara instantáneamente.", "restriccion": "Por cada punto de armadura recuperado, el portador pierde 2 HP."},
+                                { "id": "hex_pistols", "nombre": "Pistolas Místicas / Hex Pistols", "etiqueta": "Artefacto Legendario (Equipo)", "resumen": "Par de pistolas Arcloque malditas cuyos proyectiles buscan certeramente a sus víctimas.", "detalles": "Efectos: Otorga un ataque a distancia con Alcance 12\" y Power 16. Los disparos nunca sufren Desventaja.", "restriccion": "Si en la tirada hay más Fallos que Éxitos, el usuario sufre tantos Impactos (Hits) como Fallos haya obtenido."},
+                                { "id": "vitality_stone", "nombre": "Piedra de Vitalidad / Vitality Stone", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Amuleto esculpido que permite almacenar energía de acción para usarla posteriormente.", "detalles": "Efectos: Los Puntos de Acción (AP) no gastados en una activación pueden 'guardarse' y consumirse en otra activación posterior. Si el portador cae Noqueado, deja un marcador y cualquier personaje puede usar esos AP para Hazañas.", "restriccion": "Si se falla una Hazaña usando los AP almacenados, el personaje pierde tantos HP como AP había acumulados."},
+                                { "id": "griffling_boots", "nombre": "Botas de Griffling / Griffling Boots", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Botas mágicas que otorgan una velocidad y capacidad de salto sobrehumanas.", "detalles": "Efectos: Duplica el atributo de Movimiento del portador y le otorga el rasgo Vuelo (Fly).", "restriccion": "Si el portador falla una tirada de Leg It, sufre D6 Hits tras quedar Tumbado (Prone)."},
+                                { "id": "the_completely_harmless_and_normal_ring",  "nombre": "El Anillo Completamente Normal e Inofensivo / The Completely Harmless and Normal Ring", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Anillo de oro en apariencia insignificante que vuelve invisible a quien lo porta.", "detalles": "Efectos: Otorga el rasgo Invisibilidad (Invisible). El portador no puede ser objetivo de ataques a distancia y puede destrabarse del combate cuerpo a cuerpo sin penalización.", "restriccion": "Si el portador resulta Tumbado (Prone), cualquier personaje en contacto de peana puede intentar robarle el anillo con una Hazaña Fácil."},
+                                { "id": "the_eldritch_wand", "nombre": "Varita Arcana / The Eldritch Wand", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Varita de madera traslúcida que concede un gran control sobre el robo de magia.", "detalles": "Efectos: Un Mago puede descartar una carta de su mano al lanzar un hechizo, devolverla al mazo y robar otra.", "restriccion": "Cada vez que un Mago usa esta habilidad pierde 1 HP. Si la sostiene un personaje no Mago, pierde inmediatamente D6 HP."},
+                                { "id": "resurrection_coin", "nombre": "Moneda de Resurrección / Resurrection Coin", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Moneda de oro antiguo que impide que su poseedor muera del todo.", "detalles": "Efectos: Cuando el portador se reduce a 0 HP, se lanza una moneda: si sale Cara, recupera 3 HP; si sale Cruz, recupera 1 HP pero queda Tumbado (Prone).", "restriccion": "Aplica solo en el momento de ser reducido a 0 HP."},
+                                { "id": "euphimias_box", "nombre": "La Caja de Eufimia / Euphimia's Box", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Reliquia legendaria que libera una explosión devastadora al ser abierta.", "detalles": "Efectos: Al abrirse, todos los personajes a 6\" o menos deben superar una Hazaña Difícil o sufrir 2D6 Hits.", "restriccion": "Un solo uso. Una vez abierta, pierde todo su poder."},
+                                { "id": "blade_of_the_sacred_viper", "nombre": "Hoja de la Víbora Sagrada / Blade of the Sacred Viper", "etiqueta": "Artefacto Legendario (Equipo)", "resumen": "Arma impregnada con un veneno recurrente y mortal que se multiplica progresivamente.", "detalles": "Efectos: Si causa daño, la víctima debe superar una Hazaña Fácil o sufrir 1 Hit extra. Si falla, al final de su siguiente activación debe superar una Hazaña Fácil o sufrir 2 Hits (se duplican los impactos en cada activación consecutiva fallida).", "restriccion": "Si el portador no envenena a nadie durante una ronda entera, pierde D3 HP por la venganza de la víbora."},
+                                { "id": "axe_of_frost", "nombre": "Hacha de Escarcha / Axe of Frost", "etiqueta": "Artefacto Legendario (Equipo)", "resumen": "Arma antigua de Njorsvald que congela e inmoviliza a las víctimas.", "detalles": "Efectos: Si inflige daño, el objetivo queda congelado e inmovilizado. Para liberarse debe superar una Hazaña Fácil (o no podrá moverse esa activación).", "restriccion": "Si la víctima sufre daño adicional del hacha antes de liberarse, la Hazaña requerida pasa a ser de dificultad Media."},
+                                { "id": "the_chalice_of_blood", "nombre": "El Cáliz de Sangre / The Chalice of Blood", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Cáliz de oro y rubíes que otorga salud y energía de acción instantáneas a cambio de adicción.", "detalles": "Efectos: El portador puede beber del cáliz con una Hazaña Fácil para recuperar D6 HP y D6 AP en esa ronda.", "restriccion": "Durante el resto de la partida, en cada ronda en que no beba del cáliz perderá D6 HP al final de su activación."},
+                                { "id": "crown_of_the_vauhaemi", "nombre": "Corona de los Vauhaemi / Crown of the Vauhaemi", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Corona antigua que permite invocar guerreros esqueléticos para que sirvan al usuario.", "detalles": "Efectos: Al final de su activación, el portador puede invocar 1 Skelt aliado por ronda, el cual puede activarse inmediatamente después.", "restriccion": "Limitado a 1 Skelt invocado por ronda."},
+                                { "id": "silver_bolts", "nombre": "Proyectiles de Plata / Silver Bolts", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Munición bendecida extremadamente mortífera contra no-muertos.", "detalles": "Efectos: Los ataques a distancia del portador causan +D6 Hits adicionales contra personajes No-Muertos (Undead).", "restriccion": "Tras cada disparo debe tirarse 1D6: si sale un 1, la munición se agota por completo."},
+                                { "id": "cloak_of_night", "nombre": "Capa de la Noche / Cloak of Night", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Manto de seda negra que difumina la silueta del usuario en la oscuridad.", "detalles": "Efectos: Todos los disparos y ataques a distancia realizados contra el portador sufren Desventaja. Si el portador se encuentra en Cobertura (Cover), no puede ser seleccionado como objetivo de disparos.", "restriccion": "Aplica a ataques a distancia."},
+                                { "id": "amulet_of_daylight", "nombre": "Amuleto de Luz Solar / Amulet of Daylight", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Joya deslumbrante capaz de reflejar un destello solar cegador.", "detalles": "Efectos: Mediante una Hazaña Fácil, el usuario ciega a todos los personajes en un radio de 4\" durante el resto de la ronda. Los personajes cegados realizan todos sus ataques a Desventaja.", "restriccion": "Ciega tanto a enemigos como a aliados en el área."},
+                                { "id": "arcronomicon", "nombre": "Arcronomicón / Arcronomicon", "etiqueta": "Artefacto Legendario (Objeto)", "resumen": "Tomo maldito de nigromancia capaz de resucitar a los caídos.", "detalles": "Efectos: El portador puede sacrificar todos sus AP para resucitar a un personaje caído en contacto de peana con la mitad de sus HP máximos.", "restriccion": "El personaje resucitado pasa a contar como No-Muerto (Undead) durante el resto de la partida/campaña."}
+                            ]
+                        },                        
                         {
                             "nombre_categoria": "Habilidades de Campaña (Traits)",
                             "acciones": [
@@ -1239,7 +1736,7 @@
                     ]
                 }
             ]
-        };
+        };    
 
         const datosEscenarios = {
             "juego": "ArcWorlde - Libro de Escenarios y Generador",
@@ -1579,6 +2076,16 @@
                     categorias: fase.categorias ? fase.categorias : [{ nombre_categoria: 'Acciones de Fase', acciones: fase.acciones }]
                 }))
             },
+            {
+                id: 'factions',
+                titulo: 'Reglas de Facciones',
+                subtitulo: `${datosFacciones.juego} - ${datosFacciones.version}`,
+                secciones: datosFacciones.secciones_facciones.map(sec => ({
+                    titulo: sec.nombre,
+                    descripcion: sec.descripcion,
+                    categorias: sec.categorias
+                }))
+            },            
             {
                 id: 'campaign',
                 titulo: 'Reglas de Campaña',
