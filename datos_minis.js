@@ -1,3 +1,4 @@
+// Base de datos de Unidades de ArcWorlde (Versión 2.0 - Con Equipo de Serie e Innato)
 const datosMinis = {
   "version": "1.0",
   "reglas_banda": {
@@ -19,7 +20,7 @@ const datosMinis = {
           "stats": {
             "hp": 10,
             "mov": 4,
-            "armadura": 0,
+            "armadura": 1,
             "ap": 4
           },
           "ataques": [
@@ -28,7 +29,8 @@ const datosMinis = {
           ],
           "rasgos": [
             "Make Orders",
-            "Rousing Cheer"
+            "Rousing Cheer",
+            "Light Armour (Gratis / +1 Armadura)"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
@@ -36,6 +38,10 @@ const datosMinis = {
             "arma_distancia_halfling",
             "almuerzo_llevar",
             "estandarte_pueblo"
+          ],
+          "equipo_de_serie": [
+            "Armadura Ligera / Light Armour (Gratis / +1 Armadura)",
+            "Espada y Garrote de Alguacil"
           ]
         },
         {
@@ -63,6 +69,9 @@ const datosMinis = {
             "montura_halfling",
             "arma_distancia_halfling",
             "almuerzo_llevar"
+          ],
+          "equipo_de_serie": [
+            "Herramientas Agrícolas / Armas Improvisadas"
           ]
         },
         {
@@ -75,7 +84,7 @@ const datosMinis = {
           "stats": {
             "hp": 7,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 2,
             "ap": 3
           },
           "ataques": [
@@ -85,13 +94,18 @@ const datosMinis = {
           "rasgos": [
             "Take Orders",
             "Heavy Armour",
-            "Bodyguard"
+            "Bodyguard",
+            "Heavy Armour (Gratis / +2 Armadura)"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "montura_halfling",
             "arma_distancia_halfling",
             "almuerzo_llevar"
+          ],
+          "equipo_de_serie": [
+            "Armadura Pesada / Heavy Armour (Gratis / +2 Armadura, +1 dificultad a Leg It)",
+            "Hacha de la Guardia"
           ]
         },
         {
@@ -112,12 +126,17 @@ const datosMinis = {
             "Tenderise: (1 AP) Melee, Power 3."
           ],
           "rasgos": [
-            "Grand Cookbook"
+            "Grand Cookbook",
+            "Grand Cookbook of Bulbo Chubb"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
             "potbelly_cauldron",
             "almuerzo_llevar"
+          ],
+          "equipo_de_serie": [
+            "Cucharas y Calderos de Combate",
+            "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb"
           ]
         },
         {
@@ -138,12 +157,16 @@ const datosMinis = {
             "Net Throw: (1 AP) Ranged, Power 3, Alcance 6\". Regla Especial: Si impacta, el objetivo queda Tumbado (Prone)."
           ],
           "rasgos": [
-            "Expert Poacher"
+            "Expert Poacher",
+            "Traps (Gratis)"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "almuerzo_llevar",
             "ranger_cloak"
+          ],
+          "equipo_de_serie": [
+            "Marcadores de Trampa / Traps (Gratis / 1 uso por activación)"
           ]
         },
         {
@@ -156,7 +179,7 @@ const datosMinis = {
           "stats": {
             "hp": 20,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 3
           },
           "ataques": [
@@ -164,10 +187,15 @@ const datosMinis = {
             "Crew Bash: (1 AP) Melee, Power 4."
           ],
           "rasgos": [
-            "Crew and Payload"
+            "Crew and Payload",
+            "Crew",
+            "Random Payload"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Catapulta de Trastura / Thing-Flinger"
+          ]
         }
       ]
     },
@@ -195,7 +223,8 @@ const datosMinis = {
           "rasgos": [
             "Make Orders",
             "Take Orders",
-            "Light Armour"
+            "Light Armour",
+            "Light Armour (Gratis / +1 Armadura)"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
@@ -203,6 +232,10 @@ const datosMinis = {
             "medical_kit",
             "imperial_gryphon",
             "arcloque_rifle"
+          ],
+          "equipo_de_serie": [
+            "Armadura Ligera Imperial / Light Armour (Gratis / +1 Armadura)",
+            "Espada de Oficial / Riposte"
           ]
         },
         {
@@ -231,6 +264,9 @@ const datosMinis = {
             "arcloque_rifle",
             "imperial_crossbow",
             "medical_kit"
+          ],
+          "equipo_de_serie": [
+            "Lanza o Espada de Recluta"
           ]
         },
         {
@@ -253,12 +289,17 @@ const datosMinis = {
           "rasgos": [
             "Take Orders",
             "Light Armour",
-            "Mounted Specialist"
+            "Mounted Specialist",
+            "Light Armour (Gratis / +1 Armadura)"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "imperial_mount",
             "medical_kit"
+          ],
+          "equipo_de_serie": [
+            "Armadura Ligera de Dragón / Light Armour (Gratis / +1 Armadura)",
+            "Sable Dragón"
           ]
         },
         {
@@ -279,11 +320,15 @@ const datosMinis = {
           ],
           "rasgos": [
             "Contraption Trunk",
-            "Mage"
+            "Mage",
+            "Contraption Trunk (Gratis)"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
             "medical_kit"
+          ],
+          "equipo_de_serie": [
+            "Contraption Trunk / Cofre Mecánico (Seguidor robot de 30mm que se desplaza gratis con el Mago)"
           ]
         },
         {
@@ -304,11 +349,15 @@ const datosMinis = {
             "Jab: (1 AP) Melee, Power 4."
           ],
           "rasgos": [
-            "Arc Energy"
+            "Arc Energy",
+            "Arclance (Gratis)"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "medical_kit"
+          ],
+          "equipo_de_serie": [
+            "Lanza Arcana / Arclance (Cuenta como Lanza de serie; permite gastar Arcanita para +2 Power a cambio de D3 Hits)"
           ]
         },
         {
@@ -333,7 +382,10 @@ const datosMinis = {
             "Massive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -367,6 +419,9 @@ const datosMinis = {
           "max_por_banda": 1,
           "equipo_permitido": [
             "black_potion"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -392,6 +447,9 @@ const datosMinis = {
           "max_por_banda": null,
           "equipo_permitido": [
             "slaver_whip"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -417,6 +475,9 @@ const datosMinis = {
           "max_por_banda": null,
           "equipo_permitido": [
             "hobgoblin_ranged_weapon"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -441,7 +502,10 @@ const datosMinis = {
             "Diminutive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "underling",
@@ -465,7 +529,10 @@ const datosMinis = {
             "Diminutive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "hellbeast",
@@ -490,7 +557,10 @@ const datosMinis = {
             "Split Activation"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -524,6 +594,9 @@ const datosMinis = {
             "horns_and_tusks",
             "protective_hide",
             "cured_meat"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -550,6 +623,9 @@ const datosMinis = {
           "max_por_banda": 1,
           "equipo_permitido": [
             "cured_meat"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -578,6 +654,9 @@ const datosMinis = {
             "horns_and_tusks",
             "protective_hide",
             "cured_meat"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -606,6 +685,9 @@ const datosMinis = {
           "equipo_permitido": [
             "beastfolk_ranged_weapon",
             "cured_meat"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -632,6 +714,9 @@ const datosMinis = {
           "max_por_banda": null,
           "equipo_permitido": [
             "cured_meat"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -656,7 +741,10 @@ const datosMinis = {
             "Waterborne"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -691,6 +779,9 @@ const datosMinis = {
             "sacred_blade",
             "circlet_of_bronze",
             "animal_totem"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -717,6 +808,9 @@ const datosMinis = {
           "max_por_banda": 1,
           "equipo_permitido": [
             "animal_totem"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -744,6 +838,9 @@ const datosMinis = {
           "equipo_permitido": [
             "ancient_dead_ranged_weapon",
             "sacred_blade"
+          ],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
           ]
         },
         {
@@ -766,12 +863,17 @@ const datosMinis = {
           "rasgos": [
             "Afterlife",
             "Bones",
-            "Buried Horde"
+            "Buried Horde",
+            "Buried Horde (-25% GP Armería Común)"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "sacred_blade",
             "circlet_of_bronze"
+          ],
+          "equipo_de_serie": [
+            "Armadura de Bronce Ritual (+1 Armadura)",
+            "Acceso a la Armería Común con 25% de descuento por el rasgo Buried Horde"
           ]
         },
         {
@@ -796,7 +898,10 @@ const datosMinis = {
             "Spirit of the Relic"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "barrow_hound",
@@ -821,7 +926,10 @@ const datosMinis = {
             "Bones"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -851,7 +959,10 @@ const datosMinis = {
             "Bloodline Powers"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "vampire_thrall",
@@ -874,7 +985,10 @@ const datosMinis = {
             "Subservient"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "manservant",
@@ -897,7 +1011,10 @@ const datosMinis = {
             "Devoted Service"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "werewolf",
@@ -922,7 +1039,10 @@ const datosMinis = {
             "Fearsome"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "crypt_bat",
@@ -945,7 +1065,10 @@ const datosMinis = {
             "Fly"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -975,7 +1098,10 @@ const datosMinis = {
             "Outlaw Lord"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "undead_raider",
@@ -998,7 +1124,10 @@ const datosMinis = {
             "Undead"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "carrion_rat",
@@ -1021,7 +1150,10 @@ const datosMinis = {
             "Undead"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "undead_ogre",
@@ -1045,7 +1177,10 @@ const datosMinis = {
             "Massive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -1076,7 +1211,10 @@ const datosMinis = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "wild_elf_warrior",
@@ -1100,7 +1238,10 @@ const datosMinis = {
             "Woodlore"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "briarbeast",
@@ -1124,7 +1265,10 @@ const datosMinis = {
             "Woodlore"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "lichenhawk",
@@ -1149,7 +1293,10 @@ const datosMinis = {
             "Flammable"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -1176,10 +1323,14 @@ const datosMinis = {
           ],
           "rasgos": [
             "Power Struggle",
-            "Swamp Born"
+            "Swamp Born",
+            "War Hides (+1 Armadura)"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Pieles de Batalla Ourk (+1 Armadura)"
+          ]
         },
         {
           "id": "ourk_dreameater",
@@ -1203,7 +1354,10 @@ const datosMinis = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "ourk_brute",
@@ -1226,7 +1380,10 @@ const datosMinis = {
             "Swamp Born"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "boglin",
@@ -1249,7 +1406,10 @@ const datosMinis = {
             "Throwable"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "marsh_hydra",
@@ -1274,7 +1434,10 @@ const datosMinis = {
             "Fearsome"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -1304,7 +1467,10 @@ const datosMinis = {
             "Gremlin Burrows"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "gremlin_warrior",
@@ -1327,7 +1493,10 @@ const datosMinis = {
             "Gremlin Burrows"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "spitlizard",
@@ -1350,7 +1519,10 @@ const datosMinis = {
             "Diminutive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "jungle_troll",
@@ -1374,7 +1546,10 @@ const datosMinis = {
             "Fearsome"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -1405,7 +1580,10 @@ const datosMinis = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "battle_wizard",
@@ -1428,7 +1606,10 @@ const datosMinis = {
             "Mage"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "enchanted_sentinel",
@@ -1451,7 +1632,10 @@ const datosMinis = {
             "Enchanted Armour"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     },
@@ -1482,7 +1666,10 @@ const datosMinis = {
             "Chocks Away!"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "forest_troll",
@@ -1507,7 +1694,10 @@ const datosMinis = {
             "Fearsome"
           ],
           "max_por_banda": null,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         },
         {
           "id": "giant",
@@ -1532,7 +1722,10 @@ const datosMinis = {
             "Titan"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": []
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Armamento Estándar / Sin Armadura de serie"
+          ]
         }
       ]
     }
