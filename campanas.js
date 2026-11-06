@@ -110,6 +110,7 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_rolls', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_ledger', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'games', filter: 'campaign_id=eq.' + id }, soft)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'game_players' }, soft)
         .subscribe();
     } catch (e) {
       cs.channel = null;
@@ -215,8 +216,8 @@
       '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Número de misiones</label><input name="missions" type="number" min="1" max="12" step="1" value="3" required class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Valor máximo de banda (GP)</label><input name="max" type="number" min="1" step="1" value="500" required class="' + inputCls + '"></div>' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Fondo inicial por banda (GP)</label><input name="gold" type="number" min="0" step="1" value="100" required class="' + inputCls + '"></div></div>' +
-      '<p class="text-xs text-slate-500">Cada misión es una partida. El fondo es el dinero con el que empieza cada banda y luego sube o baja con compras, ventas, premios y eventos.</p>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Presupuesto inicial por banda (GP)</label><input name="gold" type="number" min="0" step="1" value="100" required class="' + inputCls + '"></div></div>' +
+      '<p class="text-xs text-slate-500">Cada misión es una partida. El presupuesto es el dinero con el que empieza cada banda: al elegir banda se le descuenta su valor, y lo que queda (el fondo) sube o baja con compras, ventas, premios y eventos.</p>' +
       '<label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" name="plays" checked class="accent-emerald-500"> Yo también juego esta campaña</label>' +
       '<div class="pt-2 flex gap-3"><button type="submit" class="' + btnPrimary + '">Crear campaña</button>' +
       '<button type="button" onclick="AW.c.back()" class="' + btnGhost + '">Cancelar</button></div></form>';
@@ -240,6 +241,10 @@
     if (r.kind === 'injury') {
       const l = t.lesiones[r.result.lesion];
       return l ? '<strong class="text-rose-300">' + esc(l.nombre) + '</strong> <span class="text-slate-400">— ' + esc(l.texto) + '</span>' : '—';
+    }
+    if (r.kind === 'round_event') {
+      const g = cs.games.find((x) => x.position === r.chapter);
+      return AW.g && AW.g.cardEventHtml ? AW.g.cardEventHtml(r.result.card, g && g.arcdeck_env) : esc(r.result.card);
     }
     const ev = t.aventuras[r.result.evento];
     const txt = ev ? ev.resultados[String(r.result.resolucion)] : '';
@@ -270,6 +275,51 @@
     );
   }
 
+  const mineOf = () => (cs.camp && cs.camp.campaign_players || []).find((p) => p.user_id === state.user.id) || null;
+  function myHumor(n) {
+    const r = rollsOf(n, 'merchant').find((x) => x.user_id === state.user.id);
+    return r ? T().humor_comerciante[r.result.humor] || null : null;
+  }
+  const pct = (n) => (n > 0 ? '+' : '') + n + '%';
+
+  // Cuánto cuestan los cambios respecto a la banda anterior, con los precios del comerciante de este jugador
+  function bandChange(orig, units, humor) {
+    const buy = 1 + ((humor && humor.compra) || 0) / 100;
+    const sell = 1 + ((humor && humor.venta) || 0) / 100;
+    const key = (g) => g.origen + ':' + g.id;
+    const used = {};
+    let spend = 0, refund = 0;
+    const lines = [];
+    const gearBuy = (g, who) => { const c = Math.round((Number(g.coste) || 0) * buy); spend += c; lines.push({ t: 'Compra', n: g.nombre + (who ? ' (' + who + ')' : ''), c }); };
+    const gearSell = (g, who) => { const c = Math.round((Number(g.coste) || 0) * sell); refund += c; lines.push({ t: 'Venta', n: g.nombre + (who ? ' (' + who + ')' : ''), c }); };
+    units.forEach((u) => {
+      const o = u._o != null ? orig[u._o] : null;
+      const gear = u.equipo || [];
+      if (o) {
+        used[u._o] = true;
+        const oldG = o.equipo || [];
+        const dc = (Number(u.coste) || 0) - (Number(o.coste) || 0);
+        if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
+        else if (dc < 0) { refund += -dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
+        gear.filter((g) => !oldG.some((x) => key(x) === key(g))).forEach((g) => gearBuy(g, u.nombre));
+        oldG.filter((g) => !gear.some((x) => key(x) === key(g))).forEach((g) => gearSell(g, u.nombre));
+      } else {
+        const c = Number(u.coste) || 0;
+        spend += c;
+        lines.push({ t: 'Fichaje', n: u.nombre, c });
+        gear.forEach((g) => gearBuy(g, u.nombre));
+      }
+    });
+    orig.forEach((o, i) => {
+      if (used[i]) return;
+      const c = Number(o.coste) || 0;
+      refund += c;
+      lines.push({ t: 'Baja', n: o.nombre, c });
+      (o.equipo || []).forEach((g) => gearSell(g, o.nombre));
+    });
+    return { spend, refund, net: spend - refund, lines };
+  }
+
   function eventsOf(g) {
     return typeof AW.g.eventsHtml === 'function' ? AW.g.eventsHtml(g) : '';
   }
@@ -298,9 +348,14 @@
     let steps = '';
 
     // 1. Escenario
+    const canPick = g.status === 'draft' && c.status === 'active' && c.owner_id === me && AW.g && AW.g.scenarioOptions;
     steps += step(1, 'Escenario', !!g.scenario_id,
+      (canPick
+        ? '<div class="flex flex-wrap gap-2 mb-3"><select onchange="AW.c.setScenario(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">Sin elegir</option>' + AW.g.scenarioOptions(g.scenario_id) + '</select>' +
+          '<button onclick="AW.c.randomScenario()" class="' + btnGhost + '">🎲 Sortear</button></div>'
+        : '') +
       '<p class="text-sm text-slate-300">' + (sc ? esc(sc) : 'Todavía no hay escenario elegido.') + '</p>' +
-      (g.status === 'draft' && c.owner_id === me ? '<p class="text-xs text-slate-500 mt-1">Elígelo o sortéalo dentro de la partida.</p>' : ''), isCur && !g.scenario_id);
+      (!canPick && g.status === 'draft' && !g.scenario_id ? '<p class="text-xs text-slate-500 mt-1">Lo elige el creador de la campaña.</p>' : ''), isCur && !g.scenario_id);
 
     // 2. Comerciante (antes de la partida)
     const mRolls = rollsOf(n, 'merchant');
@@ -309,17 +364,51 @@
       rows('merchant', c.status === 'active' && isCur && gStatus === 'draft', 'Tirar 1D6'), isCur && gStatus === 'draft');
 
     // 3. Preparar banda
-    steps += step(3, 'Preparar la banda', gStatus !== 'draft',
-      '<p class="text-xs text-slate-500 mb-2">Fondo de cada banda ahora mismo:</p>' +
-      '<div class="flex flex-wrap gap-3">' + players.map((p) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(p)) + ': <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></span>').join('') + '</div>' +
-      '<p class="text-xs text-slate-500 mt-2">Elige a tus personajes y comprueba el equipo en la ficha de la partida (el comerciante y el cofre llegan en la siguiente fase).</p>', false);
+    const mineP = players.find((p) => p.user_id === me);
+    const hum = myHumor(n);
+    let prep =
+      '<p class="text-xs text-slate-500 mb-2">Banda y fondo de cada jugador ahora mismo:</p>' +
+      '<div class="flex flex-wrap gap-3">' + players.map((p) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(p)) + ': banda <strong class="text-slate-200">' + (p.band_snapshot ? (Number(p.band_snapshot.value) || 0) : 0) + ' GP</strong> · fondo <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></span>').join('') + '</div>';
+    if (mineP && c.status === 'active' && isCur) {
+      if (gStatus === 'draft') {
+        prep += hum
+          ? '<div class="mt-3 p-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300">Tu comerciante: <strong class="text-amber-300">' + esc(hum.nombre) + '</strong> · compras ' + pct(hum.compra) + ', ventas ' + pct(hum.venta) +
+            '<div class="mt-2"><button onclick="AW.c.editBand()" class="' + btnPrimary + ' !py-1.5 text-sm">🛒 Comprar / vender y gestionar mi banda</button></div></div>'
+          : '<p class="mt-3 text-sm text-amber-300">Tira antes al comerciante (paso 2) para poder comprar y vender.</p>';
+        prep += '<p class="text-xs text-slate-500 mt-2">Lo que compres se descuenta de tu fondo y lo que vendas se suma. Al cambiar tu banda tendrás que volver a dar tu OK en la partida.</p>';
+      } else {
+        prep += '<p class="text-xs text-slate-500 mt-2">La partida ya ha empezado: la banda queda cerrada hasta la próxima misión.</p>';
+      }
+    }
+    steps += step(3, 'Preparar la banda (comerciante)', gStatus !== 'draft', prep, isCur && gStatus === 'draft');
 
-    // 4. Batalla y eventos de ronda
-    steps += step(4, 'La batalla y los eventos de ronda', gStatus === 'finished',
+    // 4. Batalla, PV y eventos de final de ronda
+    const eRolls = rollsOf(n, 'round_event');
+    const canAct = c.status === 'active' && isCur && gStatus === 'active';
+    let battle =
       '<p class="text-sm text-slate-300">' + (gStatus === 'draft' ? 'La partida aún no ha empezado: hace falta que todos den su OK.' : gStatus === 'active' ? 'En curso, ronda ' + (g.round || 0) + '.' : 'Terminada.') +
-      (gStatus === 'finished' ? (winners.length ? ' Ganó: <strong>' + esc(winners.map((u) => pname(asCamp(u))).join(', ')) + '</strong>.' : ' Sin ganador declarado.') : '') + '</p>' +
-      (gp.length ? '<div class="flex flex-wrap gap-3 mt-2">' + gp.map((x) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(x)) + ': <strong class="text-amber-400">' + x.vp + ' PV</strong></span>').join('') + '</div>' : '') +
-      (g.round ? '<div class="mt-3">' + eventsOf(g) + '</div>' : ''), isCur && gStatus === 'active');
+      (gStatus === 'finished' ? (winners.length ? ' Ganó: <strong>' + esc(winners.map((u) => pname(asCamp(u))).join(', ')) + '</strong>.' : ' Sin ganador declarado.') : '') + '</p>';
+    if (gStatus !== 'draft') {
+      battle += '<div class="mt-3 space-y-3">' + gp.map((x) => {
+        const mineRow = x.user_id === me;
+        const mine = eRolls.filter((r) => r.user_id === x.user_id).sort((a, b) => b.unit_index - a.unit_index);
+        const done = mine.some((r) => r.unit_index === g.round);
+        return '<div class="bg-slate-900 border border-slate-800 rounded-xl p-3">' +
+          '<div class="flex flex-wrap items-center gap-3"><span class="font-semibold text-white">' + esc(pname(x)) + (mineRow ? ' <span class="text-xs text-emerald-400 font-normal">(tú)</span>' : '') + '</span>' +
+          (mineRow && canAct
+            ? '<label class="text-sm text-slate-400">PV <input type="number" min="0" max="999" step="1" value="' + x.vp + '" onchange="AW.c.setVp(\'' + g.id + '\',this.value)" class="' + inputCls + ' w-20 inline-block"></label>'
+            : '<strong class="text-amber-400">' + x.vp + ' PV</strong>') +
+          (mineRow && canAct && (g.round || 0) >= 1
+            ? (done ? '<span class="text-xs text-slate-500">Ya has robado tu evento de la ronda ' + g.round + '</span>'
+                    : '<button onclick="AW.c.roll(\'round_event\')" class="' + btnPrimary + ' !py-1.5 !px-3 text-sm ml-auto">🃏 Evento de final de ronda ' + g.round + '</button>')
+            : '') + '</div>' +
+          (mine.length ? '<div class="mt-3 space-y-3">' + mine.map((r) => '<div class="border-t border-slate-800/60 pt-3"><p class="text-xs uppercase tracking-wider text-emerald-400 font-semibold mb-1">Ronda ' + r.unit_index + '</p>' + describeRoll(r) + '</div>').join('') + '</div>' : '') +
+          '</div>';
+      }).join('') + '</div>';
+      if (canAct && (g.round || 0) < 1) battle += '<p class="text-xs text-slate-500 mt-2">Cuando el creador pulse "Final de ronda" en la partida podréis robar vuestros eventos.</p>';
+    }
+    battle += (g.round ? '<div class="mt-3">' + eventsOf(g) + '</div>' : '');
+    steps += step(4, 'La batalla, PV y eventos de final de ronda', gStatus === 'finished', battle, isCur && gStatus === 'active');
 
     // 5. Lesiones
     if (gStatus === 'finished') {
@@ -435,7 +524,7 @@
       const link = location.origin + location.pathname + '?campana=' + c.join_code;
       html +=
         '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-1">Invitar jugadores</h3>' +
-        '<p class="text-sm text-slate-400 mb-3">Comparte el código o el enlace. Cada jugador elige su banda (hasta ' + c.max_value + ' GP) y empieza con ' + gpFmt(c.starting_gold) + ' de fondo.</p>' +
+        '<p class="text-sm text-slate-400 mb-3">Comparte el código o el enlace. Cada jugador elige su banda (hasta ' + c.max_value + ' GP) y empieza con ' + gpFmt(c.starting_gold) + ' de presupuesto: el valor de su banda se descuenta de ahí.</p>' +
         '<div class="flex flex-wrap gap-2 items-center"><code class="px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-emerald-300 select-all">' + esc(c.join_code) + '</code>' +
         '<button onclick="AW.c.copy(\'' + esc(c.join_code) + '\')" class="' + btnGhost + '">Copiar código</button>' +
         '<button onclick="AW.c.copy(\'' + esc(link) + '\')" class="' + btnGhost + '">Copiar enlace</button></div></section>';
@@ -518,12 +607,14 @@
         let why = '';
         if (!(b.units || []).length) why = 'vacía';
         else if (b.value > c.max_value) why = 'supera ' + c.max_value + ' GP';
+        else if (b.value > c.starting_gold) why = 'no cabe en el presupuesto de ' + c.starting_gold + ' GP';
         else if (AW.api.validateBand(b.faction, b.units).length) why = 'incompleta';
         return '<option value="' + b.id + '"' + (why ? ' disabled' : '') + (mine.band_id === b.id ? ' selected' : '') + '>' + esc(b.name) + ' · ' + b.value + ' GP' + (why ? ' (' + why + ')' : '') + '</option>';
       })
       .join('');
     return (
-      '<div class="mt-4 pt-4 border-t border-slate-800/60"><p class="text-xs text-slate-400 mb-2">Tu banda para la campaña (máximo ' + c.max_value + ' GP)</p>' +
+      '<div class="mt-4 pt-4 border-t border-slate-800/60"><p class="text-xs text-slate-400 mb-2">Tu banda para la campaña (máximo ' + c.max_value + ' GP). Su valor se descuenta de tu presupuesto de ' + c.starting_gold + ' GP' +
+      (mine.band_snapshot ? ': te quedan <strong class="text-amber-400">' + gpFmt(mine.gold) + '</strong>' : '') + '.</p>' +
       '<div class="flex flex-wrap gap-2 items-center"><select onchange="AW.c.chooseBand(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">— Elige una de tu perfil —</option>' + opts + '</select>' +
       '<button onclick="AW.c.newBandFor()" class="' + btnGhost + '">+ Crear banda nueva</button></div></div>'
     );
@@ -661,6 +752,77 @@
   C.roll = async (kind, unit) => {
     const r = await run(state.sb.rpc('campaign_roll', { p_campaign: cs.id, p_kind: kind, p_unit: unit == null ? null : unit }), null);
     if (r && r.dice) toast('Has sacado ' + r.dice.join(' / '));
+  };
+
+  C.setScenario = (id) =>
+    run(state.sb.from('games').update({ scenario_id: id || null, scenario_mode: 'chosen' }).eq('id', (cs.games.find((g) => g.position === cs.camp.chapter) || {}).id), null);
+
+  C.randomScenario = () => {
+    const g = cs.games.find((x) => x.position === cs.camp.chapter);
+    if (!g || !AW.g.randomScenarioId) return;
+    return run(state.sb.from('games').update({ scenario_id: AW.g.randomScenarioId(g.scenario_id), scenario_mode: 'random' }).eq('id', g.id), 'Escenario sorteado');
+  };
+
+  C.setVp = (gid, v) => run(state.sb.rpc('campaign_set_vp', { p_game: gid, p_vp: Math.max(0, Math.floor(Number(v) || 0)) }), null);
+
+  // Comprar y vender: se abre el editor de bandas con la banda de la campaña
+  C.editBand = () => {
+    const c = cs.camp;
+    const me = mineOf();
+    if (!c || !me || !me.band_snapshot) return;
+    const n = c.chapter;
+    const humor = myHumor(n);
+    const snap = me.band_snapshot;
+    const orig = JSON.parse(JSON.stringify(snap.units || []));
+    const gold = me.gold;
+    const back = () => C.open(c.id);
+    AW.editBandCtx(
+      {
+        title: 'Gestionar banda: ' + (snap.name || ''),
+        subtitle: 'Comerciante: ' + (humor ? humor.nombre + ' (compras ' + pct(humor.compra) + ', ventas ' + pct(humor.venta) + ')' : '—') + ' · Fondo: ' + gold + ' GP',
+        lockFaction: true,
+        summary: (units) => {
+          const ch = bandChange(orig, units, humor);
+          const left = gold - ch.net;
+          return '<div class="p-3 rounded-lg bg-slate-950 border border-slate-800 text-sm text-slate-300">' +
+            '<div class="flex flex-wrap gap-x-5 gap-y-1">' +
+            '<span>Gastas <strong class="text-rose-300">' + ch.spend + ' GP</strong></span>' +
+            '<span>Ingresas <strong class="text-emerald-300">' + ch.refund + ' GP</strong></span>' +
+            '<span>Fondo tras guardar: <strong class="' + (left < 0 ? 'text-rose-400' : 'text-amber-400') + '">' + left + ' GP</strong>' + (left < 0 ? ' (no alcanza)' : '') + '</span></div>' +
+            (ch.lines.length ? '<ul class="mt-2 text-xs text-slate-400 space-y-0.5">' + ch.lines.map((l) => '<li>' + l.t + ': ' + esc(l.n) + ' · ' + l.c + ' GP</li>').join('') + '</ul>' : '<p class="text-xs text-slate-500 mt-1">Sin cambios todavía.</p>') +
+            '</div>';
+        },
+        save: async (units) => {
+          const ch = bandChange(orig, units, humor);
+          if (ch.net > gold) {
+            toast('No tienes fondos suficientes para estos cambios', 'error');
+            return false;
+          }
+          if (!ch.lines.length) {
+            toast('No has cambiado nada');
+            return true;
+          }
+          const clean = units.map((u) => { const x = Object.assign({}, u); delete x._o; return x; });
+          const reason = ch.lines.filter((l) => l.t === 'Compra' || l.t === 'Venta' || l.t === 'Fichaje' || l.t === 'Baja').map((l) => l.t + ' ' + String(l.n).split(' (')[0]).join(', ') || 'Cambios en la banda';
+          const { error } = await state.sb.rpc('campaign_update_band', {
+            p_campaign: c.id,
+            p_units: clean,
+            p_remap: units.map((u) => (u._o == null ? -1 : u._o)),
+            p_delta: -ch.net,
+            p_reason: reason.slice(0, 118)
+          });
+          if (error) {
+            toast(translateError(error), 'error');
+            return false;
+          }
+          toast('Banda actualizada');
+          return true;
+        },
+        onSaved: back,
+        onCancel: back
+      },
+      { name: snap.name, faction: snap.faction, notes: snap.notes, units: orig }
+    );
   };
 
   C.adjustGold = async (ev) => {
