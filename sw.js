@@ -1,4 +1,4 @@
-const CACHE_NAME = "arcworlde-assist-v5";
+const CACHE_NAME = "arcworlde-assist-v6";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -6,6 +6,7 @@ const APP_SHELL = [
   "./datos_minis.js",
   "./datos_arcdeck.js",
   "./usuarios.js",
+  "./fichas.js",
   "./partidas.js",
   "./manifest.webmanifest",
   "./fire.png"

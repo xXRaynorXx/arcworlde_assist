@@ -374,6 +374,7 @@
               '<p class="text-sm text-slate-400 mt-1">' + (b.faction ? esc(b.faction) + ' · ' : '') + n + (n === 1 ? ' miniatura' : ' miniaturas') +
               (incompleta ? ' · <span class="text-amber-400" title="No cumple las reglas de composición">⚠ revisar</span>' : '') + '</p>' +
               (b.notes ? '<p class="text-sm text-slate-500 mt-2 line-clamp-2">' + esc(b.notes) + '</p>' : '') +
+              (n && AW.sheet ? '<details class="mt-3 text-sm"><summary class="cursor-pointer text-slate-300">Ver ficha (atributos y rasgos)</summary><div class="mt-2">' + AW.sheet.bandSheet(b.units, null, {}) + '</div></details>' : '') +
               '<div class="mt-4 flex gap-2">' +
               '<button onclick="AW.editBand(\'' + b.id + '\')" class="' + btnGhost + '">Editar</button>' +
               '<button onclick="AW.deleteBand(\'' + b.id + '\')" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm transition-colors">Borrar</button>' +
