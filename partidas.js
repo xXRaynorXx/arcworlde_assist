@@ -328,7 +328,7 @@
     const started = g && g.status !== 'draft';
     const edit = !!(started && g.status === 'active' && isMe);
     const sheet = AW.sheet
-      ? AW.sheet.bandSheet(b.units || [], p.roster, { edit: edit, fn: 'AW.g.rosterAdj' })
+      ? AW.sheet.bandSheet(b.units || [], p.roster, { edit: edit, fn: 'AW.g.rosterAdj', faction: b.faction })
       : '<ul class="ml-4 list-disc">' + (b.units || []).map((u) => '<li>' + esc(u.nombre) + '</li>').join('') + '</ul>';
     return (
       '<details class="text-sm"' + (started ? ' open' : '') + '><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' +

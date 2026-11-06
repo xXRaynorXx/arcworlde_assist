@@ -37,6 +37,14 @@
         Object.values(o).forEach(walk);
       }
     })(typeof datosFacciones !== 'undefined' ? datosFacciones : null);
+    // Datos consolidados de facciones (tienen prioridad sobre los textos antiguos)
+    const fresh = [];
+    if (typeof rasgosUnidadesDB !== 'undefined') fresh.push(rasgosUnidadesDB);
+    if (typeof habilidadesFaccionDB !== 'undefined') fresh.push(habilidadesFaccionDB);
+    fresh.forEach((db) => db.forEach((o) => {
+      const k = String(o.nombre).split(' / ').pop().trim().toLowerCase();
+      traitIdx[k] = o;
+    }));
     if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => add(k, datosRasgos[k]));
   }
   function traitInfo(name) {
@@ -72,13 +80,22 @@
     const traits = (c && c.rasgos) || [];
     const extra = Array.isArray(st.extra) ? st.extra : []; // rasgos comprados en campaña
     const all = traits.concat(extra);
+    const gear = Array.isArray(u.equipo) ? u.equipo : [];
+    const gearTotal = gear.reduce((t, g) => t + (Number(g.coste) || 0), 0);
     let h = '<div class="rounded-lg border ' + (st.ko ? 'border-rose-700/60 bg-rose-950/20' : 'border-slate-800 bg-slate-900/60') + ' p-3">' +
       '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.nombre) +
       (c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
-      '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + (Number(u.coste) || 0) + ' GP</span></div>';
+      '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
+    const gearHtml = gear.length
+      ? '<div class="mt-2 flex flex-wrap gap-1.5">' + gear.map((g) => {
+          const d = window.AWGear && AWGear.find(g.origen, g.id, opts.faction);
+          const tip = d ? stripTags(d.resumen) + ' ' + stripTags(d.detalles) + (d.restriccion ? ' (' + stripTags(d.restriccion) + ')' : '') : '';
+          return '<span title="' + esc(tip.trim()) + '" class="inline-block text-xs px-2 py-0.5 rounded-md border bg-emerald-950/40 border-emerald-800/50 text-emerald-200">🎒 ' + esc(String(g.nombre).split(' / ')[0]) + '</span>';
+        }).join('') + '</div>'
+      : '';
     if (!c) {
-      return h + '<p class="text-xs text-slate-500 mt-1">Miniatura personalizada: sin atributos en el catálogo.</p></div>';
+      return h + '<p class="text-xs text-slate-500 mt-1">Miniatura personalizada: sin atributos en el catálogo.</p>' + gearHtml + '</div>';
     }
     h += '<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">' + STATS.map((s) => {
       const k = s[0], base = baseStats(c)[k], v = cur(st, c, k);
@@ -94,9 +111,15 @@
     if (all.length) {
       h += '<div class="mt-2 flex flex-wrap gap-1.5">' + traits.map((n) => traitChip(n, false)).join('') + extra.map((n) => traitChip(n, true)).join('') + '</div>';
     }
+    h += gearHtml;
     h += '<details class="mt-2 text-xs"><summary class="cursor-pointer text-slate-400">Ataques y rasgos en detalle</summary><ul class="mt-1 ml-4 list-disc text-slate-400 space-y-1">' +
       (c.ataques || []).map((a) => '<li>' + esc(a) + '</li>').join('') + '</ul>' +
-      (all.length ? '<p class="mt-2 text-slate-500">Rasgos</p><ul class="ml-4 list-disc space-y-1">' + traitDetails(all) + '</ul>' : '') + '</details>';
+      (all.length ? '<p class="mt-2 text-slate-500">Rasgos</p><ul class="ml-4 list-disc space-y-1">' + traitDetails(all) + '</ul>' : '') +
+      (gear.length ? '<p class="mt-2 text-slate-500">Equipo</p><ul class="ml-4 list-disc space-y-1">' + gear.map((g) => {
+        const d = window.AWGear && AWGear.find(g.origen, g.id, opts.faction);
+        return '<li><span class="text-slate-200 font-semibold">' + esc(String(g.nombre).split(' / ')[0]) + '</span> <span class="text-slate-500">(' + (Number(g.coste) || 0) + ' GP)</span>' +
+          (d ? ' <span class="text-slate-400">— ' + esc(stripTags(d.resumen)) + ' ' + esc(stripTags(d.detalles)) + (d.restriccion ? ' ' + esc(stripTags(d.restriccion)) : '') + '</span>' : '') + '</li>';
+      }).join('') + '</ul>' : '') + '</details>';
     if (edit) {
       const les = Array.isArray(st.lesiones) ? st.lesiones : [];
       h += '<div class="mt-2 flex flex-wrap items-center gap-1.5">' +
