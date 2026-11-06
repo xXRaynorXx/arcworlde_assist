@@ -23,7 +23,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 ## Puesta en marcha de Supabase
 
 1. **Base de datos.** Aplica los archivos de `supabase/migrations/` **en orden** (por nombre):
-   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql` y `..._roster_state.sql`, más las posteriores por orden de nombre (las de campañas son `20261106220000_campaigns_phase1.sql` y `20261107000000_campaigns_band_management.sql`).
+   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql` y `..._roster_state.sql`, más las posteriores por orden de nombre (las de campañas son `20261106220000_campaigns_phase1.sql` `20261107000000_campaigns_band_management.sql` y `20261107010000_campaigns_vp_traits.sql`).
    Se hace solo si la integración Supabase–GitHub apunta a este repositorio y a la rama que uses,
    o pegándolos a mano, uno tras otro, en *SQL Editor* del panel de Supabase.
    Cada archivo se ejecuta una sola vez.

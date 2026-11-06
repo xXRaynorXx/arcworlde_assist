@@ -83,7 +83,13 @@
     const st = opts.st || {};
     const edit = !!opts.edit;
     const traits = (c && c.rasgos) || [];
-    const extra = Array.isArray(st.extra) ? st.extra : []; // rasgos comprados en campaña
+    const extra = Array.isArray(st.extra) ? st.extra.slice() : []; // rasgos comprados en campaña
+    // Habilidades de campaña compradas con PV (N1, N2...)
+    const rc = u.rasgos_campana && typeof u.rasgos_campana === 'object' ? u.rasgos_campana : {};
+    Object.keys(rc).forEach((id) => {
+      const tr = window.AWTraits && AWTraits.find(id);
+      extra.push((tr ? tr.nombre : id) + ' N' + rc[id]);
+    });
     const all = traits.concat(extra);
     const gear = Array.isArray(u.equipo) ? u.equipo : [];
     const gearTotal = gear.reduce((t, g) => t + (Number(g.coste) || 0), 0);
