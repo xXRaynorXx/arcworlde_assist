@@ -519,7 +519,7 @@
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5">' +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" oninput="AW.setField(\'name\',this.value)" maxlength="60" class="' + inputCls + '"></div>' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label><input value="' + esc(e.faction) + '" onchange="AW.setField(\'faction\',this.value);AW.rerender()" maxlength="40" list="aw-factions" class="' + inputCls + '">' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label><input value="' + esc(e.faction) + '" onchange="AW.setField(\'faction\',this.value);AW.rerender()" maxlength="40" list="aw-factions"' + (ctx && ctx.lockFaction ? ' disabled' : '') + ' class="' + inputCls + '">' +
       '<datalist id="aw-factions">' + factions.map((f) => '<option value="' + esc(f.nombre) + '">').join('') + '</datalist></div>' +
       '</div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea oninput="AW.setField(\'notes\',this.value)" rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
@@ -527,6 +527,7 @@
       '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
       '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP' +
       (ctx && ctx.maxValue ? ' <span class="text-slate-500 font-normal">/ ' + ctx.maxValue + '</span>' : '') + '</span></div>' +
+      (ctx && ctx.summary ? '<div id="aw-ctx" class="mb-3">' + ctx.summary(e.units) + '</div>' : '') +
       '<div class="space-y-2">' + e.units.map(unitRow).join('') + '</div>' +
       '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
       '<button onclick="AW.addUnit()" class="' + btnGhost + '">+ Añadir miniatura</button>' +
@@ -553,7 +554,9 @@
 
     return shell(
       ctx && ctx.title ? esc(ctx.title) : e.id ? 'Editar banda' : 'Nueva banda',
-      ctx && ctx.maxValue
+      ctx && ctx.subtitle
+        ? esc(ctx.subtitle)
+        : ctx && ctx.maxValue
         ? 'Valor máximo de la partida: ' + ctx.maxValue + ' GP. Al guardar, se apunta a ella con esta banda.'
         : 'El valor total se calcula con el coste de cada línea',
       inner
@@ -660,6 +663,22 @@
     renderApp();
   };
 
+  // Edita una banda que no es del perfil (la de una campaña). ctx: { title, subtitle, summary(units) -> html,
+  // save(units) -> false si falla, onSaved(), onCancel() }. Cada miniatura guarda su posición original en _o.
+  AW.editBandCtx = (ctx, data) => {
+    state.bandContext = ctx;
+    state.editing = {
+      id: null,
+      name: data.name || '',
+      faction: data.faction || '',
+      notes: data.notes || '',
+      units: (JSON.parse(JSON.stringify(data.units || []))).map((u, i) => Object.assign(u, { _o: i }))
+    };
+    currentSectionId = 'app_bands';
+    window.renderSidebar();
+    renderApp();
+  };
+
   AW.editBand = (id) => {
     const b = state.bands.find((x) => x.id === id);
     if (!b) return;
@@ -721,6 +740,8 @@
     if (sub) sub.textContent = unitTotal(state.editing.units[i]);
     const iss = document.getElementById('aw-issues');
     if (iss) iss.innerHTML = issuesHtml();
+    const cx = document.getElementById('aw-ctx');
+    if (cx && state.bandContext && state.bandContext.summary) cx.innerHTML = state.bandContext.summary(state.editing.units);
   };
 
   AW.addUnit = () => {
@@ -775,6 +796,17 @@
       return toast('La banda supera el valor máximo de la partida (' + forGame.maxValue + ' GP)', 'error');
     if (forGame && validateBand(payload.faction, units).length)
       return toast('Corrige los avisos de la banda antes de guardarla', 'error');
+
+    // Banda de una campaña: no se guarda en el perfil, la guarda la propia campaña (con sus compras y ventas)
+    if (forGame && forGame.save) {
+      state.busy = true;
+      const ok = await forGame.save(units);
+      state.busy = false;
+      if (ok === false) return renderApp(true);
+      state.editing = null;
+      state.bandContext = null;
+      return forGame.onSaved && forGame.onSaved();
+    }
 
     state.busy = true;
     const q = e.id

@@ -593,6 +593,17 @@
     return G.open(gid);
   };
 
+  G.scenarioOptions = scenarioOptions;
+  G.randomScenarioId = randomScenarioId;
+  // Carta + evento (para el evento de final de ronda que roba cada jugador en una campaña)
+  G.cardEventHtml = (code, envId) => {
+    const ev = eventOf(arcEnv(envId), code);
+    return (
+      '<div class="flex gap-3 items-start">' + cardBox(code) +
+      '<div class="min-w-0"><p class="font-bold text-white">' + (ev ? esc(ev.nombre) : 'Evento sin descripción') + '</p>' +
+      (ev ? '<p class="text-sm text-slate-300 mt-0.5">' + esc(ev.texto) + '</p>' : '') + '</div></div>'
+    );
+  };
   G.scenarioName = (id) => {
     const sc = scenarioById(id);
     return sc ? sc.nombre : null;
