@@ -295,8 +295,14 @@
   }
 
   /* --- bandas --- */
+  function gearCost(u) {
+    return (u.equipo || []).reduce((s, g) => s + (Number(g.coste) || 0), 0);
+  }
+  function unitTotal(u) {
+    return (Number(u.coste) || 0) + gearCost(u);
+  }
   function totalOf(units) {
-    return (units || []).reduce((s, u) => s + (Number(u.coste) || 0), 0);
+    return (units || []).reduce((s, u) => s + unitTotal(u), 0);
   }
 
   function catalogFactions() {
@@ -374,7 +380,7 @@
               '<p class="text-sm text-slate-400 mt-1">' + (b.faction ? esc(b.faction) + ' · ' : '') + n + (n === 1 ? ' miniatura' : ' miniaturas') +
               (incompleta ? ' · <span class="text-amber-400" title="No cumple las reglas de composición">⚠ revisar</span>' : '') + '</p>' +
               (b.notes ? '<p class="text-sm text-slate-500 mt-2 line-clamp-2">' + esc(b.notes) + '</p>' : '') +
-              (n && AW.sheet ? '<details class="mt-3 text-sm"><summary class="cursor-pointer text-slate-300">Ver ficha (atributos y rasgos)</summary><div class="mt-2">' + AW.sheet.bandSheet(b.units, null, {}) + '</div></details>' : '') +
+              (n && AW.sheet ? '<details class="mt-3 text-sm"><summary class="cursor-pointer text-slate-300">Ver ficha (atributos y rasgos)</summary><div class="mt-2">' + AW.sheet.bandSheet(b.units, null, { faction: b.faction }) + '</div></details>' : '') +
               '<div class="mt-4 flex gap-2">' +
               '<button onclick="AW.editBand(\'' + b.id + '\')" class="' + btnGhost + '">Editar</button>' +
               '<button onclick="AW.deleteBand(\'' + b.id + '\')" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm transition-colors">Borrar</button>' +
@@ -390,15 +396,58 @@
     return shell('Mis Bandas', 'Las bandas de tu perfil, listas para usar en partidas y campañas', inner);
   }
 
+  function shortName(n) {
+    return String(n || '').split(' / ')[0];
+  }
+
+  // Equipo de una miniatura: chips con lo que lleva y selector con la armería común, la de la
+  // facción (objetos, armas y consumibles) y el coste de cada cosa.
+  function gearBlock(u, i) {
+    const faction = state.editing.faction;
+    const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
+    const chips = (u.equipo || [])
+      .map((g, j) => {
+        const d = window.AWGear && AWGear.find(g.origen, g.id, faction);
+        const tip = d ? (d.resumen || '') + ' ' + (d.restriccion || '') : '';
+        return (
+          '<span title="' + esc(tip.trim()) + '" class="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border ' +
+          (g.origen === 'comun' ? 'bg-slate-800/70 border-slate-700 text-slate-200' : 'bg-emerald-950/40 border-emerald-800/50 text-emerald-200') + '">' +
+          esc(shortName(g.nombre)) + ' <span class="text-amber-400">' + (Number(g.coste) || 0) + '</span>' +
+          '<button onclick="AW.removeGear(' + i + ',' + j + ')" title="Quitar" class="ml-1 text-slate-400 hover:text-rose-400">×</button></span>'
+        );
+      })
+      .join('');
+    let select = '';
+    if (window.AWGear) {
+      const group = (label, items, origen) => {
+        const opts = items
+          .filter((a) => !has(origen, a.id))
+          .map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' · ' + esc(String(a.tipo).replace(/^Equipo \/ |^Objeto \//, '').trim()) + ' (' + a.coste + ' GP)</option>')
+          .join('');
+        return opts ? '<optgroup label="' + esc(label) + '">' + opts + '</optgroup>' : '';
+      };
+      const ex = AWGear.exclusive(faction);
+      const groups = group('Armería común', AWGear.common(), 'comun') + group('Armería de ' + (faction || 'facción'), ex, 'faccion');
+      select =
+        '<select onchange="AW.addGear(' + i + ',this.value)" class="text-xs bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-300">' +
+        '<option value="">+ Equipo…</option>' + groups + '</select>';
+    }
+    return (
+      '<div class="col-span-12 flex flex-wrap items-center gap-1.5 pl-1">' + chips + select +
+      '<span class="ml-auto text-xs text-slate-500">Total miniatura: <span id="aw-sub-' + i + '" class="text-amber-400 font-semibold">' + unitTotal(u) + '</span> GP</span></div>'
+    );
+  }
+
   function unitRow(u, i) {
     return (
-      '<div class="grid grid-cols-12 gap-2 items-center">' +
+      '<div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 border border-slate-800/60 rounded-xl p-2">' +
       '<input value="' + esc(u.nombre) + '" oninput="AW.setUnit(' + i + ',\'nombre\',this.value)" placeholder="Nombre" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">' +
       '<select onchange="AW.setUnit(' + i + ',\'tipo\',this.value)" class="' + inputCls + ' col-span-6 sm:col-span-3">' +
       TIPOS.map((t) => '<option value="' + t[0] + '"' + (u.tipo === t[0] ? ' selected' : '') + '>' + t[1] + '</option>').join('') +
       '</select>' +
-      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" oninput="AW.setUnit(' + i + ',\'coste\',this.value)" placeholder="GP" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
+      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" oninput="AW.setUnit(' + i + ',\'coste\',this.value)" placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
       '<button onclick="AW.removeUnit(' + i + ')" title="Quitar" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none">×</button>' +
+      gearBlock(u, i) +
       '</div>'
     );
   }
@@ -578,13 +627,40 @@
   AW.rerender = () => renderApp();
 
   AW.setField = (k, v) => {
+    if (k === 'faction' && v !== state.editing.faction) {
+      // El equipo exclusivo de otra facción deja de ser válido
+      state.editing.units.forEach((u) => {
+        u.equipo = (u.equipo || []).filter((g) => g.origen === 'comun');
+      });
+    }
     state.editing[k] = v;
+  };
+
+  AW.addGear = (i, val) => {
+    if (!val) return;
+    const [origen, id] = String(val).split(':');
+    const d = window.AWGear && AWGear.find(origen, id, state.editing.faction);
+    const unit = state.editing.units[i];
+    if (!d || !unit) return;
+    unit.equipo = unit.equipo || [];
+    if (unit.equipo.some((g) => g.origen === origen && g.id === id)) return;
+    unit.equipo.push({ id: d.id, origen, nombre: d.nombre, coste: Number(d.coste) || 0 });
+    renderApp(true);
+  };
+
+  AW.removeGear = (i, j) => {
+    const unit = state.editing.units[i];
+    if (!unit || !unit.equipo) return;
+    unit.equipo.splice(j, 1);
+    renderApp(true);
   };
 
   AW.setUnit = (i, k, v) => {
     state.editing.units[i][k] = k === 'coste' ? (v === '' ? '' : Math.max(0, Math.floor(Number(v) || 0))) : v;
     const t = document.getElementById('aw-total');
     if (t) t.textContent = totalOf(state.editing.units);
+    const sub = document.getElementById('aw-sub-' + i);
+    if (sub) sub.textContent = unitTotal(state.editing.units[i]);
     const iss = document.getElementById('aw-issues');
     if (iss) iss.innerHTML = issuesHtml();
   };
@@ -615,7 +691,16 @@
       return toast('Todas las líneas necesitan nombre', 'error');
 
     const units = e.units.map((u) =>
-      Object.assign({}, u, { nombre: String(u.nombre).trim(), coste: Math.max(0, Math.floor(Number(u.coste) || 0)) })
+      Object.assign({}, u, {
+        nombre: String(u.nombre).trim(),
+        coste: Math.max(0, Math.floor(Number(u.coste) || 0)),
+        equipo: (u.equipo || []).map((g) => ({
+          id: String(g.id),
+          origen: g.origen === 'comun' ? 'comun' : 'faccion',
+          nombre: String(g.nombre),
+          coste: Math.max(0, Math.floor(Number(g.coste) || 0))
+        }))
+      })
     );
     const payload = {
       name,
