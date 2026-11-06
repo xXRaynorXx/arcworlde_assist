@@ -1,10 +1,11 @@
-const CACHE_NAME = "arcworlde-assist-v3";
+const CACHE_NAME = "arcworlde-assist-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./config.js",
   "./datos_minis.js",
   "./usuarios.js",
+  "./partidas.js",
   "./manifest.webmanifest",
   "./fire.png"
 ];
