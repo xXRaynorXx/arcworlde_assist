@@ -1,7 +1,9 @@
-const CACHE_NAME = "mi-app-pwa-v1";
+const CACHE_NAME = "arcworlde-assist-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./config.js",
+  "./usuarios.js",
   "./manifest.webmanifest",
   "./fire.png"
 ];
@@ -50,6 +52,22 @@ self.addEventListener("fetch", (event) => {
                  (await caches.match("./index.html")) ||
                  Response.error();
         })
+    );
+    return;
+  }
+
+  // Scripts y estilos propios: red primero para que los cambios lleguen al instante.
+  if (/\.(js|css)$/.test(url.pathname)) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(async () => (await caches.match(request)) || Response.error())
     );
     return;
   }
