@@ -400,41 +400,63 @@
     return String(n || '').split(' / ')[0];
   }
 
-  // Equipo de una miniatura: chips con lo que lleva y selector con la armería común, la de la
-  // facción (objetos, armas y consumibles) y el coste de cada cosa.
+  // Equipo de una miniatura: filas bajo la miniatura (como las miniaturas de la banda) y un catálogo
+  // para añadir más, agrupado en armería común y armería de la facción, por tipo de objeto.
+  function gearCategory(a) {
+    const t = String(a.tipo || '');
+    if (/armour|shield/i.test(a.id)) return 'Armaduras y protección';
+    if (/Consumible|Explosivo|Invocaci|Grimorio|Apoyo/.test(t)) return 'Objetos y consumibles';
+    if (/Montura|Volador|Veh/.test(t)) return 'Monturas y vehículos';
+    if (/Armadura|Camuflaje|Mutaci/.test(t)) return 'Armaduras y protección';
+    if (/Arma|Varita|Linaje/.test(t) || /^Equipo/.test(t)) return 'Armas y equipo';
+    return 'Otros';
+  }
+
   function gearBlock(u, i) {
     const faction = state.editing.faction;
     const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
-    const chips = (u.equipo || [])
+    const rows = (u.equipo || [])
       .map((g, j) => {
         const d = window.AWGear && AWGear.find(g.origen, g.id, faction);
-        const tip = d ? (d.resumen || '') + ' ' + (d.restriccion || '') : '';
+        const info = d ? [d.resumen, d.detalles, d.restriccion].filter(Boolean).map((x) => String(x).replace(/<[^>]*>/g, ' ')).join(' ') : '';
         return (
-          '<span title="' + esc(tip.trim()) + '" class="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-md border ' +
-          (g.origen === 'comun' ? 'bg-slate-800/70 border-slate-700 text-slate-200' : 'bg-emerald-950/40 border-emerald-800/50 text-emerald-200') + '">' +
-          esc(shortName(g.nombre)) + ' <span class="text-amber-400">' + (Number(g.coste) || 0) + '</span>' +
-          '<button onclick="AW.removeGear(' + i + ',' + j + ')" title="Quitar" class="ml-1 text-slate-400 hover:text-rose-400">×</button></span>'
+          '<div class="grid grid-cols-12 gap-2 items-center pl-4 border-l-2 ' + (g.origen === 'comun' ? 'border-slate-600' : 'border-emerald-700') + '">' +
+          '<div class="col-span-8 sm:col-span-7 text-sm text-slate-200">' + esc(shortName(g.nombre)) +
+          '<span class="text-xs text-slate-500"> · ' + (g.origen === 'comun' ? 'común' : 'facción') + '</span></div>' +
+          '<div class="hidden sm:block sm:col-span-3 text-xs text-slate-500">' + esc(d ? String(d.tipo).replace(/^Equipo \/ |^Objeto \//, '') : '') + '</div>' +
+          '<div class="col-span-3 sm:col-span-1 text-sm text-amber-400 text-right">' + (Number(g.coste) || 0) + ' GP</div>' +
+          '<button onclick="AW.removeGear(' + i + ',' + j + ')" title="Quitar" class="col-span-1 text-slate-400 hover:text-rose-400 text-lg leading-none">×</button>' +
+          (info ? '<details class="col-span-12 text-xs text-slate-500"><summary class="cursor-pointer">Ver reglas</summary><p class="mt-1 text-slate-400">' + esc(info) + '</p></details>' : '') +
+          '</div>'
         );
       })
       .join('');
     let select = '';
     if (window.AWGear) {
-      const group = (label, items, origen) => {
-        const opts = items
-          .filter((a) => !has(origen, a.id))
-          .map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' · ' + esc(String(a.tipo).replace(/^Equipo \/ |^Objeto \//, '').trim()) + ' (' + a.coste + ' GP)</option>')
-          .join('');
-        return opts ? '<optgroup label="' + esc(label) + '">' + opts + '</optgroup>' : '';
+      const groups = [];
+      const add = (label, items, origen) => {
+        const byCat = {};
+        items.filter((a) => !has(origen, a.id)).forEach((a) => (byCat[gearCategory(a)] = byCat[gearCategory(a)] || []).push(a));
+        Object.keys(byCat).forEach((cat) =>
+          groups.push(
+            '<optgroup label="' + esc(label + ' — ' + cat) + '">' +
+              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + a.coste + ' GP)</option>').join('') +
+              '</optgroup>'
+          )
+        );
       };
-      const ex = AWGear.exclusive(faction);
-      const groups = group('Armería común', AWGear.common(), 'comun') + group('Armería de ' + (faction || 'facción'), ex, 'faccion');
+      add('Común', AWGear.common(), 'comun');
+      add(faction || 'Facción', AWGear.exclusive(faction), 'faccion');
       select =
-        '<select onchange="AW.addGear(' + i + ',this.value)" class="text-xs bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-300">' +
-        '<option value="">+ Equipo…</option>' + groups + '</select>';
+        '<select onchange="AW.addGear(' + i + ',this.value)" class="' + inputCls + ' sm:w-auto">' +
+        '<option value="">Añadir equipo del catálogo...</option>' + groups.join('') + '</select>';
     }
     return (
-      '<div class="col-span-12 flex flex-wrap items-center gap-1.5 pl-1">' + chips + select +
-      '<span class="ml-auto text-xs text-slate-500">Total miniatura: <span id="aw-sub-' + i + '" class="text-amber-400 font-semibold">' + unitTotal(u) + '</span> GP</span></div>'
+      '<div class="col-span-12 space-y-1.5 mt-1">' +
+      '<p class="text-xs uppercase tracking-wide text-slate-500">Equipo</p>' +
+      (rows || '<p class="pl-4 text-xs text-slate-600 italic">Sin equipo</p>') +
+      '<div class="pl-4 flex flex-wrap items-center gap-3">' + select +
+      '<span class="ml-auto text-xs text-slate-500">Total miniatura: <span id="aw-sub-' + i + '" class="text-amber-400 font-semibold">' + unitTotal(u) + '</span> GP</span></div></div>'
     );
   }
 

@@ -2069,12 +2069,8 @@
 
 
         // Reglas de Facciones: una sección por facción con sus reglas, rasgos de unidad y armería exclusiva
-        // (datos_facciones.js). Lo que ya estaba escrito a mano y no aparece en esos datos se conserva
-        // al final de cada facción, en "Otros datos".
+        // (datos_facciones.js).
         function construirSeccionesFacciones() {
-            const norm = (s) => String(s).replace(/\([^)]*\)/g, '').split(' / ').pop().replace(/[^a-z0-9]/gi, '').toLowerCase();
-            const viejas = { halfling: 'halfling_faction', imperial: 'imperial_faction' };
-            const ordenadas = [];
             const secciones = Object.keys(faccionesCompendioDB).map((fid) => {
                 const f = faccionesCompendioDB[fid];
                 const armeria = (f.armeria || []).map((a) => Object.assign({}, a, {
@@ -2086,16 +2082,6 @@
                     { nombre_categoria: 'Rasgos de unidades', acciones: f.rasgos_unidades || [] },
                     { nombre_categoria: 'Armería exclusiva', acciones: armeria }
                 ];
-                const conocidos = new Set(categorias.flatMap((c) => c.acciones).map((a) => norm(a.nombre)));
-                const vieja = datosFacciones.secciones_facciones.find((s) => s.id_seccion === viejas[fid]);
-                if (vieja) {
-                    const extras = [];
-                    vieja.categorias.forEach((c) => c.acciones.forEach((a) => {
-                        const k = norm(a.nombre);
-                        if (!conocidos.has(k)) { conocidos.add(k); extras.push(a); }
-                    }));
-                    if (extras.length) categorias.push({ nombre_categoria: 'Otros datos (versión anterior)', acciones: extras });
-                }
                 return { titulo: 'Facción ' + f.nombre, descripcion: 'Reglas, rasgos de unidad y armería exclusiva de ' + f.nombre + '.', categorias: categorias.filter((c) => c.acciones.length) };
             });
             return secciones;
