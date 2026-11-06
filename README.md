@@ -36,8 +36,10 @@ python3 -m http.server 8000
 
 y abre `http://localhost:8000/`.
 
-## Miniaturas (pendiente)
+## Miniaturas
 
-Cuando exista `datos_minis.js` (objeto global `datosMinis` con `facciones[].unidades[]`),
-se añade `<script src="datos_minis.js"></script>` antes de `usuarios.js` en `index.html`.
-El editor de bandas ya ofrece el catálogo por facción en cuanto detecta esos datos.
+`datos_minis.js` define el objeto global `datosMinis` con `reglas_banda` y
+`facciones[].unidades[]` (id, nombre, tipo, coste, stats, ataques, rasgos, límites y equipo permitido).
+Se carga en `index.html` antes de `usuarios.js`. El editor de bandas ofrece el catálogo de la facción
+elegida, agrupado por tipo, y avisa si la banda no cumple `reglas_banda` o los límites `max_por_banda`.
+Para cambiar costes o añadir miniaturas basta con editar ese archivo.
