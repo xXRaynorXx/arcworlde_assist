@@ -298,6 +298,38 @@
     return f ? f.unidades || [] : [];
   }
 
+  // Reglas de composición según datos_minis.js (comandantes y límites por banda).
+  function validateBand(faction, units) {
+    const issues = [];
+    if (!units || !units.length) return issues;
+
+    const rules = typeof datosMinis !== 'undefined' && datosMinis ? datosMinis.reglas_banda : null;
+    if (rules) {
+      const cmds = units.filter((u) => u.tipo === 'comandante').length;
+      if (rules.comandante_obligatorio && cmds === 0) issues.push('Falta un comandante.');
+      if (rules.max_comandantes != null && cmds > rules.max_comandantes)
+        issues.push('Máximo ' + rules.max_comandantes + ' comandante' + (rules.max_comandantes === 1 ? '' : 's') + ' por banda.');
+    }
+
+    catalogUnits(faction).forEach((c) => {
+      if (c.max_por_banda == null) return;
+      const n = units.filter((u) => u.id === c.id).length;
+      if (n > c.max_por_banda) issues.push(c.nombre + ': máximo ' + c.max_por_banda + ' por banda.');
+    });
+    return issues;
+  }
+
+  function issuesHtml() {
+    const issues = validateBand(state.editing.faction, state.editing.units);
+    if (!issues.length) return '';
+    return (
+      '<div class="mt-4 p-3 bg-amber-950/30 border border-amber-900/50 rounded-lg text-sm text-amber-200">' +
+      '<p class="font-semibold mb-1">Revisa la banda:</p><ul class="list-disc list-inside space-y-0.5">' +
+      issues.map((i) => '<li>' + esc(i) + '</li>').join('') +
+      '</ul></div>'
+    );
+  }
+
   function viewBands() {
     if (!state.user) {
       return shell(
@@ -320,11 +352,13 @@
         state.bands
           .map((b) => {
             const n = (b.units || []).length;
+            const incompleta = validateBand(b.faction, b.units).length > 0;
             return (
               '<article class="bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
               '<div class="flex items-start justify-between gap-3"><h5 class="text-lg font-bold text-white">' + esc(b.name) + '</h5>' +
               '<span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md font-semibold whitespace-nowrap">' + b.value + ' GP</span></div>' +
-              '<p class="text-sm text-slate-400 mt-1">' + (b.faction ? esc(b.faction) + ' · ' : '') + n + (n === 1 ? ' miniatura' : ' miniaturas') + '</p>' +
+              '<p class="text-sm text-slate-400 mt-1">' + (b.faction ? esc(b.faction) + ' · ' : '') + n + (n === 1 ? ' miniatura' : ' miniaturas') +
+              (incompleta ? ' · <span class="text-amber-400" title="No cumple las reglas de composición">⚠ revisar</span>' : '') + '</p>' +
               (b.notes ? '<p class="text-sm text-slate-500 mt-2 line-clamp-2">' + esc(b.notes) + '</p>' : '') +
               '<div class="mt-4 flex gap-2">' +
               '<button onclick="AW.editBand(\'' + b.id + '\')" class="' + btnGhost + '">Editar</button>' +
@@ -374,11 +408,21 @@
       '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
       '<button onclick="AW.addUnit()" class="' + btnGhost + '">+ Añadir miniatura</button>' +
       (cat.length
-        ? '<select onchange="AW.addFromCatalog(this.value);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
-          cat.map((u, i) => '<option value="' + i + '">' + esc(u.nombre) + ' (' + (Number(u.coste) || 0) + ' GP)</option>').join('') +
+        ? '<select onchange="AW.addFromCatalog(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
+          TIPOS.map((t) => {
+            const opts = cat
+              .map((u, i) => [u, i])
+              .filter((p) => p[0].tipo === t[0])
+              .map((p) => '<option value="' + p[1] + '">' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP)</option>')
+              .join('');
+            return opts ? '<optgroup label="' + t[1] + '">' + opts + '</optgroup>' : '';
+          }).join('') +
           '</select>'
-        : '') +
-      '</div></div>' +
+        : e.faction && factions.length
+          ? '<span class="text-xs text-slate-500">No hay catálogo para "' + esc(e.faction) + '": añade las miniaturas a mano.</span>'
+          : '') +
+      '</div>' +
+      '<div id="aw-issues">' + issuesHtml() + '</div></div>' +
       '<div class="pt-5 border-t border-slate-800 flex gap-3">' +
       '<button onclick="AW.saveBand()" class="' + btnPrimary + '"' + (state.busy ? ' disabled' : '') + '>Guardar banda</button>' +
       '<button onclick="AW.cancelEdit()" class="' + btnGhost + '">Cancelar</button></div>' +
@@ -510,6 +554,8 @@
     state.editing.units[i][k] = k === 'coste' ? (v === '' ? '' : Math.max(0, Math.floor(Number(v) || 0))) : v;
     const t = document.getElementById('aw-total');
     if (t) t.textContent = totalOf(state.editing.units);
+    const iss = document.getElementById('aw-issues');
+    if (iss) iss.innerHTML = issuesHtml();
   };
 
   AW.addUnit = () => {
