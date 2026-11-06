@@ -9,6 +9,10 @@
 
   const cfg = window.ARCWORLDE_CONFIG || {};
   const AW = (window.AW = {});
+  // Registro para que otros módulos (partidas.js...) añadan secciones al menú.
+  AW.views = {};          // id de sección -> función que devuelve el HTML
+  AW.navItems = [];       // [id, icono, texto] que aparecen antes de "Mis Bandas"
+  AW.hooks = { userChanged: [], afterRender: [] };
 
   const TIPOS = [
     ['comandante', 'Comandante'],
@@ -90,7 +94,9 @@
           state.bands = [];
           state.bandsLoaded = false;
           state.editing = null;
+          state.bandContext = null;
         }
+        AW.hooks.userChanged.forEach((f) => f(state.user));
         refresh();
       }, 0);
     });
@@ -129,10 +135,10 @@
     label.textContent = 'Comunidad';
     nav.appendChild(label);
 
-    const items = [
+    const items = AW.navItems.concat([
       ['app_bands', '🛡️', 'Mis Bandas'],
       ['app_account', '👤', state.user ? esc(displayName()) : 'Iniciar sesión']
-    ];
+    ]);
     items.forEach(([id, icon, text]) => {
       const b = document.createElement('button');
       const active = currentSectionId === id;
@@ -186,8 +192,9 @@
     );
   }
 
-  function renderApp() {
+  function renderApp(keepScroll) {
     const main = document.getElementById('main-content');
+    const prevScroll = main.scrollTop;
     let html;
     if (state.offline) {
       html = shell(
@@ -199,11 +206,14 @@
       html = viewAccount();
     } else if (currentSectionId === 'app_bands') {
       html = viewBands();
+    } else if (AW.views[currentSectionId]) {
+      html = AW.views[currentSectionId]();
     } else {
       html = '';
     }
     main.innerHTML = html;
-    main.scrollTop = 0;
+    main.scrollTop = keepScroll === true ? prevScroll : 0;
+    AW.hooks.afterRender.forEach((f) => f(currentSectionId));
   }
 
   const inputCls =
@@ -321,6 +331,10 @@
 
   function issuesHtml() {
     const issues = validateBand(state.editing.faction, state.editing.units);
+    const ctx = state.bandContext;
+    const total = totalOf(state.editing.units);
+    if (ctx && ctx.maxValue && total > ctx.maxValue)
+      issues.unshift('Supera el valor máximo de la partida (' + total + ' de ' + ctx.maxValue + ' GP).');
     if (!issues.length) return '';
     return (
       '<div class="mt-4 p-3 bg-amber-950/30 border border-amber-900/50 rounded-lg text-sm text-amber-200">' +
@@ -390,6 +404,7 @@
 
   function viewBandEditor() {
     const e = state.editing;
+    const ctx = state.bandContext;
     const factions = catalogFactions();
     const cat = catalogUnits(e.faction);
 
@@ -403,7 +418,8 @@
       '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea oninput="AW.setField(\'notes\',this.value)" rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
       '<div class="border-t border-slate-800 pt-5">' +
       '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
-      '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP</span></div>' +
+      '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP' +
+      (ctx && ctx.maxValue ? ' <span class="text-slate-500 font-normal">/ ' + ctx.maxValue + '</span>' : '') + '</span></div>' +
       '<div class="space-y-2">' + e.units.map(unitRow).join('') + '</div>' +
       '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
       '<button onclick="AW.addUnit()" class="' + btnGhost + '">+ Añadir miniatura</button>' +
@@ -428,7 +444,13 @@
       '<button onclick="AW.cancelEdit()" class="' + btnGhost + '">Cancelar</button></div>' +
       '</div>';
 
-    return shell(e.id ? 'Editar banda' : 'Nueva banda', 'El valor total se calcula con el coste de cada línea', inner);
+    return shell(
+      ctx && ctx.title ? esc(ctx.title) : e.id ? 'Editar banda' : 'Nueva banda',
+      ctx && ctx.maxValue
+        ? 'Valor máximo de la partida: ' + ctx.maxValue + ' GP. Al guardar, se apunta a ella con esta banda.'
+        : 'El valor total se calcula con el coste de cada línea',
+      inner
+    );
   }
 
   /* ----------------------------------------------------------------- acciones */
@@ -521,8 +543,13 @@
   };
 
   /* bandas */
-  AW.newBand = () => {
+  // ctx (opcional): { title, maxValue, onSaved(band), onCancel() } cuando se crea una banda
+  // para una partida concreta; al guardar o cancelar se vuelve a ella.
+  AW.newBand = (ctx) => {
+    state.bandContext = ctx && typeof ctx === 'object' && ctx.onSaved ? ctx : null;
     state.editing = { id: null, name: '', faction: '', notes: '', units: [] };
+    if (state.bandContext) currentSectionId = 'app_bands';
+    window.renderSidebar();
     renderApp();
   };
 
@@ -540,7 +567,10 @@
   };
 
   AW.cancelEdit = () => {
+    const ctx = state.bandContext;
     state.editing = null;
+    state.bandContext = null;
+    if (ctx && ctx.onCancel) return ctx.onCancel();
     renderApp();
   };
 
@@ -594,17 +624,28 @@
       value: totalOf(units)
     };
 
+    // Banda creada para una partida: debe respetar el valor máximo y las reglas de composición.
+    const forGame = state.bandContext;
+    if (forGame && !units.length) return toast('Añade al menos una miniatura', 'error');
+    if (forGame && forGame.maxValue && payload.value > forGame.maxValue)
+      return toast('La banda supera el valor máximo de la partida (' + forGame.maxValue + ' GP)', 'error');
+    if (forGame && validateBand(payload.faction, units).length)
+      return toast('Corrige los avisos de la banda antes de guardarla', 'error');
+
     state.busy = true;
     const q = e.id
       ? state.sb.from('bands').update(payload).eq('id', e.id)
       : state.sb.from('bands').insert(Object.assign({ owner_id: state.user.id }, payload));
-    const { error } = await q;
+    const { data, error } = await q.select().single();
     state.busy = false;
 
     if (error) return toast('No se pudo guardar: ' + translateError(error), 'error');
     toast('Banda guardada');
+    const ctx = state.bandContext;
     state.editing = null;
+    state.bandContext = null;
     await loadBands();
+    if (ctx && ctx.onSaved) return ctx.onSaved(data);
     renderApp();
   };
 
@@ -616,6 +657,12 @@
     toast('Banda borrada');
     await loadBands();
     renderApp();
+  };
+
+  // Utilidades compartidas con otros módulos (partidas.js...)
+  AW.api = {
+    state, esc, toast, translateError, shell, msgBox, inputCls, btnPrimary, btnGhost,
+    validateBand, totalOf, render: renderApp, displayName
   };
 
   init();

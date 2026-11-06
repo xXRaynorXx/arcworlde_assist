@@ -7,6 +7,8 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 
 - `index.html`: compendio (reglas, facciones, campaña, escenarios) y menú.
 - `usuarios.js`: cuentas (email y Google) y sección **Mis Bandas**. Se engancha al menú sin tocar el compendio.
+- `partidas.js`: sección **Partidas** (crear, invitar con código o enlace, elegir banda, empezar, puntuar y cerrar).
+- `datos_minis.js`: catálogo de miniaturas y reglas de composición de banda.
 - `config.js`: URL y clave pública (publishable) de Supabase.
 - `supabase/migrations/`: tablas y reglas de seguridad (RLS).
 - `sw.js` y `manifest.webmanifest`: PWA.
@@ -14,9 +16,11 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 
 ## Puesta en marcha de Supabase
 
-1. **Base de datos.** Aplica `supabase/migrations/20261106120000_init.sql`:
-   automáticamente si la integración Supabase–GitHub apunta a este repositorio y a la rama que uses,
-   o pegándolo a mano en *SQL Editor* del panel de Supabase.
+1. **Base de datos.** Aplica los archivos de `supabase/migrations/` **en orden** (por nombre):
+   `..._init.sql` y después `..._games_hardening.sql`.
+   Se hace solo si la integración Supabase–GitHub apunta a este repositorio y a la rama que uses,
+   o pegándolos a mano, uno tras otro, en *SQL Editor* del panel de Supabase.
+   Cada archivo se ejecuta una sola vez.
 2. **URLs de acceso.** En *Authentication → URL Configuration*:
    - *Site URL*: la dirección donde publiques la web.
    - *Redirect URLs*: la misma dirección (y `http://localhost:8000/` si pruebas en local).
