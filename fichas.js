@@ -69,7 +69,12 @@
   }
 
   function baseStats(c) { return (c && c.stats) || {}; }
-  function cur(st, c, k) { return st && st[k] != null ? Number(st[k]) : baseStats(c)[k]; }
+  // Valor actual de un atributo. Una cojera que llega de la partida anterior (sin Mov guardado) resta 1.
+  function cur(st, c, k) {
+    if (st && st[k] != null) return Number(st[k]);
+    const base = baseStats(c)[k];
+    return k === 'mov' && st && Array.isArray(st.lesiones) && st.lesiones.indexOf('cojera') >= 0 ? Math.max(0, base - 1) : base;
+  }
 
   // opts: { st: estado de la miniatura, edit: bool, idx, fn: 'AW.g.rosterAdj' }
   function unitBlock(u, opts) {
@@ -151,5 +156,5 @@
       units.map((u, i) => unitBlock(u, Object.assign({}, opts, { st: roster[i], idx: i }))).join('') + '</div>';
   }
 
-  AW.sheet = { STATS, LESIONES, catalogUnit, traitInfo, unitBlock, bandSheet, baseStats };
+  AW.sheet = { STATS, LESIONES, catalogUnit, traitInfo, unitBlock, bandSheet, baseStats, cur };
 })();
