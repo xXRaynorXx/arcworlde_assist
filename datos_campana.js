@@ -369,3 +369,34 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
   window.datosCampanaTablas = datosCampanaTablas;
 }
+
+// Habilidades de campaña (Traits) que se compran con PV. Se leen del compendio (datosCampana en index.html):
+// cada una tiene niveles "N1 (3 VP) efecto". AWTraits.list() -> [{id, nombre, resumen, restriccion, niveles:[{n, coste, texto}]}]
+(function () {
+  if (typeof window === 'undefined') return;
+  const strip = (h) => String(h || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  let cache = null;
+  function build() {
+    const out = [];
+    try {
+      const sec = (datosCampana.secciones_campana || []).find((s) => s.id_seccion === 'gestion_campana');
+      const cat = sec.categorias.find((c) => /Habilidades de Campa/i.test(c.nombre_categoria));
+      cat.acciones.forEach((a) => {
+        const niveles = [];
+        String(a.detalles || '').split(/<br\s*\/?>/i).forEach((line) => {
+          const m = strip(line).match(/N(\d)\s*\((\d+)\s*VP\)\s*(.*)/i);
+          if (m) niveles.push({ n: Number(m[1]), coste: Number(m[2]), texto: m[3] });
+        });
+        if (niveles.length)
+          out.push({ id: a.id, nombre: String(a.nombre).split(' / ')[0], resumen: a.resumen || '', restriccion: strip(a.restriccion), niveles: niveles.sort((x, y) => x.n - y.n) });
+      });
+    } catch (e) {
+      /* sin datos de campaña */
+    }
+    return out;
+  }
+  window.AWTraits = {
+    list() { return cache || (cache = build()); },
+    find(id) { return this.list().find((t) => t.id === id) || null; }
+  };
+})();

@@ -18,6 +18,7 @@
     games: [], // partidas (misiones) de la campaña
     rolls: [],
     ledger: [],
+    vplog: [],
     finishing: false,
     userId: null,
     pendingCode: null,
@@ -54,13 +55,14 @@
   }
 
   async function loadOne(id) {
-    const [c, g, r, l] = await Promise.all([
+    const [c, g, r, l, v] = await Promise.all([
       state.sb.from('campaigns').select(SEL_ONE).eq('id', id).maybeSingle(),
       state.sb.from('games').select(SEL_GAMES).eq('campaign_id', id).order('position', { ascending: true }),
       state.sb.from('campaign_rolls').select('*').eq('campaign_id', id).order('id', { ascending: true }),
-      state.sb.from('campaign_ledger').select('*').eq('campaign_id', id).order('id', { ascending: true })
+      state.sb.from('campaign_ledger').select('*').eq('campaign_id', id).order('id', { ascending: true }),
+      state.sb.from('campaign_vp_log').select('*').eq('campaign_id', id).order('id', { ascending: true })
     ]);
-    const err = c.error || g.error || r.error || l.error;
+    const err = c.error || g.error || r.error || l.error || v.error;
     if (err) {
       toast('No se pudo cargar la campaña: ' + translateError(err), 'error');
       return null;
@@ -70,6 +72,7 @@
       cs.games = g.data || [];
       cs.rolls = r.data || [];
       cs.ledger = l.data || [];
+      cs.vplog = v.data || [];
     }
     return c.data;
   }
@@ -110,6 +113,7 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_rolls', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_ledger', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'games', filter: 'campaign_id=eq.' + id }, soft)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_vp_log', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'game_players' }, soft)
         .subscribe();
     } catch (e) {
@@ -125,6 +129,7 @@
     cs.games = [];
     cs.rolls = [];
     cs.ledger = [];
+    cs.vplog = [];
     cs.id = null;
     cs.view = 'list';
     cs.finishing = false;
@@ -320,6 +325,48 @@
     return { spend, refund, net: spend - refund, lines };
   }
 
+  // PV: ganados en misiones terminadas menos los gastados en rasgos
+  function vpBalance(uid) {
+    let earned = 0;
+    cs.games.filter((g) => g.status === 'finished').forEach((g) => {
+      const x = (g.game_players || []).find((y) => y.user_id === uid);
+      if (x) earned += Number(x.vp) || 0;
+    });
+    const spent = cs.vplog.filter((l) => l.user_id === uid).reduce((t, l) => t + l.cost, 0);
+    return { earned, spent, left: earned - spent };
+  }
+  const LESIONES = ['herido', 'cojera', 'golpe_cabeza', 'ojo_morado', 'brazo_cabestrillo'];
+
+  // Panel del paso 3: gastar PV en rasgos de campaña y gestionar lesiones de cada miniatura
+  function spoilsPanel(snap, rosterOf, vp) {
+    const traits = window.AWTraits ? AWTraits.list() : [];
+    const t = T();
+    const units = (snap && snap.units) || [];
+    if (!units.length) return '';
+    let h = '<div class="mt-4 p-3 rounded-lg bg-slate-900 border border-slate-800"><p class="text-sm font-semibold text-white">⭐ Puntos de victoria y secuelas</p>' +
+      '<p class="text-sm text-slate-300 mt-1">PV disponibles: <strong class="text-amber-400">' + vp.left + '</strong> <span class="text-slate-500">(ganados ' + vp.earned + ' − gastados ' + vp.spent + ')</span></p>' +
+      '<p class="text-xs text-slate-500 mb-2">Compra niveles de habilidades de campaña para tus miniaturas (en orden: N1, N2...) y ajusta sus lesiones. Los PV se anotan en el paso 4 de cada misión (el MVP suma sus D3 PV a mano).</p><div class="space-y-2">';
+    units.forEach((u, i) => {
+      const rc = u.rasgos_campana || {};
+      const les = ((rosterOf && rosterOf[i] && rosterOf[i].lesiones) || []).filter((x) => LESIONES.indexOf(x) >= 0);
+      const opts = traits.map((tr) => {
+        const next = (Number(rc[tr.id]) || 0) + 1;
+        const lv = tr.niveles.find((x) => x.n === next);
+        if (!lv) return '';
+        return '<option value="' + tr.id + '"' + (lv.coste > vp.left ? ' disabled' : '') + '>' + esc(tr.nombre) + ' N' + next + ' · ' + lv.coste + ' VP</option>';
+      }).join('');
+      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(u.nombre) + '</p>' +
+        '<div class="flex flex-wrap gap-1.5 mt-1.5">' +
+        Object.keys(rc).map((id) => { const tr = window.AWTraits && AWTraits.find(id); const lv = tr && tr.niveles.find((x) => x.n === rc[id]); return '<span title="' + esc(lv ? lv.texto : '') + '" class="text-xs px-2 py-0.5 rounded-md border bg-amber-500/10 border-amber-500/30 text-amber-300">⭐ ' + esc(tr ? tr.nombre : id) + ' N' + rc[id] + '</span>'; }).join('') +
+        les.map((id) => '<span class="text-xs px-2 py-0.5 rounded-md border bg-rose-950/40 border-rose-800/50 text-rose-200">🤕 ' + esc((t.lesiones[id] || {}).nombre || id) + ' <button onclick="AW.c.setInjury(' + i + ',\'' + id + '\',false)" title="Quitar" class="ml-1 text-rose-300 hover:text-white">×</button></span>').join('') +
+        '</div><div class="flex flex-wrap gap-2 mt-2">' +
+        '<select onchange="AW.c.buyTrait(' + i + ',this.value);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Comprar habilidad con PV…</option>' + opts + '</select>' +
+        '<select onchange="AW.c.setInjury(' + i + ',this.value,true);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Añadir lesión…</option>' +
+        LESIONES.filter((id) => les.indexOf(id) < 0).map((id) => '<option value="' + id + '">' + esc((t.lesiones[id] || {}).nombre || id) + '</option>').join('') + '</select></div></div>';
+    });
+    return h + '</div></div>';
+  }
+
   function eventsOf(g) {
     return typeof AW.g.eventsHtml === 'function' ? AW.g.eventsHtml(g) : '';
   }
@@ -375,6 +422,8 @@
           ? '<div class="mt-3 p-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300">Tu comerciante: <strong class="text-amber-300">' + esc(hum.nombre) + '</strong> · compras ' + pct(hum.compra) + ', ventas ' + pct(hum.venta) +
             '<div class="mt-2"><button onclick="AW.c.editBand()" class="' + btnPrimary + ' !py-1.5 text-sm">🛒 Comprar / vender y gestionar mi banda</button></div></div>'
           : '<p class="mt-3 text-sm text-amber-300">Tira antes al comerciante (paso 2) para poder comprar y vender.</p>';
+        const myGp = gp.find((x) => x.user_id === me);
+        prep += spoilsPanel(mineP.band_snapshot, myGp && myGp.roster, vpBalance(me));
         prep += '<p class="text-xs text-slate-500 mt-2">Lo que compres se descuenta de tu fondo y lo que vendas se suma. Al cambiar tu banda tendrás que volver a dar tu OK en la partida.</p>';
       } else {
         prep += '<p class="text-xs text-slate-500 mt-2">La partida ya ha empezado: la banda queda cerrada hasta la próxima misión.</p>';
@@ -651,6 +700,7 @@
     cs.games = [];
     cs.rolls = [];
     cs.ledger = [];
+    cs.vplog = [];
     currentSectionId = SEC;
     window.renderSidebar();
     rerender();
@@ -761,6 +811,24 @@
     const g = cs.games.find((x) => x.position === cs.camp.chapter);
     if (!g || !AW.g.randomScenarioId) return;
     return run(state.sb.from('games').update({ scenario_id: AW.g.randomScenarioId(g.scenario_id), scenario_mode: 'random' }).eq('id', g.id), 'Escenario sorteado');
+  };
+
+  C.buyTrait = (unit, traitId) => {
+    if (!traitId) return;
+    const me = mineOf();
+    const tr = window.AWTraits && AWTraits.find(traitId);
+    const u = me && me.band_snapshot && me.band_snapshot.units[unit];
+    if (!tr || !u) return;
+    const next = ((u.rasgos_campana || {})[traitId] || 0) + 1;
+    const lv = tr.niveles.find((x) => x.n === next);
+    if (!lv) return toast('Ya tiene el nivel máximo', 'error');
+    if (!confirm('¿Comprar ' + tr.nombre + ' N' + next + ' para ' + u.nombre + ' por ' + lv.coste + ' PV?\n' + lv.texto)) return rerender(true);
+    return run(state.sb.rpc('campaign_buy_trait', { p_campaign: cs.id, p_unit: unit, p_trait: traitId, p_level: next, p_cost: lv.coste }), tr.nombre + ' N' + next + ' comprado');
+  };
+
+  C.setInjury = (unit, injury, add) => {
+    if (!injury) return;
+    return run(state.sb.rpc('campaign_set_injury', { p_campaign: cs.id, p_unit: unit, p_injury: injury, p_add: !!add }), null);
   };
 
   C.setVp = (gid, v) => run(state.sb.rpc('campaign_set_vp', { p_game: gid, p_vp: Math.max(0, Math.floor(Number(v) || 0)) }), null);
