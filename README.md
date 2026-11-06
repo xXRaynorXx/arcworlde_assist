@@ -8,6 +8,8 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 - `index.html`: compendio (reglas, facciones, campaña, escenarios) y menú.
 - `usuarios.js`: cuentas (email y Google) y sección **Mis Bandas**. Se engancha al menú sin tocar el compendio.
 - `partidas.js`: sección **Partidas** (crear con nº de jugadores, invitar con código o enlace, elegir banda, OK de cada jugador, empezar, rondas con eventos ArcDeck, puntuar y cerrar).
+- `campanas.js`: sección **Campañas** (misiones, fondo de cada banda y libro de caja, tiradas compartidas de comerciante, lesiones y aventuras entre partidas, eventos de ronda, clasificación y ganador).
+- `datos_campana.js`: tablas de comerciante, lesiones y aventuras entre partidas.
 - `fichas.js`: ficha de banda (atributos, ataques, rasgos) y seguimiento en partida de vida, atributos y lesiones.
 - `datos_facciones.js`: reglas de facción, rasgos de unidad y armería exclusiva de las 11 facciones (se muestran en *Reglas de Facciones*).
 - `armeria.js`: armería común + ayudas para el equipo de cada facción; el constructor de bandas suma su coste.
@@ -21,7 +23,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 ## Puesta en marcha de Supabase
 
 1. **Base de datos.** Aplica los archivos de `supabase/migrations/` **en orden** (por nombre):
-   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql` y `..._roster_state.sql`.
+   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql` y `..._roster_state.sql`, más las posteriores por orden de nombre (la de campañas es `20261106220000_campaigns_phase1.sql`).
    Se hace solo si la integración Supabase–GitHub apunta a este repositorio y a la rama que uses,
    o pegándolos a mano, uno tras otro, en *SQL Editor* del panel de Supabase.
    Cada archivo se ejecuta una sola vez.

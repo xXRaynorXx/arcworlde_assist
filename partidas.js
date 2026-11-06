@@ -211,6 +211,7 @@
     gs.currentId = null;
     gs.view = 'list';
     gs.finishing = false;
+    gs.returnTo = null;
   }
 
   AW.hooks.userChanged.push(async (user) => {
@@ -374,7 +375,8 @@
 
   function viewDetail() {
     const g = gs.current;
-    const back = '<button onclick="AW.g.back()" class="text-sm text-slate-400 hover:text-white mb-4">← Todas las partidas</button>';
+    const inCamp = !!(g && g.campaign_id);
+    const back = '<button onclick="AW.g.back()" class="text-sm text-slate-400 hover:text-white mb-4">' + (gs.returnTo ? '← Volver a la campaña' : '← Todas las partidas') + '</button>';
     if (!g) return shell('Partida', 'Cargando...', back + '<p class="text-slate-500">Cargando partida...</p>');
 
     const me = state.user.id;
@@ -419,8 +421,8 @@
       html += '<p class="mb-6 text-sm text-slate-500">Entorno del ArcDeck: ' + (env ? env.icono + ' ' + esc(env.nombre) : '—') + '</p>';
     }
 
-    /* invitación */
-    if (g.status === 'draft') {
+    /* invitación (las misiones de campaña se apuntan desde la campaña) */
+    if (g.status === 'draft' && !inCamp) {
       const link = location.origin + location.pathname + '?partida=' + g.join_code;
       html +=
         '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-3">Invitar jugadores</h3>' +
@@ -469,12 +471,12 @@
       }
       html += '</div></div><div class="mt-3">' + bandSummary(p, g, isMe) + '</div>';
 
-      if (isMe && g.status === 'draft') html += bandPicker(g, p) + readyBlock(g, p);
+      if (isMe && g.status === 'draft') html += (inCamp ? '' : bandPicker(g, p)) + readyBlock(g, p);
       html += '</article>';
     });
     html += '</div>';
 
-    if (isOwner && !mine && g.status === 'draft') {
+    if (isOwner && !mine && g.status === 'draft' && !inCamp) {
       html += '<button onclick="AW.g.joinSelf()" class="' + btnGhost + ' mt-3">Unirme como jugador</button>';
     }
     html += '</section>';
@@ -513,15 +515,15 @@
           '<button onclick="AW.g.finishCancel()" class="' + btnGhost + '">Cancelar</button></div></div>';
       }
     }
-    if (!isOwner && mine && g.status === 'draft') {
+    if (!isOwner && mine && g.status === 'draft' && !inCamp) {
       html += '<button onclick="AW.g.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la partida</button>';
     }
-    if (isOwner) {
+    if (isOwner && !inCamp) {
       html += '<button onclick="AW.g.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar partida</button>';
     }
     html += '</section>';
 
-    return shell(esc(g.name), 'Partida única', html);
+    return shell(esc(g.name), inCamp ? 'Misión ' + g.position + ' de la campaña' : 'Partida única', html);
   }
 
   /* ----------------------------------------------------------------- acciones */
@@ -566,6 +568,15 @@
 
   G.back = () => {
     unsubscribe();
+    if (gs.returnTo && AW.c && AW.c.open) {
+      const cid = gs.returnTo;
+      gs.returnTo = null;
+      gs.view = 'list';
+      gs.current = null;
+      gs.currentId = null;
+      gs.finishing = false;
+      return AW.c.open(cid);
+    }
     gs.view = 'list';
     gs.current = null;
     gs.currentId = null;
@@ -574,6 +585,39 @@
     window.renderSidebar();
     rerender();
     loadGames().then(() => rerender(true));
+  };
+
+  // Desde una campaña: abre la partida de la misión y "volver" regresa a la campaña
+  G.openFromCampaign = (gid, cid) => {
+    gs.returnTo = cid;
+    return G.open(gid);
+  };
+
+  G.scenarioName = (id) => {
+    const sc = scenarioById(id);
+    return sc ? sc.nombre : null;
+  };
+
+  // Eventos ArcDeck de todas las rondas jugadas (para mostrarlos desde la campaña)
+  G.eventsHtml = (g) => {
+    const env = arcEnv(g.arcdeck_env);
+    const hist = (g.arcdeck_history || []).slice().reverse();
+    if (!hist.length) return '<p class="text-sm text-slate-500">Todavía no se ha robado ningún evento.</p>';
+    return (
+      '<details class="text-sm"' + (g.status === 'active' ? ' open' : '') + '><summary class="cursor-pointer text-slate-300">🃏 Eventos de ronda (' + hist.length + ')' +
+      (env ? ' <span class="text-slate-500">· ' + esc(env.nombre) + '</span>' : '') + '</summary><ul class="mt-2 space-y-1.5 text-slate-400">' +
+      hist
+        .map((h) => {
+          const e = eventOf(env, h.card);
+          const c = cardParts(h.card);
+          return (
+            '<li><span class="text-slate-500">Ronda ' + h.round + '</span> · <span class="' + (c.red ? 'text-rose-400' : c.joker ? 'text-amber-400' : 'text-slate-200') + ' font-semibold">' +
+            esc(h.card) + '</span> · <strong class="text-slate-200">' + (e ? esc(e.nombre) : '—') + '</strong>' + (e ? ': ' + esc(e.texto) : '') + '</li>'
+          );
+        })
+        .join('') +
+      '</ul></details>'
+    );
   };
 
   G.showNew = () => {
@@ -720,8 +764,7 @@
   }
   G.rosterAdj = (idx, k, d) =>
     rosterEdit(idx, (st, c) => {
-      const base = c && c.stats ? c.stats[k] : 0;
-      const v = st[k] != null ? Number(st[k]) : base;
+      const v = AW.sheet.cur(st, c, k) || 0;
       st[k] = Math.max(0, v + d);
     });
   G.rosterAdjLesion = (idx, id, add) =>
@@ -729,9 +772,9 @@
       st.lesiones = (st.lesiones || []).filter((x) => x !== id);
       if (add) st.lesiones.push(id);
       if (id === 'cojera') {
-        const base = c && c.stats ? c.stats.mov : 0;
-        const v = st.mov != null ? Number(st.mov) : base;
-        st.mov = Math.max(0, v + (add ? -1 : 1));
+        // Mov guardado = ya incluye la cojera. Si venía de la partida anterior no hay Mov guardado.
+        if (add) st.mov = Math.max(0, (st.mov != null ? Number(st.mov) : c && c.stats ? c.stats.mov : 0) - 1);
+        else if (st.mov != null) st.mov = st.mov + 1;
       }
       if (id === 'herido' && add) st.ko = true;
     });
