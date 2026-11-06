@@ -87,13 +87,17 @@
       (c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
       '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
-    const gearHtml = gear.length
+    const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x));
+    const serieHtml = serie.length
+      ? '<div class="mt-2 flex flex-wrap gap-1.5">' + serie.map((x) => '<span title="Equipo de serie: ya incluido en el perfil" class="inline-block text-xs px-2 py-0.5 rounded-md border bg-amber-950/30 border-amber-800/50 text-amber-200">🛡️ ' + esc(x) + '</span>').join('') + '</div>'
+      : '';
+    const gearHtml = serieHtml + (gear.length
       ? '<div class="mt-2 flex flex-wrap gap-1.5">' + gear.map((g) => {
           const d = window.AWGear && AWGear.find(g.origen, g.id, opts.faction);
           const tip = d ? stripTags(d.resumen) + ' ' + stripTags(d.detalles) + (d.restriccion ? ' (' + stripTags(d.restriccion) + ')' : '') : '';
           return '<span title="' + esc(tip.trim()) + '" class="inline-block text-xs px-2 py-0.5 rounded-md border bg-emerald-950/40 border-emerald-800/50 text-emerald-200">🎒 ' + esc(String(g.nombre).split(' / ')[0]) + '</span>';
         }).join('') + '</div>'
-      : '';
+      : '');
     if (!c) {
       return h + '<p class="text-xs text-slate-500 mt-1">Miniatura personalizada: sin atributos en el catálogo.</p>' + gearHtml + '</div>';
     }

@@ -402,6 +402,33 @@
 
   // Equipo de una miniatura: filas bajo la miniatura (como las miniaturas de la banda) y un catálogo
   // para añadir más, agrupado en armería común y armería de la facción, por tipo de objeto.
+  function catalogById(id) {
+    if (!id) return null;
+    for (const f of catalogFactions()) {
+      const c = (f.unidades || []).find((x) => x.id === id);
+      if (c) return c;
+    }
+    return null;
+  }
+  // Equipo que la miniatura trae de serie (sin coste; ya cuenta en su perfil)
+  function serieOf(u) {
+    const c = catalogById(u.id);
+    return ((c && c.equipo_de_serie) || []).filter((s) => !/Armamento Est[aá]ndar/i.test(s));
+  }
+  function serieArmour(u) {
+    return serieOf(u).some((s) => /Light Armour|Heavy Armour|Armadura (Ligera|Pesada)/i.test(s));
+  }
+  // Horda Enterrada (Tomb Guardian): -25 % en la Armería Común, redondeado hacia arriba
+  function gearPrice(u, d, origen) {
+    const c = catalogById(u.id);
+    const base = Number(d.coste) || 0;
+    return origen === 'comun' && c && /Buried Horde/i.test((c.rasgos || []).join(' ')) ? Math.ceil(base * 0.75) : base;
+  }
+  function armourBlocked(u, d, origen) {
+    if (origen !== 'comun' || !/^(light|heavy)_armour$/.test(d.id)) return false;
+    return serieArmour(u) || (u.equipo || []).some((g) => g.origen === 'comun' && /^(light|heavy)_armour$/.test(g.id));
+  }
+
   function gearCategory(a) {
     const t = String(a.tipo || '');
     if (/armour|shield/i.test(a.id)) return 'Armaduras y protección';
@@ -415,7 +442,15 @@
   function gearBlock(u, i) {
     const faction = state.editing.faction;
     const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
-    const rows = (u.equipo || [])
+    const serieRows = serieOf(u)
+      .map(
+        (s) =>
+          '<div class="grid grid-cols-12 gap-2 items-center pl-4 border-l-2 border-amber-700/70">' +
+          '<div class="col-span-9 text-sm text-slate-200">' + esc(s) + '</div>' +
+          '<div class="col-span-3 text-xs text-amber-400/80 text-right">de serie · gratis</div></div>'
+      )
+      .join('');
+    const rows = serieRows + (u.equipo || [])
       .map((g, j) => {
         const d = window.AWGear && AWGear.find(g.origen, g.id, faction);
         const info = d ? [d.resumen, d.detalles, d.restriccion].filter(Boolean).map((x) => String(x).replace(/<[^>]*>/g, ' ')).join(' ') : '';
@@ -436,11 +471,11 @@
       const groups = [];
       const add = (label, items, origen) => {
         const byCat = {};
-        items.filter((a) => !has(origen, a.id)).forEach((a) => (byCat[gearCategory(a)] = byCat[gearCategory(a)] || []).push(a));
+        items.filter((a) => !has(origen, a.id) && !armourBlocked(u, a, origen)).forEach((a) => (byCat[gearCategory(a)] = byCat[gearCategory(a)] || []).push(a));
         Object.keys(byCat).forEach((cat) =>
           groups.push(
             '<optgroup label="' + esc(label + ' — ' + cat) + '">' +
-              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + a.coste + ' GP)</option>').join('') +
+              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + gearPrice(u, a, origen) + ' GP' + (gearPrice(u, a, origen) !== a.coste ? ', -25%' : '') + ')</option>').join('') +
               '</optgroup>'
           )
         );
@@ -666,7 +701,8 @@
     if (!d || !unit) return;
     unit.equipo = unit.equipo || [];
     if (unit.equipo.some((g) => g.origen === origen && g.id === id)) return;
-    unit.equipo.push({ id: d.id, origen, nombre: d.nombre, coste: Number(d.coste) || 0 });
+    if (armourBlocked(unit, d, origen)) return toast('Esta miniatura ya lleva armadura', 'error');
+    unit.equipo.push({ id: d.id, origen, nombre: d.nombre, coste: gearPrice(unit, d, origen) });
     renderApp(true);
   };
 

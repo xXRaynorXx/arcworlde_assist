@@ -2068,23 +2068,41 @@
 };
 
 
-        // Reglas de Facciones: una sección por facción con sus reglas, rasgos de unidad y armería exclusiva
-        // (datos_facciones.js).
+        // Reglas de Facciones: una sección por facción con sus reglas, rasgos de unidad, equipo de serie y
+        // armería exclusiva (datos_facciones.js).
         function construirSeccionesFacciones() {
-            const secciones = Object.keys(faccionesCompendioDB).map((fid) => {
-                const f = faccionesCompendioDB[fid];
-                const armeria = (f.armeria || []).map((a) => Object.assign({}, a, {
+            const FIX = { wizard: 'wizards' }; // id mal escrito en los datos
+            const fid = (x) => FIX[x.faccion_id] || x.faccion_id;
+            const esSerie = (r) => /^Equipo de Serie/i.test(r.etiqueta || '');
+            const orden = [];
+            const nombres = {};
+            [habilidadesFaccionDB, rasgosUnidadesDB, armeriaExclusivaDB].forEach((lista) => lista.forEach((x) => {
+                const id = fid(x);
+                if (!(id in nombres)) { nombres[id] = x.faccion_nombre; orden.push(id); }
+            }));
+            // 'comun' (equipo de serie compartido) va el último
+            orden.sort((a, b) => (a === 'comun') - (b === 'comun'));
+            return orden.map((id) => {
+                const reglas = habilidadesFaccionDB.filter((x) => fid(x) === id);
+                const rasgos = rasgosUnidadesDB.filter((x) => fid(x) === id && !esSerie(x));
+                const serie = rasgosUnidadesDB.filter((x) => fid(x) === id && esSerie(x));
+                const armeria = armeriaExclusivaDB.filter((x) => fid(x) === id).map((a) => Object.assign({}, a, {
                     nombre: a.nombre + ' (' + a.coste + ' GP)',
                     etiqueta: (a.etiqueta || 'Armería') + ' · ' + a.tipo
                 }));
-                const categorias = [
-                    { nombre_categoria: 'Reglas de facción', acciones: f.reglas || [] },
-                    { nombre_categoria: 'Rasgos de unidades', acciones: f.rasgos_unidades || [] },
-                    { nombre_categoria: 'Armería exclusiva', acciones: armeria }
-                ];
-                return { titulo: 'Facción ' + f.nombre, descripcion: 'Reglas, rasgos de unidad y armería exclusiva de ' + f.nombre + '.', categorias: categorias.filter((c) => c.acciones.length) };
+                const comun = id === 'comun';
+                return {
+                    titulo: comun ? 'Comunes a varias facciones' : 'Facción ' + nombres[id],
+                    descripcion: comun ? 'Equipo de serie compartido por miniaturas de distintas facciones.'
+                        : 'Reglas, rasgos de unidad, equipo de serie y armería exclusiva de ' + nombres[id] + '.',
+                    categorias: [
+                        { nombre_categoria: 'Reglas de facción', acciones: reglas },
+                        { nombre_categoria: 'Rasgos de unidades', acciones: rasgos },
+                        { nombre_categoria: 'Equipo de serie', acciones: serie },
+                        { nombre_categoria: 'Armería exclusiva', acciones: armeria }
+                    ].filter((c) => c.acciones.length)
+                };
             });
-            return secciones;
         }
 
         const dbUnificada = [

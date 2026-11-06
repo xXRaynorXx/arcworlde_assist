@@ -94,9 +94,9 @@ const armeriaComunDB = [
       const f = datosMinis.facciones.find((x) => x.id === n || String(x.nombre).toLowerCase() === n);
       if (f) return ALIAS[f.id] || f.id;
     }
-    if (typeof faccionesCompendioDB !== "undefined") {
-      const k = Object.keys(faccionesCompendioDB).find((id) => id === n || String(faccionesCompendioDB[id].nombre).toLowerCase() === n);
-      if (k) return k;
+    if (typeof armeriaExclusivaDB !== "undefined") {
+      const a = armeriaExclusivaDB.find((x) => x.faccion_id === n || String(x.faccion_nombre).toLowerCase() === n);
+      if (a) return a.faccion_id;
     }
     return null;
   }
