@@ -40,7 +40,7 @@
 
   /* ------------------------------------------------------------------ datos */
   const SELECT =
-    '*, owner:profiles!owner_id(display_name), game_players(user_id, band_id, band_snapshot, side, vp, joined_at, profiles(display_name))';
+    '*, owner:profiles!owner_id(display_name), game_players(user_id, band_id, band_snapshot, side, vp, ready, roster, joined_at, profiles(display_name))';
 
   async function loadGames() {
     gs.loading = true;
@@ -322,16 +322,19 @@
     return shell('Nueva partida', 'Después podrás invitar a los jugadores con un código o un enlace', inner);
   }
 
-  function bandSummary(p) {
+  function bandSummary(p, g, isMe) {
     const b = p.band_snapshot;
     if (!b) return '<p class="text-sm text-slate-500 italic">Aún no ha elegido banda</p>';
-    const units = (b.units || [])
-      .map((u) => '<li>' + esc(u.nombre) + ' <span class="text-slate-500">(' + (Number(u.coste) || 0) + ' GP)</span></li>')
-      .join('');
+    const started = g && g.status !== 'draft';
+    const edit = !!(started && g.status === 'active' && isMe);
+    const sheet = AW.sheet
+      ? AW.sheet.bandSheet(b.units || [], p.roster, { edit: edit, fn: 'AW.g.rosterAdj' })
+      : '<ul class="ml-4 list-disc">' + (b.units || []).map((u) => '<li>' + esc(u.nombre) + '</li>').join('') + '</ul>';
     return (
-      '<details class="text-sm"><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' +
-      (b.faction ? ' · ' + esc(b.faction) : '') + ' · <span class="text-amber-400">' + b.value + ' GP</span></summary>' +
-      '<ul class="mt-2 ml-4 list-disc text-slate-400 space-y-0.5">' + units + '</ul></details>'
+      '<details class="text-sm"' + (started ? ' open' : '') + '><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' +
+      (b.faction ? ' · ' + esc(b.faction) : '') + ' · <span class="text-amber-400">' + b.value + ' GP</span>' +
+      (started ? ' · <span class="text-slate-400">Ficha de banda</span>' : '') + '</summary>' +
+      '<div class="mt-3">' + sheet + '</div></details>'
     );
   }
 
@@ -464,7 +467,7 @@
       } else if (g.status !== 'draft') {
         html += '<span class="text-amber-400 font-semibold">' + p.vp + ' PV</span>';
       }
-      html += '</div></div><div class="mt-3">' + bandSummary(p) + '</div>';
+      html += '</div></div><div class="mt-3">' + bandSummary(p, g, isMe) + '</div>';
 
       if (isMe && g.status === 'draft') html += bandPicker(g, p) + readyBlock(g, p);
       html += '</article>';
@@ -693,6 +696,50 @@
 
   // Final de ronda: roba el siguiente evento. Se manda la ronda que ve este jugador para que dos
   // pulsaciones a la vez no salten una ronda.
+  // Ficha de banda en partida: cambios de vida/atributos/lesiones de mis miniaturas
+  let rosterQ = Promise.resolve();
+  function myPlayer() {
+    const g = gs.current;
+    return g && (g.game_players || []).find((p) => p.user_id === state.user.id);
+  }
+  function rosterEdit(idx, fn) {
+    const g = gs.current, p = myPlayer();
+    if (!g || !p || g.status !== 'active') return;
+    const roster = JSON.parse(JSON.stringify(p.roster || {}));
+    const unit = ((p.band_snapshot && p.band_snapshot.units) || [])[idx];
+    const c = unit && AW.sheet.catalogUnit(unit.id);
+    const st = (roster[idx] = roster[idx] || {});
+    fn(st, c);
+    p.roster = roster;
+    rerender(true);
+    const gid = g.id, uid = p.user_id;
+    rosterQ = rosterQ.then(async () => {
+      const { error } = await state.sb.from('game_players').update({ roster: p.roster }).eq('game_id', gid).eq('user_id', uid);
+      if (error) toast('No se pudo guardar la ficha: ' + translateError(error), 'error');
+    });
+  }
+  G.rosterAdj = (idx, k, d) =>
+    rosterEdit(idx, (st, c) => {
+      const base = c && c.stats ? c.stats[k] : 0;
+      const v = st[k] != null ? Number(st[k]) : base;
+      st[k] = Math.max(0, v + d);
+    });
+  G.rosterAdjLesion = (idx, id, add) =>
+    rosterEdit(idx, (st, c) => {
+      st.lesiones = (st.lesiones || []).filter((x) => x !== id);
+      if (add) st.lesiones.push(id);
+      if (id === 'cojera') {
+        const base = c && c.stats ? c.stats.mov : 0;
+        const v = st.mov != null ? Number(st.mov) : base;
+        st.mov = Math.max(0, v + (add ? -1 : 1));
+      }
+      if (id === 'herido' && add) st.ko = true;
+    });
+  G.rosterAdjKo = (idx) => rosterEdit(idx, (st) => { st.ko = !st.ko; });
+  G.rosterAdjReset = (idx) => rosterEdit(idx, (st, c) => {
+    ['hp', 'mov', 'armadura', 'ap', 'ko', 'lesiones'].forEach((k) => delete st[k]);
+  });
+
   G.nextRound = async () => {
     const g = gs.current;
     if (!g || gs.busyRound) return;

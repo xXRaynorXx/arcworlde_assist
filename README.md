@@ -8,6 +8,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 - `index.html`: compendio (reglas, facciones, campaña, escenarios) y menú.
 - `usuarios.js`: cuentas (email y Google) y sección **Mis Bandas**. Se engancha al menú sin tocar el compendio.
 - `partidas.js`: sección **Partidas** (crear con nº de jugadores, invitar con código o enlace, elegir banda, OK de cada jugador, empezar, rondas con eventos ArcDeck, puntuar y cerrar).
+- `fichas.js`: ficha de banda (atributos, ataques, rasgos) y seguimiento en partida de vida, atributos y lesiones.
 - `datos_arcdeck.js`: tabla de eventos ArcDeck (Bosque de Mildaark y Tierras de Vauhaemia).
 - `datos_minis.js`: catálogo de miniaturas y reglas de composición de banda.
 - `config.js`: URL y clave pública (publishable) de Supabase.
@@ -18,7 +19,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 ## Puesta en marcha de Supabase
 
 1. **Base de datos.** Aplica los archivos de `supabase/migrations/` **en orden** (por nombre):
-   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql`.
+   `..._init.sql`, `..._games_hardening.sql`, `..._fix_select_policies.sql` y `..._players_ready_arcdeck.sql` y `..._roster_state.sql`.
    Se hace solo si la integración Supabase–GitHub apunta a este repositorio y a la rama que uses,
    o pegándolos a mano, uno tras otro, en *SQL Editor* del panel de Supabase.
    Cada archivo se ejecuta una sola vez.
