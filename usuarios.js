@@ -1,0 +1,576 @@
+/* ArcWorlde Assist: cuentas de usuario y bandas (Supabase)
+ *
+ * Se carga después del script principal de index.html y se engancha a
+ * renderSidebar() y renderContent() sin tocar el compendio existente.
+ * Secciones nuevas: app_account (cuenta) y app_bands (mis bandas).
+ */
+(function () {
+  'use strict';
+
+  const cfg = window.ARCWORLDE_CONFIG || {};
+  const AW = (window.AW = {});
+
+  const TIPOS = [
+    ['comandante', 'Comandante'],
+    ['heroe', 'Héroe'],
+    ['tropa', 'Tropa'],
+    ['monstruo', 'Monstruo'],
+    ['mercenario', 'Mercenario'],
+    ['equipo', 'Equipo / Objeto']
+  ];
+
+  const state = {
+    sb: null,
+    offline: false,
+    user: null,
+    profile: null,
+    bands: [],
+    bandsLoaded: false,
+    editing: null,
+    authMode: 'login',
+    recovery: false,
+    msg: null,
+    busy: false
+  };
+
+  /* ------------------------------------------------------------------ utils */
+  const esc = (s) =>
+    String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const isApp = (id) => typeof id === 'string' && id.indexOf('app_') === 0;
+  const redirectUrl = () => location.origin + location.pathname;
+  const displayName = () =>
+    (state.profile && state.profile.display_name) ||
+    (state.user && state.user.email ? state.user.email.split('@')[0] : '');
+
+  function toast(text, type) {
+    const el = document.createElement('div');
+    el.className =
+      'fixed bottom-6 right-6 z-[60] px-4 py-3 rounded-xl text-sm font-medium shadow-2xl border ' +
+      (type === 'error'
+        ? 'bg-rose-950 text-rose-200 border-rose-800'
+        : 'bg-emerald-950 text-emerald-200 border-emerald-800');
+    el.textContent = text;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+
+  function translateError(err) {
+    const m = (err && err.message) || String(err || '');
+    if (/invalid login credentials/i.test(m)) return 'Email o contraseña incorrectos.';
+    if (/email not confirmed/i.test(m)) return 'Confirma tu correo antes de entrar (revisa también el spam).';
+    if (/user already registered/i.test(m)) return 'Ese email ya tiene cuenta. Prueba a iniciar sesión.';
+    if (/password should be at least/i.test(m)) return 'La contraseña es demasiado corta (mínimo 6 caracteres).';
+    if (/rate limit|too many/i.test(m)) return 'Demasiados intentos. Espera un momento y vuelve a probar.';
+    if (/unsupported provider|provider is not enabled/i.test(m)) return 'El acceso con Google aún no está activado en Supabase.';
+    return m;
+  }
+
+  /* --------------------------------------------------------------- bootstrap */
+  function init() {
+    if (!window.supabase || !cfg.SUPABASE_URL || !cfg.SUPABASE_KEY) {
+      state.offline = true;
+      return;
+    }
+    state.sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    });
+
+    state.sb.auth.onAuthStateChange((event, session) => {
+      state.user = session ? session.user : null;
+      if (event === 'PASSWORD_RECOVERY') state.recovery = true;
+      if (event === 'SIGNED_IN' && !state.recovery) state.msg = null;
+      // No se hacen llamadas a Supabase dentro del callback: se aplazan.
+      setTimeout(async () => {
+        if (state.user) {
+          await loadProfile();
+          await loadBands();
+        } else {
+          state.profile = null;
+          state.bands = [];
+          state.bandsLoaded = false;
+          state.editing = null;
+        }
+        refresh();
+      }, 0);
+    });
+  }
+
+  async function loadProfile() {
+    const { data, error } = await state.sb.from('profiles').select('*').eq('id', state.user.id).maybeSingle();
+    if (error) {
+      toast('No se pudo cargar tu perfil: ' + translateError(error), 'error');
+      return;
+    }
+    state.profile = data;
+  }
+
+  async function loadBands() {
+    const { data, error } = await state.sb
+      .from('bands')
+      .select('*')
+      .eq('owner_id', state.user.id)
+      .order('updated_at', { ascending: false });
+    if (error) {
+      toast('No se pudieron cargar tus bandas: ' + translateError(error), 'error');
+      return;
+    }
+    state.bands = data || [];
+    state.bandsLoaded = true;
+  }
+
+  /* ------------------------------------------------------- enganche al menú */
+  function appendAppNav() {
+    const nav = document.getElementById('nav-menu');
+    if (!nav) return;
+
+    const label = document.createElement('p');
+    label.className = 'text-xs uppercase tracking-wider text-slate-500 px-4 pt-5 pb-1 border-t border-slate-800 mt-4';
+    label.textContent = 'Comunidad';
+    nav.appendChild(label);
+
+    const items = [
+      ['app_bands', '🛡️', 'Mis Bandas'],
+      ['app_account', '👤', state.user ? esc(displayName()) : 'Iniciar sesión']
+    ];
+    items.forEach(([id, icon, text]) => {
+      const b = document.createElement('button');
+      const active = currentSectionId === id;
+      b.className =
+        'w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium truncate ' +
+        (active
+          ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20'
+          : 'text-slate-400 hover:bg-slate-800 hover:text-white');
+      b.innerHTML = icon + ' ' + text;
+      b.onclick = () => go(id);
+      nav.appendChild(b);
+    });
+  }
+
+  function go(id) {
+    currentSectionId = id;
+    window.renderSidebar();
+    window.renderContent();
+    if (window.innerWidth < 768) toggleSidebar();
+  }
+  AW.go = go;
+
+  function refresh() {
+    window.renderSidebar();
+    if (isApp(currentSectionId)) renderApp();
+  }
+
+  const origSidebar = window.renderSidebar;
+  window.renderSidebar = function () {
+    origSidebar();
+    appendAppNav();
+  };
+
+  const origContent = window.renderContent;
+  window.renderContent = function () {
+    if (isApp(currentSectionId)) return renderApp();
+    return origContent();
+  };
+
+  /* ------------------------------------------------------------------ vistas */
+  function shell(title, subtitle, inner) {
+    return (
+      '<div class="max-w-4xl mx-auto pb-12">' +
+      '<header class="mb-8"><h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">' +
+      title +
+      '</h2><p class="text-emerald-500 font-medium mt-2">' +
+      subtitle +
+      '</p></header>' +
+      inner +
+      '</div>'
+    );
+  }
+
+  function renderApp() {
+    const main = document.getElementById('main-content');
+    let html;
+    if (state.offline) {
+      html = shell(
+        'Cuentas no disponibles',
+        'No se pudo cargar el servicio',
+        '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-slate-300">No se ha podido cargar Supabase. Comprueba tu conexión y recarga la página.</div>'
+      );
+    } else if (currentSectionId === 'app_account') {
+      html = viewAccount();
+    } else if (currentSectionId === 'app_bands') {
+      html = viewBands();
+    } else {
+      html = '';
+    }
+    main.innerHTML = html;
+    main.scrollTop = 0;
+  }
+
+  const inputCls =
+    'w-full bg-slate-950 border border-slate-700 text-white rounded-lg px-3 py-2.5 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500';
+  const btnPrimary =
+    'px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-xl font-semibold transition-colors text-sm';
+  const btnGhost =
+    'px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-medium transition-colors text-sm';
+
+  function msgBox() {
+    if (!state.msg) return '';
+    const cls =
+      state.msg.type === 'error'
+        ? 'bg-rose-950/40 border-rose-900/60 text-rose-200'
+        : 'bg-emerald-950/40 border-emerald-900/60 text-emerald-200';
+    return '<div class="mb-4 p-3 border rounded-lg text-sm ' + cls + '">' + esc(state.msg.text) + '</div>';
+  }
+
+  /* --- cuenta --- */
+  function viewAccount() {
+    if (state.recovery && state.user) return viewNewPassword();
+    return state.user ? viewProfile() : viewLogin();
+  }
+
+  function viewLogin() {
+    const reg = state.authMode === 'register';
+    const googleIcon =
+      '<svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.5-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>';
+
+    const inner =
+      '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md">' +
+      msgBox() +
+      '<button onclick="AW.google()" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 rounded-xl py-2.5 font-semibold transition-colors">' +
+      googleIcon +
+      ' Continuar con Google</button>' +
+      '<div class="flex items-center gap-3 my-5 text-xs text-slate-500"><div class="flex-1 h-px bg-slate-800"></div>o con tu email<div class="flex-1 h-px bg-slate-800"></div></div>' +
+      '<form onsubmit="AW.submitAuth(event)" class="space-y-3">' +
+      (reg
+        ? '<div><label class="block text-xs text-slate-400 mb-1">Nombre de jugador</label><input name="name" required maxlength="40" class="' + inputCls + '" autocomplete="nickname"></div>'
+        : '') +
+      '<div><label class="block text-xs text-slate-400 mb-1">Email</label><input name="email" type="email" required class="' + inputCls + '" autocomplete="email"></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Contraseña</label><input name="password" type="password" required minlength="6" class="' + inputCls + '" autocomplete="' + (reg ? 'new-password' : 'current-password') + '"></div>' +
+      '<button type="submit" class="' + btnPrimary + ' w-full">' + (reg ? 'Crear cuenta' : 'Entrar') + '</button>' +
+      '</form>' +
+      '<div class="mt-4 flex justify-between text-sm">' +
+      '<button onclick="AW.setAuthMode(\'' + (reg ? 'login' : 'register') + '\')" class="text-emerald-400 hover:text-emerald-300">' +
+      (reg ? 'Ya tengo cuenta' : 'Crear una cuenta') +
+      '</button>' +
+      (reg ? '' : '<button onclick="AW.forgot()" class="text-slate-400 hover:text-white">He olvidado la contraseña</button>') +
+      '</div></div>';
+
+    return shell('Tu cuenta', 'Inicia sesión para guardar tus bandas y jugar partidas y campañas', inner);
+  }
+
+  function viewProfile() {
+    const inner =
+      '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md space-y-5">' +
+      msgBox() +
+      '<form onsubmit="AW.saveProfile(event)" class="space-y-3">' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Nombre de jugador</label><input name="name" required maxlength="40" value="' + esc(displayName()) + '" class="' + inputCls + '"></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Email</label><input value="' + esc(state.user.email) + '" disabled class="' + inputCls + ' opacity-60"></div>' +
+      '<button type="submit" class="' + btnPrimary + '">Guardar nombre</button>' +
+      '</form>' +
+      '<div class="pt-4 border-t border-slate-800 flex gap-3">' +
+      '<button onclick="AW.go(\'app_bands\')" class="' + btnGhost + '">Ver mis bandas (' + state.bands.length + ')</button>' +
+      '<button onclick="AW.signOut()" class="' + btnGhost + '">Cerrar sesión</button>' +
+      '</div></div>';
+    return shell('Hola, ' + esc(displayName()), 'Tu perfil de jugador', inner);
+  }
+
+  function viewNewPassword() {
+    const inner =
+      '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md">' +
+      msgBox() +
+      '<form onsubmit="AW.setNewPassword(event)" class="space-y-3">' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Nueva contraseña</label><input name="password" type="password" required minlength="6" class="' + inputCls + '" autocomplete="new-password"></div>' +
+      '<button type="submit" class="' + btnPrimary + '">Guardar contraseña</button></form></div>';
+    return shell('Nueva contraseña', 'Elige una contraseña nueva para tu cuenta', inner);
+  }
+
+  /* --- bandas --- */
+  function totalOf(units) {
+    return (units || []).reduce((s, u) => s + (Number(u.coste) || 0), 0);
+  }
+
+  function catalogFactions() {
+    return typeof datosMinis !== 'undefined' && datosMinis && datosMinis.facciones ? datosMinis.facciones : [];
+  }
+
+  function catalogUnits(faction) {
+    const f = catalogFactions().find((x) => x.id === faction || x.nombre === faction);
+    return f ? f.unidades || [] : [];
+  }
+
+  function viewBands() {
+    if (!state.user) {
+      return shell(
+        'Mis Bandas',
+        'Crea y guarda tus bandas',
+        '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md"><p class="text-slate-300 mb-4">Necesitas una cuenta para guardar bandas.</p><button onclick="AW.go(\'app_account\')" class="' + btnPrimary + '">Iniciar sesión</button></div>'
+      );
+    }
+    if (state.editing) return viewBandEditor();
+
+    let cards = '';
+    if (!state.bandsLoaded) {
+      cards = '<p class="text-slate-500">Cargando bandas...</p>';
+    } else if (!state.bands.length) {
+      cards =
+        '<div class="bg-slate-900 border border-dashed border-slate-700 rounded-2xl p-8 text-center text-slate-400">Aún no tienes ninguna banda. Crea la primera.</div>';
+    } else {
+      cards =
+        '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
+        state.bands
+          .map((b) => {
+            const n = (b.units || []).length;
+            return (
+              '<article class="bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
+              '<div class="flex items-start justify-between gap-3"><h5 class="text-lg font-bold text-white">' + esc(b.name) + '</h5>' +
+              '<span class="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md font-semibold whitespace-nowrap">' + b.value + ' GP</span></div>' +
+              '<p class="text-sm text-slate-400 mt-1">' + (b.faction ? esc(b.faction) + ' · ' : '') + n + (n === 1 ? ' miniatura' : ' miniaturas') + '</p>' +
+              (b.notes ? '<p class="text-sm text-slate-500 mt-2 line-clamp-2">' + esc(b.notes) + '</p>' : '') +
+              '<div class="mt-4 flex gap-2">' +
+              '<button onclick="AW.editBand(\'' + b.id + '\')" class="' + btnGhost + '">Editar</button>' +
+              '<button onclick="AW.deleteBand(\'' + b.id + '\')" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm transition-colors">Borrar</button>' +
+              '</div></article>'
+            );
+          })
+          .join('') +
+        '</div>';
+    }
+
+    const inner =
+      '<div class="mb-6"><button onclick="AW.newBand()" class="' + btnPrimary + '">+ Nueva banda</button></div>' + cards;
+    return shell('Mis Bandas', 'Las bandas de tu perfil, listas para usar en partidas y campañas', inner);
+  }
+
+  function unitRow(u, i) {
+    return (
+      '<div class="grid grid-cols-12 gap-2 items-center">' +
+      '<input value="' + esc(u.nombre) + '" oninput="AW.setUnit(' + i + ',\'nombre\',this.value)" placeholder="Nombre" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">' +
+      '<select onchange="AW.setUnit(' + i + ',\'tipo\',this.value)" class="' + inputCls + ' col-span-6 sm:col-span-3">' +
+      TIPOS.map((t) => '<option value="' + t[0] + '"' + (u.tipo === t[0] ? ' selected' : '') + '>' + t[1] + '</option>').join('') +
+      '</select>' +
+      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" oninput="AW.setUnit(' + i + ',\'coste\',this.value)" placeholder="GP" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
+      '<button onclick="AW.removeUnit(' + i + ')" title="Quitar" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none">×</button>' +
+      '</div>'
+    );
+  }
+
+  function viewBandEditor() {
+    const e = state.editing;
+    const factions = catalogFactions();
+    const cat = catalogUnits(e.faction);
+
+    const inner =
+      '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5">' +
+      '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" oninput="AW.setField(\'name\',this.value)" maxlength="60" class="' + inputCls + '"></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label><input value="' + esc(e.faction) + '" onchange="AW.setField(\'faction\',this.value);AW.rerender()" maxlength="40" list="aw-factions" class="' + inputCls + '">' +
+      '<datalist id="aw-factions">' + factions.map((f) => '<option value="' + esc(f.nombre) + '">').join('') + '</datalist></div>' +
+      '</div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea oninput="AW.setField(\'notes\',this.value)" rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
+      '<div class="border-t border-slate-800 pt-5">' +
+      '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
+      '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP</span></div>' +
+      '<div class="space-y-2">' + e.units.map(unitRow).join('') + '</div>' +
+      '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
+      '<button onclick="AW.addUnit()" class="' + btnGhost + '">+ Añadir miniatura</button>' +
+      (cat.length
+        ? '<select onchange="AW.addFromCatalog(this.value);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
+          cat.map((u, i) => '<option value="' + i + '">' + esc(u.nombre) + ' (' + (Number(u.coste) || 0) + ' GP)</option>').join('') +
+          '</select>'
+        : '') +
+      '</div></div>' +
+      '<div class="pt-5 border-t border-slate-800 flex gap-3">' +
+      '<button onclick="AW.saveBand()" class="' + btnPrimary + '"' + (state.busy ? ' disabled' : '') + '>Guardar banda</button>' +
+      '<button onclick="AW.cancelEdit()" class="' + btnGhost + '">Cancelar</button></div>' +
+      '</div>';
+
+    return shell(e.id ? 'Editar banda' : 'Nueva banda', 'El valor total se calcula con el coste de cada línea', inner);
+  }
+
+  /* ----------------------------------------------------------------- acciones */
+  AW.setAuthMode = (mode) => {
+    state.authMode = mode;
+    state.msg = null;
+    renderApp();
+  };
+
+  AW.submitAuth = async (ev) => {
+    ev.preventDefault();
+    const f = new FormData(ev.target);
+    const email = String(f.get('email') || '').trim();
+    const password = String(f.get('password') || '');
+    const btn = ev.target.querySelector('button[type=submit]');
+    btn.disabled = true;
+    state.msg = null;
+
+    if (state.authMode === 'register') {
+      const name = String(f.get('name') || '').trim();
+      const { data, error } = await state.sb.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: name }, emailRedirectTo: redirectUrl() }
+      });
+      if (error) state.msg = { type: 'error', text: translateError(error) };
+      else if (!data.session)
+        state.msg = { type: 'ok', text: 'Cuenta creada. Te hemos enviado un correo para confirmarla.' };
+    } else {
+      const { error } = await state.sb.auth.signInWithPassword({ email, password });
+      if (error) state.msg = { type: 'error', text: translateError(error) };
+    }
+    btn.disabled = false;
+    if (!state.user) renderApp();
+  };
+
+  AW.google = async () => {
+    state.msg = null;
+    const { error } = await state.sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: redirectUrl() }
+    });
+    if (error) {
+      state.msg = { type: 'error', text: translateError(error) };
+      renderApp();
+    }
+  };
+
+  AW.forgot = async () => {
+    const email = prompt('Escribe el email de tu cuenta:');
+    if (!email) return;
+    const { error } = await state.sb.auth.resetPasswordForEmail(email.trim(), { redirectTo: redirectUrl() });
+    state.msg = error
+      ? { type: 'error', text: translateError(error) }
+      : { type: 'ok', text: 'Si el email existe, recibirás un enlace para cambiar la contraseña.' };
+    renderApp();
+  };
+
+  AW.setNewPassword = async (ev) => {
+    ev.preventDefault();
+    const password = String(new FormData(ev.target).get('password') || '');
+    const { error } = await state.sb.auth.updateUser({ password });
+    if (error) {
+      state.msg = { type: 'error', text: translateError(error) };
+    } else {
+      state.recovery = false;
+      state.msg = { type: 'ok', text: 'Contraseña actualizada.' };
+      toast('Contraseña actualizada');
+    }
+    renderApp();
+  };
+
+  AW.saveProfile = async (ev) => {
+    ev.preventDefault();
+    const name = String(new FormData(ev.target).get('name') || '').trim();
+    if (!name) return;
+    const { error } = await state.sb.from('profiles').update({ display_name: name }).eq('id', state.user.id);
+    if (error) {
+      toast(translateError(error), 'error');
+      return;
+    }
+    state.profile = Object.assign({}, state.profile, { display_name: name });
+    toast('Nombre guardado');
+    refresh();
+  };
+
+  AW.signOut = async () => {
+    await state.sb.auth.signOut();
+    state.msg = null;
+  };
+
+  /* bandas */
+  AW.newBand = () => {
+    state.editing = { id: null, name: '', faction: '', notes: '', units: [] };
+    renderApp();
+  };
+
+  AW.editBand = (id) => {
+    const b = state.bands.find((x) => x.id === id);
+    if (!b) return;
+    state.editing = {
+      id: b.id,
+      name: b.name,
+      faction: b.faction || '',
+      notes: b.notes || '',
+      units: JSON.parse(JSON.stringify(b.units || []))
+    };
+    renderApp();
+  };
+
+  AW.cancelEdit = () => {
+    state.editing = null;
+    renderApp();
+  };
+
+  AW.rerender = () => renderApp();
+
+  AW.setField = (k, v) => {
+    state.editing[k] = v;
+  };
+
+  AW.setUnit = (i, k, v) => {
+    state.editing.units[i][k] = k === 'coste' ? (v === '' ? '' : Math.max(0, Math.floor(Number(v) || 0))) : v;
+    const t = document.getElementById('aw-total');
+    if (t) t.textContent = totalOf(state.editing.units);
+  };
+
+  AW.addUnit = () => {
+    state.editing.units.push({ nombre: '', tipo: 'tropa', coste: 0 });
+    renderApp();
+  };
+
+  AW.addFromCatalog = (idx) => {
+    if (idx === '') return;
+    const u = catalogUnits(state.editing.faction)[Number(idx)];
+    if (!u) return;
+    state.editing.units.push({ id: u.id, nombre: u.nombre, tipo: u.tipo || 'tropa', coste: Number(u.coste) || 0 });
+    renderApp();
+  };
+
+  AW.removeUnit = (i) => {
+    state.editing.units.splice(i, 1);
+    renderApp();
+  };
+
+  AW.saveBand = async () => {
+    const e = state.editing;
+    const name = e.name.trim();
+    if (!name) return toast('Ponle un nombre a la banda', 'error');
+    if (e.units.some((u) => !String(u.nombre || '').trim()))
+      return toast('Todas las líneas necesitan nombre', 'error');
+
+    const units = e.units.map((u) =>
+      Object.assign({}, u, { nombre: String(u.nombre).trim(), coste: Math.max(0, Math.floor(Number(u.coste) || 0)) })
+    );
+    const payload = {
+      name,
+      faction: e.faction.trim() || null,
+      notes: e.notes.trim() || null,
+      units,
+      value: totalOf(units)
+    };
+
+    state.busy = true;
+    const q = e.id
+      ? state.sb.from('bands').update(payload).eq('id', e.id)
+      : state.sb.from('bands').insert(Object.assign({ owner_id: state.user.id }, payload));
+    const { error } = await q;
+    state.busy = false;
+
+    if (error) return toast('No se pudo guardar: ' + translateError(error), 'error');
+    toast('Banda guardada');
+    state.editing = null;
+    await loadBands();
+    renderApp();
+  };
+
+  AW.deleteBand = async (id) => {
+    const b = state.bands.find((x) => x.id === id);
+    if (!b || !confirm('¿Borrar la banda "' + b.name + '"? No se puede deshacer.')) return;
+    const { error } = await state.sb.from('bands').delete().eq('id', id);
+    if (error) return toast('No se pudo borrar: ' + translateError(error), 'error');
+    toast('Banda borrada');
+    await loadBands();
+    renderApp();
+  };
+
+  init();
+})();
