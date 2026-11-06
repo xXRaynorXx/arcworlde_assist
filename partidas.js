@@ -87,6 +87,87 @@
       .join('');
   }
 
+  /* ----------------------------------------------------------------- ArcDeck */
+  function arcEnv(id) {
+    if (typeof datosArcdeck === 'undefined') return null;
+    return datosArcdeck.entornos.find((e) => e.id === id) || datosArcdeck.entornos[0];
+  }
+  function envOptions(selected) {
+    if (typeof datosArcdeck === 'undefined') return '<option value="mildaark">Bosque de Mildaark</option>';
+    return datosArcdeck.entornos
+      .map((e) => '<option value="' + e.id + '"' + (e.id === selected ? ' selected' : '') + '>' + e.icono + ' ' + esc(e.nombre) + '</option>')
+      .join('');
+  }
+  // "7♥" -> { key: '7', rank: '7', suit: '♥' };  "A♠" -> key 'As';  joker -> key 'Joker'
+  function cardParts(code) {
+    if (code === '🃏') return { key: 'Joker', rank: '🃏', suit: '', red: false, joker: true };
+    const suit = code.slice(-1);
+    const rank = code.slice(0, -1);
+    return { key: rank === 'A' ? 'As' : rank, rank, suit, red: suit === '♥' || suit === '♦', joker: false };
+  }
+  function cardBox(code) {
+    const c = cardParts(code);
+    const color = c.joker ? 'text-amber-400' : c.red ? 'text-rose-400' : 'text-slate-100';
+    return (
+      '<div class="w-16 h-24 shrink-0 rounded-lg border-2 border-slate-600 bg-slate-950 flex flex-col items-center justify-center ' + color + '">' +
+      '<span class="text-3xl font-bold leading-none">' + esc(c.rank) + '</span>' +
+      (c.suit ? '<span class="text-2xl leading-none mt-1">' + c.suit + '</span>' : '') + '</div>'
+    );
+  }
+  function eventOf(env, code) {
+    const c = cardParts(code);
+    return env && env.cartas ? env.cartas[c.key] : null;
+  }
+
+  function arcdeckPanel(g) {
+    const env = arcEnv(g.arcdeck_env);
+    const round = g.round || 0;
+    const hist = (g.arcdeck_history || []).filter((h) => h.round < round).reverse();
+    const ev = g.arcdeck_card ? eventOf(env, g.arcdeck_card) : null;
+
+    let html =
+      '<section class="mb-6 bg-slate-900 border border-emerald-900/50 rounded-2xl overflow-hidden">' +
+      '<div class="px-5 py-3 bg-slate-800/50 border-b border-slate-800 flex items-center justify-between gap-3">' +
+      '<h3 class="text-lg font-bold text-white">🃏 Evento ArcDeck</h3>' +
+      '<span class="text-sm text-slate-400">' + (env ? env.icono + ' ' + esc(env.nombre) : '') + '</span></div><div class="p-5">';
+
+    if (g.arcdeck_card) {
+      html +=
+        '<div class="flex gap-4 items-start">' + cardBox(g.arcdeck_card) +
+        '<div><p class="text-xs uppercase tracking-wider text-emerald-400 font-semibold">Ronda ' + round + '</p>' +
+        '<p class="text-xl font-bold text-white mt-1">' + (ev ? esc(ev.nombre) : 'Evento sin descripción') + '</p>' +
+        (ev ? '<p class="text-slate-300 mt-1">' + esc(ev.texto) + '</p>' : '') + '</div></div>';
+    } else {
+      html += '<p class="text-slate-400">Todavía no se ha robado ningún evento.</p>';
+    }
+
+    if (g.status === 'active') {
+      html +=
+        '<div class="mt-5 pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">' +
+        '<button onclick="AW.g.nextRound()" class="' + btnPrimary + '"' + (gs.busyRound ? ' disabled' : '') + '>Final de ronda</button>' +
+        '<span class="text-sm text-slate-500">Se robará el evento de la ronda ' + (round + 1) + '.</span></div>';
+    }
+
+    if (hist.length) {
+      html +=
+        '<details class="mt-4 text-sm"><summary class="cursor-pointer text-slate-400 hover:text-white">Eventos anteriores (' + hist.length + ')</summary>' +
+        '<ul class="mt-2 space-y-1.5 text-slate-400">' +
+        hist
+          .map((h) => {
+            const e = eventOf(env, h.card);
+            const c = cardParts(h.card);
+            return (
+              '<li><span class="text-slate-500">Ronda ' + h.round + '</span> · <span class="' + (c.red ? 'text-rose-400' : c.joker ? 'text-amber-400' : 'text-slate-200') + ' font-semibold">' +
+              esc(h.card) + '</span> · <strong class="text-slate-200">' + (e ? esc(e.nombre) : '—') + '</strong>' +
+              (e ? ': ' + esc(e.texto) : '') + '</li>'
+            );
+          })
+          .join('') +
+        '</ul></details>';
+    }
+    return html + '</div></section>';
+  }
+
   /* ------------------------------------------------------------ tiempo real */
   function unsubscribe() {
     if (gs.channel) {
@@ -204,7 +285,8 @@
             return (
               '<article onclick="AW.g.open(\'' + g.id + '\')" class="cursor-pointer bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
               '<div class="flex items-start justify-between gap-3"><h5 class="text-lg font-bold text-white">' + esc(g.name) + '</h5>' + badge(g.status) + '</div>' +
-              '<p class="text-sm text-slate-400 mt-1">' + g.max_value + ' GP · ' + n + (n === 1 ? ' jugador' : ' jugadores') + '</p>' +
+              '<p class="text-sm text-slate-400 mt-1">' + g.max_value + ' GP · ' + n + '/' + (g.max_players || 2) + ' jugadores' +
+              (g.status === 'active' ? ' · ronda ' + (g.round || 0) : '') + '</p>' +
               '<p class="text-sm text-slate-500 mt-1">' + (sc ? esc(sc.nombre) : 'Escenario sin elegir') + '</p>' +
               '<p class="text-xs text-slate-600 mt-2">' + (mine ? 'Creada por ti' : 'Creada por ' + esc(g.owner ? g.owner.display_name : '—')) + '</p>' +
               '</article>'
@@ -229,8 +311,11 @@
       '<form onsubmit="AW.g.create(event)" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 max-w-xl">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la partida</label><input name="name" required maxlength="80" class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Valor máximo de banda (GP)</label><input name="max" type="number" min="1" step="1" value="500" required class="' + inputCls + '"></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Número de jugadores</label><input name="players" type="number" min="1" max="12" step="1" value="2" required class="' + inputCls + '">' +
+      '<p class="text-xs text-slate-500 mt-1">Con más de uno, cada jugador tendrá que dar su OK antes de empezar. Con uno es una partida en solitario.</p></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Escenario</label><select name="scenario" class="' + inputCls + '">' +
       '<option value="">Elegirlo más tarde</option><option value="random">🎲 Aleatorio</option>' + scenarioOptions('') + '</select></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Entorno del ArcDeck</label><select name="env" class="' + inputCls + '">' + envOptions('mildaark') + '</select></div>' +
       '<label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" name="plays" checked class="accent-emerald-500"> Yo también juego esta partida</label>' +
       '<div class="pt-2 flex gap-3"><button type="submit" class="' + btnPrimary + '">Crear partida</button>' +
       '<button type="button" onclick="AW.g.back()" class="' + btnGhost + '">Cancelar</button></div></form>';
@@ -271,6 +356,19 @@
     );
   }
 
+  // OK del jugador: solo cuando la partida es de varios y ya tiene banda elegida
+  function readyBlock(g, p) {
+    if (g.max_players <= 1) return '';
+    if (p.ready) {
+      return (
+        '<div class="mt-3 flex flex-wrap items-center gap-3"><span class="text-sm text-emerald-400">✅ Has dado tu OK. Esperando al resto.</span>' +
+        '<button onclick="AW.g.setReady(false)" class="' + btnGhost + '">Quitar mi OK</button></div>'
+      );
+    }
+    if (!p.band_id) return '<p class="mt-3 text-xs text-slate-500">Elige una banda para poder dar tu OK.</p>';
+    return '<div class="mt-3"><button onclick="AW.g.setReady(true)" class="' + btnPrimary + '">OK, estoy listo</button></div>';
+  }
+
   function viewDetail() {
     const g = gs.current;
     const back = '<button onclick="AW.g.back()" class="text-sm text-slate-400 hover:text-white mb-4">← Todas las partidas</button>';
@@ -289,6 +387,7 @@
     html +=
       '<div class="flex flex-wrap items-center gap-3 mb-6">' + badge(g.status) +
       '<span class="text-amber-400 font-semibold">' + g.max_value + ' GP</span>' +
+      '<span class="text-slate-300" title="Jugadores apuntados / total">👥 ' + players.length + '/' + g.max_players + '</span>' +
       '<span class="text-sm text-slate-500">Creada por ' + (isOwner ? 'ti' : esc(g.owner ? g.owner.display_name : '—')) + '</span>' +
       '<button onclick="AW.g.refresh()" class="' + btnGhost + ' ml-auto">↻ Actualizar</button></div>';
 
@@ -299,6 +398,22 @@
         '<div class="mb-6 p-4 rounded-xl border border-amber-700/40 bg-amber-950/20 text-amber-200">🏆 ' +
         (names.length ? (names.length > 1 ? 'Empate entre ' : 'Ganador: ') + '<strong>' + esc(names.join(', ')) + '</strong>' : 'Partida terminada sin ganador declarado') +
         '</div>';
+    }
+
+    /* ArcDeck: aparece al empezar la partida y queda el historial al terminar */
+    if (g.status !== 'draft') html += arcdeckPanel(g);
+
+    /* ajustes (creador, en preparación) */
+    if (isOwner && g.status === 'draft') {
+      html +=
+        '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-3">Ajustes</h3>' +
+        '<div class="flex flex-wrap gap-4 items-end">' +
+        '<div><label class="block text-xs text-slate-400 mb-1">Número de jugadores</label><input type="number" min="1" max="12" step="1" value="' + g.max_players + '" onchange="AW.g.setPlayers(this.value)" class="' + inputCls + ' w-28"></div>' +
+        '<div><label class="block text-xs text-slate-400 mb-1">Entorno del ArcDeck</label><select onchange="AW.g.setEnv(this.value)" class="' + inputCls + ' sm:w-auto">' + envOptions(g.arcdeck_env) + '</select></div>' +
+        '</div></section>';
+    } else if (g.status === 'draft') {
+      const env = arcEnv(g.arcdeck_env);
+      html += '<p class="mb-6 text-sm text-slate-500">Entorno del ArcDeck: ' + (env ? env.icono + ' ' + esc(env.nombre) : '—') + '</p>';
     }
 
     /* invitación */
@@ -322,7 +437,7 @@
     html += '</section>';
 
     /* jugadores */
-    html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Jugadores (' + players.length + ')</h3><div class="space-y-3">';
+    html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Jugadores (' + players.length + '/' + g.max_players + ')</h3><div class="space-y-3">';
     if (!players.length) html += '<p class="text-slate-500">Todavía no se ha apuntado nadie.</p>';
     players.forEach((p) => {
       const isMe = p.user_id === me;
@@ -334,6 +449,11 @@
         (p.user_id === g.owner_id ? ' <span class="text-xs text-slate-500 font-normal">creador</span>' : '') + '</h4>' +
         '<div class="flex items-center gap-3 text-sm">';
 
+      if (g.status === 'draft' && g.max_players > 1) {
+        html += p.ready
+          ? '<span class="text-xs font-semibold text-emerald-400">✅ Listo</span>'
+          : '<span class="text-xs text-slate-500">⏳ Sin OK</span>';
+      }
       if (isOwner && editable) {
         html += '<input value="' + esc(p.side || '') + '" onchange="AW.g.setSide(\'' + p.user_id + '\',this.value)" maxlength="30" placeholder="Bando / equipo" class="' + inputCls + ' w-36">';
       } else if (p.side) {
@@ -346,7 +466,7 @@
       }
       html += '</div></div><div class="mt-3">' + bandSummary(p) + '</div>';
 
-      if (isMe && g.status === 'draft') html += bandPicker(g, p);
+      if (isMe && g.status === 'draft') html += bandPicker(g, p) + readyBlock(g, p);
       html += '</article>';
     });
     html += '</div>';
@@ -359,12 +479,18 @@
     /* acciones */
     html += '<section class="pt-4 border-t border-slate-800 flex flex-wrap gap-3 items-center">';
     if (isOwner && g.status === 'draft') {
-      const missing = players.filter((p) => !p.band_id).map(playerName);
-      const ready = players.length > 0 && !missing.length;
+      const need = [];
+      if (players.length < g.max_players) need.push('faltan jugadores (' + players.length + ' de ' + g.max_players + ')');
+      const noBand = players.filter((p) => !p.band_id).map(playerName);
+      if (noBand.length) need.push('falta banda de ' + noBand.join(', '));
+      if (g.max_players > 1) {
+        const noOk = players.filter((p) => p.band_id && !p.ready).map(playerName);
+        if (noOk.length) need.push('falta el OK de ' + noOk.join(', '));
+      }
+      const ready = players.length > 0 && !need.length;
       html +=
         '<button onclick="AW.g.start()" class="' + btnPrimary + '"' + (ready ? '' : ' disabled') + '>Empezar partida</button>' +
-        '<span class="text-sm text-slate-500">' +
-        (!players.length ? 'Falta al menos un jugador.' : missing.length ? 'Falta banda de: ' + esc(missing.join(', ')) : 'Todos listos.') + '</span>';
+        '<span class="text-sm text-slate-500">' + (ready ? 'Todo listo.' : 'Pendiente: ' + esc(need.join(' · '))) + '</span>';
     }
     if (isOwner && g.status === 'active') {
       if (!gs.finishing) {
@@ -463,7 +589,10 @@
     const name = String(f.get('name') || '').trim();
     const max = Math.floor(Number(f.get('max')) || 0);
     const sc = String(f.get('scenario') || '');
+    const players = Math.floor(Number(f.get('players')) || 0);
+    const env = String(f.get('env') || 'mildaark');
     if (!name || max < 1) return toast('Revisa el nombre y el valor máximo', 'error');
+    if (players < 1 || players > 12) return toast('El número de jugadores debe estar entre 1 y 12', 'error');
 
     const { data, error } = await state.sb
       .from('games')
@@ -471,6 +600,8 @@
         owner_id: state.user.id,
         name,
         max_value: max,
+        max_players: players,
+        arcdeck_env: env,
         scenario_mode: sc === 'random' ? 'random' : 'chosen',
         scenario_id: sc === 'random' ? randomScenarioId() : sc || null
       })
@@ -541,7 +672,36 @@
     return run(state.sb.from('games').update({ scenario_id: id, scenario_mode: 'random' }).eq('id', gs.currentId), 'Escenario sorteado');
   };
 
+  G.setReady = (value) =>
+    run(
+      state.sb.from('game_players').update({ ready: !!value }).eq('game_id', gs.currentId).eq('user_id', state.user.id),
+      value ? 'Has dado tu OK' : null
+    );
+
+  G.setPlayers = (value) => {
+    const n = Math.floor(Number(value) || 0);
+    if (n < 1 || n > 12) {
+      toast('El número de jugadores debe estar entre 1 y 12', 'error');
+      return run(Promise.resolve({}), null);
+    }
+    return run(state.sb.from('games').update({ max_players: n }).eq('id', gs.currentId), null);
+  };
+
+  G.setEnv = (value) => run(state.sb.from('games').update({ arcdeck_env: value }).eq('id', gs.currentId), null);
+
   G.start = () => run(state.sb.rpc('start_game', { p_game: gs.currentId }), '¡Que empiece la partida!');
+
+  // Final de ronda: roba el siguiente evento. Se manda la ronda que ve este jugador para que dos
+  // pulsaciones a la vez no salten una ronda.
+  G.nextRound = async () => {
+    const g = gs.current;
+    if (!g || gs.busyRound) return;
+    gs.busyRound = true;
+    rerender(true);
+    await run(state.sb.rpc('next_round', { p_game: g.id, p_from_round: g.round || 0 }), null);
+    gs.busyRound = false;
+    rerender(true);
+  };
 
   G.finishOpen = () => {
     gs.finishing = true;
