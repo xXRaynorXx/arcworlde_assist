@@ -79,7 +79,7 @@ window.addEventListener('load', async () => {
     const S = AWGear.find('comun', 'shield').coste;
     await AW.c.editBand(); await wait(100);
     ok('editor de banda de campaña', txt().includes('Gestionar banda') && txt().includes('Día Normal') && txt().includes('Sin cambios todavía'));
-    ok('sin selector de facción editable', document.querySelector('input[list=aw-factions]').disabled);
+    ok('sin selector de facción editable', document.querySelector('select[onchange^="AW.setField(\'faction\'"]').disabled);
     AW.addGear(0, 'comun:shield'); await wait(40);
     ok('resumen: gasta ' + S + ' GP', txt().includes('Gastas ' + S + ' GP') && txt().includes('Fondo tras guardar: ' + (150 - S) + ' GP'), txt().match(/Gastas.{0,80}/));
     await AW.saveBand(); await wait(200);

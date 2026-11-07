@@ -77,6 +77,25 @@ window.addEventListener('load', async () => {
     AW.setField('faction', 'Magos'); AW.rerender(); await wait(20);
     const sw = document.querySelector('select[onchange^="AW.addGear(0"]');
     ok('Magos: armería propia', sw && [...sw.querySelectorAll('optgroup')].some(g => g.label.startsWith('Magos —')), sw && [...sw.querySelectorAll('optgroup')].map(g => g.label).join('|'));
+    // facción como selector y comandante con perfil
+    AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
+    const fsel = document.querySelector('select[onchange^="AW.setField(\'faction\'"]');
+    ok('facción: es un selector con las 11 facciones del catálogo', fsel && [...fsel.options].filter(o => o.value).length === datosMinis.facciones.length, fsel && fsel.options.length);
+    ok('sin facción: avisa de que hace falta elegirla', txt().includes('Elige una facción para ver su catálogo'));
+    fsel.value = 'Halflings'; fsel.dispatchEvent(new Event('change')); await wait(40);
+    ok('facción: al elegirla sale el catálogo y el bloque Comandante', AW.api.state.editing.faction === 'Halflings' && !!document.querySelector('select[onchange^="AW.addFromCatalog"]') && txt().includes('Comandante'));
+    ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[onchange^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
+    const csel = document.querySelector('select[onchange^="AW.setCommander"]');
+    ok('comandante: selector con el perfil de la facción', csel && [...csel.options].some(o => /Sheriff/.test(o.textContent)), csel && [...csel.options].map(o => o.textContent).join('|'));
+    const sIdx = datosMinis.facciones.find(f => f.id === 'halfling').unidades.findIndex(u => u.id === 'sheriff');
+    AW.setCommander(String(sIdx)); await wait(30);
+    ok('comandante: se añade el primero con su ficha (atributos y rasgos)', AW.api.state.editing.units[0].id === 'sheriff' && AW.api.state.editing.units[0].tipo === 'comandante' && txt().includes('Make Orders'));
+    AW.addGear(0, 'comun:shield'); await wait(20);
+    AW.addFromCatalog(String(datosMinis.facciones[0].unidades.findIndex(u => u.id === 'halfling_militia'))); await wait(20);
+    AW.setCommander(String(sIdx)); await wait(20);
+    ok('comandante: cambiarlo no duplica y conserva el equipo válido', AW.api.state.editing.units.filter(u => u.tipo === 'comandante').length === 1 && AW.api.state.editing.units[0].equipo.length === 1 && AW.api.state.editing.units.length === 2);
+    AW.setCommander(''); await wait(20);
+    ok('comandante: se puede quitar', !AW.api.state.editing.units.some(u => u.tipo === 'comandante') && AW.api.state.editing.units.length === 1);
     // compendio v2
     currentSectionId = 'factions'; renderSidebar(); renderContent(); await wait(40);
     const tt = document.body.textContent;
