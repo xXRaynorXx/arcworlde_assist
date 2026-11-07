@@ -498,6 +498,49 @@
     );
   }
 
+  // "Vida 10 · Mov 4 · Arm 1 · AP 4" de una unidad del catálogo
+  function statLine(c) {
+    const s = (c && c.stats) || {};
+    return 'Vida ' + (s.hp != null ? s.hp : '-') + ' · Mov ' + (s.mov != null ? s.mov : '-') +
+      ' · Arm ' + (s.armadura != null ? s.armadura : '-') + ' · AP ' + (s.ap != null ? s.ap : '-');
+  }
+
+  // Selector de facción (antes era un campo de texto con sugerencias que no se veía bien).
+  // Si la banda tiene una facción escrita a mano que no está en el catálogo, se conserva como opción.
+  function factionSelect(current, factions, locked) {
+    const known = factions.some((f) => f.nombre === current);
+    const lc = String(current || '').toLowerCase();
+    const resolved = factions.find((f) => f.id === lc || String(f.nombre).toLowerCase() === lc);
+    const value = known ? current : resolved ? resolved.nombre : current;
+    return (
+      '<select onchange="AW.setField(\'faction\',this.value);AW.rerender()"' + (locked ? ' disabled' : '') + ' class="' + inputCls + '">' +
+      '<option value=""' + (value ? '' : ' selected') + '>Elige facción...</option>' +
+      factions.map((f) => '<option value="' + esc(f.nombre) + '"' + (f.nombre === value ? ' selected' : '') + '>' + esc(f.nombre) + '</option>').join('') +
+      (value && !factions.some((f) => f.nombre === value) ? '<option value="' + esc(value) + '" selected>' + esc(value) + ' (sin catálogo)</option>' : '') +
+      '</select>'
+    );
+  }
+
+  // Comandante de la banda: se elige entre los perfiles de la facción y se ve su ficha completa
+  // (atributos, ataques, rasgos y equipo de serie). Su equipo se compra en la fila de la miniatura.
+  function commanderBlock(e, cat) {
+    const cmds = cat.map((c, i) => [c, i]).filter((p) => p[0].tipo === 'comandante');
+    if (!cmds.length) return '';
+    const cur = e.units.find((u) => u.tipo === 'comandante');
+    const sel = cur && cur.id ? cmds.find((p) => p[0].id === cur.id) : null;
+    return (
+      '<div class="border-t border-slate-800 pt-5">' +
+      '<h4 class="text-lg font-bold text-white mb-1">Comandante</h4>' +
+      '<p class="text-xs text-slate-500 mb-3">Elige el perfil de comandante de la facción. Su equipo lo añades abajo, en su fila de miniatura.</p>' +
+      '<select onchange="AW.setCommander(this.value)" class="' + inputCls + ' sm:w-auto">' +
+      '<option value="">' + (cur && !sel ? 'Comandante personalizado' : 'Sin comandante') + '</option>' +
+      cmds.map((p) => '<option value="' + p[1] + '"' + (sel && sel[1] === p[1] ? ' selected' : '') + '>' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP · ' + statLine(p[0]) + ')</option>').join('') +
+      '</select>' +
+      (cur && AW.sheet ? '<div class="mt-3">' + AW.sheet.unitBlock(cur, { faction: e.faction }) + '</div>' : '') +
+      '</div>'
+    );
+  }
+
   function viewBandEditor() {
     const e = state.editing;
     const ctx = state.bandContext;
@@ -508,10 +551,10 @@
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5">' +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" oninput="AW.setField(\'name\',this.value)" maxlength="60" class="' + inputCls + '"></div>' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label><input value="' + esc(e.faction) + '" onchange="AW.setField(\'faction\',this.value);AW.rerender()" maxlength="40" list="aw-factions"' + (ctx && ctx.lockFaction ? ' disabled' : '') + ' class="' + inputCls + '">' +
-      '<datalist id="aw-factions">' + factions.map((f) => '<option value="' + esc(f.nombre) + '">').join('') + '</datalist></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label>' + factionSelect(e.faction, factions, ctx && ctx.lockFaction) + '</div>' +
       '</div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea oninput="AW.setField(\'notes\',this.value)" rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
+      commanderBlock(e, cat) +
       '<div class="border-t border-slate-800 pt-5">' +
       '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
       '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP' +
@@ -526,14 +569,14 @@
             const opts = cat
               .map((u, i) => [u, i])
               .filter((p) => p[0].tipo === t[0])
-              .map((p) => '<option value="' + p[1] + '">' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP)</option>')
+              .map((p) => '<option value="' + p[1] + '">' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP · ' + statLine(p[0]) + ')</option>')
               .join('');
             return opts ? '<optgroup label="' + t[1] + '">' + opts + '</optgroup>' : '';
           }).join('') +
           '</select>'
         : e.faction && factions.length
           ? '<span class="text-xs text-slate-500">No hay catálogo para "' + esc(e.faction) + '": añade las miniaturas a mano.</span>'
-          : '') +
+          : '<span class="text-xs text-slate-500">Elige una facción para ver su catálogo de miniaturas.</span>') +
       '</div>' +
       '<div id="aw-issues">' + issuesHtml() + '</div></div>' +
       '<div class="pt-5 border-t border-slate-800 flex gap-3">' +
@@ -747,6 +790,27 @@
     const u = catalogUnits(state.editing.faction)[Number(idx)];
     if (!u) return;
     state.editing.units.push({ id: u.id, nombre: u.nombre, tipo: u.tipo || 'tropa', coste: Number(u.coste) || 0 });
+    renderApp();
+  };
+
+  // Pone o cambia el comandante (siempre el primero de la banda). Conserva el equipo que siga siendo válido.
+  AW.setCommander = (idx) => {
+    const units = state.editing.units;
+    const at = units.findIndex((u) => u.tipo === 'comandante');
+    if (idx === '') {
+      if (at >= 0) units.splice(at, 1);
+      return renderApp();
+    }
+    const c = catalogUnits(state.editing.faction)[Number(idx)];
+    if (!c) return;
+    const unit = { id: c.id, nombre: c.nombre, tipo: 'comandante', coste: Number(c.coste) || 0 };
+    const old = at >= 0 ? units.splice(at, 1)[0] : null;
+    unit.equipo = [];
+    ((old && old.equipo) || []).forEach((g) => {
+      const d = window.AWGear && AWGear.find(g.origen, g.id, state.editing.faction);
+      if (d && !armourBlocked(unit, d, g.origen)) unit.equipo.push({ id: g.id, origen: g.origen, nombre: g.nombre, coste: gearPrice(unit, d, g.origen) });
+    });
+    units.unshift(unit);
     renderApp();
   };
 
