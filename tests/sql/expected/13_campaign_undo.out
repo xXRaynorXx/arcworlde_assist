@@ -1,0 +1,20 @@
+== deshacer misión 2 con tirada de comerciante (debe fallar)
+psql:7: ERROR:  En esta misión ya hay tiradas, compras o gastos de PV: no se puede deshacer
+CONTEXT:  PL/pgSQL function campaign_undo_chapter(uuid) line 24 at RAISE
+ campaign_undo_chapter 
+-----------------------
+ 
+(1 row)
+   t    | chapter | juegos 
+--------+---------+--------
+ estado |       1 |      1
+(1 row)
+         t          |       injuries        
+--------------------+-----------------------
+ lesiones devueltas | {"1": ["ojo_morado"]}
+(1 row)
+== traspaso a quien no está (falla), traspaso a mismo (falla)
+psql:17: ERROR:  Ese jugador no está en la campaña
+CONTEXT:  PL/pgSQL function campaign_transfer_owner(uuid,uuid) line 16 at RAISE
+psql:18: ERROR:  Ya eres el creador
+CONTEXT:  PL/pgSQL function campaign_transfer_owner(uuid,uuid) line 13 at RAISE

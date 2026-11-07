@@ -1,0 +1,24 @@
+name: Pruebas
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  base-de-datos:
+    name: Migraciones y reglas de la base de datos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar PostgreSQL
+        run: sudo apt-get update && sudo apt-get install -y postgresql
+      - name: Aplicar migraciones y ejecutar tests/sql
+        run: tests/run_sql.sh
+
+  web:
+    name: Web en Chrome (Supabase simulado)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ejecutar tests/web
+        run: tests/web/run.sh

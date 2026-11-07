@@ -1,0 +1,69 @@
+== sin PV (debe fallar)
+psql:7: ERROR:  No tienes PV suficientes (0 disponibles)
+CONTEXT:  PL/pgSQL function campaign_buy_trait(uuid,integer,text,integer,integer) line 32 at RAISE
+== lesion manual en borrador: cojera en miniatura 0
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+                        roster                         
+-------------------------------------------------------
+ {"0": {"ko": true, "lesiones": ["herido", "cojera"]}}
+(1 row)
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+                   roster                    
+---------------------------------------------
+ {"0": {"ko": true, "lesiones": ["herido"]}}
+(1 row)
+== con 7 PV: N2 sin N1 (falla), N1 ok (queda 4), N2 coste 6 (falla), N1 otra vez (falla)
+psql:18: ERROR:  Debes comprar los niveles en orden (ahora toca el nivel 1)
+CONTEXT:  PL/pgSQL function campaign_buy_trait(uuid,integer,text,integer,integer) line 28 at RAISE
+ quedan 
+--------
+      4
+(1 row)
+psql:20: ERROR:  No tienes PV suficientes (4 disponibles)
+CONTEXT:  PL/pgSQL function campaign_buy_trait(uuid,integer,text,integer,integer) line 32 at RAISE
+psql:21: ERROR:  Debes comprar los niveles en orden (ahora toca el nivel 2)
+CONTEXT:  PL/pgSQL function campaign_buy_trait(uuid,integer,text,integer,integer) line 28 at RAISE
+psql:22: ERROR:  Esa miniatura no existe
+CONTEXT:  PL/pgSQL function campaign_buy_trait(uuid,integer,text,integer,integer) line 21 at RAISE
+          r           
+----------------------
+ {"fleet_of_foot": 1}
+(1 row)
+== lesion tras batalla
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+       injuries        
+-----------------------
+ {"0": ["ojo_morado"]}
+(1 row)
+== directo al log (falla)
+psql:28: ERROR:  permission denied for table campaign_vp_log
+== siguiente misión: el rasgo y la lesion pasan; update_band conserva rasgos
+                      roster                      |          r           
+--------------------------------------------------+----------------------
+ {"0": {"ko": false, "lesiones": ["ojo_morado"]}} | {"fleet_of_foot": 1}
+(1 row)
+ ?column? 
+----------
+ t
+(1 row)
+ campaign_update_band 
+----------------------
+                  160
+(1 row)
+ jsonb_path_query_array 
+------------------------
+ [{"fleet_of_foot": 1}]
+(1 row)
+  t  |     trait     | level | cost 
+-----+---------------+-------+------
+ log | fleet_of_foot |     1 |    3
+(1 row)
