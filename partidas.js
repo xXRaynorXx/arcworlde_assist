@@ -528,10 +528,10 @@
 
   /* ----------------------------------------------------------------- acciones */
   async function run(promise, okMsg) {
-    const { error } = await promise;
+    const { error } = await AWUtil.busy(promise);
     if (error) toast(translateError(error), 'error');
     else if (okMsg) toast(okMsg);
-    if (gs.currentId) await loadGame(gs.currentId);
+    if (gs.currentId) await AWUtil.busy(loadGame(gs.currentId));
     rerender(true);
     return !error;
   }
@@ -565,6 +565,9 @@
     subscribe(id);
     rerender();
   };
+
+  G.where = () => ({ view: gs.view, id: gs.view === 'detail' ? gs.currentId : null });
+  G.reset = resetState;
 
   G.back = () => {
     unsubscribe();
@@ -819,7 +822,7 @@
   };
 
   G.leave = async () => {
-    if (!confirm('¿Salir de esta partida?')) return;
+    if (!(await AWUtil.confirm('¿Salir de esta partida?', { yes: 'Salir' }))) return;
     const { error } = await state.sb.from('game_players').delete().eq('game_id', gs.currentId).eq('user_id', state.user.id);
     if (error) return toast(translateError(error), 'error');
     toast('Has salido de la partida');
@@ -828,7 +831,7 @@
 
   G.remove = async () => {
     const g = gs.current;
-    if (!g || !confirm('¿Borrar la partida "' + g.name + '" para todos los jugadores? No se puede deshacer.')) return;
+    if (!g || !(await AWUtil.confirm('¿Borrar la partida "' + g.name + '" para todos los jugadores? No se puede deshacer.', { danger: true, yes: 'Borrar' }))) return;
     const { error } = await state.sb.from('games').delete().eq('id', g.id);
     if (error) return toast(translateError(error), 'error');
     toast('Partida borrada');

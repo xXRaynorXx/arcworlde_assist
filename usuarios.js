@@ -38,8 +38,7 @@
   };
 
   /* ------------------------------------------------------------------ utils */
-  const esc = (s) =>
-    String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const esc = AWUtil.esc;
 
   const isApp = (id) => typeof id === 'string' && id.indexOf('app_') === 0;
   const redirectUrl = () => location.origin + location.pathname;
@@ -47,17 +46,7 @@
     (state.profile && state.profile.display_name) ||
     (state.user && state.user.email ? state.user.email.split('@')[0] : '');
 
-  function toast(text, type) {
-    const el = document.createElement('div');
-    el.className =
-      'fixed bottom-6 right-6 z-[60] px-4 py-3 rounded-xl text-sm font-medium shadow-2xl border ' +
-      (type === 'error'
-        ? 'bg-rose-950 text-rose-200 border-rose-800'
-        : 'bg-emerald-950 text-emerald-200 border-emerald-800');
-    el.textContent = text;
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 3500);
-  }
+  const toast = AWUtil.toast;
 
   function translateError(err) {
     const m = (err && err.message) || String(err || '');
@@ -674,6 +663,7 @@
       notes: data.notes || '',
       units: (JSON.parse(JSON.stringify(data.units || []))).map((u, i) => Object.assign(u, { _o: i }))
     };
+    state.editing._init = JSON.stringify(state.editing.units);
     currentSectionId = 'app_bands';
     window.renderSidebar();
     renderApp();
@@ -692,8 +682,11 @@
     renderApp();
   };
 
-  AW.cancelEdit = () => {
+  AW.cancelEdit = async () => {
     const ctx = state.bandContext;
+    if (ctx && ctx.save && state.editing && state.editing._init !== JSON.stringify(state.editing.units)) {
+      if (!(await AWUtil.confirm('Tienes cambios sin guardar en la banda. ¿Descartarlos?', { danger: true, yes: 'Descartar', no: 'Seguir editando' }))) return;
+    }
     state.editing = null;
     state.bandContext = null;
     if (ctx && ctx.onCancel) return ctx.onCancel();
@@ -827,7 +820,7 @@
 
   AW.deleteBand = async (id) => {
     const b = state.bands.find((x) => x.id === id);
-    if (!b || !confirm('¿Borrar la banda "' + b.name + '"? No se puede deshacer.')) return;
+    if (!b || !(await AWUtil.confirm('¿Borrar la banda "' + b.name + '"? No se puede deshacer.', { danger: true, yes: 'Borrar' }))) return;
     const { error } = await state.sb.from('bands').delete().eq('id', id);
     if (error) return toast('No se pudo borrar: ' + translateError(error), 'error');
     toast('Banda borrada');

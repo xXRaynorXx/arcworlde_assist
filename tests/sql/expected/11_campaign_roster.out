@@ -1,0 +1,20 @@
+ ?column? 
+----------
+ t
+(1 row)
+ set_config 
+------------
+ 1
+(1 row)
+ set_config 
+------------
+ 
+(1 row)
+ campaign_update_band 
+----------------------
+                  170
+(1 row)
+                   roster                    
+---------------------------------------------
+ {"0": {"ko": true, "lesiones": ["herido"]}}
+(1 row)

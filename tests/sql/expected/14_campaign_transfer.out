@@ -1,0 +1,18 @@
+ b_dentro 
+----------
+ t
+(1 row)
+== B no es el creador: no puede traspasar
+psql:10: ERROR:  Solo el creador puede traspasar la campaña
+CONTEXT:  PL/pgSQL function campaign_transfer_owner(uuid,uuid) line 7 at RAISE
+ campaign_transfer_owner 
+-------------------------
+ 
+(1 row)
+         t          | es_b 
+--------------------+------
+ creador ahora es B | t
+(1 row)
+== A ya no puede empezar la campaña
+psql:17: ERROR:  Solo el creador puede empezar la campaña
+CONTEXT:  PL/pgSQL function campaign_start(uuid) line 10 at RAISE

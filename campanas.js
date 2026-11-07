@@ -18,7 +18,9 @@
     games: [], // partidas (misiones) de la campaña
     rolls: [],
     ledger: [],
+    vplog: [],
     finishing: false,
+    tab: 'mision', // mision | jugadores | caja | historial | ajustes
     userId: null,
     pendingCode: null,
     channel: null
@@ -54,13 +56,14 @@
   }
 
   async function loadOne(id) {
-    const [c, g, r, l] = await Promise.all([
+    const [c, g, r, l, v] = await Promise.all([
       state.sb.from('campaigns').select(SEL_ONE).eq('id', id).maybeSingle(),
       state.sb.from('games').select(SEL_GAMES).eq('campaign_id', id).order('position', { ascending: true }),
       state.sb.from('campaign_rolls').select('*').eq('campaign_id', id).order('id', { ascending: true }),
-      state.sb.from('campaign_ledger').select('*').eq('campaign_id', id).order('id', { ascending: true })
+      state.sb.from('campaign_ledger').select('*').eq('campaign_id', id).order('id', { ascending: true }),
+      state.sb.from('campaign_vp_log').select('*').eq('campaign_id', id).order('id', { ascending: true })
     ]);
-    const err = c.error || g.error || r.error || l.error;
+    const err = c.error || g.error || r.error || l.error || v.error;
     if (err) {
       toast('No se pudo cargar la campaña: ' + translateError(err), 'error');
       return null;
@@ -70,6 +73,7 @@
       cs.games = g.data || [];
       cs.rolls = r.data || [];
       cs.ledger = l.data || [];
+      cs.vplog = v.data || [];
     }
     return c.data;
   }
@@ -110,7 +114,12 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_rolls', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_ledger', filter: 'campaign_id=eq.' + id }, soft)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'games', filter: 'campaign_id=eq.' + id }, soft)
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'game_players' }, soft)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'campaign_vp_log', filter: 'campaign_id=eq.' + id }, soft)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'game_players' }, (pl) => {
+          // game_players no se puede filtrar por campaña: solo se recarga si es una partida de esta campaña
+          const gid = (pl.new && pl.new.game_id) || (pl.old && pl.old.game_id);
+          if (!gid || cs.games.some((g) => g.id === gid)) soft();
+        })
         .subscribe();
     } catch (e) {
       cs.channel = null;
@@ -125,6 +134,7 @@
     cs.games = [];
     cs.rolls = [];
     cs.ledger = [];
+    cs.vplog = [];
     cs.id = null;
     cs.view = 'list';
     cs.finishing = false;
@@ -158,8 +168,8 @@
   };
   const badge = (s) =>
     '<span class="text-xs border px-2 py-0.5 rounded-md font-semibold whitespace-nowrap ' + STATUS[s][1] + '">' + STATUS[s][0] + '</span>';
-  const pname = (p) => (p && p.profiles && p.profiles.display_name) || 'Jugador';
-  const gpFmt = (n) => (Number(n) || 0) + ' GP';
+  const pname = AWUtil.pname;
+  const gpFmt = AWUtil.gpFmt;
 
   function viewCampaigns() {
     if (!state.user) {
@@ -268,7 +278,7 @@
 
   function step(n, title, done, inner, open) {
     return (
-      '<details class="bg-slate-950 border ' + (done ? 'border-emerald-900/60' : 'border-slate-800/60') + ' rounded-xl"' + (open ? ' open' : '') + '>' +
+      '<details id="cstep-' + n + '" class="bg-slate-950 border ' + (done ? 'border-emerald-900/60' : 'border-slate-800/60') + ' rounded-xl"' + (open ? ' open' : '') + '>' +
       '<summary class="cursor-pointer px-4 py-3 flex items-center gap-3 text-white font-semibold"><span class="w-6 h-6 rounded-full text-xs flex items-center justify-center ' +
       (done ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300') + '">' + (done ? '✓' : n) + '</span>' + title + '</summary>' +
       '<div class="px-4 pb-4 pt-1">' + inner + '</div></details>'
@@ -280,7 +290,7 @@
     const r = rollsOf(n, 'merchant').find((x) => x.user_id === state.user.id);
     return r ? T().humor_comerciante[r.result.humor] || null : null;
   }
-  const pct = (n) => (n > 0 ? '+' : '') + n + '%';
+  const pct = AWUtil.pct;
 
   // Cuánto cuestan los cambios respecto a la banda anterior, con los precios del comerciante de este jugador
   function bandChange(orig, units, humor) {
@@ -318,6 +328,48 @@
       (o.equipo || []).forEach((g) => gearSell(g, o.nombre));
     });
     return { spend, refund, net: spend - refund, lines };
+  }
+
+  // PV: ganados en misiones terminadas menos los gastados en rasgos
+  function vpBalance(uid) {
+    let earned = 0;
+    cs.games.filter((g) => g.status === 'finished').forEach((g) => {
+      const x = (g.game_players || []).find((y) => y.user_id === uid);
+      if (x) earned += Number(x.vp) || 0;
+    });
+    const spent = cs.vplog.filter((l) => l.user_id === uid).reduce((t, l) => t + l.cost, 0);
+    return { earned, spent, left: earned - spent };
+  }
+  const LESIONES = ['herido', 'cojera', 'golpe_cabeza', 'ojo_morado', 'brazo_cabestrillo'];
+
+  // Panel del paso 3: gastar PV en rasgos de campaña y gestionar lesiones de cada miniatura
+  function spoilsPanel(snap, rosterOf, vp) {
+    const traits = window.AWTraits ? AWTraits.list() : [];
+    const t = T();
+    const units = (snap && snap.units) || [];
+    if (!units.length) return '';
+    let h = '<div class="mt-4 p-3 rounded-lg bg-slate-900 border border-slate-800"><p class="text-sm font-semibold text-white">⭐ Puntos de victoria y secuelas</p>' +
+      '<p class="text-sm text-slate-300 mt-1">PV disponibles: <strong class="text-amber-400">' + vp.left + '</strong> <span class="text-slate-500">(ganados ' + vp.earned + ' − gastados ' + vp.spent + ')</span></p>' +
+      '<p class="text-xs text-slate-500 mb-2">Compra niveles de habilidades de campaña para tus miniaturas (en orden: N1, N2...) y ajusta sus lesiones. Los PV se anotan en el paso 4 de cada misión (el MVP suma sus D3 PV a mano).</p><div class="space-y-2">';
+    units.forEach((u, i) => {
+      const rc = u.rasgos_campana || {};
+      const les = ((rosterOf && rosterOf[i] && rosterOf[i].lesiones) || []).filter((x) => LESIONES.indexOf(x) >= 0);
+      const opts = traits.map((tr) => {
+        const next = (Number(rc[tr.id]) || 0) + 1;
+        const lv = tr.niveles.find((x) => x.n === next);
+        if (!lv) return '';
+        return '<option value="' + tr.id + '"' + (lv.coste > vp.left ? ' disabled' : '') + '>' + esc(tr.nombre) + ' N' + next + ' · ' + lv.coste + ' VP</option>';
+      }).join('');
+      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(u.nombre) + '</p>' +
+        '<div class="flex flex-wrap gap-1.5 mt-1.5">' +
+        Object.keys(rc).map((id) => { const tr = window.AWTraits && AWTraits.find(id); const lv = tr && tr.niveles.find((x) => x.n === rc[id]); return '<span title="' + esc(lv ? lv.texto : '') + '" class="text-xs px-2 py-0.5 rounded-md border bg-amber-500/10 border-amber-500/30 text-amber-300">⭐ ' + esc(tr ? tr.nombre : id) + ' N' + rc[id] + '</span>'; }).join('') +
+        les.map((id) => '<span class="text-xs px-2 py-0.5 rounded-md border bg-rose-950/40 border-rose-800/50 text-rose-200">🤕 ' + esc((t.lesiones[id] || {}).nombre || id) + ' <button onclick="AW.c.setInjury(' + i + ',\'' + id + '\',false)" title="Quitar" aria-label="Quitar lesión" class="ml-1 px-1.5 py-0.5 text-rose-300 hover:text-white">×</button></span>').join('') +
+        '</div><div class="flex flex-wrap gap-2 mt-2">' +
+        '<select onchange="AW.c.buyTrait(' + i + ',this.value);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Comprar habilidad con PV…</option>' + opts + '</select>' +
+        '<select onchange="AW.c.setInjury(' + i + ',this.value,true);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Añadir lesión…</option>' +
+        LESIONES.filter((id) => les.indexOf(id) < 0).map((id) => '<option value="' + id + '">' + esc((t.lesiones[id] || {}).nombre || id) + '</option>').join('') + '</select></div></div>';
+    });
+    return h + '</div></div>';
   }
 
   function eventsOf(g) {
@@ -375,6 +427,8 @@
           ? '<div class="mt-3 p-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300">Tu comerciante: <strong class="text-amber-300">' + esc(hum.nombre) + '</strong> · compras ' + pct(hum.compra) + ', ventas ' + pct(hum.venta) +
             '<div class="mt-2"><button onclick="AW.c.editBand()" class="' + btnPrimary + ' !py-1.5 text-sm">🛒 Comprar / vender y gestionar mi banda</button></div></div>'
           : '<p class="mt-3 text-sm text-amber-300">Tira antes al comerciante (paso 2) para poder comprar y vender.</p>';
+        const myGp = gp.find((x) => x.user_id === me);
+        prep += spoilsPanel(mineP.band_snapshot, myGp && myGp.roster, vpBalance(me));
         prep += '<p class="text-xs text-slate-500 mt-2">Lo que compres se descuenta de tu fondo y lo que vendas se suma. Al cambiar tu banda tendrás que volver a dar tu OK en la partida.</p>';
       } else {
         prep += '<p class="text-xs text-slate-500 mt-2">La partida ya ha empezado: la banda queda cerrada hasta la próxima misión.</p>';
@@ -493,6 +547,82 @@
     return html + '</section>';
   }
 
+  // Barra "qué toca ahora": dice el siguiente paso y deja pulsarlo (o muestra a quién se espera)
+  function nextStep(c, players) {
+    if (c.status !== 'active') return '';
+    const n = c.chapter;
+    const g = gameOf(n);
+    if (!g) return '';
+    const me = state.user.id;
+    const isOwner = c.owner_id === me;
+    const gp = g.game_players || [];
+    const mineGp = gp.find((x) => x.user_id === me);
+    const act = (label, fn) => '<button onclick="' + fn + '" class="' + btnPrimary + '">' + label + '</button>';
+    const goto = (label, st) => act(label, 'AW.c.goStep(' + st + ')');
+    const open = act('Abrir la partida →', "AW.c.openGame('" + g.id + "')");
+    const without = (kind) => players.filter((p) => !rollsOf(n, kind).some((r) => r.user_id === p.user_id));
+    const names = (l) => l.map(pname).join(', ');
+    let title = '', text = '', btn = '';
+
+    if (g.status === 'draft') {
+      const noMerchant = without('merchant');
+      const waiting = gp.filter((x) => !x.ready);
+      if (!g.scenario_id) {
+        title = isOwner ? 'Elige el escenario' : 'Esperando el escenario';
+        text = isOwner ? 'Elígelo del desplegable o sortéalo.' : 'Lo elige el creador de la campaña.';
+        btn = isOwner ? goto('Ir al escenario', 1) : '';
+      } else if (noMerchant.some((p) => p.user_id === me)) {
+        title = 'Tira al comerciante ambulante';
+        text = 'Su humor fija tus precios de compra y venta.';
+        btn = act('🎲 Tirar 1D6', "AW.c.roll('merchant')");
+      } else if (mineGp && !mineGp.ready) {
+        title = 'Prepara tu banda y da tu OK';
+        text = 'Compra y vende, gasta PV y ajusta lesiones; cuando estés listo, da tu OK en la partida.';
+        btn = goto('Preparar la banda', 3) + ' ' + open;
+      } else if (waiting.length) {
+        title = 'Esperando el OK de ' + names(waiting);
+        text = noMerchant.length ? 'Faltan tiradas del comerciante: ' + names(noMerchant) + '.' : 'Cuando todos den su OK, el creador empieza la partida.';
+        btn = open;
+      } else {
+        title = isOwner ? 'Todo listo: empieza la partida' : 'Todo listo: el creador empieza la partida';
+        btn = open;
+      }
+    } else if (g.status === 'active') {
+      const mine = rollsOf(n, 'round_event').some((r) => r.user_id === me && r.unit_index === g.round);
+      title = 'Partida en curso · ronda ' + (g.round || 0);
+      text = 'Anota tus PV y roba tu evento de final de ronda cuando toque.';
+      btn = ((g.round || 0) >= 1 && !mine && mineGp ? act('🃏 Evento de final de ronda ' + g.round, "AW.c.roll('round_event')") + ' ' : '') + goto('Mis PV y eventos', 4) + ' ' + open;
+    } else {
+      const koIdx = (x) => Object.keys(x.roster || {}).filter((k) => x.roster[k] && x.roster[k].ko).map(Number);
+      const myPendInj = mineGp ? koIdx(mineGp).filter((i) => !rollsOf(n, 'injury').some((r) => r.user_id === me && r.unit_index === i)).length : 0;
+      const advLeft = n < c.num_missions ? without('adventure') : [];
+      const injLeft = gp.filter((x) => koIdx(x).some((i) => !rollsOf(n, 'injury').some((r) => r.user_id === x.user_id && r.unit_index === i)));
+      if (myPendInj) {
+        title = 'Tira las lesiones de tus noqueados';
+        text = 'Te faltan ' + myPendInj + ' tirada' + (myPendInj > 1 ? 's' : '') + '.';
+        btn = goto('Ir a las lesiones', 5);
+      } else if (advLeft.some((p) => p.user_id === me)) {
+        title = 'Tira tu aventura entre partidas';
+        text = '2D6 + 1D6; todos verán el resultado.';
+        btn = goto('Ir a la aventura', 6);
+      } else if (injLeft.length || advLeft.length) {
+        title = 'Esperando a ' + names([].concat(injLeft.map((x) => ({ profiles: x.profiles })), advLeft).filter((p, k, a) => a.findIndex((q) => pname(q) === pname(p)) === k));
+        text = 'Faltan tiradas de lesiones o aventuras.';
+      } else if (isOwner) {
+        title = n < c.num_missions ? 'Todo hecho: pasa a la misión ' + (n + 1) : 'Todo hecho: cierra la campaña';
+        text = 'Si quieres, antes compra rasgos con PV o ajusta bandas en la siguiente misión.';
+      } else {
+        title = 'Todo hecho: espera al creador';
+        text = (n < c.num_missions ? 'El creador debe pasar a la misión ' + (n + 1) : 'El creador debe cerrar la campaña') + '.';
+      }
+    }
+    return '<div class="mb-4 p-4 rounded-2xl border border-emerald-700/50 bg-emerald-950/20" role="status">' +
+      '<p class="text-xs uppercase tracking-wider text-emerald-400 font-semibold">Siguiente paso</p>' +
+      '<p class="text-white font-bold mt-0.5">' + esc(title) + '</p>' +
+      (text ? '<p class="text-sm text-slate-300 mt-0.5">' + esc(text) + '</p>' : '') +
+      (btn ? '<div class="mt-3 flex flex-wrap gap-2">' + btn + '</div>' : '') + '</div>';
+  }
+
   function viewDetail() {
     const c = cs.camp;
     const back = '<button onclick="AW.c.back()" class="text-sm text-slate-400 hover:text-white mb-4">← Todas las campañas</button>';
@@ -531,72 +661,105 @@
     }
 
     /* jugadores y bandas */
-    html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Jugadores (' + players.length + ')</h3><div class="space-y-3">';
-    if (!players.length) html += '<p class="text-slate-500">Todavía no se ha apuntado nadie.</p>';
+    let playersHtml = '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Jugadores (' + players.length + ')</h3><div class="space-y-3">';
+    if (!players.length) playersHtml += '<p class="text-slate-500">Todavía no se ha apuntado nadie.</p>';
     players.forEach((p) => {
       const b = p.band_snapshot;
-      html +=
+      playersHtml +=
         '<article class="bg-slate-950 rounded-xl p-5 border border-slate-800/60"><div class="flex flex-wrap items-center justify-between gap-3">' +
         '<h4 class="text-base font-bold text-white">' + esc(pname(p)) + (p.user_id === me ? ' <span class="text-xs text-emerald-400 font-normal">(tú)</span>' : '') +
         (p.user_id === c.owner_id ? ' <span class="text-xs text-slate-500 font-normal">creador</span>' : '') + '</h4>' +
         '<span class="text-amber-400 font-bold">' + gpFmt(p.gold) + '</span></div>' +
         '<div class="mt-3">' + (b
-          ? '<details class="text-sm"><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' + (b.faction ? ' · ' + esc(b.faction) : '') + ' · <span class="text-amber-400">' + b.value + ' GP</span></summary><div class="mt-3">' +
+          ? '<details class="text-sm"><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' + (b.faction ? ' · ' + esc(b.faction) : '') + ' · <span class="text-slate-400">' + (Number(b.value) || 0) + ' GP</span></summary><div class="mt-3 space-y-2">' +
             (AW.sheet ? AW.sheet.bandSheet(b.units || [], null, { faction: b.faction }) : '') + '</div></details>'
           : '<p class="text-sm text-slate-500 italic">Aún no ha elegido banda</p>') + '</div>';
-      if (p.user_id === me && c.status === 'draft') html += bandPicker(c, p);
-      html += '</article>';
+      if (p.user_id === me && c.status === 'draft') playersHtml += bandPicker(c, p);
+      playersHtml += '</article>';
     });
-    html += '</div></section>';
+    playersHtml += '</div></section>';
 
     /* clasificación */
+    let standHtml = '';
     if (c.status !== 'draft' && cs.games.some((g) => g.status === 'finished')) {
-      html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Clasificación</h3><div class="bg-slate-950 border border-slate-800/60 rounded-xl overflow-hidden"><table class="w-full text-sm"><thead class="text-slate-500 text-left"><tr><th class="px-4 py-2">Jugador</th><th class="px-4 py-2">Victorias</th><th class="px-4 py-2">PV</th></tr></thead><tbody>' +
-        standings(players).map((s, i) => '<tr class="border-t border-slate-800/60"><td class="px-4 py-2 text-slate-200">' + (i === 0 ? '🥇 ' : '') + esc(s.name) + '</td><td class="px-4 py-2 text-slate-300">' + s.wins + '</td><td class="px-4 py-2 text-amber-400">' + s.vp + '</td></tr>').join('') +
+      standHtml = '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Clasificación</h3><div class="bg-slate-950 border border-slate-800/60 rounded-xl overflow-hidden"><table class="w-full text-sm"><thead class="text-slate-400 text-left"><tr><th class="px-4 py-2">Jugador</th><th class="px-4 py-2">Victorias</th><th class="px-4 py-2">PV</th></tr></thead><tbody>' +
+        standings(players).map((x, k) => '<tr class="border-t border-slate-800/60"><td class="px-4 py-2 text-slate-200">' + (k === 0 ? '🥇 ' : '') + esc(x.name) + '</td><td class="px-4 py-2 text-slate-300">' + x.wins + '</td><td class="px-4 py-2 text-slate-300">' + x.vp + '</td></tr>').join('') +
         '</tbody></table></div></section>';
     }
 
-    /* fondo */
-    if (c.status !== 'draft') html += goldSection(c, players);
-
-    /* capítulos */
-    if (c.status !== 'draft') {
-      html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Misiones</h3>';
-      for (let n = c.num_missions; n >= 1; n--) html += chapterCard(c, n, players);
-      html += '</section>';
-    }
-
-    /* acciones del creador */
-    html += '<section class="pt-4 border-t border-slate-800 flex flex-wrap gap-3 items-center">';
+    /* acciones del creador sobre el avance de la campaña */
+    let actions = '';
     if (isOwner && c.status === 'draft') {
       const need = [];
       if (!players.length) need.push('faltan jugadores');
       const noBand = players.filter((p) => !p.band_id).map(pname);
       if (noBand.length) need.push('falta banda de ' + noBand.join(', '));
-      html += '<button onclick="AW.c.start()" class="' + btnPrimary + '"' + (need.length ? ' disabled' : '') + '>Empezar campaña</button>' +
+      actions += '<button onclick="AW.c.start()" class="' + btnPrimary + '"' + (need.length ? ' disabled' : '') + '>Empezar campaña</button>' +
         '<span class="text-sm text-slate-500">' + (need.length ? 'Pendiente: ' + esc(need.join(' · ')) : 'Todo listo. Se creará la misión 1.') + '</span>';
     }
     if (isOwner && c.status === 'active') {
       const g = gameOf(c.chapter);
       const done = g && g.status === 'finished';
       if (c.chapter < c.num_missions) {
-        html += '<button onclick="AW.c.nextChapter()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Pasar a la misión ' + (c.chapter + 1) + '</button>' +
+        actions += '<button onclick="AW.c.nextChapter()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Pasar a la misión ' + (c.chapter + 1) + '</button>' +
           '<span class="text-sm text-slate-500">' + (done ? 'Cuando todos hayan hecho sus tiradas.' : 'Termina antes la partida de la misión ' + c.chapter + '.') + '</span>';
       } else if (!cs.finishing) {
-        html += '<button onclick="AW.c.finishOpen()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Cerrar campaña</button>' +
+        actions += '<button onclick="AW.c.finishOpen()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Cerrar campaña</button>' +
           '<span class="text-sm text-slate-500">' + (done ? 'Es la última misión.' : 'Termina antes la última partida.') + '</span>';
       } else {
         const st = standings(players);
-        html += '<div class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm text-slate-300 mb-3">¿Quién gana la campaña? (marca varios si hay empate)</p><div class="space-y-1 mb-4">' +
-          st.map((s, i) => '<label class="flex items-center gap-2 text-slate-200"><input type="checkbox" class="aw-cwin accent-amber-500" value="' + s.user_id + '"' + (i === 0 ? ' checked' : '') + '> ' + esc(s.name) + ' <span class="text-slate-500">(' + s.wins + ' victorias, ' + s.vp + ' PV)</span></label>').join('') +
+        actions += '<div class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm text-slate-300 mb-3">¿Quién gana la campaña? (marca varios si hay empate)</p><div class="space-y-2 mb-4">' +
+          st.map((x, k) => '<label class="flex items-center gap-2 text-slate-200"><input type="checkbox" class="aw-cwin accent-amber-500" value="' + x.user_id + '"' + (k === 0 ? ' checked' : '') + '> ' + esc(x.name) + ' <span class="text-xs text-slate-500">(' + x.wins + ' victorias · ' + x.vp + ' PV)</span></label>').join('') +
           '</div><div class="flex gap-3"><button onclick="AW.c.finishConfirm()" class="' + btnPrimary + '">Confirmar y cerrar</button><button onclick="AW.c.finishCancel()" class="' + btnGhost + '">Cancelar</button></div></div>';
       }
     }
-    if (!isOwner && mine && c.status === 'draft') {
-      html += '<button onclick="AW.c.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>';
+    const actionsHtml = actions ? '<section class="pt-4 mt-2 border-t border-slate-800 flex flex-wrap gap-3 items-center">' + actions + '</section>' : '';
+
+    /* ajustes */
+    let settingsHtml = '<section class="space-y-4"><h3 class="text-lg font-bold text-white">Ajustes de la campaña</h3>';
+    if (isOwner && c.status !== 'finished' && players.length > 1) {
+      settingsHtml += '<div class="bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm font-semibold text-white mb-1">Traspasar el mando</p>' +
+        '<p class="text-xs text-slate-500 mb-3">El nuevo creador elige escenario, empieza y cierra las partidas, pasa de misión y cierra la campaña.</p>' +
+        '<div class="flex flex-wrap gap-2"><select id="aw-transfer" class="' + inputCls + ' sm:w-auto">' +
+        players.filter((p) => p.user_id !== me).map((p) => '<option value="' + p.user_id + '">' + esc(pname(p)) + '</option>').join('') + '</select>' +
+        '<button onclick="AW.c.transfer()" class="' + btnGhost + '">Traspasar</button></div></div>';
     }
-    if (isOwner) html += '<button onclick="AW.c.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar campaña</button>';
-    html += '</section>';
+    if (isOwner && c.status === 'active' && c.chapter > 1) {
+      const g = gameOf(c.chapter);
+      const fresh = g && g.status === 'draft' && !cs.rolls.some((r) => r.chapter === c.chapter) && !cs.ledger.some((l) => l.chapter === c.chapter) && !cs.vplog.some((l) => l.chapter === c.chapter);
+      settingsHtml += '<div class="bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm font-semibold text-white mb-1">Deshacer el paso a la misión ' + c.chapter + '</p>' +
+        '<p class="text-xs text-slate-500 mb-3">' + (fresh ? 'Vuelve a la misión ' + (c.chapter - 1) + ' (las lesiones vuelven a su sitio).' : 'Solo se puede mientras la partida no haya empezado y nadie haya hecho tiradas, compras ni gastos de PV en esta misión.') + '</p>' +
+        '<button onclick="AW.c.undoChapter()" class="' + btnGhost + '"' + (fresh ? '' : ' disabled') + '>Deshacer</button></div>';
+    }
+    settingsHtml += '<div class="flex flex-wrap gap-3 items-center">';
+    if (!isOwner && mine && c.status === 'draft') settingsHtml += '<button onclick="AW.c.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>';
+    if (isOwner) settingsHtml += '<button onclick="AW.c.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Borrar campaña</button>';
+    settingsHtml += '</div></section>';
+
+    if (c.status === 'draft') {
+      html += playersHtml + actionsHtml + '<section class="pt-4 mt-2 border-t border-slate-800 flex flex-wrap gap-3">' +
+        (!isOwner && mine ? '<button onclick="AW.c.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>' : '') +
+        (isOwner ? '<button onclick="AW.c.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar campaña</button>' : '') + '</section>';
+      return shell(esc(c.name), 'Campaña', html);
+    }
+
+    /* campaña en marcha o terminada: pestañas */
+    const TABS = [['mision', c.status === 'finished' ? 'Última misión' : 'Misión actual'], ['jugadores', 'Jugadores'], ['caja', 'Fondo'], ['historial', 'Misiones anteriores'], ['ajustes', 'Ajustes']];
+    if (TABS.every((t) => t[0] !== cs.tab)) cs.tab = 'mision';
+    html += '<div role="tablist" aria-label="Secciones de la campaña" class="flex gap-1 overflow-x-auto mb-5 border-b border-slate-800">' +
+      TABS.map((t) => '<button role="tab" id="ctab-' + t[0] + '" aria-selected="' + (cs.tab === t[0]) + '" onclick="AW.c.tab(\'' + t[0] + '\')" class="shrink-0 px-4 py-2 text-sm font-semibold border-b-2 -mb-px ' +
+        (cs.tab === t[0] ? 'border-emerald-500 text-white' : 'border-transparent text-slate-400 hover:text-white') + '">' + t[1] + '</button>').join('') + '</div>';
+    html += '<div role="tabpanel" aria-labelledby="ctab-' + cs.tab + '">';
+    if (cs.tab === 'mision') {
+      html += nextStep(c, players) + (c.chapter >= 1 ? chapterCard(c, c.chapter, players) : '') + actionsHtml;
+    } else if (cs.tab === 'jugadores') html += standHtml + playersHtml;
+    else if (cs.tab === 'caja') html += goldSection(c, players);
+    else if (cs.tab === 'historial') {
+      let any = false;
+      for (let n = c.chapter - 1; n >= 1; n--) { any = true; html += chapterCard(c, n, players); }
+      if (!any) html += '<p class="text-slate-500">Todavía no hay misiones anteriores.</p>';
+    } else html += settingsHtml;
+    html += '</div>';
 
     return shell(esc(c.name), 'Campaña', html);
   }
@@ -622,10 +785,10 @@
 
   /* ----------------------------------------------------------------- acciones */
   async function run(promise, okMsg) {
-    const { data, error } = await promise;
+    const { data, error } = await AWUtil.busy(promise);
     if (error) toast(translateError(error), 'error');
     else if (okMsg) toast(okMsg);
-    if (cs.id) await loadOne(cs.id);
+    if (cs.id) await AWUtil.busy(loadOne(cs.id));
     rerender(true);
     return error ? null : data === undefined ? {} : data;
   }
@@ -651,6 +814,8 @@
     cs.games = [];
     cs.rolls = [];
     cs.ledger = [];
+    cs.vplog = [];
+    cs.tab = 'mision';
     currentSectionId = SEC;
     window.renderSidebar();
     rerender();
@@ -665,6 +830,8 @@
     subscribe(id);
     rerender();
   };
+
+  C.where = () => ({ view: cs.view, id: cs.view === 'detail' ? cs.id : null });
 
   C.back = () => {
     unsubscribe();
@@ -747,7 +914,47 @@
   };
 
   C.start = () => run(state.sb.rpc('campaign_start', { p_campaign: cs.id }), '¡Empieza la campaña!');
-  C.nextChapter = () => run(state.sb.rpc('campaign_next_chapter', { p_campaign: cs.id }), 'Nueva misión creada');
+  C.nextChapter = async () => {
+    const n = cs.camp ? cs.camp.chapter + 1 : '';
+    if (!(await AWUtil.confirm('¿Pasar a la misión ' + n + '? Se creará su partida con las bandas y lesiones actuales.', { yes: 'Pasar de misión' }))) return;
+    await run(state.sb.rpc('campaign_next_chapter', { p_campaign: cs.id }), 'Nueva misión creada');
+    cs.tab = 'mision';
+    rerender();
+  };
+
+  C.tab = (t) => {
+    cs.tab = t;
+    rerender();
+  };
+
+  // Lleva a un paso de la misión actual (lo abre y se desplaza hasta él)
+  C.goStep = (n) => {
+    cs.tab = 'mision';
+    rerender(true);
+    setTimeout(() => {
+      const el = document.getElementById('cstep-' + n);
+      if (!el) return;
+      el.open = true;
+      if (el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 30);
+  };
+
+  C.transfer = async () => {
+    const sel = document.getElementById('aw-transfer');
+    const p = sel && (cs.camp.campaign_players || []).find((x) => x.user_id === sel.value);
+    if (!p) return;
+    if (!(await AWUtil.confirm('¿Traspasar el mando de la campaña a ' + pname(p) + '? Dejarás de poder gestionarla.', { yes: 'Traspasar' }))) return;
+    await run(state.sb.rpc('campaign_transfer_owner', { p_campaign: cs.id, p_user: p.user_id }), 'Mando traspasado a ' + pname(p));
+    cs.tab = 'mision';
+    rerender();
+  };
+
+  C.undoChapter = async () => {
+    if (!(await AWUtil.confirm('¿Deshacer el paso a la misión ' + (cs.camp ? cs.camp.chapter : '') + '? Se borrará su partida y volverás a la anterior.', { danger: true, yes: 'Deshacer' }))) return;
+    await run(state.sb.rpc('campaign_undo_chapter', { p_campaign: cs.id }), 'Misión deshecha');
+    cs.tab = 'mision';
+    rerender();
+  };
 
   C.roll = async (kind, unit) => {
     const r = await run(state.sb.rpc('campaign_roll', { p_campaign: cs.id, p_kind: kind, p_unit: unit == null ? null : unit }), null);
@@ -761,6 +968,24 @@
     const g = cs.games.find((x) => x.position === cs.camp.chapter);
     if (!g || !AW.g.randomScenarioId) return;
     return run(state.sb.from('games').update({ scenario_id: AW.g.randomScenarioId(g.scenario_id), scenario_mode: 'random' }).eq('id', g.id), 'Escenario sorteado');
+  };
+
+  C.buyTrait = async (unit, traitId) => {
+    if (!traitId) return;
+    const me = mineOf();
+    const tr = window.AWTraits && AWTraits.find(traitId);
+    const u = me && me.band_snapshot && me.band_snapshot.units[unit];
+    if (!tr || !u) return;
+    const next = ((u.rasgos_campana || {})[traitId] || 0) + 1;
+    const lv = tr.niveles.find((x) => x.n === next);
+    if (!lv) return toast('Ya tiene el nivel máximo', 'error');
+    if (!(await AWUtil.confirm('¿Comprar ' + tr.nombre + ' N' + next + ' para ' + u.nombre + ' por ' + lv.coste + ' PV?\n' + lv.texto, { yes: 'Comprar' }))) return rerender(true);
+    return run(state.sb.rpc('campaign_buy_trait', { p_campaign: cs.id, p_unit: unit, p_trait: traitId, p_level: next, p_cost: lv.coste }), tr.nombre + ' N' + next + ' comprado');
+  };
+
+  C.setInjury = (unit, injury, add) => {
+    if (!injury) return;
+    return run(state.sb.rpc('campaign_set_injury', { p_campaign: cs.id, p_unit: unit, p_injury: injury, p_add: !!add }), null);
   };
 
   C.setVp = (gid, v) => run(state.sb.rpc('campaign_set_vp', { p_game: gid, p_vp: Math.max(0, Math.floor(Number(v) || 0)) }), null);
@@ -852,7 +1077,7 @@
   };
 
   C.leave = async () => {
-    if (!confirm('¿Salir de la campaña?')) return;
+    if (!(await AWUtil.confirm('¿Salir de la campaña?', { yes: 'Salir' }))) return;
     const { error } = await state.sb.from('campaign_players').delete().eq('campaign_id', cs.id).eq('user_id', state.user.id);
     if (error) return toast(translateError(error), 'error');
     toast('Has salido de la campaña');
@@ -861,7 +1086,7 @@
 
   C.remove = async () => {
     const c = cs.camp;
-    if (!c || !confirm('¿Borrar la campaña "' + c.name + '" con todas sus misiones? No se puede deshacer.')) return;
+    if (!c || !(await AWUtil.confirm('¿Borrar la campaña "' + c.name + '" con todas sus misiones? No se puede deshacer.', { danger: true, yes: 'Borrar' }))) return;
     const { error } = await state.sb.from('campaigns').delete().eq('id', c.id);
     if (error) return toast('No se pudo borrar: ' + translateError(error), 'error');
     toast('Campaña borrada');
