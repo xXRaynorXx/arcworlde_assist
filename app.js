@@ -1,7 +1,6 @@
 // Lógica del compendio: menú, búsqueda, tarjetas y modales. Extraído de index.html.
 function construirSeccionesFacciones() {
-    const FIX = { wizard: 'wizards' }; // id mal escrito en los datos
-    const fid = (x) => FIX[x.faccion_id] || x.faccion_id;
+    const fid = (x) => x.faccion_id;
     const esSerie = (r) => /^Equipo de Serie/i.test(r.etiqueta || '');
     const orden = [];
     const nombres = {};
