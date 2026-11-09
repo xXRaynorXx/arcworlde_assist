@@ -298,6 +298,8 @@
     return typeof datosMinis !== 'undefined' && datosMinis && datosMinis.facciones ? datosMinis.facciones : [];
   }
 
+  const catalogUnitOf = (u) => (AW.sheet && AW.sheet.catalogUnit ? AW.sheet.catalogUnit(u.id) : null);
+
   function catalogUnits(faction) {
     const f = catalogFactions().find((x) => x.id === faction || x.nombre === faction);
     return f ? f.unidades || [] : [];
@@ -487,12 +489,16 @@
   function unitRow(u, i) {
     return (
       '<div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 border border-slate-800/60 rounded-xl p-2">' +
-      '<input value="' + esc(u.nombre) + '" oninput="AW.setUnit(' + i + ',\'nombre\',this.value)" placeholder="Nombre" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">' +
+      // Perfil (Sheriff, Vampiro...): fijo si viene del catálogo; editable solo en miniaturas propias
+      (u.id && catalogUnitOf(u)
+        ? '<div class="col-span-12 sm:col-span-5 text-sm font-semibold text-slate-100 px-1" title="Perfil del catálogo">' + esc(u.nombre) + '</div>'
+        : '<input value="' + esc(u.nombre) + '" oninput="AW.setUnit(' + i + ',\'nombre\',this.value)" placeholder="Perfil / nombre de la miniatura" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">') +
       '<select onchange="AW.setUnit(' + i + ',\'tipo\',this.value)" class="' + inputCls + ' col-span-6 sm:col-span-3">' +
       TIPOS.map((t) => '<option value="' + t[0] + '"' + (u.tipo === t[0] ? ' selected' : '') + '>' + t[1] + '</option>').join('') +
       '</select>' +
       '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" oninput="AW.setUnit(' + i + ',\'coste\',this.value)" placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
-      '<button onclick="AW.removeUnit(' + i + ')" title="Quitar" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none">×</button>' +
+      '<button onclick="AW.removeUnit(' + i + ')" title="Quitar" aria-label="Quitar miniatura" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
+      '<input value="' + esc(u.apodo || '') + '" oninput="AW.setUnit(' + i + ',\'apodo\',this.value)" placeholder="Nombre propio (opcional), p. ej. Bilbo" aria-label="Nombre propio de la miniatura" maxlength="40" class="' + inputCls + ' col-span-12">' +
       gearBlock(u, i) +
       '</div>'
     );
@@ -829,6 +835,7 @@
     const units = e.units.map((u) =>
       Object.assign({}, u, {
         nombre: String(u.nombre).trim(),
+        apodo: String(u.apodo || '').trim().slice(0, 40) || undefined,
         coste: Math.max(0, Math.floor(Number(u.coste) || 0)),
         equipo: (u.equipo || []).map((g) => ({
           id: String(g.id),

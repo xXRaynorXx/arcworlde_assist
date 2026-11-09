@@ -104,7 +104,13 @@
 
   const pname = (p) => (p && p.profiles && p.profiles.display_name) || 'Jugador';
   const gpFmt = (n) => (Number(n) || 0) + ' GP';
+  // Nombre de una miniatura: "Bilbo (Sheriff)" si tiene nombre propio, o solo el del perfil
+  const unitName = (u) => {
+    if (!u) return '';
+    const a = String(u.apodo || '').trim();
+    return a ? a + ' (' + (u.nombre || '') + ')' : String(u.nombre || '');
+  };
   const pct = (n) => (n > 0 ? '+' : '') + n + '%';
 
-  window.AWUtil = { esc, toast, confirm: confirmDialog, busy, pname, gpFmt, pct };
+  window.AWUtil = { esc, toast, confirm: confirmDialog, busy, pname, gpFmt, pct, unitName };
 })();

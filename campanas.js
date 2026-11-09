@@ -309,23 +309,23 @@
         used[u._o] = true;
         const oldG = o.equipo || [];
         const dc = (Number(u.coste) || 0) - (Number(o.coste) || 0);
-        if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
-        else if (dc < 0) { refund += -dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
-        gear.filter((g) => !oldG.some((x) => key(x) === key(g))).forEach((g) => gearBuy(g, u.nombre));
-        oldG.filter((g) => !gear.some((x) => key(x) === key(g))).forEach((g) => gearSell(g, u.nombre));
+        if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: AWUtil.unitName(u), c: dc }); }
+        else if (dc < 0) { refund += -dc; lines.push({ t: 'Ajuste', n: AWUtil.unitName(u), c: dc }); }
+        gear.filter((g) => !oldG.some((x) => key(x) === key(g))).forEach((g) => gearBuy(g, AWUtil.unitName(u)));
+        oldG.filter((g) => !gear.some((x) => key(x) === key(g))).forEach((g) => gearSell(g, AWUtil.unitName(u)));
       } else {
         const c = Number(u.coste) || 0;
         spend += c;
-        lines.push({ t: 'Fichaje', n: u.nombre, c });
-        gear.forEach((g) => gearBuy(g, u.nombre));
+        lines.push({ t: 'Fichaje', n: AWUtil.unitName(u), c });
+        gear.forEach((g) => gearBuy(g, AWUtil.unitName(u)));
       }
     });
     orig.forEach((o, i) => {
       if (used[i]) return;
       const c = Number(o.coste) || 0;
       refund += c;
-      lines.push({ t: 'Baja', n: o.nombre, c });
-      (o.equipo || []).forEach((g) => gearSell(g, o.nombre));
+      lines.push({ t: 'Baja', n: AWUtil.unitName(o), c });
+      (o.equipo || []).forEach((g) => gearSell(g, AWUtil.unitName(o)));
     });
     return { spend, refund, net: spend - refund, lines };
   }
@@ -360,7 +360,7 @@
         if (!lv) return '';
         return '<option value="' + tr.id + '"' + (lv.coste > vp.left ? ' disabled' : '') + '>' + esc(tr.nombre) + ' N' + next + ' · ' + lv.coste + ' VP</option>';
       }).join('');
-      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(u.nombre) + '</p>' +
+      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(AWUtil.unitName(u)) + '</p>' +
         '<div class="flex flex-wrap gap-1.5 mt-1.5">' +
         Object.keys(rc).map((id) => { const tr = window.AWTraits && AWTraits.find(id); const lv = tr && tr.niveles.find((x) => x.n === rc[id]); return '<span title="' + esc(lv ? lv.texto : '') + '" class="text-xs px-2 py-0.5 rounded-md border bg-amber-500/10 border-amber-500/30 text-amber-300">⭐ ' + esc(tr ? tr.nombre : id) + ' N' + rc[id] + '</span>'; }).join('') +
         les.map((id) => '<span class="text-xs px-2 py-0.5 rounded-md border bg-rose-950/40 border-rose-800/50 text-rose-200">🤕 ' + esc((t.lesiones[id] || {}).nombre || id) + ' <button onclick="AW.c.setInjury(' + i + ',\'' + id + '\',false)" title="Quitar" aria-label="Quitar lesión" class="ml-1 px-1.5 py-0.5 text-rose-300 hover:text-white">×</button></span>').join('') +
@@ -469,7 +469,7 @@
       const iRolls = rollsOf(n, 'injury');
       const mineGp = gp.find((x) => x.user_id === me);
       const koIdx = (x) => Object.keys(x.roster || {}).filter((k) => x.roster[k] && x.roster[k].ko).map(Number);
-      const unitName = (x, i) => ((x.band_snapshot && x.band_snapshot.units) || [])[i] ? x.band_snapshot.units[i].nombre : 'Miniatura ' + (i + 1);
+      const unitName = (x, i) => ((x.band_snapshot && x.band_snapshot.units) || [])[i] ? AWUtil.unitName(x.band_snapshot.units[i]) : 'Miniatura ' + (i + 1);
       let inner = '<p class="text-xs text-slate-500 mb-2">Cada miniatura noqueada tira 1D6 en la Tabla de Lesiones. Los efectos valen para la siguiente partida.</p>';
       let any = false;
       gp.forEach((x) => {

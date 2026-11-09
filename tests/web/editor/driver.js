@@ -39,12 +39,16 @@ window.addEventListener('load', async () => {
     ok('editor: armadura pesada a la milicia (+35)', document.getElementById('aw-total').textContent === '210');
     AW.removeGear(0, 2); await wait(20);
     ok('editor: quitar almuerzo (-10)', document.getElementById('aw-total').textContent === '200');
+    ok('editor: perfil del catálogo fijo (Sheriff) y campo de nombre propio', !document.querySelector('input[value="Sheriff"]') && txt().includes('Sheriff') && document.querySelectorAll('input[aria-label="Nombre propio de la miniatura"]').length === 2);
+    AW.setUnit(0, 'apodo', 'Bilbo'); await wait(10);
     AW.setUnit(1, 'coste', '50'); await wait(10);
     ok('editor: cambiar coste base actualiza total y subtotal', document.getElementById('aw-total').textContent === '210' && document.getElementById('aw-sub-1').textContent === '85');
     await AW.saveBand(); await wait(150);
     const saved = db.bands.find(b => b.name === 'Prueba');
     ok('guardado: value = 210 con equipo', saved && saved.value === 210, saved && saved.value);
     ok('guardado: equipo con id, origen, nombre y coste', saved && saved.units[0].equipo.length === 2 && saved.units[0].equipo[1].origen === 'faccion' && saved.units[0].equipo[1].coste === 30, saved && JSON.stringify(saved.units[0].equipo));
+    ok('guardado: apodo Bilbo sin perder el perfil Sheriff y el tipo comandante', saved && saved.units[0].apodo === 'Bilbo' && saved.units[0].nombre === 'Sheriff' && saved.units[0].tipo === 'comandante' && saved.units[1].apodo === undefined);
+    ok('ficha: se ve Bilbo y, al lado, Sheriff', document.body.innerHTML.includes('Bilbo') && AWUtil.unitName(saved.units[0]) === 'Bilbo (Sheriff)');
     ok('Mis Bandas: muestra 210 GP y equipo en la ficha', txt().includes('210 GP') && document.body.innerHTML.includes('🎒'));
     // cambiar de facción quita el equipo exclusivo
     AW.editBand(saved.id); await wait(50);

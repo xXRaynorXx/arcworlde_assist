@@ -45,11 +45,21 @@
       const k = String(o.nombre).split(' / ').pop().trim().toLowerCase();
       traitIdx[k] = o;
     }));
+    // Equipo (armería común y exclusiva) como último recurso: los rasgos "de serie" suelen ser un objeto
+    [typeof armeriaComunDB !== 'undefined' ? armeriaComunDB : null, typeof armeriaExclusivaDB !== 'undefined' ? armeriaExclusivaDB : null].forEach((db) => {
+      (db || []).forEach((o) => {
+        if (!o || !o.nombre) return;
+        const k = String(o.nombre).split(' / ').pop().trim().toLowerCase();
+        if (!traitIdx[k]) traitIdx[k] = { nombre: o.nombre, resumen: o.resumen || o.efecto || '', detalles: o.detalles || o.efectos || o.descripcion || '' };
+      });
+    });
     if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => add(k, datosRasgos[k]));
   }
   function traitInfo(name) {
     if (!traitIdx) buildTraits();
-    return traitIdx[String(name).toLowerCase()] || null;
+    const k = String(name).toLowerCase();
+    // "Light Armour (Gratis / +1 Armadura)" -> "light armour": se busca también sin el texto entre paréntesis
+    return traitIdx[k] || traitIdx[k.replace(/\s*\(.*\)\s*$/, '')] || null;
   }
   function stripTags(s) { return String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, ''); }
 
@@ -94,8 +104,8 @@
     const gear = Array.isArray(u.equipo) ? u.equipo : [];
     const gearTotal = gear.reduce((t, g) => t + (Number(g.coste) || 0), 0);
     let h = '<div class="rounded-lg border ' + (st.ko ? 'border-rose-700/60 bg-rose-950/20' : 'border-slate-800 bg-slate-900/60') + ' p-3">' +
-      '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.nombre) +
-      (c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
+      '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.apodo || u.nombre) +
+      (u.apodo ? ' <span class="text-xs text-slate-500 font-normal">' + esc(u.nombre) + '</span>' : c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
       '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
     const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x));
