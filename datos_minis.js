@@ -1,11 +1,11 @@
 // ============================================================================
-// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 4.0)
-// Contiene: Todas las Facciones, Miniaturas/Atributos, Ataques, Saberes Mágicos / Lista de Hechizos,
-// Armería Exclusiva y Común, Diccionario de Rasgos y Sistema de Campaña Completo.
+// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 6.0)
+// Contiene: Facciones, Miniaturas/Atributos, Ataques, Hechizos, Armería Exclusiva,
+// Armería Común, Diccionario de Rasgos, Sistema de Campaña y Asignación de Equipo Completa.
 // ============================================================================
 
 const compendioArcWorlde = {
-  "version": "4.0",
+  "version": "7.0",
   "titulo": "Compendio Oficial Completo ArcWorlde - Base de Datos Maestra",
   "fecha_actualizacion": "2026-11-09",
   "reglas_generales_banda": {
@@ -31,8 +31,8 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Spoon Whack: (2 AP) Melee, Power 5. Regla Especial: Si se obtiene un impacto Crítico, reduce en 1 los AP del personaje objetivo en su siguiente Activación. No acumulable.",
-            "Shot: (Ranged) Shot, Power 5, Alcance 12\". (Si se equipa con Arma a Distancia Halfling)."
+            "(2 AP) Furious Wallop: Power 8. Regla Especial: Un impacto Crítico reduce en 1 los AP del personaje objetivo en su siguiente Activación. No acumulable.",
+            "(1 AP) Hearty Stab: Power 5. Regla Especial: Los impactos Críticos ignoran el valor de Armadura."
           ],
           "rasgos": [
             "Make Orders",
@@ -44,7 +44,8 @@ const compendioArcWorlde = {
             "montura_halfling",
             "arma_distancia_halfling",
             "almuerzo_llevar",
-            "estandarte_pueblo"
+            "estandarte_pueblo",
+            "ranger_cloak"
           ],
           "equipo_de_serie": [
             "Armadura Ligera / Light Armour (Gratis / +1 Armadura)",
@@ -65,8 +66,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Twhack: (2 AP) Melee, Power 6. Regla Especial: Un impacto Crítico permite al jugador repetir 1 dado de Impacto fallido.",
-            "Thrust: (1 AP) Melee, Power 4."
+            "(2 AP) Twhack: Power 6. Regla Especial: Un impacto Crítico permite al jugador repetir 1 dado de Impacto fallido.",
+            "(1 AP) Thrust: Power 4."
           ],
           "rasgos": [
             "Take Orders"
@@ -75,7 +76,8 @@ const compendioArcWorlde = {
           "equipo_permitido": [
             "montura_halfling",
             "arma_distancia_halfling",
-            "almuerzo_llevar"
+            "almuerzo_llevar",
+            "ranger_cloak"
           ],
           "equipo_de_serie": [
             "Herramientas Agrícolas / Armas Improvisadas"
@@ -95,8 +97,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Determined Hack: (2 AP) Melee, Power 7. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura.",
-            "Chop: (1 AP) Melee, Power 4."
+            "(2 AP) Determined Hack: Power 7. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura.",
+            "(1 AP) Chop: Power 4."
           ],
           "rasgos": [
             "Take Orders",
@@ -108,7 +110,8 @@ const compendioArcWorlde = {
           "equipo_permitido": [
             "montura_halfling",
             "arma_distancia_halfling",
-            "almuerzo_llevar"
+            "almuerzo_llevar",
+            "ranger_cloak"
           ],
           "equipo_de_serie": [
             "Armadura Pesada / Heavy Armour (Gratis / +2 Armadura, +1 dificultad a Leg It)",
@@ -129,8 +132,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Ladle Bash: (2 AP) Melee, Power 5. Regla Especial: Si se obtiene un impacto Crítico, el objetivo queda Tumbado (Prone).",
-            "Tenderise: (1 AP) Melee, Power 3."
+            "(2 AP) Spoon Whack: Power 5. Regla Especial: Un impacto Crítico reduce en 1 los AP del objetivo en su siguiente Activación. No acumulable.",
+            "(1 AP) Tenderise: Power 3."
           ],
           "rasgos": [
             "Grand Cookbook",
@@ -166,8 +169,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Spear Thrust: (2 AP) Melee, Power 6.",
-            "Net Throw: (1 AP) Ranged, Power 3, Alcance 6\". Regla Especial: Si impacta, el objetivo queda Tumbado (Prone)."
+            "(2 AP) Spear Thrust: Power 6.",
+            "(1 AP) Net Throw: (Ranged) Power 3, Alcance 6\". Regla Especial: Si el ataque impacta con éxito, el objetivo queda Tumbado (Prone)."
           ],
           "rasgos": [
             "Expert Poacher",
@@ -196,8 +199,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Catapult Shot: (Ranged) Power 8, Alcance 24\". Regla Especial: Utiliza la regla Carga Aleatoria (Payload). Requiere Hazaña Difícil para disparar.",
-            "Crew Bash: (1 AP) Melee, Power 4."
+            "(Ranged) FIRE!: Power 10, Alcance 20\". Regla Especial: Requiere Hazaña Difícil para disparar. Consulta la tabla de Carga Aleatoria (Payload 1-6) antes de la tirada.",
+            "(2 AP) Trample: Power 4. Regla Especial: En impacto Crítico, el objetivo queda Tumbado (Prone) y el Thing-Flinger puede destrabarse sin penalizaciones."
           ],
           "rasgos": [
             "Crew and Payload",
@@ -371,8 +374,8 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Sabre Cut: (2 AP) Melee, Power 7.",
-            "Pistol Shot: (Ranged) Power 5, Alcance 12\"."
+            "(2 AP) Sabre Cut: Power 7.",
+            "(Ranged) Pistol Shot: Power 5, Alcance 12\"."
           ],
           "rasgos": [
             "Make Orders",
@@ -385,7 +388,9 @@ const compendioArcWorlde = {
             "imperial_mount",
             "medical_kit",
             "imperial_gryphon",
-            "arcloque_rifle"
+            "arcloque_rifle",
+            "arcloque_pistol",
+            "imperial_crossbow"
           ],
           "equipo_de_serie": [
             "Armadura Ligera Imperial / Light Armour (Gratis / +1 Armadura)",
@@ -406,8 +411,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Heavy Strike: (2 AP) Melee, Power 6. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
-            "Thrust: (1 AP) Melee, Power 4."
+            "(2 AP) Heavy Strike: Power 6. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
+            "(1 AP) Thrust: Power 4."
           ],
           "rasgos": [
             "Take Orders"
@@ -417,7 +422,8 @@ const compendioArcWorlde = {
             "imperial_mount",
             "arcloque_rifle",
             "imperial_crossbow",
-            "medical_kit"
+            "medical_kit",
+            "sergeants_chevrons"
           ],
           "equipo_de_serie": [
             "Lanza o Espada de Recluta"
@@ -437,8 +443,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Keen Slice: (2 AP) Melee, Power 7. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
-            "Downswing: (1 AP) Melee, Power 4. Regla Especial: Si está montado, repite todos los fallos contra peanas de 30mm."
+            "(2 AP) Keen Slice: Power 7. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
+            "(1 AP) Downswing: Power 4. Regla Especial: Si está montado, repite todos los fallos contra peanas de 30mm."
           ],
           "rasgos": [
             "Take Orders",
@@ -449,7 +455,9 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "imperial_mount",
-            "medical_kit"
+            "medical_kit",
+            "arcloque_pistol",
+            "imperial_crossbow"
           ],
           "equipo_de_serie": [
             "Armadura Ligera de Dragón / Light Armour (Gratis / +1 Armadura)",
@@ -470,7 +478,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Spanner Whack: (2 AP) Melee, Power 5."
+            "(2 AP) Spanner Whack: Power 5.",
+            "(Ranged) Revolving Pistol: Power 5, Alcance 8\". Regla Especial: Tira 1D6 adicional por cada impacto exitoso."
           ],
           "rasgos": [
             "Contraption Trunk",
@@ -479,7 +488,8 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "medical_kit"
+            "medical_kit",
+            "arcloque_pistol"
           ],
           "equipo_de_serie": [
             "Contraption Trunk / Cofre Mecánico (Seguidor robot de 30mm que se desplaza gratis con el Mago)"
@@ -504,8 +514,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Arclance Discharge: (2 AP) Melee, Power 8. Regla Especial: Un impacto Crítico causa D3 Daño adicional.",
-            "Jab: (1 AP) Melee, Power 4."
+            "(2 AP) Arclance Discharge: Power 8. Regla Especial: Un impacto Crítico causa D3 Daño adicional.",
+            "(1 AP) Jab: Power 4."
           ],
           "rasgos": [
             "Arc Energy",
@@ -533,15 +543,17 @@ const compendioArcWorlde = {
             "ap": 5
           },
           "ataques": [
-            "Clobber: (2 AP) Melee, Power 8. Regla Especial: Un impacto Crítico deja Tumbado (Prone) al objetivo en peana de 30mm o 40mm.",
-            "Big Boot: (1 AP) Melee, Power 5. Regla Especial: +2 Power si el objetivo está Tumbado (Prone)."
+            "(2 AP) Clobber: Power 8. Regla Especial: Un impacto Crítico deja Tumbado (Prone) al objetivo en peana de 30mm o 40mm.",
+            "(1 AP) Big Boot: Power 5. Regla Especial: Suma +2 al Power si el objetivo está Tumbado (Prone)."
           ],
           "rasgos": [
             "Take Orders",
             "Massive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "medical_kit"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -702,9 +714,9 @@ const compendioArcWorlde = {
             "ap": 6
           },
           "ataques": [
-            "Malicious Strike: (2 AP) Melee, Power 7. Regla Especial: Si se obtienen más Éxitos que Fallos, el objetivo (peana <= 50mm) queda Tumbado (Prone).",
-            "Malevolent Gaze: (Ranged) Power 4, Alcance 6\".",
-            "Choke: (1 AP) Melee, Power 5. Regla Especial: No se incrementa con armas. Si causa daño, los enemigos deben pasar un Chequeo de Valentía."
+            "(2 AP) Malicious Strike: Power 7. Regla Especial: Si se obtienen más Éxitos que Fallos, el objetivo (peana <= 50mm) queda Tumbado (Prone).",
+            "(Ranged) Malevolent Gaze: Power 4, Alcance 6\".",
+            "(1 AP) Choke: Power 5. Regla Especial: No se incrementa con armas equipadas. Si causa daño, los enemigos deben pasar un Chequeo de Valentía como si fuera KO."
           ],
           "rasgos": [
             "The Dark One's Will",
@@ -713,7 +725,9 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "black_potion"
+            "black_potion",
+            "dark_lord_ranged_weapon",
+            "slaver_whip"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -733,14 +747,16 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Whipcrack: (2 AP) Melee, Power 6. Regla Especial: Puede objetivar enemigos hasta a 4\" de distancia.",
-            "Brutish Slash: (1 AP) Melee, Power 4."
+            "(2 AP) Whipcrack: Power 6. Regla Especial: Puede objetivar enemigos hasta a 4\" de distancia.",
+            "(1 AP) Brutish Slash: Power 4."
           ],
           "rasgos": [
             "Slavedriver"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "black_potion",
+            "dark_lord_ranged_weapon",
             "slaver_whip"
           ],
           "equipo_de_serie": [
@@ -761,15 +777,16 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Hack'n'Slash: (2 AP) Melee, Power 4. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "Gut Stab: (1 AP) Melee, Power 3."
+            "(2 AP) Hack'n'Slash: Power 4. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Gut Stab: Power 3."
           ],
           "rasgos": [
             "Diminutive"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "hobgoblin_ranged_weapon"
+            "black_potion",
+            "dark_lord_ranged_weapon"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -789,15 +806,18 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Flame Toss: (Ranged) Power 6, Alcance 8\".",
-            "Torching: (1 AP) Melee, Power 3."
+            "(Ranged) Flame Toss: Power 6, Alcance 8\". Regla Especial: Cada impacto Crítico inflige 1 impacto a un enemigo a 2\" o menos del objetivo.",
+            "(1 AP) Firebrand: Power 4."
           ],
           "rasgos": [
             "Arson Around",
             "Diminutive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "black_potion",
+            "dark_lord_ranged_weapon"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -816,8 +836,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Blazing Demise: (2 AP) Melee/Area, Power 6. Regla Especial: Afecta a todos los personajes a 2\". El esbirro queda Noqueado tras el ataque.",
-            "Nip: (1 AP) Melee, Power 3."
+            "(2 AP) Blazing Demise: Power 6. Regla Especial: Afecta a todos los personajes a 2\". El esbirro queda Noqueado tras la explosión.",
+            "(1 AP) Nip: Power 3."
           ],
           "rasgos": [
             "Fiery Essence",
@@ -843,8 +863,9 @@ const compendioArcWorlde = {
             "ap": 5
           },
           "ataques": [
-            "Swoop: (2 AP) Melee, Power 8. Regla Especial: Un impacto Crítico deja al objetivo Tumbado (Prone).",
-            "Grasping Talons: (2 AP) Melee. Regla Especial: Atrapa y eleva a una miniatura objetivo en peana de 30mm para soltarla desde la altura."
+            "(2 AP) Swoop: Power 8. Regla Especial: Un impacto Crítico deja al objetivo Tumbado (Prone).",
+            "(2 AP) Lift and Drop: Power 5. Regla Especial: Solo contra peanas de 30mm. En impacto Crítico desplaza a la víctima D6\".",
+            "(1 AP) Fangs: Power 5."
           ],
           "rasgos": [
             "Fly",
@@ -972,8 +993,9 @@ const compendioArcWorlde = {
             "ap": 5
           },
           "ataques": [
-            "Mighty Kick: (1 AP) Melee, Power 5. Regla Especial: Si el objetivo está Tumbado (Prone), desplázalo 3\" en la dirección elegida.",
-            "Gore: (1 AP) Melee, Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
+            "(2 AP) Savage Strike: Power 8. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Mighty Kick: Power 5. Regla Especial: Si el objetivo está Tumbado (Prone) y hay más Éxitos que Fallos, desplázalo 3\" en la dirección elegida.",
+            "(1 AP) Gore: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
           ],
           "rasgos": [
             "Intimidating",
@@ -1008,7 +1030,7 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Staff Strike: (1 AP) Melee, Power 4."
+            "(1 AP) Staff Thump: Power 3."
           ],
           "rasgos": [
             "Lore of Tooth and Fur",
@@ -1050,8 +1072,8 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Savage: (2 AP) Melee, Power 7. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "Smash: (1 AP) Melee, Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
+            "(2 AP) Savage: Power 7. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Smash: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
           ],
           "rasgos": [
             "Intimidating",
@@ -1086,8 +1108,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Eager Attack: (2 AP) Melee, Power 7. Regla Especial: Si hay más Fallos que Éxitos, pierde D3 HP.",
-            "Stab: (1 AP) Melee, Power 3."
+            "(2 AP) Eager Attack: Power 7. Regla Especial: Si hay más Fallos que Éxitos al tirar a Impactar, el Verman pierde D3 HP.",
+            "(1 AP) Stab: Power 3."
           ],
           "rasgos": [
             "Diminutive",
@@ -1123,8 +1145,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Almighty Racket: (2 AP) Melee/Area, Power 3. Regla Especial: Afecta a todos los personajes no-Beastfolk a 6\" o menos.",
-            "Good Kickin': (1 AP) Melee, Power 4."
+            "(2 AP) Almighty Racket: Power 3, Área 6\". Regla Especial: Afecta a todos los personajes que no sean Beastfolk a 6\" o menos.",
+            "(1 AP) Good Kickin': Power 4."
           ],
           "rasgos": [
             "Ballads of the Beastfolk",
@@ -1159,24 +1181,16 @@ const compendioArcWorlde = {
             "ap": 7
           },
           "ataques": [
-            "Drowning Drag: (2 AP) Melee, Power 8.",
-            "Water Lash: (1 AP) Melee, Power 5."
+            "(2 AP) Crunch: Power 8. Regla Especial: En impacto Crítico, el objetivo no puede salir del contacto de peana hasta la siguiente Ronda.",
+            "(2 AP) Tail Swipe: Power 5. Regla Especial: Afecta a todos los personajes a 2\" o menos del Kelpie.",
+            "(1 AP) Wicked Slash: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
           ],
           "rasgos": [
             "Animal Form",
             "Waterborne"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [
-            "cured_meat",
-            "beastfolk_ranged_weapon",
-            "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
-            "camouflaged_pelt",
-            "ugly",
-            "monster_rider"
-          ],
+          "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -1376,9 +1390,13 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
+            "animal_totem",
+            "ancient_dead_ranged_weapon",
             "sacred_blade",
+            "familiar_jar",
             "circlet_of_bronze",
-            "animal_totem"
+            "skeleton_trumpet",
+            "vengeance_coin"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -1407,7 +1425,12 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "animal_totem"
+            "animal_totem",
+            "ancient_dead_ranged_weapon",
+            "familiar_jar",
+            "circlet_of_bronze",
+            "skeleton_trumpet",
+            "vengeance_coin"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -1442,8 +1465,11 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "animal_totem",
             "ancient_dead_ranged_weapon",
-            "sacred_blade"
+            "sacred_blade",
+            "skeleton_trumpet",
+            "vengeance_coin"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -1474,8 +1500,12 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "animal_totem",
+            "ancient_dead_ranged_weapon",
             "sacred_blade",
-            "circlet_of_bronze"
+            "circlet_of_bronze",
+            "skeleton_trumpet",
+            "vengeance_coin"
           ],
           "equipo_de_serie": [
             "Armadura de Bronce Ritual (+1 Armadura)",
@@ -1706,7 +1736,15 @@ const compendioArcWorlde = {
             "Bloodline Powers"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "blood_vial",
+            "vampyr_supreme",
+            "beguiling_temperament",
+            "shapeshifter",
+            "everlasting_bloodline",
+            "fell_scholar",
+            "crimson_knight"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -1738,7 +1776,9 @@ const compendioArcWorlde = {
             "Subservient"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "blood_vial"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -1770,7 +1810,9 @@ const compendioArcWorlde = {
             "Devoted Service"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "blood_vial"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -1964,7 +2006,14 @@ const compendioArcWorlde = {
             "Outlaw Lord"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "cursed_pipes",
+            "hangmans_noose"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -1996,7 +2045,13 @@ const compendioArcWorlde = {
             "Undead"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "hangmans_noose"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -2049,7 +2104,11 @@ const compendioArcWorlde = {
             "Massive"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_mount",
+            "hangmans_noose"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -2178,7 +2237,14 @@ const compendioArcWorlde = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "blood_stone",
+            "wild_elven_ranged_weapon",
+            "sacrificial_blade",
+            "wild_elven_mount",
+            "strongbow",
+            "faeblade"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -2211,7 +2277,13 @@ const compendioArcWorlde = {
             "Woodlore"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "blood_stone",
+            "wild_elven_ranged_weapon",
+            "sacrificial_blade",
+            "strongbow",
+            "faeblade"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -2386,8 +2458,9 @@ const compendioArcWorlde = {
             "ap": 5
           },
           "ataques": [
-            "Cleave: (2 AP) Melee, Power 8.",
-            "Headbutt: (1 AP) Melee, Power 5."
+            "(2 AP) Brawl: Power 8. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Roundhouse Punch: Power 5. Regla Especial: Si el objetivo está Tumbado (Prone) y hay más Éxitos que Fallos, muévelo 3\" en la dirección elegida.",
+            "(1 AP) Bludgeon: Power 5. Regla Especial: Un impacto Crítico otorga +1 Power al siguiente ataque. No acumulable."
           ],
           "rasgos": [
             "Power Struggle",
@@ -2396,12 +2469,12 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "ourk_mount",
-            "ourk_ranged_weapon",
-            "pet_droggo",
             "healing_broth",
+            "ourk_ranged_weapon",
             "swamp_scrumpy",
-            "magical_mushroom"
+            "pet_droggo",
+            "magical_mushroom",
+            "ourk_mount"
           ],
           "equipo_de_serie": [
             "Pieles de Batalla Ourk (+1 Armadura)"
@@ -2427,7 +2500,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Swamp Staff: (1 AP) Melee, Power 4."
+            "(2 AP) Devious Slash: Power 6. Regla Especial: Ignores totalmente Armadura y Escudos.",
+            "(Ranged) Choking Mists: Power 3, Alcance 8\". Regla Especial: Ignores totalmente Armadura y Escudos."
           ],
           "rasgos": [
             "Lore of Delusion",
@@ -2436,10 +2510,10 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "ourk_mount",
             "healing_broth",
             "swamp_scrumpy",
-            "magical_mushroom"
+            "magical_mushroom",
+            "ourk_mount"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -2465,19 +2539,19 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Heavy Chopper: (2 AP) Melee, Power 7.",
-            "Smash: (1 AP) Melee, Power 5."
+            "(2 AP) Brawl: Power 7. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Smack: Power 5. Regla Especial: Un impacto Crítico otorga +1 Power al siguiente ataque. No acumulable."
           ],
           "rasgos": [
             "Swamp Born"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "ourk_mount",
-            "ourk_ranged_weapon",
             "healing_broth",
+            "ourk_ranged_weapon",
             "swamp_scrumpy",
-            "goading_fork"
+            "goading_fork",
+            "ourk_mount"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -2503,7 +2577,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Pokey Stick: (1 AP) Melee, Power 3."
+            "(2 AP) Scrap: Power 4. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
+            "(1 AP) Shank: Power 3."
           ],
           "rasgos": [
             "Diminutive",
@@ -2511,10 +2586,10 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "ourk_mount",
+            "healing_broth",
             "ourk_ranged_weapon",
             "boglin_musical_instrument",
-            "healing_broth"
+            "ourk_mount"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -2540,9 +2615,9 @@ const compendioArcWorlde = {
             "ap": 7
           },
           "ataques": [
-            "Venom Spit: (Ranged) Power 5, Alcance 8\".",
-            "Constrict: (2 AP) Melee, Power 5. Regla Especial: En impacto Crítico, el objetivo no puede moverse ni atacar hasta superar Hazaña Media.",
-            "Bite: (1 AP) Melee, Power 4."
+            "(Ranged) Venom Spit: Power 5, Alcance 8\".",
+            "(2 AP) Constrict: Power 5. Regla Especial: En impacto Crítico, el objetivo no puede moverse ni atacar hasta superar Hazaña Media (si falla sufre D3 Hits).",
+            "(1 AP) Bite: Power 4."
           ],
           "rasgos": [
             "Head Regeneration",
@@ -2731,15 +2806,23 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Chief's Scepter: (2 AP) Melee, Power 5.",
-            "Kick: (1 AP) Melee, Power 3."
+            "(2 AP) Stone Hammer: Power 7. Regla Especial: Suma +3 al Power si el objetivo está Tumbado (Prone).",
+            "(1 AP) Enthusiastic Smack: Power 5. Regla Especial: Un impacto Crítico ignora Armadura.",
+            "(1 AP) Kneecap: Power 5. Regla Especial: Suma +1 al Power si el objetivo está en peana de 40mm o mayor."
           ],
           "rasgos": [
             "Clout Points",
             "Gremlin Burrows"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "pilfered_scran",
+            "gremlin_ranged_weapon",
+            "burrowing_tools_item",
+            "pterra_wings",
+            "shield_carriers",
+            "poison_goop"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -2765,7 +2848,13 @@ const compendioArcWorlde = {
             "Gremlin Burrows"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "pilfered_scran",
+            "gremlin_ranged_weapon",
+            "burrowing_tools_item",
+            "pterra_wings",
+            "poison_goop"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -2810,8 +2899,8 @@ const compendioArcWorlde = {
             "ap": 8
           },
           "ataques": [
-            "Hurl: (2 AP) Melee, Power 5. Regla Especial: En impacto Crítico, lanza al objetivo D6\" lejos y lo deja Tumbado (Prone).",
-            "Smash: (1 AP) Melee, Power 6."
+            "(2 AP) Furious Flailing: Power 7. Regla Especial: Afecta a todos los personajes (aliados y enemigos) a 2\" o menos.",
+            "(2 AP) Pummel: Power 9. Regla Especial: Si el objetivo está en una peana de menor tamaño, desplázalo 2\" hacia atrás."
           ],
           "rasgos": [
             "Regeneration",
@@ -2950,8 +3039,8 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "Wizard Staff: (1 AP) Melee, Power 4.",
-            "Arcane Bolt: (Ranged) Power 6, Alcance 12\"."
+            "(1 AP) Wizard Staff: Power 4.",
+            "(Ranged) Arcane Bolt: Power 6, Alcance 12\"."
           ],
           "rasgos": [
             "Elemental Colleges",
@@ -2959,7 +3048,12 @@ const compendioArcWorlde = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "vitality_gem",
+            "wizard_ranged_weapon",
+            "wizard_mount",
+            "pilfered_tome"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -3001,14 +3095,19 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Staff Strike: (1 AP) Melee, Power 4."
+            "(1 AP) Staff Strike: Power 4."
           ],
           "rasgos": [
             "Elemental Colleges",
             "Mage"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "vitality_gem",
+            "wizard_ranged_weapon",
+            "wizard_mount",
+            "pilfered_tome"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ],
@@ -3050,8 +3149,8 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "Heavy Strike: (2 AP) Melee, Power 7. Regla Especial: Impacto Crítico deja al objetivo (peana 30mm) Tumbado (Prone).",
-            "Thrust: (1 AP) Melee, Power 4."
+            "(2 AP) Heavy Strike: Power 7. Regla Especial: Un impacto Crítico deja al objetivo (peana 30mm) Tumbado (Prone).",
+            "(1 AP) Thrust: Power 4. Regla Especial: Un impacto Crítico deja al objetivo (peana 30mm) Tumbado (Prone)."
           ],
           "rasgos": [
             "Enchanted Armour"
@@ -3356,8 +3455,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Dive Bomb: (2 AP) Melee, Power 7, Alcance 2\". Regla Especial: Coloca al Griffling en contacto de peana tras atacar. Noqueado si saca más fallos que éxitos.",
-            "Peck: (1 AP) Melee, Power 3."
+            "(2 AP) Dive Bomb: Power 7, Alcance 2\". Regla Especial: Coloca al Griffling en contacto de peana tras atacar. Si saca más Fallos que Éxitos queda Noqueado.",
+            "(1 AP) Peck: Power 3."
           ],
           "rasgos": [
             "Fly",
@@ -3384,9 +3483,9 @@ const compendioArcWorlde = {
             "ap": 8
           },
           "ataques": [
-            "Boulder Lob: (Ranged) Power 9, Alcance 12\". Requiere Hazaña Media.",
-            "Hurl: (2 AP) Melee, Power 4. Regla Especial: En impacto Crítico, lanza a la víctima D6\" lejos y la deja Tumbada (Prone).",
-            "Smash: (1 AP) Melee, Power 6. Regla Especial: En impacto Crítico, deja Tumbado al objetivo de peana más pequeña."
+            "(Ranged) Boulder Lob: Power 9, Alcance 12\". Regla Especial: Requiere superar una Hazaña Media.",
+            "(2 AP) Hurl: Power 4. Regla Especial: En impacto Crítico, lanza al objetivo D6\" lejos en la dirección elegida y lo deja Tumbado (Prone).",
+            "(1 AP) Smash: Power 6. Regla Especial: En impacto Crítico, deja Tumbado (Prone) al objetivo si está en peana más pequeña."
           ],
           "rasgos": [
             "Fungal Regeneration",
@@ -3412,9 +3511,9 @@ const compendioArcWorlde = {
             "ap": 20
           },
           "ataques": [
-            "Massive Club: (2 AP) Melee, Power 10, Alcance 3\".",
-            "Pick Up: (2 AP) Melee. Regla Especial: Permite agarrar personajes (peana <= 40mm) y lanzarlos.",
-            "Bellow: (1 AP) Area, Alcance 6\". Fuerza Chequeo de Valentía en área."
+            "(2 AP) Massive Club: Power 10, Alcance 3\".",
+            "(2 AP) Pick Up: Regla Especial: Permite agarrar personajes (peana <= 40mm) y lanzarlos.",
+            "(1 AP) Bellow: Area 6\". Regla Especial: Obliga a todos los enemigos en área a realizar un Chequeo de Valentía."
           ],
           "rasgos": [
             "Long Limbs",
@@ -3453,87 +3552,71 @@ const compendioArcWorlde = {
     }
   ],
   "armeria_comun": [
-    {
-      "id": "light_armour",
-      "nombre": "Armadura Ligera / Light Armour",
-      "tipo": "Armadura",
-      "coste": 10,
-      "efecto": "+1 al Valor de Armadura del personaje.",
-      "restriccion": "No acumulable con otras armaduras."
-    },
-    {
-      "id": "heavy_armour",
-      "nombre": "Armadura Pesada / Heavy Armour",
-      "tipo": "Armadura",
-      "coste": 25,
-      "efecto": "+2 al Valor de Armadura del personaje.",
-      "restriccion": "No acumulable con otras armaduras. Reduce en -1\" el Movimiento de tropas con peana de 30mm."
-    },
-    {
-      "id": "shield",
-      "nombre": "Escudo / Shield",
-      "tipo": "Equipo Defensivo",
-      "coste": 10,
-      "efecto": "Otorga +1 al Valor de Armadura frente a ataques frontales y disparos.",
-      "restriccion": "Requiere una mano libre. No compatible con armas a dos manos."
-    },
-    {
-      "id": "spear",
-      "nombre": "Lanza / Spear",
-      "tipo": "Arma Cuerpo a Cuerpo",
-      "coste": 10,
-      "efecto": "Otorga el ataque Spear Thrust (Power 5, Alcance 2\"). Permite contragolpear cuando un enemigo se traba.",
-      "restriccion": "Arma de dos manos o una mano si se usa con escudo."
-    },
-    {
-      "id": "great_weapon",
-      "nombre": "Arma a Dos Manos / Great Weapon",
-      "tipo": "Arma Cuerpo a Cuerpo",
-      "coste": 15,
-      "efecto": "Otorga un ataque melé de Power 8. Los impactos críticos rompen 1 punto de armadura enemiga.",
-      "restriccion": "Requiere 2 manos. El usuario ataca en último lugar en la ronda si no cargó."
-    },
-    {
-      "id": "dual_weapons",
-      "nombre": "Armas Dobles / Dual Blades",
-      "tipo": "Arma Cuerpo a Cuerpo",
-      "coste": 10,
-      "efecto": "Permite realizar un segundo ataque melé gratuito por 1 AP menos una vez por ronda.",
-      "restriccion": "Ocupa ambas manos."
-    },
-    {
-      "id": "ranged_weapon",
-      "nombre": "Arma a Distancia / Ranged Weapon",
-      "tipo": "Arma a Distancia",
-      "coste": 15,
-      "efecto": "Otorga el ataque Shot (Power 5, Alcance 12\").",
-      "restriccion": "Requiere 2 AP para disparar."
-    },
-    {
-      "id": "arcanite_token",
-      "nombre": "Ficha de Arcanita / Arcanite Token",
-      "tipo": "Consumible Mágico",
-      "coste": 5,
-      "efecto": "Se consume para repetir una tirada de ataque, defensa o proeza mágica.",
-      "restriccion": "De un solo uso."
-    },
-    {
-      "id": "torch",
-      "nombre": "Antorcha / Torch",
-      "tipo": "Equipo / Objeto",
-      "coste": 5,
-      "efecto": "Ilumina en penumbra a 6\" y otorga un ataque melé de fuego Power 4 contra objetivos Inflamables.",
-      "restriccion": "Revela la posición del portador a distancia."
-    },
-    {
-      "id": "healing_potion",
-      "nombre": "Poción de Curación / Healing Potion",
-      "tipo": "Consumible",
-      "coste": 10,
-      "efecto": "El personaje o un aliado en contacto de peana recupera D6 HP.",
-      "restriccion": "De un solo uso."
-    }
-  ],
+  {
+    "id": "arcanite_token",
+    "nombre": "Ficha de Arcanita / Arcanite Token",
+    "tipo": "Objeto / Item",
+    "coste": 10,
+    "efecto": "Un solo uso (One use only). Al consumirse, elige un efecto: +1 AP para la activación, +1D6 extra a cualquier tirada, lanzar un hechizo adicional, o repetir 1D6.",
+    "restriccion": "Un solo uso (One use only)."
+  },
+  {
+    "id": "shield",
+    "nombre": "Escudo / Shield",
+    "tipo": "Equipo / Equipment",
+    "coste": 15,
+    "efecto": "Si está equipado, el personaje puede repetir 1 Tirada de Defensa fallida por Ronda.",
+    "restriccion": "Requiere el uso de una mano."
+  },
+  {
+    "id": "spear",
+    "nombre": "Lanza / Spear",
+    "tipo": "Equipo / Equipment",
+    "coste": 10,
+    "efecto": "Permite realizar ataques melé a objetivos hasta a 2\" de distancia, incluso si no está en contacto de peana o si hay una miniatura aliada de por medio.",
+    "restriccion": "Alcance melé ampliado a 2\"."
+  },
+  {
+    "id": "torch",
+    "nombre": "Antorcha / Torch",
+    "tipo": "Objeto / Item",
+    "coste": 10,
+    "efecto": "El portador cuenta como Temible (Fearsome) frente a Bestias y Monstruos. Obtiene +1 al Power melé y Temible contra objetivos Inflamables. Sin embargo, los disparos enemigos contra él pueden repetir fallos en Hazañas.",
+    "restriccion": "Revela la posición del portador a distancia."
+  },
+  {
+    "id": "two_handed_weapon",
+    "nombre": "Arma a Dos Manos / Two Handed Weapon",
+    "tipo": "Equipo / Equipment",
+    "coste": 10,
+    "efecto": "Otorga +2 al Power en todos los ataques melé. Sin embargo, los Éxitos Críticos en tiradas de Defensa del portador se descartan como si fuesen fallos.",
+    "restriccion": "Ocupa ambas manos."
+  },
+  {
+    "id": "dual_weapons",
+    "nombre": "Armas Dobles / Dual Weapons",
+    "tipo": "Equipo / Equipment",
+    "coste": 10,
+    "efecto": "Permite repetir todos los resultados de \"1\" obtenidos en tiradas de ataque cuerpo a cuerpo.",
+    "restriccion": "Ocupa ambas manos."
+  },
+  {
+    "id": "light_armour",
+    "nombre": "Armadura Ligera / Light Armour",
+    "tipo": "Equipo / Equipment",
+    "coste": 20,
+    "efecto": "Otorga +1 al Valor de Armadura del personaje.",
+    "restriccion": "No acumulable con otras armaduras."
+  },
+  {
+    "id": "heavy_armour",
+    "nombre": "Armadura Pesada / Heavy Armour",
+    "tipo": "Equipo / Equipment",
+    "coste": 35,
+    "efecto": "Otorga +2 al Valor de Armadura del personaje. Sin embargo, todas las tiradas de Leg It sufren +1 a la dificultad.",
+    "restriccion": "No acumulable con otras armaduras."
+  }
+],
   "diccionario_rasgos": {
     "Nación Colonizadora / Settler Nation": {
       "resumen": "Expansión militar del Imperio aliada con colonos locales.",

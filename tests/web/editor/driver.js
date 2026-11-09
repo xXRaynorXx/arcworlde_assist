@@ -36,7 +36,7 @@ window.addEventListener('load', async () => {
     const labels = sel ? [...sel.querySelectorAll('optgroup')].map(g => g.label + ':' + g.children.length) : [];
     ok('editor: selector de equipo con común y de facción', labels.some(l => l.startsWith('Común — Armas y equipo')) && labels.some(l => l.startsWith('Común — Armaduras')) && labels.some(l => l.startsWith('Halflings — Monturas')), labels.join('|'));
     const optsS = [...document.querySelectorAll('select[data-change="AW.addGear"][data-args^="[0,"] option')].map(o => o.value);
-    ok('equipo del Sheriff: lo que permite su ficha (ids corregidos)', ['faccion:halfling_mount', 'faccion:halfling_ranged_weapon', 'faccion:packed_lunch', 'faccion:town_banner'].every(v => optsS.includes(v)) && !optsS.includes('faccion:potbelly_cauldron') && !optsS.includes('faccion:ranger_cloak'), optsS.join());
+    ok('equipo del Sheriff: lo que permite su ficha (ids corregidos)', ['faccion:halfling_mount', 'faccion:halfling_ranged_weapon', 'faccion:packed_lunch', 'faccion:town_banner'].every(v => optsS.includes(v)) && !optsS.includes('faccion:potbelly_cauldron'), optsS.join());
     const optsM = [...document.querySelectorAll('select[data-change="AW.addGear"][data-args^="[1,"] option')].map(o => o.value);
     ok('equipo de la milicia: sin estandarte (solo del Sheriff)', !optsM.includes('faccion:town_banner') && optsM.includes('faccion:halfling_mount'));
     ok('editor: Sheriff muestra su armadura ligera de serie', txt().includes('Light Armour (Gratis') && txt().includes('de serie'));
@@ -47,7 +47,7 @@ window.addEventListener('load', async () => {
     ok('editor: equipo que su ficha no permite se rechaza', !(AW.api.state.editing.units[0].equipo || []).length);
     AW.addGear(0, 'comun:heavy_armour'); await wait(20);
     const sh = AW.api.state.editing.units[0];
-    ok('editor: la pesada sustituye a la ligera de serie (+25)', document.getElementById('aw-total').textContent === '145' && (sh.serie_quitado || []).some(x => /Light Armour/.test(x)) && txt().includes('de serie · quitado'), document.getElementById('aw-total').textContent);
+    ok('editor: la pesada sustituye a la ligera de serie (+35)', document.getElementById('aw-total').textContent === '155' && (sh.serie_quitado || []).some(x => /Light Armour/.test(x)) && txt().includes('de serie · quitado'), document.getElementById('aw-total').textContent);
     const cSh = AW.sheet.catalogUnit('sheriff');
     ok('ficha: Sheriff con pesada en vez de ligera tiene Armadura 2', AW.sheet.baseStats(cSh, sh, 'Halflings').armadura === 2 && AW.sheet.cur({}, cSh, 'armadura', sh, 'Halflings') === 2 && cSh.stats.armadura === 1, JSON.stringify(AW.sheet.baseStats(cSh, sh, 'Halflings')));
     ok('ficha: sin equipo, la armadura del catálogo', AW.sheet.baseStats(cSh, { id: 'sheriff' }, 'Halflings').armadura === 1);
@@ -59,16 +59,16 @@ window.addEventListener('load', async () => {
     ok('editor: cualquier equipo de serie se puede quitar', (sh.serie_quitado || []).length === 1 && document.getElementById('aw-total').textContent === '120');
     AW.restoreSerie(0, 1); await wait(20);
     AW.addGear(0, 'comun:shield'); AW.addGear(0, 'faccion:halfling_mount'); AW.addGear(0, 'faccion:packed_lunch'); await wait(30);
-    ok('editor: total = 120 + 10 + 30 + 10', document.getElementById('aw-total').textContent === '170', document.getElementById('aw-total').textContent);
+    ok('editor: total = 120 + 15 + 30 + 10', document.getElementById('aw-total').textContent === '175', document.getElementById('aw-total').textContent);
     ok('editor: filas de equipo bajo la miniatura', document.querySelectorAll('button[data-click="AW.removeGear"][data-args^="[0,"]').length === 3 && txt().includes('Ver reglas'));
-    ok('editor: subtotal miniatura 130', document.getElementById('aw-sub-0').textContent === '130');
+    ok('editor: subtotal miniatura 135', document.getElementById('aw-sub-0').textContent === '135');
     AW.addGear(0, 'comun:shield'); await wait(20);
-    ok('editor: no se duplica el mismo objeto', document.getElementById('aw-total').textContent === '170');
+    ok('editor: no se duplica el mismo objeto', document.getElementById('aw-total').textContent === '175');
     AW.addGear(1, 'comun:heavy_armour'); await wait(20);
-    ok('editor: armadura pesada a la milicia (+25)', document.getElementById('aw-total').textContent === '195');
+    ok('editor: armadura pesada a la milicia (+35)', document.getElementById('aw-total').textContent === '210');
     ok('ficha: milicia con armadura pesada tiene Armadura 2', AW.sheet.baseStats(AW.sheet.catalogUnit('halfling_militia'), AW.api.state.editing.units[1], 'Halflings').armadura === 2);
     AW.removeGear(0, 2); await wait(20);
-    ok('editor: quitar almuerzo (-10)', document.getElementById('aw-total').textContent === '185');
+    ok('editor: quitar almuerzo (-10)', document.getElementById('aw-total').textContent === '200');
     ok('editor: campo de nombre propio en cada miniatura', document.querySelectorAll('input[aria-label="Nombre propio de la miniatura"]').length === 2);
     // aliados y Bestiario
     AW.addFromCatalog('imperial:imperial_captain'); await wait(20);
@@ -87,11 +87,11 @@ window.addEventListener('load', async () => {
     AW.setUnit(0, 'apodo', 'Bilbo'); await wait(10);
     await AW.saveBand(); await wait(150);
     const saved = db.bands.find(b => b.name === 'Prueba');
-    ok('guardado: value = 185 con equipo', saved && saved.value === 185, saved && saved.value);
+    ok('guardado: value = 200 con equipo', saved && saved.value === 200, saved && saved.value);
     ok('guardado: equipo con id, origen, nombre y coste', saved && saved.units[0].equipo.length === 2 && saved.units[0].equipo[1].origen === 'faccion' && saved.units[0].equipo[1].coste === 30, saved && JSON.stringify(saved.units[0].equipo));
     ok('guardado: apodo Bilbo sin perder el perfil Sheriff y el tipo comandante', saved && saved.units[0].apodo === 'Bilbo' && saved.units[0].nombre === 'Sheriff' && saved.units[0].tipo === 'comandante' && saved.units[1].apodo === undefined);
     ok('ficha: se ve Bilbo y, al lado, Sheriff', document.body.innerHTML.includes('Bilbo') && AWUtil.unitName(saved.units[0]) === 'Bilbo (Sheriff)');
-    ok('Mis Bandas: muestra 185 GP y equipo en la ficha', txt().includes('185 GP') && document.body.innerHTML.includes('🎒'));
+    ok('Mis Bandas: muestra 200 GP y equipo en la ficha', txt().includes('200 GP') && document.body.innerHTML.includes('🎒'));
     // Town Guard y Tomb Guardian
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
     AW.setField('name', 'Serie'); AW.setField('faction', 'Halflings'); AW.rerender(); await wait(20);
@@ -102,7 +102,7 @@ window.addEventListener('load', async () => {
     AW.addFromCatalog('ancient_dead:tomb_guardian'); await wait(20);
     AW.addGear(0, 'comun:shield'); AW.addGear(0, 'comun:spear'); await wait(20);
     const eq = AW.api.state.editing.units[0].equipo;
-    ok('Tomb Guardian: -25% redondeado arriba (escudo 10->8, lanza 10->8)', eq && eq[0].coste === 8 && eq[1].coste === 8, JSON.stringify(eq && eq.map(g => g.coste)));
+    ok('Tomb Guardian: -25% redondeado arriba (escudo 15->12, lanza 10->8)', eq && eq[0].coste === 12 && eq[1].coste === 8, JSON.stringify(eq && eq.map(g => g.coste)));
     const ex = AWGear.optionsFor('tomb_guardian').exclusive;
     if (ex.length) { AW.addGear(0, 'faccion:' + ex[0].id); await wait(20); ok('Tomb Guardian: armería de facción sin descuento', AW.api.state.editing.units[0].equipo[2].coste === ex[0].coste); }
     // Magos y Ourks: armería propia del compendio v4 (Ourks ya completa)
