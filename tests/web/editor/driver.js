@@ -107,11 +107,9 @@ window.addEventListener('load', async () => {
     ok('compendio v2: Magos sin duplicar sección por el id mal escrito', (tt.match(/Facción Magos/g) || []).length === 1, String((tt.match(/Facción Magos/g) || []).length));
     ok('compendio v2: armería de Ourks con coste', tt.includes('Brebaje del Pantano / Swamp Scrumpy (10 GP)'));
     // Rasgos: todas las miniaturas del catálogo deben tener descripción
-    // Pendientes de describir (faltan en datos_rasgos.js); el test avisa si aparece uno nuevo sin descripción
-    const PENDIENTES = ['Arc Energy','Massive','Arson Around','Animal Form','Lore of Tooth and Fur','Waterborne','Rise from Your Grave!','Tar Footed','Undead Lord','Bloodline Powers','Subservient','Devoted Service','Resurrection','Outlaw Lord','Undead','Blood Magic','Woodlore','Swamp Born','War Hides (+1 Armadura)','Lore of Delusion','Throwable','Head Regeneration','Clout Points','Gremlin Burrows','Regeneration','Chocks Away!','Fungal Regeneration','Long Limbs','Titan'];
     const sinDesc = new Set();
-    datosMinis.facciones.forEach(fa => (fa.unidades || []).forEach(u => (u.rasgos || []).forEach(r => { const n = typeof r === 'string' ? r : (r.nombre || ''); if (n && !AW.sheet.traitInfo(n) && !PENDIENTES.includes(n)) sinDesc.add(fa.nombre + ': ' + n); })));
-    ok('rasgos: todos tienen descripción (salvo los pendientes conocidos)', sinDesc.size === 0, [...sinDesc].join(' | '));
+    datosMinis.facciones.forEach(fa => (fa.unidades || []).forEach(u => (u.rasgos || []).forEach(r => { const n = typeof r === 'string' ? r : (r.nombre || ''); if (n && !AW.sheet.traitInfo(n)) sinDesc.add(fa.nombre + ': ' + n); })));
+    ok('rasgos: todos tienen descripción', sinDesc.size === 0, [...sinDesc].join(' | '));
     // Ids de facción coherentes entre archivos
     const idsMin = new Set(datosMinis.facciones.map(x => x.id));
     const rotos = new Set(); [habilidadesFaccionDB, rasgosUnidadesDB, armeriaExclusivaDB].forEach(l => l.forEach(x => { if (x.faccion_id !== 'comun' && !idsMin.has(x.faccion_id)) rotos.add(x.faccion_id); }));

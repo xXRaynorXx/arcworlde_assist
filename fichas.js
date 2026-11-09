@@ -35,6 +35,7 @@
     'crew and payload': 'crew & random payload',
     'things of magic': 'thing of magic',
     'elemental colleges': 'colleges of mt orion',
+    'resurrection': 'raiser of the dead',
     'light armour': 'light armour (gratis)',
     'heavy armour': 'heavy armour (gratis)'
   };
@@ -64,7 +65,11 @@
         if (!traitIdx[k]) traitIdx[k] = { nombre: o.nombre, resumen: o.resumen || o.efecto || '', detalles: o.detalles || o.efectos || o.descripcion || '' };
       });
     });
-    if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => add(k.split(' / ').pop().trim(), datosRasgos[k]));
+    if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => {
+      const en = k.split(' / ').pop().trim();
+      add(en, datosRasgos[k]);
+      add(en.replace(/\s*\(.*\)\s*$/, ''), datosRasgos[k]); // "Woodlore (Lore of the Darkwood)" también como "Woodlore"
+    });
   }
   function traitInfo(name) {
     if (!traitIdx) buildTraits();

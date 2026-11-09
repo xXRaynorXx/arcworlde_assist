@@ -1,3 +1,6 @@
+// Base de datos de Rasgos Consolidada ArcWorlde (Versión Completa v2)
+// Incluye rasgos de Facción, Unidades, Bestiario, Mercenarios y Reglas Especiales
+
 const datosRasgos = {
   "Nación Colonizadora / Settler Nation": {
     "resumen": "Expansión militar del Imperio aliada con colonos locales.",
@@ -266,10 +269,126 @@ const datosRasgos = {
   "Invocado / Summoned": {
     "resumen": "Entidad mágica creada temporalmente en el tablero.",
     "detalles": "Efectos: No despliega al inicio de la partida y desaparece al ser desintegrada o al terminar la ronda."
+  },
+  "Masivo / Massive": {
+    "resumen": "Criatura de gran volumen físico y peana pesada.",
+    "detalles": "Efectos: Ocupa mayor espacio físico en el tablero. No puede ser empujada ni derribada por personajes de peanas de 30mm o 40mm, y otorga Cobertura a aliados detrás de ella."
+  },
+  "No-Muerto / Undead": {
+    "resumen": "Entidad desprovista de biología viva mantenida por magia o fuerza de voluntad.",
+    "detalles": "Efectos: Inmune a chequeos de pánico/miedo convencionales. Solo puede ser curada mediante magia nigromántica o ítems específicos (Soul Jar, Blood Vial, Animal Totem)."
+  },
+  "Regeneración / Regeneration": {
+    "resumen": "Capacidad biológica o mágica de sanar heridas de forma progresiva.",
+    "detalles": "Efectos: Si el personaje no está en contacto de peana con un enemigo al final de la Ronda (o Activación según variante), recupera D3 o D6 HP."
+  },
+  "Lanzable / Throwable": {
+    "resumen": "Miniatura pequeña que puede ser utilizada como proyectil viviente.",
+    "detalles": "Efectos: Personajes aliados con el rasgo Hurl o Intimidating en contacto de peana pueden lanzar a esta miniatura contra un enemigo como un ataque a distancia."
+  },
+  "Titán / Titan": {
+    "resumen": "Monstruo de escala gigantesca con resistencia y poder destructivo descomunales.",
+    "detalles": "Efectos: Peana de 50mm a 100mm+, reserva masiva de HP (50-100+), posee el rasgo Activación Dividida (Split Activation) para actuar múltiples veces por ronda e ignora empujones."
+  },
+  "Extremidades Largas / Long Limbs": {
+    "resumen": "Brazos o tentáculos alargados que amplían la zona de amenaza.",
+    "detalles": "Efectos: Aumenta el alcance para trabarse en combate cuerpo a cuerpo y permite realizar ataques melé o interactuar con objetivos a mayor distancia."
+  },
+  "Energía Arcana / Arc Energy": {
+    "resumen": "Capacidad para manipular y canalizar cristales de Arcanita.",
+    "detalles": "Efectos: Permite acumular, generar o consumir Tokens de Arcanita para potenciar hechizos, recargar armas de fuego pesadas o activar mecanismos de artillería."
+  },
+  "Pirómano / Arson Around": {
+    "resumen": "Afinidad del Dark Lord con la destrucción mediante fuego despiadado.",
+    "detalles": "Efectos: Los ataques de fuego y hechizos del Lore of Villainy infligen +2 al Power contra objetivos Inflamables (Flammable) y pueden prender escenografía."
+  },
+  "Formas Animales / Animal Form": {
+    "resumen": "Fisiología adaptativa de las tribus de Hombres Bestia.",
+    "detalles": "Efectos: Opciones de armería para personalizar la miniatura: Quitina (+1 Armadura), Mandíbulas/Cornamenta (+1 Power), Patas Largas (+2 Movimiento y Ágil), Camuflaje (+1 Dificultad a disparos enemigos)."
+  },
+  "Saber de Diente y Pelaje / Lore of Tooth and Fur": {
+    "resumen": "Magia ancestral chamánica canalizada por las Hedgewitches.",
+    "detalles": "Efectos: Acceso a la lista de hechizos de naturaleza y transformación (Forest Creatures, Warging), usando fetiches y huesos para sanar o dominar bestias."
+  },
+  "Acuático / Waterborne": {
+    "resumen": "Adaptación anfibia a ríos, ciénagas y terreno de agua.",
+    "detalles": "Efectos: Se desplaza por terreno acuático como si fuera terreno abierto, ganando +1 pulgada al Movimiento (incluyendo Leg It) y ventaja en Proezas realizadas en el agua."
+  },
+  "¡Levantaos de la Tumba! / Rise from Your Grave!": {
+    "resumen": "Poder de mando del Grave Lord para reanimar a sus antiguos guerreros.",
+    "detalles": "Efectos: Si un aliado con el rasgo Bones cae Noqueado (KO) a 6 pulgadas o menos del Grave Lord, se tira 1D6: con un resultado Crítico regresa inmediatamente al combate con 1 HP."
+  },
+  "Pies de Alquitrán / Tar Footed": {
+    "resumen": "El lodo sagrado de la ciénaga atrapa a los enemigos cercanos al Bog Magus.",
+    "detalles": "Efectos: Todos los personajes enemigos a 3 pulgadas o menos del Bog Magus ven su Movimiento reducido a 1 pulgada y sufren Desventaja en todas las tiradas de Leg It."
+  },
+  "Señor No-Muerto / Undead Lord": {
+    "resumen": "Dominio supremo del Vampiro noble sobre sus sirvientes e hordas no-muertas.",
+    "detalles": "Efectos: Permite al Comandante subordinar unidades de Ancient Dead y Undead Raiders, e inspirar/comandar a sus Manservants y Thralls sin chequeos de moral."
+  },
+  "Poderes de Linaje / Bloodline Powers": {
+    "resumen": "Dones de sangre heredados por los nobles Vampiros.",
+    "detalles": "Efectos: Habilidades permanentes compradas en la Armería (Vampyr Supreme: +1 AP, +6 HP y Clase Comandante; Everlasting Bloodline: curable por viales tras KO; Fell Scholar: conocimiento de magia oscura)."
+  },
+  "Subserviente / Subservient": {
+    "resumen": "Devoción ciega de los siervos y thralls hacia sus amos vampiros.",
+    "detalles": "Efectos: La miniatura pasa automáticamente los chequeos de Valentía cuando está a 6 pulgadas o menos de un Vampiro noble y no puede rehusar órdenes."
+  },
+  "Servicio Devoto / Devoted Service": {
+    "resumen": "Lealtad del Manservant para proteger a su amo.",
+    "detalles": "Efectos: Si está en contacto de peana con un Vampiro aliado, el Manservant puede interceptar y recibir los ataques dirigidos al Vampiro o donarle sus AP no utilizados."
+  },
+  "Resurrección / Raiser of the Dead": {
+    "resumen": "Capacidad nigromántica del Harbinger para levantar bandidos caídos.",
+    "detalles": "Efectos: Mediante una Hazaña Fácil, devuelve al combate a personajes No-Muertos (o Carrion Rats con Cursed Pipes) que hayan sido noqueados en la batalla."
+  },
+  "Señor de los Forajidos / Outlaw Lord": {
+    "resumen": "Liderazgo de los Harbingers sobre bandas de proscritos no-muertos.",
+    "detalles": "Efectos: Otorga bonificadores de moral y coordinación táctica a los Undead Bandits y piratas reanimados a su alrededor."
+  },
+  "Magia de Sangre / Blood Magic": {
+    "resumen": "Ritos de sacrificio de los Elfos Silvanos para dar vida a la madera.",
+    "detalles": "Efectos: Permite al Druida canalizar la energía vital de sacrificios para invocar y controlar construcciones vegetales como Woodfiends y Briarbeasts."
+  },
+  "Saber del Bosque Profundo / Woodlore (Lore of the Darkwood)": {
+    "resumen": "Dominio druídico sobre los elementos y la flora de Mildaark.",
+    "detalles": "Efectos: Acceso a hechizos para crear enredaderas abrasadoras (Tangleweed), bosques vengativos (Merciless Wood) y alterar la movilidad enemiga."
+  },
+  "Nacido del Pantano / Swamp Born": {
+    "resumen": "Naturaleza anfibia de los Ourks adaptada al fango de las ciénagas.",
+    "detalles": "Efectos: Ignora penalizaciones de movimiento por terreno difícil cenagoso o pantanoso y repite tiradas para salir de lodo."
+  },
+  "Pieles de Guerra / War Hides": {
+    "resumen": "Resistencia natural y cuero curtido de los guerreros Ourk.",
+    "detalles": "Efectos: Otorga un bonificador natural a la armadura o permite ignorar la primera herida sufrida en cada ronda de combate."
+  },
+  "Saber de la Ilusión / Lore of Delusion": {
+    "resumen": "Magia alucinógena canalizada por los Dreameaters mediante hongos.",
+    "detalles": "Efectos: Hechizos que alteran la percepción del enemigo, forzando fallos en proezas, disparos errados o movimientos involuntarios."
+  },
+  "Regeneración de Cabezas / Head Regeneration": {
+    "resumen": "Crecimiento frenético de nuevas cabezas en la Marsh Hydra.",
+    "detalles": "Efectos: En lugar de perder AP por Dwindling Strength, la Hydra gana +1 AP permanente por cada 25% de HP total que pierda (hasta un máximo de +3 AP extra)."
+  },
+  "Puntos de Prestigio / Clout Points": {
+    "resumen": "Reputación del Great Gremlin para mantener el respeto de su banda.",
+    "detalles": "Efectos: Gana puntos al causar heridas, lograr proezas difíciles o pasar Valentía (+6 Clout: +1 AP extra; 1-5: aura mejorada); pierde puntos al caer Prone o fallar (-6 Clout: pierde el mando y baja a Clase Unit)."
+  },
+  "Madrigueras Gremlin / Gremlin Burrows": {
+    "resumen": "Red de túneles subterráneos de los Gremlins.",
+    "detalles": "Efectos: Miniaturas en contacto de peana pueden sumergirse en el túnel con una Hazaña Fácil, curarse D3 HP y reaparecer en cualquier otro marcador de Madriguera al inicio del siguiente turno."
+  },
+  "¡En Despegue! / Chocks Away!": {
+    "resumen": "Maniobra de despegue para criaturas aladas o artefactos voladores.",
+    "detalles": "Efectos: El personaje inicia el vuelo ganando el rasgo Fly, +3 al Movimiento y haciendo que los ataques a distancia enemigos requieran una Hazaña Media."
+  },
+  "Regeneración Fúngica / Fungal Regeneration": {
+    "resumen": "Hongos simbióticos que sanan el cuerpo del Troll o Dragón.",
+    "detalles": "Efectos: Si la miniatura no está en contacto de peana con ningún enemigo al final de la Ronda (o de su activación en variante avanzada), recupera D6 HP (o D3 HP)."
   }
 };
 
-if (typeof module !== "undefined" && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
   module.exports = datosRasgos;
 } else {
   window.datosRasgos = datosRasgos;
