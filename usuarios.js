@@ -306,6 +306,29 @@
     return f ? f.unidades || [] : [];
   }
 
+  // Miniaturas que se pueden fichar: la facción de la banda, las de sus facciones aliadas (según su regla de
+  // facción; sin comandantes) y el Bestiario, que se contrata aparte.
+  function recruitGroups(faction) {
+    const own = catalogFactions().find((x) => x.id === faction || x.nombre === faction);
+    if (!own) return [];
+    const groups = [{ label: own.nombre, kind: 'own', units: (own.unidades || []).map((u) => ({ f: own, u })) }];
+    window.AWGear && AWGear.allies(own.id).forEach((a) => {
+      const f = catalogFactions().find((x) => x.id === a.id);
+      if (!f) return;
+      const units = (f.unidades || []).filter((u) => u.tipo !== 'comandante').map((u) => ({ f, u }));
+      if (units.length) groups.push({ label: 'Aliados: ' + f.nombre, kind: 'ally', units, regla: a.regla });
+    });
+    const best = catalogFactions().find((x) => x.id === 'bestiary');
+    if (best && best.id !== own.id) groups.push({ label: 'Bestiario (se contrata aparte)', kind: 'bestiary', units: (best.unidades || []).map((u) => ({ f: best, u })) });
+    return groups;
+  }
+  const recruitable = (faction) => recruitGroups(faction).reduce((all, g) => all.concat(g.units.map((p) => p.u)), []);
+  const unitFactionName = (u, fallback) => {
+    const id = window.AWGear && u && u.id ? AWGear.unitFaction(u.id) : null;
+    const f = id ? catalogFactions().find((x) => x.id === id) : null;
+    return f ? f.nombre : fallback;
+  };
+
   // Reglas de composición según datos_minis.js (comandantes y límites por banda).
   function validateBand(faction, units) {
     const issues = [];
@@ -319,7 +342,7 @@
         issues.push('Máximo ' + rules.max_comandantes + ' comandante' + (rules.max_comandantes === 1 ? '' : 's') + ' por banda.');
     }
 
-    catalogUnits(faction).forEach((c) => {
+    recruitable(faction).forEach((c) => {
       if (c.max_por_banda == null) return;
       const n = units.filter((u) => u.id === c.id).length;
       if (n > c.max_por_banda) issues.push(c.nombre + ': máximo ' + c.max_por_banda + ' por banda.');
@@ -440,6 +463,7 @@
 
   function gearCategory(a) {
     const t = String(a.tipo || '');
+    if (/Forma Animal|Linaje/i.test(t)) return 'Rasgos comprables';
     if (/armour|shield/i.test(a.id)) return 'Armaduras y protección';
     if (/Consumible|Explosivo|Invocaci|Grimorio|Apoyo/.test(t)) return 'Objetos y consumibles';
     if (/Montura|Volador|Veh/.test(t)) return 'Monturas y vehículos';
@@ -460,7 +484,7 @@
   }
 
   function gearBlock(u, i) {
-    const faction = state.editing.faction;
+    const faction = unitFactionName(u, state.editing.faction);
     const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
     const off = Array.isArray(u.serie_quitado) ? u.serie_quitado : [];
     const serieRows = serieAll(u)
@@ -506,8 +530,9 @@
           )
         );
       };
-      add('Común', AWGear.common(), 'comun');
-      add(faction || 'Facción', AWGear.exclusive(faction), 'faccion');
+      const opts = u.id ? AWGear.optionsFor(u.id) : null;
+      add('Común', opts ? opts.common : AWGear.common(), 'comun');
+      add(faction || 'Facción', opts ? opts.exclusive : AWGear.exclusive(faction), 'faccion');
       select =
         '<select ' + act('change', 'AW.addGear', [i, '$value']) + ' class="' + inputCls + ' sm:w-auto">' +
         '<option value="">Añadir equipo del catálogo...</option>' + groups.join('') + '</select>';
@@ -522,21 +547,24 @@
   }
 
   function unitRow(u, i) {
+    const tipo = (TIPOS.find((t) => t[0] === u.tipo) || [0, u.tipo || ''])[1];
+    const fname = unitFactionName(u, state.editing.faction);
+    const ally = u.id && fname && state.editing.faction && fname !== state.editing.faction && !/Bestiar|Bestiary/i.test(fname);
     return (
       '<div class="grid grid-cols-12 gap-2 items-center bg-slate-950/40 border border-slate-800/60 rounded-xl p-2">' +
-      // Perfil (Sheriff, Vampiro...): fijo si viene del catálogo; editable solo en miniaturas propias
-      (u.id && catalogUnitOf(u)
-        ? '<div class="col-span-12 sm:col-span-5 text-sm font-semibold text-slate-100 px-1" title="Perfil del catálogo">' + esc(u.nombre) + '</div>'
-        : '<input value="' + esc(u.nombre) + '" ' + act('input', 'AW.setUnit', [i, 'nombre', '$value']) + ' placeholder="Perfil / nombre de la miniatura" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">') +
-      '<select ' + act('change', 'AW.setUnit', [i, 'tipo', '$value']) + ' class="' + inputCls + ' col-span-6 sm:col-span-3">' +
-      TIPOS.map((t) => '<option value="' + t[0] + '"' + (u.tipo === t[0] ? ' selected' : '') + '>' + t[1] + '</option>').join('') +
-      '</select>' +
-      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" ' + act('input', 'AW.setUnit', [i, 'coste', '$value']) + ' placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
-      '<button ' + act('click', 'AW.removeUnit', [i]) + ' title="Quitar" aria-label="Quitar miniatura" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
+      // Perfil, tipo y coste base vienen del catálogo y no se editan
+      '<div class="col-span-9 sm:col-span-8 text-sm font-semibold text-slate-100 px-1" title="Perfil del catálogo">' + esc(u.nombre) +
+      ' <span class="ml-1 text-xs font-normal px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">' + esc(tipo) + '</span>' +
+      (ally ? ' <span class="text-xs font-normal text-sky-300">aliado · ' + esc(shortName(fname)) + '</span>' : '') + '</div>' +
+      '<div class="col-span-2 sm:col-span-3 text-sm text-right text-amber-400" title="Coste base de la miniatura">' + (Number(u.coste) || 0) + ' GP</div>' +
+      '<button ' + act('click', 'AW.removeUnit', [i]) + ' title="Quitar" aria-label="Quitar miniatura" class="col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
       '<input value="' + esc(u.apodo || '') + '" ' + act('input', 'AW.setUnit', [i, 'apodo', '$value']) + ' placeholder="Nombre propio (opcional), p. ej. Bilbo" aria-label="Nombre propio de la miniatura" maxlength="40" class="' + inputCls + ' col-span-12">' +
       (state.bandContext && state.bandContext.badge ? state.bandContext.badge(u) : '') +
       (state.bandContext && state.bandContext.canTemp && state.bandContext.canTemp(u)
         ? '<label class="col-span-12 text-xs text-sky-200 flex items-center gap-2"><input type="checkbox" ' + (u.temporal ? 'checked ' : '') + act('change', 'AW.setUnitTemp', [i, '$checked']) + '> Sustituto temporal (se paga con el crédito de las miniaturas heridas y se va al acabar la partida)</label>'
+        : '') +
+      (u.id && catalogUnitOf(u) && AW.sheet
+        ? '<details class="col-span-12 text-sm"><summary class="cursor-pointer text-slate-400 hover:text-slate-200">Ver ficha (atributos, ataques y rasgos)</summary><div class="mt-2">' + AW.sheet.unitBlock(u, { faction: fname }) + '</div></details>'
         : '') +
       gearBlock(u, i) +
       '</div>'
@@ -566,61 +594,41 @@
     );
   }
 
-  // Comandante de la banda: se elige entre los perfiles de la facción y se ve su ficha completa
-  // (atributos, ataques, rasgos y equipo de serie). Su equipo se compra en la fila de la miniatura.
-  function commanderBlock(e, cat) {
-    const cmds = cat.map((c, i) => [c, i]).filter((p) => p[0].tipo === 'comandante');
-    if (!cmds.length) return '';
-    const cur = e.units.find((u) => u.tipo === 'comandante');
-    const sel = cur && cur.id ? cmds.find((p) => p[0].id === cur.id) : null;
-    return (
-      '<div class="border-t border-slate-800 pt-5">' +
-      '<h4 class="text-lg font-bold text-white mb-1">Comandante</h4>' +
-      '<p class="text-xs text-slate-500 mb-3">Elige el perfil de comandante de la facción. Su equipo lo añades abajo, en su fila de miniatura.</p>' +
-      '<select ' + act('change', 'AW.setCommander', ['$value']) + ' class="' + inputCls + ' sm:w-auto">' +
-      '<option value="">' + (cur && !sel ? 'Comandante personalizado' : 'Sin comandante') + '</option>' +
-      cmds.map((p) => '<option value="' + p[1] + '"' + (sel && sel[1] === p[1] ? ' selected' : '') + '>' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP · ' + statLine(p[0]) + ')</option>').join('') +
-      '</select>' +
-      (cur && AW.sheet ? '<div class="mt-3">' + AW.sheet.unitBlock(cur, { faction: e.faction }) + '</div>' : '') +
-      '</div>'
-    );
-  }
-
   function viewBandEditor() {
     const e = state.editing;
     const ctx = state.bandContext;
     const factions = catalogFactions();
-    const cat = catalogUnits(e.faction);
+    const groups = recruitGroups(e.faction);
 
     const inner =
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5">' +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" ' + act('input', 'AW.setField', ['name', '$value']) + ' maxlength="60" class="' + inputCls + '"></div>' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Facción</label>' + factionSelect(e.faction, factions, ctx && ctx.lockFaction) + '</div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Facción' + (e.units.length && !(ctx && ctx.lockFaction) ? ' <span class="text-slate-500">(quita las miniaturas para cambiarla)</span>' : '') + '</label>' + factionSelect(e.faction, factions, (ctx && ctx.lockFaction) || e.units.length > 0) + '</div>' +
       '</div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea ' + act('input', 'AW.setField', ['notes', '$value']) + ' rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
-      commanderBlock(e, cat) +
       '<div class="border-t border-slate-800 pt-5">' +
       '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
       '<span class="text-amber-400 font-bold"><span id="aw-total">' + totalOf(e.units) + '</span> GP' +
       (ctx && ctx.maxValue ? ' <span class="text-slate-500 font-normal">/ ' + ctx.maxValue + '</span>' : '') + '</span></div>' +
       (ctx && ctx.summary ? '<div id="aw-ctx" class="mb-3">' + ctx.summary(e.units) + '</div>' : '') +
       '<div class="space-y-2">' + e.units.map(unitRow).join('') + '</div>' +
-      '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
-      '<button ' + act('click', 'AW.addUnit', []) + ' class="' + btnGhost + '">+ Añadir miniatura</button>' +
-      (cat.length
-        ? '<select ' + act('change', 'AW.addFromCatalog', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
-          TIPOS.map((t) => {
-            const opts = cat
-              .map((u, i) => [u, i])
-              .filter((p) => p[0].tipo === t[0])
-              .map((p) => '<option value="' + p[1] + '">' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP · ' + statLine(p[0]) + ')</option>')
-              .join('');
-            return opts ? '<optgroup label="' + t[1] + '">' + opts + '</optgroup>' : '';
-          }).join('') +
-          '</select>'
+      '<div class="mt-3">' +
+      (groups.length
+        ? '<select ' + act('change', 'AW.addFromCatalog', ['$value'], { reset: true }) + ' class="' + inputCls + ' sm:w-auto"><option value="">Añadir miniatura del catálogo...</option>' +
+          groups.map((g) =>
+            TIPOS.map((t) => {
+              const opts = g.units
+                .filter((p) => p.u.tipo === t[0])
+                .map((p) => '<option value="' + esc(p.f.id + ':' + p.u.id) + '">' + esc(p.u.nombre) + ' (' + (Number(p.u.coste) || 0) + ' GP · ' + statLine(p.u) + ')</option>')
+                .join('');
+              return opts ? '<optgroup label="' + esc(g.label + ' — ' + t[1]) + '">' + opts + '</optgroup>' : '';
+            }).join('')
+          ).join('') +
+          '</select>' +
+          (groups.some((g) => g.kind === 'ally') ? '<p class="mt-2 text-xs text-sky-300/80">Sugeridas por alianza: ' + groups.filter((g) => g.kind === 'ally').map((g) => esc(g.label.replace('Aliados: ', ''))).join(', ') + ' (regla de facción).</p>' : '')
         : e.faction && factions.length
-          ? '<span class="text-xs text-slate-500">No hay catálogo para "' + esc(e.faction) + '": añade las miniaturas a mano.</span>'
+          ? '<span class="text-xs text-slate-500">No hay catálogo para "' + esc(e.faction) + '".</span>'
           : '<span class="text-xs text-slate-500">Elige una facción para ver su catálogo de miniaturas.</span>') +
       '</div>' +
       '<div id="aw-issues">' + issuesHtml() + '</div></div>' +
@@ -796,9 +804,12 @@
   AW.addGear = (i, val) => {
     if (!val) return;
     const [origen, id] = String(val).split(':');
-    const d = window.AWGear && AWGear.find(origen, id, state.editing.faction);
     const unit = state.editing.units[i];
-    if (!d || !unit) return;
+    if (!unit) return;
+    const d = window.AWGear && AWGear.find(origen, id, unitFactionName(unit, state.editing.faction));
+    if (!d) return;
+    const opts = unit.id ? AWGear.optionsFor(unit.id) : null;
+    if (opts && !(origen === 'comun' ? opts.common : opts.exclusive).some((a) => a.id === id)) return toast('Esta miniatura no puede llevar ese equipo', 'error');
     unit.equipo = unit.equipo || [];
     if (unit.equipo.some((g) => g.origen === origen && g.id === id)) return;
     if (armourBlocked(unit, d, origen)) return toast('Esta miniatura ya lleva armadura', 'error');
@@ -849,39 +860,13 @@
     renderApp(true);
   };
 
-  AW.addUnit = () => {
-    state.editing.units.push({ nombre: '', tipo: 'tropa', coste: 0 });
-    renderApp();
-  };
-
-  AW.addFromCatalog = (idx) => {
-    if (idx === '') return;
-    const u = catalogUnits(state.editing.faction)[Number(idx)];
-    if (!u) return;
-    state.editing.units.push({ id: u.id, nombre: u.nombre, tipo: u.tipo || 'tropa', coste: Number(u.coste) || 0 });
-    renderApp();
-  };
-
-  // Pone o cambia el comandante (siempre el primero de la banda). Conserva el equipo que siga siendo válido.
-  AW.setCommander = (idx) => {
-    const units = state.editing.units;
-    const at = units.findIndex((u) => u.tipo === 'comandante');
-    if (idx === '') {
-      if (at >= 0) units.splice(at, 1);
-      return renderApp();
-    }
-    const c = catalogUnits(state.editing.faction)[Number(idx)];
-    if (!c) return;
-    const unit = { id: c.id, nombre: c.nombre, tipo: 'comandante', coste: Number(c.coste) || 0 };
-    const old = at >= 0 ? units.splice(at, 1)[0] : null;
-    unit.equipo = [];
-    ((old && old.equipo) || []).forEach((g) => {
-      const d = window.AWGear && AWGear.find(g.origen, g.id, state.editing.faction);
-      if (!d || armourBlocked(unit, d, g.origen)) return;
-      if (g.origen === 'comun' && gearArmourLevel(g.id)) dropSerieArmour(unit);
-      unit.equipo.push({ id: g.id, origen: g.origen, nombre: g.nombre, coste: gearPrice(unit, d, g.origen) });
-    });
-    units.unshift(unit);
+  // Añade una miniatura del catálogo: val = "idFacción:idMiniatura". Nombre, tipo y coste vienen del catálogo.
+  AW.addFromCatalog = (val) => {
+    if (!val) return;
+    const [fid, uid] = String(val).split(':');
+    const pick = recruitGroups(state.editing.faction).reduce((all, g) => all.concat(g.units), []).find((p) => p.f.id === fid && p.u.id === uid);
+    if (!pick) return;
+    state.editing.units.push({ id: pick.u.id, nombre: pick.u.nombre, tipo: pick.u.tipo || 'tropa', coste: Number(pick.u.coste) || 0, faccion_id: pick.f.id });
     renderApp();
   };
 

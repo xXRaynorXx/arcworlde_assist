@@ -1,11 +1,11 @@
 // ============================================================================
-// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 2.5)
-// Contiene: Todas las Facciones, Miniaturas/Atributos, Ataques, Hechizos,
+// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 4.0)
+// Contiene: Todas las Facciones, Miniaturas/Atributos, Ataques, Saberes Mágicos / Lista de Hechizos,
 // Armería Exclusiva y Común, Diccionario de Rasgos y Sistema de Campaña Completo.
 // ============================================================================
 
 const compendioArcWorlde = {
-  "version": "2.5",
+  "version": "4.0",
   "titulo": "Compendio Oficial Completo ArcWorlde - Base de Datos Maestra",
   "fecha_actualizacion": "2026-11-09",
   "reglas_generales_banda": {
@@ -144,6 +144,12 @@ const compendioArcWorlde = {
           "equipo_de_serie": [
             "Cucharas y Calderos de Combate",
             "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb"
+          ],
+          "hechizos": [
+            "Sopa de Verduras / Hearty Veggie Soup (Exige 14): Alcance 6\". Sana 3 HP a un personaje aliado a 6\" o menos.",
+            "Estofado de Oveja / Marvellous Mutton Stew (Exige 16): Alcance 6\". Un aliado a 6\" puede repetir todas las tiradas de Leg It durante la Ronda.",
+            "Curry Cocklegriff Madras / Cocklegriff Madras (Exige 20): Alcance 6\". Otorga el ataque Fired Up (1AP, Power 8, +1 vs Flammable) a un aliado a 6\" hasta el final de la ronda.",
+            "Sorpresa de Carne Misteriosa / Mystery Meat Surprise (Exige 21): Alcance 6\". Otorga +2 AP y cura D6 HP a un personaje aliado a 6\" o menos."
           ]
         },
         {
@@ -310,6 +316,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: A 2\" o menos de cobertura o terreno, los ataques a distancia enemigos sufren +1 a la dificultad de la Hazaña.",
           "restriccion": "Requiere estar a 2\" de un elemento de terreno."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb",
+          "hechizos": [
+            {
+              "nombre": "Sopa de Verduras / Hearty Veggie Soup",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Sana 3 HP a un personaje aliado a 6\" o menos."
+            },
+            {
+              "nombre": "Estofado de Oveja / Marvellous Mutton Stew",
+              "exige": 16,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Un aliado a 6\" puede repetir todas las tiradas de Leg It durante la Ronda."
+            },
+            {
+              "nombre": "Curry Cocklegriff Madras / Cocklegriff Madras",
+              "exige": 20,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Otorga el ataque Fired Up (1AP, Power 8, +1 vs Flammable) a un aliado a 6\" hasta el final de la ronda."
+            },
+            {
+              "nombre": "Sorpresa de Carne Misteriosa / Mystery Meat Surprise",
+              "exige": 21,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Otorga +2 AP y cura D6 HP a un personaje aliado a 6\" o menos."
+            }
+          ]
+        }
       ]
     },
     {
@@ -442,6 +483,11 @@ const compendioArcWorlde = {
           ],
           "equipo_de_serie": [
             "Contraption Trunk / Cofre Mecánico (Seguidor robot de 30mm que se desplaza gratis con el Mago)"
+          ],
+          "hechizos": [
+            "Griffling Mecánico / Mechanical Griffling (Exige 14): Alcance Contacto. Despliega un Griffling de metal autómata en contacto de peana que se activa inmediatamente.",
+            "Sobrecarga de Arcanita / Arcane Overcharge (Exige 16): Alcance 6\". Sobrecarga armas de pólvora o arcloque de aliados a 6\", otorgando +2 al Power en el siguiente disparo.",
+            "Barrera de Autómatas / Automaton Shield (Exige 18): Alcance 4\". Despliega una barrera protectora de engranajes que otorga +1 de Armadura a todos los aliados a 4\"."
           ]
         },
         {
@@ -525,40 +571,76 @@ const compendioArcWorlde = {
       ],
       "armeria_exclusiva": [
         {
-          "id": "imperial_ranged_weapon",
+          "id": "medical_kit",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
-          "nombre": "Arma a Distancia Imperial / Imperial Ranged Weapon",
+          "nombre": "Botiquín Médico / Medical Kit",
+          "tipo": "Objeto / Consumible",
+          "coste": 10,
+          "etiqueta": "Armería Imperial",
+          "resumen": "Ungüentos, aceites y vendas para curar heridas de guerra.",
+          "detalles": "Efectos: Un solo uso. Al consumirse, el personaje o un aliado en contacto de peana recupera D6 HP.",
+          "restriccion": "Un solo uso (One use only)."
+        },
+        {
+          "id": "imperial_crossbow",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Ballesta Imperial / Imperial Crossbow",
           "tipo": "Equipo / Arma a Distancia",
           "coste": 15,
           "etiqueta": "Armería Imperial",
-          "resumen": "Ballesta imperial o mosquete de repetición.",
-          "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 5, Alcance 12\").",
-          "restriccion": "Uso continuo."
+          "resumen": "Ballesta tradicional de acero empleada por veteranos imperiales.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 5, Alcance 16\".",
+          "restriccion": "Uso continuo mientras esté equipada."
         },
         {
-          "id": "arquebus",
+          "id": "arcloque_rifle",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
-          "nombre": "Arcabuz de Pólvora / Arquebus",
-          "tipo": "Equipo / Arma de Pólvora",
-          "coste": 25,
-          "etiqueta": "Armería Imperial",
-          "resumen": "Potente arma de fuego con proyectiles de plomo.",
-          "detalles": "Efectos: Ataque a distancia Arcabuzazo (Power 8, Alcance 16\"). Ignores 1 de Armadura.",
-          "restriccion": "Requiere 2 AP para disparar."
-        },
-        {
-          "id": "gunpowder_keg",
-          "faccion_id": "imperial",
-          "faccion_nombre": "Imperiales",
-          "nombre": "Barril de Pólvora / Gunpowder Keg",
-          "tipo": "Objeto / Explosivo",
+          "nombre": "Rifle Arcloque / Arcloque Rifle",
+          "tipo": "Equipo / Arma de Pólvora Arcana",
           "coste": 20,
           "etiqueta": "Armería Imperial",
-          "resumen": "Carga explosiva con mecha rápida.",
-          "detalles": "Efectos: Se coloca en el mapa con Hazaña Media. Explotar causa 8 Hits de Poder 7 a todo personaje a 3\" y los deja Prone.",
-          "restriccion": "De un solo uso."
+          "resumen": "Arma pesada de fuego de la invención del Gremio de Hojalateros.",
+          "detalles": "Efectos: Otorga el ataque (Ranged) Shot: Power 8, Alcance 20\". Máximo 1 uso por activación. Si hay más fallos que éxitos al disparar, el tirador sufre 1 Hit que ignora armadura.",
+          "restriccion": "Solo 1 disparo por activación."
+        },
+        {
+          "id": "arcloque_pistol",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Pistola Arcloque / Arcloque Pistol",
+          "tipo": "Equipo / Arma de Pólvora Arcana",
+          "coste": 15,
+          "etiqueta": "Armería Imperial",
+          "resumen": "Versión compacta del rifle para oficiales y dragones.",
+          "detalles": "Efectos: Solo para Capitanes, Tinkerer y Dragoons. Otorga el ataque (Ranged) Shot: Power 7, Alcance 8\". 1 disparo por pistola por activación. Si fallos > éxitos, sufre 1 Hit sin armadura.",
+          "restriccion": "Solo Captains, Tinkerers y Dragoons."
+        },
+        {
+          "id": "imperial_gryphon",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Estandarte del Grifo Imperial / Imperial Gryphon Standard",
+          "tipo": "Objeto / Apoyo de Moral",
+          "coste": 15,
+          "etiqueta": "Armería Imperial",
+          "resumen": "Figura de grifo niquelada sobre asta sagrada.",
+          "detalles": "Efectos: Mientras la porte un personaje aliado, todos los aliados a 12\" o menos repiten Chequeos de Valentía fallidos.",
+          "restriccion": "Portado por un personaje aliado."
+        },
+        {
+          "id": "sergeants_chevrons",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Galones de Sargento / Sergeant's Chevrons",
+          "tipo": "Equipo / Mando",
+          "coste": 10,
+          "etiqueta": "Armería Imperial",
+          "resumen": "Insignia de rango militar para liderar a las tropas de tropa.",
+          "detalles": "Efectos: Solo para Troopers. Otorga +1 a Valentía y el rasgo Make Orders. Si toma una orden de un Capitán, puede emitir esa misma orden a otros Troopers en la misma activación.",
+          "restriccion": "Solo equipable en Troopers."
         },
         {
           "id": "imperial_mount",
@@ -568,9 +650,37 @@ const compendioArcWorlde = {
           "tipo": "Equipo / Montura",
           "coste": 30,
           "etiqueta": "Armería Imperial",
-          "resumen": "Corcel blindado militar.",
-          "detalles": "Efectos: Otorga +5 HP, +4 al Movimiento y peana de 50mm.",
-          "restriccion": "Solo para Capitanes y Oficiales."
+          "resumen": "Corcel de caballería o bestia local capturada.",
+          "detalles": "Efectos: Solo para Captains, Troopers y Dragoons. Otorga +5 HP, +4 al Movimiento y el rasgo Ágil (Agile). Pasa a peana de 50mm.",
+          "restriccion": "Captains, Troopers y Dragoons."
+        }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Inventos y Artilugios Arcanos / Tinkerer's Arcane Contraptions",
+          "hechizos": [
+            {
+              "nombre": "Griffling Mecánico / Mechanical Griffling",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "Contacto",
+              "efecto": "Despliega un Griffling de metal autómata en contacto de peana que se activa inmediatamente."
+            },
+            {
+              "nombre": "Sobrecarga de Arcanita / Arcane Overcharge",
+              "exige": 16,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Sobrecarga armas de pólvora o arcloque de aliados a 6\", otorgando +2 al Power en el siguiente disparo."
+            },
+            {
+              "nombre": "Barrera de Autómatas / Automaton Shield",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "4\"",
+              "efecto": "Despliega una barrera protectora de engranajes que otorga +1 de Armadura a todos los aliados a 4\"."
+            }
+          ]
         }
       ]
     },
@@ -807,6 +917,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Permite realizar ataques en combate melé a una distancia de hasta 3\" (incluso a través de aliados).",
           "restriccion": "Alcance de 3\" en melé."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de la Villanía / Lore of Villainy",
+          "hechizos": [
+            {
+              "nombre": "Chillido Maligno / Sickly Screech",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "4\" Área",
+              "efecto": "Cada personaje a 4\" tira D6; si falla, sufre -1 AP en su siguiente Activación."
+            },
+            {
+              "nombre": "Aura Ominosa / Ominous Aura",
+              "exige": 17,
+              "ap": 1,
+              "alcance": "Personal",
+              "efecto": "El lanzador obtiene el rasgo Temible (Fearsome) hasta el final de la Ronda."
+            },
+            {
+              "nombre": "Esbirros Inquietos / Restless Minions",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Reanima a un esbirro Hobgoblin o Underling Noqueado a 6\", devolviéndolo al combate con 1 HP."
+            },
+            {
+              "nombre": "Proyectil Oscuro / Dark Bolt",
+              "exige": 20,
+              "ap": 2,
+              "alcance": "12\"",
+              "efecto": "Ataque mágico a distancia Power 7 que ignora Armadura y Escudos."
+            }
+          ]
+        }
       ]
     },
     {
@@ -836,9 +981,14 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "horns_and_tusks",
+            "cured_meat",
+            "beastfolk_ranged_weapon",
             "protective_hide",
-            "cured_meat"
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -867,10 +1017,23 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "cured_meat"
+            "cured_meat",
+            "beastfolk_ranged_weapon",
+            "protective_hide",
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Criaturas del Bosque / Forest Creatures (Exige 14): Alcance 12\". Bestias e insectos atacan al objetivo y a todos a 3\" de él, causando 3 Impactos (3 Hits) automáticos.",
+            "Dominio Bestial / Warging (Exige 17): Alcance 12\". Entra en la mente de una bestia aliada en el tablero para activarla inmediatamente en la ronda.",
+            "Hierbas Curativas / Healing Herbs (Exige 18): Alcance 6\". Restaura D6 HP a un personaje aliado a 6\" o menos.",
+            "Llamada de lo Salvaje / Call of the Wild (Exige 20): Alcance 6\". Otorga +2 al Power y +2 al Movimiento a un Hombre Bestia o Bestia aliada hasta el final de la ronda."
           ]
         },
         {
@@ -896,9 +1059,14 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "horns_and_tusks",
+            "cured_meat",
+            "beastfolk_ranged_weapon",
             "protective_hide",
-            "cured_meat"
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -928,8 +1096,14 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "cured_meat",
             "beastfolk_ranged_weapon",
-            "cured_meat"
+            "protective_hide",
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -958,7 +1132,14 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "cured_meat"
+            "cured_meat",
+            "beastfolk_ranged_weapon",
+            "protective_hide",
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
@@ -986,7 +1167,16 @@ const compendioArcWorlde = {
             "Waterborne"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "cured_meat",
+            "beastfolk_ranged_weapon",
+            "protective_hide",
+            "horns_and_tusks",
+            "long_legs",
+            "camouflaged_pelt",
+            "ugly",
+            "monster_rider"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
           ]
@@ -1028,50 +1218,133 @@ const compendioArcWorlde = {
         {
           "id": "cured_meat",
           "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
+          "faccion_nombre": "Hombres Bestia",
           "nombre": "Carne Curada / Cured Meat",
           "tipo": "Objeto / Consumible",
           "coste": 10,
           "etiqueta": "Armería Beastfolk",
-          "resumen": "Haggis de Troll y cecina conservada para travesías.",
-          "detalles": "Efectos: Un solo uso. Recupera D6 HP al personaje o a un aliado en contacto de peana.",
-          "restriccion": "De un solo uso."
+          "resumen": "Raciones de carne o haggis de troll de larga conservación.",
+          "detalles": "Efectos: Un solo uso. Al consumirse, el personaje o un aliado en contacto de peana recupera D6 HP.",
+          "restriccion": "Un solo uso (One use only)."
         },
         {
           "id": "beastfolk_ranged_weapon",
           "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
+          "faccion_nombre": "Hombres Bestia",
           "nombre": "Arma a Distancia Beastfolk / Beastfolk Ranged Weapon",
           "tipo": "Equipo / Arma a Distancia",
           "coste": 15,
           "etiqueta": "Armería Beastfolk",
-          "resumen": "Hondas de cuero crudo, arcos de hueso y ballestas de madera.",
-          "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 5, Alcance 12\").",
-          "restriccion": "Uso continuo."
-        },
-        {
-          "id": "horns_and_tusks",
-          "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
-          "nombre": "Cuernos y Colmillos / Horns and Tusks",
-          "tipo": "Equipo / Mutación Corporal",
-          "coste": 20,
-          "etiqueta": "Armería Beastfolk",
-          "resumen": "Cornamentas y colmillos prominentes en la peana.",
-          "detalles": "Efectos: Otorga +1 al Poder (Power) en TODOS los ataques del personaje.",
-          "restriccion": "Atributo físico permanente."
+          "resumen": "Hondas de cuero, arcos cortos o ballestas rústicas.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 5, Alcance 12\".",
+          "restriccion": "Uso continuo mientras esté equipada."
         },
         {
           "id": "protective_hide",
           "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
+          "faccion_nombre": "Hombres Bestia",
           "nombre": "Piel Protectora / Protective Hide",
-          "tipo": "Equipo / Armadura Natural",
+          "tipo": "Forma Animal (Animal Form)",
           "coste": 20,
           "etiqueta": "Armería Beastfolk",
-          "resumen": "Piel gruesa endurecida por cicatrices de combate.",
-          "detalles": "Efectos: Otorga +1 al Valor de Armadura del personaje.",
-          "restriccion": "Armadura natural."
+          "resumen": "Caparazón de quitina, escamas gruesas o piel de dureza extraordinaria.",
+          "detalles": "Efectos: Otorga +1 a la Armadura. Esta armadura no se destruye ni se rompe por ataques. Se acumula con otros tipos de armadura.",
+          "restriccion": "Atributo físico permanente (no se puede desequipar)."
+        },
+        {
+          "id": "horns_and_tusks",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Cuernos y Colmillos / Horns & Tusks",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 20,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Mandíbulas prominentes, cornamenta afilada o colmillos devastadores.",
+          "detalles": "Efectos: Otorga +1 al Power en todos los ataques melé del personaje.",
+          "restriccion": "Atributo físico permanente (no se puede desequipar)."
+        },
+        {
+          "id": "long_legs",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Patas Largas / Long Legs (Pies Ligeros / Ágil)",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 20,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Extremidades inferiores largas y musculadas adaptadas para dar grandes zancadas o saltar al combate.",
+          "detalles": "Efectos: Otorga +2 al Movimiento y el rasgo Ágil (Agile), permitiendo repetir un Chequeo de Leg It fallido por ronda.",
+          "restriccion": "Atributo físico permanente (no se puede desequipar)."
+        },
+        {
+          "id": "camouflaged_pelt",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Pelaje Camuflado / Camouflaged Pelt",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 15,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Patrón de piel o follaje corporal que mimetiza al personaje con el bosque.",
+          "detalles": "Efectos: Los personajes enemigos que realicen ataques a distancia contra este personaje aumentan la dificultad de su tirada de Hazaña en 1 (+1 Feat difficulty).",
+          "restriccion": "Atributo físico permanente (no se puede desequipar)."
+        },
+        {
+          "id": "ugly",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Feo / Ugly",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 15,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Rostro grotesco o deforme de pesadilla abisal.",
+          "detalles": "Efectos: Otorga el rasgo Temible (Fearsome). Los enemigos deben superar un Chequeo de Valentía para poder atacarlo o trabarse en combate.",
+          "restriccion": "Atributo físico permanente (no se puede desequipar)."
+        },
+        {
+          "id": "monster_rider",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Jinete de Monstruos / Monster Rider",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 5,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Afinidad innata para cabalgar a lomos de bestias y monstruos del bosque.",
+          "detalles": "Efectos: Permite utilizar el rasgo Montura Monstruosa (Monstrous Mount) sobre cualquier Bestia, Monstruo o Titán del Bestiario.",
+          "restriccion": "Atributo físico permanente."
+        }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de Diente y Pelaje / Lore of Tooth and Fur",
+          "hechizos": [
+            {
+              "nombre": "Criaturas del Bosque / Forest Creatures",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "12\"",
+              "efecto": "Bestias e insectos atacan al objetivo y a todos a 3\" de él, causando 3 Impactos (3 Hits) automáticos."
+            },
+            {
+              "nombre": "Dominio Bestial / Warging",
+              "exige": 17,
+              "ap": 2,
+              "alcance": "12\"",
+              "efecto": "Entra en la mente de una bestia aliada en el tablero para activarla inmediatamente en la ronda."
+            },
+            {
+              "nombre": "Hierbas Curativas / Healing Herbs",
+              "exige": 18,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Restaura D6 HP a un personaje aliado a 6\" o menos."
+            },
+            {
+              "nombre": "Llamada de lo Salvaje / Call of the Wild",
+              "exige": 20,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Otorga +2 al Power y +2 al Movimiento a un Hombre Bestia o Bestia aliada hasta el final de la ronda."
+            }
+          ]
         }
       ]
     },
@@ -1138,6 +1411,12 @@ const compendioArcWorlde = {
           ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Pozo de Alquitrán / Tar Pit (Exige 14): Alcance 8\". Coloca un marcador de alquitrán. Todos los personajes a 3\" reducen su Movimiento a 1\".",
+            "Glaive Espiritual / Spirit Glaive (Exige 17): Alcance 3\". Encanta un arma aliada. El objetivo atacado pierde 1 AP por cada 3 de daño sufrido en lugar de perder HP.",
+            "Ritual Olvidado / Forgotten Ritual (Exige 20): Alcance 3\". Todos los aliados con el rasgo Huesos (Bones) a 3\" del Mago recuperan D3 HP.",
+            "Justicia de los Muertos / Justice of the Dead (Exige 21): Alcance Global. Cada enemigo que haya noqueado a un aliado sufre D6 Impactos que ignoran Armadura."
           ]
         },
         {
@@ -1364,6 +1643,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Hazaña Fácil para tocar la trompeta: todos los aliados con el rasgo Bones a 6\" o menos ganan +1 al Movimiento esa ronda.",
           "restriccion": "Hazaña Fácil."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber del Más Allá / Lore of the Thereafter",
+          "hechizos": [
+            {
+              "nombre": "Pozo de Alquitrán / Tar Pit",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "8\"",
+              "efecto": "Coloca un marcador de alquitrán. Todos los personajes a 3\" reducen su Movimiento a 1\"."
+            },
+            {
+              "nombre": "Glaive Espiritual / Spirit Glaive",
+              "exige": 17,
+              "ap": 1,
+              "alcance": "3\"",
+              "efecto": "Encanta un arma aliada. El objetivo atacado pierde 1 AP por cada 3 de daño sufrido en lugar de perder HP."
+            },
+            {
+              "nombre": "Ritual Olvidado / Forgotten Ritual",
+              "exige": 20,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Todos los aliados con el rasgo Huesos (Bones) a 3\" del Mago recuperan D3 HP."
+            },
+            {
+              "nombre": "Justicia de los Muertos / Justice of the Dead",
+              "exige": 21,
+              "ap": 3,
+              "alcance": "Global",
+              "efecto": "Cada enemigo que haya noqueado a un aliado sufre D6 Impactos que ignoran Armadura."
+            }
+          ]
+        }
       ]
     },
     {
@@ -1395,6 +1709,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Oscuridad / Darkness (Exige 14): Alcance 8\". Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos.",
+            "Trueno Dramático / Dramatic Thunderclap (Exige 17): Alcance Global. Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda.",
+            "Cautivar / Beguile (Exige 19): Alcance 6\". Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques.",
+            "Forma de Niebla / Mist Form (Exige 21): Alcance Personal. Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
           ]
         },
         {
@@ -1421,6 +1741,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Oscuridad / Darkness (Exige 14): Alcance 8\". Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos.",
+            "Trueno Dramático / Dramatic Thunderclap (Exige 17): Alcance Global. Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda.",
+            "Cautivar / Beguile (Exige 19): Alcance 6\". Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques.",
+            "Forma de Niebla / Mist Form (Exige 21): Alcance Personal. Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
           ]
         },
         {
@@ -1575,6 +1901,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Hazaña Fácil para transformarse en un Crypt Bat a full HP. Puede volver a su forma original en su activación.",
           "restriccion": "Transformación voluntaria."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de la Noche / Lore of the Night",
+          "hechizos": [
+            {
+              "nombre": "Oscuridad / Darkness",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "8\"",
+              "efecto": "Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos."
+            },
+            {
+              "nombre": "Trueno Dramático / Dramatic Thunderclap",
+              "exige": 17,
+              "ap": 1,
+              "alcance": "Global",
+              "efecto": "Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda."
+            },
+            {
+              "nombre": "Cautivar / Beguile",
+              "exige": 19,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques."
+            },
+            {
+              "nombre": "Forma de Niebla / Mist Form",
+              "exige": 21,
+              "ap": 2,
+              "alcance": "Personal",
+              "efecto": "Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
+            }
+          ]
+        }
       ]
     },
     {
@@ -1606,6 +1967,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Frío Cadavérico / Deathly Chill (Exige 14): Alcance 12\". Reduce en D3 los AP del personaje enemigo objetivo en su siguiente Activación.",
+            "Roecueros / Bonegnawer (Exige 17): Alcance 6\". Invoca una Carrion Rat gratuita a 6\" que se activa de inmediato.",
+            "Drenaje de Alma / Soul Drain (Exige 19): Alcance 6\". El objetivo sufre 3 Impactos que ignoran Armadura; el lanzador recupera 1 HP por cada herida causada.",
+            "Resurrección Masiva / Mass Resurrection (Exige 21): Alcance 6\". Devuelve a la vida a hasta 2 unidades no-muertas caídas a 6\" con 1 HP cada una."
           ]
         },
         {
@@ -1747,6 +2114,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Otorga el rasgo Raiser of the Dead para resucitar Carrion Rats con Hazaña Fácil. Otorga Pack Hunter a las ratas a 12\".",
           "restriccion": "Control de plagas."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de los Malditos / Lore of the Damned",
+          "hechizos": [
+            {
+              "nombre": "Frío Cadavérico / Deathly Chill",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "12\"",
+              "efecto": "Reduce en D3 los AP del personaje enemigo objetivo en su siguiente Activación."
+            },
+            {
+              "nombre": "Roecueros / Bonegnawer",
+              "exige": 17,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Invoca una Carrion Rat gratuita a 6\" que se activa de inmediato."
+            },
+            {
+              "nombre": "Drenaje de Alma / Soul Drain",
+              "exige": 19,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "El objetivo sufre 3 Impactos que ignoran Armadura; el lanzador recupera 1 HP por cada herida causada."
+            },
+            {
+              "nombre": "Resurrección Masiva / Mass Resurrection",
+              "exige": 21,
+              "ap": 3,
+              "alcance": "6\"",
+              "efecto": "Devuelve a la vida a hasta 2 unidades no-muertas caídas a 6\" con 1 HP cada una."
+            }
+          ]
+        }
       ]
     },
     {
@@ -1779,6 +2181,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
+            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
+            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
+            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
           ]
         },
         {
@@ -1806,6 +2214,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
+            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
+            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
+            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
           ]
         },
         {
@@ -1833,6 +2247,12 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
+            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
+            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
+            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
           ]
         },
         {
@@ -1911,6 +2331,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 8, Alcance 18\").",
           "restriccion": "Alcance 18\"."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber del Bosque Profundo / Lore of the Darkwood",
+          "hechizos": [
+            {
+              "nombre": "Maleza Espinosa / Tangleweed",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "6\" Área",
+              "efecto": "Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\"."
+            },
+            {
+              "nombre": "Bosque Despiadado / Merciless Wood",
+              "exige": 17,
+              "ap": 2,
+              "alcance": "8\"",
+              "efecto": "Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6."
+            },
+            {
+              "nombre": "Invocación de Briarbeast / Summon Briarbeast",
+              "exige": 19,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP."
+            },
+            {
+              "nombre": "Sacrificio de Sangre / Blood Sacrifice",
+              "exige": 21,
+              "ap": 2,
+              "alcance": "Contacto",
+              "efecto": "Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
+            }
+          ]
+        }
       ]
     },
     {
@@ -1940,9 +2395,22 @@ const compendioArcWorlde = {
             "War Hides (+1 Armadura)"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "ourk_mount",
+            "ourk_ranged_weapon",
+            "pet_droggo",
+            "healing_broth",
+            "swamp_scrumpy",
+            "magical_mushroom"
+          ],
           "equipo_de_serie": [
             "Pieles de Batalla Ourk (+1 Armadura)"
+          ],
+          "hechizos": [
+            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
+            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
+            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
+            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
           ]
         },
         {
@@ -1967,9 +2435,20 @@ const compendioArcWorlde = {
             "Mage"
           ],
           "max_por_banda": 1,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "ourk_mount",
+            "healing_broth",
+            "swamp_scrumpy",
+            "magical_mushroom"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "False Foe: (Exige 14) Alcance 8\". El objetivo debe superar Hazaña Fácil antes de poder atacar esa Ronda.",
+            "Stupor: (Exige 17) Área 3\". Todos las miniaturas a 3\" quedan profundamente dormidas (cuentan como Prone hasta ser atacadas/hechizadas o superar Hazaña Media).",
+            "Dream Eater: (Exige 19) Alcance 2\". Objetivo dormido por Stupor pierde D3 AP para su siguiente activación y se los da al caster. No despierta al objetivo.",
+            "Inside your Mind: (Exige 21) Alcance 4\" (peana 30/40mm). Finaliza activación del caster; activa inmediatamente al objetivo y el jugador Ourk gasta 3 AP controlándolo libremente."
           ]
         },
         {
@@ -1993,9 +2472,21 @@ const compendioArcWorlde = {
             "Swamp Born"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "ourk_mount",
+            "ourk_ranged_weapon",
+            "healing_broth",
+            "swamp_scrumpy",
+            "goading_fork"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
+            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
+            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
+            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
           ]
         },
         {
@@ -2019,9 +2510,20 @@ const compendioArcWorlde = {
             "Throwable"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "ourk_mount",
+            "ourk_ranged_weapon",
+            "boglin_musical_instrument",
+            "healing_broth"
+          ],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
+            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
+            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
+            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
           ]
         },
         {
@@ -2050,11 +2552,166 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
+            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
+            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
+            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
           ]
         }
       ],
-      "reglas_faccion": [],
-      "armeria_exclusiva": []
+      "reglas_faccion": [
+        {
+          "id": "nomads_ourks",
+          "nombre": "Nómadas / Nomads",
+          "etiqueta": "Regla de Facción (Ourks)",
+          "resumen": "Vida itinerante en los pantanos y bosques de Mildaark.",
+          "detalles": "Efectos: Al construir tu banda de Ourks, puedes incluir personajes de las facciones Beastfolk (Hombres Bestia) y Gremlins sin penalizaciones.",
+          "restriccion": "Fase de creación de banda."
+        },
+        {
+          "id": "power_struggle",
+          "nombre": "Lucha de Poder / Power Struggle",
+          "etiqueta": "Regla de Facción (Ourks)",
+          "resumen": "Constante rivalidad por el liderazgo entre el Chieftain y el Dreameater.",
+          "detalles": "Efectos: Si incluyes un Chieftain y un Dreameater en tu banda, ambos deben realizar un Chequeo de Valentía al inicio de cada Ronda. El ganador recibe bonificadores tácticos descritos en su perfil (Chieftain: Brutos a 6\" ganan +1 Power; Dreameater: Brutos a 3\" ganan efectos de Swamp Scrumpy). El perdedor pierde 1 AP para esa activación. En caso de empate, se repite la tirada.",
+          "restriccion": "Se resuelve al inicio de cada Ronda si ambos están en mesa."
+        }
+      ],
+      "armeria_exclusiva": [
+        {
+          "id": "healing_broth",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Caldo Curativo / Healing Broth",
+          "tipo": "Objeto / Consumible",
+          "coste": 10,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Nutritivo brebaje cocinado por los Ourks para sanar heridas.",
+          "detalles": "Efectos: Un solo uso. Al consumirse, el personaje o un aliado en contacto de peana recupera D6 HP.",
+          "restriccion": "Un solo uso (One use only)."
+        },
+        {
+          "id": "ourk_ranged_weapon",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Arma a Distancia Ourk/Boglin / Ourk/Boglin Ranged Weapon",
+          "tipo": "Equipo / Arma a Distancia",
+          "coste": 15,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Hondas de cuero, ballestas toscas o trabucos de pantano.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 5, Alcance 15\".",
+          "restriccion": "Uso continuo mientras esté equipada."
+        },
+        {
+          "id": "swamp_scrumpy",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Aguardiente del Pantano / Swamp Scrumpy",
+          "tipo": "Objeto / Consumible",
+          "coste": 10,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Potente licor casero fermentado con ingredientes del pantano.",
+          "detalles": "Efectos: Un solo uso. Al beberlo se tira 1D6: 1 (Rotura de tripas: pierde 2 AP esa activación); 2-5 (Cosa buena: repite todas las tiradas de impacto fallidas esa activación); 6 (Furia alcohólica: repite tiradas de impacto y, si no está en melé, debe mover y hacer Leg It hasta trabarse o quedar Prone).",
+          "restriccion": "Un solo uso."
+        },
+        {
+          "id": "pet_droggo",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Droggo Doméstico / Pet Droggo",
+          "tipo": "Equipo / Dragón Pequeño",
+          "coste": 20,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Pequeño dragón de ciénaga que escupe llamaradas.",
+          "detalles": "Efectos: Otorga el ataque especial (2 AP) Lanzallamas Viviente (Living Flamethrower): Power 5. Traza una línea de 4\" desde la peana; todas las miniaturas a 2\" o menos de la línea son objetivo del ataque.",
+          "restriccion": "Equipable en Ourks y Boglins."
+        },
+        {
+          "id": "boglin_musical_instrument",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Instrumento Musical Boglin / Musical Instrument",
+          "tipo": "Objeto / Apoyo",
+          "coste": 10,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Tambores o flautas toscas tocadas por Boglins para animar la marcha.",
+          "detalles": "Efectos: Solo para Boglins. Todos los aliados a 3\" o menos aumentan en +1 su atributo de Movimiento.",
+          "restriccion": "Solo equipable en Boglins."
+        },
+        {
+          "id": "magical_mushroom",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Hongo Mágico / Magical Mushroom",
+          "tipo": "Objeto / Consumible",
+          "coste": 10,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Seta fluorescente recolectada de la espalda de un Swamp Wyvern.",
+          "detalles": "Efectos: Un solo uso. Al consumirse, repite todas las tiradas de Hazaña (Feat) fallidas durante el resto de la activación.",
+          "restriccion": "Un solo uso."
+        },
+        {
+          "id": "goading_fork",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Horca de Arreo / Goading Fork",
+          "tipo": "Equipo / Arma",
+          "coste": 15,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Lanza con punta provista de golosinas para azuzar bestias.",
+          "detalles": "Efectos: Cuenta como Lanza (Spear). Además, cualquier Bestia, Monstruo o Titán aliado a 1\" o menos gana +1 AP.",
+          "restriccion": "Uso continuo."
+        },
+        {
+          "id": "ourk_mount",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
+          "nombre": "Montura Ourk/Boglin / Ourk/Boglin Mount",
+          "tipo": "Equipo / Montura",
+          "coste": 30,
+          "etiqueta": "Armería Ourk",
+          "resumen": "Caimanes, sapos gigantes o bestias de pantano usadas como montura.",
+          "detalles": "Efectos: Otorga +5 HP y +4 Movimiento. Permite repetir 1 tirada de Leg It fallida por Ronda. Tamaño de peana: Ourk pasa a 50mm, Boglin pasa a 40mm.",
+          "restriccion": "Solo para Ourks y Boglins."
+        }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de la Ilusión / Lore of Delusion",
+          "hechizos": [
+            {
+              "nombre": "Enemigo Falso / False Foe",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "8\"",
+              "efecto": "Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque."
+            },
+            {
+              "nombre": "Estupefacción / Stupor",
+              "exige": 17,
+              "ap": 2,
+              "alcance": "3\" Área",
+              "efecto": "Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media."
+            },
+            {
+              "nombre": "Devorador de Sueños / Dream Eater",
+              "exige": 19,
+              "ap": 1,
+              "alcance": "2\"",
+              "efecto": "Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater."
+            },
+            {
+              "nombre": "Dentro de tu Mente / Inside your Mind",
+              "exige": 21,
+              "ap": 3,
+              "alcance": "4\"",
+              "efecto": "Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "gremlins",
@@ -2238,6 +2895,41 @@ const compendioArcWorlde = {
           "detalles": "Efectos: Otorga el rasgo Vuelo (Fly) y +4 al Movimiento.",
           "restriccion": "Solo para Burrow Dwellers."
         }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de la Travesura / Lore of Mischief",
+          "hechizos": [
+            {
+              "nombre": "Insectos Chillones / Chittering Bugs",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "8\"",
+              "efecto": "Impide acciones de movimiento al objetivo enemigo durante su siguiente activación."
+            },
+            {
+              "nombre": "Lodo Pegajoso / Sticky Mud",
+              "exige": 16,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Reduce el movimiento del objetivo a 1\" y le quita la capacidad de hacer Leg It."
+            },
+            {
+              "nombre": "Confusión Cautivadora / Confusion",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "4\" Área",
+              "efecto": "Explosión de humo y confeti que obliga a los enemigos a 4\" a mover en dirección aleatoria (1D6)."
+            },
+            {
+              "nombre": "Túnel Mágico / Tunnel Swarm",
+              "exige": 20,
+              "ap": 2,
+              "alcance": "8\"",
+              "efecto": "Abre una madriguera mágica instantánea que conecta dos puntos del mapa."
+            }
+          ]
+        }
       ]
     },
     {
@@ -2270,6 +2962,29 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
+            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
+            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
+            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
+            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
+            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
+            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
+            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
+            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
+            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
+            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
+            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
+            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
+            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
+            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
+            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
+            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
+            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
+            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
+            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
+            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
           ]
         },
         {
@@ -2296,6 +3011,29 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
+            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
+            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
+            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
+            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
+            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
+            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
+            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
+            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
+            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
+            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
+            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
+            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
+            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
+            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
+            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
+            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
+            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
+            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
+            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
+            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
           ]
         },
         {
@@ -2322,6 +3060,29 @@ const compendioArcWorlde = {
           "equipo_permitido": [],
           "equipo_de_serie": [
             "Armamento Estándar / Sin Armadura de serie"
+          ],
+          "hechizos": [
+            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
+            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
+            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
+            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
+            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
+            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
+            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
+            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
+            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
+            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
+            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
+            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
+            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
+            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
+            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
+            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
+            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
+            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
+            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
+            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
+            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
           ]
         }
       ],
@@ -2395,6 +3156,185 @@ const compendioArcWorlde = {
           "resumen": "Grimorio sustraído a un rival de otra escuela elemental.",
           "detalles": "Efectos: Permite lanzar 1 hechizo del saber de otro Colegio. Tras usarse (tenga éxito o falle), el libro se quema y se destruye.",
           "restriccion": "De un solo uso."
+        }
+      ],
+      "saberes_magicos": [
+        {
+          "saber": "Colegio Carmesí (Fuego) / Crimson College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites Carmesí / Conjure Crimson Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable)."
+            },
+            {
+              "nombre": "Bola de Fuego / Fireball",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "12\"",
+              "efecto": "Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto."
+            },
+            {
+              "nombre": "Ráfaga de Llamas / Flame Blast",
+              "exige": 20,
+              "ap": 3,
+              "alcance": "Cono 6\"",
+              "efecto": "Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos."
+            }
+          ]
+        },
+        {
+          "saber": "Colegio Zafiro (Agua y Hielo) / Sapphire College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites Zafiro / Conjure Sapphire Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate."
+            },
+            {
+              "nombre": "Marea de Asalto / Tidal Wave",
+              "exige": 17,
+              "ap": 2,
+              "alcance": "Línea 8\"",
+              "efecto": "Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta."
+            },
+            {
+              "nombre": "Puente de Hielo / Bridge of Ice",
+              "exige": 19,
+              "ap": 2,
+              "alcance": "12\"",
+              "efecto": "Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas."
+            }
+          ]
+        },
+        {
+          "saber": "Colegio Esmeralda (Naturaleza) / Emerald College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites Esmeralda / Conjure Emerald Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos."
+            },
+            {
+              "nombre": "Enredaderas Curativas / Healing Vines",
+              "exige": 17,
+              "ap": 1,
+              "alcance": "6\"",
+              "efecto": "Restaura D6 HP a una miniatura aliada en contacto con vegetación."
+            },
+            {
+              "nombre": "Alma de la Bestia / Soul of the Beast",
+              "exige": 21,
+              "ap": 3,
+              "alcance": "8\"",
+              "efecto": "Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente."
+            }
+          ]
+        },
+        {
+          "saber": "Colegio Ocre (Tierra y Piedra) / Ochre College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites Ocres / Conjure Ochre Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites de piedra con 1 de Armadura natural."
+            },
+            {
+              "nombre": "Muro de Piedra / Rock Wall",
+              "exige": 16,
+              "ap": 2,
+              "alcance": "2\"",
+              "efecto": "Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda."
+            },
+            {
+              "nombre": "Armadura de Piedra / Stone Armour",
+              "exige": 18,
+              "ap": 1,
+              "alcance": "Personal",
+              "efecto": "Otorga Armadura Pesada al lanzador durante toda la ronda."
+            },
+            {
+              "nombre": "Tesoros de la Ciénaga / ArcWorlde's Bounty",
+              "exige": 21,
+              "ap": 2,
+              "alcance": "8\"",
+              "efecto": "Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador."
+            }
+          ]
+        },
+        {
+          "saber": "Colegio Bronce (Metal y Alquimia) / Bronze College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites de Bronce / Conjure Bronze Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda."
+            },
+            {
+              "nombre": "Transfiguración / Transfiguration",
+              "exige": 16,
+              "ap": 1,
+              "alcance": "12\"",
+              "efecto": "Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior."
+            },
+            {
+              "nombre": "Ráfaga Alquímica / Alchemical Blast",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "8\"",
+              "efecto": "Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda."
+            },
+            {
+              "nombre": "Avatar de Oro / Avatar of Gold",
+              "exige": 21,
+              "ap": 2,
+              "alcance": "Personal",
+              "efecto": "Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda."
+            }
+          ]
+        },
+        {
+          "saber": "Colegio Ópalo (Aire y Espíritus) / Opal College",
+          "hechizos": [
+            {
+              "nombre": "Conjurar Sprites Ópalo / Conjure Opal Sprites",
+              "exige": 14,
+              "ap": 2,
+              "alcance": "3\"",
+              "efecto": "Invoca D3 Sprites de niebla con la capacidad de Volar (Fly)."
+            },
+            {
+              "nombre": "Aura Antinatural / Unnatural Aura",
+              "exige": 16,
+              "ap": 1,
+              "alcance": "6\" Área",
+              "efecto": "Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos."
+            },
+            {
+              "nombre": "Sanguijuela Espiritual / Spirit Leech",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador."
+            },
+            {
+              "nombre": "Hueste Espectral / Spectral Host",
+              "exige": 21,
+              "ap": 3,
+              "alcance": "6\"",
+              "efecto": "Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
+            }
+          ]
         }
       ]
     },
@@ -2488,7 +3428,28 @@ const compendioArcWorlde = {
         }
       ],
       "reglas_faccion": [],
-      "armeria_exclusiva": []
+      "armeria_exclusiva": [],
+      "saberes_magicos": [
+        {
+          "saber": "Saber de las Arañas / Lore of Spiders & Wild Magic",
+          "hechizos": [
+            {
+              "nombre": "Enjambre Chillón / Chittering Swarm",
+              "exige": 14,
+              "ap": 1,
+              "alcance": "Contacto",
+              "efecto": "Invocación de pequeñas arañas que infligen 1 Hit automático a enemigos en contacto."
+            },
+            {
+              "nombre": "Invocar Arcanid / Summon Arcanid",
+              "exige": 18,
+              "ap": 2,
+              "alcance": "6\"",
+              "efecto": "Llama a una Arcanid menor para reemplazar a unidades caídas en batalla."
+            }
+          ]
+        }
+      ]
     }
   ],
   "armeria_comun": [
@@ -2957,6 +3918,46 @@ const compendioArcWorlde = {
     "Regeneración Fúngica / Fungal Regeneration": {
       "resumen": "Hongos simbióticos que sanan el cuerpo del Troll o Dragón.",
       "detalles": "Efectos: Si la miniatura no está en contacto de peana con ningún enemigo al final de la Ronda (o de su activación en variante avanzada), recupera D6 HP (o D3 HP)."
+    },
+    "Patas Largas / Long Legs (Pies Ligeros / Ágil)": {
+      "resumen": "Extremidades inferiores alargadas adaptadas para zancadas rápidas y saltos.",
+      "detalles": "Efectos: Otorga +2 al Movimiento y el rasgo Ágil (Agile), permitiendo repetir un Chequeo de Leg It fallido por ronda."
+    },
+    "Pelaje Camuflado / Camouflaged Pelt": {
+      "resumen": "Patrón de pelaje o plumaje que mimetiza al personaje con el bosque.",
+      "detalles": "Efectos: Aumenta en +1 la dificultad de tirada de Hazaña para todos los ataques a distancia dirigidos contra esta miniatura."
+    },
+    "Feo / Ugly": {
+      "resumen": "Apariencia espantosa o temible.",
+      "detalles": "Efectos: Otorga el rasgo Temible (Fearsome). Los enemigos deben superar un Chequeo de Valentía para atacarlo o trabarse en combate."
+    },
+    "Jinete de Monstruos / Monster Rider": {
+      "resumen": "Afinidad especial para montar criaturas salvajes.",
+      "detalles": "Efectos: Permite utilizar el rasgo Montura Monstruosa (Monstrous Mount) sobre cualquier Bestia, Monstruo o Titán del Bestiario."
+    },
+    "Cuernos y Colmillos / Horns & Tusks": {
+      "resumen": "Mandíbulas prominentes o cuernos afilados de combate.",
+      "detalles": "Efectos: Otorga +1 al Power en todos los ataques melé del personaje."
+    },
+    "Botiquín Médico / Medical Kit": {
+      "resumen": "Ungüentos y vendas para curar heridas en batalla.",
+      "detalles": "Efectos: Un solo uso. Al consumirse, el personaje o un aliado en contacto de peana recupera D6 HP."
+    },
+    "Rifle Arcloque / Arcloque Rifle": {
+      "resumen": "Arma de fuego pesada alimentada por pólvora arcana.",
+      "detalles": "Efectos: Disparo de Power 8, Alcance 20\". Si hay más fallos que éxitos, sufre 1 herida que ignora armadura."
+    },
+    "Pistola Arcloque / Arcloque Pistol": {
+      "resumen": "Arma compacta de pólvora arcana para oficiales imperiales.",
+      "detalles": "Efectos: Disparo de Power 7, Alcance 8\". Si fallos > éxitos, sufre 1 herida sin armadura."
+    },
+    "Estandarte del Grifo Imperial / Imperial Gryphon Standard": {
+      "resumen": "Estandarte sagrado con el emblema del grifo imperial.",
+      "detalles": "Efectos: Todos los aliados a 12\" o menos repiten Chequeos de Valentía fallidos."
+    },
+    "Galones de Sargento / Sergeant's Chevrons": {
+      "resumen": "Insignia de mando para oficiales de tropa imperial.",
+      "detalles": "Efectos: Otorga +1 a Valentía y Make Orders. Permite encadenar órdenes de oficiales superiores."
     }
   },
   "sistema_campana": {
@@ -3808,7 +4809,7 @@ const compendioArcWorlde = {
   }
 };
 
-// Alias global de acceso rápido
+// Referencias de conveniencia para scripts y vistas web
 const datosMinis = compendioArcWorlde;
 const datosRasgos = compendioArcWorlde.diccionario_rasgos;
 const campanaArcWorlde = compendioArcWorlde.sistema_campana;
