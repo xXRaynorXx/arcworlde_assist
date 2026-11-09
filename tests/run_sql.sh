@@ -13,7 +13,7 @@ RUN=""; if [ "$(id -u)" = 0 ]; then chown postgres "$DIR"; RUN="su postgres -c";
 sh() { if [ -n "$RUN" ]; then $RUN "$*"; else bash -c "$*"; fi; }
 cleanup() { sh "$BIN/pg_ctl -D $DIR stop -m immediate >/dev/null 2>&1"; rm -rf "$DIR"; }
 trap cleanup EXIT
-sh "$BIN/initdb -D $DIR -A trust >/dev/null" || exit 2
+sh "$BIN/initdb -D $DIR -U postgres -A trust >/dev/null" || exit 2
 sh "$BIN/pg_ctl -D $DIR -o '-p $PORT -k /tmp' -l $DIR/log -w start >/dev/null" || exit 2
 P="$BIN/psql -h /tmp -p $PORT -U postgres -q"
 $P -c "create database t" >/dev/null
