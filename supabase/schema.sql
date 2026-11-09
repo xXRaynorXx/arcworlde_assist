@@ -901,7 +901,7 @@ CREATE FUNCTION public.check_game_player_band() RETURNS trigger
 declare
   b public.bands;
   g public.games;
-  snap jsonb;
+  cp public.campaign_players;
 begin
   select * into g from public.games where id = new.game_id;
 
@@ -926,23 +926,26 @@ begin
 
   -- Partida de campaña: la banda es la de la campaña (con sus compras y ventas), no la del perfil
   if g.campaign_id is not null then
-    select band_snapshot into snap from public.campaign_players
+    select * into cp from public.campaign_players
     where campaign_id = g.campaign_id and user_id = new.user_id;
-    if snap is null then
+    if not found or cp.band_snapshot is null then
       raise exception 'Este jugador no tiene banda en la campaña';
+    end if;
+    if new.band_id is distinct from cp.band_id then
+      raise exception 'En una partida de campaña solo puedes usar tu banda de la campaña';
     end if;
     if tg_op = 'UPDATE' then
       if new.side is not distinct from old.side
          and (old.side is null or old.side is not distinct from (old.band_snapshot ->> 'faction')) then
-        new.side := nullif(snap ->> 'faction', '');
+        new.side := nullif(cp.band_snapshot ->> 'faction', '');
       end if;
       if new.band_id is distinct from old.band_id then
         new.ready := false;
       end if;
     else
-      new.side := coalesce(new.side, nullif(snap ->> 'faction', ''));
+      new.side := coalesce(new.side, nullif(cp.band_snapshot ->> 'faction', ''));
     end if;
-    new.band_snapshot := snap;
+    new.band_snapshot := cp.band_snapshot;
     return new;
   end if;
 
@@ -1171,6 +1174,10 @@ CREATE FUNCTION public.guard_game_update() RETURNS trigger
     SET search_path TO 'public'
     AS $$
 begin
+  if new.campaign_id is distinct from old.campaign_id or new.position is distinct from old.position then
+    raise exception 'No se puede cambiar la campaña ni la misión de una partida';
+  end if;
+
   if old.status <> 'draft' then
     if new.max_value is distinct from old.max_value
        or new.scenario_id is distinct from old.scenario_id
@@ -1720,6 +1727,7 @@ CREATE TABLE public.games (
     arcdeck_card text,
     arcdeck_history jsonb DEFAULT '[]'::jsonb NOT NULL,
     CONSTRAINT games_arcdeck_env_check CHECK ((arcdeck_env = ANY (ARRAY['mildaark'::text, 'vauhaemia'::text]))),
+    CONSTRAINT games_campaign_position_check CHECK (((campaign_id IS NULL) = ("position" IS NULL))),
     CONSTRAINT games_max_players_check CHECK (((max_players >= 1) AND (max_players <= 12))),
     CONSTRAINT games_max_value_check CHECK ((max_value > 0)),
     CONSTRAINT games_name_check CHECK (((char_length(name) >= 1) AND (char_length(name) <= 80))),
@@ -1890,6 +1898,13 @@ CREATE INDEX game_players_user_idx ON public.game_players USING btree (user_id);
 --
 
 CREATE INDEX games_campaign_idx ON public.games USING btree (campaign_id);
+
+
+--
+-- Name: games_campaign_position_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX games_campaign_position_idx ON public.games USING btree (campaign_id, "position") WHERE (campaign_id IS NOT NULL);
 
 
 --
@@ -2334,7 +2349,7 @@ CREATE POLICY games_delete_owner ON public.games FOR DELETE TO authenticated USI
 -- Name: games games_insert; Type: POLICY; Schema: public; Owner: -
 --
 
-CREATE POLICY games_insert ON public.games FOR INSERT TO authenticated WITH CHECK (((owner_id = auth.uid()) AND ((campaign_id IS NULL) OR public.is_campaign_owner(campaign_id))));
+CREATE POLICY games_insert ON public.games FOR INSERT TO authenticated WITH CHECK (((owner_id = auth.uid()) AND (campaign_id IS NULL)));
 
 
 --

@@ -1,0 +1,49 @@
+ ?column? 
+----------
+ t
+(1 row)
+ ?column? 
+----------
+ t
+(1 row)
+    t     | position | status 
+----------+----------+--------
+ misión 1 |        1 | draft
+(1 row)
+== el creador no puede insertar partidas de campaña a mano (solo campaign_make_chapter)
+psql:19: ERROR:  new row violates row-level security policy for table "games"
+psql:20: ERROR:  new row violates row-level security policy for table "games"
+== el creador no puede cambiar la misión de una partida de campaña ni sacarla de la campaña
+psql:22: ERROR:  permission denied for table games
+psql:23: ERROR:  permission denied for table games
+== una partida suelta no puede tener misión
+psql:25: ERROR:  new row for relation "games" violates check constraint "games_campaign_position_check"
+== B no puede colgar su partida suelta de la campaña de A
+psql:30: ERROR:  permission denied for table games
+psql:31: ERROR:  permission denied for table games
+      t       | suelta | position 
+--------------+--------+----------
+ partida de B | t      |         
+(1 row)
+== B no puede poner otra banda (la de A) en la partida de campaña
+psql:35: ERROR:  En una partida de campaña solo puedes usar tu banda de la campaña
+CONTEXT:  PL/pgSQL function check_game_player_band() line 36 at RAISE
+== B tampoco con otra banda suya que no es la de la campaña
+psql:38: ERROR:  En una partida de campaña solo puedes usar tu banda de la campaña
+CONTEXT:  PL/pgSQL function check_game_player_band() line 36 at RAISE
+== quitar y volver a poner la banda de la campaña sí funciona
+     t      | banda | side  
+------------+-------+-------
+ banda de B | BB    | Ourks
+(1 row)
+== ni siquiera sin RLS ni permisos por columna se puede mover una partida de misión o de campaña
+psql:46: ERROR:  No se puede cambiar la campaña ni la misión de una partida
+CONTEXT:  PL/pgSQL function guard_game_update() line 4 at RAISE
+psql:47: ERROR:  No se puede cambiar la campaña ni la misión de una partida
+CONTEXT:  PL/pgSQL function guard_game_update() line 4 at RAISE
+== ni siquiera sin RLS puede haber dos partidas en la misma misión
+psql:50: ERROR:  duplicate key value violates unique constraint "games_campaign_position_idx"
+       t        | count 
+----------------+-------
+ partidas de C5 |     1
+(1 row)
