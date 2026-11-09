@@ -402,23 +402,40 @@
     }
     return null;
   }
-  // Equipo que la miniatura trae de serie (sin coste; ya cuenta en su perfil)
-  function serieOf(u) {
+  // Equipo que la miniatura trae de serie (sin coste; ya cuenta en su perfil). serieAll: todo el del
+  // catálogo; serieOf: el que sigue llevando (se puede quitar para poner otro mejor, p. ej. una armadura pesada).
+  function serieAll(u) {
     const c = catalogById(u.id);
     return ((c && c.equipo_de_serie) || []).filter((s) => !/Armamento Est[aá]ndar/i.test(s));
   }
-  function serieArmour(u) {
-    return serieOf(u).some((s) => /Light Armour|Heavy Armour|Armadura (Ligera|Pesada)/i.test(s));
+  function serieOf(u) {
+    const off = Array.isArray(u.serie_quitado) ? u.serie_quitado : [];
+    return serieAll(u).filter((s) => off.indexOf(s) < 0);
   }
+  // Nivel de una armadura: 1 ligera, 2 pesada, 0 si no es armadura
+  const isSerieArmour = (s) => /Light Armour|Heavy Armour|Armadura (Ligera|Pesada)/i.test(s);
+  const serieArmourLevel = (s) => (/Heavy Armour|Armadura Pesada/i.test(s) ? 2 : isSerieArmour(s) ? 1 : 0);
+  const gearArmourLevel = (id) => (id === 'heavy_armour' ? 2 : id === 'light_armour' ? 1 : 0);
+  function serieArmour(u) {
+    return serieOf(u).reduce((m, s) => Math.max(m, serieArmourLevel(s)), 0);
+  }
+  const boughtArmour = (u) => (u.equipo || []).some((g) => g.origen === 'comun' && /^(light|heavy)_armour$/.test(g.id));
   // Horda Enterrada (Tomb Guardian): -25 % en la Armería Común, redondeado hacia arriba
   function gearPrice(u, d, origen) {
     const c = catalogById(u.id);
     const base = Number(d.coste) || 0;
     return origen === 'comun' && c && /Buried Horde/i.test((c.rasgos || []).join(' ')) ? Math.ceil(base * 0.75) : base;
   }
+  // Una sola armadura por miniatura. La de serie se puede cambiar por una mejor (ligera -> pesada).
   function armourBlocked(u, d, origen) {
-    if (origen !== 'comun' || !/^(light|heavy)_armour$/.test(d.id)) return false;
-    return serieArmour(u) || (u.equipo || []).some((g) => g.origen === 'comun' && /^(light|heavy)_armour$/.test(g.id));
+    if (origen !== 'comun' || !gearArmourLevel(d.id)) return false;
+    return boughtArmour(u) || gearArmourLevel(d.id) <= serieArmour(u);
+  }
+  // Al comprar una armadura mejor se quita la de serie
+  function dropSerieArmour(u) {
+    const armour = serieOf(u).filter(isSerieArmour);
+    if (armour.length) u.serie_quitado = (u.serie_quitado || []).concat(armour);
+    return armour.length > 0;
   }
 
   function gearCategory(a) {
@@ -445,12 +462,18 @@
   function gearBlock(u, i) {
     const faction = state.editing.faction;
     const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
-    const serieRows = serieOf(u)
-      .map(
-        (s) =>
-          '<div class="grid grid-cols-12 gap-2 items-center pl-4 border-l-2 border-amber-700/70">' +
-          '<div class="col-span-9 text-sm text-slate-200">' + esc(s) + '</div>' +
-          '<div class="col-span-3 text-xs text-amber-400/80 text-right">de serie · gratis</div></div>'
+    const off = Array.isArray(u.serie_quitado) ? u.serie_quitado : [];
+    const serieRows = serieAll(u)
+      .map((s, k) =>
+        off.indexOf(s) < 0
+          ? '<div class="grid grid-cols-12 gap-2 items-center pl-4 border-l-2 border-amber-700/70">' +
+            '<div class="col-span-8 text-sm text-slate-200">' + esc(s) + '</div>' +
+            '<div class="col-span-3 text-xs text-amber-400/80 text-right">de serie · gratis</div>' +
+            '<button ' + act('click', 'AW.removeSerie', [i, k]) + ' title="Quitar el equipo de serie (no se recupera su valor)" class="col-span-1 text-slate-400 hover:text-rose-400 text-lg leading-none">×</button></div>'
+          : '<div class="grid grid-cols-12 gap-2 items-center pl-4 border-l-2 border-slate-800">' +
+            '<div class="col-span-8 text-sm text-slate-500 line-through">' + esc(s) + '</div>' +
+            '<div class="col-span-3 text-xs text-slate-500 text-right">de serie · quitado</div>' +
+            '<button ' + act('click', 'AW.restoreSerie', [i, k]) + ' title="Volver a llevarlo" class="col-span-1 text-slate-400 hover:text-emerald-400 text-base leading-none">↺</button></div>'
       )
       .join('');
     const rows = serieRows + (u.equipo || [])
@@ -779,7 +802,26 @@
     unit.equipo = unit.equipo || [];
     if (unit.equipo.some((g) => g.origen === origen && g.id === id)) return;
     if (armourBlocked(unit, d, origen)) return toast('Esta miniatura ya lleva armadura', 'error');
+    if (origen === 'comun' && gearArmourLevel(d.id) && dropSerieArmour(unit)) toast('Sustituye a la armadura de serie');
     unit.equipo.push({ id: d.id, origen, nombre: d.nombre, coste: gearPrice(unit, d, origen) });
+    renderApp(true);
+  };
+
+  // Quitar / recuperar equipo de serie (k: posición en el equipo de serie del catálogo)
+  AW.removeSerie = (i, k) => {
+    const unit = state.editing.units[i];
+    const s = unit && serieAll(unit)[k];
+    if (!s) return;
+    unit.serie_quitado = (unit.serie_quitado || []).filter((x) => x !== s).concat(s);
+    renderApp(true);
+  };
+  AW.restoreSerie = (i, k) => {
+    const unit = state.editing.units[i];
+    const s = unit && serieAll(unit)[k];
+    if (!s) return;
+    if (isSerieArmour(s) && boughtArmour(unit)) return toast('Quita antes la armadura comprada', 'error');
+    unit.serie_quitado = (unit.serie_quitado || []).filter((x) => x !== s);
+    if (!unit.serie_quitado.length) delete unit.serie_quitado;
     renderApp(true);
   };
 
@@ -835,7 +877,9 @@
     unit.equipo = [];
     ((old && old.equipo) || []).forEach((g) => {
       const d = window.AWGear && AWGear.find(g.origen, g.id, state.editing.faction);
-      if (d && !armourBlocked(unit, d, g.origen)) unit.equipo.push({ id: g.id, origen: g.origen, nombre: g.nombre, coste: gearPrice(unit, d, g.origen) });
+      if (!d || armourBlocked(unit, d, g.origen)) return;
+      if (g.origen === 'comun' && gearArmourLevel(g.id)) dropSerieArmour(unit);
+      unit.equipo.push({ id: g.id, origen: g.origen, nombre: g.nombre, coste: gearPrice(unit, d, g.origen) });
     });
     units.unshift(unit);
     renderApp();
