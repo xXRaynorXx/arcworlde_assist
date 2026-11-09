@@ -431,6 +431,17 @@
     return 'Otros';
   }
 
+  // En campaña, lo que se compra cuesta según el humor del comerciante (ctx.buyFactor)
+  function shopCtx() { return state.bandContext && state.bandContext.buyFactor && state.bandContext.buyFactor !== 1 ? state.bandContext : null; }
+  const shopPrice = (p, bc) => Math.round((Number(p) || 0) * bc.buyFactor);
+
+  function gearCostLabel(u, g) {
+    const bc = shopCtx();
+    const base = Number(g.coste) || 0;
+    if (bc && bc.isNewGear && bc.isNewGear(u, g)) return '<span class="text-slate-500 line-through">' + base + '</span> ' + shopPrice(base, bc) + ' GP';
+    return base + ' GP';
+  }
+
   function gearBlock(u, i) {
     const faction = state.editing.faction;
     const has = (origen, id) => (u.equipo || []).some((g) => g.origen === origen && g.id === id);
@@ -451,7 +462,7 @@
           '<div class="col-span-8 sm:col-span-7 text-sm text-slate-200">' + esc(shortName(g.nombre)) +
           '<span class="text-xs text-slate-500"> · ' + (g.origen === 'comun' ? 'común' : 'facción') + '</span></div>' +
           '<div class="hidden sm:block sm:col-span-3 text-xs text-slate-500">' + esc(d ? String(d.tipo).replace(/^Equipo \/ |^Objeto \//, '') : '') + '</div>' +
-          '<div class="col-span-3 sm:col-span-1 text-sm text-amber-400 text-right">' + (Number(g.coste) || 0) + ' GP</div>' +
+          '<div class="col-span-3 sm:col-span-1 text-sm text-amber-400 text-right">' + gearCostLabel(u, g) + '</div>' +
           '<button ' + act('click', 'AW.removeGear', [i, j]) + ' title="Quitar" class="col-span-1 text-slate-400 hover:text-rose-400 text-lg leading-none">×</button>' +
           (info ? '<details class="col-span-12 text-xs text-slate-500"><summary class="cursor-pointer">Ver reglas</summary><p class="mt-1 text-slate-400">' + esc(info) + '</p></details>' : '') +
           '</div>'
@@ -467,7 +478,7 @@
         Object.keys(byCat).forEach((cat) =>
           groups.push(
             '<optgroup label="' + esc(label + ' — ' + cat) + '">' +
-              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + gearPrice(u, a, origen) + ' GP' + (gearPrice(u, a, origen) !== a.coste ? ', -25%' : '') + ')</option>').join('') +
+              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + gearPrice(u, a, origen) + ' GP' + (gearPrice(u, a, origen) !== a.coste ? ', -25%' : '') + (shopCtx() ? ' → ' + shopPrice(gearPrice(u, a, origen), shopCtx()) + ' GP al comprar' : '') + ')</option>').join('') +
               '</optgroup>'
           )
         );
