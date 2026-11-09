@@ -90,7 +90,7 @@ window.addEventListener('load', async () => {
     await AW.c.editBand(); await wait(100);
     for (const id of ['heavy_armour', 'light_armour']) AW.addGear(1, 'comun:' + id);
     const big = AWGear.common().filter(a => a.coste > 0).sort((a, b) => b.coste - a.coste);
-    let added = 0; for (const a of big) { if (added >= 8) break; AW.addUnit(); const k = AW.api.state.editing.units.length - 1; AW.api.state.editing.units[k].nombre = 'Extra' + k; AW.api.state.editing.units[k].coste = 60; added++; }
+    let added = 0; for (const a of big) { if (added >= 8) break; AW.addFromCatalog('halfling:halfling_militia'); const k = AW.api.state.editing.units.length - 1; AW.api.state.editing.units[k].nombre = 'Extra' + k; AW.api.state.editing.units[k].coste = 60; added++; }
     AW.api.render(true); await wait(40);
     await AW.saveBand(); await wait(150);
     ok('no deja gastar más que el fondo', cp('u1').gold === 150 - S && txt().includes('no alcanza') );
@@ -117,7 +117,7 @@ window.addEventListener('load', async () => {
     await AW.c.setInjury(0, 'herido', true); await wait(100);
     await AW.c.editBand(); await wait(120);
     ok('crédito temporal visible al gestionar la banda', txt().includes('Crédito temporal') && txt().includes('Herido: descansa'), txt().match(/Crédito temporal.{0,60}/));
-    AW.addUnit(); const ti = AW.api.state.editing.units.length - 1;
+    AW.addFromCatalog('ourks:boglin'); const ti = AW.api.state.editing.units.length - 1;
     AW.setUnit(ti, 'nombre', 'Sustituto'); AW.setUnit(ti, 'coste', 20); AW.setUnitTemp(ti, true); await wait(40);
     ok('sustituto temporal: usa el crédito y no el fondo', txt().includes('usado 20 GP') && txt().includes('Temporal: Sustituto') && txt().includes('Gastas 0 GP'), txt().match(/usado.{0,40}/));
     AW.setUnit(ti, 'coste', 99999); await wait(40);
