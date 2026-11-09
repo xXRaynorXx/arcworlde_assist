@@ -84,15 +84,12 @@ const armeriaComunDB = [
 ];
 
 (function () {
-  // Identificadores de facción que difieren entre datos_minis.js y datos_facciones.js
-  const ALIAS = { ourks: "ourk" };
-
   function factionId(name) {
     if (!name) return null;
     const n = String(name).trim().toLowerCase();
     if (typeof datosMinis !== "undefined" && datosMinis.facciones) {
       const f = datosMinis.facciones.find((x) => x.id === n || String(x.nombre).toLowerCase() === n);
-      if (f) return ALIAS[f.id] || f.id;
+      if (f) return f.id;
     }
     if (typeof armeriaExclusivaDB !== "undefined") {
       const a = armeriaExclusivaDB.find((x) => x.faccion_id === n || String(x.faccion_nombre).toLowerCase() === n);

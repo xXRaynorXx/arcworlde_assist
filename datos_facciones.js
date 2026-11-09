@@ -153,7 +153,7 @@ const habilidadesFaccionDB = [
   },
   {
     "id": "nomads_ourk",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Nómadas de los Pantanos / Nomads",
     "etiqueta": "Regla de Facción (Ourks)",
@@ -163,7 +163,7 @@ const habilidadesFaccionDB = [
   },
   {
     "id": "power_struggle",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Lucha de Poder / Power Struggle",
     "etiqueta": "Regla de Facción (Ourks)",
@@ -455,7 +455,7 @@ const rasgosUnidadesDB = [
   },
   {
     "id": "hurl_boglin",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Lanzamiento de Boglin / Hurl Boglin",
     "etiqueta": "Rasgo de Unidad / Combate (Ourk Brute)",
@@ -465,7 +465,7 @@ const rasgosUnidadesDB = [
   },
   {
     "id": "booze_frenzy",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Frenesí de Brebaje / Booze Frenzy",
     "etiqueta": "Rasgo de Unidad / Especialista (Brewzerker)",
@@ -585,7 +585,7 @@ const rasgosUnidadesDB = [
   },
   {
     "id": "enchanted_armour_innate",
-    "faccion_id": "wizard",
+    "faccion_id": "wizards",
     "faccion_nombre": "Magos",
     "nombre": "Armadura Encantada Innata / Enchanted Armour",
     "etiqueta": "Equipo de Serie (Sentinels)",
@@ -921,7 +921,7 @@ const armeriaExclusivaDB = [
   },
   {
     "id": "swamp_scrumpy",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Brebaje del Pantano / Swamp Scrumpy",
     "tipo": "Objeto / Consumible",
@@ -933,7 +933,7 @@ const armeriaExclusivaDB = [
   },
   {
     "id": "ourk_ranged_weapon",
-    "faccion_id": "ourk",
+    "faccion_id": "ourks",
     "faccion_nombre": "Ourks",
     "nombre": "Arma a Distancia Ourk / Ourk Ranged Weapon",
     "tipo": "Equipo / Arma a Distancia",

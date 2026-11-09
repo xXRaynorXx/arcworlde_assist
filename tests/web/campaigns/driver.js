@@ -100,10 +100,16 @@ window.addEventListener('load', async () => {
     const before = cp('u2').gold;
     await AW.c.editBand(); await wait(100);
     AW.addGear(0, 'comun:shield'); await wait(40);
+    ok('Bob ve en el desplegable el precio con su %', [...document.querySelectorAll('select[data-change="AW.addGear"] option')].some(o => /→ \d+ GP al comprar/.test(o.textContent)));
+    ok('Bob ve tachado el precio base del equipo recién comprado', !!document.querySelector('.line-through'));
     const cheap = Math.round(S * 0.75);
     ok('Bob con Gran Humor paga 25% menos', txt().includes('Gastas ' + cheap + ' GP'), txt().match(/Gastas.{0,40}/));
     await AW.saveBand(); await wait(200);
     ok('fondo de Bob rebajado', cp('u2').gold === before - cheap, cp('u2').gold + ' vs ' + (before - cheap));
+    // Botón Listo del paso 3
+    ok('Bob ve el botón Listo en preparar banda', !!btnHas('Listo: mi banda está preparada'));
+    await btnHas('Listo: mi banda está preparada').click(); await wait(150);
+    ok('Bob da su Listo: ready en la partida y aviso en pantalla', db.game_players.find(x => x.user_id === 'u2').ready === true && txt().includes('Tu banda está lista'), txt().match(/Tu banda.{0,30}/));
     await as('u1'); await AW.c.open(camp().id); await wait(100);
 
     // partida de la misión 1

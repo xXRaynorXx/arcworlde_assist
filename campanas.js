@@ -417,11 +417,12 @@
       rows('merchant', c.status === 'active' && isCur && gStatus === 'draft', 'Tirar 1D6'), isCur && gStatus === 'draft');
 
     // 3. Preparar banda
+    const readyOf = (uid) => { const x = gp.find((y) => y.user_id === uid); return !!(x && x.ready); };
     const mineP = players.find((p) => p.user_id === me);
     const hum = myHumor(n);
     let prep =
       '<p class="text-xs text-slate-500 mb-2">Banda y fondo de cada jugador ahora mismo:</p>' +
-      '<div class="flex flex-wrap gap-3">' + players.map((p) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(p)) + ': banda <strong class="text-slate-200">' + (p.band_snapshot ? (Number(p.band_snapshot.value) || 0) : 0) + ' GP</strong> · fondo <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></span>').join('') + '</div>';
+      '<div class="flex flex-wrap gap-3">' + players.map((p) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(p)) + (readyOf(p.user_id) ? ' ✅' : '') + ': banda <strong class="text-slate-200">' + (p.band_snapshot ? (Number(p.band_snapshot.value) || 0) : 0) + ' GP</strong> · fondo <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></span>').join('') + '</div>';
     if (mineP && c.status === 'active' && isCur) {
       if (gStatus === 'draft') {
         prep += hum
@@ -430,12 +431,17 @@
           : '<p class="mt-3 text-sm text-amber-300">Tira antes al comerciante (paso 2) para poder comprar y vender.</p>';
         const myGp = gp.find((x) => x.user_id === me);
         prep += spoilsPanel(mineP.band_snapshot, myGp && myGp.roster, vpBalance(me));
+        prep += myGp && hum
+          ? '<div class="mt-3 flex flex-wrap items-center gap-3">' + (myGp.ready
+              ? '<span class="text-sm text-emerald-400">✅ Tu banda está lista. Esperando al resto.</span><button ' + act('click', 'AW.c.setReady', [false]) + ' class="' + btnGhost + '">Quitar mi OK</button>'
+              : '<button ' + act('click', 'AW.c.setReady', [true]) + ' class="' + btnPrimary + '">✔ Listo: mi banda está preparada</button>') + '</div>'
+          : '';
         prep += '<p class="text-xs text-slate-500 mt-2">Lo que compres se descuenta de tu fondo y lo que vendas se suma. Al cambiar tu banda tendrás que volver a dar tu OK en la partida.</p>';
       } else {
         prep += '<p class="text-xs text-slate-500 mt-2">La partida ya ha empezado: la banda queda cerrada hasta la próxima misión.</p>';
       }
     }
-    steps += step(3, 'Preparar la banda (comerciante)', gStatus !== 'draft', prep, isCur && gStatus === 'draft');
+    steps += step(3, 'Preparar la banda (comerciante)', gStatus !== 'draft' || (gp.length > 0 && gp.every((x) => x.ready)), prep, isCur && gStatus === 'draft');
 
     // 4. Batalla, PV y eventos de final de ronda
     const eRolls = rollsOf(n, 'round_event');
@@ -578,8 +584,8 @@
         btn = stepBtn('🎲 Tirar 1D6', 'AW.c.roll', ['merchant']);
       } else if (mineGp && !mineGp.ready) {
         title = 'Prepara tu banda y da tu OK';
-        text = 'Compra y vende, gasta PV y ajusta lesiones; cuando estés listo, da tu OK en la partida.';
-        btn = goto('Preparar la banda', 3) + ' ' + open;
+        text = 'Compra y vende, gasta PV y ajusta lesiones; cuando termines, pulsa "Listo".';
+        btn = goto('Preparar la banda', 3) + ' ' + stepBtn('✔ Listo', 'AW.c.setReady', [true]);
       } else if (waiting.length) {
         title = 'Esperando el OK de ' + names(waiting);
         text = noMerchant.length ? 'Faltan tiradas del comerciante: ' + names(noMerchant) + '.' : 'Cuando todos den su OK, el creador empieza la partida.';
@@ -962,6 +968,13 @@
     if (r && r.dice) toast('Has sacado ' + r.dice.join(' / '));
   };
 
+  // OK del jugador: su banda está preparada (es el mismo OK de la partida)
+  C.setReady = (value) => {
+    const g = cs.games.find((x) => x.position === cs.camp.chapter);
+    if (!g) return;
+    return run(state.sb.from('game_players').update({ ready: !!value }).eq('game_id', g.id).eq('user_id', state.user.id), value ? 'Banda lista' : null);
+  };
+
   C.setScenario = (id) =>
     run(state.sb.from('games').update({ scenario_id: id || null, scenario_mode: 'chosen' }).eq('id', (cs.games.find((g) => g.position === cs.camp.chapter) || {}).id), null);
 
@@ -1007,6 +1020,11 @@
         title: 'Gestionar banda: ' + (snap.name || ''),
         subtitle: 'Comerciante: ' + (humor ? humor.nombre + ' (compras ' + pct(humor.compra) + ', ventas ' + pct(humor.venta) + ')' : '—') + ' · Fondo: ' + gold + ' GP',
         lockFaction: true,
+        buyFactor: 1 + ((humor && humor.compra) || 0) / 100,
+        isNewGear: (u, g) => {
+          const o = u._o != null ? orig[u._o] : null;
+          return !o || !(o.equipo || []).some((x) => x.origen === g.origen && x.id === g.id);
+        },
         summary: (units) => {
           const ch = bandChange(orig, units, humor);
           const left = gold - ch.net;
