@@ -45,11 +45,21 @@
       const k = String(o.nombre).split(' / ').pop().trim().toLowerCase();
       traitIdx[k] = o;
     }));
+    // Equipo (armería común y exclusiva) como último recurso: los rasgos "de serie" suelen ser un objeto
+    [typeof armeriaComunDB !== 'undefined' ? armeriaComunDB : null, typeof armeriaExclusivaDB !== 'undefined' ? armeriaExclusivaDB : null].forEach((db) => {
+      (db || []).forEach((o) => {
+        if (!o || !o.nombre) return;
+        const k = String(o.nombre).split(' / ').pop().trim().toLowerCase();
+        if (!traitIdx[k]) traitIdx[k] = { nombre: o.nombre, resumen: o.resumen || o.efecto || '', detalles: o.detalles || o.efectos || o.descripcion || '' };
+      });
+    });
     if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => add(k, datosRasgos[k]));
   }
   function traitInfo(name) {
     if (!traitIdx) buildTraits();
-    return traitIdx[String(name).toLowerCase()] || null;
+    const k = String(name).toLowerCase();
+    // "Light Armour (Gratis / +1 Armadura)" -> "light armour": se busca también sin el texto entre paréntesis
+    return traitIdx[k] || traitIdx[k.replace(/\s*\(.*\)\s*$/, '')] || null;
   }
   function stripTags(s) { return String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, ''); }
 
@@ -94,8 +104,8 @@
     const gear = Array.isArray(u.equipo) ? u.equipo : [];
     const gearTotal = gear.reduce((t, g) => t + (Number(g.coste) || 0), 0);
     let h = '<div class="rounded-lg border ' + (st.ko ? 'border-rose-700/60 bg-rose-950/20' : 'border-slate-800 bg-slate-900/60') + ' p-3">' +
-      '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.nombre) +
-      (c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
+      '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.apodo || u.nombre) +
+      (u.apodo ? ' <span class="text-xs text-slate-500 font-normal">' + esc(u.nombre) + '</span>' : c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
       '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
     const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x));
@@ -117,9 +127,9 @@
       const changed = v !== base;
       return '<div class="text-center bg-slate-950 rounded-md py-1.5 border border-slate-800"><p class="text-[10px] uppercase tracking-wide text-slate-500">' + s[1] + '</p>' +
         (edit
-          ? '<div class="flex items-center justify-center gap-1"><button onclick="' + opts.fn + '(' + opts.idx + ',\'' + k + '\',-1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white leading-none">−</button>' +
+          ? '<div class="flex items-center justify-center gap-1"><button ' + AWUtil.act('click', opts.fn, [opts.idx, k, -1]) + ' class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white leading-none">−</button>' +
             '<span class="min-w-[2.5rem] font-bold ' + (changed ? 'text-amber-400' : 'text-white') + '">' + v + '</span>' +
-            '<button onclick="' + opts.fn + '(' + opts.idx + ',\'' + k + '\',1)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white leading-none">+</button></div>'
+            '<button ' + AWUtil.act('click', opts.fn, [opts.idx, k, 1]) + ' class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white leading-none">+</button></div>'
           : '<p class="font-bold ' + (changed ? 'text-amber-400' : 'text-white') + '">' + v + '</p>') +
         (changed ? '<p class="text-[10px] text-slate-500">base ' + base + '</p>' : '') + '</div>';
     }).join('') + '</div>';
@@ -141,13 +151,13 @@
         les.map((id) => {
           const l = LESIONES.find((x) => x[0] === id);
           return '<span title="' + esc(l ? l[2] : '') + '" class="text-xs px-2 py-0.5 rounded-md bg-rose-950/40 border border-rose-800/50 text-rose-200">' + esc(l ? l[1] : id) +
-            ' <button onclick="' + opts.fn + 'Lesion(' + opts.idx + ',\'' + id + '\',false)" class="ml-1 hover:text-white">×</button></span>';
+            ' <button ' + AWUtil.act('click', opts.fn + 'Lesion', [opts.idx, id, false]) + ' class="ml-1 hover:text-white">×</button></span>';
         }).join('') +
-        '<select onchange="' + opts.fn + 'Lesion(' + opts.idx + ',this.value,true);this.value=\'\'" class="text-xs bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-300">' +
+        '<select ' + AWUtil.act('change', opts.fn + 'Lesion', [opts.idx, '$value', true], { reset: true }) + ' class="text-xs bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-300">' +
         '<option value="">+ Lesión…</option>' + LESIONES.filter((l) => les.indexOf(l[0]) < 0).map((l) => '<option value="' + l[0] + '">' + l[1] + '</option>').join('') + '</select>' +
-        '<button onclick="' + opts.fn + 'Ko(' + opts.idx + ')" class="text-xs px-2 py-1 rounded-md border ' + (st.ko ? 'border-rose-600 text-rose-200' : 'border-slate-700 text-slate-300') + ' hover:bg-slate-800">' +
+        '<button ' + AWUtil.act('click', opts.fn + 'Ko', [opts.idx]) + ' class="text-xs px-2 py-1 rounded-md border ' + (st.ko ? 'border-rose-600 text-rose-200' : 'border-slate-700 text-slate-300') + ' hover:bg-slate-800">' +
         (st.ko ? 'Levantar' : 'Noquear') + '</button>' +
-        '<button onclick="' + opts.fn + 'Reset(' + opts.idx + ')" class="text-xs px-2 py-1 rounded-md border border-slate-700 text-slate-400 hover:bg-slate-800">Restaurar</button></div>';
+        '<button ' + AWUtil.act('click', opts.fn + 'Reset', [opts.idx]) + ' class="text-xs px-2 py-1 rounded-md border border-slate-700 text-slate-400 hover:bg-slate-800">Restaurar</button></div>';
     } else if (Array.isArray(st.lesiones) && st.lesiones.length) {
       h += '<p class="mt-2 text-xs text-rose-300">Lesiones: ' + st.lesiones.map((id) => { const l = LESIONES.find((x) => x[0] === id); return esc(l ? l[1] : id); }).join(', ') + '</p>';
     }

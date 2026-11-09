@@ -21,17 +21,17 @@ window.addEventListener('load', async () => {
     AW.addFromCatalog(String(datosMinis.facciones[0].unidades.findIndex(u => u.id === 'sheriff'))); await wait(30);
     AW.addFromCatalog(String(datosMinis.facciones[0].unidades.findIndex(u => u.id === 'halfling_militia'))); await wait(30);
     ok('editor: total base 120', document.getElementById('aw-total').textContent === '120', document.getElementById('aw-total').textContent);
-    const sel = document.querySelector('select[onchange^="AW.addGear(0"]');
+    const sel = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
     const labels = sel ? [...sel.querySelectorAll('optgroup')].map(g => g.label + ':' + g.children.length) : [];
     ok('editor: selector de equipo con común y de facción', labels.some(l => l.startsWith('Común — Armas y equipo')) && labels.some(l => l.startsWith('Común — Armaduras')) && labels.some(l => l.startsWith('Halflings — Monturas')) && labels.some(l => l.startsWith('Halflings — Objetos y consumibles')) && labels.reduce((n, l) => n + Number(l.split(':').pop()), 0) === 12, labels.join(' | '));
     ok('editor: Sheriff muestra su armadura ligera de serie', txt().includes('Light Armour (Gratis') && txt().includes('de serie'));
-    const optsS = [...document.querySelectorAll('select[onchange^="AW.addGear(0"] option')].map(o => o.value);
+    const optsS = [...document.querySelectorAll('select[data-change="AW.addGear"][data-args^="[0,"] option')].map(o => o.value);
     ok('editor: Sheriff no puede comprar más armadura (ligera/pesada)', !optsS.includes('comun:light_armour') && !optsS.includes('comun:heavy_armour') && optsS.includes('comun:shield'), optsS.filter(v => /armour/.test(v)).join());
     AW.addGear(0, 'comun:heavy_armour'); await wait(20);
     ok('editor: añadir armadura a la fuerza se rechaza', !(AW.api.state.editing.units[0].equipo || []).length);
     AW.addGear(0, 'comun:shield'); AW.addGear(0, 'faccion:halfling_mount'); AW.addGear(0, 'faccion:packed_lunch'); await wait(30);
     ok('editor: total = 120 + 15 + 30 + 10', document.getElementById('aw-total').textContent === '175', document.getElementById('aw-total').textContent);
-    ok('editor: filas de equipo bajo la miniatura', document.querySelectorAll('button[onclick^="AW.removeGear(0"]').length === 3 && txt().includes('Ver reglas'));
+    ok('editor: filas de equipo bajo la miniatura', document.querySelectorAll('button[data-click="AW.removeGear"][data-args^="[0,"]').length === 3 && txt().includes('Ver reglas'));
     ok('editor: subtotal miniatura 135', document.getElementById('aw-sub-0').textContent === '135');
     AW.addGear(0, 'comun:shield'); await wait(20);
     ok('editor: no se duplica el mismo objeto', document.getElementById('aw-total').textContent === '175');
@@ -39,12 +39,16 @@ window.addEventListener('load', async () => {
     ok('editor: armadura pesada a la milicia (+35)', document.getElementById('aw-total').textContent === '210');
     AW.removeGear(0, 2); await wait(20);
     ok('editor: quitar almuerzo (-10)', document.getElementById('aw-total').textContent === '200');
+    ok('editor: perfil del catálogo fijo (Sheriff) y campo de nombre propio', !document.querySelector('input[value="Sheriff"]') && txt().includes('Sheriff') && document.querySelectorAll('input[aria-label="Nombre propio de la miniatura"]').length === 2);
+    AW.setUnit(0, 'apodo', 'Bilbo'); await wait(10);
     AW.setUnit(1, 'coste', '50'); await wait(10);
     ok('editor: cambiar coste base actualiza total y subtotal', document.getElementById('aw-total').textContent === '210' && document.getElementById('aw-sub-1').textContent === '85');
     await AW.saveBand(); await wait(150);
     const saved = db.bands.find(b => b.name === 'Prueba');
     ok('guardado: value = 210 con equipo', saved && saved.value === 210, saved && saved.value);
     ok('guardado: equipo con id, origen, nombre y coste', saved && saved.units[0].equipo.length === 2 && saved.units[0].equipo[1].origen === 'faccion' && saved.units[0].equipo[1].coste === 30, saved && JSON.stringify(saved.units[0].equipo));
+    ok('guardado: apodo Bilbo sin perder el perfil Sheriff y el tipo comandante', saved && saved.units[0].apodo === 'Bilbo' && saved.units[0].nombre === 'Sheriff' && saved.units[0].tipo === 'comandante' && saved.units[1].apodo === undefined);
+    ok('ficha: se ve Bilbo y, al lado, Sheriff', document.body.innerHTML.includes('Bilbo') && AWUtil.unitName(saved.units[0]) === 'Bilbo (Sheriff)');
     ok('Mis Bandas: muestra 210 GP y equipo en la ficha', txt().includes('210 GP') && document.body.innerHTML.includes('🎒'));
     // cambiar de facción quita el equipo exclusivo
     AW.editBand(saved.id); await wait(50);
@@ -55,7 +59,7 @@ window.addEventListener('load', async () => {
     AW.addGear(0, 'faccion:arquebus'); await wait(20);
     ok('facción Imperial: arcabuz (+25)', document.getElementById('aw-sub-0').textContent === String(80 + 15 + 25), document.getElementById('aw-sub-0').textContent);
     AW.setField('faction', 'Ourks'); AW.rerender(); await wait(30);
-    const sel2 = document.querySelector('select[onchange^="AW.addGear(0"]');
+    const sel2 = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
     ok('Ourks (id distinto entre archivos) tiene armería propia', sel2 && [...sel2.querySelectorAll('optgroup')].some(g => g.label.startsWith('Ourks —')), sel2 && [...sel2.querySelectorAll('optgroup')].map(g => g.label + g.children.length).join('|'));
     // Town Guard y Tomb Guardian
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
@@ -75,17 +79,17 @@ window.addEventListener('load', async () => {
     ok('Tomb Guardian: armería de facción sin descuento (20)', AW.api.state.editing.units[0].equipo[2].coste === 20);
     // Magos: id 'wizard' mal escrito en los datos
     AW.setField('faction', 'Magos'); AW.rerender(); await wait(20);
-    const sw = document.querySelector('select[onchange^="AW.addGear(0"]');
+    const sw = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
     ok('Magos: armería propia', sw && [...sw.querySelectorAll('optgroup')].some(g => g.label.startsWith('Magos —')), sw && [...sw.querySelectorAll('optgroup')].map(g => g.label).join('|'));
     // facción como selector y comandante con perfil
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
-    const fsel = document.querySelector('select[onchange^="AW.setField(\'faction\'"]');
+    const fsel = document.querySelector('select[data-change="AW.setField"][data-args^=\'["faction"\']');
     ok('facción: es un selector con las 11 facciones del catálogo', fsel && [...fsel.options].filter(o => o.value).length === datosMinis.facciones.length, fsel && fsel.options.length);
     ok('sin facción: avisa de que hace falta elegirla', txt().includes('Elige una facción para ver su catálogo'));
-    fsel.value = 'Halflings'; fsel.dispatchEvent(new Event('change')); await wait(40);
-    ok('facción: al elegirla sale el catálogo y el bloque Comandante', AW.api.state.editing.faction === 'Halflings' && !!document.querySelector('select[onchange^="AW.addFromCatalog"]') && txt().includes('Comandante'));
-    ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[onchange^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
-    const csel = document.querySelector('select[onchange^="AW.setCommander"]');
+    fsel.value = 'Halflings'; fsel.dispatchEvent(new Event('change', { bubbles: true })); await wait(40);
+    ok('facción: al elegirla sale el catálogo y el bloque Comandante', AW.api.state.editing.faction === 'Halflings' && !!document.querySelector('select[data-change^="AW.addFromCatalog"]') && txt().includes('Comandante'));
+    ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
+    const csel = document.querySelector('select[data-change^="AW.setCommander"]');
     ok('comandante: selector con el perfil de la facción', csel && [...csel.options].some(o => /Sheriff/.test(o.textContent)), csel && [...csel.options].map(o => o.textContent).join('|'));
     const sIdx = datosMinis.facciones.find(f => f.id === 'halfling').unidades.findIndex(u => u.id === 'sheriff');
     AW.setCommander(String(sIdx)); await wait(30);
@@ -102,6 +106,7 @@ window.addEventListener('load', async () => {
     ok('compendio v2: Equipo de serie y Comunes a varias facciones', tt.includes('Equipo de serie') && tt.includes('Comunes a varias facciones'));
     ok('compendio v2: Magos sin duplicar sección por el id mal escrito', (tt.match(/Facción Magos/g) || []).length === 1, String((tt.match(/Facción Magos/g) || []).length));
     ok('compendio v2: armería de Ourks con coste', tt.includes('Brebaje del Pantano / Swamp Scrumpy (10 GP)'));
+    ok('todas las acciones data-* de la pantalla existen', AWUtil.unresolvedActions().length === 0, AWUtil.unresolvedActions().join(','));
   } catch (e) { out.push('EXCEPCION: ' + e.message + ' | ' + ((e.stack || '').split('\n')[1] || '')); }
   out.push('errores globales: ' + (window.__errs.join('; ') || 'ninguno'));
   document.body.insertAdjacentHTML('beforeend', '<pre id="testout">' + out.join('\n').replace(/</g, '&lt;') + '</pre>');

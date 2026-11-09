@@ -10,6 +10,7 @@
   const AW = window.AW;
   if (!AW || !AW.api) return;
   const { state, esc, toast, translateError, shell, msgBox, inputCls, btnPrimary, btnGhost, validateBand } = AW.api;
+  const act = AWUtil.act;
 
   const SEC = 'app_games';
   const G = (AW.g = {});
@@ -144,7 +145,7 @@
     if (g.status === 'active') {
       html +=
         '<div class="mt-5 pt-4 border-t border-slate-800 flex flex-wrap items-center gap-3">' +
-        '<button onclick="AW.g.nextRound()" class="' + btnPrimary + '"' + (gs.busyRound ? ' disabled' : '') + '>Final de ronda</button>' +
+        '<button ' + act('click', 'AW.g.nextRound', []) + ' class="' + btnPrimary + '"' + (gs.busyRound ? ' disabled' : '') + '>Final de ronda</button>' +
         '<span class="text-sm text-slate-500">Se robará el evento de la ronda ' + (round + 1) + '.</span></div>';
     }
 
@@ -257,7 +258,7 @@
         'Crea partidas, invita a tus amigos y llevad la cuenta de los resultados',
         '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md">' + code +
           '<p class="text-slate-300 mb-4">Necesitas una cuenta para crear o unirte a partidas.</p>' +
-          '<button onclick="AW.go(\'app_account\')" class="' + btnPrimary + '">Iniciar sesión</button></div>'
+          '<button ' + act('click', 'AW.go', ['app_account']) + ' class="' + btnPrimary + '">Iniciar sesión</button></div>'
       );
     }
     if (gs.list === null && !gs.loading) {
@@ -284,7 +285,7 @@
             const n = (g.game_players || []).length;
             const mine = g.owner_id === state.user.id;
             return (
-              '<article onclick="AW.g.open(\'' + g.id + '\')" class="cursor-pointer bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
+              '<article ' + act('click', 'AW.g.open', [g.id]) + ' class="cursor-pointer bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
               '<div class="flex items-start justify-between gap-3"><h5 class="text-lg font-bold text-white">' + esc(g.name) + '</h5>' + badge(g.status) + '</div>' +
               '<p class="text-sm text-slate-400 mt-1">' + g.max_value + ' GP · ' + n + '/' + (g.max_players || 2) + ' jugadores' +
               (g.status === 'active' ? ' · ronda ' + (g.round || 0) : '') + '</p>' +
@@ -299,8 +300,8 @@
 
     const inner =
       '<div class="flex flex-wrap gap-3 items-end mb-6">' +
-      '<button onclick="AW.g.showNew()" class="' + btnPrimary + '">+ Nueva partida</button>' +
-      '<form onsubmit="AW.g.join(event)" class="flex gap-2 items-end ml-auto">' +
+      '<button ' + act('click', 'AW.g.showNew', []) + ' class="' + btnPrimary + '">+ Nueva partida</button>' +
+      '<form ' + act('submit', 'AW.g.join', ['$event']) + ' class="flex gap-2 items-end ml-auto">' +
       '<div><label class="block text-xs text-slate-400 mb-1">¿Tienes un código?</label><input name="code" required maxlength="40" placeholder="Código de invitación" class="' + inputCls + '"></div>' +
       '<button type="submit" class="' + btnGhost + '">Unirme</button></form></div>' +
       cards;
@@ -309,7 +310,7 @@
 
   function viewNew() {
     const inner =
-      '<form onsubmit="AW.g.create(event)" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 max-w-xl">' +
+      '<form ' + act('submit', 'AW.g.create', ['$event']) + ' class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 max-w-xl">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la partida</label><input name="name" required maxlength="80" class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Valor máximo de banda (GP)</label><input name="max" type="number" min="1" step="1" value="500" required class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Número de jugadores</label><input name="players" type="number" min="1" max="12" step="1" value="2" required class="' + inputCls + '">' +
@@ -319,7 +320,7 @@
       '<div><label class="block text-xs text-slate-400 mb-1">Entorno del ArcDeck</label><select name="env" class="' + inputCls + '">' + envOptions('mildaark') + '</select></div>' +
       '<label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" name="plays" checked class="accent-emerald-500"> Yo también juego esta partida</label>' +
       '<div class="pt-2 flex gap-3"><button type="submit" class="' + btnPrimary + '">Crear partida</button>' +
-      '<button type="button" onclick="AW.g.back()" class="' + btnGhost + '">Cancelar</button></div></form>';
+      '<button type="button" ' + act('click', 'AW.g.back', []) + ' class="' + btnGhost + '">Cancelar</button></div></form>';
     return shell('Nueva partida', 'Después podrás invitar a los jugadores con un código o un enlace', inner);
   }
 
@@ -330,7 +331,7 @@
     const edit = !!(started && g.status === 'active' && isMe);
     const sheet = AW.sheet
       ? AW.sheet.bandSheet(b.units || [], p.roster, { edit: edit, fn: 'AW.g.rosterAdj', faction: b.faction })
-      : '<ul class="ml-4 list-disc">' + (b.units || []).map((u) => '<li>' + esc(u.nombre) + '</li>').join('') + '</ul>';
+      : '<ul class="ml-4 list-disc">' + (b.units || []).map((u) => '<li>' + esc(AWUtil.unitName(u)) + '</li>').join('') + '</ul>';
     return (
       '<details class="text-sm"' + (started ? ' open' : '') + '><summary class="cursor-pointer text-slate-300"><span class="font-semibold text-white">' + esc(b.name) + '</span>' +
       (b.faction ? ' · ' + esc(b.faction) : '') + ' · <span class="text-amber-400">' + b.value + ' GP</span>' +
@@ -355,8 +356,8 @@
     return (
       '<div class="mt-4 pt-4 border-t border-slate-800/60"><p class="text-xs text-slate-400 mb-2">Tu banda para esta partida (máximo ' + g.max_value + ' GP)</p>' +
       '<div class="flex flex-wrap gap-2 items-center">' +
-      '<select onchange="AW.g.chooseBand(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">— Elige una de tu perfil —</option>' + opts + '</select>' +
-      '<button onclick="AW.g.newBandFor()" class="' + btnGhost + '">+ Crear banda nueva</button></div></div>'
+      '<select ' + act('change', 'AW.g.chooseBand', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">— Elige una de tu perfil —</option>' + opts + '</select>' +
+      '<button ' + act('click', 'AW.g.newBandFor', []) + ' class="' + btnGhost + '">+ Crear banda nueva</button></div></div>'
     );
   }
 
@@ -366,17 +367,17 @@
     if (p.ready) {
       return (
         '<div class="mt-3 flex flex-wrap items-center gap-3"><span class="text-sm text-emerald-400">✅ Has dado tu OK. Esperando al resto.</span>' +
-        '<button onclick="AW.g.setReady(false)" class="' + btnGhost + '">Quitar mi OK</button></div>'
+        '<button ' + act('click', 'AW.g.setReady', [false]) + ' class="' + btnGhost + '">Quitar mi OK</button></div>'
       );
     }
     if (!p.band_id) return '<p class="mt-3 text-xs text-slate-500">Elige una banda para poder dar tu OK.</p>';
-    return '<div class="mt-3"><button onclick="AW.g.setReady(true)" class="' + btnPrimary + '">OK, estoy listo</button></div>';
+    return '<div class="mt-3"><button ' + act('click', 'AW.g.setReady', [true]) + ' class="' + btnPrimary + '">OK, estoy listo</button></div>';
   }
 
   function viewDetail() {
     const g = gs.current;
     const inCamp = !!(g && g.campaign_id);
-    const back = '<button onclick="AW.g.back()" class="text-sm text-slate-400 hover:text-white mb-4">' + (gs.returnTo ? '← Volver a la campaña' : '← Todas las partidas') + '</button>';
+    const back = '<button ' + act('click', 'AW.g.back', []) + ' class="text-sm text-slate-400 hover:text-white mb-4">' + (gs.returnTo ? '← Volver a la campaña' : '← Todas las partidas') + '</button>';
     if (!g) return shell('Partida', 'Cargando...', back + '<p class="text-slate-500">Cargando partida...</p>');
 
     const me = state.user.id;
@@ -394,7 +395,7 @@
       '<span class="text-amber-400 font-semibold">' + g.max_value + ' GP</span>' +
       '<span class="text-slate-300" title="Jugadores apuntados / total">👥 ' + players.length + '/' + g.max_players + '</span>' +
       '<span class="text-sm text-slate-500">Creada por ' + (isOwner ? 'ti' : esc(g.owner ? g.owner.display_name : '—')) + '</span>' +
-      '<button onclick="AW.g.refresh()" class="' + btnGhost + ' ml-auto">↻ Actualizar</button></div>';
+      '<button ' + act('click', 'AW.g.refresh', []) + ' class="' + btnGhost + ' ml-auto">↻ Actualizar</button></div>';
 
     /* resultado */
     if (g.status === 'finished') {
@@ -413,8 +414,8 @@
       html +=
         '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-3">Ajustes</h3>' +
         '<div class="flex flex-wrap gap-4 items-end">' +
-        '<div><label class="block text-xs text-slate-400 mb-1">Número de jugadores</label><input type="number" min="1" max="12" step="1" value="' + g.max_players + '" onchange="AW.g.setPlayers(this.value)" class="' + inputCls + ' w-28"></div>' +
-        '<div><label class="block text-xs text-slate-400 mb-1">Entorno del ArcDeck</label><select onchange="AW.g.setEnv(this.value)" class="' + inputCls + ' sm:w-auto">' + envOptions(g.arcdeck_env) + '</select></div>' +
+        '<div><label class="block text-xs text-slate-400 mb-1">Número de jugadores</label><input type="number" min="1" max="12" step="1" value="' + g.max_players + '" ' + act('change', 'AW.g.setPlayers', ['$value']) + ' class="' + inputCls + ' w-28"></div>' +
+        '<div><label class="block text-xs text-slate-400 mb-1">Entorno del ArcDeck</label><select ' + act('change', 'AW.g.setEnv', ['$value']) + ' class="' + inputCls + ' sm:w-auto">' + envOptions(g.arcdeck_env) + '</select></div>' +
         '</div></section>';
     } else if (g.status === 'draft') {
       const env = arcEnv(g.arcdeck_env);
@@ -427,16 +428,16 @@
       html +=
         '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-3">Invitar jugadores</h3>' +
         '<div class="flex flex-wrap items-center gap-2"><code class="px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-emerald-300">' + esc(g.join_code) + '</code>' +
-        '<button onclick="AW.g.copy(\'' + esc(g.join_code) + '\')" class="' + btnGhost + '">Copiar código</button>' +
-        '<button onclick="AW.g.copy(\'' + esc(link) + '\')" class="' + btnGhost + '">Copiar enlace</button></div></section>';
+        '<button ' + act('click', 'AW.g.copy', [esc(g.join_code)]) + ' class="' + btnGhost + '">Copiar código</button>' +
+        '<button ' + act('click', 'AW.g.copy', [esc(link)]) + ' class="' + btnGhost + '">Copiar enlace</button></div></section>';
     }
 
     /* escenario */
     html += '<section class="mb-6"><h3 class="text-lg font-bold text-white mb-3">Escenario</h3>';
     if (isOwner && g.status === 'draft') {
       html +=
-        '<div class="flex flex-wrap gap-2 mb-3"><select onchange="AW.g.setScenario(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">Sin elegir</option>' + scenarioOptions(g.scenario_id) + '</select>' +
-        '<button onclick="AW.g.rollScenario()" class="' + btnGhost + '">🎲 Sortear</button></div>';
+        '<div class="flex flex-wrap gap-2 mb-3"><select ' + act('change', 'AW.g.setScenario', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">Sin elegir</option>' + scenarioOptions(g.scenario_id) + '</select>' +
+        '<button ' + act('click', 'AW.g.rollScenario', []) + ' class="' + btnGhost + '">🎲 Sortear</button></div>';
     }
     html += sc ? (typeof renderCard === 'function' ? renderCard(sc) : esc(sc.nombre)) : '<p class="text-slate-500">Todavía no hay escenario elegido.</p>';
     html += '</section>';
@@ -460,12 +461,12 @@
           : '<span class="text-xs text-slate-500">⏳ Sin OK</span>';
       }
       if (isOwner && editable) {
-        html += '<input value="' + esc(p.side || '') + '" onchange="AW.g.setSide(\'' + p.user_id + '\',this.value)" maxlength="30" placeholder="Bando / equipo" class="' + inputCls + ' w-36">';
+        html += '<input value="' + esc(p.side || '') + '" ' + act('change', 'AW.g.setSide', [p.user_id, '$value']) + ' maxlength="30" placeholder="Bando / equipo" class="' + inputCls + ' w-36">';
       } else if (p.side) {
         html += '<span class="text-slate-400">' + esc(p.side) + '</span>';
       }
       if (g.status === 'active' && isOwner) {
-        html += '<label class="text-slate-400">PV <input type="number" min="0" step="1" value="' + p.vp + '" onchange="AW.g.setVp(\'' + p.user_id + '\',this.value)" class="' + inputCls + ' w-20 inline-block"></label>';
+        html += '<label class="text-slate-400">PV <input type="number" min="0" step="1" value="' + p.vp + '" ' + act('change', 'AW.g.setVp', [p.user_id, '$value']) + ' class="' + inputCls + ' w-20 inline-block"></label>';
       } else if (g.status !== 'draft') {
         html += '<span class="text-amber-400 font-semibold">' + p.vp + ' PV</span>';
       }
@@ -477,7 +478,7 @@
     html += '</div>';
 
     if (isOwner && !mine && g.status === 'draft' && !inCamp) {
-      html += '<button onclick="AW.g.joinSelf()" class="' + btnGhost + ' mt-3">Unirme como jugador</button>';
+      html += '<button ' + act('click', 'AW.g.joinSelf', []) + ' class="' + btnGhost + ' mt-3">Unirme como jugador</button>';
     }
     html += '</section>';
 
@@ -494,12 +495,12 @@
       }
       const ready = players.length > 0 && !need.length;
       html +=
-        '<button onclick="AW.g.start()" class="' + btnPrimary + '"' + (ready ? '' : ' disabled') + '>Empezar partida</button>' +
+        '<button ' + act('click', 'AW.g.start', []) + ' class="' + btnPrimary + '"' + (ready ? '' : ' disabled') + '>Empezar partida</button>' +
         '<span class="text-sm text-slate-500">' + (ready ? 'Todo listo.' : 'Pendiente: ' + esc(need.join(' · '))) + '</span>';
     }
     if (isOwner && g.status === 'active') {
       if (!gs.finishing) {
-        html += '<button onclick="AW.g.finishOpen()" class="' + btnPrimary + '">Terminar partida</button>';
+        html += '<button ' + act('click', 'AW.g.finishOpen', []) + ' class="' + btnPrimary + '">Terminar partida</button>';
       } else {
         const top = Math.max.apply(null, players.map((p) => p.vp));
         html +=
@@ -511,15 +512,15 @@
               (top > 0 && p.vp === top ? ' checked' : '') + '> ' + esc(playerName(p)) + ' <span class="text-slate-500">(' + p.vp + ' PV)</span></label>'
             )
             .join('') +
-          '</div><div class="flex gap-3"><button onclick="AW.g.finishConfirm()" class="' + btnPrimary + '">Confirmar y cerrar</button>' +
-          '<button onclick="AW.g.finishCancel()" class="' + btnGhost + '">Cancelar</button></div></div>';
+          '</div><div class="flex gap-3"><button ' + act('click', 'AW.g.finishConfirm', []) + ' class="' + btnPrimary + '">Confirmar y cerrar</button>' +
+          '<button ' + act('click', 'AW.g.finishCancel', []) + ' class="' + btnGhost + '">Cancelar</button></div></div>';
       }
     }
     if (!isOwner && mine && g.status === 'draft' && !inCamp) {
-      html += '<button onclick="AW.g.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la partida</button>';
+      html += '<button ' + act('click', 'AW.g.leave', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la partida</button>';
     }
     if (isOwner && !inCamp) {
-      html += '<button onclick="AW.g.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar partida</button>';
+      html += '<button ' + act('click', 'AW.g.remove', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar partida</button>';
     }
     html += '</section>';
 

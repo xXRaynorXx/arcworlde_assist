@@ -169,6 +169,7 @@
   const badge = (s) =>
     '<span class="text-xs border px-2 py-0.5 rounded-md font-semibold whitespace-nowrap ' + STATUS[s][1] + '">' + STATUS[s][0] + '</span>';
   const pname = AWUtil.pname;
+  const act = AWUtil.act;
   const gpFmt = AWUtil.gpFmt;
 
   function viewCampaigns() {
@@ -179,7 +180,7 @@
         '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md">' +
           (cs.pendingCode ? '<p class="text-emerald-400 mb-3">Te han invitado a una campaña. Inicia sesión y te apuntamos automáticamente.</p>' : '') +
           '<p class="text-slate-300 mb-4">Necesitas una cuenta para crear o unirte a campañas.</p>' +
-          '<button onclick="AW.go(\'app_account\')" class="' + btnPrimary + '">Iniciar sesión</button></div>'
+          '<button ' + act('click', 'AW.go', ['app_account']) + ' class="' + btnPrimary + '">Iniciar sesión</button></div>'
       );
     }
     if (cs.list === null && !cs.loading) loadList().then(() => rerender(true));
@@ -200,7 +201,7 @@
           .map((c) => {
             const mine = c.owner_id === state.user.id;
             return (
-              '<article onclick="AW.c.open(\'' + c.id + '\')" class="cursor-pointer bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
+              '<article ' + act('click', 'AW.c.open', [c.id]) + ' class="cursor-pointer bg-slate-950 rounded-xl p-5 border border-slate-800/60 hover:border-emerald-500/50 transition-colors">' +
               '<div class="flex items-start justify-between gap-3"><h5 class="text-lg font-bold text-white">' + esc(c.name) + '</h5>' + badge(c.status) + '</div>' +
               '<p class="text-sm text-slate-400 mt-1">' + c.num_missions + ' misiones · banda hasta ' + c.max_value + ' GP · ' + (c.campaign_players || []).length + ' jugadores</p>' +
               (c.status === 'active' ? '<p class="text-sm text-emerald-400 mt-1">Misión ' + c.chapter + ' de ' + c.num_missions + '</p>' : '') +
@@ -211,8 +212,8 @@
         '</div>';
     const inner =
       '<div class="flex flex-wrap gap-3 items-end mb-6">' +
-      '<button onclick="AW.c.showNew()" class="' + btnPrimary + '">+ Nueva campaña</button>' +
-      '<form onsubmit="AW.c.join(event)" class="flex gap-2 items-end ml-auto">' +
+      '<button ' + act('click', 'AW.c.showNew', []) + ' class="' + btnPrimary + '">+ Nueva campaña</button>' +
+      '<form ' + act('submit', 'AW.c.join', ['$event']) + ' class="flex gap-2 items-end ml-auto">' +
       '<div><label class="block text-xs text-slate-400 mb-1">¿Tienes un código?</label><input name="code" required maxlength="40" placeholder="Código de invitación" class="' + inputCls + '"></div>' +
       '<button type="submit" class="' + btnGhost + '">Unirme</button></form></div>' +
       cards;
@@ -221,7 +222,7 @@
 
   function viewNew() {
     const inner =
-      '<form onsubmit="AW.c.create(event)" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 max-w-xl">' +
+      '<form ' + act('submit', 'AW.c.create', ['$event']) + ' class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 max-w-xl">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la campaña</label><input name="name" required maxlength="80" class="' + inputCls + '"></div>' +
       '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Número de misiones</label><input name="missions" type="number" min="1" max="12" step="1" value="3" required class="' + inputCls + '"></div>' +
@@ -230,7 +231,7 @@
       '<p class="text-xs text-slate-500">Cada misión es una partida. El presupuesto es el dinero con el que empieza cada banda: al elegir banda se le descuenta su valor, y lo que queda (el fondo) sube o baja con compras, ventas, premios y eventos.</p>' +
       '<label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" name="plays" checked class="accent-emerald-500"> Yo también juego esta campaña</label>' +
       '<div class="pt-2 flex gap-3"><button type="submit" class="' + btnPrimary + '">Crear campaña</button>' +
-      '<button type="button" onclick="AW.c.back()" class="' + btnGhost + '">Cancelar</button></div></form>';
+      '<button type="button" ' + act('click', 'AW.c.back', []) + ' class="' + btnGhost + '">Cancelar</button></div></form>';
     return shell('Nueva campaña', 'Después podrás invitar a los jugadores con un código o un enlace', inner);
   }
 
@@ -270,7 +271,7 @@
       (roll
         ? '<span class="shrink-0">' + diceHtml(roll.dice) + '</span><span class="text-sm flex-1 min-w-[12rem]">' + describeRoll(roll) + '</span>'
         : canRoll && p.user_id === state.user.id
-          ? '<button onclick="AW.c.roll(\'' + kind + '\')" class="' + btnPrimary + ' !py-1.5 !px-3 text-sm">🎲 ' + label + '</button>'
+          ? '<button ' + act('click', 'AW.c.roll', [kind]) + ' class="' + btnPrimary + ' !py-1.5 !px-3 text-sm">🎲 ' + label + '</button>'
           : '<span class="text-sm text-slate-600 italic">pendiente</span>') +
       '</div>'
     );
@@ -309,23 +310,23 @@
         used[u._o] = true;
         const oldG = o.equipo || [];
         const dc = (Number(u.coste) || 0) - (Number(o.coste) || 0);
-        if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
-        else if (dc < 0) { refund += -dc; lines.push({ t: 'Ajuste', n: u.nombre, c: dc }); }
-        gear.filter((g) => !oldG.some((x) => key(x) === key(g))).forEach((g) => gearBuy(g, u.nombre));
-        oldG.filter((g) => !gear.some((x) => key(x) === key(g))).forEach((g) => gearSell(g, u.nombre));
+        if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: AWUtil.unitName(u), c: dc }); }
+        else if (dc < 0) { refund += -dc; lines.push({ t: 'Ajuste', n: AWUtil.unitName(u), c: dc }); }
+        gear.filter((g) => !oldG.some((x) => key(x) === key(g))).forEach((g) => gearBuy(g, AWUtil.unitName(u)));
+        oldG.filter((g) => !gear.some((x) => key(x) === key(g))).forEach((g) => gearSell(g, AWUtil.unitName(u)));
       } else {
         const c = Number(u.coste) || 0;
         spend += c;
-        lines.push({ t: 'Fichaje', n: u.nombre, c });
-        gear.forEach((g) => gearBuy(g, u.nombre));
+        lines.push({ t: 'Fichaje', n: AWUtil.unitName(u), c });
+        gear.forEach((g) => gearBuy(g, AWUtil.unitName(u)));
       }
     });
     orig.forEach((o, i) => {
       if (used[i]) return;
       const c = Number(o.coste) || 0;
       refund += c;
-      lines.push({ t: 'Baja', n: o.nombre, c });
-      (o.equipo || []).forEach((g) => gearSell(g, o.nombre));
+      lines.push({ t: 'Baja', n: AWUtil.unitName(o), c });
+      (o.equipo || []).forEach((g) => gearSell(g, AWUtil.unitName(o)));
     });
     return { spend, refund, net: spend - refund, lines };
   }
@@ -360,13 +361,13 @@
         if (!lv) return '';
         return '<option value="' + tr.id + '"' + (lv.coste > vp.left ? ' disabled' : '') + '>' + esc(tr.nombre) + ' N' + next + ' · ' + lv.coste + ' VP</option>';
       }).join('');
-      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(u.nombre) + '</p>' +
+      h += '<div class="rounded-lg bg-slate-950 border border-slate-800/70 p-3"><p class="font-semibold text-slate-100 text-sm">' + esc(AWUtil.unitName(u)) + '</p>' +
         '<div class="flex flex-wrap gap-1.5 mt-1.5">' +
         Object.keys(rc).map((id) => { const tr = window.AWTraits && AWTraits.find(id); const lv = tr && tr.niveles.find((x) => x.n === rc[id]); return '<span title="' + esc(lv ? lv.texto : '') + '" class="text-xs px-2 py-0.5 rounded-md border bg-amber-500/10 border-amber-500/30 text-amber-300">⭐ ' + esc(tr ? tr.nombre : id) + ' N' + rc[id] + '</span>'; }).join('') +
-        les.map((id) => '<span class="text-xs px-2 py-0.5 rounded-md border bg-rose-950/40 border-rose-800/50 text-rose-200">🤕 ' + esc((t.lesiones[id] || {}).nombre || id) + ' <button onclick="AW.c.setInjury(' + i + ',\'' + id + '\',false)" title="Quitar" aria-label="Quitar lesión" class="ml-1 px-1.5 py-0.5 text-rose-300 hover:text-white">×</button></span>').join('') +
+        les.map((id) => '<span class="text-xs px-2 py-0.5 rounded-md border bg-rose-950/40 border-rose-800/50 text-rose-200">🤕 ' + esc((t.lesiones[id] || {}).nombre || id) + ' <button ' + act('click', 'AW.c.setInjury', [i, id, false]) + ' title="Quitar" aria-label="Quitar lesión" class="ml-1 px-1.5 py-0.5 text-rose-300 hover:text-white">×</button></span>').join('') +
         '</div><div class="flex flex-wrap gap-2 mt-2">' +
-        '<select onchange="AW.c.buyTrait(' + i + ',this.value);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Comprar habilidad con PV…</option>' + opts + '</select>' +
-        '<select onchange="AW.c.setInjury(' + i + ',this.value,true);this.value=\'\'" class="' + inputCls + ' sm:w-auto"><option value="">Añadir lesión…</option>' +
+        '<select ' + act('change', 'AW.c.buyTrait', [i, '$value'],{reset:true}) + ' class="' + inputCls + ' sm:w-auto"><option value="">Comprar habilidad con PV…</option>' + opts + '</select>' +
+        '<select ' + act('change', 'AW.c.setInjury', [i, '$value', true],{reset:true}) + ' class="' + inputCls + ' sm:w-auto"><option value="">Añadir lesión…</option>' +
         LESIONES.filter((id) => les.indexOf(id) < 0).map((id) => '<option value="' + id + '">' + esc((t.lesiones[id] || {}).nombre || id) + '</option>').join('') + '</select></div></div>';
     });
     return h + '</div></div>';
@@ -386,7 +387,7 @@
       '<div class="px-5 py-3 flex flex-wrap items-center gap-3 border-b border-slate-800">' +
       '<h4 class="text-lg font-bold text-white">Misión ' + n + '</h4>' +
       (g ? badge(g.status) : '<span class="text-xs text-slate-500">Sin empezar</span>') +
-      (g ? '<button onclick="AW.c.openGame(\'' + g.id + '\')" class="' + btnGhost + ' ml-auto !py-1.5 text-sm">Abrir partida →</button>' : '') +
+      (g ? '<button ' + act('click', 'AW.c.openGame', [g.id]) + ' class="' + btnGhost + ' ml-auto !py-1.5 text-sm">Abrir partida →</button>' : '') +
       '</div>';
     if (!g) return html + '<p class="px-5 py-4 text-slate-500 text-sm">Se creará al terminar la misión anterior.</p></section>';
 
@@ -403,8 +404,8 @@
     const canPick = g.status === 'draft' && c.status === 'active' && c.owner_id === me && AW.g && AW.g.scenarioOptions;
     steps += step(1, 'Escenario', !!g.scenario_id,
       (canPick
-        ? '<div class="flex flex-wrap gap-2 mb-3"><select onchange="AW.c.setScenario(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">Sin elegir</option>' + AW.g.scenarioOptions(g.scenario_id) + '</select>' +
-          '<button onclick="AW.c.randomScenario()" class="' + btnGhost + '">🎲 Sortear</button></div>'
+        ? '<div class="flex flex-wrap gap-2 mb-3"><select ' + act('change', 'AW.c.setScenario', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">Sin elegir</option>' + AW.g.scenarioOptions(g.scenario_id) + '</select>' +
+          '<button ' + act('click', 'AW.c.randomScenario', []) + ' class="' + btnGhost + '">🎲 Sortear</button></div>'
         : '') +
       '<p class="text-sm text-slate-300">' + (sc ? esc(sc) : 'Todavía no hay escenario elegido.') + '</p>' +
       (!canPick && g.status === 'draft' && !g.scenario_id ? '<p class="text-xs text-slate-500 mt-1">Lo elige el creador de la campaña.</p>' : ''), isCur && !g.scenario_id);
@@ -425,7 +426,7 @@
       if (gStatus === 'draft') {
         prep += hum
           ? '<div class="mt-3 p-3 rounded-lg bg-slate-900 border border-slate-800 text-sm text-slate-300">Tu comerciante: <strong class="text-amber-300">' + esc(hum.nombre) + '</strong> · compras ' + pct(hum.compra) + ', ventas ' + pct(hum.venta) +
-            '<div class="mt-2"><button onclick="AW.c.editBand()" class="' + btnPrimary + ' !py-1.5 text-sm">🛒 Comprar / vender y gestionar mi banda</button></div></div>'
+            '<div class="mt-2"><button ' + act('click', 'AW.c.editBand', []) + ' class="' + btnPrimary + ' !py-1.5 text-sm">🛒 Comprar / vender y gestionar mi banda</button></div></div>'
           : '<p class="mt-3 text-sm text-amber-300">Tira antes al comerciante (paso 2) para poder comprar y vender.</p>';
         const myGp = gp.find((x) => x.user_id === me);
         prep += spoilsPanel(mineP.band_snapshot, myGp && myGp.roster, vpBalance(me));
@@ -450,11 +451,11 @@
         return '<div class="bg-slate-900 border border-slate-800 rounded-xl p-3">' +
           '<div class="flex flex-wrap items-center gap-3"><span class="font-semibold text-white">' + esc(pname(x)) + (mineRow ? ' <span class="text-xs text-emerald-400 font-normal">(tú)</span>' : '') + '</span>' +
           (mineRow && canAct
-            ? '<label class="text-sm text-slate-400">PV <input type="number" min="0" max="999" step="1" value="' + x.vp + '" onchange="AW.c.setVp(\'' + g.id + '\',this.value)" class="' + inputCls + ' w-20 inline-block"></label>'
+            ? '<label class="text-sm text-slate-400">PV <input type="number" min="0" max="999" step="1" value="' + x.vp + '" ' + act('change', 'AW.c.setVp', [g.id, '$value']) + ' class="' + inputCls + ' w-20 inline-block"></label>'
             : '<strong class="text-amber-400">' + x.vp + ' PV</strong>') +
           (mineRow && canAct && (g.round || 0) >= 1
             ? (done ? '<span class="text-xs text-slate-500">Ya has robado tu evento de la ronda ' + g.round + '</span>'
-                    : '<button onclick="AW.c.roll(\'round_event\')" class="' + btnPrimary + ' !py-1.5 !px-3 text-sm ml-auto">🃏 Evento de final de ronda ' + g.round + '</button>')
+                    : '<button ' + act('click', 'AW.c.roll', ['round_event']) + ' class="' + btnPrimary + ' !py-1.5 !px-3 text-sm ml-auto">🃏 Evento de final de ronda ' + g.round + '</button>')
             : '') + '</div>' +
           (mine.length ? '<div class="mt-3 space-y-3">' + mine.map((r) => '<div class="border-t border-slate-800/60 pt-3"><p class="text-xs uppercase tracking-wider text-emerald-400 font-semibold mb-1">Ronda ' + r.unit_index + '</p>' + describeRoll(r) + '</div>').join('') + '</div>' : '') +
           '</div>';
@@ -469,7 +470,7 @@
       const iRolls = rollsOf(n, 'injury');
       const mineGp = gp.find((x) => x.user_id === me);
       const koIdx = (x) => Object.keys(x.roster || {}).filter((k) => x.roster[k] && x.roster[k].ko).map(Number);
-      const unitName = (x, i) => ((x.band_snapshot && x.band_snapshot.units) || [])[i] ? x.band_snapshot.units[i].nombre : 'Miniatura ' + (i + 1);
+      const unitName = (x, i) => ((x.band_snapshot && x.band_snapshot.units) || [])[i] ? AWUtil.unitName(x.band_snapshot.units[i]) : 'Miniatura ' + (i + 1);
       let inner = '<p class="text-xs text-slate-500 mb-2">Cada miniatura noqueada tira 1D6 en la Tabla de Lesiones. Los efectos valen para la siguiente partida.</p>';
       let any = false;
       gp.forEach((x) => {
@@ -482,7 +483,7 @@
             (roll
               ? '<span class="shrink-0">' + diceHtml(roll.dice) + '</span><span class="text-sm flex-1 min-w-[12rem]">' + describeRoll(roll) + '</span>'
               : x.user_id === me && c.status === 'active' && isCur
-                ? '<button onclick="AW.c.roll(\'injury\',' + i + ')" class="' + btnPrimary + ' !py-1.5 !px-3 text-sm">🎲 Tirar lesión</button>'
+                ? '<button ' + act('click', 'AW.c.roll', ['injury', i]) + ' class="' + btnPrimary + ' !py-1.5 !px-3 text-sm">🎲 Tirar lesión</button>'
                 : '<span class="text-sm text-slate-600 italic">pendiente</span>') +
             '</div>';
         });
@@ -527,7 +528,7 @@
       ).join('') + '</div>';
     if (active) {
       html +=
-        '<form onsubmit="AW.c.adjustGold(event)" class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-wrap gap-3 items-end">' +
+        '<form ' + act('submit', 'AW.c.adjustGold', ['$event']) + ' class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-wrap gap-3 items-end">' +
         (isOwner
           ? '<div><label class="block text-xs text-slate-400 mb-1">Banda</label><select name="who" class="' + inputCls + '">' + players.map((p) => '<option value="' + p.user_id + '"' + (p.user_id === me ? ' selected' : '') + '>' + esc(pname(p)) + '</option>').join('') + '</select></div>'
           : '<input type="hidden" name="who" value="' + me + '">') +
@@ -557,9 +558,9 @@
     const isOwner = c.owner_id === me;
     const gp = g.game_players || [];
     const mineGp = gp.find((x) => x.user_id === me);
-    const act = (label, fn) => '<button onclick="' + fn + '" class="' + btnPrimary + '">' + label + '</button>';
-    const goto = (label, st) => act(label, 'AW.c.goStep(' + st + ')');
-    const open = act('Abrir la partida →', "AW.c.openGame('" + g.id + "')");
+    const stepBtn = (label, fn, args) => '<button ' + act('click', fn, args || []) + ' class="' + btnPrimary + '">' + label + '</button>';
+    const goto = (label, st) => stepBtn(label, 'AW.c.goStep', [st]);
+    const open = stepBtn('Abrir la partida →', 'AW.c.openGame', [g.id]);
     const without = (kind) => players.filter((p) => !rollsOf(n, kind).some((r) => r.user_id === p.user_id));
     const names = (l) => l.map(pname).join(', ');
     let title = '', text = '', btn = '';
@@ -574,7 +575,7 @@
       } else if (noMerchant.some((p) => p.user_id === me)) {
         title = 'Tira al comerciante ambulante';
         text = 'Su humor fija tus precios de compra y venta.';
-        btn = act('🎲 Tirar 1D6', "AW.c.roll('merchant')");
+        btn = stepBtn('🎲 Tirar 1D6', 'AW.c.roll', ['merchant']);
       } else if (mineGp && !mineGp.ready) {
         title = 'Prepara tu banda y da tu OK';
         text = 'Compra y vende, gasta PV y ajusta lesiones; cuando estés listo, da tu OK en la partida.';
@@ -591,7 +592,7 @@
       const mine = rollsOf(n, 'round_event').some((r) => r.user_id === me && r.unit_index === g.round);
       title = 'Partida en curso · ronda ' + (g.round || 0);
       text = 'Anota tus PV y roba tu evento de final de ronda cuando toque.';
-      btn = ((g.round || 0) >= 1 && !mine && mineGp ? act('🃏 Evento de final de ronda ' + g.round, "AW.c.roll('round_event')") + ' ' : '') + goto('Mis PV y eventos', 4) + ' ' + open;
+      btn = ((g.round || 0) >= 1 && !mine && mineGp ? stepBtn('🃏 Evento de final de ronda ' + g.round, 'AW.c.roll', ['round_event']) + ' ' : '') + goto('Mis PV y eventos', 4) + ' ' + open;
     } else {
       const koIdx = (x) => Object.keys(x.roster || {}).filter((k) => x.roster[k] && x.roster[k].ko).map(Number);
       const myPendInj = mineGp ? koIdx(mineGp).filter((i) => !rollsOf(n, 'injury').some((r) => r.user_id === me && r.unit_index === i)).length : 0;
@@ -625,7 +626,7 @@
 
   function viewDetail() {
     const c = cs.camp;
-    const back = '<button onclick="AW.c.back()" class="text-sm text-slate-400 hover:text-white mb-4">← Todas las campañas</button>';
+    const back = '<button ' + act('click', 'AW.c.back', []) + ' class="text-sm text-slate-400 hover:text-white mb-4">← Todas las campañas</button>';
     if (!c) return shell('Campaña', 'Cargando...', back + '<p class="text-slate-500">Cargando campaña...</p>');
 
     const me = state.user.id;
@@ -642,7 +643,7 @@
       (c.status === 'active' ? '<span class="text-emerald-400 font-semibold">Misión ' + c.chapter + ' de ' + c.num_missions + '</span>' : '') +
       '<span class="text-slate-300">👥 ' + players.length + '</span>' +
       '<span class="text-sm text-slate-500">Creada por ' + (isOwner ? 'ti' : esc(c.owner ? c.owner.display_name : '—')) + '</span>' +
-      '<button onclick="AW.c.refresh()" class="' + btnGhost + ' ml-auto">↻ Actualizar</button></div>';
+      '<button ' + act('click', 'AW.c.refresh', []) + ' class="' + btnGhost + ' ml-auto">↻ Actualizar</button></div>';
 
     if (c.status === 'finished') {
       const names = players.filter((p) => winners.indexOf(p.user_id) >= 0).map(pname);
@@ -656,8 +657,8 @@
         '<section class="mb-6 bg-slate-900 border border-slate-800 rounded-2xl p-5"><h3 class="text-lg font-bold text-white mb-1">Invitar jugadores</h3>' +
         '<p class="text-sm text-slate-400 mb-3">Comparte el código o el enlace. Cada jugador elige su banda (hasta ' + c.max_value + ' GP) y empieza con ' + gpFmt(c.starting_gold) + ' de presupuesto: el valor de su banda se descuenta de ahí.</p>' +
         '<div class="flex flex-wrap gap-2 items-center"><code class="px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-emerald-300 select-all">' + esc(c.join_code) + '</code>' +
-        '<button onclick="AW.c.copy(\'' + esc(c.join_code) + '\')" class="' + btnGhost + '">Copiar código</button>' +
-        '<button onclick="AW.c.copy(\'' + esc(link) + '\')" class="' + btnGhost + '">Copiar enlace</button></div></section>';
+        '<button ' + act('click', 'AW.c.copy', [c.join_code]) + ' class="' + btnGhost + '">Copiar código</button>' +
+        '<button ' + act('click', 'AW.c.copy', [link]) + ' class="' + btnGhost + '">Copiar enlace</button></div></section>';
     }
 
     /* jugadores y bandas */
@@ -694,23 +695,23 @@
       if (!players.length) need.push('faltan jugadores');
       const noBand = players.filter((p) => !p.band_id).map(pname);
       if (noBand.length) need.push('falta banda de ' + noBand.join(', '));
-      actions += '<button onclick="AW.c.start()" class="' + btnPrimary + '"' + (need.length ? ' disabled' : '') + '>Empezar campaña</button>' +
+      actions += '<button ' + act('click', 'AW.c.start', []) + ' class="' + btnPrimary + '"' + (need.length ? ' disabled' : '') + '>Empezar campaña</button>' +
         '<span class="text-sm text-slate-500">' + (need.length ? 'Pendiente: ' + esc(need.join(' · ')) : 'Todo listo. Se creará la misión 1.') + '</span>';
     }
     if (isOwner && c.status === 'active') {
       const g = gameOf(c.chapter);
       const done = g && g.status === 'finished';
       if (c.chapter < c.num_missions) {
-        actions += '<button onclick="AW.c.nextChapter()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Pasar a la misión ' + (c.chapter + 1) + '</button>' +
+        actions += '<button ' + act('click', 'AW.c.nextChapter', []) + ' class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Pasar a la misión ' + (c.chapter + 1) + '</button>' +
           '<span class="text-sm text-slate-500">' + (done ? 'Cuando todos hayan hecho sus tiradas.' : 'Termina antes la partida de la misión ' + c.chapter + '.') + '</span>';
       } else if (!cs.finishing) {
-        actions += '<button onclick="AW.c.finishOpen()" class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Cerrar campaña</button>' +
+        actions += '<button ' + act('click', 'AW.c.finishOpen', []) + ' class="' + btnPrimary + '"' + (done ? '' : ' disabled') + '>Cerrar campaña</button>' +
           '<span class="text-sm text-slate-500">' + (done ? 'Es la última misión.' : 'Termina antes la última partida.') + '</span>';
       } else {
         const st = standings(players);
         actions += '<div class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm text-slate-300 mb-3">¿Quién gana la campaña? (marca varios si hay empate)</p><div class="space-y-2 mb-4">' +
           st.map((x, k) => '<label class="flex items-center gap-2 text-slate-200"><input type="checkbox" class="aw-cwin accent-amber-500" value="' + x.user_id + '"' + (k === 0 ? ' checked' : '') + '> ' + esc(x.name) + ' <span class="text-xs text-slate-500">(' + x.wins + ' victorias · ' + x.vp + ' PV)</span></label>').join('') +
-          '</div><div class="flex gap-3"><button onclick="AW.c.finishConfirm()" class="' + btnPrimary + '">Confirmar y cerrar</button><button onclick="AW.c.finishCancel()" class="' + btnGhost + '">Cancelar</button></div></div>';
+          '</div><div class="flex gap-3"><button ' + act('click', 'AW.c.finishConfirm', []) + ' class="' + btnPrimary + '">Confirmar y cerrar</button><button ' + act('click', 'AW.c.finishCancel', []) + ' class="' + btnGhost + '">Cancelar</button></div></div>';
       }
     }
     const actionsHtml = actions ? '<section class="pt-4 mt-2 border-t border-slate-800 flex flex-wrap gap-3 items-center">' + actions + '</section>' : '';
@@ -722,24 +723,24 @@
         '<p class="text-xs text-slate-500 mb-3">El nuevo creador elige escenario, empieza y cierra las partidas, pasa de misión y cierra la campaña.</p>' +
         '<div class="flex flex-wrap gap-2"><select id="aw-transfer" class="' + inputCls + ' sm:w-auto">' +
         players.filter((p) => p.user_id !== me).map((p) => '<option value="' + p.user_id + '">' + esc(pname(p)) + '</option>').join('') + '</select>' +
-        '<button onclick="AW.c.transfer()" class="' + btnGhost + '">Traspasar</button></div></div>';
+        '<button ' + act('click', 'AW.c.transfer', []) + ' class="' + btnGhost + '">Traspasar</button></div></div>';
     }
     if (isOwner && c.status === 'active' && c.chapter > 1) {
       const g = gameOf(c.chapter);
       const fresh = g && g.status === 'draft' && !cs.rolls.some((r) => r.chapter === c.chapter) && !cs.ledger.some((l) => l.chapter === c.chapter) && !cs.vplog.some((l) => l.chapter === c.chapter);
       settingsHtml += '<div class="bg-slate-900 border border-slate-800 rounded-xl p-4"><p class="text-sm font-semibold text-white mb-1">Deshacer el paso a la misión ' + c.chapter + '</p>' +
         '<p class="text-xs text-slate-500 mb-3">' + (fresh ? 'Vuelve a la misión ' + (c.chapter - 1) + ' (las lesiones vuelven a su sitio).' : 'Solo se puede mientras la partida no haya empezado y nadie haya hecho tiradas, compras ni gastos de PV en esta misión.') + '</p>' +
-        '<button onclick="AW.c.undoChapter()" class="' + btnGhost + '"' + (fresh ? '' : ' disabled') + '>Deshacer</button></div>';
+        '<button ' + act('click', 'AW.c.undoChapter', []) + ' class="' + btnGhost + '"' + (fresh ? '' : ' disabled') + '>Deshacer</button></div>';
     }
     settingsHtml += '<div class="flex flex-wrap gap-3 items-center">';
-    if (!isOwner && mine && c.status === 'draft') settingsHtml += '<button onclick="AW.c.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>';
-    if (isOwner) settingsHtml += '<button onclick="AW.c.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Borrar campaña</button>';
+    if (!isOwner && mine && c.status === 'draft') settingsHtml += '<button ' + act('click', 'AW.c.leave', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>';
+    if (isOwner) settingsHtml += '<button ' + act('click', 'AW.c.remove', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Borrar campaña</button>';
     settingsHtml += '</div></section>';
 
     if (c.status === 'draft') {
       html += playersHtml + actionsHtml + '<section class="pt-4 mt-2 border-t border-slate-800 flex flex-wrap gap-3">' +
-        (!isOwner && mine ? '<button onclick="AW.c.leave()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>' : '') +
-        (isOwner ? '<button onclick="AW.c.remove()" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar campaña</button>' : '') + '</section>';
+        (!isOwner && mine ? '<button ' + act('click', 'AW.c.leave', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm">Salir de la campaña</button>' : '') +
+        (isOwner ? '<button ' + act('click', 'AW.c.remove', []) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm ml-auto">Borrar campaña</button>' : '') + '</section>';
       return shell(esc(c.name), 'Campaña', html);
     }
 
@@ -747,7 +748,7 @@
     const TABS = [['mision', c.status === 'finished' ? 'Última misión' : 'Misión actual'], ['jugadores', 'Jugadores'], ['caja', 'Fondo'], ['historial', 'Misiones anteriores'], ['ajustes', 'Ajustes']];
     if (TABS.every((t) => t[0] !== cs.tab)) cs.tab = 'mision';
     html += '<div role="tablist" aria-label="Secciones de la campaña" class="flex gap-1 overflow-x-auto mb-5 border-b border-slate-800">' +
-      TABS.map((t) => '<button role="tab" id="ctab-' + t[0] + '" aria-selected="' + (cs.tab === t[0]) + '" onclick="AW.c.tab(\'' + t[0] + '\')" class="shrink-0 px-4 py-2 text-sm font-semibold border-b-2 -mb-px ' +
+      TABS.map((t) => '<button role="tab" id="ctab-' + t[0] + '" aria-selected="' + (cs.tab === t[0]) + '" ' + act('click', 'AW.c.tab', [t[0]]) + ' class="shrink-0 px-4 py-2 text-sm font-semibold border-b-2 -mb-px ' +
         (cs.tab === t[0] ? 'border-emerald-500 text-white' : 'border-transparent text-slate-400 hover:text-white') + '">' + t[1] + '</button>').join('') + '</div>';
     html += '<div role="tabpanel" aria-labelledby="ctab-' + cs.tab + '">';
     if (cs.tab === 'mision') {
@@ -778,8 +779,8 @@
     return (
       '<div class="mt-4 pt-4 border-t border-slate-800/60"><p class="text-xs text-slate-400 mb-2">Tu banda para la campaña (máximo ' + c.max_value + ' GP). Su valor se descuenta de tu presupuesto de ' + c.starting_gold + ' GP' +
       (mine.band_snapshot ? ': te quedan <strong class="text-amber-400">' + gpFmt(mine.gold) + '</strong>' : '') + '.</p>' +
-      '<div class="flex flex-wrap gap-2 items-center"><select onchange="AW.c.chooseBand(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">— Elige una de tu perfil —</option>' + opts + '</select>' +
-      '<button onclick="AW.c.newBandFor()" class="' + btnGhost + '">+ Crear banda nueva</button></div></div>'
+      '<div class="flex flex-wrap gap-2 items-center"><select ' + act('change', 'AW.c.chooseBand', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">— Elige una de tu perfil —</option>' + opts + '</select>' +
+      '<button ' + act('click', 'AW.c.newBandFor', []) + ' class="' + btnGhost + '">+ Crear banda nueva</button></div></div>'
     );
   }
 

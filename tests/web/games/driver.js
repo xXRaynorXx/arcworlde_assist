@@ -11,7 +11,7 @@ window.addEventListener('load', async () => {
     AW.go('app_games'); await wait(100);
     AW.g.showNew(); await wait(30);
     ok('formulario: jugadores y entorno', !!document.querySelector('input[name=players]') && document.querySelectorAll('select[name=env] option').length === 2);
-    submit('form[onsubmit*="AW.g.create"]', { name: 'Duelo', max: '400', players: '2', scenario: '', env: 'vauhaemia', plays: true }); await wait(200);
+    submit('form[data-submit*="AW.g.create"]', { name: 'Duelo', max: '400', players: '2', scenario: '', env: 'vauhaemia', plays: true }); await wait(200);
     const g = db.games[0];
     ok('partida de 2 jugadores creada en Vauhaemia', g.max_players === 2 && g.arcdeck_env === 'vauhaemia');
     ok('cabecera 1/2 y ajustes del creador', main().includes('👥 1/2') && main().includes('Ajustes') && main().includes('Jugadores (1/2)'));
@@ -23,11 +23,11 @@ window.addEventListener('load', async () => {
     ok('Ana lista', main().includes('✅ Listo') && !!btn('Quitar mi OK'));
 
     __login('u2'); await wait(250); AW.go('app_games'); await wait(100);
-    submit('form[onsubmit*="AW.g.join"]', { code: g.join_code }); await wait(250);
+    submit('form[data-submit*="AW.g.join"]', { code: g.join_code }); await wait(250);
     ok('Bob dentro 2/2', main().includes('Jugadores (2/2)'));
     ok('Bob sin boton OK hasta elegir banda', !btn('OK, estoy listo') && main().includes('Elige una banda para poder dar tu OK'));
     __login('u3'); await wait(250); AW.go('app_games'); await wait(100);
-    submit('form[onsubmit*="AW.g.join"]', { code: g.join_code }); await wait(200);
+    submit('form[data-submit*="AW.g.join"]', { code: g.join_code }); await wait(200);
     ok('Carol: partida completa', document.body.textContent.includes('La partida está completa') && db.game_players.length === 2);
 
     __login('u2'); await wait(250); AW.go('app_games'); await wait(100); await AW.g.open(g.id); await wait(80);
@@ -81,7 +81,7 @@ window.addEventListener('load', async () => {
 
     __login('u1'); await wait(250); AW.go('app_games'); await wait(100);
     AW.g.showNew(); await wait(30);
-    submit('form[onsubmit*="AW.g.create"]', { name: 'Solo', max: '400', players: '1', scenario: '', env: 'mildaark', plays: true }); await wait(200);
+    submit('form[data-submit*="AW.g.create"]', { name: 'Solo', max: '400', players: '1', scenario: '', env: 'mildaark', plays: true }); await wait(200);
     ok('solitario: sin boton OK', !btn('OK, estoy listo') && main().includes('👥 1/1'));
     await AW.g.chooseBand('AnaOk'); await wait(60);
     ok('solitario: empezar habilitado sin OK', !btn('Empezar partida').disabled);
@@ -90,6 +90,7 @@ window.addEventListener('load', async () => {
     await AW.g.finishOpen(); await wait(20); await AW.g.finishConfirm(); await wait(80);
     ok('terminada: historial visible, sin boton de ronda', !btn('Final de ronda') && main().includes('Evento ArcDeck'));
     ok('compendio sigue funcionando', (currentSectionId = 'core_rules', renderSidebar(), renderContent(), document.querySelector('#main-content h2').textContent === 'Reglas Básicas'));
+    ok('todas las acciones data-* de la pantalla existen', AWUtil.unresolvedActions().length === 0, AWUtil.unresolvedActions().join(','));
   } catch (e) { out.push('EXCEPCION: ' + e.message + ' | ' + ((e.stack || '').split('\n')[1] || '')); }
   out.push('errores globales: ' + (window.__errs.join('; ') || 'ninguno'));
   document.body.insertAdjacentHTML('beforeend', '<pre id="testout">' + out.join('\n').replace(/</g, '&lt;') + '</pre>');

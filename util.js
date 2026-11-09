@@ -104,7 +104,57 @@
 
   const pname = (p) => (p && p.profiles && p.profiles.display_name) || 'Jugador';
   const gpFmt = (n) => (Number(n) || 0) + ' GP';
+  // Nombre de una miniatura: "Bilbo (Sheriff)" si tiene nombre propio, o solo el del perfil
+  const unitName = (u) => {
+    if (!u) return '';
+    const a = String(u.apodo || '').trim();
+    return a ? a + ' (' + (u.nombre || '') + ')' : String(u.nombre || '');
+  };
   const pct = (n) => (n > 0 ? '+' : '') + n + '%';
 
-  window.AWUtil = { esc, toast, confirm: confirmDialog, busy, pname, gpFmt, pct };
+  // ---- Eventos delegados (sin onclick="" en línea) ----
+  // act('click','AW.c.roll',['merchant']) -> atributos data-* para el HTML.
+  // Argumentos especiales: '$value' (valor del campo), '$checked', '$event'.
+  // opts.reset vacía el campo tras la acción; opts.then es otra función a llamar después.
+  const attr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  function act(ev, fn, args, opts) {
+    opts = opts || {};
+    return 'data-' + ev + '="' + attr(fn) + '"' +
+      (args && args.length ? ' data-args="' + attr(JSON.stringify(args)) + '"' : '') +
+      (opts.reset ? ' data-reset="1"' : '') +
+      (opts.then ? ' data-then="' + attr(opts.then) + '"' : '');
+  }
+  function resolveFn(path) {
+    let ctx = window, parent = null;
+    for (const k of String(path).split('.')) { parent = ctx; ctx = ctx == null ? undefined : ctx[k]; }
+    return typeof ctx === 'function' ? { fn: ctx, parent } : null;
+  }
+  function dispatch(ev, e) {
+    const el = e.target && e.target.closest ? e.target.closest('[data-' + ev + ']') : null;
+    if (!el) return;
+    const r = resolveFn(el.getAttribute('data-' + ev));
+    if (!r) { console.error('Acción desconocida:', el.getAttribute('data-' + ev)); return; }
+    let args = [];
+    try { args = JSON.parse(el.getAttribute('data-args') || '[]'); } catch (_) {}
+    args = args.map((a) => (a === '$value' ? el.value : a === '$checked' ? el.checked : a === '$event' ? e : a));
+    const out = r.fn.apply(r.parent, args);
+    if (el.hasAttribute('data-reset')) el.value = '';
+    const then = el.getAttribute('data-then');
+    if (then) { const t = resolveFn(then); if (t) t.fn.apply(t.parent, []); }
+    return out;
+  }
+  ['click', 'change', 'input', 'submit'].forEach((ev) => document.addEventListener(ev, (e) => dispatch(ev, e)));
+  // Para los tests: acciones de data-* que no existen
+  function unresolvedActions(root) {
+    const bad = [];
+    (root || document).querySelectorAll('[data-click],[data-change],[data-input],[data-submit]').forEach((el) => {
+      ['click', 'change', 'input', 'submit'].forEach((ev) => {
+        const v = el.getAttribute('data-' + ev);
+        if (v && !resolveFn(v)) bad.push(v);
+      });
+    });
+    return bad;
+  }
+
+  window.AWUtil = { act, unresolvedActions, esc, toast, confirm: confirmDialog, busy, pname, gpFmt, pct, unitName };
 })();

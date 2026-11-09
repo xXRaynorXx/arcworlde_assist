@@ -16,7 +16,7 @@ window.addEventListener('load', async () => {
     ok('menú Campañas existe', document.body.textContent.includes('Campañas'));
     AW.c.showNew(); await wait(30);
     ok('formulario: misiones, valor máximo y fondo inicial', ['missions', 'max', 'gold'].every(n => document.querySelector('input[name=' + n + ']')));
-    submit('form[onsubmit*="AW.c.create"]', { name: 'Gran Campaña', missions: '2', max: '500', gold: '270', plays: true }); await wait(250);
+    submit('form[data-submit*="AW.c.create"]', { name: 'Gran Campaña', missions: '2', max: '500', gold: '270', plays: true }); await wait(250);
     ok('campaña creada con 2 misiones y presupuesto 270', camp() && camp().num_missions === 2 && camp().starting_gold === 270 && camp().status === 'draft');
     ok('la URL refleja la campaña abierta', location.hash === '#/campanas/' + camp().id, location.hash);
     ok('creador apuntado con 270 GP de presupuesto', cp('u1') && cp('u1').gold === 270 && txt().includes('270 GP'));
@@ -27,7 +27,7 @@ window.addEventListener('load', async () => {
     ok('el valor de la banda (120) se descuenta: quedan 150', cp('u1').gold === 150 && txt().includes('te quedan 150 GP'));
 
     await as('u2');
-    submit('form[onsubmit*="AW.c.join"]', { code: camp().join_code }); await wait(250);
+    submit('form[data-submit*="AW.c.join"]', { code: camp().join_code }); await wait(250);
     ok('Bob dentro con presupuesto', cp('u2') && cp('u2').gold === 270 && txt().includes('Jugadores (2)'));
     await AW.c.chooseBand('BobOk'); await wait(80);
     ok('Bob: banda elegida, fondo 150', cp('u2').gold === 150);
@@ -55,22 +55,22 @@ window.addEventListener('load', async () => {
 
     // fondo (pestaña Fondo)
     await tab('caja');
-    submit('form[onsubmit*="AW.c.adjustGold"]', { delta: '-60', reason: 'Compra de escudo' }); await wait(150);
+    submit('form[data-submit*="AW.c.adjustGold"]', { delta: '-60', reason: 'Compra de escudo' }); await wait(150);
     ok('Bob gasta 60: fondo 90', cp('u2').gold === 90 && txt().includes('90 GP'));
-    submit('form[onsubmit*="AW.c.adjustGold"]', { delta: '-500', reason: 'De más' }); await wait(150);
+    submit('form[data-submit*="AW.c.adjustGold"]', { delta: '-500', reason: 'De más' }); await wait(150);
     ok('no puede gastar más de lo que tiene', cp('u2').gold === 90);
     ok('Bob no ve selector de otra banda', !document.querySelector('select[name=who]'));
     await as('u1'); await AW.c.open(camp().id); await wait(100); await tab('caja');
     ok('Ana (creadora) ve el selector de banda', !!document.querySelector('select[name=who]'));
     document.querySelector('select[name=who]').value = 'u2';
-    submit('form[onsubmit*="AW.c.adjustGold"]', { delta: '25', reason: 'Premio del creador' }); await wait(150);
+    submit('form[data-submit*="AW.c.adjustGold"]', { delta: '25', reason: 'Premio del creador' }); await wait(150);
     ok('Ana premia a Bob: 115 y libro de caja', cp('u2').gold === 115 && txt().includes('Premio del creador') && txt().includes('Compra de escudo'));
 
     // escenario desde la campaña
     await as('u1'); await AW.c.open(camp().id); await wait(100);
     ok('barra de siguiente paso: Ana (creadora) ve que falta elegir escenario o tirar', txt().includes('Siguiente paso'));
-    ok('Ana (creadora) ve el desplegable de escenario', !!document.querySelector('select[onchange*="setScenario"]'));
-    const firstSc = document.querySelector('select[onchange*="setScenario"] option:nth-child(2)').value;
+    ok('Ana (creadora) ve el desplegable de escenario', !!document.querySelector('select[data-change*="setScenario"]'));
+    const firstSc = document.querySelector('select[data-change*="setScenario"] option:nth-child(2)').value;
     await AW.c.setScenario(firstSc); await wait(100);
     ok('escenario elegido del desplegable', db.games[0].scenario_id === firstSc && db.games[0].scenario_mode === 'chosen');
     await AW.c.randomScenario(); await wait(100);
@@ -79,7 +79,7 @@ window.addEventListener('load', async () => {
     const S = AWGear.find('comun', 'shield').coste;
     await AW.c.editBand(); await wait(100);
     ok('editor de banda de campaña', txt().includes('Gestionar banda') && txt().includes('Día Normal') && txt().includes('Sin cambios todavía'));
-    ok('sin selector de facción editable', document.querySelector('select[onchange^="AW.setField(\'faction\'"]').disabled);
+    ok('sin selector de facción editable', document.querySelector('select[data-change="AW.setField"][data-args^=\'["faction"\']').disabled);
     AW.addGear(0, 'comun:shield'); await wait(40);
     ok('resumen: gasta ' + S + ' GP', txt().includes('Gastas ' + S + ' GP') && txt().includes('Fondo tras guardar: ' + (150 - S) + ' GP'), txt().match(/Gastas.{0,80}/));
     await AW.saveBand(); await wait(200);
@@ -110,7 +110,7 @@ window.addEventListener('load', async () => {
     const g1 = db.games[0];
     AW.c.openGame(g1.id); await wait(200);
     ok('partida de campaña: volver a la campaña, sin código ni salir/borrar', txt().includes('Volver a la campaña') && !txt().includes('Invitar jugadores') && !btn('Borrar partida') && txt().includes('Misión 1 de la campaña'));
-    ok('no se puede cambiar de banda dentro de la partida de campaña', !document.querySelector('select[onchange*="chooseBand"]'));
+    ok('no se puede cambiar de banda dentro de la partida de campaña', !document.querySelector('select[data-change*="chooseBand"]'));
     await AW.g.setReady(true); await wait(80);
     await as('u2', 'app_games'); await AW.g.openFromCampaign(g1.id, camp().id); await wait(200);
     await AW.g.setReady(true); await wait(80);
@@ -119,14 +119,14 @@ window.addEventListener('load', async () => {
     ok('partida en curso con evento ArcDeck', g1.status === 'active' && g1.round === 1);
     // PV y evento de final de ronda de cada jugador, desde la campaña
     await as('u1'); await AW.c.open(camp().id); await wait(120);
-    ok('Ana ve su campo de PV y su botón de evento', !!document.querySelector('input[onchange*="setVp"]') && !!btnHas('Evento de final de ronda 1'));
+    ok('Ana ve su campo de PV y su botón de evento', !!document.querySelector('input[data-change*="setVp"]') && !!btnHas('Evento de final de ronda 1'));
     await AW.c.setVp(g1.id, 4); await wait(100);
     ok('Ana anota 4 PV', db.game_players.find(x => x.user_id === 'u1').vp === 4 && db.game_players.find(x => x.user_id === 'u2').vp === 0);
     window.__card = '7♥'; __dice = [3];
     await AW.c.roll('round_event'); await wait(120);
     ok('evento de Ana: carta 7♥ Aura Temporal visible', txt().includes('Aura Temporal') && !btnHas('Evento de final de ronda 1'));
     await as('u2'); await AW.c.open(camp().id); await wait(120);
-    ok('Bob ve el evento de Ana y su propio botón', txt().includes('Aura Temporal') && !!btnHas('Evento de final de ronda 1') && !document.querySelector('input[onchange*="setVp"]') === false);
+    ok('Bob ve el evento de Ana y su propio botón', txt().includes('Aura Temporal') && !!btnHas('Evento de final de ronda 1') && !document.querySelector('input[data-change*="setVp"]') === false);
     window.__card = '6♥'; await AW.c.roll('round_event'); await wait(120);
     ok('Bob roba el suyo: Brote de Arcanita', txt().includes('Brote de Arcanita') && db.campaign_rolls.filter(r => r.kind === 'round_event').length === 2);
     await AW.c.setVp(g1.id, 2); await wait(80);
@@ -188,7 +188,7 @@ window.addEventListener('load', async () => {
     AWUtil.confirm = async () => true;
     await AW.c.open(camp().id); await wait(120);
     ok('panel de PV: Ana tiene 4 PV', txt().includes('PV disponibles: 4') && txt().includes('ganados 4 − gastados 0'), txt().match(/PV disponibles.{0,60}/));
-    const opt = n => [...document.querySelectorAll('select[onchange*="buyTrait(0"] option')].find(o => o.textContent.includes(n));
+    const opt = n => [...document.querySelectorAll('select[data-change="AW.c.buyTrait"][data-args^="[0,"] option')].find(o => o.textContent.includes(n));
     ok('N1 de Pies Ligeros (3 VP) disponible; Tirador Certero N1 también; Hardy N1 también', opt('Pies Ligeros N1 · 3 VP') && !opt('Pies Ligeros N1 · 3 VP').disabled);
     ok('Cabeza Dura (10 VP) deshabilitada por falta de PV', opt('Cabeza Dura N1 · 10 VP') && opt('Cabeza Dura N1 · 10 VP').disabled);
     await AW.c.buyTrait(0, 'fleet_of_foot'); await wait(150);
@@ -242,6 +242,7 @@ window.addEventListener('load', async () => {
     // regresión: Mis Bandas y compendio
     AW.go('app_bands'); await wait(60);
     ok('Mis Bandas sigue funcionando', txt().includes('Mis Bandas'));
+    ok('todas las acciones data-* de la pantalla existen', AWUtil.unresolvedActions().length === 0, AWUtil.unresolvedActions().join(','));
   } catch (e) { out.push('EXCEPCION: ' + e.message + ' | ' + ((e.stack || '').split('\n')[1] || '')); }
   out.push('errores globales: ' + (window.__errs.join('; ') || 'ninguno'));
   document.body.insertAdjacentHTML('beforeend', '<pre id="testout">' + out.join('\n').replace(/</g, '&lt;') + '</pre>');
