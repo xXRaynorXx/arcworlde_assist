@@ -110,6 +110,28 @@ window.addEventListener('load', async () => {
     ok('Bob ve el botón Listo en preparar banda', !!btnHas('Listo: mi banda está preparada'));
     await btnHas('Listo: mi banda está preparada').click(); await wait(150);
     ok('Bob da su Listo: ready en la partida y aviso en pantalla', db.game_players.find(x => x.user_id === 'u2').ready === true && txt().includes('Tu banda está lista'), txt().match(/Tu banda.{0,30}/));
+    // Resumen por jugador visible para todos (comerciante, compras, ventas, valor, listo)
+    ok('tarjetas de preparar banda: comerciante, comprado/vendido y listo de cada uno', txt().includes('Comerciante: Gran Humor') && /Ha comprado \d+ GP/.test(txt()) && txt().includes('Lista para jugar') && txt().includes('Preparando'), txt().match(/Ha comprado.{0,40}/));
+    // Crédito temporal: Bob sufre «Herido» en su primera miniatura
+    const gold0 = cp('u2').gold, value0 = cp('u2').band_snapshot.value, n0 = cp('u2').band_snapshot.units.length;
+    await AW.c.setInjury(0, 'herido', true); await wait(100);
+    await AW.c.editBand(); await wait(120);
+    ok('crédito temporal visible al gestionar la banda', txt().includes('Crédito temporal') && txt().includes('Herido: descansa'), txt().match(/Crédito temporal.{0,60}/));
+    AW.addUnit(); const ti = AW.api.state.editing.units.length - 1;
+    AW.setUnit(ti, 'nombre', 'Sustituto'); AW.setUnit(ti, 'coste', 20); AW.setUnitTemp(ti, true); await wait(40);
+    ok('sustituto temporal: usa el crédito y no el fondo', txt().includes('usado 20 GP') && txt().includes('Temporal: Sustituto') && txt().includes('Gastas 0 GP'), txt().match(/usado.{0,40}/));
+    AW.setUnit(ti, 'coste', 99999); await wait(40);
+    await AW.saveBand(); await wait(100);
+    ok('sustituto que supera el crédito: no se guarda', cp('u2').band_snapshot.units.length === n0, cp('u2').band_snapshot.units.length);
+    AW.setUnit(ti, 'coste', 20); await AW.saveBand(); await wait(200);
+    ok('sustituto guardado: fondo y valor de banda no cambian, queda temporal', cp('u2').gold === gold0 && cp('u2').band_snapshot.value === value0 && cp('u2').temp_spent === 20 && cp('u2').band_snapshot.units[n0].temporal === true, JSON.stringify([cp('u2').gold, gold0, cp('u2').band_snapshot.value, value0, cp('u2').temp_spent]));
+    ok('todos ven el herido y el sustituto en el resumen', txt().includes('Heridos que descansan') && txt().includes('Sustitutos temporales: Sustituto'));
+    await AW.c.setInjury(0, 'herido', false); await wait(100);
+    ok('no se puede quitar Herido con sustitutos pagados', db.game_players.find(x => x.user_id === 'u2').roster[0].lesiones.includes('herido') && cp('u2').temp_spent === 20);
+    // Se deshace: se quita el sustituto, luego la lesión
+    await AW.c.editBand(); await wait(120); AW.removeUnit(n0); await wait(30); await AW.saveBand(); await wait(200);
+    await AW.c.setInjury(0, 'herido', false); await wait(100);
+    ok('sin sustituto y sin Herido: todo como antes', cp('u2').band_snapshot.units.length === n0 && cp('u2').temp_spent === 0 && cp('u2').gold === gold0 && !(db.game_players.find(x => x.user_id === 'u2').roster[0] || {}).ko, JSON.stringify([cp('u2').band_snapshot.units.length, n0, cp('u2').temp_spent, cp('u2').gold, gold0, db.game_players.find(x => x.user_id === 'u2').roster]));
     await as('u1'); await AW.c.open(camp().id); await wait(100);
 
     // partida de la misión 1

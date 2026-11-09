@@ -1,0 +1,71 @@
+ ?column? 
+----------
+ t
+(1 row)
+ ?column? 
+----------
+ t
+(1 row)
+== sin herido no hay crédito: un temporal debe fallar
+psql:14: ERROR:  Los sustitutos temporales (20 GP) superan el crédito de las miniaturas heridas (0 GP)
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 85 at RAISE
+== el Sheriff queda Herido: crédito 110 (80 + espada 30)
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+    t    | credito 
+---------+---------
+ crédito |     110
+(1 row)
+== sustituto de 120 (supera 110): falla
+psql:19: ERROR:  Los sustitutos temporales (120 GP) superan el crédito de las miniaturas heridas (110 GP)
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 85 at RAISE
+== temporal marcado pero sin pagarlo (p_temp 0 < coste 60): falla
+psql:21: ERROR:  Cantidad no válida
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 88 at RAISE
+== sustituto 60 + espada 30 con crédito (oro no cambia) y un arco permanente de 10 con oro
+ campaign_update_band 
+----------------------
+                  140
+(1 row)
+  t  | gold | temp_spent | valor | n 
+-----+------+------------+-------+---
+ oro |  140 |         90 | 160   | 3
+(1 row)
+   t   | delta | spent | refunded |          reason           
+-------+-------+-------+----------+---------------------------
+ libro |   -10 |    10 |        0 | Compra: Arco, Fichaje Sub
+(1 row)
+   t    |                   roster                    
+--------+---------------------------------------------
+ roster | {"0": {"ko": true, "lesiones": ["herido"]}}
+(1 row)
+== quitar Herido con sustitutos pagados: falla
+psql:28: ERROR:  Quita antes los sustitutos temporales: ya has gastado 90 GP del crédito de las miniaturas heridas
+CONTEXT:  PL/pgSQL function campaign_set_injury(uuid,integer,text,boolean) line 37 at RAISE
+== fin de la partida y siguiente misión: el sustituto se va
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+ campaign_set_injury 
+---------------------
+ 
+(1 row)
+        t         |              injuries              
+------------------+------------------------------------
+ lesiones previas | {"1": ["cojera"], "2": ["cojera"]}
+(1 row)
+      t      | n | valor | temp_spent | injuries 
+-------------+---+-------+------------+----------
+ tras cambio | 2 | 160   |          0 | {}
+(1 row)
+    t    | string_agg  
+---------+-------------
+ nombres | Sheriff,Mil
+(1 row)
+      t      |                    roster                    
+-------------+----------------------------------------------
+ ficha nueva | {"1": {"ko": false, "lesiones": ["cojera"]}}
+(1 row)

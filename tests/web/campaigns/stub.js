@@ -127,6 +127,11 @@ function makeChapter(c, n) {
     max_players: Math.max(1, db.campaign_players.filter(p => p.campaign_id === c.id).length), arcdeck_env: 'mildaark' };
   db.games.push(g);
   db.campaign_players.filter(p => p.campaign_id === c.id).forEach(cp => {
+    if (cp.band_snapshot && (cp.band_snapshot.units || []).some(u => u.temporal)) {
+      const kept = [], inj = {}; (cp.band_snapshot.units || []).forEach((u, i) => { if (u.temporal) return; if (cp.injuries && cp.injuries[i]) inj[kept.length] = cp.injuries[i]; kept.push(u); });
+      cp.band_snapshot = Object.assign({}, cp.band_snapshot, { units: kept }); cp.injuries = inj;
+    }
+    cp.temp_spent = 0;
     const roster = {};
     Object.keys(cp.injuries || {}).forEach(k => { roster[k] = { lesiones: cp.injuries[k], ko: cp.injuries[k].includes('herido') }; });
     db.game_players.push({ game_id: g.id, user_id: cp.user_id, band_id: cp.band_id, band_snapshot: cp.band_snapshot, side: cp.band_snapshot && cp.band_snapshot.faction, vp: 0, ready: false, roster, joined_at: new Date(1e12 + ++seq).toISOString() });
@@ -210,7 +215,10 @@ Object.assign(rpc, {
     if (g.status === 'draft') {
       const gp = db.game_players.find(x => x.game_id === g.id && x.user_id === me);
       const e = gp.roster[p_unit] || {}; let l = (e.lesiones || []).filter(x => x !== p_injury); if (p_add) l.push(p_injury);
+      const prev = gp.roster[p_unit];
       gp.roster[p_unit] = Object.assign({}, e, { lesiones: l, ko: l.includes('herido') });
+      let credit = 0; (cp.band_snapshot.units || []).forEach((u, i) => { if (!u.temporal && ((gp.roster[i] || {}).lesiones || []).includes('herido')) credit += u.coste + (u.equipo || []).reduce((t, g) => t + g.coste, 0); });
+      if ((cp.temp_spent || 0) > credit) { if (prev) gp.roster[p_unit] = prev; else delete gp.roster[p_unit]; return err('Quita antes los sustitutos temporales: ya has gastado ' + cp.temp_spent + ' GP del crédito de las miniaturas heridas'); }
     } else if (g.status === 'finished') {
       let l = (cp.injuries[p_unit] || []).filter(x => x !== p_injury); if (p_add) l.push(p_injury); cp.injuries[p_unit] = l;
     } else return err('Las lesiones se gestionan antes o después de la batalla, no durante');
@@ -221,18 +229,26 @@ Object.assign(rpc, {
     if (g.status !== 'active') return err('Los PV se anotan mientras la partida está en curso');
     db.game_players.find(x => x.game_id === p_game && x.user_id === me).vp = p_vp; return { data: null, error: null };
   },
-  campaign_update_band({ p_campaign, p_units, p_remap, p_delta, p_reason }) {
+  campaign_update_band({ p_campaign, p_units, p_remap, p_delta, p_reason, p_spent = 0, p_refund = 0, p_temp = 0 }) {
     const c = campOf(p_campaign); const g = db.games.find(x => x.campaign_id === c.id && x.position === c.chapter);
     const cp = db.campaign_players.find(p => p.campaign_id === c.id && p.user_id === me);
     if (g.status !== 'draft') return err('La banda solo se gestiona antes de empezar la partida');
     if (!db.campaign_rolls.some(r => r.campaign_id === c.id && r.user_id === me && r.chapter === c.chapter && r.kind === 'merchant')) return err('Tira antes al comerciante ambulante');
     if (cp.gold + p_delta < 0) return err('No hay fondos suficientes');
-    let tot = 0; p_units.forEach(u => { tot += u.coste; (u.equipo || []).forEach(e => tot += e.coste); });
-    cp.gold += p_delta; cp.band_snapshot = Object.assign({}, cp.band_snapshot, { units: p_units, value: tot });
     const gp = db.game_players.find(x => x.game_id === g.id && x.user_id === me); const nr = {};
     p_remap.forEach((o, i) => { if (o >= 0 && gp.roster[o]) nr[i] = gp.roster[o]; });
+    let tot = 0, tmpUnits = 0, credit = 0;
+    p_units.forEach((u, i) => {
+      const gearSum = (u.equipo || []).reduce((t, e) => t + e.coste, 0);
+      if (u.temporal) tmpUnits += u.coste; else { tot += u.coste + gearSum; if (((nr[i] || {}).lesiones || []).includes('herido')) credit += u.coste + gearSum; }
+    });
+    if (p_units.some(u => u.temporal)) {
+      if (p_temp > credit) return err('Los sustitutos temporales (' + p_temp + ' GP) superan el crédito de las miniaturas heridas (' + credit + ' GP)');
+      if (p_temp < tmpUnits) return err('Cantidad no válida');
+    } else p_temp = 0;
+    cp.gold += p_delta; cp.temp_spent = p_temp; cp.band_snapshot = Object.assign({}, cp.band_snapshot, { units: p_units, value: tot });
     gp.band_snapshot = cp.band_snapshot; gp.roster = nr; gp.ready = false;
-    if (p_delta) db.campaign_ledger.push({ id: ++seq, campaign_id: c.id, user_id: me, actor_id: me, chapter: c.chapter, delta: p_delta, balance: cp.gold, reason: p_reason });
+    if (p_delta || p_spent || p_refund) db.campaign_ledger.push({ id: ++seq, campaign_id: c.id, user_id: me, actor_id: me, chapter: c.chapter, delta: p_delta, balance: cp.gold, reason: p_reason, spent: p_spent, refunded: p_refund });
     return { data: cp.gold, error: null };
   },
   campaign_roll({ p_campaign, p_kind, p_unit }) {

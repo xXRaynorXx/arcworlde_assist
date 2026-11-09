@@ -1,4 +1,4 @@
-const CACHE_NAME = "arcworlde-assist-v15";
+const CACHE_NAME = "arcworlde-assist-v16";
 const APP_SHELL = [
   "./",
   "./index.html",
