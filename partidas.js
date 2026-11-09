@@ -768,7 +768,7 @@
     const unit = ((p.band_snapshot && p.band_snapshot.units) || [])[idx];
     const c = unit && AW.sheet.catalogUnit(unit.id);
     const st = (roster[idx] = roster[idx] || {});
-    fn(st, c);
+    fn(st, c, unit, p.band_snapshot && p.band_snapshot.faction);
     p.roster = roster;
     rerender(true);
     const gid = g.id, uid = p.user_id;
@@ -778,8 +778,8 @@
     });
   }
   G.rosterAdj = (idx, k, d) =>
-    rosterEdit(idx, (st, c) => {
-      const v = AW.sheet.cur(st, c, k) || 0;
+    rosterEdit(idx, (st, c, unit, faction) => {
+      const v = AW.sheet.cur(st, c, k, unit, faction) || 0;
       st[k] = Math.max(0, v + d);
     });
   G.rosterAdjLesion = (idx, id, add) =>

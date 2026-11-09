@@ -95,11 +95,31 @@
     }).join('');
   }
 
-  function baseStats(c) { return (c && c.stats) || {}; }
+  // Bonus de armadura que da un texto de equipo: "Otorga +2 al Valor de Armadura", "(Gratis / +1 Armadura)"...
+  function armourBonus(text) {
+    const m = String(text || '').match(/\+(\d+)\s*(?:a la |al Valor de )?Armadura/i);
+    return m ? Number(m[1]) : 0;
+  }
+  // Atributos base de la miniatura de la banda: los del catálogo (que ya incluyen el equipo de serie),
+  // menos la armadura de serie que se haya quitado y más la del equipo comprado.
+  function baseStats(c, u, faction) {
+    const stats = Object.assign({}, (c && c.stats) || {});
+    if (!u || stats.armadura == null) return stats;
+    const quitado = Array.isArray(u.serie_quitado) ? u.serie_quitado : [];
+    let arm = Number(stats.armadura) || 0;
+    quitado.forEach((s) => { arm -= armourBonus(s); });
+    (Array.isArray(u.equipo) ? u.equipo : []).forEach((g) => {
+      const d = window.AWGear && AWGear.find(g.origen, g.id, faction);
+      if (d) arm += armourBonus(d.detalles);
+    });
+    stats.armadura = Math.max(0, arm);
+    return stats;
+  }
   // Valor actual de un atributo. Una cojera que llega de la partida anterior (sin Mov guardado) resta 1.
-  function cur(st, c, k) {
+  // u y faction (opcionales): miniatura de la banda, para contar su equipo.
+  function cur(st, c, k, u, faction) {
     if (st && st[k] != null) return Number(st[k]);
-    const base = baseStats(c)[k];
+    const base = baseStats(c, u, faction)[k];
     return k === 'mov' && st && Array.isArray(st.lesiones) && st.lesiones.indexOf('cojera') >= 0 ? Math.max(0, base - 1) : base;
   }
 
@@ -125,7 +145,8 @@
       (u.apodo ? ' <span class="text-xs text-slate-500 font-normal">' + esc(u.nombre) + '</span>' : c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
       '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
-    const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x));
+    const quitado = Array.isArray(u.serie_quitado) ? u.serie_quitado : []; // equipo de serie cambiado en el editor
+    const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x) && quitado.indexOf(x) < 0);
     const serieHtml = serie.length
       ? '<div class="mt-2 flex flex-wrap gap-1.5">' + serie.map((x) => '<span title="Equipo de serie: ya incluido en el perfil" class="inline-block text-xs px-2 py-0.5 rounded-md border bg-amber-950/30 border-amber-800/50 text-amber-200">🛡️ ' + esc(x) + '</span>').join('') + '</div>'
       : '';
@@ -140,7 +161,7 @@
       return h + '<p class="text-xs text-slate-500 mt-1">Miniatura personalizada: sin atributos en el catálogo.</p>' + gearHtml + '</div>';
     }
     h += '<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">' + STATS.map((s) => {
-      const k = s[0], base = baseStats(c)[k], v = cur(st, c, k);
+      const k = s[0], base = baseStats(c, u, opts.faction)[k], v = cur(st, c, k, u, opts.faction);
       const changed = v !== base;
       return '<div class="text-center bg-slate-950 rounded-md py-1.5 border border-slate-800"><p class="text-[10px] uppercase tracking-wide text-slate-500">' + s[1] + '</p>' +
         (edit
