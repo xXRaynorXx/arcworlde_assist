@@ -311,7 +311,7 @@
     const issues = [];
     if (!units || !units.length) return issues;
 
-    const rules = typeof datosMinis !== 'undefined' && datosMinis ? datosMinis.reglas_banda : null;
+    const rules = typeof datosMinis !== 'undefined' && datosMinis ? (datosMinis.reglas_banda || datosMinis.reglas_generales_banda) : null;
     if (rules) {
       const cmds = units.filter((u) => u.tipo === 'comandante').length;
       if (rules.comandante_obligatorio && cmds === 0) issues.push('Falta un comandante.');
