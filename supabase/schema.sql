@@ -253,6 +253,11 @@ declare
   roster jsonb;
   k   text;
   l   jsonb;
+  units jsonb;
+  kept  jsonb;
+  inj   jsonb;
+  idx   integer;
+  newi  integer;
 begin
   select * into c from public.campaigns where id = cid;
 
@@ -262,9 +267,26 @@ begin
   returning id into gid;
 
   for cp in select * from public.campaign_players where campaign_id = cid order by joined_at loop
+    units := coalesce(cp.band_snapshot -> 'units', '[]'::jsonb);
+    inj := coalesce(cp.injuries, '{}'::jsonb);
+    if exists (select 1 from jsonb_array_elements(units) x where coalesce((x ->> 'temporal')::boolean, false)) then
+      kept := '[]'::jsonb;
+      inj := '{}'::jsonb;
+      newi := 0;
+      for idx in 0 .. jsonb_array_length(units) - 1 loop
+        if coalesce((units -> idx ->> 'temporal')::boolean, false) then continue; end if;
+        kept := kept || jsonb_build_array(units -> idx);
+        if coalesce(cp.injuries, '{}'::jsonb) ? idx::text then
+          inj := inj || jsonb_build_object(newi::text, cp.injuries -> idx::text);
+        end if;
+        newi := newi + 1;
+      end loop;
+      update public.campaign_players set band_snapshot = jsonb_set(band_snapshot, '{units}', kept) where campaign_id = cid and user_id = cp.user_id;
+    end if;
+
     -- Las lesiones de la partida anterior pasan a la ficha de la nueva (y se consumen)
     roster := '{}'::jsonb;
-    for k, l in select key, value from jsonb_each(coalesce(cp.injuries, '{}'::jsonb)) loop
+    for k, l in select key, value from jsonb_each(inj) loop
       roster := roster || jsonb_build_object(k, jsonb_build_object(
         'lesiones', l,
         'ko', (l ? 'herido')
@@ -275,7 +297,7 @@ begin
     values (gid, cp.user_id, cp.band_id, roster);
   end loop;
 
-  update public.campaign_players set injuries = '{}'::jsonb where campaign_id = cid;
+  update public.campaign_players set injuries = '{}'::jsonb, temp_spent = 0 where campaign_id = cid;
   update public.campaigns set chapter = n where id = cid;
   return gid;
 end;
@@ -455,6 +477,7 @@ declare
   cp  public.campaign_players;
   les jsonb;
   ent jsonb;
+  ro  jsonb;
 begin
   select * into c from public.campaigns where id = p_campaign;
   select * into cp from public.campaign_players where campaign_id = p_campaign and user_id = me;
@@ -470,7 +493,6 @@ begin
   select * into g from public.games where campaign_id = p_campaign and position = c.chapter;
 
   if g.status = 'draft' then
-    -- La ficha de la próxima partida ya existe: se cambia ahí
     select coalesce(roster -> p_unit::text, '{}'::jsonb) into ent from public.game_players where game_id = g.id and user_id = me;
     les := coalesce(ent -> 'lesiones', '[]'::jsonb) - p_injury;
     if p_add then les := les || to_jsonb(p_injury); end if;
@@ -478,10 +500,14 @@ begin
     if p_add and p_injury = 'herido' then ent := jsonb_set(ent, '{ko}', 'true'::jsonb, true); end if;
     if not p_add and p_injury = 'herido' then ent := ent - 'ko'; end if;
     perform set_config('aw.internal', '1', true);
-    update public.game_players set roster = jsonb_set(roster, array[p_unit::text], ent, true) where game_id = g.id and user_id = me;
+    update public.game_players set roster = jsonb_set(roster, array[p_unit::text], ent, true)
+    where game_id = g.id and user_id = me
+    returning roster into ro;
     perform set_config('aw.internal', '', true);
+    if cp.temp_spent > public.campaign_temp_credit(ro, cp.band_snapshot -> 'units') then
+      raise exception 'Quita antes los sustitutos temporales: ya has gastado % GP del crédito de las miniaturas heridas', cp.temp_spent;
+    end if;
   elsif g.status = 'finished' then
-    -- Se aplicará a la ficha de la siguiente misión
     les := coalesce(cp.injuries -> p_unit::text, '[]'::jsonb) - p_injury;
     if p_add then les := les || to_jsonb(p_injury); end if;
     update public.campaign_players
@@ -572,6 +598,36 @@ $$;
 
 
 --
+-- Name: campaign_temp_credit(jsonb, jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.campaign_temp_credit(p_roster jsonb, p_units jsonb) RETURNS integer
+    LANGUAGE plpgsql IMMUTABLE
+    SET search_path TO 'public'
+    AS $$
+declare
+  k   text;
+  u   jsonb;
+  e   jsonb;
+  tot integer := 0;
+begin
+  for k in select jsonb_object_keys(coalesce(p_roster, '{}'::jsonb)) loop
+    if coalesce(p_roster -> k -> 'lesiones', '[]'::jsonb) ? 'herido' then
+      u := p_units -> (k::int);
+      if u is not null and not coalesce((u ->> 'temporal')::boolean, false) then
+        tot := tot + coalesce((u ->> 'coste')::int, 0);
+        for e in select * from jsonb_array_elements(coalesce(u -> 'equipo', '[]'::jsonb)) loop
+          tot := tot + coalesce((e ->> 'coste')::int, 0);
+        end loop;
+      end if;
+    end if;
+  end loop;
+  return tot;
+end;
+$$;
+
+
+--
 -- Name: campaign_transfer_owner(uuid, uuid); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -653,10 +709,10 @@ $$;
 
 
 --
--- Name: campaign_update_band(uuid, jsonb, integer[], integer, text); Type: FUNCTION; Schema: public; Owner: -
+-- Name: campaign_update_band(uuid, jsonb, integer[], integer, text, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text) RETURNS integer
+CREATE FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text, p_spent integer DEFAULT 0, p_refund integer DEFAULT 0, p_temp integer DEFAULT 0) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER
     SET search_path TO 'public'
     AS $$
@@ -668,6 +724,8 @@ declare
   u    jsonb;
   e    jsonb;
   tot  integer := 0;
+  tmp_units integer := 0;
+  credit integer;
   i    integer;
   n    integer;
   old_roster jsonb;
@@ -695,19 +753,25 @@ begin
   if p_remap is null or coalesce(array_length(p_remap, 1), 0) <> n then
     raise exception 'Banda no válida';
   end if;
-  if p_delta is null or abs(p_delta) > 100000 then
+  if p_delta is null or abs(p_delta) > 100000
+     or coalesce(p_spent, 0) < 0 or coalesce(p_refund, 0) < 0 or coalesce(p_temp, 0) < 0
+     or p_spent > 100000 or p_refund > 100000 or p_temp > 100000 then
     raise exception 'Cantidad no válida';
   end if;
 
-  -- valor nominal de la nueva banda
+  -- valor nominal de la banda fija (las miniaturas temporales no cuentan)
   for u in select * from jsonb_array_elements(p_units) loop
     if coalesce(btrim(u ->> 'nombre'), '') = '' or coalesce((u ->> 'coste')::int, -1) < 0 then
       raise exception 'Todas las miniaturas necesitan nombre y coste';
     end if;
-    tot := tot + (u ->> 'coste')::int;
+    if coalesce((u ->> 'temporal')::boolean, false) then
+      tmp_units := tmp_units + (u ->> 'coste')::int;
+    else
+      tot := tot + (u ->> 'coste')::int;
+    end if;
     for e in select * from jsonb_array_elements(coalesce(u -> 'equipo', '[]'::jsonb)) loop
       if coalesce((e ->> 'coste')::int, -1) < 0 then raise exception 'Coste de equipo no válido'; end if;
-      tot := tot + (e ->> 'coste')::int;
+      if not coalesce((u ->> 'temporal')::boolean, false) then tot := tot + (e ->> 'coste')::int; end if;
     end loop;
   end loop;
 
@@ -721,19 +785,34 @@ begin
     v_units := v_units || jsonb_build_array(u);
   end loop;
 
-  update public.campaign_players
-  set gold = gold + p_delta,
-      band_snapshot = jsonb_set(jsonb_set(band_snapshot, '{units}', v_units), '{value}', to_jsonb(tot))
-  where campaign_id = p_campaign and user_id = me
-  returning gold into bal;
-
-  -- La ficha de la partida en preparación: misma banda y lesiones recolocadas según la nueva posición
+  -- La ficha de la partida en preparación: lesiones recolocadas según la nueva posición
   select roster into old_roster from public.game_players where game_id = g.id and user_id = me;
   for i in 1 .. n loop
     if p_remap[i] >= 0 and old_roster ? (p_remap[i]::text) then
       new_roster := new_roster || jsonb_build_object((i - 1)::text, old_roster -> (p_remap[i]::text));
     end if;
   end loop;
+
+  -- Crédito temporal: lo gastado en sustitutos no puede pasar del valor de las miniaturas heridas
+  credit := public.campaign_temp_credit(new_roster, v_units);
+  if tmp_units = 0 and not exists (select 1 from jsonb_array_elements(v_units) x where coalesce((x ->> 'temporal')::boolean, false)) then
+    p_temp := 0;
+  else
+    if p_temp > credit then
+      raise exception 'Los sustitutos temporales (% GP) superan el crédito de las miniaturas heridas (% GP)', p_temp, credit;
+    end if;
+    if p_temp < tmp_units then
+      raise exception 'Cantidad no válida';
+    end if;
+  end if;
+
+  update public.campaign_players
+  set gold = gold + p_delta,
+      temp_spent = coalesce(p_temp, 0),
+      band_snapshot = jsonb_set(jsonb_set(band_snapshot, '{units}', v_units), '{value}', to_jsonb(tot))
+  where campaign_id = p_campaign and user_id = me
+  returning gold into bal;
+
   perform set_config('aw.internal', '1', true);
   update public.game_players
   set band_snapshot = (select band_snapshot from public.campaign_players where campaign_id = p_campaign and user_id = me),
@@ -742,9 +821,10 @@ begin
   where game_id = g.id and user_id = me;
   perform set_config('aw.internal', '', true);
 
-  if p_delta <> 0 then
-    insert into public.campaign_ledger (campaign_id, user_id, actor_id, chapter, delta, balance, reason)
-    values (p_campaign, me, me, c.chapter, p_delta, bal, left(coalesce(nullif(btrim(p_reason), ''), 'Cambios en la banda'), 120));
+  if p_delta <> 0 or coalesce(p_spent, 0) > 0 or coalesce(p_refund, 0) > 0 then
+    insert into public.campaign_ledger (campaign_id, user_id, actor_id, chapter, delta, balance, reason, spent, refunded)
+    values (p_campaign, me, me, c.chapter, p_delta, bal, left(coalesce(nullif(btrim(p_reason), ''), 'Cambios en la banda'), 120),
+            coalesce(p_spent, 0), coalesce(p_refund, 0));
   end if;
   return bal;
 exception when check_violation then
@@ -1458,6 +1538,8 @@ CREATE TABLE public.campaign_ledger (
     balance integer NOT NULL,
     reason text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
+    spent integer DEFAULT 0 NOT NULL,
+    refunded integer DEFAULT 0 NOT NULL,
     CONSTRAINT campaign_ledger_reason_check CHECK (((char_length(reason) >= 1) AND (char_length(reason) <= 120)))
 );
 
@@ -1490,6 +1572,7 @@ CREATE TABLE public.campaign_players (
     joined_at timestamp with time zone DEFAULT now() NOT NULL,
     gold integer DEFAULT 0 NOT NULL,
     injuries jsonb DEFAULT '{}'::jsonb NOT NULL,
+    temp_spent integer DEFAULT 0 NOT NULL,
     CONSTRAINT campaign_players_gold_check CHECK ((gold >= 0))
 );
 
@@ -2375,6 +2458,14 @@ GRANT ALL ON FUNCTION public.campaign_start(p_campaign uuid) TO authenticated;
 
 
 --
+-- Name: FUNCTION campaign_temp_credit(p_roster jsonb, p_units jsonb); Type: ACL; Schema: public; Owner: -
+--
+
+REVOKE ALL ON FUNCTION public.campaign_temp_credit(p_roster jsonb, p_units jsonb) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.campaign_temp_credit(p_roster jsonb, p_units jsonb) TO authenticated;
+
+
+--
 -- Name: FUNCTION campaign_transfer_owner(p_campaign uuid, p_user uuid); Type: ACL; Schema: public; Owner: -
 --
 
@@ -2391,11 +2482,11 @@ GRANT ALL ON FUNCTION public.campaign_undo_chapter(p_campaign uuid) TO authentic
 
 
 --
--- Name: FUNCTION campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text); Type: ACL; Schema: public; Owner: -
+-- Name: FUNCTION campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text, p_spent integer, p_refund integer, p_temp integer); Type: ACL; Schema: public; Owner: -
 --
 
-REVOKE ALL ON FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text) FROM PUBLIC;
-GRANT ALL ON FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text) TO authenticated;
+REVOKE ALL ON FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text, p_spent integer, p_refund integer, p_temp integer) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.campaign_update_band(p_campaign uuid, p_units jsonb, p_remap integer[], p_delta integer, p_reason text, p_spent integer, p_refund integer, p_temp integer) TO authenticated;
 
 
 --

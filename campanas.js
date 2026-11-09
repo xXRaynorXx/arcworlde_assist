@@ -44,7 +44,7 @@
   /* ------------------------------------------------------------------ datos */
   const SEL_LIST = '*, owner:profiles!owner_id(display_name), campaign_players(user_id)';
   const SEL_ONE =
-    '*, owner:profiles!owner_id(display_name), campaign_players(user_id, band_id, band_snapshot, gold, injuries, joined_at, profiles(display_name))';
+    '*, owner:profiles!owner_id(display_name), campaign_players(user_id, band_id, band_snapshot, gold, injuries, temp_spent, joined_at, profiles(display_name))';
   const SEL_GAMES = '*, game_players(user_id, band_snapshot, vp, ready, roster, profiles(display_name))';
 
   async function loadList() {
@@ -277,6 +277,34 @@
     );
   }
 
+  // Resumen por jugador de la preparación: comerciante, compras/ventas, valor y fondo, crédito temporal y si está listo
+  function prepCards(players, n, gp) {
+    return '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + players.map((p) => {
+      const r = rollsOf(n, 'merchant').find((x) => x.user_id === p.user_id);
+      const hum = r ? T().humor_comerciante[r.result.humor] : null;
+      const led = cs.ledger.filter((l) => l.user_id === p.user_id && l.chapter === n);
+      const spent = led.reduce((t, l) => t + (Number(l.spent) || 0), 0);
+      const refunded = led.reduce((t, l) => t + (Number(l.refunded) || 0), 0);
+      const x = gp.find((y) => y.user_id === p.user_id);
+      const units = (p.band_snapshot && p.band_snapshot.units) || [];
+      const wounded = woundedIdx(x && x.roster);
+      const credit = tempCredit(units.map((u, i) => Object.assign({ _o: i }, u)), wounded);
+      const tmp = units.filter((u) => u.temporal);
+      const ready = !!(x && x.ready);
+      return '<div class="bg-slate-900 border ' + (ready ? 'border-emerald-800/60' : 'border-slate-800') + ' rounded-xl p-3 text-sm">' +
+        '<div class="flex items-center justify-between gap-2"><span class="font-semibold text-white">' + esc(pname(p)) + (p.user_id === state.user.id ? ' <span class="text-xs text-emerald-400 font-normal">(tú)</span>' : '') + '</span>' +
+        '<span class="text-xs ' + (ready ? 'text-emerald-400' : 'text-slate-500') + '">' + (ready ? '✅ Lista para jugar' : '⏳ Preparando') + '</span></div>' +
+        '<p class="mt-1 text-slate-300">🎲 Comerciante: ' + (r ? '<strong class="text-amber-300">' + esc(hum ? hum.nombre : r.result.humor) + '</strong> (dado ' + (r.dice || []).join('/') + (hum ? ' · compras ' + pct(hum.compra) + ', ventas ' + pct(hum.venta) : '') + ')' : '<span class="text-slate-500 italic">sin tirar</span>') + '</p>' +
+        '<p class="text-slate-300">🛒 Ha comprado <strong class="text-rose-300">' + spent + ' GP</strong> · vendido <strong class="text-emerald-300">' + refunded + ' GP</strong></p>' +
+        '<p class="text-slate-300">⚔️ Banda <strong class="text-slate-100">' + (p.band_snapshot ? (Number(p.band_snapshot.value) || 0) : 0) + ' GP</strong> · fondo <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></p>' +
+        (wounded.length
+          ? '<p class="text-rose-300 text-xs mt-1">🤕 Heridos que descansan: ' + wounded.map((i) => esc(AWUtil.unitName(units[i]))).join(', ') + ' · crédito temporal ' + credit + ' GP (usado ' + (Number(p.temp_spent) || 0) + ')</p>'
+          : '') +
+        (tmp.length ? '<p class="text-sky-300 text-xs">⏳ Sustitutos temporales: ' + tmp.map((u) => esc(AWUtil.unitName(u))).join(', ') + '</p>' : '') +
+        '</div>';
+    }).join('') + '</div>';
+  }
+
   function step(n, title, done, inner, open) {
     return (
       '<details id="cstep-' + n + '" class="bg-slate-950 border ' + (done ? 'border-emerald-900/60' : 'border-slate-800/60') + ' rounded-xl"' + (open ? ' open' : '') + '>' +
@@ -299,15 +327,23 @@
     const sell = 1 + ((humor && humor.venta) || 0) / 100;
     const key = (g) => g.origen + ':' + g.id;
     const used = {};
-    let spend = 0, refund = 0;
+    let spend = 0, refund = 0, tempSpend = 0;
     const lines = [];
     const gearBuy = (g, who) => { const c = Math.round((Number(g.coste) || 0) * buy); spend += c; lines.push({ t: 'Compra', n: g.nombre + (who ? ' (' + who + ')' : ''), c }); };
     const gearSell = (g, who) => { const c = Math.round((Number(g.coste) || 0) * sell); refund += c; lines.push({ t: 'Venta', n: g.nombre + (who ? ' (' + who + ')' : ''), c }); };
     units.forEach((u) => {
-      const o = u._o != null ? orig[u._o] : null;
+      let o = u._o != null ? orig[u._o] : null;
+      if (o) used[u._o] = true;
       const gear = u.equipo || [];
+      if (u.temporal) {
+        // Sustituto temporal: se paga con el crédito de las miniaturas heridas, no con el fondo
+        const c = (Number(u.coste) || 0) + gear.reduce((t, g) => t + Math.round((Number(g.coste) || 0) * buy), 0);
+        tempSpend += c;
+        lines.push({ t: 'Temporal', n: AWUtil.unitName(u), c });
+        return;
+      }
+      if (o && o.temporal) o = null; // un sustituto que pasa a ser fijo se paga entero
       if (o) {
-        used[u._o] = true;
         const oldG = o.equipo || [];
         const dc = (Number(u.coste) || 0) - (Number(o.coste) || 0);
         if (dc > 0) { spend += dc; lines.push({ t: 'Ajuste', n: AWUtil.unitName(u), c: dc }); }
@@ -322,13 +358,24 @@
       }
     });
     orig.forEach((o, i) => {
-      if (used[i]) return;
+      if (used[i] || o.temporal) return;
       const c = Number(o.coste) || 0;
       refund += c;
       lines.push({ t: 'Baja', n: AWUtil.unitName(o), c });
       (o.equipo || []).forEach((g) => gearSell(g, AWUtil.unitName(o)));
     });
-    return { spend, refund, net: spend - refund, lines };
+    return { spend, refund, net: spend - refund, tempSpend, lines };
+  }
+
+  // Crédito temporal: valor (miniatura + equipo) de las miniaturas fijas con la lesión «Herido» en la ficha de esta partida
+  function woundedIdx(roster) {
+    return Object.keys(roster || {}).filter((k) => ((roster[k] || {}).lesiones || []).indexOf('herido') >= 0).map(Number);
+  }
+  function tempCredit(units, wounded) {
+    return units.reduce((t, u) => {
+      if (u.temporal || u._o == null || wounded.indexOf(u._o) < 0) return t;
+      return t + (Number(u.coste) || 0) + (u.equipo || []).reduce((s, g) => s + (Number(g.coste) || 0), 0);
+    }, 0);
   }
 
   // PV: ganados en misiones terminadas menos los gastados en rasgos
@@ -421,8 +468,7 @@
     const mineP = players.find((p) => p.user_id === me);
     const hum = myHumor(n);
     let prep =
-      '<p class="text-xs text-slate-500 mb-2">Banda y fondo de cada jugador ahora mismo:</p>' +
-      '<div class="flex flex-wrap gap-3">' + players.map((p) => '<span class="text-sm bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5">' + esc(pname(p)) + (readyOf(p.user_id) ? ' ✅' : '') + ': banda <strong class="text-slate-200">' + (p.band_snapshot ? (Number(p.band_snapshot.value) || 0) : 0) + ' GP</strong> · fondo <strong class="text-amber-400">' + gpFmt(p.gold) + '</strong></span>').join('') + '</div>';
+      '<p class="text-xs text-slate-500 mb-2">Cada jugador gestiona su banda por separado; aquí ves el resultado de todos.</p>' + prepCards(players, n, gp);
     if (mineP && c.status === 'active' && isCur) {
       if (gStatus === 'draft') {
         prep += hum
@@ -494,6 +540,16 @@
             '</div>';
         });
       });
+      // Heridas resultantes de cada miniatura (las que arrastrará a la siguiente misión)
+      const woundsHtml = players.map((p) => {
+        const inj = p.injuries || {};
+        const us = (p.band_snapshot && p.band_snapshot.units) || [];
+        const items = Object.keys(inj).filter((k) => (inj[k] || []).length && us[k]).map((k) =>
+          '<li>' + esc(AWUtil.unitName(us[k])) + ': ' + inj[k].map((id) => esc((T().lesiones[id] || {}).nombre || id)).join(', ') +
+          (inj[k].indexOf('herido') >= 0 ? ' <span class="text-rose-300">— descansa la próxima partida y su valor será crédito temporal</span>' : '') + '</li>');
+        return items.length ? '<div class="mt-2 text-sm"><p class="font-semibold text-slate-200">' + esc(pname(p)) + (p.user_id === me ? ' <span class="text-xs text-emerald-400 font-normal">(tú)</span>' : '') + '</p><ul class="ml-4 list-disc text-slate-300">' + items.join('') + '</ul></div>' : '';
+      }).join('');
+      if (woundsHtml) inner += '<div class="mt-3 pt-3 border-t border-slate-800/60"><p class="text-xs uppercase tracking-wider text-rose-300 font-semibold">Heridas de las miniaturas</p>' + woundsHtml + '</div>';
       if (!any) inner += '<p class="text-sm text-slate-500">Ninguna miniatura quedó noqueada' + (mineGp ? ' (márcalas con "Noquear" en tu ficha durante la partida).' : '.') + '</p>';
       steps += step(5, 'Lesiones tras la batalla (1D6)', any && iRolls.length >= gp.reduce((s, x) => s + koIdx(x).length, 0), inner, isCur);
     }
@@ -1014,6 +1070,8 @@
     const snap = me.band_snapshot;
     const orig = JSON.parse(JSON.stringify(snap.units || []));
     const gold = me.gold;
+    const myRoster = ((gameOf(n) || {}).game_players || []).find((x) => x.user_id === state.user.id);
+    const wounded = woundedIdx(myRoster && myRoster.roster);
     const back = () => C.open(c.id);
     AW.editBandCtx(
       {
@@ -1021,6 +1079,11 @@
         subtitle: 'Comerciante: ' + (humor ? humor.nombre + ' (compras ' + pct(humor.compra) + ', ventas ' + pct(humor.venta) + ')' : '—') + ' · Fondo: ' + gold + ' GP',
         lockFaction: true,
         buyFactor: 1 + ((humor && humor.compra) || 0) / 100,
+        // Sustituto temporal: se ofrece si hay miniaturas heridas (o si ya lo es) y la miniatura es nueva
+        canTemp: (u) => !!u.temporal || (u._o == null && wounded.length > 0),
+        badge: (u) => (u._o != null && wounded.indexOf(u._o) >= 0 && !u.temporal
+          ? '<span class="col-span-12 text-xs text-rose-300">🤕 Herido: descansa la próxima partida. Su valor (con su equipo) es crédito temporal para fichar sustitutos.</span>'
+          : u.temporal ? '<span class="col-span-12 text-xs text-sky-300">⏳ Temporal: se va con su equipo al acabar la partida.</span>' : ''),
         isNewGear: (u, g) => {
           const o = u._o != null ? orig[u._o] : null;
           return !o || !(o.equipo || []).some((x) => x.origen === g.origen && x.id === g.id);
@@ -1028,7 +1091,12 @@
         summary: (units) => {
           const ch = bandChange(orig, units, humor);
           const left = gold - ch.net;
-          return '<div class="p-3 rounded-lg bg-slate-950 border border-slate-800 text-sm text-slate-300">' +
+          const credit = tempCredit(units, wounded);
+          const creditLeft = credit - ch.tempSpend;
+          return (credit > 0 || ch.tempSpend > 0
+            ? '<div class="p-3 mb-2 rounded-lg bg-sky-950/30 border border-sky-800/50 text-sm text-sky-100">⏳ Crédito temporal: <strong>' + credit + ' GP</strong> (miniaturas heridas) · usado <strong>' + ch.tempSpend + ' GP</strong> · queda <strong class="' + (creditLeft < 0 ? 'text-rose-400' : 'text-sky-300') + '">' + creditLeft + ' GP</strong>' + (creditLeft < 0 ? ' (no alcanza)' : '') +
+              '<p class="text-xs text-sky-200/70 mt-1">Marca como «sustituto temporal» las miniaturas nuevas que quieras pagar con él. Ellas y su equipo desaparecen al acabar la partida; no gastan tu fondo ni suben el valor de la banda.</p></div>'
+            : '') + '<div class="p-3 rounded-lg bg-slate-950 border border-slate-800 text-sm text-slate-300">' +
             '<div class="flex flex-wrap gap-x-5 gap-y-1">' +
             '<span>Gastas <strong class="text-rose-300">' + ch.spend + ' GP</strong></span>' +
             '<span>Ingresas <strong class="text-emerald-300">' + ch.refund + ' GP</strong></span>' +
@@ -1042,18 +1110,25 @@
             toast('No tienes fondos suficientes para estos cambios', 'error');
             return false;
           }
-          if (!ch.lines.length) {
+          if (ch.tempSpend > tempCredit(units, wounded)) {
+            toast('Los sustitutos temporales superan el crédito de las miniaturas heridas', 'error');
+            return false;
+          }
+          if (!ch.lines.length && units.length === orig.length) {
             toast('No has cambiado nada');
             return true;
           }
           const clean = units.map((u) => { const x = Object.assign({}, u); delete x._o; return x; });
-          const reason = ch.lines.filter((l) => l.t === 'Compra' || l.t === 'Venta' || l.t === 'Fichaje' || l.t === 'Baja').map((l) => l.t + ' ' + String(l.n).split(' (')[0]).join(', ') || 'Cambios en la banda';
+          const reason = ch.lines.filter((l) => l.t === 'Compra' || l.t === 'Venta' || l.t === 'Fichaje' || l.t === 'Baja' || l.t === 'Temporal').map((l) => l.t + ' ' + String(l.n).split(' (')[0]).join(', ') || 'Cambios en la banda';
           const { error } = await state.sb.rpc('campaign_update_band', {
             p_campaign: c.id,
             p_units: clean,
             p_remap: units.map((u) => (u._o == null ? -1 : u._o)),
             p_delta: -ch.net,
-            p_reason: reason.slice(0, 118)
+            p_reason: reason.slice(0, 118),
+            p_spent: ch.spend,
+            p_refund: ch.refund,
+            p_temp: ch.tempSpend
           });
           if (error) {
             toast(translateError(error), 'error');

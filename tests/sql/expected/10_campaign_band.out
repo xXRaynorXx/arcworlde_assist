@@ -30,7 +30,7 @@ CONTEXT:  PL/pgSQL function campaign_recalc_gold() line 6 at RAISE
 (4 rows)
 == gestionar banda sin comerciante: debe fallar
 psql:27: ERROR:  Tira antes al comerciante ambulante
-CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text) line 28 at RAISE
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 30 at RAISE
  ?column? 
 ----------
  t
@@ -50,10 +50,10 @@ CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,te
 (1 row)
 == gastar mas de lo que hay: debe fallar
 psql:34: ERROR:  No hay fondos suficientes
-CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text) line 90 at RAISE
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 114 at RAISE
 == B (otro) no puede modificar la banda de A, solo la suya
 psql:37: ERROR:  Tira antes al comerciante ambulante
-CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text) line 28 at RAISE
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 30 at RAISE
 == PV: B no puede (partida en preparacion)
 psql:39: ERROR:  Los PV se anotan mientras la partida está en curso
 CONTEXT:  PL/pgSQL function campaign_set_vp(uuid,integer) line 10 at RAISE
@@ -82,7 +82,7 @@ CONTEXT:  PL/pgSQL function campaign_roll(uuid,text,integer) line 92 at RAISE
 (1 row)
 == banda no se gestiona con la partida en curso
 psql:56: ERROR:  La banda solo se gestiona antes de empezar la partida
-CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text) line 25 at RAISE
+CONTEXT:  PL/pgSQL function campaign_update_band(uuid,jsonb,integer[],integer,text,integer,integer,integer) line 27 at RAISE
    t   |    kind     | unit_index 
 -------+-------------+------------
  rolls | merchant    |           

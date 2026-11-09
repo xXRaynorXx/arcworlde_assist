@@ -511,6 +511,10 @@
       '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" ' + act('input', 'AW.setUnit', [i, 'coste', '$value']) + ' placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
       '<button ' + act('click', 'AW.removeUnit', [i]) + ' title="Quitar" aria-label="Quitar miniatura" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
       '<input value="' + esc(u.apodo || '') + '" ' + act('input', 'AW.setUnit', [i, 'apodo', '$value']) + ' placeholder="Nombre propio (opcional), p. ej. Bilbo" aria-label="Nombre propio de la miniatura" maxlength="40" class="' + inputCls + ' col-span-12">' +
+      (state.bandContext && state.bandContext.badge ? state.bandContext.badge(u) : '') +
+      (state.bandContext && state.bandContext.canTemp && state.bandContext.canTemp(u)
+        ? '<label class="col-span-12 text-xs text-sky-200 flex items-center gap-2"><input type="checkbox" ' + (u.temporal ? 'checked ' : '') + act('change', 'AW.setUnitTemp', [i, '$checked']) + '> Sustituto temporal (se paga con el crédito de las miniaturas heridas y se va al acabar la partida)</label>'
+        : '') +
       gearBlock(u, i) +
       '</div>'
     );
@@ -796,6 +800,11 @@
     if (iss) iss.innerHTML = issuesHtml();
     const cx = document.getElementById('aw-ctx');
     if (cx && state.bandContext && state.bandContext.summary) cx.innerHTML = state.bandContext.summary(state.editing.units);
+  };
+
+  AW.setUnitTemp = (i, v) => {
+    if (v) state.editing.units[i].temporal = true; else delete state.editing.units[i].temporal;
+    renderApp(true);
   };
 
   AW.addUnit = () => {
