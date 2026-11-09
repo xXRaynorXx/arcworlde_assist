@@ -39,6 +39,7 @@
 
   /* ------------------------------------------------------------------ utils */
   const esc = AWUtil.esc;
+  const act = AWUtil.act;
 
   const isApp = (id) => typeof id === 'string' && id.indexOf('app_') === 0;
   const redirectUrl = () => location.origin + location.pathname;
@@ -235,11 +236,11 @@
     const inner =
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md">' +
       msgBox() +
-      '<button onclick="AW.google()" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 rounded-xl py-2.5 font-semibold transition-colors">' +
+      '<button ' + act('click', 'AW.google', []) + ' class="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 rounded-xl py-2.5 font-semibold transition-colors">' +
       googleIcon +
       ' Continuar con Google</button>' +
       '<div class="flex items-center gap-3 my-5 text-xs text-slate-500"><div class="flex-1 h-px bg-slate-800"></div>o con tu email<div class="flex-1 h-px bg-slate-800"></div></div>' +
-      '<form onsubmit="AW.submitAuth(event)" class="space-y-3">' +
+      '<form ' + act('submit', 'AW.submitAuth', ['$event']) + ' class="space-y-3">' +
       (reg
         ? '<div><label class="block text-xs text-slate-400 mb-1">Nombre de jugador</label><input name="name" required maxlength="40" class="' + inputCls + '" autocomplete="nickname"></div>'
         : '') +
@@ -248,10 +249,10 @@
       '<button type="submit" class="' + btnPrimary + ' w-full">' + (reg ? 'Crear cuenta' : 'Entrar') + '</button>' +
       '</form>' +
       '<div class="mt-4 flex justify-between text-sm">' +
-      '<button onclick="AW.setAuthMode(\'' + (reg ? 'login' : 'register') + '\')" class="text-emerald-400 hover:text-emerald-300">' +
+      '<button ' + act('click', 'AW.setAuthMode', [(reg ? 'login' : 'register')]) + ' class="text-emerald-400 hover:text-emerald-300">' +
       (reg ? 'Ya tengo cuenta' : 'Crear una cuenta') +
       '</button>' +
-      (reg ? '' : '<button onclick="AW.forgot()" class="text-slate-400 hover:text-white">He olvidado la contraseña</button>') +
+      (reg ? '' : '<button ' + act('click', 'AW.forgot', []) + ' class="text-slate-400 hover:text-white">He olvidado la contraseña</button>') +
       '</div></div>';
 
     return shell('Tu cuenta', 'Inicia sesión para guardar tus bandas y jugar partidas y campañas', inner);
@@ -261,14 +262,14 @@
     const inner =
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md space-y-5">' +
       msgBox() +
-      '<form onsubmit="AW.saveProfile(event)" class="space-y-3">' +
+      '<form ' + act('submit', 'AW.saveProfile', ['$event']) + ' class="space-y-3">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nombre de jugador</label><input name="name" required maxlength="40" value="' + esc(displayName()) + '" class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Email</label><input value="' + esc(state.user.email) + '" disabled class="' + inputCls + ' opacity-60"></div>' +
       '<button type="submit" class="' + btnPrimary + '">Guardar nombre</button>' +
       '</form>' +
       '<div class="pt-4 border-t border-slate-800 flex gap-3">' +
-      '<button onclick="AW.go(\'app_bands\')" class="' + btnGhost + '">Ver mis bandas (' + state.bands.length + ')</button>' +
-      '<button onclick="AW.signOut()" class="' + btnGhost + '">Cerrar sesión</button>' +
+      '<button ' + act('click', 'AW.go', ['app_bands']) + ' class="' + btnGhost + '">Ver mis bandas (' + state.bands.length + ')</button>' +
+      '<button ' + act('click', 'AW.signOut', []) + ' class="' + btnGhost + '">Cerrar sesión</button>' +
       '</div></div>';
     return shell('Hola, ' + esc(displayName()), 'Tu perfil de jugador', inner);
   }
@@ -277,7 +278,7 @@
     const inner =
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 max-w-md">' +
       msgBox() +
-      '<form onsubmit="AW.setNewPassword(event)" class="space-y-3">' +
+      '<form ' + act('submit', 'AW.setNewPassword', ['$event']) + ' class="space-y-3">' +
       '<div><label class="block text-xs text-slate-400 mb-1">Nueva contraseña</label><input name="password" type="password" required minlength="6" class="' + inputCls + '" autocomplete="new-password"></div>' +
       '<button type="submit" class="' + btnPrimary + '">Guardar contraseña</button></form></div>';
     return shell('Nueva contraseña', 'Elige una contraseña nueva para tu cuenta', inner);
@@ -346,7 +347,7 @@
       return shell(
         'Mis Bandas',
         'Crea y guarda tus bandas',
-        '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md"><p class="text-slate-300 mb-4">Necesitas una cuenta para guardar bandas.</p><button onclick="AW.go(\'app_account\')" class="' + btnPrimary + '">Iniciar sesión</button></div>'
+        '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md"><p class="text-slate-300 mb-4">Necesitas una cuenta para guardar bandas.</p><button ' + act('click', 'AW.go', ['app_account']) + ' class="' + btnPrimary + '">Iniciar sesión</button></div>'
       );
     }
     if (state.editing) return viewBandEditor();
@@ -373,8 +374,8 @@
               (b.notes ? '<p class="text-sm text-slate-500 mt-2 line-clamp-2">' + esc(b.notes) + '</p>' : '') +
               (n && AW.sheet ? '<details class="mt-3 text-sm"><summary class="cursor-pointer text-slate-300">Ver ficha (atributos y rasgos)</summary><div class="mt-2">' + AW.sheet.bandSheet(b.units, null, { faction: b.faction }) + '</div></details>' : '') +
               '<div class="mt-4 flex gap-2">' +
-              '<button onclick="AW.editBand(\'' + b.id + '\')" class="' + btnGhost + '">Editar</button>' +
-              '<button onclick="AW.deleteBand(\'' + b.id + '\')" class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm transition-colors">Borrar</button>' +
+              '<button ' + act('click', 'AW.editBand', [b.id]) + ' class="' + btnGhost + '">Editar</button>' +
+              '<button ' + act('click', 'AW.deleteBand', [b.id]) + ' class="px-4 py-2 text-rose-300 hover:bg-rose-950/40 rounded-xl text-sm transition-colors">Borrar</button>' +
               '</div></article>'
             );
           })
@@ -383,7 +384,7 @@
     }
 
     const inner =
-      '<div class="mb-6"><button onclick="AW.newBand()" class="' + btnPrimary + '">+ Nueva banda</button></div>' + cards;
+      '<div class="mb-6"><button ' + act('click', 'AW.newBand', []) + ' class="' + btnPrimary + '">+ Nueva banda</button></div>' + cards;
     return shell('Mis Bandas', 'Las bandas de tu perfil, listas para usar en partidas y campañas', inner);
   }
 
@@ -451,7 +452,7 @@
           '<span class="text-xs text-slate-500"> · ' + (g.origen === 'comun' ? 'común' : 'facción') + '</span></div>' +
           '<div class="hidden sm:block sm:col-span-3 text-xs text-slate-500">' + esc(d ? String(d.tipo).replace(/^Equipo \/ |^Objeto \//, '') : '') + '</div>' +
           '<div class="col-span-3 sm:col-span-1 text-sm text-amber-400 text-right">' + (Number(g.coste) || 0) + ' GP</div>' +
-          '<button onclick="AW.removeGear(' + i + ',' + j + ')" title="Quitar" class="col-span-1 text-slate-400 hover:text-rose-400 text-lg leading-none">×</button>' +
+          '<button ' + act('click', 'AW.removeGear', [i, j]) + ' title="Quitar" class="col-span-1 text-slate-400 hover:text-rose-400 text-lg leading-none">×</button>' +
           (info ? '<details class="col-span-12 text-xs text-slate-500"><summary class="cursor-pointer">Ver reglas</summary><p class="mt-1 text-slate-400">' + esc(info) + '</p></details>' : '') +
           '</div>'
         );
@@ -474,7 +475,7 @@
       add('Común', AWGear.common(), 'comun');
       add(faction || 'Facción', AWGear.exclusive(faction), 'faccion');
       select =
-        '<select onchange="AW.addGear(' + i + ',this.value)" class="' + inputCls + ' sm:w-auto">' +
+        '<select ' + act('change', 'AW.addGear', [i, '$value']) + ' class="' + inputCls + ' sm:w-auto">' +
         '<option value="">Añadir equipo del catálogo...</option>' + groups.join('') + '</select>';
     }
     return (
@@ -492,13 +493,13 @@
       // Perfil (Sheriff, Vampiro...): fijo si viene del catálogo; editable solo en miniaturas propias
       (u.id && catalogUnitOf(u)
         ? '<div class="col-span-12 sm:col-span-5 text-sm font-semibold text-slate-100 px-1" title="Perfil del catálogo">' + esc(u.nombre) + '</div>'
-        : '<input value="' + esc(u.nombre) + '" oninput="AW.setUnit(' + i + ',\'nombre\',this.value)" placeholder="Perfil / nombre de la miniatura" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">') +
-      '<select onchange="AW.setUnit(' + i + ',\'tipo\',this.value)" class="' + inputCls + ' col-span-6 sm:col-span-3">' +
+        : '<input value="' + esc(u.nombre) + '" ' + act('input', 'AW.setUnit', [i, 'nombre', '$value']) + ' placeholder="Perfil / nombre de la miniatura" maxlength="60" class="' + inputCls + ' col-span-12 sm:col-span-5">') +
+      '<select ' + act('change', 'AW.setUnit', [i, 'tipo', '$value']) + ' class="' + inputCls + ' col-span-6 sm:col-span-3">' +
       TIPOS.map((t) => '<option value="' + t[0] + '"' + (u.tipo === t[0] ? ' selected' : '') + '>' + t[1] + '</option>').join('') +
       '</select>' +
-      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" oninput="AW.setUnit(' + i + ',\'coste\',this.value)" placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
-      '<button onclick="AW.removeUnit(' + i + ')" title="Quitar" aria-label="Quitar miniatura" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
-      '<input value="' + esc(u.apodo || '') + '" oninput="AW.setUnit(' + i + ',\'apodo\',this.value)" placeholder="Nombre propio (opcional), p. ej. Bilbo" aria-label="Nombre propio de la miniatura" maxlength="40" class="' + inputCls + ' col-span-12">' +
+      '<input type="number" min="0" step="1" value="' + esc(u.coste) + '" ' + act('input', 'AW.setUnit', [i, 'coste', '$value']) + ' placeholder="GP" title="Coste base de la miniatura" class="' + inputCls + ' col-span-4 sm:col-span-3">' +
+      '<button ' + act('click', 'AW.removeUnit', [i]) + ' title="Quitar" aria-label="Quitar miniatura" class="col-span-2 sm:col-span-1 text-slate-400 hover:text-rose-400 text-xl leading-none px-2 py-1">×</button>' +
+      '<input value="' + esc(u.apodo || '') + '" ' + act('input', 'AW.setUnit', [i, 'apodo', '$value']) + ' placeholder="Nombre propio (opcional), p. ej. Bilbo" aria-label="Nombre propio de la miniatura" maxlength="40" class="' + inputCls + ' col-span-12">' +
       gearBlock(u, i) +
       '</div>'
     );
@@ -519,7 +520,7 @@
     const resolved = factions.find((f) => f.id === lc || String(f.nombre).toLowerCase() === lc);
     const value = known ? current : resolved ? resolved.nombre : current;
     return (
-      '<select onchange="AW.setField(\'faction\',this.value);AW.rerender()"' + (locked ? ' disabled' : '') + ' class="' + inputCls + '">' +
+      '<select ' + act('change', 'AW.setField', ['faction', '$value'],{then:'AW.rerender'}) + '' + (locked ? ' disabled' : '') + ' class="' + inputCls + '">' +
       '<option value=""' + (value ? '' : ' selected') + '>Elige facción...</option>' +
       factions.map((f) => '<option value="' + esc(f.nombre) + '"' + (f.nombre === value ? ' selected' : '') + '>' + esc(f.nombre) + '</option>').join('') +
       (value && !factions.some((f) => f.nombre === value) ? '<option value="' + esc(value) + '" selected>' + esc(value) + ' (sin catálogo)</option>' : '') +
@@ -538,7 +539,7 @@
       '<div class="border-t border-slate-800 pt-5">' +
       '<h4 class="text-lg font-bold text-white mb-1">Comandante</h4>' +
       '<p class="text-xs text-slate-500 mb-3">Elige el perfil de comandante de la facción. Su equipo lo añades abajo, en su fila de miniatura.</p>' +
-      '<select onchange="AW.setCommander(this.value)" class="' + inputCls + ' sm:w-auto">' +
+      '<select ' + act('change', 'AW.setCommander', ['$value']) + ' class="' + inputCls + ' sm:w-auto">' +
       '<option value="">' + (cur && !sel ? 'Comandante personalizado' : 'Sin comandante') + '</option>' +
       cmds.map((p) => '<option value="' + p[1] + '"' + (sel && sel[1] === p[1] ? ' selected' : '') + '>' + esc(p[0].nombre) + ' (' + (Number(p[0].coste) || 0) + ' GP · ' + statLine(p[0]) + ')</option>').join('') +
       '</select>' +
@@ -556,10 +557,10 @@
     const inner =
       '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5">' +
       '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" oninput="AW.setField(\'name\',this.value)" maxlength="60" class="' + inputCls + '"></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Nombre de la banda</label><input value="' + esc(e.name) + '" ' + act('input', 'AW.setField', ['name', '$value']) + ' maxlength="60" class="' + inputCls + '"></div>' +
       '<div><label class="block text-xs text-slate-400 mb-1">Facción</label>' + factionSelect(e.faction, factions, ctx && ctx.lockFaction) + '</div>' +
       '</div>' +
-      '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea oninput="AW.setField(\'notes\',this.value)" rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
+      '<div><label class="block text-xs text-slate-400 mb-1">Notas</label><textarea ' + act('input', 'AW.setField', ['notes', '$value']) + ' rows="2" maxlength="500" class="' + inputCls + '">' + esc(e.notes) + '</textarea></div>' +
       commanderBlock(e, cat) +
       '<div class="border-t border-slate-800 pt-5">' +
       '<div class="flex items-center justify-between mb-3"><h4 class="text-lg font-bold text-white">Miniaturas y equipo</h4>' +
@@ -568,9 +569,9 @@
       (ctx && ctx.summary ? '<div id="aw-ctx" class="mb-3">' + ctx.summary(e.units) + '</div>' : '') +
       '<div class="space-y-2">' + e.units.map(unitRow).join('') + '</div>' +
       '<div class="mt-3 flex flex-wrap gap-2 items-center">' +
-      '<button onclick="AW.addUnit()" class="' + btnGhost + '">+ Añadir miniatura</button>' +
+      '<button ' + act('click', 'AW.addUnit', []) + ' class="' + btnGhost + '">+ Añadir miniatura</button>' +
       (cat.length
-        ? '<select onchange="AW.addFromCatalog(this.value)" class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
+        ? '<select ' + act('change', 'AW.addFromCatalog', ['$value']) + ' class="' + inputCls + ' sm:w-auto"><option value="">Añadir del catálogo...</option>' +
           TIPOS.map((t) => {
             const opts = cat
               .map((u, i) => [u, i])
@@ -586,8 +587,8 @@
       '</div>' +
       '<div id="aw-issues">' + issuesHtml() + '</div></div>' +
       '<div class="pt-5 border-t border-slate-800 flex gap-3">' +
-      '<button onclick="AW.saveBand()" class="' + btnPrimary + '"' + (state.busy ? ' disabled' : '') + '>Guardar banda</button>' +
-      '<button onclick="AW.cancelEdit()" class="' + btnGhost + '">Cancelar</button></div>' +
+      '<button ' + act('click', 'AW.saveBand', []) + ' class="' + btnPrimary + '"' + (state.busy ? ' disabled' : '') + '>Guardar banda</button>' +
+      '<button ' + act('click', 'AW.cancelEdit', []) + ' class="' + btnGhost + '">Cancelar</button></div>' +
       '</div>';
 
     return shell(
