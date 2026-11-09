@@ -24,7 +24,7 @@ d=sys.stdin.read();m=re.search(r'<pre id=\"testout\">(.*?)</pre>',d,re.S)
 print(html.unescape(m.group(1)) if m else 'SIN SALIDA')")
   ok=$(printf '%s\n' "$out" | grep -c '^OK  ')
   bad=$(printf '%s\n' "$out" | grep -v '^OK  ' | grep -v '^errores globales: ninguno$' | grep -v '^$')
-  if [ -n "$bad" ]; then echo "FALLA $s ($ok OK)"; printf '%s\n' "$bad" | cut -c1-300; fail=1; else echo "OK    $s ($ok comprobaciones)"; fi
+  if [ -n "$bad" ]; then echo "FALLA $s ($ok OK)"; printf '%s\n' "$bad" | cut -c1-3000; fail=1; else echo "OK    $s ($ok comprobaciones)"; fi
   rm -rf "$T"
 done
 exit $fail

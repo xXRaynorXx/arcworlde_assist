@@ -12,6 +12,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 - `datos_campana.js`: tablas de comerciante, lesiones y aventuras entre partidas.
 - `fichas.js`: ficha de banda (atributos, ataques, rasgos) y seguimiento en partida de vida, atributos y lesiones.
 - `datos_facciones.js`: reglas de facción, rasgos de unidad y armería exclusiva de las 11 facciones (se muestran en *Reglas de Facciones*).
+- `datos_rasgos.js`: descripciones de rasgos de unidad (`datosRasgos = { "Nombre ES / Name EN": {resumen, detalles} }`); se usan en las fichas.
 - `armeria.js`: armería común + ayudas para el equipo de cada facción; el constructor de bandas suma su coste.
 - `datos_arcdeck.js`: tabla de eventos ArcDeck (Bosque de Mildaark y Tierras de Vauhaemia).
 - `datos_minis.js`: catálogo de miniaturas y reglas de composición de banda.
