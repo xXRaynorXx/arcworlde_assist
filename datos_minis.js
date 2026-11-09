@@ -1,11 +1,11 @@
 // ============================================================================
-// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 6.0)
-// Contiene: Facciones, Miniaturas/Atributos, Ataques, Hechizos, Armería Exclusiva,
-// Armería Común, Diccionario de Rasgos, Sistema de Campaña y Asignación de Equipo Completa.
+// BASE DE DATOS MAESTRA COMPLETA DE ARCWORLDE (VERSIÓN CONSOLIDADA 8.0)
+// Contiene: Todas las Facciones, Miniaturas/Atributos, Ataques, Hechizos,
+// Armería Exclusiva (con los 13 objetos restaurados) y Común, Diccionario de Rasgos y Sistema de Campaña Completo.
 // ============================================================================
 
 const compendioArcWorlde = {
-  "version": "7.0",
+  "version": "8.0",
   "titulo": "Compendio Oficial Completo ArcWorlde - Base de Datos Maestra",
   "fecha_actualizacion": "2026-11-09",
   "reglas_generales_banda": {
@@ -74,7 +74,7 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "montura_halfling",
+            "halfling_mount",
             "arma_distancia_halfling",
             "almuerzo_llevar",
             "ranger_cloak"
@@ -108,7 +108,7 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "montura_halfling",
+            "halfling_mount",
             "arma_distancia_halfling",
             "almuerzo_llevar",
             "ranger_cloak"
@@ -1672,6 +1672,18 @@ const compendioArcWorlde = {
           "resumen": "Cuerno de hueso que llena de vigor a los guerreros resucitados.",
           "detalles": "Efectos: Hazaña Fácil para tocar la trompeta: todos los aliados con el rasgo Bones a 6\" o menos ganan +1 al Movimiento esa ronda.",
           "restriccion": "Hazaña Fácil."
+        },
+        {
+          "id": "vengeance_coin",
+          "faccion_id": "ancient_dead",
+          "faccion_nombre": "Antiguos Muertos",
+          "nombre": "Moneda de Venganza / Vengeance Coin",
+          "tipo": "Objeto / Gear",
+          "coste": 10,
+          "etiqueta": "Armería Antiguos Muertos",
+          "resumen": "Una de las dos monedas con las que el guerrero fue enterrado sobre sus ojos. Lleno de rabia contra quien cree que se la robó.",
+          "detalles": "Efectos: Elige un personaje enemigo al comienzo de la partida. El personaje equipado con este objeto obtiene +2 al Power en todos sus Ataques contra él.",
+          "restriccion": "Afecta a un único objetivo enemigo elegido al inicio de la partida."
         }
       ],
       "saberes_magicos": [
@@ -1942,6 +1954,42 @@ const compendioArcWorlde = {
           "resumen": "Metamorfosis en murciélago gigante.",
           "detalles": "Efectos: Hazaña Fácil para transformarse en un Crypt Bat a full HP. Puede volver a su forma original en su activación.",
           "restriccion": "Transformación voluntaria."
+        },
+        {
+          "id": "everlasting_bloodline",
+          "faccion_id": "vampires",
+          "faccion_nombre": "Vampiros",
+          "nombre": "Linaje Inmortal / Everlasting Bloodline",
+          "tipo": "Linaje / Bloodline",
+          "coste": 20,
+          "etiqueta": "Armería Vampiros",
+          "resumen": "Este Vampiro es especialmente tenaz y se aferra a la no-vida con uñas largas y afiladas.",
+          "detalles": "Efectos: Si es Noqueado (KO), coloca un marcador en el tablero. Puede ser curado mediante viales de sangre (Blood Vials) por aliados y regresar al combate.",
+          "restriccion": "Es un Linaje permanente y no se puede remover ni perder."
+        },
+        {
+          "id": "fell_scholar",
+          "faccion_id": "vampires",
+          "faccion_nombre": "Vampiros",
+          "nombre": "Sabio Caído / Fell Scholar",
+          "tipo": "Linaje / Bloodline",
+          "coste": 30,
+          "etiqueta": "Armería Vampiros",
+          "resumen": "Dedica siglos de estudio en su biblioteca amasando un vasto conocimiento de las artes oscuras.",
+          "detalles": "Efectos: El Vampiro adquiere la Clase Mago (Mage) y puede lanzar hechizos pertenecientes al Saber de la Noche (Lore of the Night).",
+          "restriccion": "Confiere la Clase Mago permanente al personaje."
+        },
+        {
+          "id": "crimson_knight",
+          "faccion_id": "vampires",
+          "faccion_nombre": "Vampiros",
+          "nombre": "Caballero Carmesí / Crimson Knight",
+          "tipo": "Linaje / Bloodline",
+          "coste": 20,
+          "etiqueta": "Armería Vampiros",
+          "resumen": "Maestro de las artes marciales cuyos sirvientes tiemblan cuando desenvaina su hoja.",
+          "detalles": "Efectos: Añade +1 al Daño infligido en cada ataque cuerpo a cuerpo (Melee) que realice este Vampiro.",
+          "restriccion": "Aplica solo en combate cuerpo a cuerpo."
         }
       ],
       "saberes_magicos": [
@@ -2172,6 +2220,42 @@ const compendioArcWorlde = {
           "resumen": "Gaitas que atraen a las ratas de la tumba.",
           "detalles": "Efectos: Otorga el rasgo Raiser of the Dead para resucitar Carrion Rats con Hazaña Fácil. Otorga Pack Hunter a las ratas a 12\".",
           "restriccion": "Control de plagas."
+        },
+        {
+          "id": "undead_raiders_ranged_weapon",
+          "faccion_id": "undead_raiders",
+          "faccion_nombre": "Saqueadores No-Muertos",
+          "nombre": "Arma a Distancia No-Muerta / Undead Raiders Ranged Weapon",
+          "tipo": "Equipo / Arma a Distancia",
+          "coste": 15,
+          "etiqueta": "Armería Saqueadores No-Muertos",
+          "resumen": "Rifles podridos, arcos, ballestas o rocas arrojadizas utilizadas por los bandidos.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 5, Alcance 12\".",
+          "restriccion": "Uso continuo mientras esté equipada."
+        },
+        {
+          "id": "stolen_arcloque_pistol",
+          "faccion_id": "undead_raiders",
+          "faccion_nombre": "Saqueadores No-Muertos",
+          "nombre": "Pistola Arcloque Robada / Stolen Arcloque Pistol",
+          "tipo": "Equipo / Arma a Distancia",
+          "coste": 20,
+          "etiqueta": "Armería Saqueadores No-Muertos",
+          "resumen": "Pistola saqueada a un soldado imperial caído, atascada de barro pero aún devastadora.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 7, Alcance 8\". Solo se puede realizar una vez por Activación. Si hay más Fallos que Éxitos al tirar para impactar, el portador recibe el mismo número de impactos que el objetivo.",
+          "restriccion": "1 uso por Activación. Riesgo de retroceso/explosión."
+        },
+        {
+          "id": "hangmans_noose",
+          "faccion_id": "undead_raiders",
+          "faccion_nombre": "Saqueadores No-Muertos",
+          "nombre": "Soga de Ahorcado / Hangman's Noose",
+          "tipo": "Objeto / Item",
+          "coste": 15,
+          "etiqueta": "Armería Saqueadores No-Muertos",
+          "resumen": "La soga del patíbulo que los envió a la tumba, portada con despecho hacia los vivos.",
+          "detalles": "Efectos: Un solo uso. Si el personaje cae Noqueado (KO), se coloca inmediatamente de nuevo en el tablero con 1 HP.",
+          "restriccion": "De un solo uso."
         }
       ],
       "saberes_magicos": [
@@ -2402,6 +2486,54 @@ const compendioArcWorlde = {
           "resumen": "Arco colosal que requiere fuerza elfa sobrehumana.",
           "detalles": "Efectos: Otorga el ataque a distancia Shot (Power 8, Alcance 18\").",
           "restriccion": "Alcance 18\"."
+        },
+        {
+          "id": "blood_stone",
+          "faccion_id": "wild_elves",
+          "faccion_nombre": "Elfos Silvanos",
+          "nombre": "Piedra de Sangre / Blood Stone",
+          "tipo": "Objeto / Consumible",
+          "coste": 10,
+          "etiqueta": "Armería Elfos Silvanos",
+          "resumen": "Un fragmento carmesí de las profundidades de Mildaark repleto de magia sustentadora.",
+          "detalles": "Efectos: Un solo uso. Al consumirse, el personaje recupera D6 HP. Puede usarse para curar a un aliado en contacto de peana.",
+          "restriccion": "De un solo uso."
+        },
+        {
+          "id": "wild_elven_ranged_weapon",
+          "faccion_id": "wild_elves",
+          "faccion_nombre": "Elfos Silvanos",
+          "nombre": "Arma a Distancia Silvana / Wild Elven Ranged Weapon",
+          "tipo": "Equipo / Arma a Distancia",
+          "coste": 15,
+          "etiqueta": "Armería Elfos Silvanos",
+          "resumen": "Lanzas arrojadizas o arcos silvanos del tamaño de un adulto.",
+          "detalles": "Efectos: Otorga el ataque a distancia (Ranged) Shot: Power 6, Alcance 16\".",
+          "restriccion": "Uso continuo mientras esté equipada."
+        },
+        {
+          "id": "sacrificial_blade",
+          "faccion_id": "wild_elves",
+          "faccion_nombre": "Elfos Silvanos",
+          "nombre": "Hoja Sacrificial / Sacrificial Blade",
+          "tipo": "Equipo / Arma",
+          "coste": 20,
+          "etiqueta": "Armería Elfos Silvanos",
+          "resumen": "Un arma manchada de sangre utilizada en las ceremonias secretas de los Elfos.",
+          "detalles": "Efectos: El personaje obtiene el rasgo Sacrificio (Sacrifice). Si ya poseía dicho rasgo, puede repetir 1 intento fallido de Sacrificio por Ronda.",
+          "restriccion": "Otorga o potencia la capacidad de Sacrificio."
+        },
+        {
+          "id": "faeblade",
+          "faccion_id": "wild_elves",
+          "faccion_nombre": "Elfos Silvanos",
+          "nombre": "Faeblade / Hoja Feérica",
+          "tipo": "Equipo / Arma Mágica",
+          "coste": 30,
+          "etiqueta": "Armería Elfos Silvanos",
+          "resumen": "Hoja etérea y centelleante que al ser arrojada busca a la presa y regresa a la mano.",
+          "detalles": "Efectos: Cuenta como Arma a Dos Manos (Two-Handed Weapon). Permite el ataque a distancia (Ranged) Faeblade: Power 8, Alcance 12\". Si el objetivo queda KO, el daño sobrante afecta a otro enemigo a 6\".",
+          "restriccion": "Arma de dos manos. Permite ataque relámpago con daño sobrante."
         }
       ],
       "saberes_magicos": [
@@ -2983,6 +3115,30 @@ const compendioArcWorlde = {
           "resumen": "Alas de cuero sujetas con correas caseras.",
           "detalles": "Efectos: Otorga el rasgo Vuelo (Fly) y +4 al Movimiento.",
           "restriccion": "Solo para Burrow Dwellers."
+        },
+        {
+          "id": "shield_carriers",
+          "faccion_id": "gremlins",
+          "faccion_nombre": "Gremlins",
+          "nombre": "Portadores de Escudo / Shield Carriers",
+          "tipo": "Equipo / Montura",
+          "coste": 50,
+          "etiqueta": "Armería Gremlins",
+          "resumen": "Esbirros sometidos que transportan sobre un gran escudo a los Gremlins más importantes.",
+          "detalles": "Efectos: Solo para Great Gremlins (Jefe Gremlin). Otorga +8 HP y +1 a la Armadura. El personaje pasa a tener peana de 50mm.",
+          "restriccion": "Solo equipable en Great Gremlin."
+        },
+        {
+          "id": "poison_goop",
+          "faccion_id": "gremlins",
+          "faccion_nombre": "Gremlins",
+          "nombre": "Veneno Pegajoso / Poison Goop",
+          "tipo": "Objeto / Consumible",
+          "coste": 5,
+          "etiqueta": "Armería Gremlins",
+          "resumen": "Toxina nociva extraída del veneno del Lagarto Escupidor para imbuir armas.",
+          "detalles": "Efectos: Un solo uso. Durante esta Ronda, si un objetivo pierde HP por un ataque de este personaje, el objetivo pierde 1 HP adicional al inicio de su siguiente Activación.",
+          "restriccion": "De un solo uso."
         }
       ],
       "saberes_magicos": [
@@ -3552,71 +3708,71 @@ const compendioArcWorlde = {
     }
   ],
   "armeria_comun": [
-  {
-    "id": "arcanite_token",
-    "nombre": "Ficha de Arcanita / Arcanite Token",
-    "tipo": "Objeto / Item",
-    "coste": 10,
-    "efecto": "Un solo uso (One use only). Al consumirse, elige un efecto: +1 AP para la activación, +1D6 extra a cualquier tirada, lanzar un hechizo adicional, o repetir 1D6.",
-    "restriccion": "Un solo uso (One use only)."
-  },
-  {
-    "id": "shield",
-    "nombre": "Escudo / Shield",
-    "tipo": "Equipo / Equipment",
-    "coste": 15,
-    "efecto": "Si está equipado, el personaje puede repetir 1 Tirada de Defensa fallida por Ronda.",
-    "restriccion": "Requiere el uso de una mano."
-  },
-  {
-    "id": "spear",
-    "nombre": "Lanza / Spear",
-    "tipo": "Equipo / Equipment",
-    "coste": 10,
-    "efecto": "Permite realizar ataques melé a objetivos hasta a 2\" de distancia, incluso si no está en contacto de peana o si hay una miniatura aliada de por medio.",
-    "restriccion": "Alcance melé ampliado a 2\"."
-  },
-  {
-    "id": "torch",
-    "nombre": "Antorcha / Torch",
-    "tipo": "Objeto / Item",
-    "coste": 10,
-    "efecto": "El portador cuenta como Temible (Fearsome) frente a Bestias y Monstruos. Obtiene +1 al Power melé y Temible contra objetivos Inflamables. Sin embargo, los disparos enemigos contra él pueden repetir fallos en Hazañas.",
-    "restriccion": "Revela la posición del portador a distancia."
-  },
-  {
-    "id": "two_handed_weapon",
-    "nombre": "Arma a Dos Manos / Two Handed Weapon",
-    "tipo": "Equipo / Equipment",
-    "coste": 10,
-    "efecto": "Otorga +2 al Power en todos los ataques melé. Sin embargo, los Éxitos Críticos en tiradas de Defensa del portador se descartan como si fuesen fallos.",
-    "restriccion": "Ocupa ambas manos."
-  },
-  {
-    "id": "dual_weapons",
-    "nombre": "Armas Dobles / Dual Weapons",
-    "tipo": "Equipo / Equipment",
-    "coste": 10,
-    "efecto": "Permite repetir todos los resultados de \"1\" obtenidos en tiradas de ataque cuerpo a cuerpo.",
-    "restriccion": "Ocupa ambas manos."
-  },
-  {
-    "id": "light_armour",
-    "nombre": "Armadura Ligera / Light Armour",
-    "tipo": "Equipo / Equipment",
-    "coste": 20,
-    "efecto": "Otorga +1 al Valor de Armadura del personaje.",
-    "restriccion": "No acumulable con otras armaduras."
-  },
-  {
-    "id": "heavy_armour",
-    "nombre": "Armadura Pesada / Heavy Armour",
-    "tipo": "Equipo / Equipment",
-    "coste": 35,
-    "efecto": "Otorga +2 al Valor de Armadura del personaje. Sin embargo, todas las tiradas de Leg It sufren +1 a la dificultad.",
-    "restriccion": "No acumulable con otras armaduras."
-  }
-],
+    {
+      "id": "arcanite_token",
+      "nombre": "Ficha de Arcanita / Arcanite Token",
+      "tipo": "Objeto / Item",
+      "coste": 10,
+      "efecto": "Un solo uso (One use only). Al consumirse, elige un efecto: +1 AP para la activación, +1D6 extra a cualquier tirada, lanzar un hechizo adicional, o repetir 1D6.",
+      "restriccion": "Un solo uso (One use only)."
+    },
+    {
+      "id": "shield",
+      "nombre": "Escudo / Shield",
+      "tipo": "Equipo / Equipment",
+      "coste": 15,
+      "efecto": "Si está equipado, el personaje puede repetir 1 Tirada de Defensa fallida por Ronda.",
+      "restriccion": "Requiere el uso de una mano."
+    },
+    {
+      "id": "spear",
+      "nombre": "Lanza / Spear",
+      "tipo": "Equipo / Equipment",
+      "coste": 10,
+      "efecto": "Permite realizar ataques melé a objetivos hasta a 2\" de distancia, incluso si no está en contacto de peana o si hay una miniatura aliada de por medio.",
+      "restriccion": "Alcance melé ampliado a 2\"."
+    },
+    {
+      "id": "torch",
+      "nombre": "Antorcha / Torch",
+      "tipo": "Objeto / Item",
+      "coste": 5,
+      "efecto": "El portador cuenta como Temible (Fearsome) frente a Bestias y Monstruos. Obtiene +1 al Power melé y Temible contra objetivos Inflamables. Sin embargo, los disparos enemigos contra él pueden repetir fallos en Hazañas.",
+      "restriccion": "Revela la posición del portador a distancia."
+    },
+    {
+      "id": "two_handed_weapon",
+      "nombre": "Arma a Dos Manos / Two Handed Weapon",
+      "tipo": "Equipo / Equipment",
+      "coste": 10,
+      "efecto": "Otorga +2 al Power en todos los ataques melé. Sin embargo, los Éxitos Críticos en tiradas de Defensa del portador se descartan como si fuesen fallos.",
+      "restriccion": "Ocupa ambas manos."
+    },
+    {
+      "id": "dual_weapons",
+      "nombre": "Armas Dobles / Dual Weapons",
+      "tipo": "Equipo / Equipment",
+      "coste": 10,
+      "efecto": "Permite repetir todos los resultados de \"1\" obtenidos en tiradas de ataque cuerpo a cuerpo.",
+      "restriccion": "Ocupa ambas manos."
+    },
+    {
+      "id": "light_armour",
+      "nombre": "Armadura Ligera / Light Armour",
+      "tipo": "Equipo / Equipment",
+      "coste": 20,
+      "efecto": "Otorga +1 al Valor de Armadura del personaje.",
+      "restriccion": "No acumulable con otras armaduras."
+    },
+    {
+      "id": "heavy_armour",
+      "nombre": "Armadura Pesada / Heavy Armour",
+      "tipo": "Equipo / Equipment",
+      "coste": 35,
+      "efecto": "Otorga +2 al Valor de Armadura del personaje. Sin embargo, todas las tiradas de Leg It sufren +1 a la dificultad.",
+      "restriccion": "No acumulable con otras armaduras."
+    }
+  ],
   "diccionario_rasgos": {
     "Nación Colonizadora / Settler Nation": {
       "resumen": "Expansión militar del Imperio aliada con colonos locales.",
@@ -4890,7 +5046,7 @@ const compendioArcWorlde = {
       }
     ]
   }
-};
+}
 
 // Referencias de conveniencia para scripts y vistas web
 const datosMinis = compendioArcWorlde;
