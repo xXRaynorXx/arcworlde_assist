@@ -51,8 +51,8 @@
   // Clase de una miniatura (campo "clase" del compendio)
   const claseOf = (u) => (u && u.clase) || "";
   const isCommander = (u) => /^commander$/.test(claseOf(u));
-  // Monstruos y bestias: no compran armería común
-  const isMonster = (u) => /^(monster|heavy|beast)$/.test(claseOf(u));
+  // Criaturas (bestias, monstruos y titanes): no compran armería común ("Equipment can't be used by Creatures", Core Rulebook p.41)
+  const isMonster = (u) => /^(monster|titan|beast)$/.test(claseOf(u));
 
   // Facción de una miniatura del catálogo
   function unitFaction(unitId) {
