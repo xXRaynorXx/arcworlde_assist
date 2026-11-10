@@ -282,16 +282,6 @@ const compendioArcWorlde = {
           "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
           "detalles": "Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
           "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
-        },
-        {
-          "id": "grand_cookbook",
-          "faccion_id": "halfling",
-          "faccion_nombre": "Halflings",
-          "nombre": "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb",
-          "etiqueta": "Saber Mágico (Halflings)",
-          "resumen": "Magia gastronómica infundida con Arcanita para potenciar o curar aliados.",
-          "detalles": "Efectos: Acceso al saber mágico con hechizos de curación, bonificación al movimiento y potenciadores de combate.",
-          "restriccion": "Exclusivo de Magos Halflings (Battle Cook)."
         }
       ],
       "armeria_exclusiva": [
@@ -628,28 +618,8 @@ const compendioArcWorlde = {
           "nombre": "Comandos Militares / Make/Take Orders",
           "etiqueta": "Regla de Facción (Imperiales)",
           "resumen": "Permite a un personaje con Make Orders emitir órdenes a aliados con Take Orders a 12\" o menos.",
-          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders:\n As One! Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.\n Stand Firm! Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
-          "restriccion": "Hazaña Fácil. El emisor finaliza su activación al emitir la orden. Rango de 12\"."
-        },
-        {
-          "id": "order_as_one_imperial",
-          "faccion_id": "imperial",
-          "faccion_nombre": "Imperiales",
-          "nombre": "As One!",
-          "etiqueta": "Regla de Facción (Imperiales)",
-          "resumen": "Orden de facción que activa simultáneamente a hasta 3 personajes de la misma clase.",
-          "detalles": "Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.",
-          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Los ataques deben dirigirse al mismo objetivo."
-        },
-        {
-          "id": "order_stand_firm_imperial",
-          "faccion_id": "imperial",
-          "faccion_nombre": "Imperiales",
-          "nombre": "Stand Firm!",
-          "etiqueta": "Regla de Facción (Imperiales)",
-          "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
-          "detalles": "Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
-          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
+          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the Imperial Orders (Together!, Hold!, Volley! or Form Up!) can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders.",
+          "restriccion": "Hazaña Fácil. El emisor finaliza su activación al emitir la orden. Rango de 12\". Las órdenes imperiales son Together!, Hold!, Volley! y Form Up!."
         },
         {
           "id": "order_together",
@@ -1384,16 +1354,6 @@ const compendioArcWorlde = {
           "resumen": "Descuento del 20% en GP al reclutar criaturas del Bestiario.",
           "detalles": "Beasts, Monsters or Titans from the Bestiary taken as part of a Beastfolk Warband are at –20% GP cost.",
           "restriccion": "Aplica al reclutar Bestias, Monstruos o Titanes en la construcción de la banda."
-        },
-        {
-          "id": "diminutive_intimidating",
-          "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
-          "nombre": "Jerarquía del Clan / Diminutive & Intimidating",
-          "etiqueta": "Regla de Facción (Beastfolk)",
-          "resumen": "Los brutos dominan a las sabandijas más pequeñas del clan.",
-          "detalles": "Efectos: La caída de unidades Diminutive no fuerza chequeos de Valentía en líderes Intimidating. Además, minis Diminutive a 6\" de un Intimidating re-repiten 1 fallo al atacar.",
-          "restriccion": "Sinergia de tamaño."
         }
       ],
       "armeria_exclusiva": [
@@ -2139,26 +2099,6 @@ const compendioArcWorlde = {
           "resumen": "Permite reclutar personajes de las facciones Undead Raiders y Ancient Dead.",
           "detalles": "Although the Vampires are dismissive of the living, they have been known to ally with other unliving beings whose hunger for power they respect. When constructing your Warband, you may use Characters from the Undead Raiders and Ancient Dead Factions.",
           "restriccion": "Fase de construcción de la banda."
-        },
-        {
-          "id": "enthrall_rule",
-          "faccion_id": "vampires",
-          "faccion_nombre": "Vampiros (Vampires)",
-          "nombre": "Cautivar / Enthral",
-          "etiqueta": "Regla de Facción (Vampires)",
-          "resumen": "Poder hipnótico para convertir enemigos heridos en sirvientes sumisos.",
-          "detalles": "Efectos: En contacto de peana, realiza una Hazaña (Easy/Medium/Hard/Legendary según HP y peana del rival) para transformar al enemigo en un Thrall bajo tu control.",
-          "restriccion": "Liberados si el Vampiro cae KO."
-        },
-        {
-          "id": "insignificant_vampires",
-          "faccion_id": "vampires",
-          "faccion_nombre": "Vampiros (Vampires)",
-          "nombre": "Insignificantes / Insignificant",
-          "etiqueta": "Regla de Facción (Vampires)",
-          "resumen": "Desprecio absoluto por la vida de sus sirvientes y plebeyos.",
-          "detalles": "Efectos: La caída o noqueo de sirvientes y Thralls no obliga a los Vampiros a realizar Chequeos de Valentía.",
-          "restriccion": "Afecta a nobles vampíricos."
         }
       ],
       "armeria_exclusiva": [
@@ -2894,16 +2834,6 @@ const compendioArcWorlde = {
           "resumen": "Permite reclutar personajes de las facciones Wizards y Dark Lords.",
           "detalles": "Elves are mercurial creatures of magic, and on occasion temporarily ally with those whose arcane prowess they respect. The Wizards of Mt Orion are known to liaise and trade with the Elves, and Dark Lords have been seen fighting with Wild Elven warriors beside them. When constructing your Warband, you may use Characters from the Wizards and Dark Lords Factions.",
           "restriccion": "Fase de construcción de la banda."
-        },
-        {
-          "id": "summoner_sacrifice",
-          "faccion_id": "wild_elves",
-          "faccion_nombre": "Elfos Silvanos (Wild Elves)",
-          "nombre": "Magia de Sangre y Sacrificio / Summoner & Sacrifice",
-          "etiqueta": "Regla de Facción (Wild Elves)",
-          "resumen": "Invocación de criaturas de madera mediante ofrendas de vida.",
-          "detalles": "Efectos: Los Druidas invocan Woodfiends y Briarbeasts sacrificando HP propio o noqueando unidades aliadas de apoyo.",
-          "restriccion": "Invocación druídica."
         }
       ],
       "armeria_exclusiva": [
@@ -3975,16 +3905,6 @@ const compendioArcWorlde = {
           "resumen": "Permite reclutar personajes de las facciones Dark Lords y Wild Elves.",
           "detalles": "Wizards have dedicated their lives to the practice of magic, and on occasion temporarily ally with those whose magical prowess they respect. Rogue Wizards often make pacts with Dark Lords, and the Elves of Mildaark will lend their swords if the fickle creatures are impressed by a Wizard’s arcane mastery. When constructing your Warband, you may use Characters from the Dark Lords and Wild Elven Factions.",
           "restriccion": "Fase de construcción de la banda."
-        },
-        {
-          "id": "colleges_mt_orion",
-          "faccion_id": "wizards",
-          "faccion_nombre": "Magos (Wizards)",
-          "nombre": "Los Colegios de Mt Orion / Colleges of Mt Orion",
-          "etiqueta": "Regla de Facción (Wizards)",
-          "resumen": "Especialización elemental entre los seis Colegios Mágicos.",
-          "detalles": "Efectos: Elige la escuela mágica antes de la partida (Crimson, Sapphire, Emerald, Ochre, Bronze, Opal) para acceder a su saber exclusivo.",
-          "restriccion": "Elección de colegio antes de jugar."
         }
       ],
       "armeria_exclusiva": [
@@ -5124,7 +5044,7 @@ const compendioArcWorlde = {
       "id": "torch",
       "nombre": "Antorcha / Torch",
       "tipo": "Objeto",
-      "coste": 10,
+      "coste": 5,
       "efecto": "Carrying a lit torch can have its uses in a land so filled with dangers as ArcWorlde. If equipped, a Character counts as Fearsome to Beasts and Monsters. In addition, the Character counts as Fearsome, and has +1 Power on all Melee Attacks against Characters who are Flammable. However, enemy Characters may re-roll Failures when attempting Feat rolls for Ranged Attacks against a Torch-carrying Character, as they are much easier to spot from afar.",
       "restriccion": "",
       "no_permitido_a": [
