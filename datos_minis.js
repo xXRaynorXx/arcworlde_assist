@@ -1750,51 +1750,47 @@ const compendioArcWorlde = {
       "nombre": "Vampiros",
       "unidades": [
         {
-          "id": "vampire_lord",
-          "nombre": "Señor Vampiro",
-          "nombre_en": "Vampire Lord",
-          "tipo": "comandante",
-          "coste": 150,
-          "peana_mm": 40,
+          "id": "vampire",
+          "nombre": "Vampiro",
+          "nombre_en": "Vampire",
+          "clase": "elite",
+          "coste": 120,
+          "peana_mm": 30,
           "stats": {
-            "hp": 16,
-            "mov": 5,
-            "armadura": 1,
-            "ap": 5
+            "hp": 12,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
           },
           "ataques": [
-            "Vampiric Bite: (2 AP) Melee, Power 7. Regla Especial: El Señor Vampiro recupera HP iguales a las heridas causadas.",
-            "Noble Slash: (1 AP) Melee, Power 5."
+            "(2 AP) Effortless Slash: Power 7. Special Rules: Each Crit allows one more D6 to be rolled.",
+            "(1 AP) Bloody Strike: Power 5. Special Rules: Crit ignores Armour.",
+            "(1 AP) Go for the Throat: Power 2. Special Rules: This Attack’s Power is not boosted by any Equipment. If HP is removed by this Attack, may re-roll any failed Enthral attempts against the target this Round."
           ],
           "rasgos": [
-            "Undead Lord",
-            "Bloodline Powers"
+            "Enthral",
+            "Feed"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
             "blood_vial",
             "vampyr_supreme",
             "beguiling_temperament",
-            "shapeshifter",
+            "shapeshifter_bloodline",
             "everlasting_bloodline",
-            "fell_scholar",
+            "fell_scholar_bloodline",
             "crimson_knight"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Oscuridad / Darkness (Exige 14): Alcance 8\". Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos.",
-            "Trueno Dramático / Dramatic Thunderclap (Exige 17): Alcance Global. Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda.",
-            "Cautivar / Beguile (Exige 19): Alcance 6\". Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques.",
-            "Forma de Niebla / Mist Form (Exige 21): Alcance Personal. Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
+            "Lore of the Night Spells (if equipped with Fell Scholar Bloodline): Darkness (Required Draw 14), Dramatic Thunderclap (Required Draw 17), Vampiric Glare (Required Draw 20), Cloud of Bats (Required Draw 21)"
           ]
         },
         {
-          "id": "vampire_thrall",
-          "nombre": "Siervo / Thrall",
-          "nombre_en": "Vampire Thrall",
-          "tipo": "tropa",
+          "id": "manservant",
+          "nombre": "Sirviente",
+          "nombre_en": "Manservant",
+          "clase": "unit",
           "coste": 40,
           "peana_mm": 30,
           "stats": {
@@ -1804,107 +1800,100 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Desperate Strike: (2 AP) Melee, Power 5.",
-            "Scratch: (1 AP) Melee, Power 3."
+            "(2 AP) Manhandle: Power 5. Special Rules: If the target is on a 30mm base, a Crit knocks them Prone.",
+            "(1 AP) Club Foot: Power 4. Special Rules: +1 Power if the target is Prone."
           ],
           "rasgos": [
-            "Subservient"
+            "Insignificant",
+            "Drag"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [
-            "blood_vial"
-          ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
-          "hechizos": [
-            "Oscuridad / Darkness (Exige 14): Alcance 8\". Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos.",
-            "Trueno Dramático / Dramatic Thunderclap (Exige 17): Alcance Global. Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda.",
-            "Cautivar / Beguile (Exige 19): Alcance 6\". Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques.",
-            "Forma de Niebla / Mist Form (Exige 21): Alcance Personal. Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
-          ]
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
-          "id": "manservant",
-          "nombre": "Sirviente Personal",
-          "nombre_en": "Manservant",
-          "tipo": "heroe",
-          "coste": 50,
+          "id": "thrall",
+          "nombre": "Esclavo",
+          "nombre_en": "Thrall",
+          "clase": "irregular",
+          "coste": 30,
           "peana_mm": 30,
           "stats": {
-            "hp": 7,
+            "hp": 5,
             "mov": 4,
             "armadura": 0,
-            "ap": 3
+            "ap": 2
           },
           "ataques": [
-            "Serving Tray Bash: (2 AP) Melee, Power 6.",
-            "Concealed Dagger: (1 AP) Melee, Power 4."
+            "(1 AP) Vacant Strike: Power 4"
           ],
           "rasgos": [
-            "Devoted Service"
+            "Insignificant",
+            "Mindless"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [
-            "blood_vial"
-          ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "werewolf",
           "nombre": "Hombre Lobo",
           "nombre_en": "Werewolf",
-          "tipo": "monstruo",
+          "clase": "heavy",
           "coste": 200,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 20,
             "mov": 6,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 7
           },
           "ataques": [
-            "Raking Claws: (2 AP) Melee, Power 7. Regla Especial: Críticos rompen 1 de Armadura.",
-            "Savage: (2 AP) Melee, Power 5. Regla Especial: Cada impacto exitoso permite tirar un dado extra.",
-            "Howl: (1 AP) Area, Power 2, Alcance 6\". Ignora armadura, fuerza Chequeo de Valentía."
+            "(2 AP) Raking Claws: Power 7. Special Rules: A Crit ignores and breaks 1 Armour.",
+            "(2 AP) Savage: Power 5. Special Rules: Each successful Hit allows one more D6 to be rolled.",
+            "(1 AP) Howl: Power 2. Special Rules: Every enemy Character within 6” is affected by this Attack. Ignores Armour. If a Character loses HP to this Attack they must make a Bravery Test."
           ],
           "rasgos": [
             "Agile",
-            "Fearsome"
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Curse of the Wolf"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "crypt_bat",
           "nombre": "Murciélago de la Cripta",
           "nombre_en": "Crypt Bat",
-          "tipo": "monstruo",
-          "coste": 45,
-          "peana_mm": 40,
+          "clase": "beast",
+          "coste": 20,
+          "peana_mm": 30,
           "stats": {
-            "hp": 8,
+            "hp": 3,
             "mov": 8,
             "armadura": 0,
-            "ap": 3
+            "ap": 2
           },
           "ataques": [
-            "Wing Buffet: (1 AP) Melee, Power 4.",
-            "Fanged Bite: (1 AP) Melee, Power 5."
+            "(1 AP) Nip: Power 4"
           ],
           "rasgos": [
-            "Fly"
+            "Agile",
+            "Fly",
+            "Insignificant",
+            "Flittering"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
