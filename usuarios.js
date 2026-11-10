@@ -15,6 +15,13 @@
   AW.hooks = { userChanged: [], afterRender: [] };
 
   const TIPOS = [
+    ['commander', 'Comandante'],
+    ['mage', 'Mago'],
+    ['elite', 'Élite'],
+    ['irregular', 'Irregular'],
+    ['unit', 'Unidad'],
+    ['heavy', 'Pesada'],
+    ['beast', 'Bestia'],
     ['comandante', 'Comandante'],
     ['heroe', 'Héroe'],
     ['tropa', 'Tropa'],
@@ -315,7 +322,7 @@
     window.AWGear && AWGear.allies(own.id).forEach((a) => {
       const f = catalogFactions().find((x) => x.id === a.id);
       if (!f) return;
-      const units = (f.unidades || []).filter((u) => u.tipo !== 'comandante').map((u) => ({ f, u }));
+      const units = (f.unidades || []).filter((u) => !AWGear.isCommander(u)).map((u) => ({ f, u }));
       if (units.length) groups.push({ label: 'Aliados: ' + f.nombre, kind: 'ally', units, regla: a.regla });
     });
     const best = catalogFactions().find((x) => x.id === 'bestiary');
@@ -336,7 +343,7 @@
 
     const rules = typeof datosMinis !== 'undefined' && datosMinis ? (datosMinis.reglas_banda || datosMinis.reglas_generales_banda) : null;
     if (rules) {
-      const cmds = units.filter((u) => u.tipo === 'comandante').length;
+      const cmds = units.filter((u) => AWGear.isCommander(u)).length;
       if (rules.comandante_obligatorio && cmds === 0) issues.push('Falta un comandante.');
       if (rules.max_comandantes != null && cmds > rules.max_comandantes)
         issues.push('Máximo ' + rules.max_comandantes + ' comandante' + (rules.max_comandantes === 1 ? '' : 's') + ' por banda.');
@@ -344,7 +351,7 @@
 
     recruitable(faction).forEach((c) => {
       if (c.max_por_banda == null) return;
-      const n = units.filter((u) => u.id === c.id).length;
+      const n = units.filter((u) => AWGear.canonId(u.id) === c.id).length;
       if (n > c.max_por_banda) issues.push(c.nombre + ': máximo ' + c.max_por_banda + ' por banda.');
     });
     return issues;
@@ -547,7 +554,7 @@
   }
 
   function unitRow(u, i) {
-    const tipo = (TIPOS.find((t) => t[0] === u.tipo) || [0, u.tipo || ''])[1];
+    const tipo = (TIPOS.find((t) => t[0] === (u.clase || u.tipo)) || [0, u.clase || u.tipo || ''])[1];
     const fname = unitFactionName(u, state.editing.faction);
     const ally = u.id && fname && state.editing.faction && fname !== state.editing.faction && !/Bestiar|Bestiary/i.test(fname);
     return (
@@ -619,7 +626,7 @@
           groups.map((g) =>
             TIPOS.map((t) => {
               const opts = g.units
-                .filter((p) => p.u.tipo === t[0])
+                .filter((p) => AWGear.claseOf(p.u) === t[0])
                 .map((p) => '<option value="' + esc(p.f.id + ':' + p.u.id) + '">' + esc(p.u.nombre) + ' (' + (Number(p.u.coste) || 0) + ' GP · ' + statLine(p.u) + ')</option>')
                 .join('');
               return opts ? '<optgroup label="' + esc(g.label + ' — ' + t[1]) + '">' + opts + '</optgroup>' : '';
@@ -866,7 +873,7 @@
     const [fid, uid] = String(val).split(':');
     const pick = recruitGroups(state.editing.faction).reduce((all, g) => all.concat(g.units), []).find((p) => p.f.id === fid && p.u.id === uid);
     if (!pick) return;
-    state.editing.units.push({ id: pick.u.id, nombre: pick.u.nombre, tipo: pick.u.tipo || 'tropa', coste: Number(pick.u.coste) || 0, faccion_id: pick.f.id });
+    state.editing.units.push({ id: pick.u.id, nombre: pick.u.nombre, tipo: AWGear.claseOf(pick.u) || 'unit', coste: Number(pick.u.coste) || 0, faccion_id: pick.f.id });
     renderApp();
   };
 

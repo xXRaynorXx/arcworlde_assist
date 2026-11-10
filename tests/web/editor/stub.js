@@ -3,7 +3,7 @@ window.addEventListener('error', e => window.__errs.push(String(e.message)));
 window.addEventListener('unhandledrejection', e => window.__errs.push('rej: ' + String(e.reason && e.reason.message || e.reason) + ' @ ' + String(e.reason && e.reason.stack || '').split('\n').slice(1,3).join('|')));
 let me = 'u1', seq = 0, authCb = null;
 const FIRST = (f, n, t) => ({ id: n, owner_id: f, name: n, faction: t, value: 120, updated_at: '1',
-  units: [{ id: 'sheriff', nombre: 'Sheriff', tipo: 'comandante', coste: 80 }, { id: 'halfling_militia', nombre: 'Milicia Halfling', tipo: 'tropa', coste: 40 }] });
+  units: [{ id: 'halfling_sheriff', nombre: 'Sheriff', tipo: 'comandante', coste: 80 }, { id: 'halfling_militia', nombre: 'Milicia Halfling', tipo: 'tropa', coste: 40 }] });
 const db = {
   profiles: [{ id: 'u1', display_name: 'Ana' }, { id: 'u2', display_name: 'Bob' }, { id: 'u3', display_name: 'Carol' }],
   games: [], game_players: [],
