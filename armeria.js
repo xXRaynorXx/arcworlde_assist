@@ -159,7 +159,8 @@ const armeriaComunDB = [
     gremlin_chief: "the_great_gremlin",
     gremlin_warrior: "gremlin_scamp",
     vampire_lord: "vampire",
-    vampire_thrall: "thrall"
+    vampire_thrall: "thrall",
+    ancient_grave_lord: "grave_lord"
   };
   const canonId = (id) => LEGACY_UNIT_ID[id] || id;
   // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
