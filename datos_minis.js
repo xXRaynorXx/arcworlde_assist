@@ -389,7 +389,7 @@ const compendioArcWorlde = {
           "id": "imperial_captain",
           "nombre": "Capitán Imperial",
           "nombre_en": "Imperial Captain",
-          "tipo": "comandante",
+          "clase": "commander",
           "coste": 80,
           "peana_mm": 30,
           "stats": {
@@ -399,34 +399,33 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "(2 AP) Sabre Cut: Power 7.",
-            "(Ranged) Pistol Shot: Power 5, Alcance 12\"."
+            "(2 AP) Riposte: Power 8. Special Rules: If this Attack removes HP, the next Character who attempts to Attack the Captain must pass an Easy Feat or lose 1HP.",
+            "(1 AP) Slash: Power 5. Special Rules: Critical Hits ignore Armour"
           ],
           "rasgos": [
-            "Make Orders",
-            "Take Orders",
             "Light Armour",
-            "Light Armour (Gratis / +1 Armadura)"
+            "Make Orders",
+            "Leaders of Men"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
             "imperial_mount",
             "medical_kit",
+            "imperial_crossbow",
             "imperial_gryphon",
             "arcloque_rifle",
-            "arcloque_pistol",
-            "imperial_crossbow"
+            "arcloque_pistol"
           ],
           "equipo_de_serie": [
-            "Armadura Ligera Imperial / Light Armour (Gratis / +1 Armadura)",
-            "Espada de Oficial / Riposte"
-          ]
+            "Armadura Ligera / Light Armour"
+          ],
+          "hechizos": []
         },
         {
           "id": "imperial_trooper",
-          "nombre": "Soldado Raso / Trooper",
+          "nombre": "Soldado Raso Imperial",
           "nombre_en": "Imperial Trooper",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 40,
           "peana_mm": 30,
           "stats": {
@@ -436,8 +435,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Heavy Strike: Power 6. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
-            "(1 AP) Thrust: Power 4."
+            "(2 AP) Heavy Strike: Power 6. Special Rules: A Critical Hit allows the player to re-roll 1 failed Hit.",
+            "(1 AP) Thrust: Power 4"
           ],
           "rasgos": [
             "Take Orders"
@@ -445,20 +444,19 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "imperial_mount",
-            "arcloque_rifle",
-            "imperial_crossbow",
             "medical_kit",
+            "imperial_crossbow",
+            "arcloque_rifle",
             "sergeants_chevrons"
           ],
-          "equipo_de_serie": [
-            "Lanza o Espada de Recluta"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "imperial_dragoon",
           "nombre": "Dragón Imperial",
           "nombre_en": "Imperial Dragoon",
-          "tipo": "heroe",
+          "clase": "elite",
           "coste": 65,
           "peana_mm": 30,
           "stats": {
@@ -468,32 +466,32 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Keen Slice: Power 7. Regla Especial: Un impacto Crítico permite repetir 1 tirada de Impacto fallida.",
-            "(1 AP) Downswing: Power 4. Regla Especial: Si está montado, repite todos los fallos contra peanas de 30mm."
+            "(2 AP) Keen Slice: Power 7. Special Rules: A Critical Hit allows the player to re-roll 1 failed Hit.",
+            "(1 AP) Downswing: Power 4. Special Rules: If this Character is mounted, re-roll all failed Hits against Targets on 30mm bases."
           ],
           "rasgos": [
             "Take Orders",
             "Light Armour",
-            "Mounted Specialist",
-            "Light Armour (Gratis / +1 Armadura)"
+            "Mounted Specialist"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "imperial_mount",
             "medical_kit",
+            "imperial_crossbow",
             "arcloque_pistol",
-            "imperial_crossbow"
+            "arcloque_rifle"
           ],
           "equipo_de_serie": [
-            "Armadura Ligera de Dragón / Light Armour (Gratis / +1 Armadura)",
-            "Sable Dragón"
-          ]
+            "Armadura Ligera / Light Armour"
+          ],
+          "hechizos": []
         },
         {
           "id": "imperial_tinkerer",
-          "nombre": "Hojalatero / Tinkerer",
+          "nombre": "Hojalatero Imperial",
           "nombre_en": "Imperial Tinkerer",
-          "tipo": "heroe",
+          "clase": "mage",
           "coste": 80,
           "peana_mm": 30,
           "stats": {
@@ -503,33 +501,30 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Spanner Whack: Power 5.",
-            "(Ranged) Revolving Pistol: Power 5, Alcance 8\". Regla Especial: Tira 1D6 adicional por cada impacto exitoso."
+            "(2 AP) Spanner Whack: Power 5"
           ],
           "rasgos": [
-            "Contraption Trunk",
-            "Mage",
-            "Contraption Trunk (Gratis)"
+            "Contraption Trunk"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
             "medical_kit",
             "arcloque_pistol"
           ],
-          "equipo_de_serie": [
-            "Contraption Trunk / Cofre Mecánico (Seguidor robot de 30mm que se desplaza gratis con el Mago)"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Griffling Mecánico / Mechanical Griffling (Exige 14): Alcance Contacto. Despliega un Griffling de metal autómata en contacto de peana que se activa inmediatamente.",
-            "Sobrecarga de Arcanita / Arcane Overcharge (Exige 16): Alcance 6\". Sobrecarga armas de pólvora o arcloque de aliados a 6\", otorgando +2 al Power en el siguiente disparo.",
-            "Barrera de Autómatas / Automaton Shield (Exige 18): Alcance 4\". Despliega una barrera protectora de engranajes que otorga +1 de Armadura a todos los aliados a 4\"."
+            "Mechanical Griffling (Exige 14): Place a Griffling (see Bestiary) in base contact with the Tinkerer that is Activated immediately after the Tinkerer’s Activation has ended. This Spell may only be used again if the Mechanical Griffling has been Knocked Out.",
+            "Revolving Pistol (Exige 16): The Tinkerer may make this Attack: (Ranged) Revolving Pistol - Power: 5. Special Rules: 8” range. Roll another D6 for each Successful Hit.",
+            "Arcane Shielding (Exige 17): For the rest of the Round, any Character within 2” of the Tinkerer gains +1 Armour for Attacks made by Characters outside of this area.",
+            "Homing Bullet (Exige 20): Once this Spell has been cast, in their Activation a single Character in base contact with the Tinkerer may make a single Ranged Attack that ignores cover and automatically passes its Feat roll for free.",
+            "Magic Gobbler (Exige 21): Until the Tinkerer’s next Activation, every time an enemy Character successfully casts a Spell, roll a D6. On a Success the Spell is not cast and the Tinkerer gains an Arcanite Token."
           ]
         },
         {
           "id": "imperial_arclancer",
           "nombre": "Arcalancero Imperial",
           "nombre_en": "Imperial Arclancer",
-          "tipo": "heroe",
+          "clase": "irregular",
           "coste": 60,
           "peana_mm": 30,
           "stats": {
@@ -539,49 +534,49 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Arclance Discharge: Power 8. Regla Especial: Un impacto Crítico causa D3 Daño adicional.",
-            "(1 AP) Jab: Power 4."
+            "(1 AP) Arclance: Power 6. Special Rules: Any failed Hits against the target are dealt as Hits to an enemy Character within 3” of the target."
           ],
           "rasgos": [
-            "Arc Energy",
-            "Arclance (Gratis)"
+            "Take Orders",
+            "Arclance"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "medical_kit"
           ],
           "equipo_de_serie": [
-            "Lanza Arcana / Arclance (Cuenta como Lanza de serie; permite gastar Arcanita para +2 Power a cambio de D3 Hits)"
-          ]
+            "Arclance"
+          ],
+          "hechizos": []
         },
         {
           "id": "imperial_ogre",
           "nombre": "Ogro Imperial",
           "nombre_en": "Imperial Ogre",
-          "tipo": "monstruo",
+          "clase": "heavy",
           "coste": 160,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 16,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 5
           },
           "ataques": [
-            "(2 AP) Clobber: Power 8. Regla Especial: Un impacto Crítico deja Tumbado (Prone) al objetivo en peana de 30mm o 40mm.",
-            "(1 AP) Big Boot: Power 5. Regla Especial: Suma +2 al Power si el objetivo está Tumbado (Prone)."
+            "(2 AP) Clobber: Power 8. Special Rules: If a Critical Hit is made, and the target is on a 30 or 40mm base, the target Character becomes Prone.",
+            "(1 AP) Big Boot: Power 5. Special Rules: +2 Power if the target is Prone."
           ],
           "rasgos": [
             "Take Orders",
-            "Massive"
+            "Volley Gun"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
-            "medical_kit"
+            "medical_kit",
+            "volley_gun"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
