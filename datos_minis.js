@@ -724,7 +724,7 @@ const compendioArcWorlde = {
           "id": "dark_lord",
           "nombre": "Señor Oscuro",
           "nombre_en": "Dark Lord",
-          "tipo": "comandante",
+          "clase": "commander",
           "coste": 210,
           "peana_mm": 50,
           "stats": {
@@ -734,60 +734,31 @@ const compendioArcWorlde = {
             "ap": 6
           },
           "ataques": [
-            "(2 AP) Malicious Strike: Power 7. Regla Especial: Si se obtienen más Éxitos que Fallos, el objetivo (peana <= 50mm) queda Tumbado (Prone).",
-            "(Ranged) Malevolent Gaze: Power 4, Alcance 6\".",
-            "(1 AP) Choke: Power 5. Regla Especial: No se incrementa con armas equipadas. Si causa daño, los enemigos deben pasar un Chequeo de Valentía como si fuera KO."
+            "(2 AP) Malicious Strike: Power 7. Special Rules: If more Successes are rolled than Failures, the target is knocked Prone if on a 50mm base or less.",
+            "(Ranged) Malevolent Gaze: Power 4. Special Rules: 6” Range.",
+            "(1 AP) Choke: Power 5. Special Rules: This Attack’s Power is not boosted by any equipped weapons. If HP is removed by this Attack, enemy models must take a Bravery Test as if the target had been Knocked Out."
           ],
           "rasgos": [
-            "The Dark One's Will",
+            "Heavy Armour",
             "Split Activation",
-            "Heavy Armour"
+            "Monologue"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "black_potion",
-            "dark_lord_ranged_weapon",
-            "slaver_whip"
+            "black_potion"
           ],
           "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
-        },
-        {
-          "id": "hobgoblin_honcho",
-          "nombre": "Capataz Hobgoblin",
-          "nombre_en": "Hobgoblin Honcho",
-          "tipo": "heroe",
-          "coste": 50,
-          "peana_mm": 30,
-          "stats": {
-            "hp": 7,
-            "mov": 4,
-            "armadura": 0,
-            "ap": 3
-          },
-          "ataques": [
-            "(2 AP) Whipcrack: Power 6. Regla Especial: Puede objetivar enemigos hasta a 4\" de distancia.",
-            "(1 AP) Brutish Slash: Power 4."
+            "Armadura Pesada / Heavy Armour"
           ],
-          "rasgos": [
-            "Slavedriver"
-          ],
-          "max_por_banda": null,
-          "equipo_permitido": [
-            "black_potion",
-            "dark_lord_ranged_weapon",
-            "slaver_whip"
-          ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "hechizos": [
+            "Lore of Villainy Spells (if Dark Warlock Trait chosen): Sickly Screech (Required Draw 14), Ominous Aura (Required Draw 17), Restless Minions (Required Draw 18), Molten Terrain (Required Draw 20), Hellfire (Required Draw 21)"
           ]
         },
         {
           "id": "hobgoblins",
           "nombre": "Hobgoblins",
           "nombre_en": "Hobgoblins",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 35,
           "peana_mm": 30,
           "stats": {
@@ -797,8 +768,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Hack'n'Slash: Power 4. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Gut Stab: Power 3."
+            "(2 AP) Hack’n’Slash: Power 4. Special Rules: Each Critical Hit allows one more D6 to be rolled.",
+            "(1 AP) Gut Stab: Power 3"
           ],
           "rasgos": [
             "Diminutive"
@@ -806,47 +777,18 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "black_potion",
-            "dark_lord_ranged_weapon"
+            "hobgoblin_ranged_weapon",
+            "hobgoblin_mount",
+            "slaver_whip"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
-        },
-        {
-          "id": "hobgoblin_firestarter",
-          "nombre": "Pirómano Hobgoblin",
-          "nombre_en": "Hobgoblin Firestarter",
-          "tipo": "heroe",
-          "coste": 50,
-          "peana_mm": 30,
-          "stats": {
-            "hp": 6,
-            "mov": 4,
-            "armadura": 0,
-            "ap": 2
-          },
-          "ataques": [
-            "(Ranged) Flame Toss: Power 6, Alcance 8\". Regla Especial: Cada impacto Crítico inflige 1 impacto a un enemigo a 2\" o menos del objetivo.",
-            "(1 AP) Firebrand: Power 4."
-          ],
-          "rasgos": [
-            "Arson Around",
-            "Diminutive"
-          ],
-          "max_por_banda": null,
-          "equipo_permitido": [
-            "black_potion",
-            "dark_lord_ranged_weapon"
-          ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "underling",
-          "nombre": "Esbirro Mágico",
+          "nombre": "Esbirro",
           "nombre_en": "Underling",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 20,
           "peana_mm": 30,
           "stats": {
@@ -856,47 +798,112 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Blazing Demise: Power 6. Regla Especial: Afecta a todos los personajes a 2\". El esbirro queda Noqueado tras la explosión.",
-            "(1 AP) Nip: Power 3."
+            "(2 AP) Blazing Demise: Power 6. Special Rules: Targets every Character within 2”. This Character is Knocked Out after the Attack has been executed. Only 1HP is returned to the Dark Lord who summoned them (see Firey Essence Trait) and the Dark Lord’s max HP is permanently reduced by 1 for the rest of the game (see Firey Essence Trait). +1 Damage against Flammable targets.",
+            "(1 AP) Nip: Power 3"
           ],
           "rasgos": [
-            "Fiery Essence",
-            "Diminutive"
+            "Diminutive",
+            "Firey Essence"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "hellbeast",
-          "nombre": "Bestia Infernal",
+          "nombre": "Bestia del Infierno",
           "nombre_en": "Hellbeast",
-          "tipo": "monstruo",
+          "clase": "heavy",
           "coste": 160,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 15,
             "mov": 10,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 5
           },
           "ataques": [
-            "(2 AP) Swoop: Power 8. Regla Especial: Un impacto Crítico deja al objetivo Tumbado (Prone).",
-            "(2 AP) Lift and Drop: Power 5. Regla Especial: Solo contra peanas de 30mm. En impacto Crítico desplaza a la víctima D6\".",
-            "(1 AP) Fangs: Power 5."
+            "(2 AP) Swoop: Power 8. Special Rules: If a Crit is rolled, the target is Prone.",
+            "(2 AP) Lift and Drop: Power 5. Special Rules: This Attack may only be made on a Character on a 30mm base size, and if the Hellbeast is not currently using Grasping Talons. On a Crit, the target is moved D6 inches in the direction of the Dark Lord player’s choosing.",
+            "(1 AP) Fangs: Power 5"
           ],
           "rasgos": [
-            "Fly",
             "Fearsome",
-            "Split Activation"
+            "Fly",
+            "Split Activation",
+            "Grasping Talons"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "black_potion"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "hobgoblin_honcho",
+          "nombre": "Jefe Hobgoblin",
+          "nombre_en": "Hobgoblin Honcho",
+          "clase": "elite",
+          "coste": 50,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 7,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Whipcrack: Power 6. Special Rules: May target any Character within 4”.",
+            "(1 AP) Brutish Slash: Power 4"
+          ],
+          "rasgos": [
+            "Slavedriver"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "black_potion",
+            "hobgoblin_ranged_weapon",
+            "hobgoblin_mount",
+            "slaver_whip"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "hobgoblin_firestarter",
+          "nombre": "Pirómano Hobgoblin",
+          "nombre_en": "Hobgoblin Firestarter",
+          "clase": "irregular",
+          "coste": 50,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 6,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(Ranged) Flame Toss: Power 6. Special Rules: 6” Range. Each Critical Hit causes one Hit against an enemy Character within 2” of the Target.",
+            "(1 AP) Firebrand: Power 4"
+          ],
+          "rasgos": [
+            "Diminutive",
+            "Arson Around",
+            "Can’t Burn a Burn"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "black_potion",
+            "hobgoblin_ranged_weapon",
+            "hobgoblin_mount",
+            "slaver_whip"
+          ],
           "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+            "Antorcha / Torch"
+          ],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
