@@ -5230,6 +5230,246 @@ const compendioArcWorlde = {
     "Galones de Sargento / Sergeant's Chevrons": {
       "resumen": "Insignia de mando para oficiales de tropa imperial.",
       "detalles": "Efectos: Otorga +1 a Valentía y Make Orders. Permite encadenar órdenes de oficiales superiores."
+    },
+    "Advanced Fungal Regeneration": {
+      "resumen": "Permite a las criaturas regenerar sus heridas al final de cada activación si no están trabadas en combate.",
+      "detalles": "Efectos: A Forest Dragon is covered in mushrooms and other fungi which heal the wounds of their host. If this Character is not in base contact with an enemy Character at the end of an Activation, it regains D3 HP. (Bestiary - Forest Dragon)"
+    },
+    "Ambush": {
+      "resumen": "Permite mantener a la miniatura oculta en un elemento de escenografía hasta que decide revelarse.",
+      "detalles": "Efectos: At the start of the game, secretly select one piece of scenery on the board that isn’t in your opponent’s deployment zone and write it down. This Character is hidden here and cannot be targeted by any Character on the board. At any point during the game, you may choose to reveal the Character, which is Activated immediately after the Active Character’s Activation has ended. (Bestiary - Forest Troll, Forest Dragon)"
+    },
+    "Aquatic": {
+      "resumen": "Permite moverse libremente por terreno de agua y ganar bonificaciones de movimiento.",
+      "detalles": "Efectos: This Character may move through any water-themed terrain as if it were Open Terrain. In addition, this Character gains +2” on any movement made in water, including Leg It rolls.\nVariante (Old Grogg - Bestiary): Old Grogg may move through water-based terrain as if it were Open Terrain. In addition, whilst in water-based terrain he gains +1” on all Movement (including Leg It rolls) and may re-roll a single dice for any Feat attempt. (Beastfolk - Kelpie / Bestiary - Old Grogg)"
+    },
+    "Arcanite Carapace": {
+      "resumen": "Otorga protección mágica y resistencia gracias a la arcanita incrustada en el caparazón.",
+      "detalles": "Efectos: The Arcanid Queen is covered in chunks of Arcanite that absorb magical energy, providing natural armour and magical protection against spell attacks. (Bestiary - Arcanid Queen)"
+    },
+    "Bellow": {
+      "resumen": "Emite un rugido atronador que causa pruebas de valentía o altera a los enemigos cercanos.",
+      "detalles": "Efectos: The Giant lets out a deafening roar. Every enemy Character within 6” must pass a Bravery Test or lose 1AP for their next Activation. (Swords for Hire - Giant/Giantess)"
+    },
+    "Brewboy": {
+      "resumen": "Proporciona brebajes alquímicos aleatorios con potentes efectos tanto para el usuario como para sus aliados.",
+      "detalles": "Efectos: At the start of their Activation, roll a D6 to see which brew the Brewzerker has been supping: 1 – Gutter Dross (loses 2AP), 2 – Tekiller (+2 Move, +3 Power on all Attacks this Activation, loses D6HP), 3 – Liquid Bread (heals D3 HP), 4 – Shroom Liquor (may re-roll one die per Feat attempt this Activation), 5 – Alechemical Blend (gains Ranged Attack Alechemical Belch: Power 4, 6” range, +2 Power vs Flammable), 6 – Loonshine (auto passes all Bravery Tests, must spend full Movement + 2 Leg It rolls towards enemy with highest HP). A friendly Character in base contact may also risk a drink on an Easy Feat. (Ourks - Brewzerker)"
+    },
+    "Burrower": {
+      "resumen": "Permite excavar bajo tierra para evitar ataques e ignorar terreno y miniaturas.",
+      "detalles": "Efectos: This creature is a skilled tunneller and can dig burrows quickly. This Character may attempt to Burrow into the ground on an Easy Feat. Whilst Burrowed, the Character cannot be targeted by Melee or Ranged Attacks, does not need to take Bravery tests and may move underneath other Characters. Whilst Burrowed, the Character may not pick up Items or engage in scenario activities. They may also not Attack, unless Special Rules dictate otherwise. A Character may come out of their burrow at any point and act as normal until they Burrow again. A Character may only Burrow into soil, sand, or any other soft material on the battlefield. (Bestiary - Troggle)"
+    },
+    "Can’t Burn a Burn": {
+      "resumen": "Inmunidad parcial a los ataques de fuego debido a la piel hardened por el fuego.",
+      "detalles": "Efectos: Years of messing about with fire have hardened the Firestarter’s skin to the point where they don’t even feel the flame anymore. Any attacks that cause extra damage to Flammable targets are at -1 Power against the Firestarter. (Dark Lords - Hobgoblin Firestarter)"
+    },
+    "Clout Chaser": {
+      "resumen": "Sistema de puntos de influencia (Clout) que mejora o empeora los atributos del líder según sus éxitos.",
+      "detalles": "Efectos: Throughout a game, the Great Gremlin will gain and lose Clout Points. Starting with 0, Clout is gained by KOing an enemy, passing a Hard Feat, dealing 6+ Damage, using Arcanite, or passing a Bravery Test (+1 each). Clout is lost by becoming Prone, failing a Hard Feat, dealing 0 Damage, or failing a Bravery Test (-1 each). At 6+ Clout: +1AP. 1 to 5 Clout: Intimidating allows 2 re-rolls. 0 Clout: normal. -1 to -5 Clout: loses Intimidating. -6 or fewer Clout: loses 1AP, Class changes from Commander to Unit, and the Gremlin with highest HP becomes Commander. (Gremlins - The Great Gremlin)"
+    },
+    "Collection of Tomes": {
+      "resumen": "Genera tomos mágicos robados al inicio de la activación para que los usen los magos cercanos.",
+      "detalles": "Efectos: Travelling Wizards collect their ‘discovered’ objects in enchanted cases and none are so precious as magical books. The Charmed Bookcase generates D3 Pilfered Tomes at the start of its Activation. Roll a D6 for each Pilfered Tome to see which College Lore it belongs to (1: Crimson, 2: Sapphire, 3: Emerald, 4: Ochre, 5: Bronze, 6: Opal). These Pilfered Tomes can be used by any Wizard or Apprentice within 3”. (Wizards - Charmed Bookcase)"
+    },
+    "Conduit": {
+      "resumen": "Sirve como canalizador mágico para facilitar el lanzamiento de hechizos por parte del mago principal.",
+      "detalles": "Efectos: The Apprentice can act as a magical conduit for their master. Spells cast by a friendly Wizard within 6” may use the Apprentice’s line of sight and range. (Wizards - Apprentice)"
+    },
+    "Coodolf the Griffling": {
+      "resumen": "Un compañero griffling cuya linterna otorga ventaja a los disparos contra enemigos cercanos.",
+      "detalles": "Efectos: Coodolf is Griffmas’ trusty companion on his nights abroad, his lantern shining in the darkness to light the way and reveal any dangers. Any Shots against enemy Characters within 6” of Father Griffmas are rolled at an Advantage. (Swords for Hire - Father Griffmas)"
+    },
+    "Crumbling Remains": {
+      "resumen": "La miniatura pierde punto de vida en cada activación al desmoronarse paulatinamente su cuerpo.",
+      "detalles": "Efectos: The tattered remnants of the Old Man’o’Bones are held together by pure will, and sometimes even this isn’t enough. This Character loses 1HP each time it is Activated. (Undead Raiders - Old Man’o’Bones)"
+    },
+    "Curse of the Wolf": {
+      "resumen": "Representa la licantropía y la feroz transformación monstruosa del hombre lobo en combate.",
+      "detalles": "Efectos: Those afflicted with the curse oftentimes look completely normal until they transform into a terrifying monster that tears your arms off. Bestows monstrous strength and ferocity in combat. (Vampires - Werewolf)"
+    },
+    "Drag": {
+      "resumen": "Permite arrastrar a personajes inconscientes o capturados fuera del combate.",
+      "detalles": "Efectos: When in their master’s castle a Manservant will pull out all the stops to make their master’s next victim feel at home. In the field they aren’t so courteous. A Manservant may move a Prone or Knocked Out Character in base contact along with them when moving for 1 extra AP. (Vampires - Manservant)"
+    },
+    "Dual Weapons": {
+      "resumen": "Equipar dos armas otorga potencia adicional en combate cuerpo a cuerpo y dados de defensa extra.",
+      "detalles": "Efectos: If equipped, a Character gets +1 Power on all Melee Attacks and gains +1 D6 to all Defence Rolls. (Common Armoury)"
+    },
+    "Expendable": {
+      "resumen": "La caída en combate de esta miniatura prescindible no obliga a realizar chequeos de valentía a los aliados.",
+      "detalles": "Efectos: When this Character is Knocked Out, friendly Characters do not need to take Bravery Tests. They are cheap goons after all! (Swords for Hire - Mercenary Goon)"
+    },
+    "Familiars": {
+      "resumen": "Asigna un boglin como familiar para medir el alcance de los hechizos desde su posición.",
+      "detalles": "Efectos: For 10GP, a Boglin can be assigned as a Familiar. They may not carry any Items or Equipment, but any Spells cast by the Dreameater can be measured from the Familiar’s position as if they were the caster. If a Familiar is Knocked Out, place an Arcanite Token on the board where they fell. (Ourks - Ourk Dreameater)"
+    },
+    "Feast of Magic": {
+      "resumen": "Devora sprites aliados para recuperar HP y adquirir temporalmente las reglas especiales de su colegio.",
+      "detalles": "Efectos: An Ensorcelled Beast is a creature of magic and sustains its form by feeding upon magical creatures. For an Easy Feat an Ensorcelled Beast may consume a friendly Sprite in base contact and regain D3HP. In addition, for the rest of the Round it gains the additional rules of the Sprites from the College Lore they were summoned from. (Wizards - Ensorcelled Beast)"
+    },
+    "Feed": {
+      "resumen": "Se alimenta de esclavos (Thralls) aliados para curarse, viéndose forzado a hacerlo si está gravemente herido.",
+      "detalles": "Efectos: A Vampire may feed on a friendly Thrall in base contact by passing an Easy Feat to regain D3 HP (the Thrall loses D3 HP). If reduced to 25% or less of starting HP (3 HP or less), the Vampire must attempt to Feed if a Thrall is within 6” at the start of their Activation. (Vampires - Vampire)"
+    },
+    "Firey Essence": {
+      "resumen": "Permite al Dark Lord invocar esbirros (Underlings) sacrificando HP y vida máxima.",
+      "detalles": "Efectos: Underlings are made from the essence of their masters, who portion off pieces of their power to bring them to life. Characters with this Trait are not deployed at the start of the game. A Dark Lord may summon them in their Activation by sacrificing 2HP and reducing their max HP by 2. Although they can be summoned multiple times, only the number of Underlings that were purchased as part of the Warband may be on the board at the same time. (Dark Lords - Underling)"
+    },
+    "Flightless": {
+      "resumen": "Indica que la criatura es una especie de ave o grifo incapaz de volar.",
+      "detalles": "Efectos: Peagryphs and Death Kiwis are flightless species that have evolved razor-sharp tails or beaks instead of wings for flight. They cannot fly over terrain features like flying creatures. (Bestiary - Peagryph, Death Kiwi)"
+    },
+    "Flittering": {
+      "resumen": "Movimiento errático de volador que dificulta ser alcanzado por ataques a distancia.",
+      "detalles": "Efectos: Crypt Bats flit and flutter frantically through the air. All Ranged Attacks against a Character with this Trait increase their Feat difficulty by 1. (Vampires - Crypt Bat)"
+    },
+    "For Honour and Glory!": {
+      "resumen": "Permite repetir cualquier intento fallido de Hazaña Legendaria.",
+      "detalles": "Efectos: Jean le Porc quests only for glory and to be remembered in epic tales. If a Legendary Feat attempt is failed, re-roll the attempt. (Swords for Hire - Jean le Porc)"
+    },
+    "Glittering Scales": {
+      "resumen": "Las escamas deslumbrantes aumentan la dificultad de las hazañas de disparos enemigos.",
+      "detalles": "Efectos: The light that reflects off the scales of the Faery Dragon makes it very difficult to see clearly. All Ranged Attacks against it are at +1 Feat difficulty. (Bestiary - Faery Dragon)"
+    },
+    "Grasping Talons": {
+      "resumen": "Atrapa a un personaje con sus garras para transportarlo y luego soltarlo o dejarlo caer.",
+      "detalles": "Efectos: The Hellbeast may choose to scoop up a Character in its long claws on an Easy Feat. The picked-up Character counts as being in Cover and may not make any movement Actions. Instead, they are moved along with the Hellbeast. They may be Activated as normal and count as in base contact with the Hellbeast and any Character that the Hellbeast is in base contact with. In the Hellbeast’s Activation, they may drop the picked-up Character at any point. If they are dropped, or the Hellbeast is Knocked Out, the picked-up Character takes D6 Hits and counts as Prone. For an Easy Feat, the Character may be placed down gently with no ill effects. (Dark Lords - Hellbeast)"
+    },
+    "Griffmas Sack": {
+      "resumen": "Extrae regalos mágicos o comida del saco navideño mediante una Hazaña Fácil y el robo de una carta.",
+      "detalles": "Efectos: For an Easy Feat, Father Griffmas may reach into his sack and give a gift to a friendly Character in base contact. Draw a card from your ArcDeck: 2 – Turnip (distracts beast/monster), 3 – Flaming Pudding (gains Agile), 4 – Boughs of Holly (enemies in base contact take 1 Hit upon Activation), 5 – Magic Stockings (gains Fly), 6 – Griffmas Carol (heals 3HP to user and all within 6”), 7 – Festive Sword (Melee Attacks with Advantage), 8 – Eggnog (re-roll 1 failure on next Feat), 9 – Griffmas Cracker (user & enemy in base contact gain D3 Arcanite each), 10 – Singing Trumpet (Broken within 12” restored), J – Nutcracker (summon toy Imperial Trooper for 1 Round), Q – Glittering Armour (+1 Armour, unbreakable), K – Griffmas Miracle (free Legendary Feat with 4D6), A – Fabled Artefact. (Swords for Hire - Father Griffmas)"
+    },
+    "Grizzled Hide": {
+      "resumen": "Piel extremadamente dura que otorga +1 a la armadura y no se puede romper.",
+      "detalles": "Efectos: Old Grogg is an ancient Troll whose hide is as thick as tanned leather. He has +1 Armour that cannot be broken. (Bestiary - Old Grogg)"
+    },
+    "Healing Song": {
+      "resumen": "Canta una melodía mágica que restaura vida a todos los personajes cercanos.",
+      "detalles": "Efectos: The call of the Faery Dragon is said to have magical healing properties. On an Easy Feat, the Faery Dragon restores 1HP to every Character within 6”. (Bestiary - Faery Dragon)"
+    },
+    "Hurl": {
+      "resumen": "Permite coger y lanzar a personajes diminutos (Diminutive) que estén en contacto de peana.",
+      "detalles": "Efectos: A Character with the Hurl Trait may pick up and throw Diminutive Characters in base contact by rolling a Feat. Target takes D6 Hits and becomes Prone if hit.\nVariante (Ourks): Pick up and throw Diminutive Characters in base contact on an Easy Feat up to 8”.\nVariante (Jungle Troll - Gremlins): May pick up Diminutive Gremlins/Boglins and throw them up to 6”.\nVariante (Forest Troll - Bestiary): On a Critical Hit with Hurl Attack, target thrown D6” and Prone. (Ourks - Chieftain, Brute / Gremlins - Jungle Troll / Bestiary - Forest Troll)"
+    },
+    "Incorporeal": {
+      "resumen": "Forma espectral que otorga desventaja a todos los ataques a distancia recibidos.",
+      "detalles": "Efectos: The ghostly form seems to fade and flicker as it floats across the land. Any Ranged Attacks against a Character with this Trait are at a Disadvantage. (Undead Raiders - Will o’the Wisp)"
+    },
+    "Leader of the Pack": {
+      "resumen": "Permite a las criaturas aliadas cercanas utilizar el atributo de Valentía del líder.",
+      "detalles": "Efectos: Some larger monsters hold a natural sway over their smaller kin. A Character with this Trait may allow Creatures on the same or smaller base size within 8” to use their Bravery stat. (Bestiary - Old Grogg, Death Kiwi Alpha)"
+    },
+    "Living Lair": {
+      "resumen": "La criatura colosal actúa como una guarida viva sobre el campo de batalla arrastrando terreno y refugio.",
+      "detalles": "Efectos: The Tarrasque is so huge that it acts as a moving piece of terrain and living lair. Friendly diminutive or beast characters may hide on or under its carapace to count as in Heavy Cover and move along with it. (Bestiary - Tarrasque)"
+    },
+    "Long Arms": {
+      "resumen": "Brazos extremadamente largos que permiten realizar ataques cuerpo a cuerpo a 2” de distancia.",
+      "detalles": "Efectos: Jungle Trolls have extremely long arms tipped with razor sharp claws. Jungle Trolls may make Melee Attacks against targets up to 2” away, even if they aren’t in base contact. Attacks may still be made if there is a friendly Character between the Character and the target. (Gremlins - Jungle Troll)"
+    },
+    "Magical Spores": {
+      "resumen": "Esporas de hongos ricos en arcanita con efectos impredecibles al inhalarse.",
+      "detalles": "Efectos: The fungi that grow upon the Swamp Wyvern’s back are enriched with Arcanite. Roll D6 when inhaled/affected: 3 – The spores make the Character feel sick and cough up phlegm: loses 1HP (and another 1HP if ending turn within 3” of Swamp Wyvern). 4 – Invigorates with energy: gains +1AP for Activation. 5 – Filled with power: re-roll failed Feats this Activation. 6 – Connected with magic: cast 1 Spell from Faction Ruleset for free (Mages cast an additional Spell for free). (Bestiary - Swamp Wyvern)"
+    },
+    "Mindless": {
+      "resumen": "La miniatura carece de mente propia y es inmune a las pruebas de valentía y al miedo.",
+      "detalles": "Efectos: Mindless thralls have no will or fear. They automatically pass all Bravery Tests and are immune to Fearsome and Intimidating rules. (Vampires - Thrall)"
+    },
+    "Monologue": {
+      "resumen": "El jugador realiza un monólogo dramático en voz alta para ganar una tentativa de Hazaña Fácil gratis.",
+      "detalles": "Efectos: At the start of their Activation, a Dark Lord may perform a dramatic monologue. If you (the player) perform a monologue out loud, gain a free Easy Feat attempt. If you do not wish to perform a monologue, roll a free Easy Feat attempt instead. Only one Monologue may be attempted per Round, lest the Dark Lord’s audience grow weary of their bombast. (Dark Lords - Dark Lord)"
+    },
+    "Monstrous Mount": {
+      "resumen": "Permite montar sobre cualquier Bestia, Monstruo o Titán en la batalla.",
+      "detalles": "Efectos: Some Beastfolk have a particular affinity with the creatures of ArcWorlde and can convince them to ride atop them into battle. May use the Monstrous Mount Trait (see Bestiary) on any Beast, Monster or Titan. (Wild Elves - Briarbeast / Beastfolk - Packmaster)"
+    },
+    "Mysterious Herbs": {
+      "resumen": "La bruja lleva hierbas místicas para curar heridas o potenciar habilidades mágicas.",
+      "detalles": "Efectos: The Hedgewitch carries a pouch of rare Mildaark herbs. Once per Round, she may consume a herb on an Easy Feat to heal D3 HP or add +2 Power to her next Spell. (Beastfolk - Hedgewitch)"
+    },
+    "Pick Up And…": {
+      "resumen": "Permite al gigante coger a un personaje de peana pequeña y ejecutar acciones brutales con él.",
+      "detalles": "Efectos: On a Critical Hit with Pick Up Attack, the target is Picked Up. In subsequent Activations, roll a D6 for Pick Up And…: 4 – Rummage (steal 1 Item/Gear), 5 – Squirrel Away (target cannot Activate until next Round), 6 – Smush (target takes 2D6 Hits). To escape, target must pass a Medium Feat. (Swords for Hire - Giant/Giantess)"
+    },
+    "Plot Armour": {
+      "resumen": "Protección de guión que impide ser objetivo de ataques o hechizos hasta ser el último superviviente.",
+      "detalles": "Efectos: The Explorer is protected by the fabric of fate itself. He cannot be targeted by enemy Attacks or Spells unless he is the last surviving friendly Character on the game board. (Swords for Hire - The Explorer)"
+    },
+    "Present Thy Neck": {
+      "resumen": "El verdugo ejecuta ataques devastadores de decapitación contra objetivos de peana pequeña.",
+      "detalles": "Efectos: Executioners specialize in swift decapitation. If the target is on a 30mm base size and fails its first Defence Roll against the Executioner's Decapitation Attack, it is Knocked Out immediately. (Undead Raiders - Undead Executioner)"
+    },
+    "Sacrifice": {
+      "resumen": "Permite sacrificar vida de aliados o la propia para obtener energía mágica y bonificaciones.",
+      "detalles": "Efectos: The Wild Elves siphon life energy for power. A Character with Sacrifice may inflict D3 Damage on a friendly Character in base contact to gain +2 AP or add +2 Power to an Attack/Spell.\nVariante (Sacrificial Blade Gear): Grants the Sacrifice Trait. If already possessed, allows re-rolling 1 failed Sacrifice attempt per Round. (Wild Elves - Warchief, Druid)"
+    },
+    "Shield": {
+      "resumen": "El escudo otorga la capacidad de repetir una tirada de defensa fallida por ronda.",
+      "detalles": "Efectos: If equipped, a Character may re-roll one failed Defence Roll per Round. (Common Armoury)"
+    },
+    "Shifting Forms": {
+      "resumen": "Permite alterar la forma física para adaptarse a la cobertura o cambiar de movimiento.",
+      "detalles": "Efectos: Woodfiends are composed of shifting bark and vines. They may blend into forest terrain to count as Heavy Cover and re-roll failed Leg It rolls while in Woodland terrain. (Wild Elves - Woodfiend)"
+    },
+    "Soul Eater": {
+      "resumen": "Devora las almas de las criaturas caídas cercanas para recuperar puntos de vida.",
+      "detalles": "Efectos: Whenever an enemy Character is Knocked Out within 6” of the Harbinger, the Harbinger immediately regains D3 HP. (Undead Raiders - Undead Harbinger)"
+    },
+    "Sticky Fingers": {
+      "resumen": "Permite robar objetos a personajes tumbados sin necesidad de tiradas de prueba.",
+      "detalles": "Efectos: Boglins have an aptitude for relieving folk of their possessions. When attempting to take a Prone Character’s Items, they do so without having to roll an Easy Feat. They may also attempt to take Equipment on a Medium Feat. (Ourks - Boglin)"
+    },
+    "Stinky Beast": {
+      "resumen": "Pestilencia insoportable que obliga a bestias y monstruos a pasar pruebas de valentía para acercarse.",
+      "detalles": "Efectos: Swamp Critters have a very potent pong that protects them against creatures with sensitive noses. If a Beast, Monster or Titan wishes to move within 3” of a Swamp Critter they must first pass a Bravery Test. If failed, they may not voluntarily move within 3” of the Swamp Critter that Round. (Ourks - Swamp Critter)"
+    },
+    "Student of Magic": {
+      "resumen": "Permite al aprendiz lanzar hechizos del saber de su colegio robando un máximo de 2 cartas.",
+      "detalles": "Efectos: May cast Spells from the Lore of their College, drawing a maximum of 2 cards. (Wizards - Apprentice)"
+    },
+    "Summoner": {
+      "resumen": "Permite convocar criaturas del bosque (Lichenhawk, Woodfiend) al campo de batalla.",
+      "detalles": "Efectos: Wild Elves with this Trait can perform rituals to summon woodland allies. On a Medium Feat, place a Lichenhawk or Woodfiend within 3” of the Summoner that can Activate in the same Round.\nVariante (Warchief/Druid/Warrior/Blademaster): Allows summoning Lichenhawks and Woodfiends using blood magic rituals. (Wild Elves - Warchief, Druid, Warrior, Blademaster)"
+    },
+    "Swinger": {
+      "resumen": "Permite balancearse por los árboles y elementos de terreno para avanzar rápidamente.",
+      "detalles": "Efectos: Jungle Trolls use their long arms to swing through foliage. They may move over or through Scenery and Woodland terrain features without movement penalty and ignore Difficult Terrain. (Gremlins - Jungle Troll)"
+    },
+    "The Carven Idol": {
+      "resumen": "Estatua sagrada que otorga repeticiones de tiradas a los habiliantes de madrigueras cercanos.",
+      "detalles": "Efectos: Every Character with the Burrow Dweller Trait that starts their Activation within 3” of the Carvenhead gains one re-roll per Round. This radius is increased by 1” for every piece of Equipment that is willingly given to the Carvenhead by a friendly Character (while held). If the re-roll is used to help pass a Bravery Test, two re-rolls may be made. (Gremlins - Carvenhead)"
+    },
+    "The Enchanted Journal": {
+      "resumen": "El diario flotante que acompaña al explorador y desde el que se miden sus hechizos.",
+      "detalles": "Efectos: The Explorer is always accompanied by his Enchanted Journal, which flaps along beside him on his adventures. The Enchanted Journal is a Character on a 30mm base. It has no stats, cannot be Knocked Out and cannot interact with any objectives. It may move up to 6” each time the Explorer is Activated. The Journal may cast Spells from the Lore of the Enchanted Journal. All Spells are cast from the position of the Journal and use its line of sight. Any HP lost due to Overpowering Spells is dealt to the Explorer. (Swords for Hire - The Explorer)"
+    },
+    "Thirst of the Forest": {
+      "resumen": "Absorbe la sangre de las víctimas caídas para fortalecer sus espinas y estructura.",
+      "detalles": "Efectos: When an enemy is Knocked Out in base contact with the Briarbeast, the Briarbeast absorbs their vitality and regains D6 HP while gaining +1 Power on its next Attack. (Wild Elves - Briarbeast)"
+    },
+    "Thorned": {
+      "resumen": "Piel cubierta de espinas afiladas que inflige daño a los atacantes en combate cuerpo a cuerpo.",
+      "detalles": "Efectos: The Briarbeast is covered in razor-sharp thorns. Any Character that makes a Melee Attack against the Briarbeast takes 1 Hit for each failed Hit roll. (Wild Elves - Briarbeast)"
+    },
+    "Trophy Frenzy": {
+      "resumen": "Aumenta los AP del cazador por cada enemigo dejado fuera de combate, perdiéndolos si cae tumbado.",
+      "detalles": "Efectos: Collecting trophies from their defeated foes riles these Gremlins into even more of a frenzy. For each Character the Trophy Taker Knocks Out, their total AP is increased by 1. Their total AP is reduced back to 2 if they ever become Prone. (Gremlins - Trophy Hunter)"
+    },
+    "Two-Handed Weapon": {
+      "resumen": "Arma a dos manos pesada que otorga +2 de potencia pero descarta los éxitos críticos de defensa.",
+      "detalles": "Efectos: If equipped, a Character gets +2 Power for all Melee Attacks. However, any of their own Critical Defends are discarded as if they were Failures. (Common Armoury)"
+    },
+    "Very Flammable": {
+      "resumen": "Extremadamente vulnerable al fuego, sufriendo impactos y heridas adicionales por llamas.",
+      "detalles": "Efectos: Characters with this Trait take double Damage from any fire-based Attacks, Spells or Weapons, and must re-roll successful Defence Rolls against them. (Undead Raiders - Undead Ogre)"
+    },
+    "Web Spinner": {
+      "resumen": "Permite transformar terreno abierto en terreno difícil o impassable mediante telarañas.",
+      "detalles": "Efectos: Whilst in Open Terrain, this Character can attempt a Medium Feat to turn a radius of 3” into Difficult Terrain. If this Character is in Difficult Terrain it may attempt a Hard Feat to turn it into Impassable Terrain. This effect lasts until the end of the Round. (Bestiary - Arcanid)"
+    },
+    "Web Spray": {
+      "resumen": "Dispara telarañas para reducir a la mitad el movimiento del objetivo durante la ronda.",
+      "detalles": "Efectos: This Character may attempt a Medium Feat to target a single enemy Character on a 60mm base or less within 8”. If successful, this causes no damage, but the Movement of the target is halved for the rest of the Round. The effects of this Trait stack. (Bestiary - Arcanid)"
     }
   },
   "sistema_campana": {
