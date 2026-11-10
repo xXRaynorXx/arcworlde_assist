@@ -46,7 +46,7 @@
 
   // Bonus de armadura que da un texto de equipo: "Otorga +2 al Valor de Armadura", "(Gratis / +1 Armadura)"...
   function armourBonus(text) {
-    const re = /\+(\d+)\s*(?:a la |al Valor de )?Armadura/i;
+    const re = /\+(\d+)\s*(?:a la |al Valor de )?(?:Armadura|Armour)/i;
     const m = String(text || '').match(re);
     if (m) return Number(m[1]);
     // Equipo de serie dado solo por nombre ("Armadura Pesada / Heavy Armour"): se busca en la armería común
