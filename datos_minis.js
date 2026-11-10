@@ -1001,9 +1001,9 @@ const compendioArcWorlde = {
       "unidades": [
         {
           "id": "beastfolk_packmaster",
-          "nombre": "Líder de la Camada / Packmaster",
+          "nombre": "Líder de la Camada Beastfolk",
           "nombre_en": "Beastfolk Packmaster",
-          "tipo": "comandante",
+          "clase": "commander",
           "coste": 120,
           "peana_mm": 40,
           "stats": {
@@ -1013,9 +1013,9 @@ const compendioArcWorlde = {
             "ap": 5
           },
           "ataques": [
-            "(2 AP) Savage Strike: Power 8. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Mighty Kick: Power 5. Regla Especial: Si el objetivo está Tumbado (Prone) y hay más Éxitos que Fallos, desplázalo 3\" en la dirección elegida.",
-            "(1 AP) Gore: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
+            "(2 AP) Bestial Rage: Power 8. Special Rules: Each Critical Hit allows one more D6 to be rolled.",
+            "(1 AP) Mighty Kick: Power 5. Special Rules: If the Target is Prone, if there are more Successes than Failures, the Character is moved 3” in a direction chosen by the Beastfolk player.",
+            "(1 AP) Gore: Power 5. Special Rules: Critical Hits break 1 Armour."
           ],
           "rasgos": [
             "Intimidating",
@@ -1026,21 +1026,21 @@ const compendioArcWorlde = {
             "cured_meat",
             "beastfolk_ranged_weapon",
             "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
             "camouflaged_pelt",
             "ugly",
+            "bestial_moxie",
+            "horns_and_tusks",
+            "long_legs",
             "monster_rider"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "beastfolk_hedgewitch",
-          "nombre": "Bruja del Bosque / Hedgewitch",
+          "nombre": "Bruja del Bosque Beastfolk",
           "nombre_en": "Beastfolk Hedgewitch",
-          "tipo": "heroe",
+          "clase": "mage",
           "coste": 90,
           "peana_mm": 30,
           "stats": {
@@ -1050,39 +1050,37 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(1 AP) Staff Thump: Power 3."
+            "(1 AP) Staff Thump: Power 3"
           ],
           "rasgos": [
-            "Lore of Tooth and Fur",
             "Animal Form",
-            "Mage"
+            "Mysterious Herbs"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
             "cured_meat",
             "beastfolk_ranged_weapon",
             "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
             "camouflaged_pelt",
             "ugly",
+            "bestial_moxie",
+            "horns_and_tusks",
+            "long_legs",
             "monster_rider"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Criaturas del Bosque / Forest Creatures (Exige 14): Alcance 12\". Bestias e insectos atacan al objetivo y a todos a 3\" de él, causando 3 Impactos (3 Hits) automáticos.",
-            "Dominio Bestial / Warging (Exige 17): Alcance 12\". Entra en la mente de una bestia aliada en el tablero para activarla inmediatamente en la ronda.",
-            "Hierbas Curativas / Healing Herbs (Exige 18): Alcance 6\". Restaura D6 HP a un personaje aliado a 6\" o menos.",
-            "Llamada de lo Salvaje / Call of the Wild (Exige 20): Alcance 6\". Otorga +2 al Power y +2 al Movimiento a un Hombre Bestia o Bestia aliada hasta el final de la ronda."
+            "Forest Creatures (Exige 14): The target Character and all Characters within 3” of them take 3 Hits.",
+            "Warging (Exige 17): Once the caster has finished their Activation, nominate a friendly Beast on the board. They may immediately Activate, even if they have already done so this Round. Any Items or Equipment collected by the Beast are transferred to the caster at the end of its activation.",
+            "Bestial Strength (Exige 19): This Spell may be cast on any Character that isn’t a Beast, Monster or Titan. The target gains +3 Power on any Melee Attacks until the caster chooses to cast another Spell.",
+            "Shapeshift (Exige 21): Replace the caster with a Monster chosen from the Bestiary. The Monster has the same AP as the caster had remaining before the Shapeshift but is otherwise identical. At the end of the Round, the caster returns to their true form with the same amount of HP as they had when the Spell was cast."
           ]
         },
         {
           "id": "beastfolk_clanbeast",
-          "nombre": "Guerrero del Clan / Clanbeast",
+          "nombre": "Guerrero del Clan Beastfolk",
           "nombre_en": "Beastfolk Clanbeast",
-          "tipo": "heroe",
+          "clase": "elite",
           "coste": 85,
           "peana_mm": 40,
           "stats": {
@@ -1092,8 +1090,8 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "(2 AP) Savage: Power 7. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Smash: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
+            "(2 AP) Savage: Power 7. Special Rules: Each Critical Hit allows one more Hit to be rolled.",
+            "(1 AP) Smash: Power 5. Special Rules: Critical Hits break 1 Armour."
           ],
           "rasgos": [
             "Intimidating",
@@ -1104,21 +1102,21 @@ const compendioArcWorlde = {
             "cured_meat",
             "beastfolk_ranged_weapon",
             "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
             "camouflaged_pelt",
             "ugly",
+            "bestial_moxie",
+            "horns_and_tusks",
+            "long_legs",
             "monster_rider"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "beastfolk_verman",
-          "nombre": "Verman",
+          "nombre": "Verman Beastfolk",
           "nombre_en": "Beastfolk Verman",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 30,
           "peana_mm": 30,
           "stats": {
@@ -1128,92 +1126,97 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Eager Attack: Power 7. Regla Especial: Si hay más Fallos que Éxitos al tirar a Impactar, el Verman pierde D3 HP.",
-            "(1 AP) Stab: Power 3."
+            "(2 AP) Eager Attack: Power 7. Special Rules: If there are more Failures than Successes when rolling to Hit, the Verman loses D3HP afterwards.",
+            "(1 AP) Stab: Power 3"
           ],
           "rasgos": [
             "Diminutive",
             "Animal Form",
-            "Go Get'Em!"
+            "Go Get’Em!"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "cured_meat",
             "beastfolk_ranged_weapon",
             "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
             "camouflaged_pelt",
             "ugly",
+            "bestial_moxie",
+            "horns_and_tusks",
+            "long_legs",
             "monster_rider"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "war_bard",
           "nombre": "Bardo de Guerra",
           "nombre_en": "War Bard",
-          "tipo": "heroe",
-          "coste": 60,
+          "clase": "irregular",
+          "coste": 70,
           "peana_mm": 30,
           "stats": {
-            "hp": 6,
+            "hp": 8,
             "mov": 4,
             "armadura": 0,
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Almighty Racket: Power 3, Área 6\". Regla Especial: Afecta a todos los personajes que no sean Beastfolk a 6\" o menos.",
-            "(1 AP) Good Kickin': Power 4."
+            "(2 AP) Almighty Racket: Power 3. Special Rules: Every non-Beastfolk Character within 6” is affected by this Attack.",
+            "(1 AP) Good Kickin’: Power 4"
           ],
           "rasgos": [
-            "Ballads of the Beastfolk",
-            "Animal Form"
+            "Animal Form",
+            "Ballads of the Beastfolk"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "cured_meat",
             "beastfolk_ranged_weapon",
             "protective_hide",
-            "horns_and_tusks",
-            "long_legs",
             "camouflaged_pelt",
             "ugly",
+            "bestial_moxie",
+            "horns_and_tusks",
+            "long_legs",
             "monster_rider"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "kelpie",
           "nombre": "Kelpie",
           "nombre_en": "Kelpie",
-          "tipo": "monstruo",
+          "clase": "monster",
           "coste": 200,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 20,
             "mov": 6,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 7
           },
           "ataques": [
-            "(2 AP) Crunch: Power 8. Regla Especial: En impacto Crítico, el objetivo no puede salir del contacto de peana hasta la siguiente Ronda.",
-            "(2 AP) Tail Swipe: Power 5. Regla Especial: Afecta a todos los personajes a 2\" o menos del Kelpie.",
-            "(1 AP) Wicked Slash: Power 5. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura."
+            "(2 AP) Crunch: Power 8. Special Rules: If a Critical Hit is made, the target Character may not move out of base contact with the Kelpie until the next Round.",
+            "(2 AP) Tail Swipe: Power 5. Special Rules: Every Character within 2” is affected by this Attack.",
+            "(1 AP) Wicked Slash: Power 5. Special Rules: Critical Hits break 1 Armour."
           ],
           "rasgos": [
-            "Animal Form",
-            "Waterborne"
+            "Agile",
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Aquatic"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_permitido": [
+            "cured_meat"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [

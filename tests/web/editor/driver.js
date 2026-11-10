@@ -138,7 +138,7 @@ window.addEventListener('load', async () => {
     ok('compendio v2: armería de Ourks con coste', tt.includes('Brebaje del Pantano / Swamp Scrumpy (10 GP)'));
     // Rasgos: todas las miniaturas del catálogo deben tener descripción
     // Rasgos nuevos aún sin entrada en el diccionario del compendio (pendientes de recibirlos)
-    const PENDIENTES = ['Ourks: Hurl', 'Ourks: Familiars', 'Ourks: Sticky Fingers', 'Ourks: Brewboy', 'Ourks: Stinky Beast'];
+    const PENDIENTES = ['Ourks: Hurl', 'Ourks: Familiars', 'Ourks: Sticky Fingers', 'Ourks: Brewboy', 'Ourks: Stinky Beast', 'Hombres Bestia: Mysterious Herbs', 'Hombres Bestia: Aquatic'];
     const sinDesc = new Set();
     datosMinis.facciones.forEach(fa => (fa.unidades || []).forEach(u => (u.rasgos || []).forEach(r => { const n = typeof r === 'string' ? r : (r.nombre || ''); if (n && !AW.sheet.traitInfo(n)) sinDesc.add(fa.nombre + ': ' + n); })));
     PENDIENTES.forEach(p => sinDesc.delete(p));
