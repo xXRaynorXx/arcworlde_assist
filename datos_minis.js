@@ -234,7 +234,10 @@ const compendioArcWorlde = {
             "Cling On"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
+          "equipo_permitido": [
+            "packed_lunch",
+            "ranger_cloak"
+          ],
           "equipo_de_serie": [],
           "hechizos": []
         }

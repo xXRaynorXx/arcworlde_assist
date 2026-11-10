@@ -29,6 +29,7 @@ window.addEventListener('load', async () => {
     ok('catálogo: Espadas de Alquiler aparte, sin su comandante', gl().some(l => l.startsWith('Espadas de Alquiler')) && cat().includes('swords_for_hire:mercenary_goon') && !cat().includes('swords_for_hire:father_griffmas'), cat().filter(v => v.startsWith('swords')).join());
     ok('mercenarios: Rabbin Tood usa el arma a distancia halfling', AWGear.optionsFor('rabbin_tood').exclusive.some(a => a.id === 'halfling_ranged_weapon') && AWGear.optionsFor('giant_giantess').common.length === 0);
     const vs = datosMinis.facciones.find(f => f.id === 'vampires').unidades;
+    ok('Trollhound accede a la armería halfling (almuerzo y capa) pero no a la común', (() => { const o = AWGear.optionsFor('trollhound'); return o.exclusive.map(x => x.id).sort().join() === 'packed_lunch,ranger_cloak' && o.common.length === 0; })());
     ok('Vampiros: el Vampiro Supremo es comandante (150 GP, 24 HP, 5 AP) y el Vampiro sigue siendo élite', vs.find(u => u.id === 'vampire_supreme').clase === 'commander' && vs.find(u => u.id === 'vampire_supreme').coste === 150 && vs.find(u => u.id === 'vampire_supreme').stats.hp === 24 && vs.find(u => u.id === 'vampire_supreme').stats.ap === 5 && vs.find(u => u.id === 'vampire').clase === 'elite');
     ok('objetos v9: Volley Gun (Ogro), Hobgoblin Mount y Bestial Moxie se ofrecen', AWGear.optionsFor('imperial_ogre').exclusive.some(a => a.id === 'volley_gun') && AWGear.optionsFor('hobgoblins').exclusive.some(a => a.id === 'hobgoblin_mount') && AWGear.optionsFor('beastfolk_clanbeast').exclusive.some(a => a.id === 'bestial_moxie'));
     ok('catálogo: las opciones muestran nombre - tipo (coste) y no los atributos', (() => { const o = [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].map(x => x.textContent); return o.some(x => /^.+ - (Comandante|Mago|Unidad|Élite) \(\d+ GP\)$/.test(x)) && !o.some(x => /Vida \d/.test(x)); })());
@@ -40,7 +41,7 @@ window.addEventListener('load', async () => {
     ok('editor: ficha plegable en cada miniatura', document.querySelectorAll('details summary').length >= 2 && txt().includes('Make Orders'));
     const sel = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
     const labels = sel ? [...sel.querySelectorAll('optgroup')].map(g => g.label + ':' + g.children.length) : [];
-    ok('editor: selector de equipo con común y de facción', labels.some(l => l.startsWith('Común — Armas y equipo')) && labels.some(l => l.startsWith('Común — Armaduras')) && labels.some(l => l.startsWith('Halflings — Monturas')), labels.join('|'));
+    ok('editor: selector de equipo con común y de facción', labels.map(l => l.split(':')[0]).join('|') === 'Común|Halflings' && (() => { const o = [...document.querySelectorAll('select[data-change^="AW.addGear"] option')].map(x => x.textContent); return o.some(x => /^Armadura Ligera.* - Armaduras y protección \(/.test(x)) && o.some(x => /Montura.* - Monturas y vehículos \(/.test(x)); })(), labels.join('|'));
     const optsS = [...document.querySelectorAll('select[data-change="AW.addGear"][data-args^="[0,"] option')].map(o => o.value);
     ok('equipo del Sheriff: lo que permite su ficha (ids corregidos)', ['faccion:halfling_mount', 'faccion:halfling_ranged_weapon', 'faccion:packed_lunch', 'faccion:town_banner'].every(v => optsS.includes(v)) && !optsS.includes('faccion:potbelly_cauldron'), optsS.join());
     const optsM = [...document.querySelectorAll('select[data-change="AW.addGear"][data-args^="[1,"] option')].map(o => o.value);
@@ -119,7 +120,7 @@ window.addEventListener('load', async () => {
     AW.api.state.editing.units = []; AW.setField('faction', 'Ourks'); AW.rerender(); await wait(20);
     AW.addFromCatalog('ourks:ourk_chieftain'); await wait(20);
     const sel2 = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
-    ok('Ourks tiene armería propia', sel2 && [...sel2.querySelectorAll('optgroup')].some(g => g.label.startsWith('Ourks —')), sel2 && [...sel2.querySelectorAll('optgroup')].map(g => g.label + g.children.length).join('|'));
+    ok('Ourks tiene armería propia', sel2 && [...sel2.querySelectorAll('optgroup')].some(g => g.label === 'Ourks'), sel2 && [...sel2.querySelectorAll('optgroup')].map(g => g.label + g.children.length).join('|'));
     ok('Ourks: aliados Beastfolk y Gremlins sugeridos', gl().some(l => l.includes('Gremlins')) && gl().some(l => l.includes('Hombres Bestia')), gl().join('|'));
     // Fichas sin equipo_permitido: se ofrece la armería de su facción (salvo monstruos)
     ok('equipo_permitido: el Vampiro ofrece su armería; el Esclavo y los monstruos no', AWGear.optionsFor('vampire').exclusive.length === 6 && AWGear.optionsFor('thrall').exclusive.length === 0 && AWGear.optionsFor('werewolf').exclusive.length === 0 && AWGear.optionsFor('werewolf').common.length === 0);
@@ -128,7 +129,7 @@ window.addEventListener('load', async () => {
     AW.setField('name', 'Bestias'); AW.setField('faction', 'Hombres Bestia'); AW.rerender(); await wait(20);
     AW.addFromCatalog('beastfolk:beastfolk_clanbeast'); await wait(20);
     const selB = document.querySelector('select[data-change="AW.addGear"][data-args^="[0,"]');
-    ok('rasgos comprables (Forma Animal) aparecen como grupo del equipo', selB && [...selB.querySelectorAll('optgroup')].some(g => g.label.includes('Rasgos comprables')), selB && [...selB.querySelectorAll('optgroup')].map(g => g.label).join('|'));
+    ok('rasgos comprables (Forma Animal) aparecen como grupo del equipo', selB && [...selB.querySelectorAll('option')].some(o => o.textContent.includes('Rasgos comprables')), selB && [...selB.querySelectorAll('optgroup')].map(g => g.label).join('|'));
     // facción como selector
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
     const fsel = document.querySelector('select[data-change="AW.setField"][data-args^=\'["faction"\']');
