@@ -3,7 +3,7 @@
 // rasgos, saberes mágicos y armería exclusiva de cada facción, más la armería común y el diccionario de rasgos.
 const CLASES_CONSULTA = {
     commander: 'Comandante', mage: 'Mago', elite: 'Élite', irregular: 'Irregular', unit: 'Unidad', heavy: 'Pesada',
-    beast: 'Bestia', monster: 'Monstruo', comandante: 'Comandante', heroe: 'Héroe', tropa: 'Tropa', monstruo: 'Monstruo', mercenario: 'Mercenario'
+    beast: 'Bestia', monster: 'Monstruo'
 };
 
 function construirSeccionesFacciones() {
