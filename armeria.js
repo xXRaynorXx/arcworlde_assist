@@ -4,10 +4,13 @@
 (function () {
   // Cómo se nombran las facciones en el texto de las reglas de facción (para saber quiénes son aliadas)
   const FACTION_WORDS = {
-    imperial: /imperial/i, halfling: /halfling/i, wizards: /wizards/i, wild_elves: /wild elves/i,
-    dark_lords: /dark lords/i, undead_raiders: /undead raiders/i, vampires: /vampires/i,
-    ancient_dead: /ancient dead/i, ourks: /ourks/i, gremlins: /gremlins/i, beastfolk: /beastfolk/i
+    imperial: /imperial/i, halfling: /halfling/i, wizards: /wizard/i, wild_elves: /wild elv/i,
+    dark_lords: /dark lord/i, undead_raiders: /undead raiders/i, vampires: /vampire/i,
+    ancient_dead: /ancient dead/i, ourks: /ourk/i, gremlins: /gremlin/i, beastfolk: /beastfolk/i
   };
+  // Frase de las reglas de alianza: "When constructing your Warband, you may use Characters from ..."
+  const ALLY_PHRASE = /you may (?:also )?use characters from|puedes (?:reclutar|incluir)/i;
+
 
   const comp = () => (typeof compendioArcWorlde !== "undefined" ? compendioArcWorlde : null);
   const factions = () => (comp() && comp().facciones) || (typeof datosMinis !== "undefined" && datosMinis.facciones) || [];
@@ -81,9 +84,11 @@
     const out = {};
     (f.reglas_faccion || []).forEach((r) => {
       const t = String(r.detalles || "");
-      if (!/reclutar|incluir/i.test(t)) return;
+      const m = ALLY_PHRASE.exec(t);
+      if (!m) return;
+      const tail = t.slice(m.index);
       Object.keys(FACTION_WORDS).forEach((id) => {
-        if (id !== f.id && FACTION_WORDS[id].test(t)) out[id] = { id, regla: r.nombre };
+        if (id !== f.id && FACTION_WORDS[id].test(tail)) out[id] = { id, regla: r.nombre };
       });
     });
     return Object.keys(out).map((id) => out[id]);

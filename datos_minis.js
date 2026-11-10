@@ -244,24 +244,44 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
-          "id": "settler_nation",
+          "id": "settler_nation_halfling",
           "faccion_id": "halfling",
           "faccion_nombre": "Halflings",
           "nombre": "Nación Colonizadora / Settler Nation",
           "etiqueta": "Regla de Facción (Halflings)",
-          "resumen": "Alianzas tácticas con otros colonos del bosque de Mildaark.",
-          "detalles": "Efectos: Al construir tu banda, puedes incluir personajes de las facciones Imperial y Njorsvald sin penalizaciones.",
-          "restriccion": "Aplica en la fase de creación de la banda."
+          "resumen": "Permite reclutar personajes de las facciones Imperial y Njorsvald.",
+          "detalles": "Halflings are generally distrustful of outsiders, especially within the dangerous lands of the Mildaark. Regardless, they will begrudgingly ally with other settlers of the forest if they know to keep their thieving mitts to themselves. When constructing your Warband, you may also use Characters from the Imperial and Njorsvald (Coming Soon!) Factions.",
+          "restriccion": "Fase de construcción de la banda."
         },
         {
-          "id": "make_take_orders",
+          "id": "make_take_orders_halfling",
           "faccion_id": "halfling",
           "faccion_nombre": "Halflings",
           "nombre": "Dar y Recibir Órdenes / Make/Take Orders",
           "etiqueta": "Regla de Facción (Halflings)",
-          "resumen": "Cadena de mando para coordinar acciones grupales de la milicia.",
-          "detalles": "Efectos: Un personaje con Make Orders emite una orden a aliados con Take Orders a 12\" tras superar una Hazaña Fácil.",
-          "restriccion": "Requiere estar a 12\" del líder emitente."
+          "resumen": "Permite a un personaje con Make Orders emitir órdenes a aliados con Take Orders a 12\" o menos.",
+          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders:\n As One! Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.\n Stand Firm! Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
+          "restriccion": "Hazaña Fácil. El emisor finaliza su activación al emitir la orden. Rango de 12\"."
+        },
+        {
+          "id": "order_as_one_halfling",
+          "faccion_id": "halfling",
+          "faccion_nombre": "Halflings",
+          "nombre": "As One!",
+          "etiqueta": "Regla de Facción (Halflings)",
+          "resumen": "Orden de facción que activa simultáneamente a hasta 3 personajes de la misma clase.",
+          "detalles": "Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.",
+          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Los ataques deben dirigirse al mismo objetivo."
+        },
+        {
+          "id": "order_stand_firm_halfling",
+          "faccion_id": "halfling",
+          "faccion_nombre": "Halflings",
+          "nombre": "Stand Firm!",
+          "etiqueta": "Regla de Facción (Halflings)",
+          "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
+          "detalles": "Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
+          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
         },
         {
           "id": "grand_cookbook",
@@ -592,24 +612,44 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
-          "id": "settler_nation",
+          "id": "settler_nation_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
           "nombre": "Nación Colonizadora / Settler Nation",
           "etiqueta": "Regla de Facción (Imperiales)",
-          "resumen": "Expansión militar del Imperio aliada con colonos locales.",
-          "detalles": "Efectos: Puedes reclutar personajes de las facciones Halfling y Njorsvald sin penalización de infidelidad.",
-          "restriccion": "Aplica al armar la lista de banda."
+          "resumen": "Permite reclutar personajes de las facciones Halflings y Njorsvald.",
+          "detalles": "Imperial outposts dot the Mildaark, expanding their influence as their search for Arcanite takes them ever deeper into the woods. Imperial garrisons have been known to ally with other settlers within the forest, if they don’t get in the way of their goals. When constructing your Warband, you may use Characters from the Halflings and Njorsvald (Coming Soon!) Factions.",
+          "restriccion": "Fase de construcción de la banda."
         },
         {
-          "id": "make_take_orders",
+          "id": "make_take_orders_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
           "nombre": "Comandos Militares / Make/Take Orders",
           "etiqueta": "Regla de Facción (Imperiales)",
-          "resumen": "Ordenanza táctica prusiano-imperial para mover y disparar en bloque.",
-          "detalles": "Efectos: Permite mandar '¡Fuego a Discreción!', '¡Formad Línea!' o '¡Avance Rápido!' a soldados a 12\".",
-          "restriccion": "Líder a 12\" de unidades con Take Orders."
+          "resumen": "Permite a un personaje con Make Orders emitir órdenes a aliados con Take Orders a 12\" o menos.",
+          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders:\n As One! Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.\n Stand Firm! Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
+          "restriccion": "Hazaña Fácil. El emisor finaliza su activación al emitir la orden. Rango de 12\"."
+        },
+        {
+          "id": "order_as_one_imperial",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "As One!",
+          "etiqueta": "Regla de Facción (Imperiales)",
+          "resumen": "Orden de facción que activa simultáneamente a hasta 3 personajes de la misma clase.",
+          "detalles": "Up to three Characters of the same Class may Activate together. Any Attacks made must be against the same target and are rolled one after another.",
+          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Los ataques deben dirigirse al mismo objetivo."
+        },
+        {
+          "id": "order_stand_firm_imperial",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Stand Firm!",
+          "etiqueta": "Regla de Facción (Imperiales)",
+          "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
+          "detalles": "Up to three Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
+          "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
         },
         {
           "id": "order_together",
@@ -986,24 +1026,24 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
-          "id": "dark_ones_will",
+          "id": "the_dark_ones_will",
           "faccion_id": "dark_lords",
-          "faccion_nombre": "Señores Oscuros (Dark Lords)",
+          "faccion_nombre": "Señores Oscuros",
           "nombre": "La Voluntad del Oscuro / The Dark One's Will",
-          "etiqueta": "Regla de Facción (Dark Lords)",
-          "resumen": "Personalización táctica de la obsesión del Comandante antes de la partida.",
-          "detalles": "Efectos: Elige 1 rasgo: Fell Warrior (+1 AP extra por cada KO causado), Dark Warlock (Mago + Lore of Villainy), Master of the Horde (-20% GP Hobgoblins), Beast Master (-20% GP Bestiario).",
-          "restriccion": "Elección previa al juego."
+          "etiqueta": "Regla de Facción (Señores Oscuros)",
+          "resumen": "Permite seleccionar un rasgo de personalidad inicial que otorga habilidades o descuentos al Dark Lord.",
+          "detalles": "Each Dark Lord has a unique combination of obsessions, grudges and fevered goals that make up their twisted personality. Before the game, choose the character traits your Dark Lord embodies:\n Fell Warrior – This Dark Lord is infamous for their skill in martial combat and seek nothing more than the defeat their enemies by the might of their sword. The Dark Lord gains +1AP for each enemy Character they Knock Out. This resets at the start of each Round.\n Dark Warlock – This Dark Lord has dedicated their existence to the study of magic and craves nothing more than the increase of their arcane power. The Dark Lord gains the Mage Trait and may cast Spells from the Lore of Villainy.\n Master of the Horde – This Dark Lord has amassed a great army and takes great pleasure in seeing them destroy all who stand in their way. All Hobgoblin Characters cost -20% GP, rounded up to the nearest whole number.\n Beast Master – This Dark Lord has many pacts with the monsters of ArcWorlde, who march by their side into battle. All Beasts, Monsters and Titans taken from the Bestiary cost -20% GP, rounded up to the nearest whole number.",
+          "restriccion": "Se elige antes de comenzar la partida al construir el Dark Lord."
         },
         {
-          "id": "fae_beings_dark",
+          "id": "fae_beings_dark_lords",
           "faccion_id": "dark_lords",
-          "faccion_nombre": "Señores Oscuros (Dark Lords)",
+          "faccion_nombre": "Señores Oscuros",
           "nombre": "Pactos Malevolentes / Fae Beings",
-          "etiqueta": "Regla de Facción (Dark Lords)",
-          "resumen": "Alianzas oscuras con magos renegados y elfos oscuros.",
-          "detalles": "Efectos: Puedes reclutar unidades de las facciones Wizards y Wild Elves.",
-          "restriccion": "Creación de banda."
+          "etiqueta": "Regla de Facción (Señores Oscuros)",
+          "resumen": "Permite reclutar personajes de las facciones Wizards y Wild Elves.",
+          "detalles": "Dark Lords are malignant creatures of magic, and on occasion temporarily ally with those whose magical prowess they respect. Rogue Wizards often make pacts with the Dark Ones, and the Elves of Mildaark lend their swords if the fickle creatures see something to gain. When constructing your Warband, you may use Characters from the Wizards and Wild Elven Factions.",
+          "restriccion": "Fase de construcción de la banda."
         }
       ],
       "armeria_exclusiva": [
@@ -1326,24 +1366,24 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
-          "id": "nomadic_clans",
+          "id": "nomadic_clans_beastfolk",
           "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
+          "faccion_nombre": "Hombres Bestia",
           "nombre": "Clanes Nómadas / Nomadic Clans",
-          "etiqueta": "Regla de Facción (Beastfolk)",
-          "resumen": "Vida errante por los valles salvajes compartida con otros clanes.",
-          "detalles": "Efectos: Puedes incluir unidades de las facciones Ourks y Gremlins en tu banda.",
-          "restriccion": "Creación de banda."
+          "etiqueta": "Regla de Facción (Hombres Bestia)",
+          "resumen": "Permite reclutar personajes de las facciones Ourks y Gremlins.",
+          "detalles": "The Beastfolk live a roaming, nomadic life in the wilds of ArcWorlde and have been known to ally with those who do the same. When constructing your Warband, you may use Characters from the Ourks and Gremlins Factions.",
+          "restriccion": "Fase de construcción de la banda."
         },
         {
           "id": "beastkin",
           "faccion_id": "beastfolk",
-          "faccion_nombre": "Hombres Bestia (Beastfolk)",
+          "faccion_nombre": "Hombres Bestia",
           "nombre": "Parentesco Bestial / Beastkin",
-          "etiqueta": "Regla de Facción (Beastfolk)",
-          "resumen": "Afinidad natural con los monstruos y bestias del bosque.",
-          "detalles": "Efectos: Todas las Bestias, Monstruos o Titanes contratados del Bestiario tienen un 20% de descuento en su coste de GP.",
-          "restriccion": "Descuento en Bestiario."
+          "etiqueta": "Regla de Facción (Hombres Bestia)",
+          "resumen": "Descuento del 20% en GP al reclutar criaturas del Bestiario.",
+          "detalles": "Beasts, Monsters or Titans from the Bestiary taken as part of a Beastfolk Warband are at –20% GP cost.",
+          "restriccion": "Aplica al reclutar Bestias, Monstruos o Titanes en la construcción de la banda."
         },
         {
           "id": "diminutive_intimidating",
@@ -1750,32 +1790,32 @@ const compendioArcWorlde = {
         {
           "id": "afterlife",
           "faccion_id": "ancient_dead",
-          "faccion_nombre": "Antiguos Muertos (Ancient Dead)",
+          "faccion_nombre": "Antiguos Muertos",
           "nombre": "El Más Allá / Afterlife",
-          "etiqueta": "Regla de Facción (Ancient Dead)",
-          "resumen": "Convicción absoluta de encontrarse en el paraíso prometido.",
-          "detalles": "Efectos: Los personajes con este rasgo superan automáticamente todos los Chequeos de Valentía.",
-          "restriccion": "Pasivo universal de la facción."
+          "etiqueta": "Regla de Facción (Antiguos Muertos)",
+          "resumen": "Supera automáticamente todas las pruebas de Valentía.",
+          "detalles": "The Ancient Dead believe they are in the afterlife promised by their long-forgotten gods, and as such have no fear of anything that might cause them harm. Characters with this Trait automatically pass all Bravery Tests.",
+          "restriccion": ""
         },
         {
           "id": "bones",
           "faccion_id": "ancient_dead",
-          "faccion_nombre": "Antiguos Muertos (Ancient Dead)",
+          "faccion_nombre": "Antiguos Muertos",
           "nombre": "Huesos Antiguos / Bones",
-          "etiqueta": "Regla de Facción (Ancient Dead)",
-          "resumen": "Anatomía esquelética sin carne ni órganos que dañar.",
-          "detalles": "Efectos: Permite hacer una Hazaña Fácil para recolocar sus huesos y recuperar D3 HP. Además, cuentan como si estuvieran en Cobertura contra ataques a distancia.",
-          "restriccion": "Aplica a miniaturas esqueléticas."
+          "etiqueta": "Regla de Facción (Antiguos Muertos)",
+          "resumen": "Permite curarse D3 HP mediante una Hazaña Fácil y otorga cobertura constante contra disparos.",
+          "detalles": "With their flesh long since gone, the Ancient Dead are proud of their gleaming bones. There are a lot of benefits to not having any skin. Any Character with this Trait may attempt an Easy Feat to ‘pull themselves together’ and regain D3HP. In addition, they count as in Cover against any Ranged Attacks. The arrows just go straight through!",
+          "restriccion": "Curar D3 HP requiere Hazaña Fácil."
         },
         {
-          "id": "undead_legions",
+          "id": "undead_legions_ancient_dead",
           "faccion_id": "ancient_dead",
-          "faccion_nombre": "Antiguos Muertos (Ancient Dead)",
+          "faccion_nombre": "Antiguos Muertos",
           "nombre": "Legiones No-Muertas / Undead Legions",
-          "etiqueta": "Regla de Facción (Ancient Dead)",
-          "resumen": "Alianza eterna entre señores de las tumbas y tiranos imperecederos.",
-          "detalles": "Efectos: Puedes incluir unidades de los Undead Raiders y Vampires en tu banda sin penalizaciones de alianzas.",
-          "restriccion": "Aplica al construir la banda."
+          "etiqueta": "Regla de Facción (Antiguos Muertos)",
+          "resumen": "Permite reclutar personajes de las facciones Undead Raiders y Vampires.",
+          "detalles": "Although the Ancient Dead are dismissive of the living, they have been known to ally with other unliving beings whose hunger for power they respect. When constructing your Warband, you may use Characters from the Undead Raiders and Vampire Factions.",
+          "restriccion": "Fase de construcción de la banda."
         }
       ],
       "armeria_exclusiva": [
@@ -2090,6 +2130,16 @@ const compendioArcWorlde = {
         }
       ],
       "reglas_faccion": [
+        {
+          "id": "undead_legions_vampires",
+          "faccion_id": "vampires",
+          "faccion_nombre": "Vampiros",
+          "nombre": "Undead Legions",
+          "etiqueta": "Regla de Facción (Vampiros)",
+          "resumen": "Permite reclutar personajes de las facciones Undead Raiders y Ancient Dead.",
+          "detalles": "Although the Vampires are dismissive of the living, they have been known to ally with other unliving beings whose hunger for power they respect. When constructing your Warband, you may use Characters from the Undead Raiders and Ancient Dead Factions.",
+          "restriccion": "Fase de construcción de la banda."
+        },
         {
           "id": "enthrall_rule",
           "faccion_id": "vampires",
@@ -2472,24 +2522,24 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
-          "id": "undead_legions_raiders",
+          "id": "undead_legions_undead_raiders",
           "faccion_id": "undead_raiders",
-          "faccion_nombre": "Saqueadores No-Muertos (Undead Raiders)",
+          "faccion_nombre": "Saqueadores No-Muertos",
           "nombre": "Legiones No-Muertas / Undead Legions",
-          "etiqueta": "Regla de Facción (Undead Raiders)",
-          "resumen": "Bribones y piratas resucitados unidos a otros no-muertos.",
-          "detalles": "Efectos: Puedes reclutar unidades de las facciones Vampires y Ancient Dead.",
-          "restriccion": "Creación de lista."
+          "etiqueta": "Regla de Facción (Saqueadores No-Muertos)",
+          "resumen": "Permite reclutar personajes de las facciones Vampires y Ancient Dead.",
+          "detalles": "Although the Undead Raiders are famously pugnacious, they have been known to ally with other unliving beings whose hunger for power they respect. When constructing your Warband, you may use Characters from the Vampires and Ancient Dead Factions.",
+          "restriccion": "Fase de construcción de la banda."
         },
         {
-          "id": "resurrection_harbinger",
+          "id": "raiser_of_the_dead",
           "faccion_id": "undead_raiders",
-          "faccion_nombre": "Saqueadores No-Muertos (Undead Raiders)",
+          "faccion_nombre": "Saqueadores No-Muertos",
           "nombre": "Resurrección del Pescador / Raiser of the Dead",
-          "etiqueta": "Regla de Facción (Undead Raiders)",
-          "resumen": "Los Harbingers traen de vuelta a los rufianes caídos en combate.",
-          "detalles": "Efectos: Mediante una Hazaña, resucita unidades No-Muertas caídas en el mismo lugar donde cayeron con el 50% de sus HP iniciales.",
-          "restriccion": "Unidades No-Muertas."
+          "etiqueta": "Regla de Facción (Saqueadores No-Muertos)",
+          "resumen": "Permite resucitar a personajes aliados Noqueados a 6\" o menos con el 50% de sus HP.",
+          "detalles": "A Character with the Raiser of the Dead Trait may attempt to resurrect fallen friendly Characters with the Risen Trait. When a Raised Character is Knocked Out, place the model on its side or use a token to mark where they fell. To resurrect a Knocked Out Character, the Raiser of the Dead must roll a Feat and be within 6” of the marked spot –\n For Units or Beasts, a Medium Feat is required.\n For Elites or Irregulars, a Hard Feat is required.\n For Heavies, or friendly Characters without the Risen Trait, a Legendary Feat is required.\nCharacters who are successfully resurrected are placed back on the game board in the same place that they fell and can be Activated as normal. However, they are at 50% of their starting HP, rounded up to the nearest whole number.",
+          "restriccion": "Rango de 6\" del marcador. Hazaña Media (Unidades/Bestias), Difícil (Élites/Irregulares) o Legendaria (Pesadas o sin Risen)."
         }
       ],
       "armeria_exclusiva": [
@@ -2836,6 +2886,16 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
+          "id": "fae_beings_wild_elves",
+          "faccion_id": "wild_elves",
+          "faccion_nombre": "Elfos Silvanos",
+          "nombre": "Pactos Arcanos / Fae Beings",
+          "etiqueta": "Regla de Facción (Elfos Silvanos)",
+          "resumen": "Permite reclutar personajes de las facciones Wizards y Dark Lords.",
+          "detalles": "Elves are mercurial creatures of magic, and on occasion temporarily ally with those whose arcane prowess they respect. The Wizards of Mt Orion are known to liaise and trade with the Elves, and Dark Lords have been seen fighting with Wild Elven warriors beside them. When constructing your Warband, you may use Characters from the Wizards and Dark Lords Factions.",
+          "restriccion": "Fase de construcción de la banda."
+        },
+        {
           "id": "summoner_sacrifice",
           "faccion_id": "wild_elves",
           "faccion_nombre": "Elfos Silvanos (Wild Elves)",
@@ -2844,16 +2904,6 @@ const compendioArcWorlde = {
           "resumen": "Invocación de criaturas de madera mediante ofrendas de vida.",
           "detalles": "Efectos: Los Druidas invocan Woodfiends y Briarbeasts sacrificando HP propio o noqueando unidades aliadas de apoyo.",
           "restriccion": "Invocación druídica."
-        },
-        {
-          "id": "fae_beings_elves",
-          "faccion_id": "wild_elves",
-          "faccion_nombre": "Elfos Silvanos (Wild Elves)",
-          "nombre": "Pactos Arcanos / Fae Beings",
-          "etiqueta": "Regla de Facción (Wild Elves)",
-          "resumen": "Lazos milenarios con los magos y las fuerzas de la naturaleza.",
-          "detalles": "Efectos: Puedes reclutar personajes de las facciones Wizards y Dark Lords.",
-          "restriccion": "Creación de banda."
         }
       ],
       "armeria_exclusiva": [
@@ -3198,19 +3248,23 @@ const compendioArcWorlde = {
       "reglas_faccion": [
         {
           "id": "nomads_ourks",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
           "nombre": "Nómadas / Nomads",
           "etiqueta": "Regla de Facción (Ourks)",
-          "resumen": "Vida itinerante en los pantanos y bosques de Mildaark.",
-          "detalles": "Efectos: Al construir tu banda de Ourks, puedes incluir personajes de las facciones Beastfolk (Hombres Bestia) y Gremlins sin penalizaciones.",
-          "restriccion": "Fase de creación de banda."
+          "resumen": "Permite reclutar personajes de las facciones Beastfolk y Gremlins.",
+          "detalles": "The Ourks live a roaming, nomadic life in the wilds of ArcWorlde and have been known to ally with those who do the same. When constructing your Warband, you may use Characters from the Beastfolk and Gremlins Factions.",
+          "restriccion": "Fase de construcción de la banda."
         },
         {
           "id": "power_struggle",
+          "faccion_id": "ourks",
+          "faccion_nombre": "Ourks",
           "nombre": "Lucha de Poder / Power Struggle",
           "etiqueta": "Regla de Facción (Ourks)",
-          "resumen": "Constante rivalidad por el liderazgo entre el Chieftain y el Dreameater.",
-          "detalles": "Efectos: Si incluyes un Chieftain y un Dreameater en tu banda, ambos deben realizar un Chequeo de Valentía al inicio de cada Ronda. El ganador recibe bonificadores tácticos descritos en su perfil (Chieftain: Brutos a 6\" ganan +1 Power; Dreameater: Brutos a 3\" ganan efectos de Swamp Scrumpy). El perdedor pierde 1 AP para esa activación. En caso de empate, se repite la tirada.",
-          "restriccion": "Se resuelve al inicio de cada Ronda si ambos están en mesa."
+          "resumen": "Disputa de liderazgo entre Chieftain y Dreameater mediante tiradas de Valentía al inicio de cada ronda.",
+          "detalles": "It is common in an Ourk clan for the Chieftains and the Dreameaters to be in constant competition for leadership. If you take a Chieftain and a Dreameater as part of your Warband, they must each roll a Bravery Test at the start of each Round. The Character with the highest roll receives certain bonuses stated in their stat profile. The loser receives certain negative effects also stated in their profile. If the roll-off is a draw, re-roll until there is a winner.",
+          "restriccion": "Al inicio de cada ronda si la banda incluye tanto un Chieftain como un Dreameater."
         }
       ],
       "armeria_exclusiva": [
@@ -3587,14 +3641,24 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
+          "id": "nomads_gremlins",
+          "faccion_id": "gremlins",
+          "faccion_nombre": "Gremlins",
+          "nombre": "Nomads",
+          "etiqueta": "Regla de Facción (Gremlins)",
+          "resumen": "Permite reclutar personajes de las facciones Ourk y Beastfolk.",
+          "detalles": "The Gremlins live a roaming, nomadic life in the wilds of ArcWorlde and have been known to ally with those who do the same. When constructing your Warband, you may use Characters from the Ourk and Beastfolk Factions.",
+          "restriccion": "Fase de construcción de la banda."
+        },
+        {
           "id": "born_slippy",
           "faccion_id": "gremlins",
           "faccion_nombre": "Gremlins",
           "nombre": "Escurridizo / Born Slippy",
           "etiqueta": "Regla de Facción (Gremlins)",
-          "resumen": "Agilidad diminuta para zafarse del combate cuerpo a cuerpo.",
-          "detalles": "Efectos: Permite repetir cualquier tirada de Hazaña fallida al intentar Desengancharse (Disengage) del combate.",
-          "restriccion": "Acción de Disengage."
+          "resumen": "Permite repetir cualquier intento fallido de Hazaña para destrabarse del combate cuerpo a cuerpo.",
+          "detalles": "Gremlins are small and nimble, making them incredibly difficult to pin down in combat. All Characters with this Trait may re-roll any failed Feat attempts to Disengage from Melee Combat.",
+          "restriccion": ""
         },
         {
           "id": "burrow_dweller",
@@ -3602,9 +3666,9 @@ const compendioArcWorlde = {
           "faccion_nombre": "Gremlins",
           "nombre": "Habitante de Madrigueras / Burrow Dweller",
           "etiqueta": "Regla de Facción (Gremlins)",
-          "resumen": "Uso de la red subterránea para curarse y teletransportarse.",
-          "detalles": "Efectos: En contacto con un Gremlin Burrow, una Hazaña Fácil sumerge al personaje, retirándolo del tablero y curándole D3 HP. Reaparece en cualquier madriguera la ronda siguiente.",
-          "restriccion": "No se puede usar si lleva tokens de VP de escenario."
+          "resumen": "Permite ocultarse en las madrigueras Gremlin para curar D3 HP y reaparecer la ronda siguiente.",
+          "detalles": "Gremlins live in vast burrows beneath the ground, popping up out of holes and disappearing down them quick as a flash. Characters with this Trait may use any Gremlin Burrows placed upon the battlefield. If in base contact with a Gremlin Burrow, they may jump down it by attempting an Easy Feat. If successful, the Character is temporarily removed from the game. In the next Round, they must re-appear in base contact with any Gremlin Burrow on the board at the start of their Activation. In addition, whilst down the burrow the Gremlins scarf whatever supplies they have stashed down there, and as such heal D3HP. Characters that are holding Items or Equipment crucial to the outcome of the game, such as collectable tokens that earn the player VP, may not use Gremlin Burrows. Gremlins are annoying, but not that annoying!",
+          "restriccion": "Hazaña Fácil en contacto de peana con Gremlin Burrow. No utilizable si porta objetos clave de PV."
         }
       ],
       "armeria_exclusiva": [
@@ -3893,6 +3957,26 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [
         {
+          "id": "thing_of_magic",
+          "faccion_id": "wizards",
+          "faccion_nombre": "Magos",
+          "nombre": "Entidades de Magia / Thing of Magic",
+          "etiqueta": "Regla de Facción (Magos)",
+          "resumen": "Las criaturas mágicas no se despliegan al inicio y deben ser invocadas mediante Conjure Sprites.",
+          "detalles": "Characters with this Ability are not deployed on the battlefield. A Character with the Mage Type may attempt to bring them to ‘life’ on the battlefield by casting the Conjure Sprites Spell. Things of Magic may not be equipped with Equipment before the game. If a Thing of Magic is ever Knocked Out, they may be re-conjured in the following Round.",
+          "restriccion": "No se despliegan en mesa. Sin equipo inicial. Se invocan en partida."
+        },
+        {
+          "id": "fae_beings_wizards",
+          "faccion_id": "wizards",
+          "faccion_nombre": "Magos",
+          "nombre": "Fae Beings",
+          "etiqueta": "Regla de Facción (Magos)",
+          "resumen": "Permite reclutar personajes de las facciones Dark Lords y Wild Elves.",
+          "detalles": "Wizards have dedicated their lives to the practice of magic, and on occasion temporarily ally with those whose magical prowess they respect. Rogue Wizards often make pacts with Dark Lords, and the Elves of Mildaark will lend their swords if the fickle creatures are impressed by a Wizard’s arcane mastery. When constructing your Warband, you may use Characters from the Dark Lords and Wild Elven Factions.",
+          "restriccion": "Fase de construcción de la banda."
+        },
+        {
           "id": "colleges_mt_orion",
           "faccion_id": "wizards",
           "faccion_nombre": "Magos (Wizards)",
@@ -3901,16 +3985,6 @@ const compendioArcWorlde = {
           "resumen": "Especialización elemental entre los seis Colegios Mágicos.",
           "detalles": "Efectos: Elige la escuela mágica antes de la partida (Crimson, Sapphire, Emerald, Ochre, Bronze, Opal) para acceder a su saber exclusivo.",
           "restriccion": "Elección de colegio antes de jugar."
-        },
-        {
-          "id": "thing_of_magic",
-          "faccion_id": "wizards",
-          "faccion_nombre": "Magos (Wizards)",
-          "nombre": "Entidades de Magia / Thing of Magic",
-          "etiqueta": "Regla de Facción (Wizards)",
-          "resumen": "Constructos y duendes arcanos traídos a la vida por los magos.",
-          "detalles": "Efectos: No se despliegan al inicio. Se invocan en mesa mediante el hechizo Conjure Sprites. Si caen KO, pueden reconjurarse la ronda siguiente.",
-          "restriccion": "Invocación por Spells."
         }
       ],
       "armeria_exclusiva": [
@@ -4649,7 +4723,28 @@ const compendioArcWorlde = {
           "hechizos": []
         }
       ],
-      "reglas_faccion": [],
+      "reglas_faccion": [
+        {
+          "id": "tamed_beasts",
+          "faccion_id": "bestiary",
+          "faccion_nombre": "Bestiario",
+          "nombre": "Tamed Beasts",
+          "etiqueta": "Regla de Facción (Bestiario)",
+          "resumen": "Permite a cualquier facción contratar criaturas del Bestiario para su banda.",
+          "detalles": "It is extremely common for Warbands to tame creatures to fight alongside them. Whether raised from eggs or captured in the wild, the monsters of ArcWorlde are often seen marching to battle. When constructing your Warband of any Faction, you may hire Characters from the Bestiary.",
+          "restriccion": "Fase de construcción de la banda para cualquier facción."
+        },
+        {
+          "id": "bestiary_warband",
+          "faccion_id": "bestiary",
+          "faccion_nombre": "Bestiario",
+          "nombre": "Bestiary Warband",
+          "etiqueta": "Regla de Facción (Bestiario)",
+          "resumen": "Permite construir una banda formada exclusivamente por Bestias, Monstruos y Titanes del Bestiario.",
+          "detalles": "You may construct a Warband entirely from Beasts, Monsters and Titans from the Bestiary.",
+          "restriccion": "Fase de construcción de la banda."
+        }
+      ],
       "armeria_exclusiva": [],
       "saberes_magicos": [
         {
@@ -4924,7 +5019,28 @@ const compendioArcWorlde = {
           "hechizos": []
         }
       ],
-      "reglas_faccion": [],
+      "reglas_faccion": [
+        {
+          "id": "swords_for_hire_alliance",
+          "faccion_id": "swords_for_hire",
+          "faccion_nombre": "Espadas de Alquiler / Swords for Hire",
+          "nombre": "Swords for Hire",
+          "etiqueta": "Regla de Facción (Espadas de Alquiler / Swords for Hire)",
+          "resumen": "Cualquier facción puede contratar mercenarios del reglamento de Swords for Hire pagando su coste en GP.",
+          "detalles": "In the dangerous and untamed lands of ArcWorlde sometimes a little extra muscle is required, and many warriors roam the countryside offering their services. Any Faction may hire Characters from the Swords for Hire Ruleset on the Warp Miniatures website. They’re mercenaries who will fight for anyone, as long as they have the GP to pay them.",
+          "restriccion": "Fase de construcción de la banda."
+        },
+        {
+          "id": "impostor",
+          "faccion_id": "swords_for_hire",
+          "faccion_nombre": "Espadas de Alquiler / Swords for Hire",
+          "nombre": "Impostor!",
+          "etiqueta": "Regla de Facción (Espadas de Alquiler / Swords for Hire)",
+          "resumen": "Si ambos jugadores reclutan al mismo mercenario, el que deje Noqueado al rival gana +1 AP permanente.",
+          "detalles": "With many heroes wandering the wilds of ArcWorlde, it is common for some to disguise themselves as the most famous warriors to capitalise upon their reputation. When a Sword for Hire discovers one of these impostors, they’re rightly outraged. If more than one player hires the same Sword for Hire Character, if one Knocks Out the other they get +1AP for the rest of the game. There can be only one!",
+          "restriccion": "Se activa durante la partida si se enfrenta el mismo mercenario en ambos bandos."
+        }
+      ],
       "armeria_exclusiva": [],
       "saberes_magicos": [
         {
@@ -4968,66 +5084,106 @@ const compendioArcWorlde = {
     {
       "id": "arcanite_token",
       "nombre": "Ficha de Arcanita / Arcanite Token",
-      "tipo": "Objeto / Item",
+      "tipo": "Consumible",
       "coste": 10,
-      "efecto": "Un solo uso (One use only). Al consumirse, elige un efecto: +1 AP para la activación, +1D6 extra a cualquier tirada, lanzar un hechizo adicional, o repetir 1D6.",
-      "restriccion": "Un solo uso (One use only)."
+      "efecto": "A glittering nugget of Arcanite. One use only. When used, choose one effect: • Grant +1AP to the Character for their Activation. • Add an extra D6 to any roll. • Allow another Spell to be cast. • Allow a D6 to be re-rolled.",
+      "restriccion": "Un solo uso (One use only).",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "shield",
       "nombre": "Escudo / Shield",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Escudo",
       "coste": 15,
-      "efecto": "Si está equipado, el personaje puede repetir 1 Tirada de Defensa fallida por Ronda.",
-      "restriccion": "Requiere el uso de una mano."
+      "efecto": "Shields can take many forms, from sheets of wood and metal to even magical amulets and charms. If equipped, a Character may re-roll one failed Defence Roll per Round.",
+      "restriccion": "",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "spear",
       "nombre": "Lanza / Spear",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Arma",
       "coste": 10,
-      "efecto": "Permite realizar ataques melé a objetivos hasta a 2\" de distancia, incluso si no está en contacto de peana o si hay una miniatura aliada de por medio.",
-      "restriccion": "Alcance melé ampliado a 2\"."
+      "efecto": "A pointed weapon on the end of a long wooden haft. Excellent for keeping ne’er-do-wells at bay. If equipped, a Character may make Melee Attacks against targets up to 2” away, even if they aren’t in base contact. Attacks may still be made if there is a friendly Character between the Character and the target.",
+      "restriccion": "",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "torch",
       "nombre": "Antorcha / Torch",
-      "tipo": "Objeto / Item",
-      "coste": 5,
-      "efecto": "El portador cuenta como Temible (Fearsome) frente a Bestias y Monstruos. Obtiene +1 al Power melé y Temible contra objetivos Inflamables. Sin embargo, los disparos enemigos contra él pueden repetir fallos en Hazañas.",
-      "restriccion": "Revela la posición del portador a distancia."
+      "tipo": "Objeto",
+      "coste": 10,
+      "efecto": "Carrying a lit torch can have its uses in a land so filled with dangers as ArcWorlde. If equipped, a Character counts as Fearsome to Beasts and Monsters. In addition, the Character counts as Fearsome, and has +1 Power on all Melee Attacks against Characters who are Flammable. However, enemy Characters may re-roll Failures when attempting Feat rolls for Ranged Attacks against a Torch-carrying Character, as they are much easier to spot from afar.",
+      "restriccion": "",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "two_handed_weapon",
       "nombre": "Arma a Dos Manos / Two Handed Weapon",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Arma",
       "coste": 10,
-      "efecto": "Otorga +2 al Power en todos los ataques melé. Sin embargo, los Éxitos Críticos en tiradas de Defensa del portador se descartan como si fuesen fallos.",
-      "restriccion": "Ocupa ambas manos."
+      "efecto": "A large and heavy weapon. Difficult to use, but powerful in the right hands. If equipped, a Character gets +2 Power for all Melee Attacks. However, any of their own Critical Defends are discarded as if they were Failures.",
+      "restriccion": "",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "dual_weapons",
       "nombre": "Armas Dobles / Dual Weapons",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Arma",
       "coste": 10,
-      "efecto": "Permite repetir todos los resultados de \"1\" obtenidos en tiradas de ataque cuerpo a cuerpo.",
-      "restriccion": "Ocupa ambas manos."
+      "efecto": "A set of two weapons that the user has trained to use in each hand. If equipped, a Character may re-roll every 1 when making an Melee Attack.",
+      "restriccion": "",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "light_armour",
       "nombre": "Armadura Ligera / Light Armour",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Armadura",
       "coste": 20,
-      "efecto": "Otorga +1 al Valor de Armadura del personaje.",
-      "restriccion": "No acumulable con otras armaduras."
+      "efecto": "A garment of leather, thick cloth or metal, or even a protective spell placed upon the wearer. Often needed when adventuring in ArcWorlde. If equipped, a Character gains +1 Armour. This does not stack.",
+      "restriccion": "No se acumula (This does not stack).",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     },
     {
       "id": "heavy_armour",
       "nombre": "Armadura Pesada / Heavy Armour",
-      "tipo": "Equipo / Equipment",
+      "tipo": "Armadura",
       "coste": 35,
-      "efecto": "Otorga +2 al Valor de Armadura del personaje. Sin embargo, todas las tiradas de Leg It sufren +1 a la dificultad.",
-      "restriccion": "No acumulable con otras armaduras."
+      "efecto": "A suit of thick steel plate, or a particularly powerful protective incantation placed upon the wearer. If equipped, a Character gains +2 Armour. This does not stack. In addition, any Leg It rolls are at +1 difficulty.",
+      "restriccion": "No se acumula (This does not stack). Las tiradas de Leg It sufren +1 de dificultad.",
+      "no_permitido_a": [
+        "Beast",
+        "Monster",
+        "Titan"
+      ]
     }
   ],
   "diccionario_rasgos": {
