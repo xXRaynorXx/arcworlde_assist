@@ -3237,27 +3237,22 @@ const compendioArcWorlde = {
       "nombre": "Magos",
       "unidades": [
         {
-          "id": "archmage",
-          "nombre": "Archimago",
-          "nombre_en": "Archmage",
-          "tipo": "comandante",
-          "coste": 120,
+          "id": "wizard",
+          "nombre": "Mago",
+          "nombre_en": "Wizard",
+          "clase": "commander",
+          "coste": 100,
           "peana_mm": 30,
           "stats": {
-            "hp": 10,
+            "hp": 9,
             "mov": 4,
             "armadura": 0,
             "ap": 4
           },
           "ataques": [
-            "(1 AP) Wizard Staff: Power 4.",
-            "(Ranged) Arcane Bolt: Power 6, Alcance 12\"."
+            "(1 AP) Staff Thwack: Power 5. Special Rules: Crits ignore Armour."
           ],
-          "rasgos": [
-            "Elemental Colleges",
-            "Things of Magic",
-            "Mage"
-          ],
+          "rasgos": [],
           "max_por_banda": 1,
           "equipo_permitido": [
             "vitality_gem",
@@ -3265,52 +3260,31 @@ const compendioArcWorlde = {
             "wizard_mount",
             "pilfered_tome"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
-            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
-            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
-            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
-            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
-            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
-            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
-            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
-            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
-            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
-            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
-            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
-            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
-            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
-            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
-            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
-            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
-            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
-            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
-            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
-            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
+            "Conjure Sprites (Exige 14): Summons D3 Sprites of the caster's chosen College Lore.",
+            "College Lore Spells: Access to spells from their chosen College of Mt Orion (Crimson, Sapphire, Emerald, Ochre, Bronze, or Opal College)."
           ]
         },
         {
-          "id": "battle_wizard",
-          "nombre": "Mago de Batalla",
-          "nombre_en": "Battle Wizard",
-          "tipo": "heroe",
-          "coste": 85,
+          "id": "apprentice",
+          "nombre": "Aprendiz",
+          "nombre_en": "Apprentice",
+          "clase": "mage",
+          "coste": 60,
           "peana_mm": 30,
           "stats": {
-            "hp": 8,
+            "hp": 5,
             "mov": 4,
             "armadura": 0,
-            "ap": 3
+            "ap": 2
           },
           "ataques": [
-            "(1 AP) Staff Strike: Power 4."
+            "(1 AP) Whack: Power 3"
           ],
           "rasgos": [
-            "Elemental Colleges",
-            "Mage"
+            "Conduit",
+            "Student of Magic"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
@@ -3319,81 +3293,116 @@ const compendioArcWorlde = {
             "wizard_mount",
             "pilfered_tome"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
-            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
-            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
-            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
-            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
-            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
-            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
-            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
-            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
-            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
-            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
-            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
-            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
-            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
-            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
-            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
-            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
-            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
-            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
-            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
-            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
+            "Student of Magic: May cast Spells from the Lore of their College, drawing a maximum of 2 cards."
           ]
         },
         {
-          "id": "enchanted_sentinel",
+          "id": "sprite",
+          "nombre": "Sprite",
+          "nombre_en": "Sprite",
+          "clase": "beast",
+          "coste": 25,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 4,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(2 AP) Sparkle: Power 5. Special Rules: Every time this Attack is used, the Sprite loses 1AP.",
+            "(1 AP) Nibble: Power 3"
+          ],
+          "rasgos": [
+            "Thing of Magic"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "ensorcelled_beast",
+          "nombre": "Bestia Encantada",
+          "nombre_en": "Ensorcelled Beast",
+          "clase": "monster",
+          "coste": 200,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 24,
+            "mov": 7,
+            "armadura": 0,
+            "ap": 7
+          },
+          "ataques": [
+            "(2 AP) Pounce: Power 7. Special Rules: If a Crit is rolled, the target must re-roll any successful Feats to leave base contact.",
+            "(2 AP) Crackle: Power 5. Special Rules: Affects all Characters without the Thing of Magic Trait within 2”. Ignores Armour.",
+            "(1 AP) Chomp: Power 4"
+          ],
+          "rasgos": [
+            "Gobble",
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Feast of Magic"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "sentinel",
           "nombre": "Centinela Encantado",
-          "nombre_en": "Enchanted Sentinel",
-          "tipo": "heroe",
-          "coste": 100,
+          "nombre_en": "Sentinel",
+          "clase": "elite",
+          "coste": 80,
           "peana_mm": 40,
           "stats": {
-            "hp": 12,
+            "hp": 8,
             "mov": 4,
-            "armadura": 2,
+            "armadura": 0,
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Heavy Strike: Power 7. Regla Especial: Un impacto Crítico deja al objetivo (peana 30mm) Tumbado (Prone).",
-            "(1 AP) Thrust: Power 4. Regla Especial: Un impacto Crítico deja al objetivo (peana 30mm) Tumbado (Prone)."
+            "(2 AP) Heavy Strike: Power 7. Special Rules: A Critical Hit knocks the target Prone if they are on a 30mm base.",
+            "(1 AP) Thrust: Power 4. Special Rules: A Critical Hit knocks the target Prone if they are on a 30mm base"
           ],
           "rasgos": [
             "Enchanted Armour"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "charmed_bookcase",
+          "nombre": "Estantería Encantada",
+          "nombre_en": "Charmed Bookcase",
+          "clase": "irregular",
+          "coste": 80,
+          "peana_mm": 40,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(1 AP) Jostle: Power 3"
           ],
-          "hechizos": [
-            "Conjurar Sprites Carmesí / Conjure Crimson Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable).",
-            "Bola de Fuego / Fireball (Exige 18): Alcance 12\". Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto.",
-            "Ráfaga de Llamas / Flame Blast (Exige 20): Alcance Cono 6\". Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos.",
-            "Conjurar Sprites Zafiro / Conjure Sapphire Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate.",
-            "Marea de Asalto / Tidal Wave (Exige 17): Alcance Línea 8\". Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta.",
-            "Puente de Hielo / Bridge of Ice (Exige 19): Alcance 12\". Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas.",
-            "Conjurar Sprites Esmeralda / Conjure Emerald Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos.",
-            "Enredaderas Curativas / Healing Vines (Exige 17): Alcance 6\". Restaura D6 HP a una miniatura aliada en contacto con vegetación.",
-            "Alma de la Bestia / Soul of the Beast (Exige 21): Alcance 8\". Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente.",
-            "Conjurar Sprites Ocres / Conjure Ochre Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de piedra con 1 de Armadura natural.",
-            "Muro de Piedra / Rock Wall (Exige 16): Alcance 2\". Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda.",
-            "Armadura de Piedra / Stone Armour (Exige 18): Alcance Personal. Otorga Armadura Pesada al lanzador durante toda la ronda.",
-            "Tesoros de la Ciénaga / ArcWorlde's Bounty (Exige 21): Alcance 8\". Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador.",
-            "Conjurar Sprites de Bronce / Conjure Bronze Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda.",
-            "Transfiguración / Transfiguration (Exige 16): Alcance 12\". Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior.",
-            "Ráfaga Alquímica / Alchemical Blast (Exige 18): Alcance 8\". Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda.",
-            "Avatar de Oro / Avatar of Gold (Exige 21): Alcance Personal. Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda.",
-            "Conjurar Sprites Ópalo / Conjure Opal Sprites (Exige 14): Alcance 3\". Invoca D3 Sprites de niebla con la capacidad de Volar (Fly).",
-            "Aura Antinatural / Unnatural Aura (Exige 16): Alcance 6\" Área. Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos.",
-            "Sanguijuela Espiritual / Spirit Leech (Exige 18): Alcance 6\". El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador.",
-            "Hueste Espectral / Spectral Host (Exige 21): Alcance 6\". Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
-          ]
+          "rasgos": [
+            "Flammable",
+            "Collection of Tomes"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
