@@ -85,7 +85,7 @@ const compendioArcWorlde = {
             "Marvellous Mutton Stew (Exige 16): One friendly Character within 6\" may re-roll a single failed Leg It roll this Round.",
             "Bullox Burgers (Exige 17): One friendly Character within 6\" may re-roll all failed Defence rolls until its next Activation.",
             "Cocklegriff Madras (with rice and naan) (Exige 20): One friendly Character within 6” gains the Fired Up Attack until the end of the Round: (1 AP) Fired Up: Power 8. Special Rules: +1 Power against Flammable targets.",
-            "Mystery Meat Surprise (Exige 21): Choose two different Spells from this list and apply them to the same Character."
+            "Mystery Meat Surprise (Exige 21): The ‘piece de résistance’ (as they would say in Galanaux), this outstanding feat of culinary craft is a closely guarded secret recipe. Only the finest of gourmets can master it, and its subtle flavours and expensive ingredients are often wasted on the rabble that gobble it up greedily on the battlefield. One friendly Character within 6\" gains +2 AP and regains D6 HP."
           ]
         },
         {
@@ -3303,7 +3303,7 @@ const compendioArcWorlde = {
           "hechizos": [
             "Chittering Bugs (Exige 14): Choose one enemy Character within 8” of the caster. For their next Activation they may not make any movement Actions as they frantically swat away the bugs.",
             "Slip and Slide (Exige 17): This Spell effects any enemy Characters that attempt a Leg It roll within 8” of the caster. If they fail, instead of becoming Prone they slide the rolled number in the opposite direction of their intended movement. This effect lasts until the end of the Round.",
-            "Peek-A-Boo (Exige 19): Remove the caster from the game board. Place them back again in the same place when they are re-activated.",
+            "Peek-a-Boo (Exige 19): Cackling maniacally, the Shaman’s magic makes an ally seem to pop in and out of existence, much to the frustration of the enemy. Choose one allied Character to be the target of this Spell. This Character is temporarily given the Split Activation rule (if they haven’t got it already). Until they have spent their last AP for the Round, whenever they end their Activation remove them from the game board. Place them back again in the same place when they are re-activated.",
             "Great Green Explosion (Exige 21+): Every Character within 6” of the caster takes 8 Hits, plus additional Hits for every 1 the draw is over 21. If Overpowered, in addition to losing D6 HP, the Shaman loses 1HP for every 1 the draw is over 21."
           ]
         },
