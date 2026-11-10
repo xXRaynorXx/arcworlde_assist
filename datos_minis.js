@@ -2327,7 +2327,7 @@ const compendioArcWorlde = {
           "nombre_en": "Wild Elven Warchief",
           "clase": "commander",
           "coste": 130,
-          "peana_mm": null,
+          "peana_mm": 40,
           "stats": {
             "hp": 14,
             "mov": 5,
@@ -2362,7 +2362,7 @@ const compendioArcWorlde = {
           "nombre_en": "Wild Elven Druid",
           "clase": "mage",
           "coste": 145,
-          "peana_mm": 30,
+          "peana_mm": 40,
           "stats": {
             "hp": 12,
             "mov": 5,
@@ -2401,7 +2401,7 @@ const compendioArcWorlde = {
           "nombre_en": "Wild Elven Warrior",
           "clase": "elite",
           "coste": 95,
-          "peana_mm": 30,
+          "peana_mm": 40,
           "stats": {
             "hp": 10,
             "mov": 5,
@@ -2433,7 +2433,7 @@ const compendioArcWorlde = {
           "nombre_en": "Wild Elven Blademaster",
           "clase": "irregular",
           "coste": 110,
-          "peana_mm": null,
+          "peana_mm": 40,
           "stats": {
             "hp": 10,
             "mov": 5,
@@ -2465,7 +2465,7 @@ const compendioArcWorlde = {
           "nombre_en": "Briarbeast",
           "clase": "heavy",
           "coste": 200,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 20,
             "mov": 8,
@@ -2526,7 +2526,7 @@ const compendioArcWorlde = {
           "nombre_en": "Woodfiend",
           "clase": "unit",
           "coste": 45,
-          "peana_mm": null,
+          "peana_mm": 30,
           "stats": {
             "hp": 6,
             "mov": 3,
