@@ -90,7 +90,10 @@ const armeriaComunDB = [
     arma_distancia_halfling: "halfling_ranged_weapon",
     almuerzo_llevar: "packed_lunch",
     estandarte_pueblo: "town_banner",
-    hobgoblin_ranged_weapon: "dark_lord_ranged_weapon"
+    hobgoblin_ranged_weapon: "dark_lord_ranged_weapon",
+    ourk_boglin_ranged_weapon: "ourk_ranged_weapon",
+    ourk_boglin_mount: "ourk_mount",
+    musical_instrument: "boglin_musical_instrument"
   };
   // Cómo se nombran las facciones en el texto de las reglas de facción (para saber quiénes son aliadas)
   const FACTION_WORDS = {
@@ -154,7 +157,7 @@ const armeriaComunDB = [
   const claseOf = (u) => (u && (u.clase || u.tipo)) || "";
   const isCommander = (u) => /^(commander|comandante)$/.test(claseOf(u));
   // Monstruos y bestias: no compran armería común
-  const isMonster = (u) => /^(monstruo|heavy|beast)$/.test(claseOf(u));
+  const isMonster = (u) => /^(monstruo|monster|heavy|beast)$/.test(claseOf(u));
 
   // Facción de una miniatura del catálogo
   function unitFaction(unitId) {
