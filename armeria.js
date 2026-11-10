@@ -153,7 +153,9 @@ const armeriaComunDB = [
     monster_hunter: "halfling_monster_hunter",
     archmage: "wizard",
     battle_wizard: "apprentice",
-    enchanted_sentinel: "sentinel"
+    enchanted_sentinel: "sentinel",
+    gremlin_chief: "the_great_gremlin",
+    gremlin_warrior: "gremlin_scamp"
   };
   const canonId = (id) => LEGACY_UNIT_ID[id] || id;
   // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
