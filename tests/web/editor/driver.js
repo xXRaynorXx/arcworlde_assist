@@ -138,7 +138,7 @@ window.addEventListener('load', async () => {
     ok('compendio v2: armería de Ourks con coste', tt.includes('Brebaje del Pantano / Swamp Scrumpy (10 GP)'));
     // Rasgos: todas las miniaturas del catálogo deben tener descripción
     // Rasgos nuevos aún sin entrada en el diccionario del compendio (pendientes de recibirlos)
-    const PENDIENTES = ['Ourks: Hurl', 'Ourks: Familiars', 'Ourks: Sticky Fingers', 'Ourks: Brewboy', 'Ourks: Stinky Beast', 'Hombres Bestia: Mysterious Herbs', 'Hombres Bestia: Aquatic'];
+    const PENDIENTES = ['Ourks: Hurl', 'Ourks: Familiars', 'Ourks: Sticky Fingers', 'Ourks: Brewboy', 'Ourks: Stinky Beast', 'Hombres Bestia: Mysterious Herbs', 'Hombres Bestia: Aquatic', 'Bestiario y Mercenarios: Burrower', 'Bestiario y Mercenarios: Web Spray', 'Bestiario y Mercenarios: Web Spinner', 'Bestiario y Mercenarios: Glittering Scales', 'Bestiario y Mercenarios: Healing Song', 'Bestiario y Mercenarios: Ambush', 'Bestiario y Mercenarios: Leader of the Pack', 'Bestiario y Mercenarios: Aquatic', 'Bestiario y Mercenarios: Grizzled Hide', 'Bestiario y Mercenarios: Advanced Fungal Regeneration', 'Bestiario y Mercenarios: Arcanite Carapace', 'Bestiario y Mercenarios: Magical Spores', 'Bestiario y Mercenarios: Living Lair'];
     const sinDesc = new Set();
     datosMinis.facciones.forEach(fa => (fa.unidades || []).forEach(u => (u.rasgos || []).forEach(r => { const n = typeof r === 'string' ? r : (r.nombre || ''); if (n && !AW.sheet.traitInfo(n)) sinDesc.add(fa.nombre + ': ' + n); })));
     PENDIENTES.forEach(p => sinDesc.delete(p));
