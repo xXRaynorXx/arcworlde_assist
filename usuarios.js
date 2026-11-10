@@ -528,14 +528,14 @@
     if (window.AWGear) {
       const groups = [];
       const add = (label, items, origen) => {
-        const byCat = {};
-        items.filter((a) => !has(origen, a.id) && !armourBlocked(u, a, origen)).forEach((a) => (byCat[gearCategory(a)] = byCat[gearCategory(a)] || []).push(a));
-        Object.keys(byCat).forEach((cat) =>
-          groups.push(
-            '<optgroup label="' + esc(label + ' — ' + cat) + '">' +
-              byCat[cat].map((a) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' (' + gearPrice(u, a, origen) + ' GP' + (gearPrice(u, a, origen) !== a.coste ? ', -25%' : '') + (shopCtx() ? ' → ' + shopPrice(gearPrice(u, a, origen), shopCtx()) + ' GP al comprar' : '') + ')</option>').join('') +
-              '</optgroup>'
-          )
+        const rows = items.filter((a) => !has(origen, a.id) && !armourBlocked(u, a, origen))
+          .map((a) => ({ a, cat: gearCategory(a) }))
+          .sort((x, y) => (x.cat < y.cat ? -1 : x.cat > y.cat ? 1 : 0));
+        if (!rows.length) return;
+        groups.push(
+          '<optgroup label="' + esc(label) + '">' +
+            rows.map(({ a, cat }) => '<option value="' + origen + ':' + esc(a.id) + '">' + esc(shortName(a.nombre)) + ' - ' + esc(cat) + ' (' + gearPrice(u, a, origen) + ' GP' + (gearPrice(u, a, origen) !== a.coste ? ', -25%' : '') + (shopCtx() ? ' → ' + shopPrice(gearPrice(u, a, origen), shopCtx()) + ' GP al comprar' : '') + ')</option>').join('') +
+          '</optgroup>'
         );
       };
       const opts = u.id ? AWGear.optionsFor(u.id) : null;
