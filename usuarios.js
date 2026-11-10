@@ -23,11 +23,6 @@
     ['heavy', 'Pesada'],
     ['beast', 'Bestia'],
     ['monster', 'Monstruo'],
-    ['comandante', 'Comandante'],
-    ['heroe', 'Héroe'],
-    ['tropa', 'Tropa'],
-    ['monstruo', 'Monstruo'],
-    ['mercenario', 'Mercenario'],
     ['equipo', 'Equipo / Objeto']
   ];
 
@@ -349,7 +344,7 @@
 
     const rules = typeof datosMinis !== 'undefined' && datosMinis ? (datosMinis.reglas_banda || datosMinis.reglas_generales_banda) : null;
     if (rules) {
-      const cmds = units.filter((u) => AWGear.isCommander(u)).length;
+      const cmds = units.filter((u) => AWGear.isCommander(catalogUnitOf(u) || u)).length;
       if (rules.comandante_obligatorio && cmds === 0 && catalogUnits(faction).some((u) => AWGear.isCommander(u))) issues.push('Falta un comandante.');
       if (rules.max_comandantes != null && cmds > rules.max_comandantes)
         issues.push('Máximo ' + rules.max_comandantes + ' comandante' + (rules.max_comandantes === 1 ? '' : 's') + ' por banda.');
@@ -560,7 +555,7 @@
   }
 
   function unitRow(u, i) {
-    const tipo = (TIPOS.find((t) => t[0] === (u.clase || u.tipo)) || [0, u.clase || u.tipo || ''])[1];
+    const tipo = (TIPOS.find((t) => t[0] === ((catalogUnitOf(u) || {}).clase || u.tipo)) || [0, (catalogUnitOf(u) || {}).clase || u.tipo || ''])[1];
     const fname = unitFactionName(u, state.editing.faction);
     const ally = u.id && fname && state.editing.faction && fname !== state.editing.faction && !/Bestiar|Bestiary/i.test(fname);
     return (

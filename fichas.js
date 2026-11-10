@@ -99,7 +99,7 @@
       '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.apodo || u.nombre) +
       (u.apodo ? ' <span class="text-xs text-slate-500 font-normal">' + esc(u.nombre) + '</span>' : c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
-      '<span class="text-xs text-slate-500">' + esc(u.clase || u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
+      '<span class="text-xs text-slate-500">' + esc((c && c.clase) || u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
     const quitado = Array.isArray(u.serie_quitado) ? u.serie_quitado : []; // equipo de serie cambiado en el editor
     const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x) && quitado.indexOf(x) < 0);
     const serieHtml = serie.length
