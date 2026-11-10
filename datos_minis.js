@@ -1910,10 +1910,10 @@ const compendioArcWorlde = {
           "coste": 150,
           "peana_mm": 30,
           "stats": {
-            "hp": 18,
+            "hp": 24,
             "mov": 4,
             "armadura": 0,
-            "ap": 4
+            "ap": 5
           },
           "ataques": [
             "(2 AP) Effortless Slash: Power 7. Special Rules: Each Crit allows one more D6 to be rolled.",
