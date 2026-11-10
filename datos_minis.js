@@ -2089,25 +2089,25 @@ const compendioArcWorlde = {
       "nombre": "Saqueadores No-Muertos",
       "unidades": [
         {
-          "id": "harbinger",
-          "nombre": "Heraldo / Harbinger",
-          "nombre_en": "Harbinger",
-          "tipo": "comandante",
-          "coste": 110,
-          "peana_mm": 40,
+          "id": "undead_harbinger",
+          "nombre": "Harbinger No Muerto",
+          "nombre_en": "Undead Harbinger",
+          "clase": "commander",
+          "coste": 90,
+          "peana_mm": 30,
           "stats": {
-            "hp": 12,
+            "hp": 11,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 4
           },
           "ataques": [
-            "Scythe Sweep: (2 AP) Melee, Power 7.",
-            "Dark Touch: (1 AP) Melee, Power 4."
+            "(2 AP) Swashbuckle: Power 8. Special Rules: If a Critical Hit is rolled, the target loses 1AP in its next Activation.",
+            "(1 AP) Vicious Slash: Power 6. Special Rules: Critical Hits ignore Armour"
           ],
           "rasgos": [
-            "Resurrection",
-            "Outlaw Lord"
+            "Raiser of the Dead",
+            "Soul Eater"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
@@ -2118,35 +2118,28 @@ const compendioArcWorlde = {
             "cursed_pipes",
             "hangmans_noose"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
-          "hechizos": [
-            "Frío Cadavérico / Deathly Chill (Exige 14): Alcance 12\". Reduce en D3 los AP del personaje enemigo objetivo en su siguiente Activación.",
-            "Roecueros / Bonegnawer (Exige 17): Alcance 6\". Invoca una Carrion Rat gratuita a 6\" que se activa de inmediato.",
-            "Drenaje de Alma / Soul Drain (Exige 19): Alcance 6\". El objetivo sufre 3 Impactos que ignoran Armadura; el lanzador recupera 1 HP por cada herida causada.",
-            "Resurrección Masiva / Mass Resurrection (Exige 21): Alcance 6\". Devuelve a la vida a hasta 2 unidades no-muertas caídas a 6\" con 1 HP cada una."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
-          "id": "undead_raider",
-          "nombre": "Saqueador No-Muerto",
-          "nombre_en": "Undead Raider",
-          "tipo": "tropa",
-          "coste": 35,
-          "peana_mm": 30,
+          "id": "old_man_o_bones",
+          "nombre": "Viejo Man'o'Bones",
+          "nombre_en": "Old Man’o’Bones",
+          "clase": "mage",
+          "coste": 90,
+          "peana_mm": 40,
           "stats": {
-            "hp": 5,
+            "hp": 12,
             "mov": 4,
             "armadura": 0,
-            "ap": 2
+            "ap": 3
           },
           "ataques": [
-            "Rusty Cutlass: (2 AP) Melee, Power 5.",
-            "Pistol Shot: (Ranged) Power 4, Alcance 8\"."
+            "(1 AP) Touch of Death: Power 3. Special Rules: Ignores Armour."
           ],
           "rasgos": [
-            "Undead"
+            "Fly",
+            "Crumbling Remains"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
@@ -2154,68 +2147,177 @@ const compendioArcWorlde = {
             "undead_raiders_ranged_weapon",
             "stolen_arcloque_pistol",
             "undead_mount",
+            "cursed_pipes",
             "hangmans_noose"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": [
+            "Deathly Chill (Required Draw 14): Choose one enemy Character within 12” of the caster. Their AP is reduced by D3 in their next Activation.",
+            "Bonegnawer (Required Draw 17): Place a free Carrion Rat within 6” of the caster. It can be Activated this Round, however, if it is Knocked Out it may not be Raised.",
+            "Soul Drain (Required Draw 19): The target Character takes 3 Hits that ignore Armour. For every HP lost by the target, the caster regains 1HP. This Spell may be cast on a friendly Character.",
+            "Mass Resurrection (Required Draw 21): Raise up to three Units or Beasts anywhere on the game board."
           ]
         },
         {
-          "id": "carrion_rat",
-          "nombre": "Rata Carroñera",
-          "nombre_en": "Carrion Rat",
-          "tipo": "tropa",
-          "coste": 20,
+          "id": "undead_bandit",
+          "nombre": "Bandido No Muerto",
+          "nombre_en": "Undead Bandit",
+          "clase": "unit",
+          "coste": 45,
           "peana_mm": 30,
           "stats": {
-            "hp": 4,
+            "hp": 7,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(2 AP) Gut’em: Power 6. Special Rules: Critical Hit ignores 1 Armour.",
+            "(1 AP) Slash: Power 4"
+          ],
+          "rasgos": [
+            "Risen"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "cursed_pipes",
+            "hangmans_noose"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "undead_executioner",
+          "nombre": "Verdugo No Muerto",
+          "nombre_en": "Undead Executioner",
+          "clase": "elite",
+          "coste": 70,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Decapitation: Power 6. Special Rules: If the target is on a 30mm base, it is Knocked Out if it fails its first Defence Roll.",
+            "(1 AP) Weighty Hack: Power 5"
+          ],
+          "rasgos": [
+            "Risen",
+            "Present Thy Neck"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "cursed_pipes",
+            "hangmans_noose"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "undead_ogre",
+          "nombre": "Ogro No Muerto",
+          "nombre_en": "Undead Ogre",
+          "clase": "heavy",
+          "coste": 180,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 16,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 5
+          },
+          "ataques": [
+            "(2 AP) Bludgeon: Power 8. Special Rules: If a Critical Hit is made against a target on a 30 or 40mm base, the target Character becomes Prone.",
+            "(Ranged) Vomit: Power 4. Special Rules: 6” range. If a Critical Hit is rolled, the target must take an immediate Bravery Test.",
+            "(1 AP) Stomp: Power 5. Special Rules: +2 Power if the target is Prone."
+          ],
+          "rasgos": [
+            "Risen",
+            "Fearsome",
+            "Very Flammable"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "cursed_pipes",
+            "hangmans_noose"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "will_o_the_wisp",
+          "nombre": "Will o'the Wisp",
+          "nombre_en": "Will o’the Wisp",
+          "clase": "irregular",
+          "coste": 70,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 6,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Wychfire: Power 4. Special Rules: Effects all Characters within 3”. Ignores Armour, +1 Power if the target is Flammable.",
+            "(Ranged) Ethereal Caress: Power 5. Special Rules: 6” range. Ignores Armour."
+          ],
+          "rasgos": [
+            "Risen",
+            "Fly",
+            "Lure of the Light",
+            "Incorporeal"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "soul_jar",
+            "undead_raiders_ranged_weapon",
+            "stolen_arcloque_pistol",
+            "undead_mount",
+            "cursed_pipes",
+            "hangmans_noose"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "carrion_rat",
+          "nombre": "Rata de Carroña",
+          "nombre_en": "Carrion Rat",
+          "clase": "beast",
+          "coste": 15,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 3,
             "mov": 6,
             "armadura": 0,
             "ap": 2
           },
           "ataques": [
-            "Diseased Bite: (1 AP) Melee, Power 3."
+            "(1 AP) Bite: Power 3",
+            "(2 AP) Death Leap: Power 5. Special Rules: May target Characters within 2”. After this Attack, move this Character in base contact with the target. If more Failures are rolled than Successes to Hit, this Character is Knocked Out."
           ],
           "rasgos": [
-            "Pack Hunter",
-            "Undead"
+            "Risen",
+            "Flammable"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
-        },
-        {
-          "id": "undead_ogre",
-          "nombre": "Ogro No-Muerto",
-          "nombre_en": "Undead Ogre",
-          "tipo": "monstruo",
-          "coste": 160,
-          "peana_mm": 50,
-          "stats": {
-            "hp": 16,
-            "mov": 4,
-            "armadura": 1,
-            "ap": 5
-          },
-          "ataques": [
-            "Corpse Club: (2 AP) Melee, Power 8.",
-            "Stomp: (1 AP) Melee, Power 5."
-          ],
-          "rasgos": [
-            "Undead",
-            "Massive"
-          ],
-          "max_por_banda": null,
-          "equipo_permitido": [
-            "soul_jar",
-            "undead_mount",
-            "hangmans_noose"
-          ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
