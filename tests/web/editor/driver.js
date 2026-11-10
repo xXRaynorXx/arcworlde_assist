@@ -28,6 +28,7 @@ window.addEventListener('load', async () => {
     ok('catálogo: Bestiario aparte', gl().some(l => l.startsWith('Bestiario')) && cat().includes('bestiary:griffling'));
     ok('catálogo: Espadas de Alquiler aparte, sin su comandante', gl().some(l => l.startsWith('Espadas de Alquiler')) && cat().includes('swords_for_hire:mercenary_goon') && !cat().includes('swords_for_hire:father_griffmas'), cat().filter(v => v.startsWith('swords')).join());
     ok('mercenarios: Rabbin Tood usa el arma a distancia halfling', AWGear.optionsFor('rabbin_tood').exclusive.some(a => a.id === 'halfling_ranged_weapon') && AWGear.optionsFor('giant_giantess').common.length === 0);
+    ok('objetos v9: Volley Gun (Ogro), Hobgoblin Mount y Bestial Moxie se ofrecen', AWGear.optionsFor('imperial_ogre').exclusive.some(a => a.id === 'volley_gun') && AWGear.optionsFor('hobgoblins').exclusive.some(a => a.id === 'hobgoblin_mount') && AWGear.optionsFor('beastfolk_clanbeast').exclusive.some(a => a.id === 'bestial_moxie'));
     ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
     AW.addFromCatalog('halfling:halfling_sheriff'); await wait(30);
     AW.addFromCatalog('halfling:halfling_militia'); await wait(30);

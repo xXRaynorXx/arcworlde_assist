@@ -693,6 +693,18 @@ const compendioArcWorlde = {
           "resumen": "Corcel de caballería o bestia local capturada.",
           "detalles": "Efectos: Solo para Captains, Troopers y Dragoons. Otorga +5 HP, +4 al Movimiento y el rasgo Ágil (Agile). Pasa a peana de 50mm.",
           "restriccion": "Captains, Troopers y Dragoons."
+        },
+        {
+          "id": "volley_gun",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Volley Gun",
+          "tipo": "Equipo / Arma a Distancia",
+          "coste": 40,
+          "etiqueta": "Armería Imperial",
+          "resumen": "Volley guns are large multi-barrelled Arcloque weapons that fire a deadly salvo of shot. However, their immense size, powerful recoil and the effort required to reload them make them difficult to wield effectively.",
+          "detalles": "Efectos: The Volley Gun allows the Ogre to make this Attack: (Ranged) Volley Gun Shot: Power - 6. Special Rules: 16” range. This Attack requires a Hard Feat. Draw a line from the base of the Attacker to the Target. All Characters within 2” of this line are also targeted by this Attack. If there are more Failures than Successes when rolling to Hit, the wielder takes D3 Hits that ignores Armour.",
+          "restriccion": "May only be equipped to an Imperial Ogre."
         }
       ],
       "saberes_magicos": [
@@ -987,6 +999,18 @@ const compendioArcWorlde = {
           "resumen": "Látigo largo con púas metálicas.",
           "detalles": "Efectos: Permite realizar ataques en combate melé a una distancia de hasta 3\" (incluso a través de aliados).",
           "restriccion": "Alcance de 3\" en melé."
+        },
+        {
+          "id": "hobgoblin_mount",
+          "faccion_id": "dark_lords",
+          "faccion_nombre": "Señores Oscuros",
+          "nombre": "Hobgoblin Mount",
+          "tipo": "Equipo / Montura",
+          "coste": 30,
+          "etiqueta": "Armería Dark Lords",
+          "resumen": "Hobgoblins are a roving folk who utilise all sorts of beasts to carry themselves and their equipment. Rapid Hobgoblin riders are deadly if utilised effectively.",
+          "detalles": "Efectos: If mounted, a Character gains +5HP and +4 Movement. They are Agile (see Bestiary rules) and now have a 40mm base size.",
+          "restriccion": "May only be used by Hobgoblins."
         }
       ],
       "saberes_magicos": [
@@ -1385,6 +1409,18 @@ const compendioArcWorlde = {
           "resumen": "Afinidad innata para cabalgar a lomos de bestias y monstruos del bosque.",
           "detalles": "Efectos: Permite utilizar el rasgo Montura Monstruosa (Monstrous Mount) sobre cualquier Bestia, Monstruo o Titán del Bestiario.",
           "restriccion": "Atributo físico permanente."
+        },
+        {
+          "id": "bestial_moxie",
+          "faccion_id": "beastfolk",
+          "faccion_nombre": "Hombres Bestia",
+          "nombre": "Bestial Moxie",
+          "tipo": "Forma Animal (Animal Form)",
+          "coste": 20,
+          "etiqueta": "Armería Beastfolk",
+          "resumen": "Some Beastfolk have never known the creep of fear in their hearts. You can decide if this is a good or bad thing.",
+          "detalles": "Efectos: This Character automatically passes all Bravery Tests.",
+          "restriccion": ""
         }
       ],
       "saberes_magicos": [
