@@ -1,87 +1,5 @@
 // Armería para construir bandas: la común (extraída de las Reglas de Campaña) y la exclusiva de cada
 // facción (armeria_exclusiva del compendio, datos_minis.js). Cada objeto tiene coste en GP.
-const armeriaComunDB = [
-  {
-    "id": "arcanite_token",
-    "origen": "comun",
-    "nombre": "Cristal de Arcanita",
-    "tipo": "Consumible",
-    "coste": 10,
-    "resumen": "Otorga ventajas mágicas o tácticas inmediatas.",
-    "detalles": "Efectos: +1 AP, +1D6 a una tirada, permitir lanzar otro hechizo o repetir 1D6 fallido.",
-    "restriccion": "De un solo uso (One use only)"
-  },
-  {
-    "id": "torch",
-    "origen": "comun",
-    "nombre": "Antorcha",
-    "tipo": "Consumible",
-    "coste": 10,
-    "resumen": "El portador cuenta como Fearsome (Temible) frente a Bestias y Monstruos.",
-    "detalles": "Efectos: +1 Power en ataques cuerpo a cuerpo contra objetivos Flammable (Inflamables).",
-    "restriccion": "Desventaja: los ataques a distancia contra el portador pueden repetir los fallos."
-  },
-  {
-    "id": "shield",
-    "origen": "comun",
-    "nombre": "Escudo",
-    "tipo": "Equipo",
-    "coste": 15,
-    "resumen": "Permite repetir una Tirada de Defensa fallida por ronda.",
-    "detalles": "Efecto: Se puede repetir 1 dado de defensa en cada ronda.",
-    "restriccion": ""
-  },
-  {
-    "id": "two_handed_weapon",
-    "origen": "comun",
-    "nombre": "Arma a Dos Manos",
-    "tipo": "Equipo",
-    "coste": 10,
-    "resumen": "Arma Pesada que otorga bonus de Power en los ataques.",
-    "detalles": "Efecto: Otorga +2 Power en todos los ataques cuerpo a cuerpo.",
-    "restriccion": "Invalida tus Éxitos Críticos defensivos, son considerados Fallos."
-  },
-  {
-    "id": "dual_weapon",
-    "origen": "comun",
-    "nombre": "Armas Dobles",
-    "tipo": "Equipo",
-    "coste": 10,
-    "resumen": "Permite repetir dados de ataque cuerpo a cuerpo.",
-    "detalles": "Efectos: Permite repetir todos los resultados de '1' en tiradas de ataque cuerpo a cuerpo.",
-    "restriccion": "Solo se permite repetir una vez por ronda."
-  },
-  {
-    "id": "spear",
-    "origen": "comun",
-    "nombre": "Lanza",
-    "tipo": "Equipo",
-    "coste": 10,
-    "resumen": "Ataques cuerpo a cuerpo hasta 2 pulgadas de distancia.",
-    "detalles": "Efecto: Permite atacar a objetivos a 2\" incluso a través de aliados.",
-    "restriccion": ""
-  },
-  {
-    "id": "light_armour",
-    "origen": "comun",
-    "nombre": "Armadura Ligera",
-    "tipo": "Equipo",
-    "coste": 20,
-    "resumen": "Armadura que bloquea dados de daño.",
-    "detalles": "Efectos: Otorga +1 al Valor de Armadura.",
-    "restriccion": ""
-  },
-  {
-    "id": "heavy_armour",
-    "origen": "comun",
-    "nombre": "Armadura Pesada",
-    "tipo": "Equipo",
-    "coste": 35,
-    "resumen": "Armadura que bloquea dados de daño.",
-    "detalles": "Efectos: Otorga +2 al Valor de Armadura.",
-    "restriccion": "Aumenta en +1 la dificultad de todas las tiradas de Leg It."
-  }
-];
 
 (function () {
   // Ids de equipo mal escritos en equipo_permitido del compendio (se corrigen aquí hasta que se arreglen en los datos)
@@ -122,7 +40,7 @@ const armeriaComunDB = [
   // Armería común: la del compendio (con campos resumen/detalles como el resto)
   function common() {
     const c = comp();
-    if (!c || !c.armeria_comun) return armeriaComunDB;
+    if (!c || !c.armeria_comun) return [];
     return c.armeria_comun.map((a) => ({
       id: a.id, origen: "comun", nombre: a.nombre, tipo: a.tipo, coste: a.coste,
       resumen: "", detalles: a.efecto || a.resumen || "", restriccion: a.restriccion || ""
@@ -133,7 +51,7 @@ const armeriaComunDB = [
     return f ? f.armeria_exclusiva || [] : [];
   }
   function find(origen, id, factionName) {
-    if (origen === "comun") return common().find((a) => a.id === id) || armeriaComunDB.find((a) => a.id === id) || null;
+    if (origen === "comun") return common().find((a) => a.id === id) || null;
     const own = exclusive(factionName).find((a) => a.id === id);
     if (own) return own;
     for (const f of factions()) { const a = (f.armeria_exclusiva || []).find((x) => x.id === id); if (a) return a; }
@@ -159,11 +77,11 @@ const armeriaComunDB = [
     undead_raider: "undead_bandit"
   };
   const canonId = (id) => LEGACY_UNIT_ID[id] || id;
-  // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
-  const claseOf = (u) => (u && (u.clase || u.tipo)) || "";
-  const isCommander = (u) => /^(commander|comandante)$/.test(claseOf(u));
+  // Clase de una miniatura (campo "clase" del compendio)
+  const claseOf = (u) => (u && u.clase) || "";
+  const isCommander = (u) => /^commander$/.test(claseOf(u));
   // Monstruos y bestias: no compran armería común
-  const isMonster = (u) => /^(monstruo|monster|heavy|beast)$/.test(claseOf(u));
+  const isMonster = (u) => /^(monster|heavy|beast)$/.test(claseOf(u));
 
   // Facción de una miniatura del catálogo
   function unitFaction(unitId) {
@@ -183,11 +101,10 @@ const armeriaComunDB = [
     return {
       faccion: f.nombre,
       common: isMonster(u) ? [] : common(),
-      // Fichas antiguas (sin clase) sin equipo listado: se ofrece toda la armería de la facción, salvo a los monstruos. En las nuevas, vacío = nada
-      // Con equipo_permitido: lo que la ficha cita de cualquier armería de facción (los mercenarios usan la de otras)
+      // Lo que la ficha cita en equipo_permitido, de cualquier armería de facción (los mercenarios usan la de otras). Vacío = nada
       exclusive: allowed.size
         ? factions().reduce((all, x) => all.concat((x.armeria_exclusiva || []).filter((a) => allowed.has(a.id) && !all.some((b) => b.id === a.id))), [])
-        : u.clase ? [] : (f.armeria_exclusiva || []).filter(() => !isMonster(u))
+        : []
     };
   }
 
