@@ -2600,192 +2600,224 @@ const compendioArcWorlde = {
           "id": "ourk_chieftain",
           "nombre": "Jefe Ourk",
           "nombre_en": "Ourk Chieftain",
-          "tipo": "comandante",
+          "clase": "commander",
           "coste": 120,
           "peana_mm": 40,
           "stats": {
             "hp": 14,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 5
           },
           "ataques": [
-            "(2 AP) Brawl: Power 8. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Roundhouse Punch: Power 5. Regla Especial: Si el objetivo está Tumbado (Prone) y hay más Éxitos que Fallos, muévelo 3\" en la dirección elegida.",
-            "(1 AP) Bludgeon: Power 5. Regla Especial: Un impacto Crítico otorga +1 Power al siguiente ataque. No acumulable."
+            "(2 AP) Brawl: Power 8. Special Rules: Each Critical Hit allows one more D6 to be rolled.",
+            "(1 AP) Roundhouse Punch: Power 5. Special Rules: If the Target is Prone, if there are more Successes than Failures, the Character is moved 3” in a direction chosen by the Ourk player.",
+            "(1 AP) Bludgeon: Power 5. Special Rules: Critical Hits cause the next Attack to have +1 Power. This does not stack."
           ],
           "rasgos": [
-            "Power Struggle",
-            "Swamp Born",
-            "War Hides (+1 Armadura)"
+            "Intimidating",
+            "Hurl",
+            "Power Struggle"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_ranged_weapon",
+            "ourk_boglin_ranged_weapon",
             "swamp_scrumpy",
             "pet_droggo",
             "magical_mushroom",
-            "ourk_mount"
+            "ourk_boglin_mount"
           ],
-          "equipo_de_serie": [
-            "Pieles de Batalla Ourk (+1 Armadura)"
-          ],
-          "hechizos": [
-            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
-            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
-            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
-            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "ourk_dreameater",
-          "nombre": "Devorador de Sueños",
+          "nombre": "Devorador de Sueños Ourk",
           "nombre_en": "Ourk Dreameater",
-          "tipo": "heroe",
+          "clase": "mage",
           "coste": 90,
-          "peana_mm": 30,
+          "peana_mm": 40,
           "stats": {
-            "hp": 8,
+            "hp": 13,
             "mov": 4,
             "armadura": 0,
-            "ap": 3
+            "ap": 5
           },
           "ataques": [
-            "(2 AP) Devious Slash: Power 6. Regla Especial: Ignores totalmente Armadura y Escudos.",
-            "(Ranged) Choking Mists: Power 3, Alcance 8\". Regla Especial: Ignores totalmente Armadura y Escudos."
+            "(2 AP) Devious Slash: Power 6. Special Rules: Ignores Armour and Shields.",
+            "(Ranged) Choking Mists: Power 3. Special Rules: 8” range. Ignores Armour and Shields."
           ],
           "rasgos": [
-            "Lore of Delusion",
+            "Intimidating",
             "Power Struggle",
-            "Mage"
+            "Familiars"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
             "healing_broth",
             "swamp_scrumpy",
+            "pet_droggo",
             "magical_mushroom",
-            "ourk_mount"
+            "ourk_boglin_mount"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "False Foe: (Exige 14) Alcance 8\". El objetivo debe superar Hazaña Fácil antes de poder atacar esa Ronda.",
-            "Stupor: (Exige 17) Área 3\". Todos las miniaturas a 3\" quedan profundamente dormidas (cuentan como Prone hasta ser atacadas/hechizadas o superar Hazaña Media).",
-            "Dream Eater: (Exige 19) Alcance 2\". Objetivo dormido por Stupor pierde D3 AP para su siguiente activación y se los da al caster. No despierta al objetivo.",
-            "Inside your Mind: (Exige 21) Alcance 4\" (peana 30/40mm). Finaliza activación del caster; activa inmediatamente al objetivo y el jugador Ourk gasta 3 AP controlándolo libremente."
+            "False Foe (Exige 14): Range 8”. For the rest of the Round the target must pass an Easy Feat before they are able to make any Attacks",
+            "Stupor (Exige 17): All Characters within 3” of the caster fall into a deep sleep. They count as being Prone until they are either the target of an Attack or Spell or have passed a Medium Feat in their next Activation. Once they have woken up, they may Activate as normal.",
+            "Dream Eater (Exige 19): Range 2”. This Spell may only be targeted against those under the effects of the Stupor Spell. The target loses D3 AP for their next Activation, and they are given to the caster to spend in their current Activation. In addition, the target is not woken up by this Spell.",
+            "Inside your Mind (Exige 21): Choose a target on a 30mm or 40mm base within 4” of the caster. The caster’s Activation immediately ends, and the target is Activated, even if they have already Activated this Round. The Ourk player can spend 3AP controlling the target however they wish. Once the 3AP is spent, the game continues as normal."
           ]
         },
         {
           "id": "ourk_brute",
           "nombre": "Bruto Ourk",
           "nombre_en": "Ourk Brute",
-          "tipo": "heroe",
+          "clase": "elite",
           "coste": 85,
           "peana_mm": 40,
           "stats": {
             "hp": 11,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 4
           },
           "ataques": [
-            "(2 AP) Brawl: Power 7. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Smack: Power 5. Regla Especial: Un impacto Crítico otorga +1 Power al siguiente ataque. No acumulable."
+            "(2 AP) Brawl: Power 7. Special Rules: Each Critical Hit allows one more Hit to be rolled.",
+            "(1 AP) Smack: Power 5. Special Rules: Critical Hits cause the next Attack to have +1 Power. This does not stack."
           ],
           "rasgos": [
-            "Swamp Born"
+            "Intimidating",
+            "Hurl"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_ranged_weapon",
+            "ourk_boglin_ranged_weapon",
             "swamp_scrumpy",
             "goading_fork",
-            "ourk_mount"
+            "ourk_boglin_mount"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
-          "hechizos": [
-            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
-            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
-            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
-            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "boglin",
           "nombre": "Boglin",
           "nombre_en": "Boglin",
-          "tipo": "tropa",
-          "coste": 25,
+          "clase": "unit",
+          "coste": 20,
           "peana_mm": 30,
           "stats": {
             "hp": 4,
-            "mov": 4,
+            "mov": 5,
             "armadura": 0,
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Scrap: Power 4. Regla Especial: Cada impacto Crítico permite tirar 1D6 adicional.",
-            "(1 AP) Shank: Power 3."
+            "(2 AP) Scrap: Power 4. Special Rules: Each Critical Hit allows one more D6 to be rolled.",
+            "(1 AP) Shank: Power 3"
           ],
           "rasgos": [
             "Diminutive",
-            "Throwable"
+            "Sticky Fingers"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_ranged_weapon",
-            "boglin_musical_instrument",
-            "ourk_mount"
+            "ourk_boglin_ranged_weapon",
+            "musical_instrument",
+            "ourk_boglin_mount"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
-          "hechizos": [
-            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
-            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
-            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
-            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "marsh_hydra",
           "nombre": "Hidra del Pantano",
           "nombre_en": "Marsh Hydra",
-          "tipo": "monstruo",
+          "clase": "monster",
           "coste": 200,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 25,
             "mov": 6,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 7
           },
           "ataques": [
-            "(Ranged) Venom Spit: Power 5, Alcance 8\".",
-            "(2 AP) Constrict: Power 5. Regla Especial: En impacto Crítico, el objetivo no puede moverse ni atacar hasta superar Hazaña Media (si falla sufre D3 Hits).",
-            "(1 AP) Bite: Power 4."
+            "(Ranged) Venom Spit: Power 5. Special Rules: 8” range.",
+            "(2 AP) Constrict: Power 5. Special Rules: On a Critical Hit, the target may not move or Attack until they have made a successful Medium Feat. If unsuccessful, they take D3 Hits.",
+            "(1 AP) Bite: Power 4"
           ],
           "rasgos": [
-            "Head Regeneration",
-            "Fearsome"
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Head Regeneration"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "brewzerker",
+          "nombre": "Brewzerker",
+          "nombre_en": "Brewzerker",
+          "clase": "irregular",
+          "coste": 95,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 11,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Booze Frenzy: Power 9. Special Rules: After this Attack, this Character becomes Prone.",
+            "(1 AP) Drunken Wallop: Power 4"
           ],
-          "hechizos": [
-            "Enemigo Falso / False Foe (Exige 14): Alcance 8\". Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque.",
-            "Estupefacción / Stupor (Exige 17): Alcance 3\" Área. Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media.",
-            "Devorador de Sueños / Dream Eater (Exige 19): Alcance 2\". Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater.",
-            "Dentro de tu Mente / Inside your Mind (Exige 21): Alcance 4\". Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
-          ]
+          "rasgos": [
+            "Intimidating",
+            "Brewboy"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "healing_broth",
+            "swamp_scrumpy",
+            "magical_mushroom",
+            "ourk_boglin_mount"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "swamp_critter",
+          "nombre": "Criatura del Pantano",
+          "nombre_en": "Swamp Critter",
+          "clase": "beast",
+          "coste": 30,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 5,
+            "mov": 7,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(1 AP) Chomp: Power 4"
+          ],
+          "rasgos": [
+            "Agile",
+            "Pack Hunter",
+            "Stinky Beast"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [

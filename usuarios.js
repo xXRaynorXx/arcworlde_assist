@@ -22,6 +22,7 @@
     ['unit', 'Unidad'],
     ['heavy', 'Pesada'],
     ['beast', 'Bestia'],
+    ['monster', 'Monstruo'],
     ['comandante', 'Comandante'],
     ['heroe', 'Héroe'],
     ['tropa', 'Tropa'],
