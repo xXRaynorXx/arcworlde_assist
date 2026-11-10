@@ -4042,6 +4042,60 @@ const compendioArcWorlde = {
           "hechizos": []
         },
         {
+          "id": "death_kiwi",
+          "nombre": "Kiwi de la Muerte",
+          "nombre_en": "Death Kiwi",
+          "clase": "beast",
+          "coste": 60,
+          "peana_mm": 40,
+          "stats": {
+            "hp": 6,
+            "mov": 7,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Razor Beak: Power 6. Special Rules: Critical Hits ignore Armour.",
+            "(1 AP) Peck: Power 4"
+          ],
+          "rasgos": [
+            "Agile",
+            "Pack Hunter",
+            "Flightless"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "death_kiwi_alpha",
+          "nombre": "Kiwi de la Muerte Alfa",
+          "nombre_en": "Death Kiwi Alpha",
+          "clase": "beast",
+          "coste": 100,
+          "peana_mm": 50,
+          "stats": {
+            "hp": 10,
+            "mov": 7,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Vicious Peck: Power 8. Special Rules: Critical Hits ignore Armour.",
+            "(1 AP) Talon Slash: Power 5"
+          ],
+          "rasgos": [
+            "Agile",
+            "Leader of the Pack",
+            "Fearsome"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
           "id": "fire_dragon",
           "nombre": "Dragón de Fuego",
           "nombre_en": "Fire Dragon",
