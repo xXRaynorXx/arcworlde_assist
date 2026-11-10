@@ -3303,7 +3303,7 @@ const compendioArcWorlde = {
           "hechizos": [
             "Chittering Bugs (Exige 14): Choose one enemy Character within 8” of the caster. For their next Activation they may not make any movement Actions as they frantically swat away the bugs.",
             "Slip and Slide (Exige 17): This Spell effects any enemy Characters that attempt a Leg It roll within 8” of the caster. If they fail, instead of becoming Prone they slide the rolled number in the opposite direction of their intended movement. This effect lasts until the end of the Round.",
-            "Peek-a-Boo (Exige 19): Cackling maniacally, the Shaman’s magic makes an ally seem to pop in and out of existence, much to the frustration of the enemy. Choose one allied Character to be the target of this Spell. This Character is temporarily given the Split Activation rule (if they haven’t got it already). Until they have spent their last AP for the Round, whenever they end their Activation remove them from the game board. Place them back again in the same place when they are re-activated.",
+            "Peek-a-Boo (Exige 20): Cackling maniacally, the Shaman’s magic makes an ally seem to pop in and out of existence, much to the frustration of the enemy. Choose one allied Character to be the target of this Spell. This Character is temporarily given the Split Activation rule (if they haven’t got it already). Until they have spent their last AP for the Round, whenever they end their Activation remove them from the game board. Place them back again in the same place when they are re-activated.",
             "Great Green Explosion (Exige 21+): Every Character within 6” of the caster takes 8 Hits, plus additional Hits for every 1 the draw is over 21. If Overpowered, in addition to losing D6 HP, the Shaman loses 1HP for every 1 the draw is over 21."
           ]
         },
@@ -3586,7 +3586,7 @@ const compendioArcWorlde = {
             },
             {
               "nombre": "Peek-a-Boo",
-              "exige": 19,
+              "exige": 20,
               "ap": null,
               "alcance": "Self",
               "efecto": "Cackling maniacally, the Shaman’s magic makes an ally seem to pop in and out of existence, much to the frustration of the enemy. Choose one allied Character to be the target of this Spell. This Character is temporarily given the Split Activation rule (if they haven’t got it already). Until they have spent their last AP for the Round, whenever they end their Activation remove them from the game board. Place them back again in the same place when they are re-activated."
