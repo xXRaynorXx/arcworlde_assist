@@ -18,6 +18,7 @@
 
   function catalogUnit(id) {
     if (!id || typeof datosMinis === 'undefined') return null;
+    if (window.AWGear) id = AWGear.canonId(id);
     for (const f of datosMinis.facciones || []) {
       const u = (f.unidades || []).find((x) => x.id === id);
       if (u) return u;
@@ -97,8 +98,13 @@
 
   // Bonus de armadura que da un texto de equipo: "Otorga +2 al Valor de Armadura", "(Gratis / +1 Armadura)"...
   function armourBonus(text) {
-    const m = String(text || '').match(/\+(\d+)\s*(?:a la |al Valor de )?Armadura/i);
-    return m ? Number(m[1]) : 0;
+    const re = /\+(\d+)\s*(?:a la |al Valor de )?Armadura/i;
+    const m = String(text || '').match(re);
+    if (m) return Number(m[1]);
+    // Equipo de serie dado solo por nombre ("Armadura Pesada / Heavy Armour"): se busca en la armería común
+    const c = window.AWGear ? AWGear.common().find((a) => a.nombre === String(text || '').trim()) : null;
+    const m2 = c ? String(c.detalles || '').match(re) : null;
+    return m2 ? Number(m2[1]) : 0;
   }
   // Atributos base de la miniatura de la banda: los del catálogo (que ya incluyen el equipo de serie),
   // menos la armadura de serie que se haya quitado y más la del equipo comprado.
@@ -144,7 +150,7 @@
       '<div class="flex flex-wrap items-center justify-between gap-2"><p class="font-semibold text-white">' + esc(u.apodo || u.nombre) +
       (u.apodo ? ' <span class="text-xs text-slate-500 font-normal">' + esc(u.nombre) + '</span>' : c && c.nombre !== u.nombre ? ' <span class="text-xs text-slate-500 font-normal">' + esc(c.nombre) + '</span>' : '') +
       (st.ko ? ' <span class="text-xs text-rose-300">🤕 Noqueado</span>' : '') + '</p>' +
-      '<span class="text-xs text-slate-500">' + esc(u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
+      '<span class="text-xs text-slate-500">' + esc(u.clase || u.tipo || '') + ' · ' + ((Number(u.coste) || 0) + gearTotal) + ' GP' + (gearTotal ? ' <span class="text-slate-600">(' + (Number(u.coste) || 0) + ' + ' + gearTotal + ' equipo)</span>' : '') + '</span></div>';
     const quitado = Array.isArray(u.serie_quitado) ? u.serie_quitado : []; // equipo de serie cambiado en el editor
     const serie = ((c && c.equipo_de_serie) || []).filter((x) => !/Armamento Est[aá]ndar/i.test(x) && quitado.indexOf(x) < 0);
     const serieHtml = serie.length

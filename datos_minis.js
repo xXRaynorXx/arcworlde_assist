@@ -18,10 +18,10 @@ const compendioArcWorlde = {
       "nombre": "Halflings",
       "unidades": [
         {
-          "id": "sheriff",
-          "nombre": "Sheriff",
+          "id": "halfling_sheriff",
+          "nombre": "Sheriff Halfling",
           "nombre_en": "Halfling Sheriff",
-          "tipo": "comandante",
+          "clase": "commander",
           "coste": 80,
           "peana_mm": 30,
           "stats": {
@@ -31,32 +31,68 @@ const compendioArcWorlde = {
             "ap": 4
           },
           "ataques": [
-            "(2 AP) Furious Wallop: Power 8. Regla Especial: Un impacto Crítico reduce en 1 los AP del personaje objetivo en su siguiente Activación. No acumulable.",
-            "(1 AP) Hearty Stab: Power 5. Regla Especial: Los impactos Críticos ignoran el valor de Armadura."
+            "(2 AP) Furious Wallop: Power 8. Special Rules: If a Critical Hit is rolled, reduce the target Character's AP by 1 for their next Activation. This does not stack.",
+            "(1 AP) Hearty Stab: Power 5. Special Rules: Critical Hits ignore Armour"
           ],
           "rasgos": [
+            "Light Armour",
             "Make Orders",
-            "Rousing Cheer",
-            "Light Armour (Gratis / +1 Armadura)"
+            "Rousing Cheer"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
-            "montura_halfling",
-            "arma_distancia_halfling",
-            "almuerzo_llevar",
-            "estandarte_pueblo",
+            "packed_lunch",
+            "halfling_ranged_weapon",
+            "town_banner",
+            "halfling_mount",
             "ranger_cloak"
           ],
           "equipo_de_serie": [
-            "Armadura Ligera / Light Armour (Gratis / +1 Armadura)",
-            "Espada y Garrote de Alguacil"
+            "Armadura Ligera / Light Armour"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "halfling_battle_cook",
+          "nombre": "Cocinero de Batalla Halfling",
+          "nombre_en": "Halfling Battle Cook",
+          "clase": "mage",
+          "coste": 80,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 9,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Spoon Whack: Power 5. Special Rules: If a Critical Hit is rolled, reduce the target Character's AP by 1 for their next Activation. This does not stack."
+          ],
+          "rasgos": [
+            "Make Orders"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "potbelly_cauldron",
+            "packed_lunch",
+            "halfling_ranged_weapon",
+            "town_banner",
+            "ranger_cloak"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": [
+            "Hearty Veggie Soup (Exige 14): One friendly Character within 6\" regains 3 HP.",
+            "Marvellous Mutton Stew (Exige 16): One friendly Character within 6\" may re-roll a single failed Leg It roll this Round.",
+            "Bullox Burgers (Exige 17): One friendly Character within 6\" may re-roll all failed Defence rolls until its next Activation.",
+            "Cocklegriff Madras (with rice and naan) (Exige 20): One friendly Character within 6” gains the Fired Up Attack until the end of the Round: (1 AP) Fired Up: Power 8. Special Rules: +1 Power against Flammable targets.",
+            "Mystery Meat Surprise (Exige 21): Choose two different Spells from this list and apply them to the same Character."
           ]
         },
         {
           "id": "halfling_militia",
           "nombre": "Milicia Halfling",
           "nombre_en": "Halfling Militia",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 40,
           "peana_mm": 30,
           "stats": {
@@ -66,29 +102,29 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Twhack: Power 6. Regla Especial: Un impacto Crítico permite al jugador repetir 1 dado de Impacto fallido.",
-            "(1 AP) Thrust: Power 4."
+            "(2 AP) Twhack: Power 6. Special Rules: A Critical Hit allows the player to re-roll 1 failed Hit.",
+            "(1 AP) Thrust: Power 4"
           ],
           "rasgos": [
             "Take Orders"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "packed_lunch",
+            "halfling_ranged_weapon",
+            "town_banner",
             "halfling_mount",
-            "arma_distancia_halfling",
-            "almuerzo_llevar",
             "ranger_cloak"
           ],
-          "equipo_de_serie": [
-            "Herramientas Agrícolas / Armas Improvisadas"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
-          "id": "town_guard",
-          "nombre": "Guardia del Pueblo",
-          "nombre_en": "Town Guard",
-          "tipo": "heroe",
-          "coste": 55,
+          "id": "halfling_town_guard",
+          "nombre": "Guardia del Pueblo Halfling",
+          "nombre_en": "Halfling Town Guard",
+          "clase": "elite",
+          "coste": 70,
           "peana_mm": 30,
           "stats": {
             "hp": 7,
@@ -97,69 +133,63 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Determined Hack: Power 7. Regla Especial: Un impacto Crítico rompe 1 punto de Armadura.",
-            "(1 AP) Chop: Power 4."
+            "(2 AP) Determined Hack: Power 7. Special Rules: A Critical Hit breaks 1 Armour.",
+            "(1 AP) Chop: Power 4"
           ],
           "rasgos": [
             "Take Orders",
             "Heavy Armour",
-            "Bodyguard",
-            "Heavy Armour (Gratis / +2 Armadura)"
+            "Bodyguard"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
+            "packed_lunch",
+            "halfling_ranged_weapon",
+            "town_banner",
             "halfling_mount",
-            "arma_distancia_halfling",
-            "almuerzo_llevar",
             "ranger_cloak"
           ],
           "equipo_de_serie": [
-            "Armadura Pesada / Heavy Armour (Gratis / +2 Armadura, +1 dificultad a Leg It)",
-            "Hacha de la Guardia"
-          ]
+            "Armadura Pesada / Heavy Armour"
+          ],
+          "hechizos": []
         },
         {
-          "id": "battle_cook",
-          "nombre": "Cocinero de Batalla",
-          "nombre_en": "Halfling Battle Cook",
-          "tipo": "heroe",
-          "coste": 65,
-          "peana_mm": 30,
+          "id": "halfling_thing_flinger",
+          "nombre": "Lanza-Cosas Halfling",
+          "nombre_en": "Halfling Thing-Flinger",
+          "clase": "heavy",
+          "coste": 200,
+          "peana_mm": 60,
           "stats": {
-            "hp": 7,
+            "hp": 20,
             "mov": 4,
             "armadura": 0,
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Spoon Whack: Power 5. Regla Especial: Un impacto Crítico reduce en 1 los AP del objetivo en su siguiente Activación. No acumulable.",
-            "(1 AP) Tenderise: Power 3."
+            "(2 AP) Trample: Power 4. Special Rules: If a Critical Hit is rolled, the target Character is Prone and the Thing-Flinger may move out of combat without any penalties.",
+            "(Ranged) And…FIRE!: Power 10. Special Rules: 20” range. Requires a Hard Feat to Shoot."
           ],
           "rasgos": [
-            "Grand Cookbook",
-            "Grand Cookbook of Bulbo Chubb"
+            "Flammable",
+            "Crew",
+            "Random Payload"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
-            "potbelly_cauldron",
-            "almuerzo_llevar"
+            "packed_lunch",
+            "town_banner",
+            "ranger_cloak"
           ],
-          "equipo_de_serie": [
-            "Cucharas y Calderos de Combate",
-            "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb"
-          ],
-          "hechizos": [
-            "Sopa de Verduras / Hearty Veggie Soup (Exige 14): Alcance 6\". Sana 3 HP a un personaje aliado a 6\" o menos.",
-            "Estofado de Oveja / Marvellous Mutton Stew (Exige 16): Alcance 6\". Un aliado a 6\" puede repetir todas las tiradas de Leg It durante la Ronda.",
-            "Curry Cocklegriff Madras / Cocklegriff Madras (Exige 20): Alcance 6\". Otorga el ataque Fired Up (1AP, Power 8, +1 vs Flammable) a un aliado a 6\" hasta el final de la ronda.",
-            "Sorpresa de Carne Misteriosa / Mystery Meat Surprise (Exige 21): Alcance 6\". Otorga +2 AP y cura D6 HP a un personaje aliado a 6\" o menos."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
-          "id": "monster_hunter",
-          "nombre": "Cazador de Monstruos",
+          "id": "halfling_monster_hunter",
+          "nombre": "Cazador de Monstruos Halfling",
           "nombre_en": "Halfling Monster Hunter",
-          "tipo": "heroe",
+          "clase": "irregular",
           "coste": 60,
           "peana_mm": 30,
           "stats": {
@@ -169,49 +199,44 @@ const compendioArcWorlde = {
             "ap": 3
           },
           "ataques": [
-            "(2 AP) Spear Thrust: Power 6.",
-            "(1 AP) Net Throw: (Ranged) Power 3, Alcance 6\". Regla Especial: Si el ataque impacta con éxito, el objetivo queda Tumbado (Prone)."
+            "(2 AP) Cunning Thrust: Power 6. Special Rules: Re-roll all failed Hits against Monsters or Titans. These cannot be re-rolled again"
           ],
-          "rasgos": [
-            "Expert Poacher",
-            "Traps (Gratis)"
-          ],
+          "rasgos": [],
           "max_por_banda": null,
           "equipo_permitido": [
-            "almuerzo_llevar",
-            "ranger_cloak"
+            "packed_lunch",
+            "ranger_cloak",
+            "halfling_ranged_weapon",
+            "town_banner"
           ],
-          "equipo_de_serie": [
-            "Marcadores de Trampa / Traps (Gratis / 1 uso por activación)"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
-          "id": "thing_flinger",
-          "nombre": "Lanza-Cosas Halfling",
-          "nombre_en": "Halfling Thing-Flinger",
-          "tipo": "monstruo",
-          "coste": 200,
-          "peana_mm": 50,
+          "id": "trollhound",
+          "nombre": "Sabueso de Trolls",
+          "nombre_en": "Trollhound",
+          "clase": "beast",
+          "coste": 35,
+          "peana_mm": 30,
           "stats": {
-            "hp": 20,
-            "mov": 4,
+            "hp": 6,
+            "mov": 6,
             "armadura": 0,
-            "ap": 3
+            "ap": 2
           },
           "ataques": [
-            "(Ranged) FIRE!: Power 10, Alcance 20\". Regla Especial: Requiere Hazaña Difícil para disparar. Consulta la tabla de Carga Aleatoria (Payload 1-6) antes de la tirada.",
-            "(2 AP) Trample: Power 4. Regla Especial: En impacto Crítico, el objetivo queda Tumbado (Prone) y el Thing-Flinger puede destrabarse sin penalizaciones."
+            "(1 AP) Bite: Power 5"
           ],
           "rasgos": [
-            "Crew and Payload",
-            "Crew",
-            "Random Payload"
+            "Agile",
+            "Pack Hunter",
+            "Cling On"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Catapulta de Trastura / Thing-Flinger"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [

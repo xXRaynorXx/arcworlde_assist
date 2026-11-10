@@ -141,14 +141,31 @@ const armeriaComunDB = [
     return null;
   }
 
+  // Ids antiguos (en castellano / sin prefijo) de bandas ya guardadas -> id actual del compendio
+  const LEGACY_UNIT_ID = {
+    sheriff: "halfling_sheriff",
+    battle_cook: "halfling_battle_cook",
+    town_guard: "halfling_town_guard",
+    thing_flinger: "halfling_thing_flinger",
+    monster_hunter: "halfling_monster_hunter"
+  };
+  const canonId = (id) => LEGACY_UNIT_ID[id] || id;
+  // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
+  const claseOf = (u) => (u && (u.clase || u.tipo)) || "";
+  const isCommander = (u) => /^(commander|comandante)$/.test(claseOf(u));
+  // Monstruos y bestias: no compran armería común
+  const isMonster = (u) => /^(monstruo|heavy|beast)$/.test(claseOf(u));
+
   // Facción de una miniatura del catálogo
   function unitFaction(unitId) {
+    unitId = canonId(unitId);
     const f = factions().find((x) => (x.unidades || []).some((u) => u.id === unitId));
     return f ? f.id : null;
   }
   // Equipo que puede comprar una miniatura del catálogo: la armería común (salvo monstruos) y lo que
   // su ficha permite de la armería de su facción (equipo_permitido).
   function optionsFor(unitId) {
+    unitId = canonId(unitId);
     const fid = unitFaction(unitId);
     const f = factions().find((x) => x.id === fid);
     const u = f && f.unidades.find((x) => x.id === unitId);
@@ -156,9 +173,9 @@ const armeriaComunDB = [
     const allowed = new Set((u.equipo_permitido || []).map((id) => GEAR_ALIAS[id] || id));
     return {
       faccion: f.nombre,
-      common: u.tipo === "monstruo" ? [] : common(),
+      common: isMonster(u) ? [] : common(),
       // Si la ficha no lista equipo (faltan datos en el compendio), se ofrece toda la armería de la facción, salvo a los monstruos
-      exclusive: (f.armeria_exclusiva || []).filter((a) => (allowed.size ? allowed.has(a.id) : u.tipo !== "monstruo"))
+      exclusive: (f.armeria_exclusiva || []).filter((a) => (allowed.size ? allowed.has(a.id) : !isMonster(u)))
     };
   }
 
@@ -177,5 +194,5 @@ const armeriaComunDB = [
     return Object.keys(out).map((id) => out[id]);
   }
 
-  window.AWGear = { common, exclusive, find, factionId, unitFaction, optionsFor, allies };
+  window.AWGear = { canonId, claseOf, isCommander, isMonster, common, exclusive, find, factionId, unitFaction, optionsFor, allies };
 })();
