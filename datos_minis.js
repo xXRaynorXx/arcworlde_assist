@@ -3656,7 +3656,7 @@ const compendioArcWorlde = {
           "id": "griffling",
           "nombre": "Griffling",
           "nombre_en": "Griffling",
-          "tipo": "monstruo",
+          "clase": "beast",
           "coste": 22,
           "peana_mm": 30,
           "stats": {
@@ -3666,8 +3666,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "(2 AP) Dive Bomb: Power 7, Alcance 2\". Regla Especial: Coloca al Griffling en contacto de peana tras atacar. Si saca más Fallos que Éxitos queda Noqueado.",
-            "(1 AP) Peck: Power 3."
+            "(2 AP) Dive Bomb: Power 7. Special Rules: May target Characters within 2”. After this Attack, move this Character in base contact with the target. If more Failures are rolled than Successes to Hit, this Character is Knocked Out.",
+            "(1 AP) Peck: Power 3"
           ],
           "rasgos": [
             "Fly",
@@ -3676,65 +3676,401 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "troggle",
+          "nombre": "Troggle",
+          "nombre_en": "Troggle",
+          "clase": "beast",
+          "coste": 30,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 5,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(2 AP) Dig Attack: Power 6. Special Rules: Must be performed whilst Burrowed. The Troggle comes out of its burrow after this Attack has taken place.",
+            "(1 AP) Scrabble: Power 3"
+          ],
+          "rasgos": [
+            "Pack Hunter",
+            "Burrower"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "arcanid",
+          "nombre": "Arcanid",
+          "nombre_en": "Arcanid",
+          "clase": "beast",
+          "coste": 60,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 7,
+            "mov": 7,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Sting: Power 7. Special Rules: A Critical Hit ignores Armour.",
+            "(1 AP) Bite: Power 4"
+          ],
+          "rasgos": [
+            "Pack Hunter",
+            "Agile",
+            "Flammable",
+            "Web Spray",
+            "Web Spinner"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "peagryph",
+          "nombre": "Peagryph",
+          "nombre_en": "Peagryph",
+          "clase": "beast",
+          "coste": 80,
+          "peana_mm": 40,
+          "stats": {
+            "hp": 8,
+            "mov": 8,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Featherblade: Power 6. Special Rules: This Attack may be made against targets up to 2” away, even if they aren’t in base contact. Attacks may still be made if there is a friendly Character between this Character and the target.",
+            "(1 AP) Piercing Screech: Power 1. Special Rules: Affects all Characters within 6” and ignores Armour and Shields. On a Critical Hit, the target’s Move stat is halved for this Round. This does stack."
+          ],
+          "rasgos": [
+            "Fly",
+            "Agile"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "wild_unicorn",
+          "nombre": "Unicornio Salvaje",
+          "nombre_en": "Wild Unicorn",
+          "clase": "monster",
+          "coste": 80,
+          "peana_mm": 50,
+          "stats": {
+            "hp": 8,
+            "mov": 10,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Piercing Horn: Power 7. Special Rules: +2 Power if this Attack is made after a Charge.",
+            "(1 AP) Hoof: Power 4"
+          ],
+          "rasgos": [
+            "Agile"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "faery_dragon",
+          "nombre": "Dragón Feérico",
+          "nombre_en": "Faery Dragon",
+          "clase": "beast",
+          "coste": 100,
+          "peana_mm": 40,
+          "stats": {
+            "hp": 14,
+            "mov": 8,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Blinding Light: Power 1. Special Rules: Affects all Characters within 6” and ignores Armour and Shields. On a Critical Hit, the target’s AP is reduced by 1 for their next Activation. This does stack.",
+            "(1 AP) Bite: Power 5"
+          ],
+          "rasgos": [
+            "Fly",
+            "Agile",
+            "Glittering Scales",
+            "Healing Song"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "juvenile_forest_dragon",
+          "nombre": "Dragón del Bosque Juvenil",
+          "nombre_en": "Juvenile Forest Dragon",
+          "clase": "monster",
+          "coste": 150,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 15,
+            "mov": 6,
+            "armadura": 0,
+            "ap": 5
+          },
+          "ataques": [
+            "(2 AP) Poison Bite: Power *. Special Rules: The target receives a number of Hits equal to the amount of HP they are below their starting HP.",
+            "(2 AP) Tail Swipe: Power 4. Special Rules: All Characters within 2” are targeted by this Attack. If a Critical Hit is rolled, and they on a smaller base size, the target Character is Prone.",
+            "(1 AP) Sharp Claws: Power 5. Special Rules: Critical Hits ignore Armour."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Fungal Regeneration"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "forest_troll",
           "nombre": "Troll del Bosque",
           "nombre_en": "Forest Troll",
-          "tipo": "monstruo",
+          "clase": "monster",
           "coste": 220,
-          "peana_mm": 50,
+          "peana_mm": 60,
           "stats": {
             "hp": 20,
             "mov": 5,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 8
           },
           "ataques": [
-            "(Ranged) Boulder Lob: Power 9, Alcance 12\". Regla Especial: Requiere superar una Hazaña Media.",
-            "(2 AP) Hurl: Power 4. Regla Especial: En impacto Crítico, lanza al objetivo D6\" lejos en la dirección elegida y lo deja Tumbado (Prone).",
-            "(1 AP) Smash: Power 6. Regla Especial: En impacto Crítico, deja Tumbado (Prone) al objetivo si está en peana más pequeña."
+            "(2 AP) Hurl: Power 4. Special Rules: If a Critical Hit is made, the target Character may be thrown D6 inches in a direction of the Troll player’s choosing. This Character is Prone.",
+            "(Ranged) Boulder Lob: Power 9. Special Rules: 12” range. Requires a Medium Feat.",
+            "(1 AP) Smash: Power 6. Special Rules: If a Critical Hit is rolled, if the target Character is on a smaller base size they become Prone after the Attack has been made."
           ],
           "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
             "Fungal Regeneration",
-            "Fearsome"
+            "Ambush"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "old_grogg",
+          "nombre": "Old Grogg el Troll del Río",
+          "nombre_en": "Old Grogg the River Troll",
+          "clase": "monster",
+          "coste": 400,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 30,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 10
+          },
+          "ataques": [
+            "(1 AP) Weighty Smash: Power 5. Special Rules: If a Crit is rolled and the target Character is on a smaller base size they become Prone after the Attack has been made.",
+            "(2 AP) Launch: Power 5. Special Rules: If a Critical Hit is made, the target Character may be thrown D6 inches in a direction of the Troll player’s choosing. This Character is Prone.",
+            "(2 AP) Ravenous Chomp: Power 6. Special Rules: If a Crit is rolled, Old Grogg may make a single attempt to Gobble the target for only an Easy Feat."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
+            "Leader of the Pack",
+            "Aquatic",
+            "Grizzled Hide"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "forest_dragon",
+          "nombre": "Dragón del Bosque",
+          "nombre_en": "Forest Dragon",
+          "clase": "monster",
+          "coste": 900,
+          "peana_mm": 120,
+          "stats": {
+            "hp": 100,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 30
+          },
+          "ataques": [
+            "(Ranged) Noxious Breath: Power 2. Special Rules: 6” range. Requires a Hard Feat. Draw a line from this Character to the target. Any Character touched by this line is also affected by this Attack. In addition, the targets suffer a number of Hits equal to the amount of HP that they are below their starting HP.",
+            "(2 AP) Tail Swipe: Power 4. Special Rules: All Characters within 4” are targets of this attack. If Critical Hit is made, the target Character is thrown D6 inches in a direction of the Dragon player’s choosing. This Character is Prone.",
+            "(1 AP) Talons: Power 6. Special Rules: If a Critical Hit is rolled, if the target Character is on a smaller base size they become Prone after the Attack has been made.",
+            "(5 AP) Arboreal Gore: Power 15. Special Rules: Hits may be split between up to five target Characters. If a Critical Hit is rolled, the target Character suffers an extra Hit if they are the target of this Attack again this Activation."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
+            "Advanced Fungal Regeneration",
+            "Ambush"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "arcanid_queen",
+          "nombre": "Reina Arcanid",
+          "nombre_en": "Arcanid Queen",
+          "clase": "monster",
+          "coste": 900,
+          "peana_mm": 120,
+          "stats": {
+            "hp": 80,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 28
+          },
+          "ataques": [
+            "(2 AP) Horrible Sting: Power 4. Special Rules: If a Critical Hit is rolled, an extra Hit is taken by the target the next time they Activate. If the target fails to Defend it, another Hit is taken in their next Activation, and so on. These additional Hits ignore Armour and Shields.",
+            "(2 AP) Grasp: Power 5. Special Rules: If a Critical Hit is rolled, the Arcanid Queen may Gobble the target on an Easy Feat during this Activation.",
+            "(1 AP) Mandibles: Power 5. Special Rules: Critical Hits break 1 Armour.",
+            "(5 AP) Arcane Burst: Power 6. Special Rules: Affects all Characters within 2”. All Mages must pass a Bravery Test or automatically Overpower their Spells for the rest of the Round."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
+            "Arcanite Carapace"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": [
+            "Chittering Swarm (Exige 14): All enemy Characters in base contact take 1 Hit.",
+            "Summon Arcanid (Exige 18): Replace one Knocked Out Arcanid at full HP on a table edge of your choice.",
+            "Silken Salve (Exige 20): The caster regains D6 HP."
           ]
         },
         {
-          "id": "giant",
-          "nombre": "Gigante / Giganta",
-          "nombre_en": "Giant / Giantess",
-          "tipo": "mercenario",
-          "coste": 600,
+          "id": "swamp_wyvern",
+          "nombre": "Guiverno del Pantano",
+          "nombre_en": "Swamp Wyvern",
+          "clase": "monster",
+          "coste": 900,
           "peana_mm": 120,
           "stats": {
-            "hp": 60,
-            "mov": 5,
-            "armadura": 2,
-            "ap": 20
+            "hp": 100,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 30
           },
           "ataques": [
-            "(2 AP) Massive Club: Power 10, Alcance 3\".",
-            "(2 AP) Pick Up: Regla Especial: Permite agarrar personajes (peana <= 40mm) y lanzarlos.",
-            "(1 AP) Bellow: Area 6\". Regla Especial: Obliga a todos los enemigos en área a realizar un Chequeo de Valentía."
+            "(5 AP) Thunderous Dive: Power 10. Special Rules: May only be used if the Swamp Wyvern is Airborne. Pick an area on the board. All Characters within 3” of this Attack are hit by this Attack. After the Attack has been made, place the Swamp Wyvern on the board in the area the Attack was made. It also takes a Power 10 Attack, and its Activation immediately ends. Rearrange any Characters that have not been Knocked Out by this Attack in base contact with the Swamp Wyvern.",
+            "(2 AP) Crushing Jaws: Power 6. Special Rules: If this Attack causes the target to lose 5 or more HP, they may be Gobbled in this Activation on an Easy Feat.",
+            "(2 AP) Thunderous Belch: Power 5. Special Rules: If a Critical Hit is rolled, the target Character is thrown backwards D6”.",
+            "(1 AP) Stomp: Power 4"
           ],
           "rasgos": [
-            "Long Limbs",
-            "Titan"
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
+            "Magical Spores"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "tarrasque",
+          "nombre": "Tarrasque",
+          "nombre_en": "Tarrasque",
+          "clase": "monster",
+          "coste": 1200,
+          "peana_mm": 120,
+          "stats": {
+            "hp": 200,
+            "mov": 3,
+            "armadura": 0,
+            "ap": 30
+          },
+          "ataques": [
+            "(2 AP) Tail Lash: Power 4. Special Rules: All Characters within 4” are targets of this attack. If Critical Hit is made, the target Character is thrown D6 inches in a direction of the Tarrasque player’s choosing. This Character is Prone.",
+            "(1 AP) Languid Chomp: Power 4",
+            "(2 AP) Earthquake Stomp: Power 5. Special Rules: Hits are doubled if the Target is Prone.",
+            "(5 AP) Carapace Crush: Power 20. Special Rules: Hits may be split between up to five target Characters. +1 Power if the target is Prone. The Tarrasque may only Move again on a successful Easy Feat to get up."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble",
+            "Living Lair"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "fire_dragon",
+          "nombre": "Dragón de Fuego",
+          "nombre_en": "Fire Dragon",
+          "clase": "monster",
+          "coste": 1000,
+          "peana_mm": 120,
+          "stats": {
+            "hp": 100,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 30
+          },
+          "ataques": [
+            "(Ranged) Flaming Breath: Power 6. Special Rules: 8” range. Requires a Hard Feat. Draw a line from this Character to the target. Any Character touched by this line is also affected by this Attack. +2 Power against Flammable targets.",
+            "(2 AP) Crunch: Power 6. Special Rules: If a Crit is rolled, a Gobble attempt may be made as an Easy Feat.",
+            "(1 AP) Spiked Tail: Power 5. Special Rules: If a Critical Hit is rolled, break 1 Armour.",
+            "(5 AP) Eruption: Power 20. Special Rules: Place a token up to 8” away. Divide the Hits from this Attack between all Characters within 3” of the token. Add an additional +2 Hits against Flammable targets."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Gobble"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [],
