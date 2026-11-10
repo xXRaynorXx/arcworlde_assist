@@ -328,6 +328,11 @@
     });
     const best = catalogFactions().find((x) => x.id === 'bestiary');
     if (best && best.id !== own.id) groups.push({ label: 'Bestiario (se contrata aparte)', kind: 'bestiary', units: (best.unidades || []).map((u) => ({ f: best, u })) });
+    const hire = catalogFactions().find((x) => x.id === 'swords_for_hire');
+    if (hire && hire.id !== own.id) {
+      const units = (hire.unidades || []).filter((u) => !AWGear.isCommander(u)).map((u) => ({ f: hire, u }));
+      if (units.length) groups.push({ label: 'Espadas de Alquiler (se contrata aparte)', kind: 'hire', units });
+    }
     return groups;
   }
   const recruitable = (faction) => recruitGroups(faction).reduce((all, g) => all.concat(g.units.map((p) => p.u)), []);

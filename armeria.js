@@ -178,7 +178,10 @@ const armeriaComunDB = [
       faccion: f.nombre,
       common: isMonster(u) ? [] : common(),
       // Si la ficha no lista equipo (faltan datos en el compendio), se ofrece toda la armería de la facción, salvo a los monstruos
-      exclusive: (f.armeria_exclusiva || []).filter((a) => (allowed.size ? allowed.has(a.id) : !isMonster(u)))
+      // Con equipo_permitido: lo que la ficha cita de cualquier armería de facción (los mercenarios usan la de otras)
+      exclusive: allowed.size
+        ? factions().reduce((all, x) => all.concat((x.armeria_exclusiva || []).filter((a) => allowed.has(a.id) && !all.some((b) => b.id === a.id))), [])
+        : (f.armeria_exclusiva || []).filter(() => !isMonster(u))
     };
   }
 
