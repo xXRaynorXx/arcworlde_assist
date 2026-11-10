@@ -152,7 +152,7 @@ const armeriaComunDB = [
     enchanted_sentinel: "sentinel",
     gremlin_chief: "the_great_gremlin",
     gremlin_warrior: "gremlin_scamp",
-    vampire_lord: "vampire",
+    vampire_lord: "vampire_supreme",
     vampire_thrall: "thrall",
     ancient_grave_lord: "grave_lord",
     harbinger: "undead_harbinger",
