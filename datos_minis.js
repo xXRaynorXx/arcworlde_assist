@@ -347,35 +347,43 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb",
+          "saber": "The Grand Cookbook of Bulbo Chubb",
+          "reglas_saber": "These delicious meals, created by the legendary Master Cook Bulbo Chubb himself, are often either brought to or prepared on the battlefield by the Halflings to give them strength in combat. All it takes is a little Arcanite seasoning and the dishes take up a whole new dimension of 'flavour'. The effects of these Spells do not stack and are replaced if another Spell is cast upon the same Character.",
           "hechizos": [
             {
-              "nombre": "Sopa de Verduras / Hearty Veggie Soup",
+              "nombre": "Hearty Veggie Soup",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Sana 3 HP a un personaje aliado a 6\" o menos."
+              "efecto": "The honest soil of Hobbleshire bestows the vegetables grown in it a distinctive, powerful flavour. Those who drink this nourishing broth say that its warmth can soothe even the most grievous of injuries. One friendly Character within 6\" regains 3 HP."
             },
             {
-              "nombre": "Estofado de Oveja / Marvellous Mutton Stew",
+              "nombre": "Marvellous Mutton Stew",
               "exige": 16,
-              "ap": 1,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Un aliado a 6\" puede repetir todas las tiradas de Leg It durante la Ronda."
+              "efecto": "Halflings are well known for keeping herds of well-bred sheep, and this stew is so scrumptious that they must have been honoured to have become mutton for it. One friendly Character within 6\" may re-roll a single failed Leg It roll this Round."
             },
             {
-              "nombre": "Curry Cocklegriff Madras / Cocklegriff Madras",
+              "nombre": "Bullox Burgers",
+              "exige": 17,
+              "ap": null,
+              "alcance": "6\"",
+              "efecto": "Bullox are loyal beasts of burden for the Halflings, but even they can’t work forever. Thankfully they also make a cracking meal once they have… ‘retired’. One friendly Character within 6\" may re-roll all failed Defence rolls until its next Activation."
+            },
+            {
+              "nombre": "Cocklegriff Madras",
               "exige": 20,
-              "ap": 1,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Otorga el ataque Fired Up (1AP, Power 8, +1 vs Flammable) a un aliado a 6\" hasta el final de la ronda."
+              "efecto": "This dish, inspired by the fragrant delicacies of Raajalan, has become a firm favourite for feisty folk to get them in the mood for a scrap. Although the violence the morning after often eclipses any that preceded it. One friendly Character within 6” gains the Fired Up Attack until the end of the Round: (1AP) Fired Up: Power - 8. Special Rules: +1 Power against Flammable targets."
             },
             {
-              "nombre": "Sorpresa de Carne Misteriosa / Mystery Meat Surprise",
+              "nombre": "Mystery Meat Surprise",
               "exige": 21,
-              "ap": 2,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Otorga +2 AP y cura D6 HP a un personaje aliado a 6\" o menos."
+              "efecto": "The ‘piece de résistance’ (as they would say in Galanaux), this outstanding feat of culinary craft is a closely guarded secret recipe. Only the finest of gourmets can master it, and its subtle flavours and expensive ingredients are often wasted on the rabble that gobble it up greedily on the battlefield. One friendly Character within 6\" gains +2 AP and regains D6 HP."
             }
           ]
         }
@@ -689,28 +697,43 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Inventos y Artilugios Arcanos / Tinkerer's Arcane Contraptions",
+          "saber": "Tinkerer's Arcane Contraptions",
+          "reglas_saber": "The job of the Tinkerer is to maintain the equipment of the Imperial warband. However, their manic imaginations cannot be kept idle for long, and Tinkerers often bring trunks of their curious contraptions to the battlefield. Maybe one of their arcane creations just might help?",
           "hechizos": [
             {
-              "nombre": "Griffling Mecánico / Mechanical Griffling",
+              "nombre": "Mechanical Griffling",
               "exige": 14,
-              "ap": 2,
+              "ap": null,
               "alcance": "Contacto",
-              "efecto": "Despliega un Griffling de metal autómata en contacto de peana que se activa inmediatamente."
+              "efecto": "With a whirr and a chirp, a Griffling made of polished metal springs into life. Place a Griffling (see Bestiary) in base contact with the Tinkerer that is Activated immediately after the Tinkerer’s Activation has ended. This Spell may only be used again if the Mechanical Griffling has been Knocked Out."
             },
             {
-              "nombre": "Sobrecarga de Arcanita / Arcane Overcharge",
+              "nombre": "Revolving Pistol",
               "exige": 16,
-              "ap": 1,
-              "alcance": "6\"",
-              "efecto": "Sobrecarga armas de pólvora o arcloque de aliados a 6\", otorgando +2 al Power en el siguiente disparo."
+              "ap": null,
+              "alcance": "8\"",
+              "efecto": "The Tinkerer pulls out a bizarre multi-barrelled Arcloque pistol that fires many bullets one after another. The Tinkerer may make this Attack: (Ranged) Revolving Pistol - Power: 5. Special Rules: 8” range. Roll another D6 for each Successful Hit."
             },
             {
-              "nombre": "Barrera de Autómatas / Automaton Shield",
-              "exige": 18,
-              "ap": 2,
-              "alcance": "4\"",
-              "efecto": "Despliega una barrera protectora de engranajes que otorga +1 de Armadura a todos los aliados a 4\"."
+              "nombre": "Arcane Shielding",
+              "exige": 17,
+              "ap": null,
+              "alcance": "2\"",
+              "efecto": "A contraption emits an aura of blue-green light that extends around the Tinkerer and appears to deflect blows from afar. For the rest of the Round, any Character within 2” of the Tinkerer gains +1 Armour for Attacks made by Characters outside of this area."
+            },
+            {
+              "nombre": "Homing Bullet",
+              "exige": 20,
+              "ap": null,
+              "alcance": "Contacto",
+              "efecto": "A triumph of engineering, this projectile seemingly never misses its mark. Once this Spell has been cast, in their Activation a single Character in base contact with the Tinkerer may make a single Ranged Attack that ignores cover and automatically passes its Feat roll for free."
+            },
+            {
+              "nombre": "Magic Gobbler",
+              "exige": 21,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "A marvellous device that swallows magical energy and stores it for the Tinkerer to use. Until the Tinkerer’s next Activation, every time an enemy Character successfully casts a Spell, roll a D6. On a Success the Spell is not cast and the Tinkerer gains an Arcanite Token."
             }
           ]
         }
@@ -968,35 +991,43 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de la Villanía / Lore of Villainy",
+          "saber": "Lore of Villainy",
+          "reglas_saber": "Trapped for millennia within the Blasted Wastes, many Dark Lords turn their fevered minds to mastering the arts of magic. These wicked villains use their powers to great effect and are, in their opinion, unmatched by the lowly mages of other peoples.",
           "hechizos": [
             {
-              "nombre": "Chillido Maligno / Sickly Screech",
+              "nombre": "Sickly Screech",
               "exige": 14,
-              "ap": 1,
-              "alcance": "4\" Área",
-              "efecto": "Cada personaje a 4\" tira D6; si falla, sufre -1 AP en su siguiente Activación."
+              "ap": null,
+              "alcance": "4\"",
+              "efecto": "A foul scream erupts from the helmet of the Dark Lord, causing those around them to clutch their ears in pain. Each Character within 4” of the caster must roll a D6. On a Failure, they are at -1 AP in their next Activation. This Spell affects the caster, and its effects do not stack."
             },
             {
-              "nombre": "Aura Ominosa / Ominous Aura",
+              "nombre": "Ominous Aura",
               "exige": 17,
-              "ap": 1,
-              "alcance": "Personal",
-              "efecto": "El lanzador obtiene el rasgo Temible (Fearsome) hasta el final de la Ronda."
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "A miasma of evil surrounds the Dark Lord, seeping into the hearts of those before them. The caster gains the Fearsome Trait until the end of the Round (see Bestiary)."
             },
             {
-              "nombre": "Esbirros Inquietos / Restless Minions",
+              "nombre": "Restless Minions",
               "exige": 18,
-              "ap": 2,
-              "alcance": "6\"",
-              "efecto": "Reanima a un esbirro Hobgoblin o Underling Noqueado a 6\", devolviéndolo al combate con 1 HP."
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "The wickedness of the Dark Lord seeps into the minds of their unconscious subjects, bringing them back from the brink of the abyss. Place one Knocked Out Unit within 3” of the caster at 1HP."
             },
             {
-              "nombre": "Proyectil Oscuro / Dark Bolt",
+              "nombre": "Molten Terrain",
               "exige": 20,
-              "ap": 2,
-              "alcance": "12\"",
-              "efecto": "Ataque mágico a distancia Power 7 que ignora Armadura y Escudos."
+              "ap": null,
+              "alcance": "8\"",
+              "efecto": "The Dark Lord summons the volcanic heat of their ashen realm, forcing the very earth to melt and bubble. Pick an area with a 4” radius within 8” of the caster. Until the end of the Round, any Character who is in base contact with this area takes D6 Hits."
+            },
+            {
+              "nombre": "Hellfire",
+              "exige": 21,
+              "ap": null,
+              "alcance": "Cone 6\"",
+              "efecto": "(21+) The Dark Lord issues forth a terrifying gout of flame, scorching all in its path. Draw a 6” line from the front base edge of the caster. All Characters within 2” of the line are targeted by an Attack with Power 8 (+2 Power vs Flammable)."
             }
           ]
         }
@@ -1358,35 +1389,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de Diente y Pelaje / Lore of Tooth and Fur",
+          "saber": "Lore of Tooth and Fur",
+          "reglas_saber": "Beastfolk are instinctively attuned to the energies of nature and use them to power their magic. Brandishing mystical charms and potions made from the bones of their kin, their Hedge Witches use knowledge and skill passed down for generations to weave arcane energy into a tapestry of power.",
           "hechizos": [
             {
-              "nombre": "Criaturas del Bosque / Forest Creatures",
+              "nombre": "Forest Creatures",
               "exige": 14,
-              "ap": 2,
-              "alcance": "12\"",
-              "efecto": "Bestias e insectos atacan al objetivo y a todos a 3\" de él, causando 3 Impactos (3 Hits) automáticos."
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "The beasties of the woods are called up from their lairs to attack unseelie trespassers. The target Character and all Characters within 3” of them take 3 Hits."
             },
             {
-              "nombre": "Dominio Bestial / Warging",
+              "nombre": "Warging",
               "exige": 17,
-              "ap": 2,
-              "alcance": "12\"",
-              "efecto": "Entra en la mente de una bestia aliada en el tablero para activarla inmediatamente en la ronda."
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The Hedgewitch enters the mind of another creature and controls their every move. Once the caster has finished their Activation, nominate a friendly Beast on the board. They may immediately Activate, even if they have already done so this Round. Any Items or Equipment collected by the Beast are transferred to the caster at the end of its activation."
             },
             {
-              "nombre": "Hierbas Curativas / Healing Herbs",
-              "exige": 18,
-              "ap": 1,
-              "alcance": "6\"",
-              "efecto": "Restaura D6 HP a un personaje aliado a 6\" o menos."
+              "nombre": "Bestial Strength",
+              "exige": 19,
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "With a mighty roar, the Hedgewitch harnesses the strength of a powerful creature and gifts it to one of her kin. This Spell may be cast on any Character that isn’t a Beast, Monster or Titan. The target gains +3 Power on any Melee Attacks until the caster chooses to cast another Spell."
             },
             {
-              "nombre": "Llamada de lo Salvaje / Call of the Wild",
-              "exige": 20,
-              "ap": 2,
-              "alcance": "6\"",
-              "efecto": "Otorga +2 al Power y +2 al Movimiento a un Hombre Bestia o Bestia aliada hasta el final de la ronda."
+              "nombre": "Shapeshift",
+              "exige": 21,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "As the air around them blurs, the Hedgewitch assumes a new form – a terrifying Monster! Replace the caster with a Monster chosen from the Bestiary. The Monster has the same AP as the caster had remaining before the Shapeshift but is otherwise identical. At the end of the Round, the caster returns to their true form with the same amount of HP as they had when the Spell was cast."
             }
           ]
         }
@@ -1755,35 +1787,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber del Más Allá / Lore of the Thereafter",
+          "saber": "Lore of the Thereafter",
+          "reglas_saber": "The ancient peoples of ArcWorlde were in tune with the magical energy of the land, and their powers have only grown in the afterlife. The Bog Magi tap into the unknown magics that reanimate them and their kin to help, harm and heal on the battlefield.",
           "hechizos": [
             {
-              "nombre": "Pozo de Alquitrán / Tar Pit",
+              "nombre": "Tar Pit",
               "exige": 14,
-              "ap": 2,
+              "ap": null,
               "alcance": "8\"",
-              "efecto": "Coloca un marcador de alquitrán. Todos los personajes a 3\" reducen su Movimiento a 1\"."
+              "efecto": "The Magus calls forth a pool of sticky black pitch from deep within the ground to entomb their foes as they themselves were entombed long ago. Place a marker on the game board. All Characters within 3” of it have their Move reduced to 1. This effect lasts until the Bog Magus is Prone or Knocked Out."
             },
             {
-              "nombre": "Glaive Espiritual / Spirit Glaive",
+              "nombre": "Spirit Glaive",
               "exige": 17,
-              "ap": 1,
+              "ap": null,
               "alcance": "3\"",
-              "efecto": "Encanta un arma aliada. El objetivo atacado pierde 1 AP por cada 3 de daño sufrido en lugar de perder HP."
+              "efecto": "The Mage summons an ethereal blade from the same spirit-stuff that animates them. It seems to cut through to the very soul of those it is used upon. Can be cast upon themselves or a friendly Character within 3” and lasts until the end of the Round. Instead of losing HP a target loses 1AP from their next Activation for each 3 Damage it takes from Melee Attacks from those wielding the Spirit Glaive."
             },
             {
-              "nombre": "Ritual Olvidado / Forgotten Ritual",
+              "nombre": "Forgotten Ritual",
               "exige": 20,
-              "ap": 2,
+              "ap": null,
               "alcance": "3\"",
-              "efecto": "Todos los aliados con el rasgo Huesos (Bones) a 3\" del Mago recuperan D3 HP."
+              "efecto": "The Mage reenacts a long forgotten ritual of their people, the memories and power of which reinvigorate their kin. All friendly Characters with the Bones Trait within 3” regain D3 HP."
             },
             {
-              "nombre": "Justicia de los Muertos / Justice of the Dead",
+              "nombre": "Justice of the Dead",
               "exige": 21,
-              "ap": 3,
+              "ap": null,
               "alcance": "Global",
-              "efecto": "Cada enemigo que haya noqueado a un aliado sufre D6 Impactos que ignoran Armadura."
+              "efecto": "The dead remember the injustices done unto them. Every enemy Character that has Knocked Out a friendly Character by the time this Spell is cast suffers D6 Hits that ignore Armour and Shields."
             }
           ]
         }
@@ -2050,35 +2083,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de la Noche / Lore of the Night",
+          "saber": "Lore of the Night",
+          "reglas_saber": "Obsessed with ancient books of lore, some Vampires dabble in dark and unseelie magic. Their centuries of study make them potent in the sorcerous arts and they delight in testing it out upon the mortals they find.",
           "hechizos": [
             {
-              "nombre": "Oscuridad / Darkness",
+              "nombre": "Darkness",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "8\"",
-              "efecto": "Crea miasma oscuro. El objetivo y miniaturas a 4\" sufren Desventaja al realizar disparos."
+              "efecto": "A pool of pitch blackness surrounds the target, and they are unable to see what danger awaits them. Choose a target Character within 8”. Until the end of this Round, they and any Character within 4” of them are at a Disadvantage when rolling to Shoot."
             },
             {
-              "nombre": "Trueno Dramático / Dramatic Thunderclap",
+              "nombre": "Dramatic Thunderclap",
               "exige": 17,
-              "ap": 1,
+              "ap": null,
               "alcance": "Global",
-              "efecto": "Un personaje aliado puede repetir un Chequeo Narrativo o Hazaña durante la Ronda."
+              "efecto": "With a mighty boom, peel of terrible thunder erupts from the heavens. Incredible for dramatic effect. A single friendly Character this Round may re-roll a Narrative Feat."
             },
             {
-              "nombre": "Cautivar / Beguile",
-              "exige": 19,
-              "ap": 2,
+              "nombre": "Vampiric Glare",
+              "exige": 20,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Objetivo enemigo debe pasar Valentía o perder 2 AP e incapacitarse de realizar ataques."
+              "efecto": "The Vampire transfixes their prey with glowing red eyes. The target within 6” must pass a Bravery Test or be unable to Move or Attack during their next Activation."
             },
             {
-              "nombre": "Forma de Niebla / Mist Form",
+              "nombre": "Cloud of Bats",
               "exige": 21,
-              "ap": 2,
-              "alcance": "Personal",
-              "efecto": "Permite moverse 8\" ignorando terreno y miniaturas enemigas e impidiendo ser atacado."
+              "ap": null,
+              "alcance": "6\"",
+              "efecto": "A swarm of fluttering crypt bats obscures vision and tears at enemy flesh. Summons a Crypt Bat within 6” of the caster that can Activate immediately."
             }
           ]
         }
@@ -2418,35 +2452,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de los Malditos / Lore of the Damned",
+          "saber": "Lore of the Damned",
+          "reglas_saber": "Many Undead are kept alive by the power of their own will, their villainous hearts clinging to existence beyond the grave. Some can channel that power into vile magics, using the arcane energy to further their own wicked ends.",
           "hechizos": [
             {
-              "nombre": "Frío Cadavérico / Deathly Chill",
+              "nombre": "Deathly Chill",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "12\"",
-              "efecto": "Reduce en D3 los AP del personaje enemigo objetivo en su siguiente Activación."
+              "efecto": "The living begin to feel the chill of the grave clinging to their very bones, and their limbs become heavy and cumbersome. Choose one enemy Character within 12” of the caster. Their AP is reduced by D3 in their next Activation."
             },
             {
-              "nombre": "Roecueros / Bonegnawer",
+              "nombre": "Bonegnawer",
               "exige": 17,
-              "ap": 2,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Invoca una Carrion Rat gratuita a 6\" que se activa de inmediato."
+              "efecto": "A scrabbling Carrion Rat is brought to unlife and flings itself at the enemy. Place a free Carrion Rat within 6” of the caster. It can be Activated this Round, however, if it is Knocked Out it may not be Raised."
             },
             {
-              "nombre": "Drenaje de Alma / Soul Drain",
+              "nombre": "Soul Drain",
               "exige": 19,
-              "ap": 2,
-              "alcance": "6\"",
-              "efecto": "El objetivo sufre 3 Impactos que ignoran Armadura; el lanzador recupera 1 HP por cada herida causada."
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The victim feels their very life essence being pulled away from them, their souls feeding the hungry Dead. The target Character takes 3 Hits that ignore Armour. For every HP lost by the target, the caster regains 1HP. This Spell may be cast on a friendly Character."
             },
             {
-              "nombre": "Resurrección Masiva / Mass Resurrection",
+              "nombre": "Mass Resurrection",
               "exige": 21,
-              "ap": 3,
-              "alcance": "6\"",
-              "efecto": "Devuelve a la vida a hasta 2 unidades no-muertas caídas a 6\" con 1 HP cada una."
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "Raise up to three Units or Beasts anywhere on the game board."
             }
           ]
         }
@@ -2781,35 +2816,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber del Bosque Profundo / Lore of the Darkwood",
+          "saber": "Lore of the Darkwood",
+          "reglas_saber": "The magic of the Elves in inextricably linked to the dark forests in which they dwell. The mysterious Druids siphon the life energy of their sacrificial victims and use its power to warp the wood to their will.",
           "hechizos": [
             {
-              "nombre": "Maleza Espinosa / Tangleweed",
+              "nombre": "Tangleweed",
               "exige": 14,
-              "ap": 1,
-              "alcance": "6\" Área",
-              "efecto": "Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\"."
-            },
-            {
-              "nombre": "Bosque Despiadado / Merciless Wood",
-              "exige": 17,
-              "ap": 2,
-              "alcance": "8\"",
-              "efecto": "Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6."
-            },
-            {
-              "nombre": "Invocación de Briarbeast / Summon Briarbeast",
-              "exige": 19,
-              "ap": 2,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP."
+              "efecto": "Barbed vines erupt from the earth and ensnare all who are unlucky enough to be in their grasp. All Characters within 6\" of the caster have their Movement and Leg It rolls reduced by 2\" until the caster’s next Spell."
             },
             {
-              "nombre": "Sacrificio de Sangre / Blood Sacrifice",
+              "nombre": "Spirit of the Forest",
+              "exige": 16,
+              "ap": null,
+              "alcance": "12\"",
+              "efecto": "The vitality of their victims fills the Druid with an unnatural vigour, and their eyes glow with the power of the dark woods. One friendly Character within 12\" gains +2 AP for their next Activation. Whilst under the effects of this Spell, the target may not receive any other bonuses from Spells."
+            },
+            {
+              "nombre": "Ominous Whispers",
+              "exige": 19,
+              "ap": null,
+              "alcance": "12\"",
+              "efecto": "With a hissed word in an unnatural tongue, the enemies of the Elves find their minds tortured by Fae laughter and malice. One enemy Character within 12” must pass a Bravery Test. If they fail, they lose 3 HP in addition to the regular effects of failure. All enemy models within 3” of the original target, whether they passed their Bravery Test or not, must also take Bravery Tests."
+            },
+            {
+              "nombre": "The Merciless Wood",
               "exige": 21,
-              "ap": 2,
-              "alcance": "Contacto",
-              "efecto": "Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "Power 4. Special Rules: If any Characters are Knocked Out by the effects of this spell, they are replaced by a Woodfiend. This Character is controlled by the Elven player as normal and can be activated in the next Round."
             }
           ]
         }
@@ -3161,35 +3197,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de la Ilusión / Lore of Delusion",
+          "saber": "Lore of Delusion",
+          "reglas_saber": "Ourk Dreameaters are potent Mages who are said to be able to warp the mind and channel the power of nightmares. Enveloped in cloying tendrils of smoke and with eyes glowing with an unknown vigour, they cackle wickedly as they weave their devious magics.",
           "hechizos": [
             {
-              "nombre": "Enemigo Falso / False Foe",
+              "nombre": "False Foe",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "8\"",
-              "efecto": "Obliga al objetivo a superar Hazaña Fácil antes de poder realizar cualquier ataque."
+              "efecto": "A sickly mist envelops the target, and they see enemies that may not truly be there. Range 8”. For the rest of the Round the target must pass an Easy Feat before they are able to make any Attacks."
             },
             {
-              "nombre": "Estupefacción / Stupor",
+              "nombre": "Stupor",
               "exige": 17,
-              "ap": 2,
-              "alcance": "3\" Área",
-              "efecto": "Todas las miniaturas a 3\" quedan dormidas (Prone) hasta ser atacadas o superar Hazaña Media."
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "The Dreameater summons a heavy miasma around them, and those who breathe it quickly succumb to its soporific influence. All Characters within 3” of the caster fall into a deep sleep. They count as being Prone until they are either the target of an Attack or Spell or have passed a Medium Feat in their next Activation. Once they have woken up, they may Activate as normal."
             },
             {
-              "nombre": "Devorador de Sueños / Dream Eater",
+              "nombre": "Dream Eater",
               "exige": 19,
-              "ap": 1,
+              "ap": null,
               "alcance": "2\"",
-              "efecto": "Roba D3 AP a un enemigo dormido por Stupor y se los entrega al Dreameater."
+              "efecto": "This Dreameater feasts upon the dreams of others, consuming their power with gluttonous abandon. Range 2”. This Spell may only be targeted against those under the effects of the Stupor Spell. The target loses D3 AP for their next Activation, and they are given to the caster to spend in their current Activation. In addition, the target is not woken up by this Spell."
             },
             {
-              "nombre": "Dentro de tu Mente / Inside your Mind",
+              "nombre": "Inside your Mind",
               "exige": 21,
-              "ap": 3,
+              "ap": null,
               "alcance": "4\"",
-              "efecto": "Finaliza activación del Mago y controla libremente a una miniatura enemiga gastando 3 AP."
+              "efecto": "The tendrils of green mist seep into the minds of the target, and the caster can control them like a living puppet. Choose a target on a 30mm or 40mm base within 4” of the caster. The caster’s Activation immediately ends, and the target is Activated, even if they have already Activated this Round. The Ourk player can spend 3AP controlling the target however they wish. Once the 3AP is spent, the game continues as normal."
             }
           ]
         }
@@ -3530,35 +3567,36 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Saber de la Travesura / Lore of Mischief",
+          "saber": "Lore of Mischief",
+          "reglas_saber": "The Gremlins of the Netherregions care little for arcane knowledge. Instead, their mages are blessed with an innate ability to channel their love of devilment into magical might.",
           "hechizos": [
             {
-              "nombre": "Insectos Chillones / Chittering Bugs",
+              "nombre": "Chittering Bugs",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "8\"",
-              "efecto": "Impide acciones de movimiento al objetivo enemigo durante su siguiente activación."
+              "efecto": "The Shaman summons a torrent of creepy crawlies to clamber all over their foe, much to the Gremlins’ delight. Choose one enemy Character within 8” of the caster. For their next Activation they may not make any movement Actions as they frantically swat away the bugs."
             },
             {
-              "nombre": "Lodo Pegajoso / Sticky Mud",
-              "exige": 16,
-              "ap": 1,
+              "nombre": "Slip and Slide",
+              "exige": 17,
+              "ap": null,
+              "alcance": "8\"",
+              "efecto": "With a whirl of their staff, the Shaman coats their foes boots with a magically slippery substance. The antics that follow are highly amusing. This Spell effects any enemy Characters that attempt a Leg It roll within 8” of the caster. If they fail, instead of becoming Prone they slide the rolled number in the opposite direction of their intended movement. This effect lasts until the end of the Round."
+            },
+            {
+              "nombre": "Peek-a-Boo",
+              "exige": 19,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "Cackling maniacally, the Shaman’s magic makes an ally seem to pop in and out of existence, much to the frustration of the enemy. Choose one allied Character to be the target of this Spell. This Character is temporarily given the Split Activation rule (if they haven’t got it already). Until they have spent their last AP for the Round, whenever they end their Activation remove them from the game board. Place them back again in the same place when they are re-activated."
+            },
+            {
+              "nombre": "Great Green Explosion",
+              "exige": 21,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "Reduce el movimiento del objetivo a 1\" y le quita la capacidad de hacer Leg It."
-            },
-            {
-              "nombre": "Confusión Cautivadora / Confusion",
-              "exige": 18,
-              "ap": 2,
-              "alcance": "4\" Área",
-              "efecto": "Explosión de humo y confeti que obliga a los enemigos a 4\" a mover en dirección aleatoria (1D6)."
-            },
-            {
-              "nombre": "Túnel Mágico / Tunnel Swarm",
-              "exige": 20,
-              "ap": 2,
-              "alcance": "8\"",
-              "efecto": "Abre una madriguera mágica instantánea que conecta dos puntos del mapa."
+              "efecto": "(21+) Every Character within 6” of the caster takes 8 Hits, plus additional Hits for every 1 the draw is over 21. If Overpowered, in addition to losing D6 HP, the Shaman loses 1HP for every 1 the draw is over 21."
             }
           ]
         }
@@ -3811,179 +3849,206 @@ const compendioArcWorlde = {
       ],
       "saberes_magicos": [
         {
-          "saber": "Colegio Carmesí (Fuego) / Crimson College",
+          "saber": "The Lore of The Crimson College",
+          "reglas_saber": "Masters of the art of manipulating fire, Crimson Wizards are passionate and quick to anger over the merest perceived slight. Many a tavern in Mildaark has been set ablaze by a furious Wizard after a ruffian looked at them the wrong way. Sprites conjured by Crimson College spells have +1 Power on all Attacks, +2 if the Target is Flammable.",
           "hechizos": [
             {
-              "nombre": "Conjurar Sprites Carmesí / Conjure Crimson Sprites",
+              "nombre": "Conjure Crimson Sprites",
               "exige": 14,
-              "ap": 2,
+              "ap": null,
               "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites de fuego (+1 Power, +2 vs Flammable)."
+              "efecto": "With a flick of the wrist, Sprites of flickering flame are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell have +1 Power on all Attacks, +2 if the Target is Flammable. If this Spell isn’t successfully cast, the caster loses 1HP."
             },
             {
-              "nombre": "Bola de Fuego / Fireball",
-              "exige": 18,
-              "ap": 2,
-              "alcance": "12\"",
-              "efecto": "Ataque a distancia Power 6 que ignora Armadura y afecta en área a miniaturas en contacto."
-            },
-            {
-              "nombre": "Ráfaga de Llamas / Flame Blast",
-              "exige": 20,
-              "ap": 3,
-              "alcance": "Cono 6\"",
-              "efecto": "Lanza un cono de llamas de Power 8 que prende fuego a la escenografía y objetivos."
-            }
-          ]
-        },
-        {
-          "saber": "Colegio Zafiro (Agua y Hielo) / Sapphire College",
-          "hechizos": [
-            {
-              "nombre": "Conjurar Sprites Zafiro / Conjure Sapphire Sprites",
-              "exige": 14,
-              "ap": 2,
-              "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites de agua que repiten tiradas para destrabarse del combate."
-            },
-            {
-              "nombre": "Marea de Asalto / Tidal Wave",
-              "exige": 17,
-              "ap": 2,
-              "alcance": "Línea 8\"",
-              "efecto": "Ola de agua que empuja 3\" e inflige ataques de Power 6 a todos los enemigos en línea recta."
-            },
-            {
-              "nombre": "Puente de Hielo / Bridge of Ice",
-              "exige": 19,
-              "ap": 2,
-              "alcance": "12\"",
-              "efecto": "Crea una pasarela helada sobre agua o abismos permitiendo el paso de tropas."
-            }
-          ]
-        },
-        {
-          "saber": "Colegio Esmeralda (Naturaleza) / Emerald College",
-          "hechizos": [
-            {
-              "nombre": "Conjurar Sprites Esmeralda / Conjure Emerald Sprites",
-              "exige": 14,
-              "ap": 2,
-              "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites de fauna con -1 a los disparos enemigos recibidos."
-            },
-            {
-              "nombre": "Enredaderas Curativas / Healing Vines",
-              "exige": 17,
-              "ap": 1,
-              "alcance": "6\"",
-              "efecto": "Restaura D6 HP a una miniatura aliada en contacto con vegetación."
-            },
-            {
-              "nombre": "Alma de la Bestia / Soul of the Beast",
-              "exige": 21,
-              "ap": 3,
-              "alcance": "8\"",
-              "efecto": "Toma el control de una Bestia, Monstruo o Titán enemigo usando sus 3 AP libremente."
-            }
-          ]
-        },
-        {
-          "saber": "Colegio Ocre (Tierra y Piedra) / Ochre College",
-          "hechizos": [
-            {
-              "nombre": "Conjurar Sprites Ocres / Conjure Ochre Sprites",
-              "exige": 14,
-              "ap": 2,
-              "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites de piedra con 1 de Armadura natural."
-            },
-            {
-              "nombre": "Muro de Piedra / Rock Wall",
+              "nombre": "Sword of Embers",
               "exige": 16,
-              "ap": 2,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "A blade of pure flame appears in the hand of the caster. All Melee Attacks made by the Character are at +3 Power, and Characters who are Flammable must re-roll all Successful Defends against this weapon. The Sword of Embers may not be given or taken and is active until the Character casts another Spell. If this Spell isn’t successfully cast, the caster loses 1HP."
+            },
+            {
+              "nombre": "Fireball",
+              "exige": 18,
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "A classic spell, and one that any self-respecting Crimson Mage is all too eager to use. (Ranged) Fireball: Power - 6. Special Rules: Ignores Armour. Roll an additional Fireball Attack against every Character in base contact with the target. Characters who are Flammable must re-roll all Successful Defends. If this Spell isn’t successfully cast, the caster loses 1HP."
+            },
+            {
+              "nombre": "Flame Blast",
+              "exige": 21,
+              "ap": null,
+              "alcance": "4\"",
+              "efecto": "With a shout, the Mage’s body exudes a wall of fire, scorching all around them. All Characters within 4” of the caster suffer D6 Wounds. Characters who are Flammable roll 2D6 and choose the highest value. If this Spell isn’t successfully cast, the caster loses 1HP."
+            }
+          ]
+        },
+        {
+          "saber": "The Lore of The Sapphire College",
+          "reglas_saber": "Proud and adventurous, Sapphire Wizards study the mysteries of the oceans, rivers and poles of ArcWorlde. They are found throughout the globe, sailing to uncharted waters, undiscovered coves and frozen wastes. Sprites conjured by Sapphire College spells are difficult to catch, and may re-roll failed attempts to leave Combat.",
+          "hechizos": [
+            {
+              "nombre": "Conjure Sapphire Sprites",
+              "exige": 14,
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "With a flick of the wrist, Sprites of shimmering liquid are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell are difficult to catch, and may re-roll failed attempts to leave Combat."
+            },
+            {
+              "nombre": "Bridge of Ice",
+              "exige": 16,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "A crackling structure of ice extends from the Mage’s boots, allowing them to travel where they wish. The caster may move over any terrain or Character for the rest of their Activation. In addition, the caster may re-roll any failed attempts to leave base contact with an enemy Character."
+            },
+            {
+              "nombre": "Storm Cloud",
+              "exige": 18,
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The Mage curses an enemy to be pursued by a miniature storm cloud, crackling with lightening. Choose an enemy Character anywhere on the board. Every time the enemy Character is Activated, they take D3 Hits that ignore Armour. This Spell lasts until the caster attempts another Spell or is Knocked Out."
+            },
+            {
+              "nombre": "Tidal Wave",
+              "exige": 21,
+              "ap": null,
+              "alcance": "Line D6\"",
+              "efecto": "Drawing upon stores of water from deep within the ground, the mage hurls a great wave at their foes. Measure a line D6” from the caster. Any Characters within 2” of this line take 4 Hits. If the caster is within 3” of a piece of water terrain, the line distance is increased to 2D6 inches."
+            }
+          ]
+        },
+        {
+          "saber": "The Lore of The Emerald College",
+          "reglas_saber": "Emerald Wizards are recluses, mainly preferring the company of the beasts of ArcWorlde than others of their kind. These wandering hermits study the natural world, and the wild places are where they feel most at home. Sprites conjured by Emerald College spells blend into the underbrush, so all attempts to Shoot them are at -1.",
+          "hechizos": [
+            {
+              "nombre": "Conjure Emerald Sprites",
+              "exige": 14,
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "With a flick of the wrist, Sprites of sparkling furs and feathers are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell blend into the underbrush, so all attempts to Shoot them are at -1."
+            },
+            {
+              "nombre": "Healing Touch",
+              "exige": 16,
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "Soft ferns extend from the caster’s fingertips and soothe the wounds of their allies. A single Character within 3” of the caster (or the caster themselves) regains D6 HP."
+            },
+            {
+              "nombre": "Winged Swarm",
+              "exige": 18,
+              "ap": null,
+              "alcance": "4\"",
+              "efecto": "A cacophonous deluge of birds and flying insects swarm around the caster’s foes, making it impossible for them to see. Choose a point on the board. Any Characters within 4” of this point have their Movement and any Leg It rolls reduced by 2” and may not make Ranged Attacks. This Spell lasts until the caster casts another Spell or is Knocked Out."
+            },
+            {
+              "nombre": "Soul of the Beast",
+              "exige": 21,
+              "ap": null,
+              "alcance": "8\"",
+              "efecto": "The caster reaches out to the soul of a wild creature, befriending it for a short while. The player may Activate one enemy Beast, Monster or Titan within 8” of the caster and spend 3AP however they wish. If the Beast/Monster/Titan has spent all its AP this Round, they may not be targeted by this Spell."
+            }
+          ]
+        },
+        {
+          "saber": "The Lore of The Ochre College",
+          "reglas_saber": "Ochre Wizards are solid, stubborn folk who delve into the very earth to study its secrets. They explore the deepest caverns and the darkest caves and have the strength and magical prowess to fight off anything they find dwelling down there. Sprites conjured by Ochre College spells are hardy and have 1 Armour.",
+          "hechizos": [
+            {
+              "nombre": "Conjure Ochre Sprites",
+              "exige": 14,
+              "ap": null,
+              "alcance": "3\"",
+              "efecto": "With a flick of the wrist, Sprites of glinting precious ores are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell are hardy and have 1 Armour."
+            },
+            {
+              "nombre": "Rock Wall",
+              "exige": 16,
+              "ap": null,
               "alcance": "2\"",
-              "efecto": "Levanta una barrera infranqueable de piedra de 6\" de largo hasta el final de la ronda."
+              "efecto": "The ground swells and cracks, jutting forth an impenetrable wall of stone. Place a 6” long barrier up to 2” wide within 2” of the caster. This counts as Impassable Terrain and remains until the end of the Round."
             },
             {
-              "nombre": "Armadura de Piedra / Stone Armour",
+              "nombre": "Stone Armour",
               "exige": 18,
-              "ap": 1,
-              "alcance": "Personal",
-              "efecto": "Otorga Armadura Pesada al lanzador durante toda la ronda."
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "The robes of the caster stiffen and crystalise, protecting them from enemy blows. The caster has Heavy Armour that lasts until the end of the Round."
             },
             {
-              "nombre": "Tesoros de la Ciénaga / ArcWorlde's Bounty",
+              "nombre": "ArcWorlde’s Bounty",
               "exige": 21,
-              "ap": 2,
+              "ap": null,
               "alcance": "8\"",
-              "efecto": "Genera D3 Fichas de Arcanita en un punto a 8\" del lanzador."
+              "efecto": "The very realm gifts her treasures to the caster and their allies. Place D3 Arcanite Tokens at a point at least 8” away from the caster."
             }
           ]
         },
         {
-          "saber": "Colegio Bronce (Metal y Alquimia) / Bronze College",
+          "saber": "The Lore of The Bronze College",
+          "reglas_saber": "Bronze Mages delight in alchemy and the invention of mechanical things. Their workshops are filled with the most arcane of equipment, and their expeditions are oftentimes to seek out new materials and ingredients for their experiments. Sprites conjured by Bronze College spells tend to repair themselves, so regain D3HP at the end of each Round.",
           "hechizos": [
             {
-              "nombre": "Conjurar Sprites de Bronce / Conjure Bronze Sprites",
+              "nombre": "Conjure Bronze Sprites",
               "exige": 14,
-              "ap": 2,
+              "ap": null,
               "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites metálicos que recuperan D3 HP al final de cada ronda."
+              "efecto": "With a flick of the wrist, Sprites of glittering metals are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell tend to repair themselves, so regain D3HP at the end of each Round."
             },
             {
-              "nombre": "Transfiguración / Transfiguration",
+              "nombre": "Transfiguration",
               "exige": 16,
-              "ap": 1,
+              "ap": null,
               "alcance": "12\"",
-              "efecto": "Transforma un objeto de la armería de un aliado en otro del mismo coste o inferior."
+              "efecto": "Materials blend and change, making something new out of something old. A friendly Character within 12” may opt to change one Item or Equipment into another from their Faction’s armoury of the same or lesser gp value."
             },
             {
-              "nombre": "Ráfaga Alquímica / Alchemical Blast",
+              "nombre": "Alchemical Blast",
               "exige": 18,
-              "ap": 2,
-              "alcance": "8\"",
-              "efecto": "Disparo Power 5; en impacto Crítico invalida un objeto del objetivo hasta la siguiente ronda."
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The Mage hurls a bolt of warping energy at their foe, which moulds their equipment into bizarre shapes. (Ranged) Alchemical Blast: Power- 5. Special Rules: On a Crit, one piece of Equipment or Item carried by the target is useless until the following Round after this Attack has been completed."
             },
             {
-              "nombre": "Avatar de Oro / Avatar of Gold",
+              "nombre": "Avatar of Gold",
               "exige": 21,
-              "ap": 2,
-              "alcance": "Personal",
-              "efecto": "Transforma al Mago en estatua de oro (+2 Armadura, +2 Power melé) por 1 ronda."
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "The caster’s skin shimmers, turning into pure gold. Whilst in this form the caster counts as having Heavy Armour and has +2 Power to any of their Melee Attacks. However, they may not cast Spells in this state, and it lasts until the end of the Round."
             }
           ]
         },
         {
-          "saber": "Colegio Ópalo (Aire y Espíritus) / Opal College",
+          "saber": "The Lore of The Opal College",
+          "reglas_saber": "The most mysterious of the Colleges of Mt Orion, the Opal Mages delve into the secrets of the spiritual world. They are otherworldly and aloof, communing with the souls of both the living and the dead. Sprites conjured by Opal College spells float along the ground, and therefore can Fly (see Bestiary rules).",
           "hechizos": [
             {
-              "nombre": "Conjurar Sprites Ópalo / Conjure Opal Sprites",
+              "nombre": "Conjure Opal Sprites",
               "exige": 14,
-              "ap": 2,
+              "ap": null,
               "alcance": "3\"",
-              "efecto": "Invoca D3 Sprites de niebla con la capacidad de Volar (Fly)."
+              "efecto": "With a flick of the wrist, Sprites of ethereal fog are brought to life. Place D3 Sprites within 3” of the caster. The Sprites may be Activated as normal. Sprites conjured by this Spell float along the ground, and therefore can Fly (see Bestiary rules)."
             },
             {
-              "nombre": "Aura Antinatural / Unnatural Aura",
+              "nombre": "Unnatural Aura",
               "exige": 16,
-              "ap": 1,
-              "alcance": "6\" Área",
-              "efecto": "Obliga a los enemigos a 6\" a repetir Chequeos de Valentía exitosos."
+              "ap": null,
+              "alcance": "6\"",
+              "efecto": "The Mage exudes a spooky aura, unnerving all those around them. All enemy Characters within 6” must re-roll successful Bravery Tests. This Spell lasts until the end of the Round."
             },
             {
-              "nombre": "Sanguijuela Espiritual / Spirit Leech",
+              "nombre": "Spirit Leech",
               "exige": 18,
-              "ap": 2,
+              "ap": null,
               "alcance": "6\"",
-              "efecto": "El objetivo tira Valentía o pierde D3 HP, que son transferidos al lanzador."
+              "efecto": "The mage draws spiritual power from the target, leaving them drained of life. A target within 6” of the caster must pass a Bravery Test, or lose D3 HP. Any HP taken is given to the caster. The caster may not increase their HP above their original number."
             },
             {
-              "nombre": "Hueste Espectral / Spectral Host",
+              "nombre": "Spectral Host",
               "exige": 21,
-              "ap": 3,
-              "alcance": "6\"",
-              "efecto": "Invoca espíritus temibles que causan chequeos de terror automático a enemigos a 6\"."
+              "ap": null,
+              "alcance": "1\"",
+              "efecto": "The Mage calls upon the spirits of their enemies’ ancestors and turn them against them. The caster summons D3 beings that have the same stats and base size as the Unit Type of the enemy Faction, and places them within 1”. These beings are activated as normal and are controlled by the caster."
             }
           ]
         }
@@ -4472,21 +4537,29 @@ const compendioArcWorlde = {
       "armeria_exclusiva": [],
       "saberes_magicos": [
         {
-          "saber": "Saber de las Arañas / Lore of Spiders & Wild Magic",
+          "saber": "Lore of Spiders",
+          "reglas_saber": "Arcanid Queens are imbued with a cunning intelligence, and the vast quantities of Arcanite within their bodies gifts them the ability to wield magical power. Spiderwitch: The Arcanid Queen may cast Spells from the Lore of Spiders. However, if a Spell Overpowers the Arcanid Queen loses 2D6HP, the Activation ends, and the Spell is not cast.",
           "hechizos": [
             {
-              "nombre": "Enjambre Chillón / Chittering Swarm",
+              "nombre": "Chittering Swarm",
               "exige": 14,
-              "ap": 1,
+              "ap": null,
               "alcance": "Contacto",
-              "efecto": "Invocación de pequeñas arañas que infligen 1 Hit automático a enemigos en contacto."
+              "efecto": "The Arcanid Queen calls forth a horde of spiders, who bite at any exposed flesh. All enemy Characters in base contact take 1 Hit."
             },
             {
-              "nombre": "Invocar Arcanid / Summon Arcanid",
+              "nombre": "Summon Arcanid",
               "exige": 18,
-              "ap": 2,
-              "alcance": "6\"",
-              "efecto": "Llama a una Arcanid menor para reemplazar a unidades caídas en batalla."
+              "ap": null,
+              "alcance": "Borde de Mesa",
+              "efecto": "With a gesture, the Arcanid Queen calls forth another of her children to replace those fallen on the battlefield. Replace one Knocked Out Arcanid at full HP on a table edge of your choice."
+            },
+            {
+              "nombre": "Silken Salve",
+              "exige": 20,
+              "ap": null,
+              "alcance": "Self",
+              "efecto": "The Arcanid Queen coats her wounds in Arcanite laced web, and broken skin and carapace start to knit back together. The caster regains D6 HP."
             }
           ]
         }
@@ -4737,7 +4810,42 @@ const compendioArcWorlde = {
       ],
       "reglas_faccion": [],
       "armeria_exclusiva": [],
-      "saberes_magicos": []
+      "saberes_magicos": [
+        {
+          "saber": "Lore of the Enchanted Journal",
+          "reglas_saber": "Discovered in a dusty library, the Enchanted Journal now accompanies The Explorer wherever he goes. Its pages bristle with a life of their own, and the Journal wields a great magical power that it uses readily to protect those it cares for.",
+          "hechizos": [
+            {
+              "nombre": "Arcleap",
+              "exige": 14,
+              "ap": null,
+              "alcance": "6\"",
+              "efecto": "The Journal thwips itself and The Explorer out of this realm of existence. Remove both The Explorer and the Journal from the board, even if either of them is in base contact with an enemy Character. Replace them in base contact within 6” of any table edge as they appear again."
+            },
+            {
+              "nombre": "Touch of Destiny",
+              "exige": 16,
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The Journal bends the very fabric of reality, and those that it favours are blessed by destiny. Choose a friendly Character on the board. For the rest of the Round, re-roll any failed dice when they are attempting Feats."
+            },
+            {
+              "nombre": "Charmed Blade",
+              "exige": 18,
+              "ap": null,
+              "alcance": "6\"",
+              "efecto": "With a rustle of its pages, the weapon of an ally thrums with magical energy. Choose one friendly Character within 6” of the Journal. On rolls to Attack, both 5s and 6s count as Critical Hits."
+            },
+            {
+              "nombre": "Arcane Knowledge",
+              "exige": 21,
+              "ap": null,
+              "alcance": "Global",
+              "efecto": "The Journal seems to tap into an unknown wealth of knowledge, as if it was connected to all the books of magic ever written. The caster may choose one Spell from any lore in the ArcWorlde game. This may now be successfully cast."
+            }
+          ]
+        }
+      ]
     }
   ],
   "armeria_comun": [
