@@ -352,7 +352,7 @@
 
     recruitable(faction).forEach((c) => {
       if (c.max_por_banda == null) return;
-      const n = units.filter((u) => AWGear.canonId(u.id) === c.id).length;
+      const n = units.filter((u) => u.id === c.id).length;
       if (n > c.max_por_banda) issues.push(c.nombre + ': máximo ' + c.max_por_banda + ' por banda.');
     });
     return issues;

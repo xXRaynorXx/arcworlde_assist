@@ -10,7 +10,7 @@ function construirSeccionesFacciones() {
     const comp = typeof compendioArcWorlde !== 'undefined' ? compendioArcWorlde : { facciones: [], armeria_comun: [], diccionario_rasgos: {} };
     const sinParentesis = (t) => String(t || '').replace(/\s*\(.*\)\s*$/, '');
     const nombreEquipo = (id, f) => {
-        const g = window.AWGear ? AWGear.find('faccion', (window.AWGear.aliasEquipo ? AWGear.aliasEquipo(id) : id), f.nombre) || AWGear.find('comun', id) : null;
+        const g = window.AWGear ? AWGear.find('faccion', id, f.nombre) || AWGear.find('comun', id) : null;
         return g ? String(g.nombre).split(' / ').pop() : id;
     };
     const fichaMiniatura = (u, f) => {

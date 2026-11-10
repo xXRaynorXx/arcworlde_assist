@@ -18,7 +18,6 @@
 
   function catalogUnit(id) {
     if (!id || typeof datosMinis === 'undefined') return null;
-    if (window.AWGear) id = AWGear.canonId(id);
     for (const f of datosMinis.facciones || []) {
       const u = (f.unidades || []).find((x) => x.id === id);
       if (u) return u;
