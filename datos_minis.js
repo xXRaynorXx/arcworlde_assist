@@ -4172,7 +4172,7 @@ const compendioArcWorlde = {
     },
     {
       "id": "bestiary",
-      "nombre": "Bestiario y Mercenarios",
+      "nombre": "Bestiario",
       "unidades": [
         {
           "id": "griffling",
