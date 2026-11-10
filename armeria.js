@@ -93,6 +93,8 @@ const armeriaComunDB = [
     hobgoblin_ranged_weapon: "dark_lord_ranged_weapon",
     ourk_boglin_ranged_weapon: "ourk_ranged_weapon",
     ourk_boglin_mount: "ourk_mount",
+    shapeshifter_bloodline: "shapeshifter",
+    fell_scholar_bloodline: "fell_scholar",
     musical_instrument: "boglin_musical_instrument"
   };
   // Cómo se nombran las facciones en el texto de las reglas de facción (para saber quiénes son aliadas)
@@ -155,7 +157,9 @@ const armeriaComunDB = [
     battle_wizard: "apprentice",
     enchanted_sentinel: "sentinel",
     gremlin_chief: "the_great_gremlin",
-    gremlin_warrior: "gremlin_scamp"
+    gremlin_warrior: "gremlin_scamp",
+    vampire_lord: "vampire",
+    vampire_thrall: "thrall"
   };
   const canonId = (id) => LEGACY_UNIT_ID[id] || id;
   // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
@@ -182,11 +186,11 @@ const armeriaComunDB = [
     return {
       faccion: f.nombre,
       common: isMonster(u) ? [] : common(),
-      // Si la ficha no lista equipo (faltan datos en el compendio), se ofrece toda la armería de la facción, salvo a los monstruos
+      // Fichas antiguas (sin clase) sin equipo listado: se ofrece toda la armería de la facción, salvo a los monstruos. En las nuevas, vacío = nada
       // Con equipo_permitido: lo que la ficha cita de cualquier armería de facción (los mercenarios usan la de otras)
       exclusive: allowed.size
         ? factions().reduce((all, x) => all.concat((x.armeria_exclusiva || []).filter((a) => allowed.has(a.id) && !all.some((b) => b.id === a.id))), [])
-        : (f.armeria_exclusiva || []).filter(() => !isMonster(u))
+        : u.clase ? [] : (f.armeria_exclusiva || []).filter(() => !isMonster(u))
     };
   }
 
