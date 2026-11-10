@@ -3065,59 +3065,163 @@ const compendioArcWorlde = {
       "nombre": "Gremlins",
       "unidades": [
         {
-          "id": "gremlin_chief",
-          "nombre": "Jefe Gremlin",
-          "nombre_en": "Gremlin Chief",
-          "tipo": "comandante",
-          "coste": 80,
+          "id": "the_great_gremlin",
+          "nombre": "El Gran Gremlin",
+          "nombre_en": "The Great Gremlin",
+          "clase": "commander",
+          "coste": 100,
           "peana_mm": 30,
           "stats": {
-            "hp": 8,
-            "mov": 5,
+            "hp": 9,
+            "mov": 4,
             "armadura": 0,
             "ap": 4
           },
           "ataques": [
-            "(2 AP) Stone Hammer: Power 7. Regla Especial: Suma +3 al Power si el objetivo está Tumbado (Prone).",
-            "(1 AP) Enthusiastic Smack: Power 5. Regla Especial: Un impacto Crítico ignora Armadura.",
-            "(1 AP) Kneecap: Power 5. Regla Especial: Suma +1 al Power si el objetivo está en peana de 40mm o mayor."
+            "(2 AP) Stone Hammer: Power 7. Special Rules: +3 Power if target is Prone.",
+            "(1 AP) Enthusiastic Smack: Power 5. Special Rules: Crit ignores Armour.",
+            "(1 AP) Kneecap: Power 5. Special Rules: +1 Power if the target is on a 40mm base or larger."
           ],
           "rasgos": [
-            "Clout Points",
-            "Gremlin Burrows"
+            "Burrow Dweller",
+            "Intimidating",
+            "Clout Chaser"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
             "pilfered_scran",
             "gremlin_ranged_weapon",
             "burrowing_tools_item",
-            "pterra_wings",
             "shield_carriers",
+            "pterra_wings",
             "poison_goop"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "shaman",
+          "nombre": "Chamán Gremlin",
+          "nombre_en": "Shaman",
+          "clase": "mage",
+          "coste": 60,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 6,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Poke in the Parts: Power 5. Special Rules: A Crit reduces the target’s Movement by 1 for the rest of the Round."
+          ],
+          "rasgos": [
+            "Born Slippy",
+            "Burrow Dweller"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "pilfered_scran",
+            "gremlin_ranged_weapon",
+            "burrowing_tools_item",
+            "pterra_wings",
+            "poison_goop"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": [
+            "Chittering Bugs (Exige 14): Choose one enemy Character within 8” of the caster. For their next Activation they may not make any movement Actions as they frantically swat away the bugs.",
+            "Slip and Slide (Exige 17): This Spell effects any enemy Characters that attempt a Leg It roll within 8” of the caster. If they fail, instead of becoming Prone they slide the rolled number in the opposite direction of their intended movement. This effect lasts until the end of the Round.",
+            "Peek-A-Boo (Exige 19): Remove the caster from the game board. Place them back again in the same place when they are re-activated.",
+            "Great Green Explosion (Exige 21+): Every Character within 6” of the caster takes 8 Hits, plus additional Hits for every 1 the draw is over 21. If Overpowered, in addition to losing D6 HP, the Shaman loses 1HP for every 1 the draw is over 21."
           ]
         },
         {
-          "id": "gremlin_warrior",
-          "nombre": "Guerrero Gremlin",
-          "nombre_en": "Gremlin Warrior",
-          "tipo": "tropa",
-          "coste": 25,
+          "id": "gremlin_scamp",
+          "nombre": "Granuja Gremlin",
+          "nombre_en": "Gremlin Scamp",
+          "clase": "unit",
+          "coste": 20,
           "peana_mm": 30,
           "stats": {
-            "hp": 4,
+            "hp": 5,
             "mov": 5,
             "armadura": 0,
             "ap": 2
           },
           "ataques": [
-            "Rusty Dagger: (1 AP) Melee, Power 3."
+            "(2 AP) Stabby Stab!: Power 5. Special Rules: Each Critical Hit allows one more D6 to be rolled.",
+            "(1 AP) Fast Attack: Power 3"
           ],
           "rasgos": [
+            "Born Slippy",
+            "Burrow Dweller",
+            "Diminutive"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "pilfered_scran",
+            "gremlin_ranged_weapon",
+            "burrowing_tools_item",
+            "pterra_wings",
+            "poison_goop"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "trophy_hunter",
+          "nombre": "Cazador de Trofeos Gremlin",
+          "nombre_en": "Trophy Hunter",
+          "clase": "elite",
+          "coste": 35,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 6,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(2 AP) Wild Swing: Power 9. Special Rules: If more Failures than Successes are rolled, the Trophy Hunter is Prone after the Attack has been made.",
+            "(1 AP) Frenzied Chop: Power 4"
+          ],
+          "rasgos": [
+            "Born Slippy",
+            "Burrow Dweller",
+            "Trophy Frenzy"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "pilfered_scran",
+            "gremlin_ranged_weapon",
+            "burrowing_tools_item",
+            "pterra_wings",
+            "poison_goop"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "carvenhead",
+          "nombre": "Carvenhead",
+          "nombre_en": "Carvenhead",
+          "clase": "irregular",
+          "coste": 40,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 7,
+            "mov": 4,
+            "armadura": 1,
+            "ap": 2
+          },
+          "ataques": [
+            "(1 AP) Wooden Headbutt: Power 5"
+          ],
+          "rasgos": [
+            "Burrow Dweller",
             "Diminutive",
-            "Gremlin Burrows"
+            "Light Armour",
+            "The Carven Idol"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
@@ -3128,14 +3232,49 @@ const compendioArcWorlde = {
             "poison_goop"
           ],
           "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+            "Armadura Ligera / Light Armour"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "jungle_troll",
+          "nombre": "Troll de la Jungla",
+          "nombre_en": "Jungle Troll",
+          "clase": "monster",
+          "coste": 220,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 20,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 8
+          },
+          "ataques": [
+            "(2 AP) Furious Flailing: Power 7. Special Rules: Targets every Character (friend or foe) within 2”.",
+            "(2 AP) Pummel: Power 9. Special Rules: If the target is on a smaller base size, move them back 2” after this Attack has been made.",
+            "(1 AP) Claw Slash: Power 6. Special Rules: If a Critical Hit is rolled, remove 1 Armour or Shield from the target."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Long Arms",
+            "Hurl",
+            "Swinger"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "pilfered_scran"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "spitlizard",
           "nombre": "Lagarto Escupidor",
           "nombre_en": "Spitlizard",
-          "tipo": "tropa",
+          "clase": "beast",
           "coste": 30,
           "peana_mm": 30,
           "stats": {
@@ -3145,7 +3284,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Bite: (1 AP) Melee, Power 4."
+            "(Ranged) Poison Spit: Power 6. Special Rules: 10” range. Ignores Armour. If this Attack causes Damage, the target loses an additional 1HP at the start of their next Activation (even if it isn’t in the same Round).",
+            "(1 AP) Bite: Power 4"
           ],
           "rasgos": [
             "Agile",
@@ -3153,36 +3293,8 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
-        },
-        {
-          "id": "jungle_troll",
-          "nombre": "Troll de la Selva",
-          "nombre_en": "Jungle Troll",
-          "tipo": "monstruo",
-          "coste": 220,
-          "peana_mm": 50,
-          "stats": {
-            "hp": 20,
-            "mov": 5,
-            "armadura": 1,
-            "ap": 8
-          },
-          "ataques": [
-            "(2 AP) Furious Flailing: Power 7. Regla Especial: Afecta a todos los personajes (aliados y enemigos) a 2\" o menos.",
-            "(2 AP) Pummel: Power 9. Regla Especial: Si el objetivo está en una peana de menor tamaño, desplázalo 2\" hacia atrás."
-          ],
-          "rasgos": [
-            "Regeneration",
-            "Fearsome"
-          ],
-          "max_por_banda": null,
-          "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
