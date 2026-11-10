@@ -1,36 +1,114 @@
 // Lógica del compendio: menú, búsqueda, tarjetas y modales. Extraído de index.html.
+// Las páginas de consulta de facciones salen del compendio (datos_minis.js): reglas de facción, miniaturas,
+// rasgos, saberes mágicos y armería exclusiva de cada facción, más la armería común y el diccionario de rasgos.
+const CLASES_CONSULTA = {
+    commander: 'Comandante', mage: 'Mago', elite: 'Élite', irregular: 'Irregular', unit: 'Unidad', heavy: 'Pesada',
+    beast: 'Bestia', monster: 'Monstruo', comandante: 'Comandante', heroe: 'Héroe', tropa: 'Tropa', monstruo: 'Monstruo', mercenario: 'Mercenario'
+};
+
 function construirSeccionesFacciones() {
-    const fid = (x) => x.faccion_id;
-    const esSerie = (r) => /^Equipo de Serie/i.test(r.etiqueta || '');
-    const orden = [];
-    const nombres = {};
-    [habilidadesFaccionDB, rasgosUnidadesDB, armeriaExclusivaDB].forEach((lista) => lista.forEach((x) => {
-        const id = fid(x);
-        if (!(id in nombres)) { nombres[id] = x.faccion_nombre; orden.push(id); }
-    }));
-    // 'comun' (equipo de serie compartido) va el último
-    orden.sort((a, b) => (a === 'comun') - (b === 'comun'));
-    return orden.map((id) => {
-        const reglas = habilidadesFaccionDB.filter((x) => fid(x) === id);
-        const rasgos = rasgosUnidadesDB.filter((x) => fid(x) === id && !esSerie(x));
-        const serie = rasgosUnidadesDB.filter((x) => fid(x) === id && esSerie(x));
-        const armeria = armeriaExclusivaDB.filter((x) => fid(x) === id).map((a) => Object.assign({}, a, {
+    const comp = typeof compendioArcWorlde !== 'undefined' ? compendioArcWorlde : { facciones: [], armeria_comun: [], diccionario_rasgos: {} };
+    const sinParentesis = (t) => String(t || '').replace(/\s*\(.*\)\s*$/, '');
+    const nombreEquipo = (id, f) => {
+        const g = window.AWGear ? AWGear.find('faccion', (window.AWGear.aliasEquipo ? AWGear.aliasEquipo(id) : id), f.nombre) || AWGear.find('comun', id) : null;
+        return g ? String(g.nombre).split(' / ').pop() : id;
+    };
+    const fichaMiniatura = (u, f) => {
+        const st = u.stats || {};
+        const v = (x) => (x == null ? '—' : x);
+        const listas = [];
+        if ((u.ataques || []).length) listas.push({ titulo: 'Ataques', items: u.ataques });
+        if ((u.rasgos || []).length) listas.push({ titulo: 'Rasgos', items: u.rasgos });
+        if ((u.equipo_de_serie || []).length) listas.push({ titulo: 'Equipo de serie', items: u.equipo_de_serie });
+        if ((u.equipo_permitido || []).length) listas.push({ titulo: 'Equipo permitido', items: u.equipo_permitido.map((id) => nombreEquipo(id, f)) });
+        if ((u.hechizos || []).length) listas.push({ titulo: 'Hechizos', items: u.hechizos });
+        const nombreEn = u.nombre_en && u.nombre_en !== u.nombre ? ' / ' + u.nombre_en : '';
+        return {
+            id: u.id,
+            nombre: u.nombre + nombreEn,
+            etiqueta: (CLASES_CONSULTA[u.clase || u.tipo] || u.clase || u.tipo || 'Miniatura') + ' · ' + (Number(u.coste) || 0) + ' GP',
+            resumen: 'Vida ' + v(st.hp) + ' · Mov ' + v(st.mov) + ' · Armadura ' + v(st.armadura) + ' · AP ' + v(st.ap),
+            detalles: [u.peana_mm ? 'Peana ' + u.peana_mm + ' mm.' : '', u.max_por_banda != null ? 'Máximo ' + u.max_por_banda + ' por banda.' : ''].filter(Boolean).join(' '),
+            listas
+        };
+    };
+    const rasgosDe = (f) => {
+        const vistos = {};
+        const out = [];
+        (f.unidades || []).forEach((u) => (u.rasgos || []).forEach((r) => {
+            const nombre = String(typeof r === 'string' ? r : r.nombre || '').trim();
+            const k = nombre.toLowerCase();
+            if (!nombre || vistos[k]) return;
+            vistos[k] = true;
+            const t = window.AWCompendio ? AWCompendio.traitInfo(nombre) : null;
+            out.push({
+                nombre: nombre,
+                etiqueta: 'Rasgo · ' + f.nombre,
+                resumen: t ? t.resumen : '',
+                detalles: t ? t.detalles : 'Sin descripción cargada todavía.'
+            });
+        }));
+        return out.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    };
+    const saberesDe = (f) => (f.saberes_magicos || []).reduce((all, sab) => {
+        if (sab.reglas_saber) all.push({ nombre: sab.saber, etiqueta: 'Saber mágico', detalles: sab.reglas_saber });
+        (sab.hechizos || []).forEach((h) => {
+            const card = {
+                nombre: h.nombre,
+                etiqueta: sab.saber + ' · Exige ' + h.exige + (h.alcance ? ' · ' + h.alcance : ''),
+                detalles: h.efecto
+            };
+            if (h.ap != null) card.coste_ap = h.ap;
+            all.push(card);
+        });
+        return all;
+    }, []);
+    const secciones = (comp.facciones || []).map((f) => {
+        const apart = f.id === 'bestiary' || f.id === 'swords_for_hire';
+        const armeria = (f.armeria_exclusiva || []).map((a) => Object.assign({}, a, {
             nombre: a.nombre + ' (' + a.coste + ' GP)',
             etiqueta: (a.etiqueta || 'Armería') + ' · ' + a.tipo
         }));
-        const comun = id === 'comun';
         return {
-            titulo: comun ? 'Comunes a varias facciones' : 'Facción ' + nombres[id],
-            descripcion: comun ? 'Equipo de serie compartido por miniaturas de distintas facciones.'
-                : 'Reglas, rasgos de unidad, equipo de serie y armería exclusiva de ' + nombres[id] + '.',
+            titulo: (apart ? '' : 'Facción ') + f.nombre,
+            descripcion: 'Reglas, miniaturas, rasgos, saberes mágicos y armería exclusiva de ' + f.nombre + '.',
             categorias: [
-                { nombre_categoria: 'Reglas de facción', acciones: reglas },
-                { nombre_categoria: 'Rasgos de unidades', acciones: rasgos },
-                { nombre_categoria: 'Equipo de serie', acciones: serie },
+                { nombre_categoria: 'Reglas de facción', acciones: f.reglas_faccion || [] },
+                { nombre_categoria: 'Miniaturas', acciones: (f.unidades || []).map((u) => fichaMiniatura(u, f)) },
+                { nombre_categoria: 'Rasgos de unidades', acciones: rasgosDe(f) },
+                { nombre_categoria: 'Saberes mágicos', acciones: saberesDe(f) },
                 { nombre_categoria: 'Armería exclusiva', acciones: armeria }
             ].filter((c) => c.acciones.length)
         };
     });
+    secciones.push({
+        titulo: 'Armería común',
+        descripcion: 'Equipo y objetos que puede comprar cualquier banda.',
+        categorias: [{
+            nombre_categoria: 'Armería común',
+            acciones: (comp.armeria_comun || []).map((a) => ({
+                id: a.id,
+                nombre: a.nombre + ' (' + a.coste + ' GP)',
+                etiqueta: 'Armería común · ' + a.tipo,
+                detalles: a.efecto || a.detalles || '',
+                restriccion: a.restriccion || ''
+            }))
+        }]
+    });
+    secciones.push({
+        titulo: 'Diccionario de rasgos',
+        descripcion: 'Todos los rasgos del juego por orden alfabético.',
+        categorias: [{
+            nombre_categoria: 'Rasgos',
+            acciones: Object.keys(comp.diccionario_rasgos || {}).sort((a, b) => a.localeCompare(b)).map((k) => ({
+                nombre: k,
+                etiqueta: 'Rasgo',
+                resumen: comp.diccionario_rasgos[k].resumen,
+                detalles: comp.diccionario_rasgos[k].detalles
+            }))
+        }]
+    });
+    return secciones;
 }
 
 const dbUnificada = [
@@ -47,7 +125,7 @@ const dbUnificada = [
     {
         id: 'factions',
         titulo: 'Reglas de Facciones',
-        subtitulo: `${datosFacciones.juego} - ${datosFacciones.version}`,
+        subtitulo: `${compendioArcWorlde.titulo} - v${compendioArcWorlde.version}`,
         secciones: construirSeccionesFacciones()
     },            
     {
@@ -194,6 +272,7 @@ function renderCard(acc) {
             ${renderList("Dificultades", acc.dificultades, true)}
             ${renderList("Dificultad Escalada", acc.dificultad_escalada)}
             ${renderList("Efectos Disponibles", acc.efectos_disponibles)}
+            ${(acc.listas || []).map((l) => renderList(l.titulo, l.items)).join('')}
 
             ${acc.restriccion ? `
                 <div class="mt-4 p-3 bg-rose-950/30 border border-rose-900/50 rounded-lg flex items-start">
@@ -340,6 +419,7 @@ function executeSearch(e) {
                         acc.resumen,
                         acc.detalles,
                         acc.etiqueta,
+                        (acc.listas || []).map((l) => l.items.join(' ')).join(' '),
                         mainSec.titulo,
                         cat.nombre_categoria
                     ].filter(Boolean).join(' ').toLowerCase();

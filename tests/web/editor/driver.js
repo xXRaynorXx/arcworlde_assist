@@ -136,9 +136,18 @@ window.addEventListener('load', async () => {
     // compendio v2
     currentSectionId = 'factions'; renderSidebar(); renderContent(); await wait(40);
     const tt = document.body.textContent;
-    ok('compendio v2: Equipo de serie y Comunes a varias facciones', tt.includes('Equipo de serie') && tt.includes('Comunes a varias facciones'));
-    ok('compendio v2: Magos sin duplicar sección por el id mal escrito', (tt.match(/Facción Magos/g) || []).length === 1, String((tt.match(/Facción Magos/g) || []).length));
-    ok('compendio v2: armería de Ourks con coste', tt.includes('Brebaje del Pantano / Swamp Scrumpy (10 GP)'));
+    // Consulta unificada: todo sale del compendio (datos_minis.js)
+    const secF = dbUnificada.find(x => x.id === 'factions').secciones;
+    const tituloDe = fa => (fa.id === 'bestiary' || fa.id === 'swords_for_hire' ? '' : 'Facción ') + fa.nombre;
+    ok('consulta: una sección por facción del compendio, sin duplicados', datosMinis.facciones.every(fa => secF.filter(x => x.titulo === tituloDe(fa)).length === 1), secF.map(x => x.titulo).join('|'));
+    ok('consulta: Magos sale una sola vez', (tt.match(/Facción Magos/g) || []).length === 1, String((tt.match(/Facción Magos/g) || []).length));
+    const unidadesOk = datosMinis.facciones.every(fa => { const m = secF.find(x => x.titulo === tituloDe(fa)).categorias.find(c => c.nombre_categoria === 'Miniaturas'); return m && m.acciones.length === fa.unidades.length; });
+    ok('consulta: cada facción lista todas sus miniaturas', unidadesOk);
+    ok('consulta: ficha de miniatura con atributos, ataques y rasgos', tt.includes('Vida 10 · Mov 4 · Armadura 1 · AP 4') && tt.includes('Furious Wallop') && tt.includes('Make Orders'));
+    ok('consulta: saberes mágicos con sus hechizos', tt.includes('Hearty Veggie Soup') && tt.includes('Great Green Explosion') && tt.includes('Exige 14'));
+    ok('consulta: armería de Ourks con coste', tt.includes('Aguardiente del Pantano / Swamp Scrumpy (10 GP)'));
+    ok('consulta: armería común y diccionario de rasgos', secF.some(x => x.titulo === 'Armería común' && x.categorias[0].acciones.length === datosMinis.armeria_comun.length) && secF.some(x => x.titulo === 'Diccionario de rasgos' && x.categorias[0].acciones.length === Object.keys(datosMinis.diccionario_rasgos).length));
+    ok('consulta: equipo permitido con nombre, no con id', tt.includes('Packed Lunch') || tt.includes('Almuerzo'), '');
     // Rasgos: todas las miniaturas del catálogo deben tener descripción
     // Rasgos nuevos aún sin entrada en el diccionario del compendio (pendientes de recibirlos)
     const PENDIENTES = [];
@@ -146,10 +155,6 @@ window.addEventListener('load', async () => {
     datosMinis.facciones.forEach(fa => (fa.unidades || []).forEach(u => (u.rasgos || []).forEach(r => { const n = typeof r === 'string' ? r : (r.nombre || ''); if (n && !AW.sheet.traitInfo(n)) sinDesc.add(fa.nombre + ': ' + n); })));
     PENDIENTES.forEach(p => sinDesc.delete(p));
     ok('rasgos: todos tienen descripción (salvo pendientes)', sinDesc.size === 0, [...sinDesc].join(' | '));
-    // Ids de facción coherentes entre archivos
-    const idsMin = new Set(datosMinis.facciones.map(x => x.id));
-    const rotos = new Set(); [habilidadesFaccionDB, rasgosUnidadesDB, armeriaExclusivaDB].forEach(l => l.forEach(x => { if (x.faccion_id !== 'comun' && !idsMin.has(x.faccion_id)) rotos.add(x.faccion_id); }));
-    ok('ids de facción: iguales en datos_minis y datos_facciones', rotos.size === 0, [...rotos].join(','));
     ok('todas las acciones data-* de la pantalla existen', AWUtil.unresolvedActions().length === 0, AWUtil.unresolvedActions().join(','));
   } catch (e) { out.push('EXCEPCION: ' + e.message + ' | ' + ((e.stack || '').split('\n')[1] || '')); }
   out.push('errores globales: ' + (window.__errs.join('; ') || 'ninguno'));
