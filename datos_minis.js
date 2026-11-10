@@ -1390,21 +1390,21 @@ const compendioArcWorlde = {
       "nombre": "Antiguos Muertos",
       "unidades": [
         {
-          "id": "ancient_grave_lord",
-          "nombre": "Señor de las Tumbas",
-          "nombre_en": "Ancient Grave Lord",
-          "tipo": "comandante",
-          "coste": 120,
-          "peana_mm": 40,
+          "id": "grave_lord",
+          "nombre": "Señor de la Tumba",
+          "nombre_en": "Grave Lord",
+          "clase": "commander",
+          "coste": 100,
+          "peana_mm": 30,
           "stats": {
-            "hp": 12,
+            "hp": 10,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 4
           },
           "ataques": [
-            "Spooky Aura: (2 AP) Area, Power 5. Regla Especial: Afecta a todos los enemigos a 4\" o menos. Daño no modificable.",
-            "Regal Slash: (1 AP) Melee, Power 5."
+            "(2 AP) Spooky Aura: Power 5. Special Rules: Targets every enemy Character within 4”. May not be modified by Spells or Equipment.",
+            "(1 AP) Regal Slash: Power 5"
           ],
           "rasgos": [
             "Bones",
@@ -1421,15 +1421,14 @@ const compendioArcWorlde = {
             "skeleton_trumpet",
             "vengeance_coin"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "bog_magus",
-          "nombre": "Mago del Pantano / Bog Magus",
+          "nombre": "Mago del Pantano",
           "nombre_en": "Bog Magus",
-          "tipo": "heroe",
+          "clase": "mage",
           "coste": 90,
           "peana_mm": 30,
           "stats": {
@@ -1439,37 +1438,35 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Staff Whack: (1 AP) Melee, Power 4."
+            "(1 AP) Staff Whack: Power 4"
           ],
           "rasgos": [
             "Afterlife",
-            "Tar Footed",
-            "Mage"
+            "Tar Footed"
           ],
-          "max_por_banda": 1,
+          "max_por_banda": null,
           "equipo_permitido": [
             "animal_totem",
             "ancient_dead_ranged_weapon",
+            "sacred_blade",
             "familiar_jar",
             "circlet_of_bronze",
             "skeleton_trumpet",
             "vengeance_coin"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Pozo de Alquitrán / Tar Pit (Exige 14): Alcance 8\". Coloca un marcador de alquitrán. Todos los personajes a 3\" reducen su Movimiento a 1\".",
-            "Glaive Espiritual / Spirit Glaive (Exige 17): Alcance 3\". Encanta un arma aliada. El objetivo atacado pierde 1 AP por cada 3 de daño sufrido en lugar de perder HP.",
-            "Ritual Olvidado / Forgotten Ritual (Exige 20): Alcance 3\". Todos los aliados con el rasgo Huesos (Bones) a 3\" del Mago recuperan D3 HP.",
-            "Justicia de los Muertos / Justice of the Dead (Exige 21): Alcance Global. Cada enemigo que haya noqueado a un aliado sufre D6 Impactos que ignoran Armadura."
+            "Tar Pit (Exige 14): Place a marker on the game board. All Characters within 3” of it have their Move reduced to 1. This effect lasts until the Bog Magus is Prone or Knocked Out.",
+            "Spirit Glaive (Exige 17): Can be cast upon themselves or a friendly Character within 3” and lasts until the end of the Round. Instead of losing HP a target loses 1AP from their next Activation for each 3 Damage it takes from Melee Attacks from those wielding the Spirit Glaive.",
+            "Forgotten Ritual (Exige 20): All friendly Characters with the Bones Trait within 3” regain D3 HP.",
+            "Justice of the Dead (Exige 21): Every enemy Character that has Knocked Out a friendly Character by the time this Spell is cast suffers D6 Hits that ignore Armour and Shields."
           ]
         },
         {
           "id": "skelt",
-          "nombre": "Esqueleto / Skelt",
+          "nombre": "Esqueleto",
           "nombre_en": "Skelt",
-          "tipo": "tropa",
+          "clase": "unit",
           "coste": 35,
           "peana_mm": 30,
           "stats": {
@@ -1479,8 +1476,8 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Rattling Strike: (2 AP) Melee, Power 5. Regla Especial: Impacto Crítico permite tirar 1 dado adicional.",
-            "Stab: (1 AP) Melee, Power 3."
+            "(2 AP) Rattling Strike: Power 5. Special Rules: Crit allows 1 more Hit to be rolled.",
+            "(1 AP) Stab: Power 3"
           ],
           "rasgos": [
             "Bones",
@@ -1491,92 +1488,133 @@ const compendioArcWorlde = {
             "animal_totem",
             "ancient_dead_ranged_weapon",
             "sacred_blade",
+            "familiar_jar",
+            "circlet_of_bronze",
             "skeleton_trumpet",
             "vengeance_coin"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "tomb_guardian",
           "nombre": "Guardián de la Tumba",
           "nombre_en": "Tomb Guardian",
-          "tipo": "heroe",
+          "clase": "elite",
           "coste": 55,
           "peana_mm": 30,
           "stats": {
             "hp": 6,
             "mov": 4,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 3
           },
           "ataques": [
-            "Bronze Slice: (2 AP) Melee, Power 6.",
-            "Shield Bash: (1 AP) Melee, Power 4."
+            "(2 AP) Accomplished Swing: Power 7. Special Rules: May spend 1 more AP to add 3 Power to this Attack.",
+            "(1 AP) Bash: Power 3. Special Rules: +2 Power if this Character is armed with a Shield."
           ],
           "rasgos": [
             "Afterlife",
             "Bones",
-            "Buried Horde",
-            "Buried Horde (-25% GP Armería Común)"
+            "Buried Horde"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
             "animal_totem",
             "ancient_dead_ranged_weapon",
             "sacred_blade",
+            "familiar_jar",
             "circlet_of_bronze",
             "skeleton_trumpet",
             "vengeance_coin"
           ],
-          "equipo_de_serie": [
-            "Armadura de Bronce Ritual (+1 Armadura)",
-            "Acceso a la Armería Común con 25% de descuento por el rasgo Buried Horde"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "bone_goliath",
+          "nombre": "Goliat de Hueso",
+          "nombre_en": "Bone Goliath",
+          "clase": "heavy",
+          "coste": 180,
+          "peana_mm": 60,
+          "stats": {
+            "hp": 18,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 5
+          },
+          "ataques": [
+            "(2 AP) Weighty Smash: Power 8. Special Rules: If the target is on a 30 or 40mm base, on a Crit they are knocked Prone.",
+            "(2 AP) Champion’s Strike: Power 7. Special Rules: If this Attack Knocks Out a Character, the Bone Goliath regains +1AP.",
+            "(1 AP) Backswing: Power 5"
+          ],
+          "rasgos": [
+            "Bones",
+            "Afterlife",
+            "Fearsome"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "animal_totem",
+            "ancient_dead_ranged_weapon",
+            "sacred_blade",
+            "familiar_jar",
+            "circlet_of_bronze",
+            "skeleton_trumpet",
+            "vengeance_coin"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "relic_spirit",
           "nombre": "Espíritu de la Reliquia",
           "nombre_en": "Relic Spirit",
-          "tipo": "heroe",
+          "clase": "irregular",
           "coste": 50,
           "peana_mm": 30,
           "stats": {
             "hp": 8,
-            "mov": 4,
+            "mov": null,
             "armadura": 0,
             "ap": 3
           },
           "ataques": [
-            "Howling Slashes: (2 AP) Area, Power 6. Regla Especial: Afecta a todos los enemigos a 4\" o menos.",
-            "Vengeful Screech: (1 AP) Area, Power 3. Regla Especial: Afecta a todos los enemigos a 4\" o menos."
+            "(2 AP) Howling Slashes: Power 6. Special Rules: Affects all enemy Characters within 4”.",
+            "(1 AP) Vengeful Screech: Power 3. Special Rules: Affects all enemy Characters within 4”."
           ],
           "rasgos": [
             "Afterlife",
             "Spirit of the Relic"
           ],
           "max_por_banda": null,
-          "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_permitido": [
+            "ancient_dead_ranged_weapon",
+            "sacred_blade",
+            "familiar_jar",
+            "circlet_of_bronze",
+            "skeleton_trumpet",
+            "vengeance_coin"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "barrow_hound",
-          "nombre": "Sabueso de las Tumbas",
+          "nombre": "Sabueso del Túmulo",
           "nombre_en": "Barrow Hound",
-          "tipo": "monstruo",
+          "clase": "beast",
           "coste": 30,
           "peana_mm": 30,
           "stats": {
-            "hp": 6,
+            "hp": 4,
             "mov": 7,
             "armadura": 0,
             "ap": 2
           },
           "ataques": [
-            "Chomp: (1 AP) Melee, Power 5."
+            "(1 AP) Chomp: Power 5"
           ],
           "rasgos": [
             "Agile",
@@ -1586,9 +1624,8 @@ const compendioArcWorlde = {
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
