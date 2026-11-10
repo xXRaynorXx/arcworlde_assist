@@ -28,6 +28,8 @@ window.addEventListener('load', async () => {
     ok('catálogo: Bestiario aparte', gl().some(l => l.startsWith('Bestiario')) && cat().includes('bestiary:griffling'));
     ok('catálogo: Espadas de Alquiler aparte, sin su comandante', gl().some(l => l.startsWith('Espadas de Alquiler')) && cat().includes('swords_for_hire:mercenary_goon') && !cat().includes('swords_for_hire:father_griffmas'), cat().filter(v => v.startsWith('swords')).join());
     ok('mercenarios: Rabbin Tood usa el arma a distancia halfling', AWGear.optionsFor('rabbin_tood').exclusive.some(a => a.id === 'halfling_ranged_weapon') && AWGear.optionsFor('giant_giantess').common.length === 0);
+    const vs = datosMinis.facciones.find(f => f.id === 'vampires').unidades;
+    ok('Vampiros: el Vampiro Supremo es comandante (Vampiro + Vampyr Supreme: 150 GP, 18 HP, 4 AP) y el Vampiro sigue siendo élite', vs.find(u => u.id === 'vampire_supreme').clase === 'commander' && vs.find(u => u.id === 'vampire_supreme').coste === 150 && vs.find(u => u.id === 'vampire_supreme').stats.hp === 18 && vs.find(u => u.id === 'vampire_supreme').stats.ap === 4 && vs.find(u => u.id === 'vampire').clase === 'elite');
     ok('objetos v9: Volley Gun (Ogro), Hobgoblin Mount y Bestial Moxie se ofrecen', AWGear.optionsFor('imperial_ogre').exclusive.some(a => a.id === 'volley_gun') && AWGear.optionsFor('hobgoblins').exclusive.some(a => a.id === 'hobgoblin_mount') && AWGear.optionsFor('beastfolk_clanbeast').exclusive.some(a => a.id === 'bestial_moxie'));
     ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
     AW.addFromCatalog('halfling:halfling_sheriff'); await wait(30);
@@ -119,7 +121,7 @@ window.addEventListener('load', async () => {
     ok('Ourks tiene armería propia', sel2 && [...sel2.querySelectorAll('optgroup')].some(g => g.label.startsWith('Ourks —')), sel2 && [...sel2.querySelectorAll('optgroup')].map(g => g.label + g.children.length).join('|'));
     ok('Ourks: aliados Beastfolk y Gremlins sugeridos', gl().some(l => l.includes('Gremlins')) && gl().some(l => l.includes('Hombres Bestia')), gl().join('|'));
     // Fichas sin equipo_permitido: se ofrece la armería de su facción (salvo monstruos)
-    ok('equipo_permitido: el Vampiro ofrece su armería; el Esclavo y los monstruos no', AWGear.optionsFor('vampire').exclusive.length === 7 && AWGear.optionsFor('thrall').exclusive.length === 0 && AWGear.optionsFor('werewolf').exclusive.length === 0 && AWGear.optionsFor('werewolf').common.length === 0);
+    ok('equipo_permitido: el Vampiro ofrece su armería; el Esclavo y los monstruos no', AWGear.optionsFor('vampire').exclusive.length === 6 && AWGear.optionsFor('thrall').exclusive.length === 0 && AWGear.optionsFor('werewolf').exclusive.length === 0 && AWGear.optionsFor('werewolf').common.length === 0);
     // Rasgos comprables dentro del selector de equipo
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
     AW.setField('name', 'Bestias'); AW.setField('faction', 'Hombres Bestia'); AW.rerender(); await wait(20);

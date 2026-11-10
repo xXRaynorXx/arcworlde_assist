@@ -1903,6 +1903,44 @@ const compendioArcWorlde = {
       "nombre": "Vampiros",
       "unidades": [
         {
+          "id": "vampire_supreme",
+          "nombre": "Vampiro Supremo",
+          "nombre_en": "Vampyr Supreme",
+          "clase": "commander",
+          "coste": 150,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 18,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Effortless Slash: Power 7. Special Rules: Each Crit allows one more D6 to be rolled.",
+            "(1 AP) Bloody Strike: Power 5. Special Rules: Crit ignores Armour.",
+            "(1 AP) Go for the Throat: Power 2. Special Rules: This Attack’s Power is not boosted by any Equipment. If HP is removed by this Attack, may re-roll any failed Enthral attempts against the target this Round."
+          ],
+          "rasgos": [
+            "Enthral",
+            "Feed"
+          ],
+          "max_por_banda": 1,
+          "equipo_permitido": [
+            "blood_vial",
+            "beguiling_temperament",
+            "shapeshifter_bloodline",
+            "everlasting_bloodline",
+            "fell_scholar_bloodline",
+            "crimson_knight"
+          ],
+          "equipo_de_serie": [
+            "Vampiro Supremo / Vampyr Supreme"
+          ],
+          "hechizos": [
+            "Lore of the Night Spells (if equipped with Fell Scholar Bloodline): Darkness (Required Draw 14), Dramatic Thunderclap (Required Draw 17), Vampiric Glare (Required Draw 20), Cloud of Bats (Required Draw 21)"
+          ]
+        },
+        {
           "id": "vampire",
           "nombre": "Vampiro",
           "nombre_en": "Vampire",
@@ -1927,7 +1965,6 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "blood_vial",
-            "vampyr_supreme",
             "beguiling_temperament",
             "shapeshifter_bloodline",
             "everlasting_bloodline",
