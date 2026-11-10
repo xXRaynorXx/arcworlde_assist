@@ -22,7 +22,7 @@ window.addEventListener('load', async () => {
     const gl = () => [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] optgroup')].map(g => g.label);
     const cat = () => [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].map(o => o.value);
     ok('catálogo: sin botón «Añadir miniatura» y un solo desplegable', !btnText('Añadir miniatura') && document.querySelectorAll('select[data-change^="AW.addFromCatalog"]').length === 1);
-    ok('catálogo: facción propia por tipo', gl().includes('Halflings — Comandante') && gl().includes('Halflings — Mago') && gl().includes('Halflings — Unidad') && gl().includes('Halflings — Pesada') && gl().includes('Halflings — Bestia'), gl().join('|'));
+    ok('catálogo: un grupo por facción, sin repetir el tipo en el título', gl().join('|') === 'Halflings|Aliados: Imperiales|Bestiario (se contrata aparte)|Espadas de Alquiler (se contrata aparte)', gl().join('|'));
     ok('catálogo: sugiere aliados (Imperiales) sin su comandante', gl().some(l => l.startsWith('Aliados: Imperial')) && cat().includes('imperial:imperial_dragoon') && cat().includes('imperial:imperial_trooper') && !cat().includes('imperial:imperial_captain'), gl().join('|'));
     ok('catálogo: nota de aliados', txt().includes('Sugeridas por alianza'));
     ok('catálogo: Bestiario aparte', gl().some(l => l.startsWith('Bestiario')) && cat().includes('bestiary:griffling'));
@@ -31,7 +31,8 @@ window.addEventListener('load', async () => {
     const vs = datosMinis.facciones.find(f => f.id === 'vampires').unidades;
     ok('Vampiros: el Vampiro Supremo es comandante (150 GP, 24 HP, 5 AP) y el Vampiro sigue siendo élite', vs.find(u => u.id === 'vampire_supreme').clase === 'commander' && vs.find(u => u.id === 'vampire_supreme').coste === 150 && vs.find(u => u.id === 'vampire_supreme').stats.hp === 24 && vs.find(u => u.id === 'vampire_supreme').stats.ap === 5 && vs.find(u => u.id === 'vampire').clase === 'elite');
     ok('objetos v9: Volley Gun (Ogro), Hobgoblin Mount y Bestial Moxie se ofrecen', AWGear.optionsFor('imperial_ogre').exclusive.some(a => a.id === 'volley_gun') && AWGear.optionsFor('hobgoblins').exclusive.some(a => a.id === 'hobgoblin_mount') && AWGear.optionsFor('beastfolk_clanbeast').exclusive.some(a => a.id === 'bestial_moxie'));
-    ok('catálogo: las opciones muestran los atributos', [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].some(o => /Vida 10 · Mov 4 · Arm 1 · AP 4/.test(o.textContent)));
+    ok('catálogo: las opciones muestran nombre - tipo (coste) y no los atributos', (() => { const o = [...document.querySelectorAll('select[data-change^="AW.addFromCatalog"] option')].map(x => x.textContent); return o.some(x => /^.+ - (Comandante|Mago|Unidad|Élite) \(\d+ GP\)$/.test(x)) && !o.some(x => /Vida \d/.test(x)); })());
+    ok('navegación: barra Atrás/Inicio en pantallas que no son el inicio', !document.getElementById('aw-navbar').classList.contains('hidden'));
     AW.addFromCatalog('halfling:halfling_sheriff'); await wait(30);
     AW.addFromCatalog('halfling:halfling_militia'); await wait(30);
     ok('editor: total base 120', document.getElementById('aw-total').textContent === '120', document.getElementById('aw-total').textContent);

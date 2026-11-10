@@ -36,7 +36,28 @@
     const h = current();
     if (!h || h === location.hash) return;
     const url = location.pathname + location.search + h;
-    if (!first) { first = true; history.replaceState(null, '', url); } else history.pushState(null, '', url);
+    const i = (history.state && history.state.i) || 0;
+    if (!first) { first = true; history.replaceState({ i: i }, '', url); } else history.pushState({ i: i + 1 }, '', url);
+    updateBar();
+  }
+
+  // Barra "Atrás / Inicio": visible en todas las pantallas menos la de inicio
+  function homeId() { return typeof dbUnificada !== 'undefined' && dbUnificada[0] ? dbUnificada[0].id : ''; }
+  function updateBar() {
+    const bar = document.getElementById('aw-navbar');
+    if (!bar) return;
+    const s = typeof currentSectionId === 'string' ? currentSectionId : '';
+    const home = !s || s === homeId();
+    bar.classList.toggle('hidden', home);
+    bar.classList.toggle('flex', !home);
+    const back = document.getElementById('aw-nav-back');
+    if (back) back.classList.toggle('hidden', !(history.state && history.state.i > 0));
+  }
+  function goHome() {
+    const id = homeId();
+    if (!id) return;
+    if (AW.g && AW.g.reset) AW.g.reset();
+    if (AW.go) AW.go(id);
   }
 
   async function apply(hash, opts) {
@@ -76,7 +97,13 @@
   }
 
   window.addEventListener('popstate', () => {
-    if (location.hash) apply(location.hash, { force: true });
+    if (location.hash) apply(location.hash, { force: true }).then(updateBar);
+    else { goHome(); updateBar(); }
+  });
+  document.addEventListener('click', (ev) => {
+    const t = ev.target.closest && ev.target.closest('#aw-nav-back, #aw-nav-home');
+    if (!t) return;
+    if (t.id === 'aw-nav-back') history.back(); else goHome();
   });
 
   AW.hooks.afterRender.push(sync);

@@ -624,15 +624,13 @@
       '<div class="mt-3">' +
       (groups.length
         ? '<select ' + act('change', 'AW.addFromCatalog', ['$value'], { reset: true }) + ' class="' + inputCls + ' sm:w-auto"><option value="">Añadir miniatura del catálogo...</option>' +
-          groups.map((g) =>
-            TIPOS.map((t) => {
-              const opts = g.units
-                .filter((p) => AWGear.claseOf(p.u) === t[0])
-                .map((p) => '<option value="' + esc(p.f.id + ':' + p.u.id) + '">' + esc(p.u.nombre) + ' (' + (Number(p.u.coste) || 0) + ' GP · ' + statLine(p.u) + ')</option>')
-                .join('');
-              return opts ? '<optgroup label="' + esc(g.label + ' — ' + t[1]) + '">' + opts + '</optgroup>' : '';
-            }).join('')
-          ).join('') +
+          groups.map((g) => {
+            const opts = TIPOS.map((t) => g.units
+              .filter((p) => AWGear.claseOf(p.u) === t[0])
+              .map((p) => '<option value="' + esc(p.f.id + ':' + p.u.id) + '">' + esc(p.u.nombre) + ' - ' + esc(t[1]) + ' (' + (Number(p.u.coste) || 0) + ' GP)</option>')
+              .join('')).join('');
+            return opts ? '<optgroup label="' + esc(g.label) + '">' + opts + '</optgroup>' : '';
+          }).join('') +
           '</select>' +
           (groups.some((g) => g.kind === 'ally') ? '<p class="mt-2 text-xs text-sky-300/80">Sugeridas por alianza: ' + groups.filter((g) => g.kind === 'ally').map((g) => esc(g.label.replace('Aliados: ', ''))).join(', ') + ' (regla de facción).</p>' : '')
         : e.faction && factions.length
