@@ -2322,26 +2322,27 @@ const compendioArcWorlde = {
       "nombre": "Elfos Silvanos",
       "unidades": [
         {
-          "id": "wild_elf_druid",
-          "nombre": "Drúida Elfo Silvano",
-          "nombre_en": "Wild Elf Druid",
-          "tipo": "comandante",
-          "coste": 110,
-          "peana_mm": 30,
+          "id": "wild_elf_warchief",
+          "nombre": "Jefe de Guerra Elfo Silvano",
+          "nombre_en": "Wild Elven Warchief",
+          "clase": "commander",
+          "coste": 130,
+          "peana_mm": null,
           "stats": {
-            "hp": 10,
+            "hp": 14,
             "mov": 5,
             "armadura": 0,
-            "ap": 4
+            "ap": 5
           },
           "ataques": [
-            "Staff of Bloodwood: (2 AP) Melee, Power 6.",
-            "Nature's Wrath: (Ranged) Power 5, Alcance 8\"."
+            "(2 AP) Whirlwind: Power 8. Special Rules: Each Critical Hit allows 1 more D6 to be rolled.",
+            "(1 AP) Deadly Strike: Power 5. Special Rules: Critical Hits ignore Armour",
+            "(2 AP) Bloodlust: Power 10. Special Rules: This Attack may only be made if the Warchief Knocked Out an enemy Character in the same Activation."
           ],
           "rasgos": [
-            "Blood Magic",
-            "Woodlore",
-            "Mage"
+            "Agile",
+            "Summoner",
+            "Sacrifice"
           ],
           "max_por_banda": 1,
           "equipo_permitido": [
@@ -2352,36 +2353,68 @@ const compendioArcWorlde = {
             "strongbow",
             "faeblade"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "wild_elf_druid",
+          "nombre": "Drúida Elfo Silvano",
+          "nombre_en": "Wild Elven Druid",
+          "clase": "mage",
+          "coste": 145,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 12,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 5
+          },
+          "ataques": [
+            "(Ranged) Enchanted Vines: Power 4. Special Rules: 8” range",
+            "(1 AP) Ritual Blade: Power 5"
           ],
+          "rasgos": [
+            "Agile",
+            "Summoner",
+            "Sacrifice"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "blood_stone",
+            "wild_elven_ranged_weapon",
+            "sacrificial_blade",
+            "wild_elven_mount",
+            "strongbow",
+            "faeblade"
+          ],
+          "equipo_de_serie": [],
           "hechizos": [
-            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
-            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
-            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
-            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
+            "Tangleweed (Exige 14): All Characters within 6\" of the caster have their Movement and Leg It rolls reduced by 2\" until the caster’s next Spell.",
+            "Spirit of the Forest (Exige 16): One friendly Character within 12\" gains +2 AP for their next Activation. Whilst under the effects of this Spell, the target may not receive any other bonuses from Spells.",
+            "Ominous Whispers (Exige 19): One enemy Character within 12” must pass a Bravery Test. If they fail, they lose 3 HP in addition to the regular effects of failure. All enemy models within 3” of the original target, whether they passed their Bravery Test or not, must also take Bravery Tests.",
+            "The Merciless Wood (Exige 21): Power 4. Special Rules: If any Characters are Knocked Out by the effects of this spell, they are replaced by a Woodfiend. This Character is controlled by the Elven player as normal and can be activated in the next Round."
           ]
         },
         {
           "id": "wild_elf_warrior",
           "nombre": "Guerrero Elfo Silvano",
-          "nombre_en": "Wild Elf Warrior",
-          "tipo": "tropa",
-          "coste": 45,
+          "nombre_en": "Wild Elven Warrior",
+          "clase": "elite",
+          "coste": 95,
           "peana_mm": 30,
           "stats": {
-            "hp": 6,
+            "hp": 10,
             "mov": 5,
             "armadura": 0,
-            "ap": 2
+            "ap": 4
           },
           "ataques": [
-            "Leafblade Slash: (2 AP) Melee, Power 6.",
-            "Longbow Shot: (Ranged) Power 5, Alcance 16\"."
+            "(2 AP) Flurry of Blades: Power 7. Special Rules: Each Critical Hit allows 1 more D6 to be rolled.",
+            "(1 AP) Wicked Slash: Power 5. Special Rules: Each Critical Hit ignores 1 Armour."
           ],
           "rasgos": [
             "Agile",
-            "Woodlore"
+            "Summoner"
           ],
           "max_por_banda": null,
           "equipo_permitido": [
@@ -2391,54 +2424,80 @@ const compendioArcWorlde = {
             "strongbow",
             "faeblade"
           ],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "wild_elf_blademaster",
+          "nombre": "Maestro de la Hoja Elfo Silvano",
+          "nombre_en": "Wild Elven Blademaster",
+          "clase": "irregular",
+          "coste": 110,
+          "peana_mm": null,
+          "stats": {
+            "hp": 10,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Bladestorm: Power 8. Special Rules: Each Critical Hit allows 2 more D6 to be rolled.",
+            "(1 AP) Scissor Strike: Power 5. Special Rules: Each Critical Hit breaks 1 Armour."
           ],
-          "hechizos": [
-            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
-            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
-            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
-            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
-          ]
+          "rasgos": [
+            "Agile",
+            "Summoner"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "blood_stone",
+            "wild_elven_ranged_weapon",
+            "sacrificial_blade",
+            "strongbow",
+            "faeblade"
+          ],
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "briarbeast",
           "nombre": "Briarbeast",
           "nombre_en": "Briarbeast",
-          "tipo": "monstruo",
+          "clase": "heavy",
           "coste": 200,
           "peana_mm": 50,
           "stats": {
             "hp": 20,
             "mov": 8,
-            "armadura": 1,
+            "armadura": 0,
             "ap": 7
           },
           "ataques": [
-            "Bladestorm: (2 AP) Melee, Power 8.",
-            "Scissor Strike: (1 AP) Melee, Power 5. Breaks 1 Armour."
+            "(2 AP) Impale: Power 9. Special Rules: May only be used if a Charge was made in this Activation.",
+            "(2 AP) Trample: Power 4. Special Rules: If a Critical Hit is made, the target Character is Prone, and this Character may move out of combat without any penalties.",
+            "(2 AP) Gore: Power 6"
           ],
           "rasgos": [
+            "Flammable",
             "Agile",
-            "Woodlore"
+            "Split Activation",
+            "Fearsome",
+            "Dwindling Strength",
+            "Death Throes",
+            "Monstrous Mount",
+            "Thorned",
+            "Thirst of the Forest"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ],
-          "hechizos": [
-            "Maleza Espinosa / Tangleweed (Exige 14): Alcance 6\" Área. Enredaderas espinosas reducen en 2\" el Movimiento y Leg It de todos los personajes a 6\".",
-            "Bosque Despiadado / Merciless Wood (Exige 17): Alcance 8\". Los árboles atacan a enemigos en terreno de bosque, infligiendo 2 Impactos de Power 6.",
-            "Invocación de Briarbeast / Summon Briarbeast (Exige 19): Alcance 6\". Invoca o fortalece a un constructo vegetal/madera otorgándole +2 Power y +5 HP.",
-            "Sacrificio de Sangre / Blood Sacrifice (Exige 21): Alcance Contacto. Sacrifica 2 HP de un aliado o prisionero para recargar completamente los AP del Druida."
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
         },
         {
           "id": "lichenhawk",
           "nombre": "Lichenhawk",
           "nombre_en": "Lichenhawk",
-          "tipo": "monstruo",
+          "clase": "beast",
           "coste": 35,
           "peana_mm": 30,
           "stats": {
@@ -2448,19 +2507,45 @@ const compendioArcWorlde = {
             "ap": 2
           },
           "ataques": [
-            "Skydive: (2 AP) Melee, Power 8, Alcance 2\". Regla Especial: Coloca en contacto de peana.",
-            "Peck: (1 AP) Melee, Power 4."
+            "(1 AP) Peck: Power 4",
+            "(2 AP) Skydive: Power 8. Special Rules: May target Characters within 2”. After this Attack, move this Character in base contact with the target. If more Failures are rolled than Successes to Hit, this Character is Knocked Out."
           ],
           "rasgos": [
-            "Fly",
             "Summoned",
-            "Flammable"
+            "Flammable",
+            "Fly"
           ],
           "max_por_banda": null,
           "equipo_permitido": [],
-          "equipo_de_serie": [
-            "Armamento Estándar / Sin Armadura de serie"
-          ]
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "woodfiend",
+          "nombre": "Woodfiend",
+          "nombre_en": "Woodfiend",
+          "clase": "unit",
+          "coste": 45,
+          "peana_mm": null,
+          "stats": {
+            "hp": 6,
+            "mov": 3,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(Ranged) Splinter: Power 4. Special Rules: Range 8”.",
+            "(1 AP) Razorbark: Power 3"
+          ],
+          "rasgos": [
+            "Summoned",
+            "Flammable",
+            "Shifting Forms"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
         }
       ],
       "reglas_faccion": [
