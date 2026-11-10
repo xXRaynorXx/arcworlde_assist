@@ -852,7 +852,7 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "black_potion",
-            "hobgoblin_ranged_weapon",
+            "dark_lord_ranged_weapon",
             "hobgoblin_mount",
             "slaver_whip"
           ],
@@ -939,7 +939,7 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "black_potion",
-            "hobgoblin_ranged_weapon",
+            "dark_lord_ranged_weapon",
             "hobgoblin_mount",
             "slaver_whip"
           ],
@@ -971,7 +971,7 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "black_potion",
-            "hobgoblin_ranged_weapon",
+            "dark_lord_ranged_weapon",
             "hobgoblin_mount",
             "slaver_whip"
           ],
@@ -1928,9 +1928,9 @@ const compendioArcWorlde = {
           "equipo_permitido": [
             "blood_vial",
             "beguiling_temperament",
-            "shapeshifter_bloodline",
+            "shapeshifter",
             "everlasting_bloodline",
-            "fell_scholar_bloodline",
+            "fell_scholar",
             "crimson_knight"
           ],
           "equipo_de_serie": [
@@ -1966,9 +1966,9 @@ const compendioArcWorlde = {
           "equipo_permitido": [
             "blood_vial",
             "beguiling_temperament",
-            "shapeshifter_bloodline",
+            "shapeshifter",
             "everlasting_bloodline",
-            "fell_scholar_bloodline",
+            "fell_scholar",
             "crimson_knight"
           ],
           "equipo_de_serie": [],
@@ -2994,11 +2994,11 @@ const compendioArcWorlde = {
           "max_por_banda": 1,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_boglin_ranged_weapon",
+            "ourk_ranged_weapon",
             "swamp_scrumpy",
             "pet_droggo",
             "magical_mushroom",
-            "ourk_boglin_mount"
+            "ourk_mount"
           ],
           "equipo_de_serie": [],
           "hechizos": []
@@ -3031,7 +3031,7 @@ const compendioArcWorlde = {
             "swamp_scrumpy",
             "pet_droggo",
             "magical_mushroom",
-            "ourk_boglin_mount"
+            "ourk_mount"
           ],
           "equipo_de_serie": [],
           "hechizos": [
@@ -3065,10 +3065,10 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_boglin_ranged_weapon",
+            "ourk_ranged_weapon",
             "swamp_scrumpy",
             "goading_fork",
-            "ourk_boglin_mount"
+            "ourk_mount"
           ],
           "equipo_de_serie": [],
           "hechizos": []
@@ -3097,9 +3097,9 @@ const compendioArcWorlde = {
           "max_por_banda": null,
           "equipo_permitido": [
             "healing_broth",
-            "ourk_boglin_ranged_weapon",
-            "musical_instrument",
-            "ourk_boglin_mount"
+            "ourk_ranged_weapon",
+            "boglin_musical_instrument",
+            "ourk_mount"
           ],
           "equipo_de_serie": [],
           "hechizos": []
@@ -3160,7 +3160,7 @@ const compendioArcWorlde = {
             "healing_broth",
             "swamp_scrumpy",
             "magical_mushroom",
-            "ourk_boglin_mount"
+            "ourk_mount"
           ],
           "equipo_de_serie": [],
           "hechizos": []
