@@ -4150,6 +4150,253 @@ const compendioArcWorlde = {
           ]
         }
       ]
+    },
+    {
+      "id": "swords_for_hire",
+      "nombre": "Espadas de Alquiler / Swords for Hire",
+      "unidades": [
+        {
+          "id": "mercenary_goon",
+          "nombre": "Goon Mercenario",
+          "nombre_en": "Mercenary Goon",
+          "clase": "unit",
+          "coste": 30,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 6,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 2
+          },
+          "ataques": [
+            "(2 AP) Wallop: Power 6. Special Rules: A Critical Hit allows the player to re-roll 1 failed Hit.",
+            "(1 AP) Whack: Power 4"
+          ],
+          "rasgos": [
+            "Expendable"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "rabbin_tood",
+          "nombre": "Rabbin Tood",
+          "nombre_en": "Rabbin Tood",
+          "clase": "irregular",
+          "coste": 65,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Gut Punch: Power 7. Special Rules: If a Critical Hit is rolled, reduces the Target's AP by 1 for its next Activation. This does not stack.",
+            "(1 AP) Shin Kick: Power 4"
+          ],
+          "rasgos": [
+            "Halfling Ranged Weapon",
+            "Expert Poacher"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [
+            "halfling_ranged_weapon",
+            "packed_lunch"
+          ],
+          "equipo_de_serie": [
+            "Halfling Ranged Weapon"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "bruno_focaccia",
+          "nombre": "Bruno Focaccia",
+          "nombre_en": "Bruno Focaccia",
+          "clase": "elite",
+          "coste": 70,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 1,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Flourish: Power 6. Special Rules: On a Crit, one more D6 may be rolled for this Attack.",
+            "(1 AP) Feint: Power 4. Special Rules: If this Attack removes HP, the next Character who attempts to Attack Bruno must first pass an Easy Feat or lose 1HP instead."
+          ],
+          "rasgos": [
+            "Dual Weapons",
+            "Light Armour",
+            "The Scarlet Blur"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Dual Weapons",
+            "Light Armour"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "the_explorer",
+          "nombre": "El Explorador y el Diario Encantado",
+          "nombre_en": "The Explorer and The Enchanted Journal",
+          "clase": "mage",
+          "coste": 90,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 8,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(1 AP) Clumsy Slashing: Power 4"
+          ],
+          "rasgos": [
+            "Plot Armour",
+            "The Enchanted Journal"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Plot Armour"
+          ],
+          "hechizos": [
+            "Arcleap (Exige 14): Remove both The Explorer and the Journal from the board, even if either of them is in base contact with an enemy Character. Replace them in base contact within 6” of any table edge as they appear again",
+            "Touch of Destiny (Exige 16): Choose a friendly Character on the board. For the rest of the Round, re-roll any failed dice when they are attempting Feats.",
+            "Charmed Blade (Exige 18): Choose one friendly Character within 6” of the Journal. On rolls to Attack, both 5s and 6s count as Critical Hits.",
+            "Arcane Knowledge (Exige 21): The Journal seems to tap into an unknown wealth of knowledge, as if it was connected to all the books of magic ever written. The caster may choose one Spell from any lore in the ArcWorlde game. This may now be successfully cast."
+          ]
+        },
+        {
+          "id": "giant_giantess",
+          "nombre": "Gigante / Giganta",
+          "nombre_en": "Giant/Giantess",
+          "clase": "monster",
+          "coste": 600,
+          "peana_mm": 120,
+          "stats": {
+            "hp": 60,
+            "mov": 5,
+            "armadura": 0,
+            "ap": 20
+          },
+          "ataques": [
+            "(4 AP) Club Swing: Power 7. Special Rules: Targets every Character in Melee range. A Crit knocks a Character Prone if on a 50mm base or less.",
+            "(2 AP) Big Foot: Power 6. Special Rules: Re-roll all failed Hits against Prone targets.",
+            "(1 AP) Pick Up: Power 2. Special Rules: May only be used against a Character on a 40mm base or less. On a Crit, the target Character is Picked Up. They may not move, and if the Giant moves, they are taken with them and remain in base contact. To escape the target must pass a Medium Feat in their Activation."
+          ],
+          "rasgos": [
+            "Split Activation",
+            "Dwindling Strength",
+            "Death Throes",
+            "Fearsome",
+            "Long Limbs",
+            "Bellow",
+            "Pick Up And…"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [],
+          "hechizos": []
+        },
+        {
+          "id": "jean_le_porc",
+          "nombre": "Jean le Porc",
+          "nombre_en": "Jean le Porc",
+          "clase": "elite",
+          "coste": 70,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 2,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Glinting Thrust: Power 6. Special Rules: +3 Power if in base contact with more than one enemy Character.",
+            "(1 AP) Shield Bonk: Power 4. Special Rules: If a Crit is rolled, the player may choose to move the target 1” in a direction of their choosing. This effect only applies to targets on a 50mm base or less."
+          ],
+          "rasgos": [
+            "Shield",
+            "Heavy Armour",
+            "For Honour and Glory!"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Escudo / Shield",
+            "Armadura Pesada / Heavy Armour"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "van_halfsing",
+          "nombre": "Van Halfsing",
+          "nombre_en": "Van Halfsing",
+          "clase": "irregular",
+          "coste": 70,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 10,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 3
+          },
+          "ataques": [
+            "(2 AP) Stake Through the Heart: Power 6. Special Rules: If the target is Prone, and from an undead Faction (Undead Raiders, Ancient Dead or Vampires), any Damage caused is doubled.",
+            "(1 AP) Crossbow Butt: Power 4",
+            "(Ranged) Rapid Shot: Power 4. Special Rules: 12” range. Two Shots can be made for every successful Feat."
+          ],
+          "rasgos": [
+            "Van Halfsing’s Crossbow",
+            "Hater of the Dead"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Van Halfsing’s Crossbow"
+          ],
+          "hechizos": []
+        },
+        {
+          "id": "father_griffmas",
+          "nombre": "Father Griffmas",
+          "nombre_en": "Father Griffmas",
+          "clase": "commander",
+          "coste": 120,
+          "peana_mm": 30,
+          "stats": {
+            "hp": 12,
+            "mov": 4,
+            "armadura": 0,
+            "ap": 4
+          },
+          "ataques": [
+            "(2 AP) Festive Slash: Power 7. Special Rules: Each Crit allows one more D6 to be rolled.",
+            "(1 AP) Sack Whack: Power 5"
+          ],
+          "rasgos": [
+            "Two-Handed Weapon",
+            "Coodolf the Griffling",
+            "Griffmas Sack"
+          ],
+          "max_por_banda": null,
+          "equipo_permitido": [],
+          "equipo_de_serie": [
+            "Arma a Dos Manos / Two-Handed Weapon"
+          ],
+          "hechizos": []
+        }
+      ],
+      "reglas_faccion": [],
+      "armeria_exclusiva": [],
+      "saberes_magicos": []
     }
   ],
   "armeria_comun": [
