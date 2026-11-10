@@ -126,7 +126,7 @@ window.addEventListener('load', async () => {
     ok('Ourks tiene armería propia', sel2 && [...sel2.querySelectorAll('optgroup')].some(g => g.label === 'Ourks'), sel2 && [...sel2.querySelectorAll('optgroup')].map(g => g.label + g.children.length).join('|'));
     ok('Ourks: aliados Beastfolk y Gremlins sugeridos', gl().some(l => l.includes('Gremlins')) && gl().some(l => l.includes('Hombres Bestia')), gl().join('|'));
     // Fichas sin equipo_permitido: se ofrece la armería de su facción (salvo monstruos)
-    ok('equipo_permitido: el Vampiro ofrece su armería; el Esclavo y los monstruos no', AWGear.optionsFor('vampire').exclusive.length === 6 && AWGear.optionsFor('thrall').exclusive.length === 0 && AWGear.optionsFor('werewolf').exclusive.length === 0 && AWGear.optionsFor('werewolf').common.length === 0);
+    ok('equipo_permitido: el Vampiro ofrece su armería; el Esclavo no; las criaturas (bestia/monstruo) no compran armería común, las pesadas sí', AWGear.optionsFor('vampire').exclusive.length === 6 && AWGear.optionsFor('thrall').exclusive.length === 0 && AWGear.optionsFor('werewolf').exclusive.length === 0 && AWGear.optionsFor('werewolf').common.length === 8 && AWGear.optionsFor('crypt_bat').common.length === 0 && AWGear.optionsFor('forest_troll').common.length === 0);
     // Rasgos comprables dentro del selector de equipo
     AW.go('app_bands'); await wait(60); AW.newBand(); await wait(40);
     AW.setField('name', 'Bestias'); AW.setField('faction', 'Hombres Bestia'); AW.rerender(); await wait(20);
