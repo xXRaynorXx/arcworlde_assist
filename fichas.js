@@ -26,59 +26,8 @@
     return null;
   }
 
-  // Descripciones de rasgos: datosFacciones (compendio) y, si existe, datosRasgos { "Nombre": {resumen, detalles} }.
-  let traitIdx = null;
-  // Clave de búsqueda: minúsculas y apóstrofos tipográficos normalizados
-  const traitKey = (n) => String(n || '').toLowerCase().replace(/[\u2018\u2019`´]/g, "'").trim();
-  // Nombres con que aparece un rasgo en las miniaturas -> nombre con que está descrito
-  const TRAIT_ALIAS = {
-    'grand cookbook': 'grand cookbook of bulbo chubb',
-    'crew and payload': 'crew & random payload',
-    'things of magic': 'thing of magic',
-    'elemental colleges': 'colleges of mt orion',
-    'resurrection': 'raiser of the dead',
-    'light armour': 'light armour (gratis)',
-    'heavy armour': 'heavy armour (gratis)'
-  };
-  function buildTraits() {
-    traitIdx = {};
-    const add = (name, o) => { const k = traitKey(name); if (k && !traitIdx[k]) traitIdx[k] = o; };
-    (function walk(o) {
-      if (Array.isArray(o)) return o.forEach(walk);
-      if (o && typeof o === 'object') {
-        if (o.nombre && o.detalles) add(String(o.nombre).split(' / ').pop().trim(), o);
-        Object.values(o).forEach(walk);
-      }
-    })(typeof datosFacciones !== 'undefined' ? datosFacciones : null);
-    // Datos consolidados de facciones (tienen prioridad sobre los textos antiguos)
-    const fresh = [];
-    if (typeof rasgosUnidadesDB !== 'undefined') fresh.push(rasgosUnidadesDB);
-    if (typeof habilidadesFaccionDB !== 'undefined') fresh.push(habilidadesFaccionDB);
-    fresh.forEach((db) => db.forEach((o) => {
-      const k = traitKey(String(o.nombre).split(' / ').pop());
-      traitIdx[k] = o;
-    }));
-    // Equipo (armería común y exclusiva) como último recurso: los rasgos "de serie" suelen ser un objeto
-    [typeof armeriaComunDB !== 'undefined' ? armeriaComunDB : null, typeof armeriaExclusivaDB !== 'undefined' ? armeriaExclusivaDB : null].forEach((db) => {
-      (db || []).forEach((o) => {
-        if (!o || !o.nombre) return;
-        const k = traitKey(String(o.nombre).split(' / ').pop());
-        if (!traitIdx[k]) traitIdx[k] = { nombre: o.nombre, resumen: o.resumen || o.efecto || '', detalles: o.detalles || o.efectos || o.descripcion || '' };
-      });
-    });
-    if (typeof datosRasgos !== 'undefined' && datosRasgos) Object.keys(datosRasgos).forEach((k) => {
-      const en = k.split(' / ').pop().trim();
-      add(en, datosRasgos[k]);
-      add(en.replace(/\s*\(.*\)\s*$/, ''), datosRasgos[k]); // "Woodlore (Lore of the Darkwood)" también como "Woodlore"
-    });
-  }
-  function traitInfo(name) {
-    if (!traitIdx) buildTraits();
-    const k = traitKey(name);
-    // "Light Armour (Gratis / +1 Armadura)" -> "light armour": se busca también sin el texto entre paréntesis
-    const base = k.replace(/\s*\(.*\)\s*$/, '');
-    return traitIdx[k] || traitIdx[base] || traitIdx[TRAIT_ALIAS[k]] || traitIdx[TRAIT_ALIAS[base]] || null;
-  }
+  // Descripciones de rasgos: índice común del compendio (compendio.js)
+  const traitInfo = (name) => AWCompendio.traitInfo(name);
   function stripTags(s) { return String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, ''); }
 
   function traitChip(name, extra) {

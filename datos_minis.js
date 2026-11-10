@@ -607,6 +607,46 @@ const compendioArcWorlde = {
           "resumen": "Ordenanza táctica prusiano-imperial para mover y disparar en bloque.",
           "detalles": "Efectos: Permite mandar '¡Fuego a Discreción!', '¡Formad Línea!' o '¡Avance Rápido!' a soldados a 12\".",
           "restriccion": "Líder a 12\" de unidades con Take Orders."
+        },
+        {
+          "id": "order_together",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Órden: ¡Juntos! / Order: Together!",
+          "etiqueta": "Comando Táctico (Imperiales)",
+          "resumen": "Ataque coordinado de infantería para golpear con mayor contundencia.",
+          "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase juntos. Si atacan al mismo objetivo, ganan +1 al Poder (Power).",
+          "restriccion": "Emitido vía Make Orders. Requiere atacar al mismo objetivo."
+        },
+        {
+          "id": "order_hold",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Órden: ¡Resistid! / Order: Hold!",
+          "etiqueta": "Comando Táctico (Imperiales)",
+          "resumen": "Orden de mantener la línea y resistir el pánico frente al enemigo.",
+          "detalles": "Efectos: Hasta cuatro personajes de la misma clase superan automáticamente todos los Chequeos de Valentía hasta el final de la ronda.",
+          "restriccion": "Emitido vía Make Orders."
+        },
+        {
+          "id": "order_volley",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Órden: ¡Salva! / Order: Volley!",
+          "etiqueta": "Comando Táctico (Imperiales)",
+          "resumen": "Fuego de cobertura y descargas coordinadas a distancia.",
+          "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase. Permite repetir cualquier tirada de Hazaña fallida en ataques a distancia.",
+          "restriccion": "Emitido vía Make Orders. Aplica a ataques a distancia."
+        },
+        {
+          "id": "order_form_up",
+          "faccion_id": "imperial",
+          "faccion_nombre": "Imperiales",
+          "nombre": "Órden: ¡Formación! / Order: Form Up!",
+          "etiqueta": "Comando Táctico (Imperiales)",
+          "resumen": "Reposicionamiento táctico rápido de las tropas.",
+          "detalles": "Efectos: Incluso si ya se han activado, hasta cuatro personajes de la misma clase pueden realizar un movimiento de hasta 2\" si no están en combate.",
+          "restriccion": "Emitido vía Make Orders. Solo si no están en contacto de peana."
         }
       ],
       "armeria_exclusiva": [
@@ -5614,6 +5654,46 @@ const compendioArcWorlde = {
     "Web Spray": {
       "resumen": "Dispara telarañas para reducir a la mitad el movimiento del objetivo durante la ronda.",
       "detalles": "Efectos: This Character may attempt a Medium Feat to target a single enemy Character on a 60mm base or less within 8”. If successful, this causes no damage, but the Movement of the target is halved for the rest of the Round. The effects of this Trait stack. (Bestiary - Arcanid)"
+    },
+    "Tripulación / Crew": {
+      "resumen": "Asistencia de la milicia para alimentar de acción a la catapulta.",
+      "detalles": "Efectos: Si hay miembros de la Halfling Militia en contacto de peana con el Thing-Flinger, durante su activación pueden donar sus Puntos de Acción (AP) no utilizados al Thing-Flinger."
+    },
+    "Carga Aleatoria / Random Payload": {
+      "resumen": "Disparo de proyectiles caóticos con diversos efectos según la tirada.",
+      "detalles": "Efectos: Antes de intentar la Hazaña Difícil para disparar FIRE!, tira 1D6: (1) Unfortunate Crew: lanza un miliciano al objetivo dándole D6 Hits y Prone; (2) Rotten Veggies: terreno difícil a 3\"; (3) Knives & Forks: -2 Power pero ignora armadura; (4) Farmyard Friends: D3 Hits a 3\"; (5) Honest Stone: +4 Power; (6) Bomb Brew: Prone al objetivo y personajes a 3\"."
+    },
+    "Trampas / Traps": {
+      "resumen": "Colocación de cepos y trampas mortales para detener monstruos y enemigos.",
+      "detalles": "Efectos: Una vez por activación, puede intentar una Hazaña Media para colocar un marcador de trampa a 2\". Cualquier personaje a 2\" o menos del marcador debe superar una Hazaña Media o activar la trampa y sufrir 6 Hits."
+    },
+    "Morder y Agarrarse / Cling On": {
+      "resumen": "Presa tenaz del sabueso sobre monstruos y titanes.",
+      "detalles": "Efectos: Si realiza un ataque exitoso sobre un Monstruo o Titán en contacto de peana, la víctima sufre un ataque de Bite (Power 5) cada vez que se active. Si el Trollhound es atacado y falla 1D6, pierde el agarre."
+    },
+    "Cazador Furtivo Experto / Expert Poacher": {
+      "resumen": "Precisión legendaria con arco contra grandes bestias y recolección de raciones.",
+      "detalles": "Efectos: Al realizar ataques a distancia contra Bestias, Monstruos o Titanes, tira 2D6 para apuntar (elige el más alto) e ignora coberturas. Obtiene Packed Lunches al noquear a estas criaturas (1 por Bestia, 2 por Monstruo, 5 por Titán)."
+    },
+    "El Borrón Escarlata / The Scarlet Blur": {
+      "resumen": "Destreza en duelo para esquivar ataques cuando combate mano a mano.",
+      "detalles": "Efectos: Si solo hay un personaje enemigo en contacto de peana, Bruno puede repetir todas sus tiradas de Defensa fallidas."
+    },
+    "Odiador de los Muertos / Hater of the Dead": {
+      "resumen": "Furia sagrada que inflige daño aumentado a todas las criaturas no-muertas.",
+      "detalles": "Efectos: Otorga +1 al Poder (Power) en todos los ataques contra personajes de las facciones Undead Raiders, Ancient Dead o Vampires. Además, su ataque Stake Through the Heart duplica el daño contra no-muertos Tumbados (Prone)."
+    },
+    "Ballesta de Van Halfsing / Van Halfsing's Crossbow": {
+      "resumen": "Ballesta de repetición artesanal para acribillar a los no-muertos.",
+      "detalles": "Efectos: Otorga el ataque a distancia Rapid Shot (Power 4, Alcance 12\"). Por cada tirada de Hazaña exitosa realizada para disparar, realiza dos disparos."
+    },
+    "Líderes de Hombres / Leaders of Men": {
+      "resumen": "Aura de mando del Capitán que inspira disciplina a los soldados.",
+      "detalles": "Efectos: Todos los personajes con Take Orders a 10\" o menos del Capitán utilizan su atributo de Valentía (Valor 9)."
+    },
+    "Especialista Montado / Mounted Specialist": {
+      "resumen": "Carga de caballería devastadora impulsada por los Dragoons.",
+      "detalles": "Efectos: Si el personaje está montado, gana +1 al Poder (Power) en todos sus ataques si realiza una Carga en esa activación."
     }
   },
   "sistema_campana": {

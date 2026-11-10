@@ -11,7 +11,7 @@ Próximas fases: partidas únicas y campañas con invitaciones.
 - `campanas.js`: sección **Campañas** (misiones, fondo de cada banda y libro de caja, tiradas compartidas de comerciante, lesiones y aventuras entre partidas, eventos de ronda, clasificación y ganador).
 - `datos_campana.js`: tablas de comerciante, lesiones y aventuras entre partidas.
 - `fichas.js`: ficha de banda (atributos, ataques, rasgos) y seguimiento en partida de vida, atributos y lesiones.
-- `datos_facciones.js`: reglas de facción, rasgos de unidad y armería exclusiva de las 11 facciones (se muestran en *Reglas de Facciones*).
+- `compendio.js`: índice de rasgos del compendio (`datos_minis.js`), compartido por la consulta y las fichas. Las páginas de *Reglas de Facciones* (reglas, miniaturas, rasgos, saberes y armería de cada facción, más la armería común y el diccionario de rasgos) salen todas de `datos_minis.js`.
 - `datos_minis.js`: compendio completo (`compendioArcWorlde`): facciones y miniaturas, armería común, diccionario de rasgos (`datosRasgos`) y sistema de campaña. Es la fuente de las miniaturas y de las descripciones de rasgos.
 - `armeria.js`: armería común + ayudas para el equipo de cada facción; el constructor de bandas suma su coste.
 - `datos_arcdeck.js`: tabla de eventos ArcDeck (Bosque de Mildaark y Tierras de Vauhaemia).

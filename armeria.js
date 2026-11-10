@@ -1,5 +1,5 @@
 // Armería para construir bandas: la común (extraída de las Reglas de Campaña) y la exclusiva de cada
-// facción (armeriaExclusivaDB, en datos_facciones.js). Cada objeto tiene coste en GP.
+// facción (armeria_exclusiva del compendio, datos_minis.js). Cada objeto tiene coste en GP.
 const armeriaComunDB = [
   {
     "id": "arcanite_token",
@@ -112,10 +112,6 @@ const armeriaComunDB = [
     const n = String(name).trim().toLowerCase();
     const f = factions().find((x) => x.id === n || String(x.nombre).toLowerCase() === n);
     if (f) return f.id;
-    if (typeof armeriaExclusivaDB !== "undefined") {
-      const a = armeriaExclusivaDB.find((x) => x.faccion_id === n || String(x.faccion_nombre).toLowerCase() === n);
-      if (a) return a.faccion_id;
-    }
     return null;
   }
   function faction(name) {
@@ -134,9 +130,7 @@ const armeriaComunDB = [
   }
   function exclusive(name) {
     const f = faction(name);
-    if (f && f.armeria_exclusiva) return f.armeria_exclusiva;
-    const id = factionId(name);
-    return id && typeof armeriaExclusivaDB !== "undefined" ? armeriaExclusivaDB.filter((a) => a.faccion_id === id) : [];
+    return f ? f.armeria_exclusiva || [] : [];
   }
   function find(origen, id, factionName) {
     if (origen === "comun") return common().find((a) => a.id === id) || armeriaComunDB.find((a) => a.id === id) || null;
@@ -212,5 +206,5 @@ const armeriaComunDB = [
     return Object.keys(out).map((id) => out[id]);
   }
 
-  window.AWGear = { canonId, claseOf, isCommander, isMonster, common, exclusive, find, factionId, unitFaction, optionsFor, allies };
+  window.AWGear = { aliasEquipo: (id) => GEAR_ALIAS[id] || id, canonId, claseOf, isCommander, isMonster, common, exclusive, find, factionId, unitFaction, optionsFor, allies };
 })();
