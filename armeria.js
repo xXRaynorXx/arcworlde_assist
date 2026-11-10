@@ -150,7 +150,10 @@ const armeriaComunDB = [
     battle_cook: "halfling_battle_cook",
     town_guard: "halfling_town_guard",
     thing_flinger: "halfling_thing_flinger",
-    monster_hunter: "halfling_monster_hunter"
+    monster_hunter: "halfling_monster_hunter",
+    archmage: "wizard",
+    battle_wizard: "apprentice",
+    enchanted_sentinel: "sentinel"
   };
   const canonId = (id) => LEGACY_UNIT_ID[id] || id;
   // Clase de una miniatura (campo "clase" del compendio; "tipo" en fichas antiguas)
