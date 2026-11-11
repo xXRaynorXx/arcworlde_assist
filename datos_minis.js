@@ -615,51 +615,51 @@ const compendioArcWorlde = {
           "id": "make_take_orders_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
-          "nombre": "Comandos Militares / Make/Take Orders",
           "etiqueta": "Regla de Facción (Imperiales)",
-          "resumen": "Permite a un personaje con Make Orders emitir órdenes a aliados con Take Orders a 12\" o menos.",
-          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the Imperial Orders (Together!, Hold!, Volley! or Form Up!) can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders.",
-          "restriccion": "Hazaña Fácil. El emisor finaliza su activación al emitir la orden. Rango de 12\". Las órdenes imperiales son Together!, Hold!, Volley! y Form Up!."
+          "nombre": "Comandos Militares / Make/Take Orders",
+          "resumen": "Regla de facción que permite a personajes con Make Orders emitir órdenes tácticas a aliados con Take Orders a 12\" o menos tras superar una Hazaña Fácil.",
+          "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders: Together!, Hold!, Volley! or Form Up! (see the Imperial Orders).",
+          "restriccion": "Requiere superar una Hazaña Fácil. La activación del emisor finaliza inmediatamente al emitir la orden y se pasa la activación a las tropas que reciben la orden. Rango máximo de 12\"."
         },
         {
-          "id": "order_together",
+          "id": "order_together_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
+          "etiqueta": "Orden imperial",
           "nombre": "Órden: ¡Juntos! / Order: Together!",
-          "etiqueta": "Comando Táctico (Imperiales)",
-          "resumen": "Ataque coordinado de infantería para golpear con mayor contundencia.",
-          "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase juntos. Si atacan al mismo objetivo, ganan +1 al Poder (Power).",
-          "restriccion": "Emitido vía Make Orders. Requiere atacar al mismo objetivo."
+          "resumen": "Permite activar juntos a hasta 4 personajes de la misma clase, otorgando +1 Power si atacan al mismo objetivo.",
+          "detalles": "Up to four Characters of the same Class may Activate together. If their Attacks are against the same target, they gain +1 Power.",
+          "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El bonificador de +1 Power requiere concentrar los ataques en la misma miniatura objetivo."
         },
         {
-          "id": "order_hold",
+          "id": "order_hold_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
+          "etiqueta": "Orden imperial",
           "nombre": "Órden: ¡Resistid! / Order: Hold!",
-          "etiqueta": "Comando Táctico (Imperiales)",
-          "resumen": "Orden de mantener la línea y resistir el pánico frente al enemigo.",
-          "detalles": "Efectos: Hasta cuatro personajes de la misma clase superan automáticamente todos los Chequeos de Valentía hasta el final de la ronda.",
-          "restriccion": "Emitido vía Make Orders."
+          "resumen": "Hasta 4 personajes de la misma clase pasan automáticamente todas las pruebas de Valentía hasta el final de la ronda.",
+          "detalles": "Up to four Characters of the same Class automatically pass all Bravery Tests until the end of the Round.",
+          "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El efecto dura hasta el final de la Ronda."
         },
         {
-          "id": "order_volley",
+          "id": "order_volley_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
+          "etiqueta": "Orden imperial",
           "nombre": "Órden: ¡Salva! / Order: Volley!",
-          "etiqueta": "Comando Táctico (Imperiales)",
-          "resumen": "Fuego de cobertura y descargas coordinadas a distancia.",
-          "detalles": "Efectos: Activa hasta cuatro personajes de la misma clase. Permite repetir cualquier tirada de Hazaña fallida en ataques a distancia.",
-          "restriccion": "Emitido vía Make Orders. Aplica a ataques a distancia."
+          "resumen": "Hasta 4 personajes de la misma clase se activan juntos y pueden repetir tiradas de Hazaña fallidas en sus ataques a distancia.",
+          "detalles": "Up to four Characters of the same Class may Activate together. Any failed Feat rolls for Ranged Attacks may be re-rolled.",
+          "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Aplica la repetición de tiradas únicamente a ataques a distancia."
         },
         {
-          "id": "order_form_up",
+          "id": "order_form_up_imperial",
           "faccion_id": "imperial",
           "faccion_nombre": "Imperiales",
+          "etiqueta": "Orden imperial",
           "nombre": "Órden: ¡Formación! / Order: Form Up!",
-          "etiqueta": "Comando Táctico (Imperiales)",
-          "resumen": "Reposicionamiento táctico rápido de las tropas.",
-          "detalles": "Efectos: Incluso si ya se han activado, hasta cuatro personajes de la misma clase pueden realizar un movimiento de hasta 2\" si no están en combate.",
-          "restriccion": "Emitido vía Make Orders. Solo si no están en contacto de peana."
+          "resumen": "Hasta 4 personajes de la misma clase pueden realizar un movimiento único de 2\" aunque ya hayan sido activados, si no están trabados.",
+          "detalles": "Even if they have already Activated, up to four Characters of the same Class may make single movements of 2” if they are not in base contact with an enemy Character.",
+          "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Permite recolocarse 2\" incluso si la unidad ya se activó previamente en la ronda, siempre que no esté en contacto de peana con ningún enemigo."
         }
       ],
       "armeria_exclusiva": [
@@ -5120,8 +5120,8 @@ const compendioArcWorlde = {
       "detalles": "Efectos: Acceso al saber mágico con hechizos de curación, bonificación al movimiento y potenciadores de combate."
     },
     "Comandos Militares / Make/Take Orders": {
-      "resumen": "Ordenanza táctica prusiano-imperial para mover y disparar en bloque.",
-      "detalles": "Efectos: Permite mandar '¡Fuego a Discreción!', '¡Formad Línea!' o '¡Avance Rápido!' a soldados a 12\"."
+      "resumen": "Los oficiales imperiales emiten Together!, Hold!, Volley! o Form Up! a hasta 4 personajes de la misma clase a 12\".",
+      "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders: Together!, Hold!, Volley! or Form Up! (see the Imperial Orders)."
     },
     "El Más Allá / Afterlife": {
       "resumen": "Convicción absoluta de encontrarse en el paraíso prometido.",
@@ -5200,12 +5200,12 @@ const compendioArcWorlde = {
       "detalles": "Efectos: No se despliegan al inicio. Se invocan en mesa mediante el hechizo Conjure Sprites. Si caen KO, pueden reconjurarse la ronda siguiente."
     },
     "Dar Órdenes / Make Orders": {
-      "resumen": "Permite al líder emitir comandos tácticos a las tropas de la milicia.",
-      "detalles": "Efectos: Con una Hazaña Fácil, emite órdenes como '¡Como Uno!' (activa hasta 3 minis juntas) o '¡Manteneos Firmes!' (supera Valentía automáticamente)."
+      "resumen": "Permite al personaje emitir las órdenes de su facción (regla Make/Take Orders).",
+      "detalles": "Make Orders is a Trait listed on a Character's Stat Profile under Traits & Equipment. It allows the Character to issue commands using the faction-specific Make/Take Orders rule. (Note: An Imperial Trooper may also gain this trait if equipped with Sergeant’s Chevrons)."
     },
     "Recibir Órdenes / Take Orders": {
-      "resumen": "Disciplina de la tropa para responder a las órdenes del mando.",
-      "detalles": "Efectos: Permite a las unidades activarse en grupo o recibir beneficios de las órdenes emitidas por un líder."
+      "resumen": "Permite al personaje recibir las órdenes emitidas por un personaje con Make Orders.",
+      "detalles": "Take Orders is a Trait listed on a Character's Stat Profile under Traits & Equipment that enables the Character to receive orders issued by a Character with Make Orders."
     },
     "Ánimo Entusiasta / Rousing Cheer": {
       "resumen": "Aura de valentía del Sheriff para inspirar a la milicia.",
