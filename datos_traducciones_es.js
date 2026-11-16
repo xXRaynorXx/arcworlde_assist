@@ -1540,166 +1540,406 @@ const traduccionesES = {
   "saberes": {
     "the grand cookbook of bulbo chubb": {
       "nombre": "El Gran Libro de Cocina de Bulbo Chubb",
+      "reglas": "Estas deliciosas comidas, creadas por el mismísimo y legendario Maestro Cocinero Bulbo Chubb, son llevadas o preparadas a menudo en el campo de batalla por los Halflings para darles fuerza en combate. Basta un poco de condimento de Arcanita para que los platos alcancen una nueva dimensión de «sabor». Los efectos de estos Hechizos no se acumulan y se sustituyen si se lanza otro Hechizo sobre el mismo Personaje.",
       "hechizos": {
-        "hearty veggie soup": "Sopa de Verduras (Hearty Veggie Soup)",
-        "marvellous mutton stew": "Estofado de Oveja Maravilloso (Marvellous Mutton Stew)",
-        "bullox burgers": "Hamburguesas de Buey (Bullox Burgers)",
-        "cocklegriff madras": "Curry Cocklegriff Madras (Cocklegriff Madras)",
-        "mystery meat surprise": "Sorpresa de Carne Misteriosa (Mystery Meat Surprise)"
+        "hearty veggie soup": {
+          "nombre": "Sopa de Verduras (Hearty Veggie Soup)",
+          "efecto": "La tierra honesta de Hobbleshire otorga a las verduras que crecen en ella un sabor distintivo y potente. Quienes beben este caldo nutritivo dicen que su calor puede aliviar incluso las heridas más graves. Un Personaje aliado a 6\" o menos recupera 3 HP."
+        },
+        "marvellous mutton stew": {
+          "nombre": "Estofado de Oveja Maravilloso (Marvellous Mutton Stew)",
+          "efecto": "Los Halflings son bien conocidos por criar rebaños de ovejas de buena raza, y este estofado es tan delicioso que seguro que se sintieron honradas de convertirse en cordero para él. Un Personaje aliado a 6\" o menos puede Repetir tirada en una única tirada de Leg It fallida durante esta Ronda."
+        },
+        "bullox burgers": {
+          "nombre": "Hamburguesas de Buey (Bullox Burgers)",
+          "efecto": "Los bueyes son leales bestias de carga para los Halflings, pero ni siquiera ellos pueden trabajar para siempre. Por suerte, también son una comida estupenda una vez que se han... «retirado». Un Personaje aliado a 6\" o menos puede Repetir tirada en todas sus Tiradas de Defensa fallidas hasta su siguiente Activación."
+        },
+        "cocklegriff madras": {
+          "nombre": "Curry Cocklegriff Madras (Cocklegriff Madras)",
+          "efecto": "Este plato, inspirado en las fragantes delicias de Raajalan, se ha convertido en el favorito de la gente pendenciera para ponerse a tono antes de una refriega. Aunque la violencia de la mañana siguiente suele eclipsar a cualquiera de las anteriores. Un Personaje aliado a 6\" o menos obtiene el Ataque Fired Up hasta el final de la Ronda: (1 AP) Fired Up: Power 8. Reglas especiales: +1 al Power contra objetivos Inflamables."
+        },
+        "mystery meat surprise": {
+          "nombre": "Sorpresa de Carne Misteriosa (Mystery Meat Surprise)",
+          "efecto": "La «pièce de résistance» (como dirían en Galanaux), esta extraordinaria proeza culinaria es una receta secreta celosamente guardada. Solo los gourmets más refinados pueden dominarla, y sus sutiles sabores e ingredientes caros se desperdician a menudo en la chusma que la engulle con avidez en el campo de batalla. Un Personaje aliado a 6\" o menos gana +2 AP y recupera D6 HP."
+        }
       }
     },
     "tinkerer's arcane contraptions": {
       "nombre": "Creaciones Arcanas del Hojalatero (Tinkerer's Arcane Contraptions)",
+      "reglas": "El trabajo del Tinkerer es mantener el equipo de la banda imperial. Sin embargo, su imaginación maníaca no puede estar ociosa mucho tiempo, y los Tinkerers suelen llevar al campo de batalla baúles con sus curiosos artilugios. ¿Quizá alguna de sus creaciones arcanas pueda ayudar?",
       "hechizos": {
-        "mechanical griffling": "Griffling Mecánico (Mechanical Griffling)",
-        "revolving pistol": "Pistola Giratoria (Revolving Pistol)",
-        "arcane shielding": "Escudo Arcano (Arcane Shielding)",
-        "homing bullet": "Bala Teledirigida (Homing Bullet)",
-        "magic gobbler": "Engullidor de Magia (Magic Gobbler)"
+        "mechanical griffling": {
+          "nombre": "Griffling Mecánico (Mechanical Griffling)",
+          "efecto": "Con un zumbido y un gorjeo, un Griffling hecho de metal pulido cobra vida. Coloca un Griffling (ver Bestiario) en contacto de peana con el Tinkerer, que se Activa inmediatamente después de que termine la Activación del Tinkerer. Este Hechizo solo puede volver a usarse si el Griffling Mecánico ha quedado Noqueado."
+        },
+        "revolving pistol": {
+          "nombre": "Pistola Giratoria (Revolving Pistol)",
+          "efecto": "El Tinkerer saca una extraña pistola Arcloque de varios cañones que dispara muchas balas una tras otra. El Tinkerer puede realizar este Ataque: (A distancia) Revolving Pistol: Power 5. Reglas especiales: alcance de 8\". Tira otro D6 por cada Impacto exitoso."
+        },
+        "arcane shielding": {
+          "nombre": "Escudo Arcano (Arcane Shielding)",
+          "efecto": "Un artilugio emite un aura de luz azul verdosa que se extiende alrededor del Tinkerer y parece desviar los golpes lejanos. Durante el resto de la Ronda, cualquier Personaje a 2\" o menos del Tinkerer gana +1 de Armadura contra los Ataques realizados por Personajes fuera de esta zona."
+        },
+        "homing bullet": {
+          "nombre": "Bala Teledirigida (Homing Bullet)",
+          "efecto": "Un triunfo de la ingeniería: este proyectil parece no fallar nunca su objetivo. Una vez lanzado este Hechizo, durante su Activación un único Personaje en contacto de peana con el Tinkerer puede realizar un único Ataque a distancia que ignora la cobertura y supera automáticamente su tirada de Hazaña sin coste."
+        },
+        "magic gobbler": {
+          "nombre": "Engullidor de Magia (Magic Gobbler)",
+          "efecto": "Un maravilloso aparato que engulle energía mágica y la almacena para que el Tinkerer la use. Hasta la siguiente Activación del Tinkerer, cada vez que un Personaje enemigo lance un Hechizo con éxito, tira un D6. Con un Éxito, el Hechizo no se lanza y el Tinkerer gana una Ficha de Arcanita."
+        }
       }
     },
     "lore of villainy": {
       "nombre": "Saber de la Villanía (Lore of Villainy)",
+      "reglas": "Atrapados durante milenios en los Páramos Desolados, muchos Señores Oscuros dirigen sus mentes febriles hacia el dominio de las artes mágicas. Estos viles villanos usan sus poderes con gran eficacia y, en su opinión, no tienen rival entre los humildes magos de otros pueblos.",
       "hechizos": {
-        "sickly screech": "Chillido Enfermizo (Sickly Screech)",
-        "ominous aura": "Aura Ominosa (Ominous Aura)",
-        "restless minions": "Esbirros Inquietos (Restless Minions)",
-        "molten terrain": "Terreno Fundido (Molten Terrain)",
-        "hellfire": "Fuego del Infierno (Hellfire)"
+        "sickly screech": {
+          "nombre": "Chillido Enfermizo (Sickly Screech)",
+          "efecto": "Un chillido atroz brota del yelmo del Señor Oscuro y obliga a quienes lo rodean a taparse los oídos de dolor. Cada Personaje a 4\" o menos del lanzador debe tirar un D6. Con un Fallo, sufre -1 AP en su siguiente Activación. Este Hechizo afecta también al lanzador y sus efectos no se acumulan."
+        },
+        "ominous aura": {
+          "nombre": "Aura Ominosa (Ominous Aura)",
+          "efecto": "Un miasma de maldad rodea al Señor Oscuro y se filtra en los corazones de quienes tiene delante. El lanzador gana el Rasgo Temible (Fearsome) hasta el final de la Ronda (ver Bestiario)."
+        },
+        "restless minions": {
+          "nombre": "Esbirros Inquietos (Restless Minions)",
+          "efecto": "La maldad del Señor Oscuro se filtra en las mentes de sus súbditos inconscientes y los hace volver del borde del abismo. Coloca una Unidad Noqueada a 3\" o menos del lanzador con 1 HP."
+        },
+        "molten terrain": {
+          "nombre": "Terreno Fundido (Molten Terrain)",
+          "efecto": "El Señor Oscuro invoca el calor volcánico de su reino ceniciento y obliga a la tierra misma a fundirse y burbujear. Elige una zona de 4\" de radio a 8\" o menos del lanzador. Hasta el final de la Ronda, cualquier Personaje en contacto de peana con esta zona sufre D6 Impactos."
+        },
+        "hellfire": {
+          "nombre": "Fuego del Infierno (Hellfire)",
+          "efecto": "(21+) El Señor Oscuro lanza una terrible llamarada que abrasa todo a su paso. Traza una línea de 6\" desde el borde frontal de la peana del lanzador. Todos los Personajes a 2\" o menos de la línea son objetivo de un Ataque de Power 8 (+2 al Power contra Inflamables)."
+        }
       }
     },
     "lore of tooth and fur": {
       "nombre": "Saber de Diente y Pelaje (Lore of Tooth and Fur)",
+      "reglas": "Los Hombres Bestia están instintivamente sintonizados con las energías de la naturaleza y las usan para alimentar su magia. Blandiendo amuletos místicos y pociones hechas con los huesos de sus congéneres, sus Brujas del Seto emplean conocimientos y habilidades transmitidos durante generaciones para tejer la energía arcana en un tapiz de poder.",
       "hechizos": {
-        "forest creatures": "Criaturas del Bosque (Forest Creatures)",
-        "warging": "Dominio Bestial (Warging)",
-        "bestial strength": "Fuerza Bestial (Bestial Strength)",
-        "shapeshift": "Cambio de Forma (Shapeshift)"
+        "forest creatures": {
+          "nombre": "Criaturas del Bosque (Forest Creatures)",
+          "efecto": "Las alimañas del bosque son llamadas desde sus guaridas para atacar a los intrusos impíos. El Personaje objetivo y todos los Personajes a 3\" o menos de él sufren 3 Impactos."
+        },
+        "warging": {
+          "nombre": "Dominio Bestial (Warging)",
+          "efecto": "La Bruja del Seto entra en la mente de otra criatura y controla todos sus movimientos. Cuando el lanzador haya terminado su Activación, elige una Bestia aliada en el tablero. Puede Activarse de inmediato, aunque ya se haya Activado en esta Ronda. Cualquier Objeto o Equipo recogido por la Bestia se transfiere al lanzador al final de su activación."
+        },
+        "bestial strength": {
+          "nombre": "Fuerza Bestial (Bestial Strength)",
+          "efecto": "Con un rugido poderoso, la Bruja del Seto aprovecha la fuerza de una criatura poderosa y se la regala a uno de los suyos. Este Hechizo puede lanzarse sobre cualquier Personaje que no sea una Bestia, un Monstruo o un Titán. El objetivo gana +3 al Power en cualquier Ataque cuerpo a cuerpo hasta que el lanzador decida lanzar otro Hechizo."
+        },
+        "shapeshift": {
+          "nombre": "Cambio de Forma (Shapeshift)",
+          "efecto": "Mientras el aire a su alrededor se desdibuja, la Bruja del Seto adopta una nueva forma: ¡un aterrador Monstruo! Sustituye al lanzador por un Monstruo elegido del Bestiario. El Monstruo tiene los mismos AP que le quedaban al lanzador antes del Cambio de Forma, pero por lo demás es idéntico. Al final de la Ronda, el lanzador vuelve a su verdadera forma con los mismos HP que tenía cuando se lanzó el Hechizo."
+        }
       }
     },
     "lore of the thereafter": {
       "nombre": "Saber del Más Allá (Lore of the Thereafter)",
+      "reglas": "Los antiguos pueblos de ArcWorlde estaban en sintonía con la energía mágica de la tierra, y sus poderes no han hecho más que crecer en el más allá. Los Bog Magi se sirven de las magias desconocidas que los reaniman a ellos y a los suyos para ayudar, dañar y curar en el campo de batalla.",
       "hechizos": {
-        "tar pit": "Pozo de Alquitrán (Tar Pit)",
-        "spirit glaive": "Glaive Espiritual (Spirit Glaive)",
-        "forgotten ritual": "Ritual Olvidado (Forgotten Ritual)",
-        "justice of the dead": "Justicia de los Muertos (Justice of the Dead)"
+        "tar pit": {
+          "nombre": "Pozo de Alquitrán (Tar Pit)",
+          "efecto": "El Magus hace brotar de las profundidades de la tierra un charco de pez negra y pegajosa para sepultar a sus enemigos, como ellos mismos fueron sepultados hace mucho. Coloca un marcador en el tablero. Todos los Personajes a 3\" o menos de él ven reducido su Movimiento a 1. Este efecto dura hasta que el Bog Magus quede Tumbado o Noqueado."
+        },
+        "spirit glaive": {
+          "nombre": "Glaive Espiritual (Spirit Glaive)",
+          "efecto": "El Mago invoca una hoja etérea hecha de la misma materia espiritual que lo anima. Parece cortar hasta el alma de aquellos contra quienes se usa. Puede lanzarse sobre sí mismo o sobre un Personaje aliado a 3\" o menos, y dura hasta el final de la Ronda. En lugar de perder HP, un objetivo pierde 1 AP de su siguiente Activación por cada 3 puntos de daño que reciba de Ataques cuerpo a cuerpo de quienes empuñen la Spirit Glaive."
+        },
+        "forgotten ritual": {
+          "nombre": "Ritual Olvidado (Forgotten Ritual)",
+          "efecto": "El Mago recrea un ritual olvidado de su pueblo, cuyos recuerdos y poder reaniman a los suyos. Todos los Personajes aliados con el Rasgo Huesos (Bones) a 3\" o menos recuperan D3 HP."
+        },
+        "justice of the dead": {
+          "nombre": "Justicia de los Muertos (Justice of the Dead)",
+          "efecto": "Los muertos recuerdan las injusticias que se cometieron contra ellos. Todo Personaje enemigo que haya dejado Noqueado a un Personaje aliado en el momento de lanzar este Hechizo sufre D6 Impactos que ignoran la Armadura y los Escudos."
+        }
       }
     },
     "lore of the night": {
       "nombre": "Saber de la Noche (Lore of the Night)",
+      "reglas": "Obsesionados con los antiguos libros de saber, algunos Vampiros incursionan en la magia oscura e impía. Sus siglos de estudio los hacen poderosos en las artes hechiceras y disfrutan poniéndolas a prueba con los mortales que encuentran.",
       "hechizos": {
-        "darkness": "Oscuridad (Darkness)",
-        "dramatic thunderclap": "Trueno Dramático (Dramatic Thunderclap)",
-        "vampiric glare": "Mirada Vampírica (Vampiric Glare / Beguile)",
-        "cloud of bats": "Nube de Murciélagos (Cloud of Bats)"
+        "darkness": {
+          "nombre": "Oscuridad (Darkness)",
+          "efecto": "Un charco de oscuridad total rodea al objetivo, que no puede ver el peligro que le aguarda. Elige un Personaje objetivo a 8\" o menos. Hasta el final de esta Ronda, él y cualquier Personaje a 4\" o menos de él tienen Desventaja al tirar para Disparar."
+        },
+        "dramatic thunderclap": {
+          "nombre": "Trueno Dramático (Dramatic Thunderclap)",
+          "efecto": "Con un estruendo, un terrible trueno retumba desde los cielos. Increíble para el efecto dramático. Un único Personaje aliado puede Repetir tirada en una Hazaña Narrativa durante esta Ronda."
+        },
+        "vampiric glare": {
+          "nombre": "Mirada Vampírica (Vampiric Glare / Beguile)",
+          "efecto": "El Vampiro fija a su presa con unos ojos rojos brillantes. El objetivo a 6\" o menos debe superar un Chequeo de Valentía o no podrá Moverse ni Atacar durante su siguiente Activación."
+        },
+        "cloud of bats": {
+          "nombre": "Nube de Murciélagos (Cloud of Bats)",
+          "efecto": "Un enjambre de murciélagos de cripta revoloteando oscurece la visión y desgarra la carne enemiga. Invoca un Crypt Bat a 6\" o menos del lanzador que puede Activarse de inmediato."
+        }
       }
     },
     "lore of the damned": {
       "nombre": "Saber de los Condenados (Lore of the Damned)",
+      "reglas": "Muchos No-Muertos se mantienen vivos por el poder de su propia voluntad, con sus corazones villanos aferrados a la existencia más allá de la tumba. Algunos pueden canalizar ese poder en viles magias, usando la energía arcana para fomentar sus propios fines perversos.",
       "hechizos": {
-        "deathly chill": "Frío Mortal (Deathly Chill)",
-        "bonegnawer": "Roeehuesos (Bonegnawer)",
-        "soul drain": "Drenar Alma (Soul Drain)",
-        "mass resurrection": "Resurrección Masiva (Mass Resurrection)"
+        "deathly chill": {
+          "nombre": "Frío Mortal (Deathly Chill)",
+          "efecto": "Los vivos empiezan a sentir el frío de la tumba aferrado a sus mismísimos huesos, y sus miembros se vuelven pesados y torpes. Elige un Personaje enemigo a 12\" o menos del lanzador. Sus AP se reducen en D3 en su siguiente Activación."
+        },
+        "bonegnawer": {
+          "nombre": "Roeehuesos (Bonegnawer)",
+          "efecto": "Una Rata de Carroña que escarba es devuelta a la no-vida y se lanza contra el enemigo. Coloca una Rata de Carroña gratuita a 6\" o menos del lanzador. Puede Activarse esta Ronda; sin embargo, si queda Noqueada no puede ser Alzada."
+        },
+        "soul drain": {
+          "nombre": "Drenar Alma (Soul Drain)",
+          "efecto": "La víctima siente cómo su esencia vital es arrancada de su cuerpo, y sus almas alimentan a los hambrientos Muertos. El Personaje objetivo sufre 3 Impactos que ignoran la Armadura. Por cada HP que pierda el objetivo, el lanzador recupera 1 HP. Este Hechizo puede lanzarse sobre un Personaje aliado."
+        },
+        "mass resurrection": {
+          "nombre": "Resurrección Masiva (Mass Resurrection)",
+          "efecto": "Alza hasta tres Unidades o Bestias en cualquier lugar del tablero."
+        }
       }
     },
     "lore of the darkwood": {
       "nombre": "Saber del Bosque Profundo (Lore of the Darkwood)",
+      "reglas": "La magia de los Elfos está inextricablemente ligada a los bosques oscuros en los que habitan. Los misteriosos Druidas extraen la energía vital de sus víctimas sacrificiales y usan su poder para doblegar la madera a su voluntad.",
       "hechizos": {
-        "tangleweed": "Mala Hierba Enredadera (Tangleweed)",
-        "spirit of the forest": "Espíritu del Bosque (Spirit of the Forest)",
-        "ominous whispers": "Susurros Ominosos (Ominous Whispers)",
-        "the merciless wood": "El Bosque Inclemente (The Merciless Wood)"
+        "tangleweed": {
+          "nombre": "Mala Hierba Enredadera (Tangleweed)",
+          "efecto": "Enredaderas espinosas brotan de la tierra y atrapan a todos los que tienen la mala suerte de estar a su alcance. Todos los Personajes a 6\" o menos del lanzador ven reducidos en 2\" su Movimiento y sus tiradas de Leg It hasta el siguiente Hechizo del lanzador."
+        },
+        "spirit of the forest": {
+          "nombre": "Espíritu del Bosque (Spirit of the Forest)",
+          "efecto": "La vitalidad de sus víctimas llena al Druida de un vigor antinatural, y sus ojos brillan con el poder del bosque oscuro. Un Personaje aliado a 12\" o menos gana +2 AP en su siguiente Activación. Mientras esté bajo los efectos de este Hechizo, el objetivo no puede recibir ninguna otra bonificación de Hechizos."
+        },
+        "ominous whispers": {
+          "nombre": "Susurros Ominosos (Ominous Whispers)",
+          "efecto": "Con una palabra siseada en una lengua antinatural, los enemigos de los Elfos sienten sus mentes torturadas por la risa y la malicia de los Fae. Un Personaje enemigo a 12\" o menos debe superar un Chequeo de Valentía. Si falla, pierde 3 HP además de los efectos normales del fallo. Todos los modelos enemigos a 3\" o menos del objetivo original, hayan superado o no su Chequeo de Valentía, deben realizar también Chequeos de Valentía."
+        },
+        "the merciless wood": {
+          "nombre": "El Bosque Inclemente (The Merciless Wood)",
+          "efecto": "Power 4. Reglas especiales: si algún Personaje queda Noqueado por los efectos de este hechizo, es sustituido por un Woodfiend. Este Personaje es controlado por el jugador Elfo con normalidad y puede Activarse en la siguiente Ronda."
+        }
       }
     },
     "lore of delusion": {
       "nombre": "Saber de la Ilusión (Lore of Delusion)",
+      "reglas": "Los Dreameaters Ourk son poderosos Magos de los que se dice que pueden retorcer la mente y canalizar el poder de las pesadillas. Envueltos en zarcillos de humo empalagoso y con los ojos brillando con un vigor desconocido, cacarean con malicia mientras tejen sus retorcidas magias.",
       "hechizos": {
-        "false foe": "Enemigo Falso (False Foe)",
-        "stupor": "Estupor (Stupor)",
-        "dream eater": "Devorador de Sueños (Dream Eater)",
-        "inside your mind": "Dentro de tu Mente (Inside your Mind)"
+        "false foe": {
+          "nombre": "Enemigo Falso (False Foe)",
+          "efecto": "Una niebla enfermiza envuelve al objetivo, que ve enemigos que quizá no estén realmente allí. Alcance 8\". Durante el resto de la Ronda, el objetivo debe superar una Hazaña Fácil antes de poder realizar cualquier Ataque."
+        },
+        "stupor": {
+          "nombre": "Estupor (Stupor)",
+          "efecto": "El Dreameater invoca un denso miasma a su alrededor, y quienes lo respiran sucumben pronto a su influencia soporífera. Todos los Personajes a 3\" o menos del lanzador caen en un sueño profundo. Cuentan como Tumbados hasta que sean objetivo de un Ataque o Hechizo, o hayan superado una Hazaña Media en su siguiente Activación. Una vez despiertos, pueden Activarse con normalidad."
+        },
+        "dream eater": {
+          "nombre": "Devorador de Sueños (Dream Eater)",
+          "efecto": "Este Dreameater se da un festín con los sueños de los demás y consume su poder con una glotonería desenfrenada. Alcance 2\". Este Hechizo solo puede dirigirse contra quienes estén bajo los efectos del Hechizo Stupor. El objetivo pierde D3 AP en su siguiente Activación, y estos se entregan al lanzador para que los gaste en su Activación actual. Además, este Hechizo no despierta al objetivo."
+        },
+        "inside your mind": {
+          "nombre": "Dentro de tu Mente (Inside your Mind)",
+          "efecto": "Los zarcillos de niebla verde se filtran en la mente del objetivo, y el lanzador puede controlarlo como a una marioneta viviente. Elige un objetivo con peana de 30 mm o 40 mm a 4\" o menos del lanzador. La Activación del lanzador termina de inmediato y el objetivo se Activa, aunque ya se haya Activado en esta Ronda. El jugador Ourk puede gastar 3 AP controlando al objetivo como desee. Una vez gastados los 3 AP, la partida continúa con normalidad."
+        }
       }
     },
     "lore of mischief": {
       "nombre": "Saber de la Travesura (Lore of Mischief)",
+      "reglas": "A los Gremlins de las Regiones Infernales les importa poco el conocimiento arcano. En cambio, sus magos están bendecidos con una habilidad innata para canalizar su amor por las travesuras en poder mágico.",
       "hechizos": {
-        "chittering bugs": "Insectos Estridentes (Chittering Bugs)",
-        "slip and slide": "Resbalón y Caída (Slip and Slide)",
-        "peek-a-boo": "¡Cucú! (Peek-a-Boo)",
-        "great green explosion": "Gran Explosión Verde (Great Green Explosion)"
+        "chittering bugs": {
+          "nombre": "Insectos Estridentes (Chittering Bugs)",
+          "efecto": "El Chamán invoca un torrente de bichos que trepan por todo su enemigo, para deleite de los Gremlins. Elige un Personaje enemigo a 8\" o menos del lanzador. En su siguiente Activación no puede realizar ninguna Acción de movimiento, pues está ocupado frenéticamente en espantar los bichos."
+        },
+        "slip and slide": {
+          "nombre": "Resbalón y Caída (Slip and Slide)",
+          "efecto": "Con un giro de su bastón, el Chamán cubre las botas de sus enemigos con una sustancia resbaladiza mágica. Las payasadas que siguen son muy divertidas. Este Hechizo afecta a cualquier Personaje enemigo que intente una tirada de Leg It a 8\" o menos del lanzador. Si falla, en lugar de quedar Tumbado se desliza el número obtenido en la tirada en la dirección opuesta a la de su movimiento previsto. Este efecto dura hasta el final de la Ronda."
+        },
+        "peek-a-boo": {
+          "nombre": "¡Cucú! (Peek-a-Boo)",
+          "efecto": "Cacareando como un maníaco, la magia del Chamán hace que un aliado parezca aparecer y desaparecer, para frustración del enemigo. Elige un Personaje aliado como objetivo de este Hechizo. Este Personaje obtiene temporalmente la regla Activación Dividida (Split Activation), si no la tenía ya. Hasta que haya gastado su último AP de la Ronda, cada vez que termine su Activación retíralo del tablero. Colócalo de nuevo en el mismo lugar cuando se vuelva a Activar."
+        },
+        "great green explosion": {
+          "nombre": "Gran Explosión Verde (Great Green Explosion)",
+          "efecto": "(21+) Todos los Personajes a 6\" o menos del lanzador sufren 8 Impactos, más Impactos adicionales por cada 1 que la carta supere 21. Si es Sobrepotenciado, además de perder D6 HP, el Chamán pierde 1 HP por cada 1 que la carta supere 21."
+        }
       }
     },
     "the lore of the crimson college": {
       "nombre": "El Saber del Colegio Carmesí (The Lore of The Crimson College)",
+      "reglas": "Maestros en el arte de manipular el fuego, los Magos Carmesí son apasionados y rápidos para enfurecerse por el más mínimo agravio percibido. Más de una taberna de Mildaark ha sido incendiada por un Mago furioso después de que un rufián lo mirara mal. Los Sprites conjurados por hechizos del Colegio Carmesí tienen +1 al Power en todos sus Ataques, +2 si el Objetivo es Inflamable.",
       "hechizos": {
-        "conjure crimson sprites": "Conjurar Sprites Carmesí (Conjure Crimson Sprites)",
-        "sword of embers": "Espada de Ascuas (Sword of Embers)",
-        "fireball": "Bola de Fuego (Fireball)",
-        "flame blast": "Ráfaga de Llamas (Flame Blast)"
+        "conjure crimson sprites": {
+          "nombre": "Conjurar Sprites Carmesí (Conjure Crimson Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de llama parpadeante. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo tienen +1 al Power en todos sus Ataques, +2 si el Objetivo es Inflamable. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP."
+        },
+        "sword of embers": {
+          "nombre": "Espada de Ascuas (Sword of Embers)",
+          "efecto": "Una hoja de llama pura aparece en la mano del lanzador. Todos los Ataques cuerpo a cuerpo del Personaje tienen +3 al Power, y los Personajes Inflamables deben Repetir tirada en todas sus Defensas exitosas contra esta arma. La Sword of Embers no puede darse ni quitarse y permanece activa hasta que el Personaje lance otro Hechizo. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP."
+        },
+        "fireball": {
+          "nombre": "Bola de Fuego (Fireball)",
+          "efecto": "Un hechizo clásico, y uno que cualquier Mago Carmesí que se precie está más que deseoso de usar. (A distancia) Fireball: Power 6. Reglas especiales: ignora la Armadura. Realiza un Ataque Fireball adicional contra cada Personaje en contacto de peana con el objetivo. Los Personajes Inflamables deben Repetir tirada en todas sus Defensas exitosas. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP."
+        },
+        "flame blast": {
+          "nombre": "Ráfaga de Llamas (Flame Blast)",
+          "efecto": "Con un grito, el cuerpo del Mago emana un muro de fuego que abrasa todo a su alrededor. Todos los Personajes a 4\" o menos del lanzador sufren D6 Heridas. Los Personajes Inflamables tiran 2D6 y se quedan con el valor más alto. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP."
+        }
       }
     },
     "the lore of the sapphire college": {
       "nombre": "El Saber del Colegio Zafiro (The Lore of The Sapphire College)",
+      "reglas": "Orgullosos y aventureros, los Magos Zafiro estudian los misterios de los océanos, ríos y polos de ArcWorlde. Se los encuentra por todo el globo, navegando hacia aguas inexploradas, calas sin descubrir y yermos helados. Los Sprites conjurados por hechizos del Colegio Zafiro son difíciles de atrapar y pueden Repetir tirada en los intentos fallidos de abandonar el Combate.",
       "hechizos": {
-        "conjure sapphire sprites": "Conjurar Sprites Zafiro (Conjure Sapphire Sprites)",
-        "bridge of ice": "Puente de Hielo (Bridge of Ice)",
-        "storm cloud": "Nube de Tormenta (Storm Cloud)",
-        "tidal wave": "Marea de Asalto (Tidal Wave)"
+        "conjure sapphire sprites": {
+          "nombre": "Conjurar Sprites Zafiro (Conjure Sapphire Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de líquido reluciente. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo son difíciles de atrapar y pueden Repetir tirada en los intentos fallidos de abandonar el Combate."
+        },
+        "bridge of ice": {
+          "nombre": "Puente de Hielo (Bridge of Ice)",
+          "efecto": "Una estructura de hielo crepitante se extiende desde las botas del Mago, permitiéndole viajar adonde quiera. El lanzador puede moverse sobre cualquier terreno o Personaje durante el resto de su Activación. Además, el lanzador puede Repetir tirada en cualquier intento fallido de abandonar el contacto de peana con un Personaje enemigo."
+        },
+        "storm cloud": {
+          "nombre": "Nube de Tormenta (Storm Cloud)",
+          "efecto": "El Mago maldice a un enemigo para que sea perseguido por una nube de tormenta en miniatura que crepita con rayos. Elige un Personaje enemigo en cualquier lugar del tablero. Cada vez que el Personaje enemigo se Active, sufre D3 Impactos que ignoran la Armadura. Este Hechizo dura hasta que el lanzador intente otro Hechizo o quede Noqueado."
+        },
+        "tidal wave": {
+          "nombre": "Marea de Asalto (Tidal Wave)",
+          "efecto": "Valiéndose de las reservas de agua de las profundidades de la tierra, el mago lanza una gran ola contra sus enemigos. Mide una línea de D6\" desde el lanzador. Cualquier Personaje a 2\" o menos de esta línea sufre 4 Impactos. Si el lanzador está a 3\" o menos de un elemento de terreno de agua, la distancia de la línea aumenta a 2D6 pulgadas."
+        }
       }
     },
     "the lore of the emerald college": {
       "nombre": "El Saber del Colegio Esmeralda (The Lore of The Emerald College)",
+      "reglas": "Los Magos Esmeralda son reclusos que prefieren la compañía de las bestias de ArcWorlde a la de otros de su especie. Estos ermitaños errantes estudian el mundo natural, y los lugares salvajes son donde se sienten más en casa. Los Sprites conjurados por hechizos del Colegio Esmeralda se mimetizan con la maleza, por lo que todos los intentos de Dispararles tienen -1.",
       "hechizos": {
-        "conjure emerald sprites": "Conjurar Sprites Esmeralda (Conjure Emerald Sprites)",
-        "healing touch": "Toque Curativo (Healing Touch)",
-        "winged swarm": "Enjambre Alado (Winged Swarm)",
-        "soul of the beast": "Alma de la Bestia (Soul of the Beast)"
+        "conjure emerald sprites": {
+          "nombre": "Conjurar Sprites Esmeralda (Conjure Emerald Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de pieles y plumas relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo se mimetizan con la maleza, por lo que todos los intentos de Dispararles tienen -1."
+        },
+        "healing touch": {
+          "nombre": "Toque Curativo (Healing Touch)",
+          "efecto": "Suaves helechos brotan de las yemas de los dedos del lanzador y alivian las heridas de sus aliados. Un único Personaje a 3\" o menos del lanzador (o el propio lanzador) recupera D6 HP."
+        },
+        "winged swarm": {
+          "nombre": "Enjambre Alado (Winged Swarm)",
+          "efecto": "Un diluvio ensordecedor de aves e insectos voladores enjambra alrededor de los enemigos del lanzador, impidiéndoles ver. Elige un punto del tablero. Cualquier Personaje a 4\" o menos de este punto ve reducidos en 2\" su Movimiento y cualquier tirada de Leg It, y no puede realizar Ataques a distancia. Este Hechizo dura hasta que el lanzador lance otro Hechizo o quede Noqueado."
+        },
+        "soul of the beast": {
+          "nombre": "Alma de la Bestia (Soul of the Beast)",
+          "efecto": "El lanzador extiende la mano hacia el alma de una criatura salvaje y se hace amigo de ella por un breve tiempo. El jugador puede Activar una Bestia, Monstruo o Titán enemigo a 8\" o menos del lanzador y gastar 3 AP como desee. Si la Bestia/Monstruo/Titán ha gastado todos sus AP en esta Ronda, no puede ser objetivo de este Hechizo."
+        }
       }
     },
     "the lore of the ochre college": {
       "nombre": "El Saber del Colegio Ocre (The Lore of The Ochre College)",
+      "reglas": "Los Magos Ocre son gente sólida y obstinada que excava en la tierra misma para estudiar sus secretos. Exploran las cavernas más profundas y las cuevas más oscuras, y tienen la fuerza y la destreza mágica para derrotar a cualquier cosa que encuentren morando allí abajo. Los Sprites conjurados por hechizos del Colegio Ocre son robustos y tienen 1 de Armadura.",
       "hechizos": {
-        "conjure ochre sprites": "Conjurar Sprites Ocres (Conjure Ochre Sprites)",
-        "rock wall": "Muro de Piedra (Rock Wall)",
-        "stone armour": "Armadura de Piedra (Stone Armour)",
-        "arcworlde's bounty": "Tesoros de ArcWorlde (ArcWorlde's Bounty)"
+        "conjure ochre sprites": {
+          "nombre": "Conjurar Sprites Ocres (Conjure Ochre Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de menas preciosas relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo son robustos y tienen 1 de Armadura."
+        },
+        "rock wall": {
+          "nombre": "Muro de Piedra (Rock Wall)",
+          "efecto": "El suelo se hincha y se agrieta, y hace brotar un muro de piedra impenetrable. Coloca una barrera de 6\" de largo y hasta 2\" de ancho a 2\" o menos del lanzador. Cuenta como Terreno Infranqueable y permanece hasta el final de la Ronda."
+        },
+        "stone armour": {
+          "nombre": "Armadura de Piedra (Stone Armour)",
+          "efecto": "Las túnicas del lanzador se endurecen y se cristalizan, protegiéndolo de los golpes enemigos. El lanzador tiene Armadura Pesada hasta el final de la Ronda."
+        },
+        "arcworlde's bounty": {
+          "nombre": "Tesoros de ArcWorlde (ArcWorlde's Bounty)",
+          "efecto": "El propio reino regala sus tesoros al lanzador y a sus aliados. Coloca D3 Fichas de Arcanita en un punto situado como mínimo a 8\" del lanzador."
+        }
       }
     },
     "the lore of the bronze college": {
       "nombre": "El Saber del Colegio de Bronce (The Lore of The Bronze College)",
+      "reglas": "A los Magos de Bronce les encantan la alquimia y la invención de artilugios mecánicos. Sus talleres están repletos del equipo más arcano, y sus expediciones suelen tener por objeto buscar nuevos materiales e ingredientes para sus experimentos. Los Sprites conjurados por hechizos del Colegio de Bronce tienden a repararse solos, por lo que recuperan D3 HP al final de cada Ronda.",
       "hechizos": {
-        "conjure bronze sprites": "Conjurar Sprites de Bronce (Conjure Bronze Sprites)",
-        "transfiguration": "Transfiguración (Transfiguration)",
-        "alchemical blast": "Ráfaga Alquímica (Alchemical Blast)",
-        "avatar of gold": "Avatar de Oro (Avatar of Gold)"
+        "conjure bronze sprites": {
+          "nombre": "Conjurar Sprites de Bronce (Conjure Bronze Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de metales relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo tienden a repararse solos, por lo que recuperan D3 HP al final de cada Ronda."
+        },
+        "transfiguration": {
+          "nombre": "Transfiguración (Transfiguration)",
+          "efecto": "Los materiales se mezclan y cambian, haciendo algo nuevo a partir de algo viejo. Un Personaje aliado a 12\" o menos puede optar por cambiar un Objeto o una pieza de Equipo por otro de la armería de su Facción de igual o menor valor en GP."
+        },
+        "alchemical blast": {
+          "nombre": "Ráfaga Alquímica (Alchemical Blast)",
+          "efecto": "El Mago lanza un rayo de energía deformante contra su enemigo, que moldea su equipo en formas extrañas. (A distancia) Alchemical Blast: Power 5. Reglas especiales: con un Crítico, una pieza de Equipo u Objeto que lleve el objetivo queda inutilizada hasta la Ronda siguiente a la resolución de este Ataque."
+        },
+        "avatar of gold": {
+          "nombre": "Avatar de Oro (Avatar of Gold)",
+          "efecto": "La piel del lanzador reluce y se convierte en oro puro. Mientras esté en esta forma, el lanzador cuenta como si tuviera Armadura Pesada y tiene +2 al Power en cualquiera de sus Ataques cuerpo a cuerpo. Sin embargo, no puede lanzar Hechizos en este estado, que dura hasta el final de la Ronda."
+        }
       }
     },
     "the lore of the opal college": {
       "nombre": "El Saber del Colegio Ópalo (The Lore of The Opal College)",
+      "reglas": "El más misterioso de los Colegios del Monte Orion; los Magos Ópalo profundizan en los secretos del mundo espiritual. Son seres de otro mundo y distantes, que comulgan con las almas tanto de los vivos como de los muertos. Los Sprites conjurados por hechizos del Colegio Ópalo flotan sobre el suelo y, por tanto, pueden Volar (ver reglas del Bestiario).",
       "hechizos": {
-        "conjure opal sprites": "Conjurar Sprites Ópalo (Conjure Opal Sprites)",
-        "unnatural aura": "Aura Antinatural (Unnatural Aura)",
-        "spirit leech": "Sanguijuela Espiritual (Spirit Leech)",
-        "spectral host": "Hueste Espectral (Spectral Host)"
+        "conjure opal sprites": {
+          "nombre": "Conjurar Sprites Ópalo (Conjure Opal Sprites)",
+          "efecto": "Con un movimiento de muñeca, cobran vida Sprites de niebla etérea. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo flotan sobre el suelo y, por tanto, pueden Volar (ver reglas del Bestiario)."
+        },
+        "unnatural aura": {
+          "nombre": "Aura Antinatural (Unnatural Aura)",
+          "efecto": "El Mago exuda un aura espeluznante que inquieta a todos los que lo rodean. Todos los Personajes enemigos a 6\" o menos deben Repetir tirada en los Chequeos de Valentía superados. Este Hechizo dura hasta el final de la Ronda."
+        },
+        "spirit leech": {
+          "nombre": "Sanguijuela Espiritual (Spirit Leech)",
+          "efecto": "El mago extrae poder espiritual del objetivo y lo deja sin vida. Un objetivo a 6\" o menos del lanzador debe superar un Chequeo de Valentía o perder D3 HP. Todos los HP arrebatados se entregan al lanzador. El lanzador no puede aumentar sus HP por encima de su cifra original."
+        },
+        "spectral host": {
+          "nombre": "Hueste Espectral (Spectral Host)",
+          "efecto": "El Mago invoca a los espíritus de los antepasados de sus enemigos y los vuelve contra ellos. El lanzador invoca D3 seres que tienen los mismos atributos y tamaño de peana que el Tipo de Unidad de la Facción enemiga y los coloca a 1\" o menos. Estos seres se Activan con normalidad y son controlados por el lanzador."
+        }
       }
     },
     "lore of spiders": {
       "nombre": "Saber de las Arañas (Lore of Spiders)",
+      "reglas": "Las Reinas Arcanid están imbuidas de una inteligencia astuta, y las vastas cantidades de Arcanita que albergan sus cuerpos les otorgan la capacidad de empuñar poder mágico. Bruja Araña (Spiderwitch): la Arcanid Queen puede lanzar Hechizos del Saber de las Arañas. Sin embargo, si un Hechizo Sobrepotencia, la Arcanid Queen pierde 2D6 HP, la Activación termina y el Hechizo no se lanza.",
       "hechizos": {
-        "chittering swarm": "Enjambre Estridente (Chittering Swarm)",
-        "summon arcanid": "Invocación de Arcanida (Summon Arcanid)",
-        "silken salve": "Ungüento Sedoso (Silken Salve)"
+        "chittering swarm": {
+          "nombre": "Enjambre Estridente (Chittering Swarm)",
+          "efecto": "La Arcanid Queen convoca una horda de arañas que muerden cualquier carne expuesta. Todos los Personajes enemigos en contacto de peana sufren 1 Impacto."
+        },
+        "summon arcanid": {
+          "nombre": "Invocación de Arcanida (Summon Arcanid)",
+          "efecto": "Con un gesto, la Arcanid Queen llama a otro de sus hijos para reemplazar a los caídos en el campo de batalla. Coloca un Arcanid Noqueado con todos sus HP en un borde de mesa a tu elección."
+        },
+        "silken salve": {
+          "nombre": "Ungüento Sedoso (Silken Salve)",
+          "efecto": "La Arcanid Queen cubre sus heridas con seda impregnada de Arcanita, y la piel y el caparazón rotos empiezan a soldarse. El lanzador recupera D6 HP."
+        }
       }
     },
     "lore of the enchanted journal": {
       "nombre": "Saber del Diario Encantado (Lore of the Enchanted Journal)",
+      "reglas": "Descubierto en una biblioteca polvorienta, el Diario Encantado acompaña ahora al Explorer adondequiera que va. Sus páginas se erizan con vida propia, y el Diario empuña un gran poder mágico que usa con presteza para proteger a quienes le importan.",
       "hechizos": {
-        "arcleap": "Salto Arcano (Arcleap)",
-        "touch of destiny": "Toque del Destino (Touch of Destiny)",
-        "charmed blade": "Hoja Encantada (Charmed Blade)",
-        "arcane knowledge": "Conocimiento Arcano (Arcane Knowledge)"
+        "arcleap": {
+          "nombre": "Salto Arcano (Arcleap)",
+          "efecto": "El Diario se desvanece con un zumbido junto con el Explorer fuera de este plano de existencia. Retira del tablero tanto al Explorer como al Diario, aunque alguno de ellos esté en contacto de peana con un Personaje enemigo. Vuelve a colocarlos en contacto de peana a 6\" o menos de cualquier borde de mesa cuando reaparezcan."
+        },
+        "touch of destiny": {
+          "nombre": "Toque del Destino (Touch of Destiny)",
+          "efecto": "El Diario retuerce el tejido mismo de la realidad, y aquellos a quienes favorece son bendecidos por el destino. Elige un Personaje aliado en el tablero. Durante el resto de la Ronda, puede Repetir tirada en cualquier dado fallido cuando intente Hazañas."
+        },
+        "charmed blade": {
+          "nombre": "Hoja Encantada (Charmed Blade)",
+          "efecto": "Con un crujir de sus páginas, el arma de un aliado vibra con energía mágica. Elige un Personaje aliado a 6\" o menos del Diario. En sus tiradas para Atacar, tanto los 5 como los 6 cuentan como Impactos Críticos."
+        },
+        "arcane knowledge": {
+          "nombre": "Conocimiento Arcano (Arcane Knowledge)",
+          "efecto": "El Diario parece aprovechar una riqueza desconocida de conocimiento, como si estuviera conectado con todos los libros de magia jamás escritos. El lanzador puede elegir un Hechizo de cualquier saber del juego ArcWorlde. Este Hechizo se considera ahora lanzado con éxito."
+        }
       }
     }
   },

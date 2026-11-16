@@ -52,11 +52,19 @@ fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
     } else if (kind === 'objetos') {
       pendObjetos.push(r);
     } else if (kind === 'saberes') {
-      // Solo se usan los nombres: NotebookLM cambió exigencias, alcances y efectos de los hechizos, así que los textos se quedan en inglés del compendio
+      // saberes_texto_*.json: traducción propia de reglas de saber y efectos (desde el inglés del compendio).
+      // Los demás saberes_*.json (NotebookLM) solo aportan los nombres: cambió exigencias, alcances y efectos de los hechizos.
       const sk = key(r.saber);
-      out.saberes[sk] = out.saberes[sk] || { nombre: '', hechizos: {} };
-      out.saberes[sk].nombre = limpiaNombre(limpia(r.saber_es));
-      (r.hechizos || []).forEach((h) => { out.saberes[sk].hechizos[key(h.nombre)] = limpiaNombre(limpia(h.nombre_es)); });
+      const sab = (out.saberes[sk] = out.saberes[sk] || { nombre: '', reglas: '', hechizos: {} });
+      const texto = f.startsWith('saberes_texto');
+      if (texto) {
+        if (r.reglas_saber_es) sab.reglas = r.reglas_saber_es;
+      } else sab.nombre = limpiaNombre(limpia(r.saber_es));
+      (r.hechizos || []).forEach((h) => {
+        const hk = key(h.nombre);
+        const x = (sab.hechizos[hk] = sab.hechizos[hk] || { nombre: '', efecto: '' });
+        if (texto) x.efecto = h.efecto_es; else x.nombre = limpiaNombre(limpia(h.nombre_es));
+      });
     } else if (kind === 'reglas') {
       pendReglas.push(r);
     } else avisos.push('tipo de archivo sin soporte todavía: ' + f);

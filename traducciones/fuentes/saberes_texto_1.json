@@ -1,0 +1,65 @@
+[
+  {
+    "saber": "The Grand Cookbook of Bulbo Chubb",
+    "reglas_saber_es": "Estas deliciosas comidas, creadas por el mismísimo y legendario Maestro Cocinero Bulbo Chubb, son llevadas o preparadas a menudo en el campo de batalla por los Halflings para darles fuerza en combate. Basta un poco de condimento de Arcanita para que los platos alcancen una nueva dimensión de «sabor». Los efectos de estos Hechizos no se acumulan y se sustituyen si se lanza otro Hechizo sobre el mismo Personaje.",
+    "hechizos": [
+      { "nombre": "Hearty Veggie Soup", "efecto_es": "La tierra honesta de Hobbleshire otorga a las verduras que crecen en ella un sabor distintivo y potente. Quienes beben este caldo nutritivo dicen que su calor puede aliviar incluso las heridas más graves. Un Personaje aliado a 6\" o menos recupera 3 HP." },
+      { "nombre": "Marvellous Mutton Stew", "efecto_es": "Los Halflings son bien conocidos por criar rebaños de ovejas de buena raza, y este estofado es tan delicioso que seguro que se sintieron honradas de convertirse en cordero para él. Un Personaje aliado a 6\" o menos puede Repetir tirada en una única tirada de Leg It fallida durante esta Ronda." },
+      { "nombre": "Bullox Burgers", "efecto_es": "Los bueyes son leales bestias de carga para los Halflings, pero ni siquiera ellos pueden trabajar para siempre. Por suerte, también son una comida estupenda una vez que se han... «retirado». Un Personaje aliado a 6\" o menos puede Repetir tirada en todas sus Tiradas de Defensa fallidas hasta su siguiente Activación." },
+      { "nombre": "Cocklegriff Madras", "efecto_es": "Este plato, inspirado en las fragantes delicias de Raajalan, se ha convertido en el favorito de la gente pendenciera para ponerse a tono antes de una refriega. Aunque la violencia de la mañana siguiente suele eclipsar a cualquiera de las anteriores. Un Personaje aliado a 6\" o menos obtiene el Ataque Fired Up hasta el final de la Ronda: (1 AP) Fired Up: Power 8. Reglas especiales: +1 al Power contra objetivos Inflamables." },
+      { "nombre": "Mystery Meat Surprise", "efecto_es": "La «pièce de résistance» (como dirían en Galanaux), esta extraordinaria proeza culinaria es una receta secreta celosamente guardada. Solo los gourmets más refinados pueden dominarla, y sus sutiles sabores e ingredientes caros se desperdician a menudo en la chusma que la engulle con avidez en el campo de batalla. Un Personaje aliado a 6\" o menos gana +2 AP y recupera D6 HP." }
+    ]
+  },
+  {
+    "saber": "Tinkerer's Arcane Contraptions",
+    "reglas_saber_es": "El trabajo del Tinkerer es mantener el equipo de la banda imperial. Sin embargo, su imaginación maníaca no puede estar ociosa mucho tiempo, y los Tinkerers suelen llevar al campo de batalla baúles con sus curiosos artilugios. ¿Quizá alguna de sus creaciones arcanas pueda ayudar?",
+    "hechizos": [
+      { "nombre": "Mechanical Griffling", "efecto_es": "Con un zumbido y un gorjeo, un Griffling hecho de metal pulido cobra vida. Coloca un Griffling (ver Bestiario) en contacto de peana con el Tinkerer, que se Activa inmediatamente después de que termine la Activación del Tinkerer. Este Hechizo solo puede volver a usarse si el Griffling Mecánico ha quedado Noqueado." },
+      { "nombre": "Revolving Pistol", "efecto_es": "El Tinkerer saca una extraña pistola Arcloque de varios cañones que dispara muchas balas una tras otra. El Tinkerer puede realizar este Ataque: (A distancia) Revolving Pistol: Power 5. Reglas especiales: alcance de 8\". Tira otro D6 por cada Impacto exitoso." },
+      { "nombre": "Arcane Shielding", "efecto_es": "Un artilugio emite un aura de luz azul verdosa que se extiende alrededor del Tinkerer y parece desviar los golpes lejanos. Durante el resto de la Ronda, cualquier Personaje a 2\" o menos del Tinkerer gana +1 de Armadura contra los Ataques realizados por Personajes fuera de esta zona." },
+      { "nombre": "Homing Bullet", "efecto_es": "Un triunfo de la ingeniería: este proyectil parece no fallar nunca su objetivo. Una vez lanzado este Hechizo, durante su Activación un único Personaje en contacto de peana con el Tinkerer puede realizar un único Ataque a distancia que ignora la cobertura y supera automáticamente su tirada de Hazaña sin coste." },
+      { "nombre": "Magic Gobbler", "efecto_es": "Un maravilloso aparato que engulle energía mágica y la almacena para que el Tinkerer la use. Hasta la siguiente Activación del Tinkerer, cada vez que un Personaje enemigo lance un Hechizo con éxito, tira un D6. Con un Éxito, el Hechizo no se lanza y el Tinkerer gana una Ficha de Arcanita." }
+    ]
+  },
+  {
+    "saber": "Lore of Villainy",
+    "reglas_saber_es": "Atrapados durante milenios en los Páramos Desolados, muchos Señores Oscuros dirigen sus mentes febriles hacia el dominio de las artes mágicas. Estos viles villanos usan sus poderes con gran eficacia y, en su opinión, no tienen rival entre los humildes magos de otros pueblos.",
+    "hechizos": [
+      { "nombre": "Sickly Screech", "efecto_es": "Un chillido atroz brota del yelmo del Señor Oscuro y obliga a quienes lo rodean a taparse los oídos de dolor. Cada Personaje a 4\" o menos del lanzador debe tirar un D6. Con un Fallo, sufre -1 AP en su siguiente Activación. Este Hechizo afecta también al lanzador y sus efectos no se acumulan." },
+      { "nombre": "Ominous Aura", "efecto_es": "Un miasma de maldad rodea al Señor Oscuro y se filtra en los corazones de quienes tiene delante. El lanzador gana el Rasgo Temible (Fearsome) hasta el final de la Ronda (ver Bestiario)." },
+      { "nombre": "Restless Minions", "efecto_es": "La maldad del Señor Oscuro se filtra en las mentes de sus súbditos inconscientes y los hace volver del borde del abismo. Coloca una Unidad Noqueada a 3\" o menos del lanzador con 1 HP." },
+      { "nombre": "Molten Terrain", "efecto_es": "El Señor Oscuro invoca el calor volcánico de su reino ceniciento y obliga a la tierra misma a fundirse y burbujear. Elige una zona de 4\" de radio a 8\" o menos del lanzador. Hasta el final de la Ronda, cualquier Personaje en contacto de peana con esta zona sufre D6 Impactos." },
+      { "nombre": "Hellfire", "efecto_es": "(21+) El Señor Oscuro lanza una terrible llamarada que abrasa todo a su paso. Traza una línea de 6\" desde el borde frontal de la peana del lanzador. Todos los Personajes a 2\" o menos de la línea son objetivo de un Ataque de Power 8 (+2 al Power contra Inflamables)." }
+    ]
+  },
+  {
+    "saber": "Lore of Tooth and Fur",
+    "reglas_saber_es": "Los Hombres Bestia están instintivamente sintonizados con las energías de la naturaleza y las usan para alimentar su magia. Blandiendo amuletos místicos y pociones hechas con los huesos de sus congéneres, sus Brujas del Seto emplean conocimientos y habilidades transmitidos durante generaciones para tejer la energía arcana en un tapiz de poder.",
+    "hechizos": [
+      { "nombre": "Forest Creatures", "efecto_es": "Las alimañas del bosque son llamadas desde sus guaridas para atacar a los intrusos impíos. El Personaje objetivo y todos los Personajes a 3\" o menos de él sufren 3 Impactos." },
+      { "nombre": "Warging", "efecto_es": "La Bruja del Seto entra en la mente de otra criatura y controla todos sus movimientos. Cuando el lanzador haya terminado su Activación, elige una Bestia aliada en el tablero. Puede Activarse de inmediato, aunque ya se haya Activado en esta Ronda. Cualquier Objeto o Equipo recogido por la Bestia se transfiere al lanzador al final de su activación." },
+      { "nombre": "Bestial Strength", "efecto_es": "Con un rugido poderoso, la Bruja del Seto aprovecha la fuerza de una criatura poderosa y se la regala a uno de los suyos. Este Hechizo puede lanzarse sobre cualquier Personaje que no sea una Bestia, un Monstruo o un Titán. El objetivo gana +3 al Power en cualquier Ataque cuerpo a cuerpo hasta que el lanzador decida lanzar otro Hechizo." },
+      { "nombre": "Shapeshift", "efecto_es": "Mientras el aire a su alrededor se desdibuja, la Bruja del Seto adopta una nueva forma: ¡un aterrador Monstruo! Sustituye al lanzador por un Monstruo elegido del Bestiario. El Monstruo tiene los mismos AP que le quedaban al lanzador antes del Cambio de Forma, pero por lo demás es idéntico. Al final de la Ronda, el lanzador vuelve a su verdadera forma con los mismos HP que tenía cuando se lanzó el Hechizo." }
+    ]
+  },
+  {
+    "saber": "Lore of the Thereafter",
+    "reglas_saber_es": "Los antiguos pueblos de ArcWorlde estaban en sintonía con la energía mágica de la tierra, y sus poderes no han hecho más que crecer en el más allá. Los Bog Magi se sirven de las magias desconocidas que los reaniman a ellos y a los suyos para ayudar, dañar y curar en el campo de batalla.",
+    "hechizos": [
+      { "nombre": "Tar Pit", "efecto_es": "El Magus hace brotar de las profundidades de la tierra un charco de pez negra y pegajosa para sepultar a sus enemigos, como ellos mismos fueron sepultados hace mucho. Coloca un marcador en el tablero. Todos los Personajes a 3\" o menos de él ven reducido su Movimiento a 1. Este efecto dura hasta que el Bog Magus quede Tumbado o Noqueado." },
+      { "nombre": "Spirit Glaive", "efecto_es": "El Mago invoca una hoja etérea hecha de la misma materia espiritual que lo anima. Parece cortar hasta el alma de aquellos contra quienes se usa. Puede lanzarse sobre sí mismo o sobre un Personaje aliado a 3\" o menos, y dura hasta el final de la Ronda. En lugar de perder HP, un objetivo pierde 1 AP de su siguiente Activación por cada 3 puntos de daño que reciba de Ataques cuerpo a cuerpo de quienes empuñen la Spirit Glaive." },
+      { "nombre": "Forgotten Ritual", "efecto_es": "El Mago recrea un ritual olvidado de su pueblo, cuyos recuerdos y poder reaniman a los suyos. Todos los Personajes aliados con el Rasgo Huesos (Bones) a 3\" o menos recuperan D3 HP." },
+      { "nombre": "Justice of the Dead", "efecto_es": "Los muertos recuerdan las injusticias que se cometieron contra ellos. Todo Personaje enemigo que haya dejado Noqueado a un Personaje aliado en el momento de lanzar este Hechizo sufre D6 Impactos que ignoran la Armadura y los Escudos." }
+    ]
+  },
+  {
+    "saber": "Lore of the Night",
+    "reglas_saber_es": "Obsesionados con los antiguos libros de saber, algunos Vampiros incursionan en la magia oscura e impía. Sus siglos de estudio los hacen poderosos en las artes hechiceras y disfrutan poniéndolas a prueba con los mortales que encuentran.",
+    "hechizos": [
+      { "nombre": "Darkness", "efecto_es": "Un charco de oscuridad total rodea al objetivo, que no puede ver el peligro que le aguarda. Elige un Personaje objetivo a 8\" o menos. Hasta el final de esta Ronda, él y cualquier Personaje a 4\" o menos de él tienen Desventaja al tirar para Disparar." },
+      { "nombre": "Dramatic Thunderclap", "efecto_es": "Con un estruendo, un terrible trueno retumba desde los cielos. Increíble para el efecto dramático. Un único Personaje aliado puede Repetir tirada en una Hazaña Narrativa durante esta Ronda." },
+      { "nombre": "Vampiric Glare", "efecto_es": "El Vampiro fija a su presa con unos ojos rojos brillantes. El objetivo a 6\" o menos debe superar un Chequeo de Valentía o no podrá Moverse ni Atacar durante su siguiente Activación." },
+      { "nombre": "Cloud of Bats", "efecto_es": "Un enjambre de murciélagos de cripta revoloteando oscurece la visión y desgarra la carne enemiga. Invoca un Crypt Bat a 6\" o menos del lanzador que puede Activarse de inmediato." }
+    ]
+  }
+]
