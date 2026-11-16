@@ -5108,236 +5108,236 @@ const compendioArcWorlde = {
   ],
   "diccionario_rasgos": {
     "Nación Colonizadora / Settler Nation": {
-      "resumen": "Expansión militar del Imperio aliada con colonos locales.",
-      "detalles": "Efectos: Puedes reclutar personajes de las facciones Halfling y Njorsvald sin penalización de infidelidad."
+      "resumen": "Permite reclutar personajes de las facciones Imperial y Njorsvald al construir la Banda.",
+      "detalles": "Efectos: Al construir tu Banda, puedes incluir personajes de las facciones Imperial y Njorsvald sin penalizaciones."
     },
     "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb": {
-      "resumen": "Magia gastronómica infundida con Arcanita para potenciar o curar aliados.",
-      "detalles": "Efectos: Acceso al saber mágico con hechizos de curación, bonificación al movimiento y potenciadores de combate."
+      "resumen": "Acceso al Saber mágico gastronómico de la facción Halfling.",
+      "detalles": "Efectos: Otorga acceso al Saber mágico de los Halflings con Hechizos de curación, bonificación al movimiento y potenciadores de combate."
     },
     "El Más Allá / Afterlife": {
-      "resumen": "Convicción absoluta de encontrarse en el paraíso prometido.",
-      "detalles": "Efectos: Los personajes con este rasgo superan automáticamente todos los Chequeos de Valentía."
+      "resumen": "Los personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía.",
+      "detalles": "Efectos: Los Antiguos Muertos creen que se encuentran en el más allá prometido por sus dioses olvidados. Los personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía."
     },
     "Huesos Antiguos / Bones": {
-      "resumen": "Anatomía esquelética sin carne ni órganos que dañar.",
-      "detalles": "Efectos: Permite hacer una Hazaña Fácil para recolocar sus huesos y recuperar D3 HP. Además, cuentan como si estuvieran en Cobertura contra ataques a distancia."
+      "resumen": "Permite curarse D3 HP mediante una Hazaña Fácil y otorga Cobertura constante contra Ataques a distancia.",
+      "detalles": "Efectos: Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para recolocarse sus huesos y recuperar D3 HP (Puntos de Vida). Además, cuentan como en Cobertura contra cualquier Ataque a distancia."
     },
     "Legiones No-Muertas / Undead Legions": {
-      "resumen": "Bribones y piratas resucitados unidos a otros no-muertos.",
-      "detalles": "Efectos: Puedes reclutar unidades de las facciones Vampires y Ancient Dead."
+      "resumen": "Permite reclutar personajes de las facciones Saqueadores No-Muertos y Vampiros.",
+      "detalles": "Efectos: Al construir tu Banda, puedes incluir personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Vampiros (Vampires)."
     },
     "Clanes Nómadas / Nomadic Clans": {
-      "resumen": "Vida errante por los valles salvajes compartida con otros clanes.",
-      "detalles": "Efectos: Puedes incluir unidades de las facciones Ourks y Gremlins en tu banda."
+      "resumen": "Permite a los Hombres Bestia reclutar personajes de las facciones Ourks y Gremlins.",
+      "detalles": "Efectos: Al construir tu Banda de Hombres Bestia (Beastfolk), puedes incluir personajes de las facciones Ourks y Gremlins."
     },
     "Parentesco Bestial / Beastkin": {
-      "resumen": "Afinidad natural con los monstruos y bestias del bosque.",
-      "detalles": "Efectos: Todas las Bestias, Monstruos o Titanes contratados del Bestiario tienen un 20% de descuento en su coste de GP."
+      "resumen": "Descuento del 20% en el coste en GP al reclutar criaturas del Bestiario.",
+      "detalles": "Efectos: Las Bestias, Monstruos o Titanes del Bestiario reclutados como parte de una Banda de Hombres Bestia tienen un descuento del -20% en su coste en GP."
     },
     "Jerarquía del Clan / Diminutive & Intimidating": {
-      "resumen": "Los brutos dominan a las sabandijas más pequeñas del clan.",
-      "detalles": "Efectos: La caída de unidades Diminutive no fuerza chequeos de Valentía en líderes Intimidating. Además, minis Diminutive a 6\" de un Intimidating re-repiten 1 fallo al atacar."
+      "resumen": "Los aliados Intimidantes no realizan Chequeos de Valentía cuando cae un Diminuto.",
+      "detalles": "Efectos: Cuando un Personaje aliado con el Rasgo Diminuto (Diminutive) queda Noqueado, los Personajes aliados con el Rasgo Intimidante (Intimidating) no necesitan realizar Chequeos de Valentía."
     },
     "La Voluntad del Oscuro / The Dark One's Will": {
-      "resumen": "Personalización táctica de la obsesión del Comandante antes de la partida.",
-      "detalles": "Efectos: Elige 1 rasgo: Fell Warrior (+1 AP extra por cada KO causado), Dark Warlock (Mago + Lore of Villainy), Master of the Horde (-20% GP Hobgoblins), Beast Master (-20% GP Bestiario)."
+      "resumen": "Permite elegir el perfil de personalidad del Señor Oscuro antes del juego.",
+      "detalles": "Efectos: Antes del juego, elige una personalidad para el Dark Lord: Fell Warrior (+1 AP por enemigo Noqueado), Dark Warlock (gana clase Mago y Saber de la Villanía), Master of the Horde (-20% GP en Hobgoblins) o Beast Master (-20% GP en Bestias/Monstruos)."
     },
     "Pactos Malevolentes / Fae Beings": {
       "resumen": "Alianzas oscuras con magos renegados y elfos oscuros.",
       "detalles": "Efectos: Puedes reclutar unidades de las facciones Wizards y Wild Elves."
     },
     "Escurridizo / Born Slippy": {
-      "resumen": "Agilidad diminuta para zafarse del combate cuerpo a cuerpo.",
-      "detalles": "Efectos: Permite repetir cualquier tirada de Hazaña fallida al intentar Desengancharse (Disengage) del combate."
+      "resumen": "Permite Repetir tirada en intentos fallidos para Destrabarse del combate cuerpo a cuerpo.",
+      "detalles": "Efectos: Todos los Personajes con este Rasgo pueden Repetir tirada en cualquier intento de Hazaña fallido para Destrabarse de un combate cuerpo a cuerpo."
     },
     "Habitante de Madrigueras / Burrow Dweller": {
-      "resumen": "Uso de la red subterránea para curarse y teletransportarse.",
-      "detalles": "Efectos: En contacto con un Gremlin Burrow, una Hazaña Fácil sumerge al personaje, retirándolo del tablero y curándole D3 HP. Reaparece en cualquier madriguera la ronda siguiente."
+      "resumen": "Permite entrar en Madrigueras Gremlin para curarse D3 HP y reaparecer la siguiente Ronda.",
+      "detalles": "Efectos: Si está en contacto de peana con una Madriguera Gremlin, el Personaje puede intentar una Hazaña Fácil para esconderse. Queda retirado temporalmente, cura D3 HP y reaparece al inicio de su Activación en la siguiente Ronda en cualquier Madriguera del tablero."
     },
     "Nómadas de los Pantanos / Nomads": {
-      "resumen": "Bandas errantes de los pantanos del sur.",
-      "detalles": "Efectos: Puedes reclutar unidades de las facciones Beastfolk y Gremlins."
+      "resumen": "Permite a los Ourks reclutar personajes de las facciones Hombres Bestia y Gremlins.",
+      "detalles": "Efectos: Al construir tu Banda de Ourks, puedes incluir personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins."
     },
     "Lucha de Poder / Power Struggle": {
-      "resumen": "Rivalidad constante entre el Chieftain y el Dreameater por el mando.",
-      "detalles": "Efectos: Si tienes ambos en la lista, realizan un enfrentamiento de Valentía al inicio de cada ronda. El ganador obtiene bonificaciones en su perfil y el perdedor sufre -1 AP."
+      "resumen": "Enfrentamiento de liderazgo entre Chieftain y Dreameater al inicio de cada Ronda.",
+      "detalles": "Efectos: Si incluyes un Chieftain y un Dreameater en tu Banda, deben realizar un Chequeo de Valentía al inicio de cada Ronda. El ganador recibe bonificaciones en su perfil y el perdedor penalizaciones."
     },
     "Resurrección del Pescador / Raiser of the Dead": {
-      "resumen": "Los Harbingers traen de vuelta a los rufianes caídos en combate.",
-      "detalles": "Efectos: Mediante una Hazaña, resucita unidades No-Muertas caídas en el mismo lugar donde cayeron con el 50% de sus HP iniciales."
+      "resumen": "Permite resucitar a personajes aliados Noqueados a 6\" o menos con el 50% de sus HP.",
+      "detalles": "Efectos: Un Personaje con este Rasgo puede intentar resucitar a Personajes aliados Noqueados con el Rasgo Resucitado (Risen) a 6\" mediante una Hazaña (Media para Unidades/Bestias, Difícil para Élites/Irregulares, Legendaria para Pesadas). Si tiene éxito, regresa al juego con el 50% de sus HP iniciales."
     },
     "Cautivar / Enthral": {
-      "resumen": "Poder hipnótico para convertir enemigos heridos en sirvientes sumisos.",
-      "detalles": "Efectos: En contacto de peana, realiza una Hazaña (Easy/Medium/Hard/Legendary según HP y peana del rival) para transformar al enemigo en un Thrall bajo tu control."
+      "resumen": "Permite al Vampiro cautivar a un personaje enemigo en contacto de peana para dominarlo.",
+      "detalles": "Efectos: Un Vampiro puede intentar fascinar a un Personaje enemigo en contacto de peana realizando una Hazaña (Fácil para Unidades, Media para Élites/Irregulares, Difícil para Pesadas, Legendaria para Comandantes). Si tiene éxito, el objetivo se convierte en un Esclavo (Thrall) bajo tu control."
     },
     "Insignificantes / Insignificant": {
-      "resumen": "Desprecio absoluto por la vida de sus sirvientes y plebeyos.",
-      "detalles": "Efectos: La caída o noqueo de sirvientes y Thralls no obliga a los Vampiros a realizar Chequeos de Valentía."
+      "resumen": "La caída de esta miniatura no obliga a los aliados a realizar Chequeos de Valentía.",
+      "detalles": "Efectos: Cuando este Personaje queda Noqueado, los Personajes aliados no necesitan realizar Chequeos de Valentía."
     },
     "Magia de Sangre y Sacrificio / Summoner & Sacrifice": {
-      "resumen": "Invocación de criaturas de madera mediante ofrendas de vida.",
-      "detalles": "Efectos: Los Druidas invocan Woodfiends y Briarbeasts sacrificando HP propio o noqueando unidades aliadas de apoyo."
+      "resumen": "Permite invocar aliados del bosque e infligir daño a aliados para potenciar acciones.",
+      "detalles": "Efectos: Permite invocar aliados del bosque (como Lichenhawk o Woodfiend) mediante Hazañas Medias. Además, el Personaje puede infligir D3 de daño a un aliado en contacto de peana para ganar +2 AP o +2 al Power de un Ataque o Hechizo."
     },
     "Pactos Arcanos / Fae Beings": {
       "resumen": "Lazos milenarios con los magos y las fuerzas de la naturaleza.",
       "detalles": "Efectos: Puedes reclutar personajes de las facciones Wizards y Dark Lords."
     },
     "Los Colegios de Mt Orion / Colleges of Mt Orion": {
-      "resumen": "Especialización elemental entre los seis Colegios Mágicos.",
-      "detalles": "Efectos: Elige la escuela mágica antes de la partida (Crimson, Sapphire, Emerald, Ochre, Bronze, Opal) para acceder a su saber exclusivo."
+      "resumen": "Estructura la magia de la facción Magos en 6 escuelas elementales distintas.",
+      "detalles": "Efectos: Al crear tu Banda de Magos, elige uno de los 6 Colegios (Carmesí, Zafiro, Esmeralda, Ocre, Bronce u Ópalo). El Mago y sus Aprendices obtienen acceso automático al Saber mágico completo de dicho Colegio."
     },
     "Entidades de Magia / Thing of Magic": {
-      "resumen": "Constructos y duendes arcanos traídos a la vida por los magos.",
-      "detalles": "Efectos: No se despliegan al inicio. Se invocan en mesa mediante el hechizo Conjure Sprites. Si caen KO, pueden reconjurarse la ronda siguiente."
+      "resumen": "La miniatura no se despliega inicialmente y debe ser Invocada mediante Hechizos.",
+      "detalles": "Efectos: Los Personajes con esta habilidad no se despliegan en el tablero al inicio del juego. Un Mago debe invocarlos mediante el Hechizo Conjurar Sprites (Conjure Sprites). Si son Noqueados, pueden ser Invocados de nuevo en la siguiente Ronda."
     },
     "Dar Órdenes / Make Orders": {
-      "resumen": "Permite al personaje emitir las órdenes de su facción (regla Make/Take Orders).",
-      "detalles": "Make Orders is a Trait listed on a Character's Stat Profile under Traits & Equipment. It allows the Character to issue commands using the faction-specific Make/Take Orders rule. (Note: An Imperial Trooper may also gain this trait if equipped with Sergeant’s Chevrons)."
+      "resumen": "Permite emitir órdenes tácticas a aliados con Take Orders a 12\" o menos tras una Hazaña Fácil.",
+      "detalles": "Efectos: Tras superar una Hazaña Fácil, el Personaje puede emitir una orden a los aliados con el Rasgo Take Orders a 12\" o menos. Al emitirla, la Activación del emisor finaliza e inmediatamente se activan las tropas receptoras."
     },
     "Recibir Órdenes / Take Orders": {
-      "resumen": "Permite al personaje recibir las órdenes emitidas por un personaje con Make Orders.",
-      "detalles": "Take Orders is a Trait listed on a Character's Stat Profile under Traits & Equipment that enables the Character to receive orders issued by a Character with Make Orders."
+      "resumen": "Permite a la miniatura recibir y ejecutar órdenes tácticas emitidas por un oficial.",
+      "detalles": "Efectos: Habilita a la miniatura para recibir y ejecutar órdenes emitidas por un Personaje con el Rasgo Make Orders a 12\" o menos."
     },
     "Ánimo Entusiasta / Rousing Cheer": {
-      "resumen": "Aura de valentía del Sheriff para inspirar a la milicia.",
-      "detalles": "Efectos: Todos los aliados con Take Orders a 8\" o menos utilizan la Valentía del Sheriff (Valor 9)."
+      "resumen": "Otorga Ventaja en Chequeos de Valentía a los aliados a 8\" o menos.",
+      "detalles": "Efectos: Todos los Personajes aliados a 8\" o menos del Sheriff realizan los Chequeos de Valentía con Ventaja."
     },
     "Guardaespaldas / Bodyguard": {
-      "resumen": "Protección para interceptar ataques dirigidos al Comandante.",
-      "detalles": "Efectos: Si está en contacto de peana con un Comandante aliado, puede redirigir a sí mismo cualquier impacto exitoso sufrido por el Comandante."
+      "resumen": "Permite interceptar Ataques dirigidos a un Comandante aliado a 2\" o menos.",
+      "detalles": "Efectos: Si un Comandante aliado a 2\" o menos es objetivo de un Ataque, este Personaje puede intentar una Hazaña Fácil para convertirse en el nuevo objetivo del Ataque."
     },
     "Tripulación y Carga Aleatoria / Crew & Random Payload": {
-      "resumen": "Catapulta que dispara proyectiles impredecibles con apoyo de la milicia.",
-      "detalles": "Efectos: La milicia en contacto puede donar AP. Tira 1D6 para el efecto del proyectil (1: Tripulación enviada, 2: Verduras/Terreno difícil, 3: Cuchillos/Ignora armadura, 4: Amigos de granja/Área, 5: Piedra/Power 9, 6: Brebaje explosivo/Prone en área)."
+      "resumen": "Determina el comportamiento y munición aleatoria del cañón de artillería.",
+      "detalles": "Efectos: Requiere 2 miembros de dotación para operar a pleno rendimiento. Al disparar, tira un D6 para determinar el tipo de munición: explosiva, metralla o proyectil sólido."
     },
     "Liderar desde la Vanguardia / Lead from the Front": {
-      "resumen": "Inspiración marcial del Capitán Imperial.",
-      "detalles": "Efectos: Si el Capitán está en combate melé, los aliados a 6\" ganan +1 al Poder (Power) de sus ataques."
+      "resumen": "Otorga +1 AP a los aliados en la misma Activación si el líder carga en combate.",
+      "detalles": "Efectos: Si el Comandante realiza un movimiento de Carga y entra en contacto de peana con un enemigo, todos los aliados que se activen junto a él ganan +1 AP durante esa Activación."
     },
     "Armadura Pesada / Heavy Armour": {
-      "resumen": "Coraza metálica de placas imperiales.",
-      "detalles": "Efectos: Otorga Valor de Armadura 1 automático contra todos los impactos normales."
+      "resumen": "Otorga +2 a la Armadura y aplica penalización a las tiradas de Leg It.",
+      "detalles": "Efectos: El Personaje obtiene +2 de Armadura. Las tiradas de Leg It sufren +1 de dificultad. No es acumulable con otras armaduras."
     },
     "Maestro de la Pólvora / Gunpowder Master": {
-      "resumen": "Mantenimiento y recarga experta de armas de fuego.",
-      "detalles": "Efectos: Permite a los aliados a 6\" repetir tiradas de ataque pifiadas con armas de pólvora (Arquebus)."
+      "resumen": "Permite Repetir tirada en disparos fallidos con armas de pólvora o arcloque.",
+      "detalles": "Efectos: El Personaje puede Repetir tirada en cualquier disparo fallido realizado con armas de pólvora o arcloque."
     },
     "Constructo Autómata / Tinkered Construct": {
-      "resumen": "Mecanismo autómata sin sentimientos.",
-      "detalles": "Efectos: Inmune a chequeos de Valentía y efectos de terror. Si sufre un impacto crítico, pierde 1 AP en su siguiente activación."
+      "resumen": "Un autómata mecánico inmune a chequeos de moral que puede ser reparado por un Mago.",
+      "detalles": "Efectos: Pasa automáticamente todos los Chequeos de Valentía. Si un Mago o Alquimista realiza una Hazaña Media en contacto de peana, el constructo recupera D3 HP."
     },
     "Huesos / Bones": {
-      "resumen": "Estructura ósea mágica resistente a flechas.",
-      "detalles": "Efectos: Hazaña Fácil para curar D3 HP (pull self together). Cobertura permanente contra proyectiles."
+      "resumen": "Permite curarse D3 HP mediante una Hazaña Fácil y otorga Cobertura constante contra Ataques a distancia.",
+      "detalles": "Efectos: Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para recolocarse sus huesos y recuperar D3 HP (Puntos de Vida). Además, cuentan como en Cobertura contra cualquier Ataque a distancia."
     },
     "Horda Enterrada / Buried Horde": {
-      "resumen": "Armamento ancestral conservado en los sarcófagos.",
-      "detalles": "Efectos: Todo el equipo de la Armería Común equipado a un Tomb Guardian tiene un 25% de descuento en GP (redondeado hacia arriba)."
+      "resumen": "Descuento del 25% en el coste en GP de objetos de la Armería Común para el Tomb Guardian.",
+      "detalles": "Efectos: Todo el Equipo de la Armería Común equipado en un Guardián de la Tumba (Tomb Guardian) tiene un descuento del -25% GP."
     },
     "Espíritu de la Reliquia / Spirit of the Relic": {
-      "resumen": "Alma atada a un objeto sagrado que ataca a los profanadores.",
-      "detalles": "Efectos: Ataca automáticamente con aullidos de área (Power 6 a 4\") a cualquier enemigo que intente acercarse o tocar la reliquia."
+      "resumen": "Regla especial que vincula la existencia del espíritu espectral a una reliquia sagrada.",
+      "detalles": "Efectos: El Espíritu de la Reliquia flota alrededor de la reliquia sagrada de la Banda. No puede alejarse a más de 8\" de la reliquia o de la miniatura que la porta."
     },
     "Intimidador / Intimidating": {
-      "resumen": "Estatura e imponencia física que infunde respeto.",
-      "detalles": "Efectos: Permite a los aliados Diminutive a 6\" repetir 1 fallo de ataque por ronda y previene pánico al caer las tropas pequeñas."
+      "resumen": "Obliga a los enemigos cercanos a Repetir tirada en Chequeos de Valentía exitosos.",
+      "detalles": "Efectos: Los Personajes enemigos a 3\" o menos deben Repetir tirada en cualquier Chequeo de Valentía que hayan superado con éxito."
     },
     "¡A por Ellos! / Go Get’Em!": {
-      "resumen": "Impulso de las alimañas cuando su líder las empuja a la carga.",
-      "detalles": "Efectos: Si el Verman está a 6\" de un personaje Intimidating, puede repetir la tirada de Leg It si el objetivo es cargar a un enemigo."
+      "resumen": "Permite azuzar a una Bestia aliada a 6\" para otorgarle movimiento adicional.",
+      "detalles": "Efectos: Tras superar una Hazaña Fácil, el Cazador puede otorgar +2\" de movimiento a una Bestia aliada situada a 6\" o menos."
     },
     "Baladas del Clan / Ballads of the Beastfolk": {
-      "resumen": "Música estridente tocada con instrumentos estrafalarios.",
-      "detalles": "Efectos: Una vez por activación, tira 1D6: (1-2) Tooting: +1 Movimiento a 6\"; (3-4) Honking: cura 1 HP a aliados a 6\"; (5-6) Blaring: +1 Power a ataques a 6\"."
+      "resumen": "Canciones de guerra del Bardo que otorgan bonificaciones a los aliados a 6\".",
+      "detalles": "Efectos: El Bardo puede cantar una balada por Activación: Canción de Guerra (+1 al Power en melé a aliados a 6\") o Himno de Resistencia (superar Chequeos de Valentía automáticamente a 6\")."
     },
     "Esencia Ígnea / Fiery Essence": {
-      "resumen": "Criaturas creadas a partir de la propia fuerza vital del Señor Oscuro.",
-      "detalles": "Efectos: No se despliegan al inicio. El Señor Oscuro los invoca sacrificando 2 HP y reduciendo su HP máximo en 2."
+      "resumen": "Los esbirros Underlings son Invocados por el Dark Lord sacrificando 2 HP y 2 HP máximos.",
+      "detalles": "Efectos: Los Underlings no se despliegan al inicio. El Dark Lord puede Invocarlos durante su Activación sacrificando 2 HP y reduciendo su HP máximo en 2 por cada esbirro traído al juego."
     },
     "Destrucción Abrasadora / Blazing Demise": {
-      "resumen": "Autodestrucción mágica para calcinar a los enemigos cercanos.",
-      "detalles": "Efectos: Ataque de Power 6 a todos los personajes a 2\". El Underling se noquea y devuelve 1 HP máximo al Señor Oscuro."
+      "resumen": "El esbirro Underling se inmola en una explosión de fuego que daña a todos a 2\".",
+      "detalles": "Efectos: (2 AP) Ataque de área a 2\" con Power 6 (+1 Power contra objetivos Inflamables). Tras ejecutar el ataque, el Underling queda Noqueado automáticamente."
     },
     "Capataz / Slavedriver": {
-      "resumen": "Castigo físico para mantener la disciplina hobgoblin.",
-      "detalles": "Efectos: Resta 1 HP a un Hobgoblin a 6\" para ignorar un Chequeo de Valentía fallido."
+      "resumen": "Permite azotar a un Hobgoblin aliado a 4\" para otorgarle +1 AP a costa de 1 HP.",
+      "detalles": "Efectos: El Hobgoblin Honcho puede infligir 1 daño a un Hobgoblin aliado a 4\" o menos para otorgarle +1 AP inmediato en su siguiente Activación."
     },
     "Portadores de Escudo / Shield Carriers": {
-      "resumen": "Escolta de esbirros que cargan a hombros al gran líder.",
-      "detalles": "Efectos: Otorga +8 HP extra, +1 a la Armadura y cambia la peana a 50mm."
+      "resumen": "Formación de escudos que otorga +1 de Armadura contra disparos a los aliados adyacentes.",
+      "detalles": "Efectos: Mientras estén en contacto de peana entre sí, los portadores de escudo otorgan +1 de Armadura contra Ataques a distancia a todas las miniaturas de la formación."
     },
     "Herramientas de Excavación / Burrowing Tools": {
-      "resumen": "Capacidad de cavar nuevas entradas a la red subterránea.",
-      "detalles": "Efectos: Con Hazaña Media, coloca un token de Gremlin Burrow en terreno abierto en contacto de peana."
+      "resumen": "Permite excavar túneles en terreno blando para atravesar escenografía.",
+      "detalles": "Efectos: Permite al Personaje realizar una Hazaña Fácil para excavar bajo tierra, ignorando elementos de terreno y saliendo a la superficie en cualquier punto a 6\"."
     },
     "Lanzamiento de Boglin / Hurl Boglin": {
-      "resumen": "Agarra a un Boglin aliado y lo lanza violentamente contra el enemigo.",
-      "detalles": "Efectos: Lanza un Boglin a 8\" infligiendo D6 Hits de Power 6 al objetivo y dejando al Boglin Prone."
+      "resumen": "Permite coger y lanzar a un Boglin aliado en contacto de peana a una distancia de hasta 8\".",
+      "detalles": "Efectos: Un Brute u Ourk Chieftain puede intentar una Hazaña Fácil para coger a un Boglin aliado en contacto de peana y lanzarlo hasta a 8\". El objetivo alcanzado sufre D6 impactos y queda Tumbado."
     },
     "Frenesí de Brebaje / Booze Frenzy": {
-      "resumen": "Ataque devastador bajo los efectos de brebajes del pantano.",
-      "detalles": "Efectos: Ataque de Power 9 por 2 AP. Tras ejecutar el ataque, el Brewzerker cae automáticamente en estado Prone."
+      "resumen": "Determina brebajes aleatorios al inicio de la Activación del Brewzerker.",
+      "detalles": "Efectos: Tira un D6 al inicio de la Activación: 1 (-2 AP), 2 (+2 Movimiento, +3 Power), 3 (cura D3 HP), 4 (Repetir tirada por Hazaña), 5 (Ataque de aliento de fuego), 6 (frenesí total)."
     },
     "Resucitado / Risen": {
-      "resumen": "Cadáver animado por artes nigrománticas.",
-      "detalles": "Efectos: Permite ser objetivo de las habilidades y hechizos de resurrección de los Harbingers."
+      "resumen": "Permite ser resucitado en combate por un personaje con el Rasgo Raiser of the Dead.",
+      "detalles": "Efectos: Indica que la miniatura es un no-muerto reanimado que puede ser traído de vuelta al juego por un Raiser of the Dead a 6\" cuando queda Noqueado."
     },
     "Señuelo de la Luz / Lure of the Light": {
-      "resumen": "Luz hipnótica que atrae a las víctimas hacia el peligro.",
-      "detalles": "Efectos: Enemigos a 8\" que se activen deben pasar un Chequeo de Valentía o gastar su movimiento dirigiéndose hacia ella."
+      "resumen": "Atrae a los enemigos cercanos hacia la luz mágica del espectro.",
+      "detalles": "Efectos: Los Personajes enemigos a 6\" o menos que deseen moverse en dirección opuesta al Will o'the Wisp deben superar un Chequeo de Valentía."
     },
     "Mirada Vampírica / Vampiric Glare": {
-      "resumen": "Parálisis hipnótica fija en los ojos de la víctima.",
-      "detalles": "Efectos: Un enemigo a 6\" debe superar Valentía o no podrá realizar ningún movimiento durante el resto de la ronda."
+      "resumen": "Paraliza a un enemigo a 6\" tras fallar un Chequeo de Valentía.",
+      "detalles": "Efectos: El objetivo a 6\" o menos debe superar un Chequeo de Valentía o quedará paralizado, siendo incapaz de Moverse o Atacar durante su siguiente Activación."
     },
     "Garras Desgarradoras / Raking Claws": {
-      "resumen": "Zarpazos letales capaces de despedazar armaduras pesadas.",
-      "detalles": "Efectos: Ataque de Power 7. Los impactos críticos ignoran y destruyen 1 punto de Armadura del objetivo."
+      "resumen": "Un Impacto Crítico en combate cuerpo a cuerpo ignora y rompe 1 punto de Armadura.",
+      "detalles": "Efectos: Ataque cuerpo a cuerpo con Power 7. Un Impacto Crítico ignora y rompe permanentemente 1 punto de Armadura del objetivo."
     },
     "Ágil / Agile": {
-      "resumen": "Gracia sobrehumana para desplazarse por el follaje denso.",
-      "detalles": "Efectos: Ignora todas las penalizaciones por terreno difícil en el movimiento y tiradas de Leg It."
+      "resumen": "Otorga bonificaciones a las tiradas de Leg It e ignora penalizaciones de terreno difícil.",
+      "detalles": "Efectos: El Personaje ignora el penalizador de movimiento por terreno difícil y puede Repetir tirada en cualquier intento fallido de Leg It."
     },
     "Ráfaga de Hojas / Flurry of Blades": {
-      "resumen": "Velocidad de estocadas relámpago con espadas de maderaoscura.",
-      "detalles": "Efectos: Ataque de Power 7. Cada impacto crítico permite tirar 1 dado de ataque extra."
+      "resumen": "Cada Impacto Crítico en combate cuerpo a cuerpo permite tirar un dado D6 adicional de ataque.",
+      "detalles": "Efectos: Al realizar Ataques cuerpo a cuerpo, cada Impacto Crítico obtenido permite lanzar un dado D6 adicional para impactar."
     },
     "Mago / Mage": {
-      "resumen": "Dominio de las corrientes arcanas y robo de cartas del ArcDeck.",
-      "detalles": "Efectos: Permite robar cartas del ArcDeck gastando AP para lanzar hechizos de su escuela."
+      "resumen": "Habilita al personaje para lanzar Hechizos de su Saber de facción o Colegio.",
+      "detalles": "Efectos: El Personaje pertenece a la clase Mago y puede gastar sus AP para Lanzar Hechizos del Saber mágico de su facción o Colegio robando cartas del ArcDeck."
     },
     "Armadura Ligera Innatas / Light Armour (Gratis)": {
-      "resumen": "La unidad viene equipada de serie con Armadura Ligera sin coste adicional de GP.",
-      "detalles": "Efectos: Otorga +1 al Valor de Armadura de la miniatura desde el inicio de la partida. No requiere gasto de GP en la Armería Común."
+      "resumen": "Otorga +1 de Armadura como equipo de serie sin coste adicional de GP.",
+      "detalles": "Efectos: El Personaje cuenta de serie con Armadura Ligera, obteniendo +1 de Armadura. No es acumulable con otras armaduras."
     },
     "Armadura Pesada Innata / Heavy Armour (Gratis)": {
-      "resumen": "La Guardia del Pueblo está equipada de serie con placas de armadura pesada.",
-      "detalles": "Efectos: Otorga +2 al Valor de Armadura de la miniatura desde el inicio. Las tiradas de Leg It sufren +1 a la dificultad."
+      "resumen": "Otorga +2 de Armadura como equipo de serie sin coste adicional de GP.",
+      "detalles": "Efectos: El Personaje cuenta de serie con Armadura Pesada, obteniendo +2 de Armadura y +1 de dificultad en tiradas de Leg It."
     },
     "Cofre Mecánico / Contraption Trunk": {
-      "resumen": "Baúl autómata con patas de latón impulsadas por Arcanita que transporta los inventos del Tinkerer.",
-      "detalles": "Efectos: El Cofre Mecánico es un personaje seguidor gratis en peana de 30mm. Se mueve hasta 6\" cada vez que se activa el Tinkerer y no puede ser noqueado."
+      "resumen": "Almacén de inventos del Tinkerer que genera efectos arcanos en combate.",
+      "detalles": "Efectos: Permite al Tinkerer acceder a su baúl de inventos para Lanzar Hechizos de la lista Tinkerer's Arcane Contraptions consumiendo sus AP."
     },
     "Lanza Arcana Innata / Arclance": {
-      "resumen": "Lanza tecnológica que canaliza descargas de Arcanita.",
-      "detalles": "Efectos: Cuenta como una Lanza de serie. El jugador puede gastar 1 Ficha de Arcanita para añadir +2 al Power de todos sus ataques en esa activación, sufriendo D3 Hits de rebote."
+      "resumen": "Arma de carga que inflige impactos adicionales de Power 8 al cargar a caballo.",
+      "detalles": "Efectos: Ataque cuerpo a cuerpo de Power 7 (+2 al Power durante una Activación en la que el Personaje haya realizado un movimiento de Carga Montado)."
     },
     "Armadura Encantada Innata / Enchanted Armour": {
-      "resumen": "Armadura mágica autómata que protege a los Magos de Mt Orion.",
-      "detalles": "Efectos: Otorga +2 al Valor de Armadura gratis y supera automáticamente los chequeos de Valentía. Al ser noqueado, deja caer un objeto de Heavy Armour."
+      "resumen": "Otorga +2 de Armadura y permite Repetir tirada en salvaciones contra Hechizos.",
+      "detalles": "Efectos: El Personaje obtiene +2 de Armadura y puede Repetir tirada en cualquier tirada de defensa fallida contra Hechizos enemigos."
     },
     "Diminuto / Diminutive": {
-      "resumen": "Criaturas de tamaño reducido que no causan impacto moral al caer KO.",
-      "detalles": "Efectos: Cuando un personaje con este rasgo queda KO, los aliados cercanos (especialmente los Intimidadores) no realizan chequeos de Valentía."
+      "resumen": "Miniatura de tamaño reducido que puede ser Lanzada por aliados más grandes.",
+      "detalles": "Efectos: Indica que el Personaje es de tamaño pequeño. Puede ser objetivo de la regla Hurl por parte de aliados o monstruos de mayor tamaño."
     },
     "Temible / Fearsome": {
-      "resumen": "Monstruos o entidades pavorosas que provocan pánico.",
-      "detalles": "Efectos: Los enemigos que deseen trabarse en combate o activarse a corta distancia deben superar un Chequeo de Valentía."
+      "resumen": "Obliga a los enemigos a superar un Chequeo de Valentía antes de entrar en contacto de peana.",
+      "detalles": "Efectos: Cualquier Personaje enemigo que desee entrar en contacto de peana con este Personaje debe superar primero un Chequeo de Valentía."
     },
     "Cazador de Manada / Pack Hunter": {
-      "resumen": "Tácticas de acoso en grupo para derribar presas más grandes.",
-      "detalles": "Efectos: Otorga +1 al Power o ventaja en los ataques si hay otros aliados con el mismo rasgo trabados con la misma víctima."
+      "resumen": "Otorga +1 al Power en melé por cada otro cazador aliado en el mismo combate.",
+      "detalles": "Efectos: El Personaje obtiene +1 al Power en sus Ataques cuerpo a cuerpo por cada otro Personaje aliado con el Rasgo Pack Hunter que esté en contacto de peana con el mismo objetivo."
     },
     "Activación Dividida / Split Activation": {
       "resumen": "Bestias o criaturas gigantes que pueden actuar en múltiples momentos del turno.",
@@ -5436,8 +5436,8 @@ const compendioArcWorlde = {
       "detalles": "Efectos: Si está en contacto de peana con un Vampiro aliado, el Manservant puede interceptar y recibir los ataques dirigidos al Vampiro o donarle sus AP no utilizados."
     },
     "Resurrección / Raiser of the Dead": {
-      "resumen": "Capacidad nigromántica del Harbinger para levantar bandidos caídos.",
-      "detalles": "Efectos: Mediante una Hazaña Fácil, devuelve al combate a personajes No-Muertos (o Carrion Rats con Cursed Pipes) que hayan sido noqueados en la batalla."
+      "resumen": "Permite resucitar a personajes aliados Noqueados a 6\" o menos con el 50% de sus HP.",
+      "detalles": "Efectos: Un Personaje con este Rasgo puede intentar resucitar a Personajes aliados Noqueados con el Rasgo Resucitado (Risen) a 6\" mediante una Hazaña (Media para Unidades/Bestias, Difícil para Élites/Irregulares, Legendaria para Pesadas). Si tiene éxito, regresa al juego con el 50% de sus HP iniciales."
     },
     "Señor de los Forajidos / Outlaw Lord": {
       "resumen": "Liderazgo de los Harbingers sobre bandas de proscritos no-muertos.",
