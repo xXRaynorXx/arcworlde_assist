@@ -68,16 +68,17 @@ function construirSeccionesFacciones() {
         return out.sort((a, b) => a.nombre.localeCompare(b.nombre));
     };
     const saberesDe = (f) => (f.saberes_magicos || []).reduce((all, sab) => {
-        // En castellano se traducen los nombres del saber y de sus hechizos (los textos siguen en inglés hasta tener su traducción fiel)
+        // En castellano: nombres, reglas del saber y efectos de hechizos (datos_traducciones_es.js)
         const ts = window.AWCompendio ? AWCompendio.trad('saberes', AWCompendio.enKey(sab.saber)) : null;
         const nSab = ts && ts.nombre ? ts.nombre : sab.saber;
-        if (sab.reglas_saber) all.push({ nombre: nSab, etiqueta: 'Saber mágico', detalles: sab.reglas_saber });
+        const alcanceES = (a) => (ts ? String(a).replace(/^Self$/, 'Personal').replace(/^Cone\b/, 'Cono').replace(/^Line\b/, 'Línea') : a);
+        if (sab.reglas_saber) all.push({ nombre: nSab, etiqueta: 'Saber mágico', detalles: (ts && ts.reglas) || sab.reglas_saber });
         (sab.hechizos || []).forEach((h) => {
-            const nH = ts && ts.hechizos && ts.hechizos[AWCompendio.enKey(h.nombre)];
+            const th = ts && ts.hechizos && ts.hechizos[AWCompendio.enKey(h.nombre)];
             const card = {
-                nombre: nH || h.nombre,
-                etiqueta: nSab + ' · Exige ' + h.exige + (h.alcance ? ' · ' + h.alcance : ''),
-                detalles: h.efecto
+                nombre: (th && th.nombre) || h.nombre,
+                etiqueta: nSab + ' · Exige ' + h.exige + (h.alcance ? ' · ' + alcanceES(h.alcance) : ''),
+                detalles: (th && th.efecto) || h.efecto
             };
             if (h.ap != null) card.coste_ap = h.ap;
             all.push(card);

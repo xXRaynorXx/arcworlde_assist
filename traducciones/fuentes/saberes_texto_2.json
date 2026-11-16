@@ -1,0 +1,72 @@
+[
+  {
+    "saber": "Lore of the Damned",
+    "reglas_saber_es": "Muchos No-Muertos se mantienen vivos por el poder de su propia voluntad, con sus corazones villanos aferrados a la existencia más allá de la tumba. Algunos pueden canalizar ese poder en viles magias, usando la energía arcana para fomentar sus propios fines perversos.",
+    "hechizos": [
+      { "nombre": "Deathly Chill", "efecto_es": "Los vivos empiezan a sentir el frío de la tumba aferrado a sus mismísimos huesos, y sus miembros se vuelven pesados y torpes. Elige un Personaje enemigo a 12\" o menos del lanzador. Sus AP se reducen en D3 en su siguiente Activación." },
+      { "nombre": "Bonegnawer", "efecto_es": "Una Rata de Carroña que escarba es devuelta a la no-vida y se lanza contra el enemigo. Coloca una Rata de Carroña gratuita a 6\" o menos del lanzador. Puede Activarse esta Ronda; sin embargo, si queda Noqueada no puede ser Alzada." },
+      { "nombre": "Soul Drain", "efecto_es": "La víctima siente cómo su esencia vital es arrancada de su cuerpo, y sus almas alimentan a los hambrientos Muertos. El Personaje objetivo sufre 3 Impactos que ignoran la Armadura. Por cada HP que pierda el objetivo, el lanzador recupera 1 HP. Este Hechizo puede lanzarse sobre un Personaje aliado." },
+      { "nombre": "Mass Resurrection", "efecto_es": "Alza hasta tres Unidades o Bestias en cualquier lugar del tablero." }
+    ]
+  },
+  {
+    "saber": "Lore of the Darkwood",
+    "reglas_saber_es": "La magia de los Elfos está inextricablemente ligada a los bosques oscuros en los que habitan. Los misteriosos Druidas extraen la energía vital de sus víctimas sacrificiales y usan su poder para doblegar la madera a su voluntad.",
+    "hechizos": [
+      { "nombre": "Tangleweed", "efecto_es": "Enredaderas espinosas brotan de la tierra y atrapan a todos los que tienen la mala suerte de estar a su alcance. Todos los Personajes a 6\" o menos del lanzador ven reducidos en 2\" su Movimiento y sus tiradas de Leg It hasta el siguiente Hechizo del lanzador." },
+      { "nombre": "Spirit of the Forest", "efecto_es": "La vitalidad de sus víctimas llena al Druida de un vigor antinatural, y sus ojos brillan con el poder del bosque oscuro. Un Personaje aliado a 12\" o menos gana +2 AP en su siguiente Activación. Mientras esté bajo los efectos de este Hechizo, el objetivo no puede recibir ninguna otra bonificación de Hechizos." },
+      { "nombre": "Ominous Whispers", "efecto_es": "Con una palabra siseada en una lengua antinatural, los enemigos de los Elfos sienten sus mentes torturadas por la risa y la malicia de los Fae. Un Personaje enemigo a 12\" o menos debe superar un Chequeo de Valentía. Si falla, pierde 3 HP además de los efectos normales del fallo. Todos los modelos enemigos a 3\" o menos del objetivo original, hayan superado o no su Chequeo de Valentía, deben realizar también Chequeos de Valentía." },
+      { "nombre": "The Merciless Wood", "efecto_es": "Power 4. Reglas especiales: si algún Personaje queda Noqueado por los efectos de este hechizo, es sustituido por un Woodfiend. Este Personaje es controlado por el jugador Elfo con normalidad y puede Activarse en la siguiente Ronda." }
+    ]
+  },
+  {
+    "saber": "Lore of Delusion",
+    "reglas_saber_es": "Los Dreameaters Ourk son poderosos Magos de los que se dice que pueden retorcer la mente y canalizar el poder de las pesadillas. Envueltos en zarcillos de humo empalagoso y con los ojos brillando con un vigor desconocido, cacarean con malicia mientras tejen sus retorcidas magias.",
+    "hechizos": [
+      { "nombre": "False Foe", "efecto_es": "Una niebla enfermiza envuelve al objetivo, que ve enemigos que quizá no estén realmente allí. Alcance 8\". Durante el resto de la Ronda, el objetivo debe superar una Hazaña Fácil antes de poder realizar cualquier Ataque." },
+      { "nombre": "Stupor", "efecto_es": "El Dreameater invoca un denso miasma a su alrededor, y quienes lo respiran sucumben pronto a su influencia soporífera. Todos los Personajes a 3\" o menos del lanzador caen en un sueño profundo. Cuentan como Tumbados hasta que sean objetivo de un Ataque o Hechizo, o hayan superado una Hazaña Media en su siguiente Activación. Una vez despiertos, pueden Activarse con normalidad." },
+      { "nombre": "Dream Eater", "efecto_es": "Este Dreameater se da un festín con los sueños de los demás y consume su poder con una glotonería desenfrenada. Alcance 2\". Este Hechizo solo puede dirigirse contra quienes estén bajo los efectos del Hechizo Stupor. El objetivo pierde D3 AP en su siguiente Activación, y estos se entregan al lanzador para que los gaste en su Activación actual. Además, este Hechizo no despierta al objetivo." },
+      { "nombre": "Inside your Mind", "efecto_es": "Los zarcillos de niebla verde se filtran en la mente del objetivo, y el lanzador puede controlarlo como a una marioneta viviente. Elige un objetivo con peana de 30 mm o 40 mm a 4\" o menos del lanzador. La Activación del lanzador termina de inmediato y el objetivo se Activa, aunque ya se haya Activado en esta Ronda. El jugador Ourk puede gastar 3 AP controlando al objetivo como desee. Una vez gastados los 3 AP, la partida continúa con normalidad." }
+    ]
+  },
+  {
+    "saber": "Lore of Mischief",
+    "reglas_saber_es": "A los Gremlins de las Regiones Infernales les importa poco el conocimiento arcano. En cambio, sus magos están bendecidos con una habilidad innata para canalizar su amor por las travesuras en poder mágico.",
+    "hechizos": [
+      { "nombre": "Chittering Bugs", "efecto_es": "El Chamán invoca un torrente de bichos que trepan por todo su enemigo, para deleite de los Gremlins. Elige un Personaje enemigo a 8\" o menos del lanzador. En su siguiente Activación no puede realizar ninguna Acción de movimiento, pues está ocupado frenéticamente en espantar los bichos." },
+      { "nombre": "Slip and Slide", "efecto_es": "Con un giro de su bastón, el Chamán cubre las botas de sus enemigos con una sustancia resbaladiza mágica. Las payasadas que siguen son muy divertidas. Este Hechizo afecta a cualquier Personaje enemigo que intente una tirada de Leg It a 8\" o menos del lanzador. Si falla, en lugar de quedar Tumbado se desliza el número obtenido en la tirada en la dirección opuesta a la de su movimiento previsto. Este efecto dura hasta el final de la Ronda." },
+      { "nombre": "Peek-a-Boo", "efecto_es": "Cacareando como un maníaco, la magia del Chamán hace que un aliado parezca aparecer y desaparecer, para frustración del enemigo. Elige un Personaje aliado como objetivo de este Hechizo. Este Personaje obtiene temporalmente la regla Activación Dividida (Split Activation), si no la tenía ya. Hasta que haya gastado su último AP de la Ronda, cada vez que termine su Activación retíralo del tablero. Colócalo de nuevo en el mismo lugar cuando se vuelva a Activar." },
+      { "nombre": "Great Green Explosion", "efecto_es": "(21+) Todos los Personajes a 6\" o menos del lanzador sufren 8 Impactos, más Impactos adicionales por cada 1 que la carta supere 21. Si es Sobrepotenciado, además de perder D6 HP, el Chamán pierde 1 HP por cada 1 que la carta supere 21." }
+    ]
+  },
+  {
+    "saber": "The Lore of The Crimson College",
+    "reglas_saber_es": "Maestros en el arte de manipular el fuego, los Magos Carmesí son apasionados y rápidos para enfurecerse por el más mínimo agravio percibido. Más de una taberna de Mildaark ha sido incendiada por un Mago furioso después de que un rufián lo mirara mal. Los Sprites conjurados por hechizos del Colegio Carmesí tienen +1 al Power en todos sus Ataques, +2 si el Objetivo es Inflamable.",
+    "hechizos": [
+      { "nombre": "Conjure Crimson Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de llama parpadeante. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo tienen +1 al Power en todos sus Ataques, +2 si el Objetivo es Inflamable. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP." },
+      { "nombre": "Sword of Embers", "efecto_es": "Una hoja de llama pura aparece en la mano del lanzador. Todos los Ataques cuerpo a cuerpo del Personaje tienen +3 al Power, y los Personajes Inflamables deben Repetir tirada en todas sus Defensas exitosas contra esta arma. La Sword of Embers no puede darse ni quitarse y permanece activa hasta que el Personaje lance otro Hechizo. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP." },
+      { "nombre": "Fireball", "efecto_es": "Un hechizo clásico, y uno que cualquier Mago Carmesí que se precie está más que deseoso de usar. (A distancia) Fireball: Power 6. Reglas especiales: ignora la Armadura. Realiza un Ataque Fireball adicional contra cada Personaje en contacto de peana con el objetivo. Los Personajes Inflamables deben Repetir tirada en todas sus Defensas exitosas. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP." },
+      { "nombre": "Flame Blast", "efecto_es": "Con un grito, el cuerpo del Mago emana un muro de fuego que abrasa todo a su alrededor. Todos los Personajes a 4\" o menos del lanzador sufren D6 Heridas. Los Personajes Inflamables tiran 2D6 y se quedan con el valor más alto. Si este Hechizo no se lanza con éxito, el lanzador pierde 1 HP." }
+    ]
+  },
+  {
+    "saber": "The Lore of The Sapphire College",
+    "reglas_saber_es": "Orgullosos y aventureros, los Magos Zafiro estudian los misterios de los océanos, ríos y polos de ArcWorlde. Se los encuentra por todo el globo, navegando hacia aguas inexploradas, calas sin descubrir y yermos helados. Los Sprites conjurados por hechizos del Colegio Zafiro son difíciles de atrapar y pueden Repetir tirada en los intentos fallidos de abandonar el Combate.",
+    "hechizos": [
+      { "nombre": "Conjure Sapphire Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de líquido reluciente. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo son difíciles de atrapar y pueden Repetir tirada en los intentos fallidos de abandonar el Combate." },
+      { "nombre": "Bridge of Ice", "efecto_es": "Una estructura de hielo crepitante se extiende desde las botas del Mago, permitiéndole viajar adonde quiera. El lanzador puede moverse sobre cualquier terreno o Personaje durante el resto de su Activación. Además, el lanzador puede Repetir tirada en cualquier intento fallido de abandonar el contacto de peana con un Personaje enemigo." },
+      { "nombre": "Storm Cloud", "efecto_es": "El Mago maldice a un enemigo para que sea perseguido por una nube de tormenta en miniatura que crepita con rayos. Elige un Personaje enemigo en cualquier lugar del tablero. Cada vez que el Personaje enemigo se Active, sufre D3 Impactos que ignoran la Armadura. Este Hechizo dura hasta que el lanzador intente otro Hechizo o quede Noqueado." },
+      { "nombre": "Tidal Wave", "efecto_es": "Valiéndose de las reservas de agua de las profundidades de la tierra, el mago lanza una gran ola contra sus enemigos. Mide una línea de D6\" desde el lanzador. Cualquier Personaje a 2\" o menos de esta línea sufre 4 Impactos. Si el lanzador está a 3\" o menos de un elemento de terreno de agua, la distancia de la línea aumenta a 2D6 pulgadas." }
+    ]
+  },
+  {
+    "saber": "The Lore of The Emerald College",
+    "reglas_saber_es": "Los Magos Esmeralda son reclusos que prefieren la compañía de las bestias de ArcWorlde a la de otros de su especie. Estos ermitaños errantes estudian el mundo natural, y los lugares salvajes son donde se sienten más en casa. Los Sprites conjurados por hechizos del Colegio Esmeralda se mimetizan con la maleza, por lo que todos los intentos de Dispararles tienen -1.",
+    "hechizos": [
+      { "nombre": "Conjure Emerald Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de pieles y plumas relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo se mimetizan con la maleza, por lo que todos los intentos de Dispararles tienen -1." },
+      { "nombre": "Healing Touch", "efecto_es": "Suaves helechos brotan de las yemas de los dedos del lanzador y alivian las heridas de sus aliados. Un único Personaje a 3\" o menos del lanzador (o el propio lanzador) recupera D6 HP." },
+      { "nombre": "Winged Swarm", "efecto_es": "Un diluvio ensordecedor de aves e insectos voladores enjambra alrededor de los enemigos del lanzador, impidiéndoles ver. Elige un punto del tablero. Cualquier Personaje a 4\" o menos de este punto ve reducidos en 2\" su Movimiento y cualquier tirada de Leg It, y no puede realizar Ataques a distancia. Este Hechizo dura hasta que el lanzador lance otro Hechizo o quede Noqueado." },
+      { "nombre": "Soul of the Beast", "efecto_es": "El lanzador extiende la mano hacia el alma de una criatura salvaje y se hace amigo de ella por un breve tiempo. El jugador puede Activar una Bestia, Monstruo o Titán enemigo a 8\" o menos del lanzador y gastar 3 AP como desee. Si la Bestia/Monstruo/Titán ha gastado todos sus AP en esta Ronda, no puede ser objetivo de este Hechizo." }
+    ]
+  }
+]

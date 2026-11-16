@@ -1,0 +1,51 @@
+[
+  {
+    "saber": "The Lore of The Ochre College",
+    "reglas_saber_es": "Los Magos Ocre son gente sólida y obstinada que excava en la tierra misma para estudiar sus secretos. Exploran las cavernas más profundas y las cuevas más oscuras, y tienen la fuerza y la destreza mágica para derrotar a cualquier cosa que encuentren morando allí abajo. Los Sprites conjurados por hechizos del Colegio Ocre son robustos y tienen 1 de Armadura.",
+    "hechizos": [
+      { "nombre": "Conjure Ochre Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de menas preciosas relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo son robustos y tienen 1 de Armadura." },
+      { "nombre": "Rock Wall", "efecto_es": "El suelo se hincha y se agrieta, y hace brotar un muro de piedra impenetrable. Coloca una barrera de 6\" de largo y hasta 2\" de ancho a 2\" o menos del lanzador. Cuenta como Terreno Infranqueable y permanece hasta el final de la Ronda." },
+      { "nombre": "Stone Armour", "efecto_es": "Las túnicas del lanzador se endurecen y se cristalizan, protegiéndolo de los golpes enemigos. El lanzador tiene Armadura Pesada hasta el final de la Ronda." },
+      { "nombre": "ArcWorlde’s Bounty", "efecto_es": "El propio reino regala sus tesoros al lanzador y a sus aliados. Coloca D3 Fichas de Arcanita en un punto situado como mínimo a 8\" del lanzador." }
+    ]
+  },
+  {
+    "saber": "The Lore of The Bronze College",
+    "reglas_saber_es": "A los Magos de Bronce les encantan la alquimia y la invención de artilugios mecánicos. Sus talleres están repletos del equipo más arcano, y sus expediciones suelen tener por objeto buscar nuevos materiales e ingredientes para sus experimentos. Los Sprites conjurados por hechizos del Colegio de Bronce tienden a repararse solos, por lo que recuperan D3 HP al final de cada Ronda.",
+    "hechizos": [
+      { "nombre": "Conjure Bronze Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de metales relucientes. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo tienden a repararse solos, por lo que recuperan D3 HP al final de cada Ronda." },
+      { "nombre": "Transfiguration", "efecto_es": "Los materiales se mezclan y cambian, haciendo algo nuevo a partir de algo viejo. Un Personaje aliado a 12\" o menos puede optar por cambiar un Objeto o una pieza de Equipo por otro de la armería de su Facción de igual o menor valor en GP." },
+      { "nombre": "Alchemical Blast", "efecto_es": "El Mago lanza un rayo de energía deformante contra su enemigo, que moldea su equipo en formas extrañas. (A distancia) Alchemical Blast: Power 5. Reglas especiales: con un Crítico, una pieza de Equipo u Objeto que lleve el objetivo queda inutilizada hasta la Ronda siguiente a la resolución de este Ataque." },
+      { "nombre": "Avatar of Gold", "efecto_es": "La piel del lanzador reluce y se convierte en oro puro. Mientras esté en esta forma, el lanzador cuenta como si tuviera Armadura Pesada y tiene +2 al Power en cualquiera de sus Ataques cuerpo a cuerpo. Sin embargo, no puede lanzar Hechizos en este estado, que dura hasta el final de la Ronda." }
+    ]
+  },
+  {
+    "saber": "The Lore of The Opal College",
+    "reglas_saber_es": "El más misterioso de los Colegios del Monte Orion; los Magos Ópalo profundizan en los secretos del mundo espiritual. Son seres de otro mundo y distantes, que comulgan con las almas tanto de los vivos como de los muertos. Los Sprites conjurados por hechizos del Colegio Ópalo flotan sobre el suelo y, por tanto, pueden Volar (ver reglas del Bestiario).",
+    "hechizos": [
+      { "nombre": "Conjure Opal Sprites", "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de niebla etérea. Coloca D3 Sprites a 3\" o menos del lanzador. Los Sprites pueden Activarse con normalidad. Los Sprites conjurados por este Hechizo flotan sobre el suelo y, por tanto, pueden Volar (ver reglas del Bestiario)." },
+      { "nombre": "Unnatural Aura", "efecto_es": "El Mago exuda un aura espeluznante que inquieta a todos los que lo rodean. Todos los Personajes enemigos a 6\" o menos deben Repetir tirada en los Chequeos de Valentía superados. Este Hechizo dura hasta el final de la Ronda." },
+      { "nombre": "Spirit Leech", "efecto_es": "El mago extrae poder espiritual del objetivo y lo deja sin vida. Un objetivo a 6\" o menos del lanzador debe superar un Chequeo de Valentía o perder D3 HP. Todos los HP arrebatados se entregan al lanzador. El lanzador no puede aumentar sus HP por encima de su cifra original." },
+      { "nombre": "Spectral Host", "efecto_es": "El Mago invoca a los espíritus de los antepasados de sus enemigos y los vuelve contra ellos. El lanzador invoca D3 seres que tienen los mismos atributos y tamaño de peana que el Tipo de Unidad de la Facción enemiga y los coloca a 1\" o menos. Estos seres se Activan con normalidad y son controlados por el lanzador." }
+    ]
+  },
+  {
+    "saber": "Lore of Spiders",
+    "reglas_saber_es": "Las Reinas Arcanid están imbuidas de una inteligencia astuta, y las vastas cantidades de Arcanita que albergan sus cuerpos les otorgan la capacidad de empuñar poder mágico. Bruja Araña (Spiderwitch): la Arcanid Queen puede lanzar Hechizos del Saber de las Arañas. Sin embargo, si un Hechizo Sobrepotencia, la Arcanid Queen pierde 2D6 HP, la Activación termina y el Hechizo no se lanza.",
+    "hechizos": [
+      { "nombre": "Chittering Swarm", "efecto_es": "La Arcanid Queen convoca una horda de arañas que muerden cualquier carne expuesta. Todos los Personajes enemigos en contacto de peana sufren 1 Impacto." },
+      { "nombre": "Summon Arcanid", "efecto_es": "Con un gesto, la Arcanid Queen llama a otro de sus hijos para reemplazar a los caídos en el campo de batalla. Coloca un Arcanid Noqueado con todos sus HP en un borde de mesa a tu elección." },
+      { "nombre": "Silken Salve", "efecto_es": "La Arcanid Queen cubre sus heridas con seda impregnada de Arcanita, y la piel y el caparazón rotos empiezan a soldarse. El lanzador recupera D6 HP." }
+    ]
+  },
+  {
+    "saber": "Lore of the Enchanted Journal",
+    "reglas_saber_es": "Descubierto en una biblioteca polvorienta, el Diario Encantado acompaña ahora al Explorer adondequiera que va. Sus páginas se erizan con vida propia, y el Diario empuña un gran poder mágico que usa con presteza para proteger a quienes le importan.",
+    "hechizos": [
+      { "nombre": "Arcleap", "efecto_es": "El Diario se desvanece con un zumbido junto con el Explorer fuera de este plano de existencia. Retira del tablero tanto al Explorer como al Diario, aunque alguno de ellos esté en contacto de peana con un Personaje enemigo. Vuelve a colocarlos en contacto de peana a 6\" o menos de cualquier borde de mesa cuando reaparezcan." },
+      { "nombre": "Touch of Destiny", "efecto_es": "El Diario retuerce el tejido mismo de la realidad, y aquellos a quienes favorece son bendecidos por el destino. Elige un Personaje aliado en el tablero. Durante el resto de la Ronda, puede Repetir tirada en cualquier dado fallido cuando intente Hazañas." },
+      { "nombre": "Charmed Blade", "efecto_es": "Con un crujir de sus páginas, el arma de un aliado vibra con energía mágica. Elige un Personaje aliado a 6\" o menos del Diario. En sus tiradas para Atacar, tanto los 5 como los 6 cuentan como Impactos Críticos." },
+      { "nombre": "Arcane Knowledge", "efecto_es": "El Diario parece aprovechar una riqueza desconocida de conocimiento, como si estuviera conectado con todos los libros de magia jamás escritos. El lanzador puede elegir un Hechizo de cualquier saber del juego ArcWorlde. Este Hechizo se considera ahora lanzado con éxito." }
+    ]
+  }
+]
