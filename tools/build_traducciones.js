@@ -24,7 +24,7 @@ const limpiaNombre = (n) => String(n || '').replace(/\s+-\s+[^()]*$/, '').trim()
 // Erratas conocidas de las respuestas de NotebookLM (se corrigen al generar; los JSON de fuentes no se tocan)
 const ERRATAS = [
   [/Ignores terreno difícil/g, 'Ignora el terreno difícil'], [/Ignera la penalización/g, 'Ignora la penalización'],
-  [/Saca 1 daño a sí mismo/g, 'Inflige 1 de daño a sí mismo'], [/Ignera la Armadura/g, 'Ignora la Armadura'],
+  [/Saca 1 daño a sí mismo/g, 'Inflige 1 de daño a sí mismo'], [/Órden:/g, 'Orden:'], [/Ignera la Armadura/g, 'Ignora la Armadura'],
   [/Señor Oscuro Invoque esbirros/g, 'Señor Oscuro invocar esbirros'], [/puede Invoque criaturas/g, 'puede invocar criaturas'],
   [/para Invoque criaturas/g, 'para invocar criaturas']
 ];
@@ -36,6 +36,7 @@ const out = { rasgos: {}, objetos: {}, reglas: {}, saberes: {}, unidades: {} };
 const en = {};   // "nombre" / "nombre#2" -> texto literal en inglés (para el texto base del compendio)
 const avisos = [];
 const pendObjetos = [];
+const pendReglas = [];
 fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
   const kind = f.split('_')[0];
   if (kind === 'glosario') return;
@@ -50,6 +51,8 @@ fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
       if (r.detalles_en) en[k] = r.detalles_en;
     } else if (kind === 'objetos') {
       pendObjetos.push(r);
+    } else if (kind === 'reglas') {
+      pendReglas.push(r);
     } else avisos.push('tipo de archivo sin soporte todavía: ' + f);
   });
 });
@@ -72,14 +75,41 @@ const costes = {};
 (comp.armeria_comun || []).forEach((a) => { costes[a.id] = a.coste; });
 (comp.facciones || []).forEach((f) => (f.armeria_exclusiva || []).forEach((a) => { costes[a.id] = a.coste; }));
 // Los 7 del lote 2/3 cuyo coste de NotebookLM difiere: el usuario decide que vale el del compendio (se aplica el texto, con el coste del compendio)
-const COSTE_COMPENDIO = ['fell_scholar', 'stolen_arcloque_pistol', 'hangmans_noose', 'blood_stone', 'sacrificial_blade', 'faeblade', 'pet_droggo'];
-const REVISAR = ['arcanite_token']; // el efecto de NotebookLM no coincide con el del manual ya cargado
+const COSTE_COMPENDIO = ['fell_scholar', 'stolen_arcloque_pistol', 'hangmans_noose', 'blood_stone', 'sacrificial_blade', 'faeblade', 'pet_droggo',
+  'shield', 'two_handed_weapon', 'light_armour', 'heavy_armour', 'volley_gun', 'camouflaged_pelt', 'ugly', 'monster_rider', 'animal_totem', 'sacred_blade', 'familiar_jar'];
+const REVISAR = [];
+// Ficha de Arcanita: el efecto de NotebookLM no coincide con el del manual cargado; se traduce el del compendio
+const MANUAL = { arcanite_token: { detalles: 'Un fragmento brillante de Arcanita. Un solo uso. Al usarlo, elige un efecto: • Otorga +1 AP al personaje durante su Activación. • Añade un D6 extra a cualquier tirada. • Permite Lanzar otro Hechizo. • Permite Repetir tirada de un D6.', restriccion: 'Un solo uso (10 GP).' } }; // el efecto de NotebookLM no coincide con el del manual ya cargado
 pendObjetos.forEach((r) => {
   const m = String(r.restriccion_es || '').match(/\((\d+) GP/);
   if (!(r.id in costes)) return avisos.push('objeto sin equivalente: ' + r.id);
+  if (MANUAL[r.id]) { r.detalles_es = MANUAL[r.id].detalles; r.restriccion_es = MANUAL[r.id].restriccion; }
   if (COSTE_COMPENDIO.includes(r.id) && m) r.restriccion_es = r.restriccion_es.replace(/\(\d+ GP/, '(' + costes[r.id] + ' GP');
   else if (REVISAR.includes(r.id) || (m && Number(m[1]) !== costes[r.id])) return avisos.push('objeto NO aplicado (revisar): ' + r.id + (m ? ' · NotebookLM ' + m[1] + ' GP vs compendio ' + costes[r.id] + ' GP' : ''));
   out.objetos[r.id] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es), restriccion: limpia(r.restriccion_es) };
+});
+// Reglas de facción: NotebookLM inventó la mecánica de las órdenes y cambió la de Raiser of the Dead; para esas se traduce el texto en inglés del compendio
+const reglasBase = {};
+(comp.facciones || [])
+  .forEach((f) => (f.reglas_faccion || []).forEach((r) => { reglasBase[r.id] = r; }));
+const MANUAL_REGLAS = {
+  order_as_one_halfling: 'Hasta tres Personajes de la misma Clase pueden Activarse juntos. Todos los Ataques realizados deben dirigirse al mismo objetivo y se resuelven uno tras otro.',
+  order_stand_firm_halfling: 'Hasta tres Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.',
+  order_together_imperial: 'Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Si sus Ataques se dirigen al mismo objetivo, ganan +1 al Power.',
+  order_hold_imperial: 'Hasta cuatro Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.',
+  order_volley_imperial: 'Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Cualquier tirada de Hazaña fallida en un Ataque a distancia puede Repetirse.',
+  order_form_up_imperial: 'Aunque ya se hayan Activado, hasta cuatro Personajes de la misma Clase pueden realizar un único movimiento de 2" si no están en contacto de peana con un Personaje enemigo.',
+  raiser_of_the_dead: 'Un Personaje con el Rasgo Invocador de No-Muertos (Raiser of the Dead) puede intentar resucitar a Personajes aliados caídos con el Rasgo Resucitado (Risen). Cuando un Personaje Resucitado queda Noqueado, coloca la miniatura de lado o usa una ficha para marcar dónde cayó. Para resucitar a un Personaje Noqueado, el Invocador debe realizar una Hazaña estando a 6" o menos del marcador: para Unidades o Bestias, una Hazaña Media; para Élites o Irregulares, una Hazaña Difícil; para Pesadas o Personajes aliados sin el Rasgo Resucitado, una Hazaña Legendaria. Los Personajes resucitados con éxito se colocan de nuevo en el tablero donde cayeron y pueden Activarse con normalidad, pero con el 50% de sus HP iniciales, redondeando hacia arriba.'
+};
+pendReglas.forEach((r) => {
+  const b = reglasBase[r.id];
+  if (!b) return avisos.push('regla sin equivalente: ' + r.id);
+  out.reglas[r.id] = {
+    nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es),
+    detalles: MANUAL_REGLAS[r.id] || limpia(r.detalles_es),
+    restriccion: MANUAL_REGLAS[r.id] ? (b.restriccion || '') : limpia(r.restriccion_es)
+  };
+  if (MANUAL_REGLAS[r.id] && b.resumen) out.reglas[r.id].resumen = b.resumen;
 });
 fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'),
   '// Generado por tools/build_traducciones.js a partir de traducciones/fuentes/*.json. No editar a mano.\n' +

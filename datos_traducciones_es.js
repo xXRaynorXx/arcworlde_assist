@@ -868,6 +868,18 @@ const traduccionesES = {
     }
   },
   "objetos": {
+    "arcanite_token": {
+      "nombre": "Ficha de Arcanita (Arcanite Token)",
+      "resumen": "Fragmento de mineral mágico consumible para potenciar habilidades y hechizos.",
+      "detalles": "Un fragmento brillante de Arcanita. Un solo uso. Al usarlo, elige un efecto: • Otorga +1 AP al personaje durante su Activación. • Añade un D6 extra a cualquier tirada. • Permite Lanzar otro Hechizo. • Permite Repetir tirada de un D6.",
+      "restriccion": "Un solo uso (10 GP)."
+    },
+    "shield": {
+      "nombre": "Escudo (Shield)",
+      "resumen": "Protección defensiva para desviar golpes e impactos a distancia.",
+      "detalles": "Si está equipado, el personaje puede Repetir tirada en una Tirada de Defensa fallida por Ronda (ya sea contra Ataques cuerpo a cuerpo o a distancia).",
+      "restriccion": "Cualquier personaje (15 GP). No acumulable."
+    },
     "spear": {
       "nombre": "Lanza (Spear)",
       "resumen": "Arma de asta que permite atacar a distancia en melé y reaccionar contra cargas.",
@@ -880,11 +892,29 @@ const traduccionesES = {
       "detalles": "Ataque cuerpo a cuerpo o a distancia corto: Power 4. Los impactos causados por la antorcha cuentan como ataques de fuego (+2 al Power contra objetivos Inflamables y obliga a repetir defensas exitosas). Además, ilumina un radio de 6\" en escenarios nocturnos o subterráneos.",
       "restriccion": "Cualquier personaje (5 GP)."
     },
+    "two_handed_weapon": {
+      "nombre": "Arma a Dos Manos (Two Handed Weapon)",
+      "resumen": "Arma pesada de gran contundencia que sacrifica la capacidad defensiva.",
+      "detalles": "Ataque cuerpo a cuerpo: Otorga +2 al Power para todos los Ataques cuerpo a cuerpo del personaje. Sin embargo, debido a su peso y manejo, cualquier Defensa Crítica propia se descarta como si fuera un fallo.",
+      "restriccion": "Cualquier personaje (10 GP). Requiere ambas manos."
+    },
     "dual_weapons": {
       "nombre": "Armas Dobles (Dual Weapons)",
       "resumen": "Par de armas ligeras que mejoran la precisión en combate cuerpo a cuerpo.",
       "detalles": "Ataque cuerpo a cuerpo: Si está equipado con un par de armas dobles, el personaje puede Repetir tirada en todos los resultados de 1 en sus dados de ataque al realizar un Ataque cuerpo a cuerpo.",
       "restriccion": "Cualquier personaje (10 GP). Ocupa ambas manos."
+    },
+    "light_armour": {
+      "nombre": "Armadura Ligera (Light Armour)",
+      "resumen": "Protección de cuero o acolchada que otorga +1 de Armadura.",
+      "detalles": "Otorga +1 al valor de Armadura del personaje. Reduce en 1 el daño sufrido de todos los impactos recibidos.",
+      "restriccion": "Cualquier personaje (20 GP). No acumulable con otras armaduras."
+    },
+    "heavy_armour": {
+      "nombre": "Armadura Pesada (Heavy Armour)",
+      "resumen": "Protección metálica completa que otorga +2 de Armadura pero dificulta la huida.",
+      "detalles": "Otorga +2 al valor de Armadura del personaje. Sin embargo, la rigidez del equipo añade +1 de dificultad a todas sus tiradas de Leg It.",
+      "restriccion": "Cualquier personaje (35 GP). No acumulable con otras armaduras."
     },
     "packed_lunch": {
       "nombre": "Almuerzo Para Llevar (Packed Lunch)",
@@ -964,6 +994,12 @@ const traduccionesES = {
       "detalles": "Otorga el estado Montado (Mounted), aumentando la velocidad de Movimiento a 7\" e ignorando el terreno difícil. Otorga +1 al Power en Ataques cuerpo a cuerpo realizados en Carga.",
       "restriccion": "Exclusivo de la facción Imperial (30 GP)."
     },
+    "volley_gun": {
+      "nombre": "Cañón de Volea (Volley Gun)",
+      "resumen": "Arma pesada de cañones múltiples que barre filas enteras de enemigos.",
+      "detalles": "(2 AP) Ataque a distancia: Power 6, Alcance 16\". Exige Hazaña Difícil. Traza una línea recta desde el tirador hasta el objetivo afectando a todas las miniaturas en la trayectoria.",
+      "restriccion": "Equipable únicamente por Imperial Tinkerer o Heavy Trooper (40 GP)."
+    },
     "black_potion": {
       "nombre": "Poción Negra (Black Potion)",
       "resumen": "Brebaje oscuro e hirviente que otorga fuerza bruta momentánea a costa de la salud.",
@@ -1018,17 +1054,53 @@ const traduccionesES = {
       "detalles": "Otorga +2\" a la capacidad de Movimiento base del personaje y le permite Repetir tirada en los intentos fallidos de Leg It.",
       "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
     },
+    "camouflaged_pelt": {
+      "nombre": "Pelaje Camuflado (Camouflaged Pelt)",
+      "resumen": "Mimetismo foliar o pelaje adaptable que dificulta fijar al personaje como blanco.",
+      "detalles": "Los ataques a distancia dirigidos contra este personaje sufren +1 de dificultad en la tirada de Hazaña (o cuentan como en Cobertura Pesada).",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (15 GP)."
+    },
+    "ugly": {
+      "nombre": "Feo (Ugly)",
+      "resumen": "Aspecto repulsivo y grotesco que desorienta a los atacantes en melé.",
+      "detalles": "Cualquier personaje enemigo que intente realizar un Ataque cuerpo a cuerpo contra esta miniatura lo hace con Desventaja.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (15 GP)."
+    },
+    "monster_rider": {
+      "nombre": "Jinete de Monstruos (Monster Rider)",
+      "resumen": "Arnés y adiestramiento para cabalgar sobre criaturas feroces del Bestiario.",
+      "detalles": "Permite al personaje usar el Rasgo Montura Monstruosa (Monstrous Mount) sobre cualquier Bestia, Monstruo o Titán reclutado en la Banda.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (5 GP)."
+    },
     "bestial_moxie": {
       "nombre": "Furia Bestial (Bestial Moxie)",
       "resumen": "Impulso salvaje e indomable que vigoriza la combatividad del personaje.",
       "detalles": "Otorga Ventaja en todos los Chequeos de Valentía y +1 al Power en el primer Ataque cuerpo a cuerpo realizado en cada Activación.",
       "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
     },
+    "animal_totem": {
+      "nombre": "Tótem Animal (Animal Totem)",
+      "resumen": "Fetiche de hueso y madera que canaliza los espíritus guía de la manada.",
+      "detalles": "Otorga al usuario y a las Bestias aliadas a 6\" o menos una Repetición de tirada por Ronda en cualquier tirada de Hazaña o Valentía fallida.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (10 GP)."
+    },
     "ancient_dead_ranged_weapon": {
       "nombre": "Arma a Distancia Ancestral (Ancient Dead Ranged Weapon)",
       "resumen": "Arco largo milenario o jabalina de bronce sepulcral.",
       "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 14\". Causa pavor: Obliga al objetivo impactado a superar un Chequeo de Valentía de inmediato.",
       "restriccion": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (15 GP)."
+    },
+    "sacred_blade": {
+      "nombre": "Hoja Sagrada (Sacred Blade)",
+      "resumen": "Espada ceremonial bendecida por los antiguos dioses para purgar intrusos.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 6. Los Impactos Críticos ignoran la Armadura del objetivo y le impiden regenerar HP durante el resto de la Ronda.",
+      "restriccion": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (20 GP)."
+    },
+    "familiar_jar": {
+      "nombre": "Jarra de Familiar (Familiar Jar)",
+      "resumen": "Recipiente de cristal místico que alberga el espíritu condensado de un duendecillo.",
+      "detalles": "Permite al usuario canalizar y medir el alcance y la línea de visión de sus Hechizos desde la posición de la Jarra de Familiar colocada en el tablero a hasta 8\".",
+      "restriccion": "Exclusivo para personajes de tipo Mago (35 GP)."
     },
     "circlet_of_bronze": {
       "nombre": "Aro de Bronce (Circlet of Bronze)",
@@ -1271,7 +1343,140 @@ const traduccionesES = {
       "restriccion": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
     }
   },
-  "reglas": {},
+  "reglas": {
+    "settler_nation_halfling": {
+      "nombre": "Nación Colonizadora (Settler Nation)",
+      "resumen": "Alianzas tácticas entre Halflings, Imperiales y Njorsvald en el bosque de Mildaark.",
+      "detalles": "Los Halflings e Imperiales por lo general desconfían de los extraños, especialmente en las peligrosas tierras del Mildaark. A pesar de todo, se aliarán a regañadientes con otros colonos del bosque si saben mantener sus manos de ladrón para sí mismos. Al construir tu Banda, puedes incluir Personajes de las facciones Imperial y Njorsvald sin penalización.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "make_take_orders_halfling": {
+      "nombre": "Dar y Recibir Órdenes (Make/Take Orders)",
+      "resumen": "Sistema de mando para coordinar las acciones grupales de la milicia Halfling.",
+      "detalles": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden de facción a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir una orden, la Activación del oficial finaliza y pasa inmediatamente a los aliados que reciben la orden.",
+      "restriccion": "El emisor debe estar a 12\" o menos de los receptores."
+    },
+    "order_as_one_halfling": {
+      "nombre": "Orden: ¡Como Uno Solo! (As One!)",
+      "resumen": "Orden de facción que activa simultáneamente a hasta 3 personajes de la misma clase.",
+      "detalles": "Hasta tres Personajes de la misma Clase pueden Activarse juntos. Todos los Ataques realizados deben dirigirse al mismo objetivo y se resuelven uno tras otro.",
+      "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Los ataques deben dirigirse al mismo objetivo."
+    },
+    "order_stand_firm_halfling": {
+      "nombre": "Orden: ¡Manteneos Firmes! (Stand Firm!)",
+      "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
+      "detalles": "Hasta tres Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.",
+      "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
+    },
+    "settler_nation_imperial": {
+      "nombre": "Nación Colonizadora (Settler Nation)",
+      "resumen": "Integración táctica militar del Imperio con colonos Halflings y Njorsvald.",
+      "detalles": "Los Imperiales y Halflings por lo general desconfían de los extraños en el bosque de Mildaark, pero colaboran estrechamente para defender sus asentamientos. Al construir tu Banda imperial, puedes incluir Personajes de las facciones Halfling y Njorsvald.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "make_take_orders_imperial": {
+      "nombre": "Comandos Militares (Make/Take Orders)",
+      "resumen": "Ordenanza y disciplina militar imperial para coordinar regimientos en batalla.",
+      "detalles": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden táctica imperial a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir la orden, la Activación del oficial finaliza y pasa a las tropas dirigidas.",
+      "restriccion": "El oficial debe estar a 12\" o menos de las unidades receptoras."
+    },
+    "order_together_imperial": {
+      "nombre": "Orden: ¡Juntos! (Order: Together!)",
+      "resumen": "Permite activar juntos a hasta 4 personajes de la misma clase, otorgando +1 Power si atacan al mismo objetivo.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Si sus Ataques se dirigen al mismo objetivo, ganan +1 al Power.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El bonificador de +1 Power requiere concentrar los ataques en la misma miniatura objetivo."
+    },
+    "order_hold_imperial": {
+      "nombre": "Orden: ¡Resistid! (Order: Hold!)",
+      "resumen": "Hasta 4 personajes de la misma clase pasan automáticamente todas las pruebas de Valentía hasta el final de la ronda.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El efecto dura hasta el final de la Ronda."
+    },
+    "order_volley_imperial": {
+      "nombre": "Orden: ¡Salva! (Order: Volley!)",
+      "resumen": "Hasta 4 personajes de la misma clase se activan juntos y pueden repetir tiradas de Hazaña fallidas en sus ataques a distancia.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Cualquier tirada de Hazaña fallida en un Ataque a distancia puede Repetirse.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Aplica la repetición de tiradas únicamente a ataques a distancia."
+    },
+    "order_form_up_imperial": {
+      "nombre": "Orden: ¡Formación! (Order: Form Up!)",
+      "resumen": "Hasta 4 personajes de la misma clase pueden realizar un movimiento único de 2\" aunque ya hayan sido activados, si no están trabados.",
+      "detalles": "Aunque ya se hayan Activado, hasta cuatro Personajes de la misma Clase pueden realizar un único movimiento de 2\" si no están en contacto de peana con un Personaje enemigo.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Permite recolocarse 2\" incluso si la unidad ya se activó previamente en la ronda, siempre que no esté en contacto de peana con ningún enemigo."
+    },
+    "the_dark_ones_will": {
+      "nombre": "La Voluntad del Oscuro (The Dark One's Will)",
+      "resumen": "Personalización de las obsesiones y capacidades del Señor Oscuro.",
+      "detalles": "Cada Señor Oscuro tiene una combinación única de obsesiones y metas febriles. Antes del juego, elige los rasgos de personalidad que encarna tu Señor Oscuro: Guerrero Maligno (+1 AP por cada enemigo Noqueado), Brujo Oscuro (obtiene el Rasgo Mago y el Saber de la Villanía), Maestro de la Horda (-20% GP para Hobgoblins) o Maestro de Bestias (-20% GP para criaturas del Bestiario).",
+      "restriccion": "Se elige antes del comienzo de la partida durante la creación de la lista."
+    },
+    "fae_beings_dark_lords": {
+      "nombre": "Seres Fae / Pactos Malevolentes (Fae Beings)",
+      "resumen": "Alianzas oscuras entre los Señores Oscuros y otras criaturas o magos de naturaleza feérica.",
+      "detalles": "Los Seres Fae son criaturas volubles de magia que a veces se alían con aquellos cuyo poder respetan. Al construir tu Banda de Señores Oscuros, puedes utilizar Personajes de las facciones Magos (Wizards) y Elfos Silvanos (Wild Elves).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "nomadic_clans_beastfolk": {
+      "nombre": "Clanes Nómadas (Nomadic Clans)",
+      "resumen": "Vida errante y alianzas de los Hombres Bestia con otras facciones nómadas.",
+      "detalles": "Los Hombres Bestia llevan una vida nómada en las tierras salvajes de ArcWorlde y se alían con quienes hacen lo mismo. Al construir tu Banda de Hombres Bestia, puedes incluir Personajes de las facciones Ourks y Gremlins sin penalizaciones.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "beastkin": {
+      "nombre": "Parentesco Bestial (Beastkin)",
+      "resumen": "Descuento en reclutamiento de criaturas salvajes del Bestiario.",
+      "detalles": "Las Bestias, Monstruos o Titanes del Bestiario reclutados como parte de una Banda de Hombres Bestia (Beastfolk) tienen un descuento del -20% en su coste de GP.",
+      "restriccion": "Aplica al reclutar criaturas del Bestiario."
+    },
+    "afterlife": {
+      "nombre": "El Más Allá (Afterlife)",
+      "resumen": "Inmunidad al miedo al creer que ya se encuentran en el paraíso prometido.",
+      "detalles": "Los Antiguos Muertos creen que están en el más allá prometido por sus dioses olvidados y no temen nada. Los Personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía.",
+      "restriccion": "Pasivo universal para los Antiguos Muertos."
+    },
+    "bones": {
+      "nombre": "Huesos (Bones)",
+      "resumen": "Regeneración de estructura ósea y cobertura natural contra disparos.",
+      "detalles": "Con su carne desaparecida, los Antiguos Muertos están orgullosos de sus brillantes huesos. Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para 'recomponerse' y recuperar D3 HP. Además, cuentan como en Cobertura contra cualquier Ataque a distancia.",
+      "restriccion": "Requiere una Hazaña Fácil para la curación."
+    },
+    "undead_legions_ancient_dead": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Alianza entre las distintas facciones de no-muertos del reino de Vauhaemia.",
+      "detalles": "Aunque los no-muertos desprecian a los vivos, se alían con otros seres no-muertos cuyo hambre de poder respetan. Al construir tu Banda de Antiguos Muertos, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Vampiros (Vampires).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "undead_legions_vampires": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Pactos nobiliarios y de servidumbre entre señores vampiros y otras huestes no-muertas.",
+      "detalles": "Los Vampiros pueden comandar e integrar otras fuerzas de no-muertos. Al construir tu Banda de Vampiros, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Antiguos Muertos (Ancient Dead).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "undead_legions_undead_raiders": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Alianza de forajidos resucitados con otras legiones de la no-vida.",
+      "detalles": "Los Saqueadores No-Muertos se alían fácilmente con otros seres no-muertos. Al construir tu Banda de Saqueadores No-Muertos, puedes incluir Personajes de las facciones Vampiros (Vampires) y Antiguos Muertos (Ancient Dead).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "raiser_of_the_dead": {
+      "nombre": "Invocador de No-Muertos (Raiser of the Dead)",
+      "resumen": "Permite resucitar a personajes aliados Noqueados a 6\" o menos con el 50% de sus HP.",
+      "detalles": "Un Personaje con el Rasgo Invocador de No-Muertos (Raiser of the Dead) puede intentar resucitar a Personajes aliados caídos con el Rasgo Resucitado (Risen). Cuando un Personaje Resucitado queda Noqueado, coloca la miniatura de lado o usa una ficha para marcar dónde cayó. Para resucitar a un Personaje Noqueado, el Invocador debe realizar una Hazaña estando a 6\" o menos del marcador: para Unidades o Bestias, una Hazaña Media; para Élites o Irregulares, una Hazaña Difícil; para Pesadas o Personajes aliados sin el Rasgo Resucitado, una Hazaña Legendaria. Los Personajes resucitados con éxito se colocan de nuevo en el tablero donde cayeron y pueden Activarse con normalidad, pero con el 50% de sus HP iniciales, redondeando hacia arriba.",
+      "restriccion": "Rango de 6\" del marcador. Hazaña Media (Unidades/Bestias), Difícil (Élites/Irregulares) o Legendaria (Pesadas o sin Risen)."
+    },
+    "fae_beings_wild_elves": {
+      "nombre": "Seres Fae / Pactos Arcanos (Fae Beings)",
+      "resumen": "Afinidad mágica de los Elfos Silvanos con los Magos y los Señores Oscuros.",
+      "detalles": "Los Seres Fae son criaturas volubles de magia y se alían con aquellos cuyo poder respetan. Al construir tu Banda de Elfos Silvanos, puedes incluir Personajes de las facciones Magos (Wizards) y Señores Oscuros (Dark Lords).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "nomads_ourks": {
+      "nombre": "Nómadas (Nomads)",
+      "resumen": "Estilo de vida errante en los pantanos que permite alianzas con Hombres Bestia y Gremlins.",
+      "detalles": "Los Ourks llevan una vida nómada y errante en los pantanos y tierras salvajes de ArcWorlde. Al construir tu Banda de Ourks, puedes incluir Personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins sin penalizaciones.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    }
+  },
   "saberes": {},
   "unidades": {}
 };
