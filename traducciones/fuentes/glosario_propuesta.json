@@ -1,0 +1,398 @@
+[
+  {
+    "en": "Action Points (AP)",
+    "es": "Puntos de Acción (AP)",
+    "fuente": "propuesta",
+    "nota": "Moneda principal de recursos que gasta cada miniatura durante su activación."
+  },
+  {
+    "en": "Victory Points (VP)",
+    "es": "Puntos de Victoria (VP)",
+    "fuente": "propuesta",
+    "nota": "Puntos acumulados durante el escenario o campaña para determinar la victoria."
+  },
+  {
+    "en": "Game Value / GP",
+    "es": "Valor de Juego / Piezas de Oro (GP)",
+    "fuente": "propuesta",
+    "nota": "Coste en puntos/oro utilizado para reclutar miniaturas y comprar equipo."
+  },
+  {
+    "en": "HP (Health Points)",
+    "es": "Puntos de Vida (HP)",
+    "fuente": "propuesta",
+    "nota": "Resistencia o salud total de una miniatura."
+  },
+  {
+    "en": "Warband",
+    "es": "Banda",
+    "fuente": "propuesta",
+    "nota": "Conjunto de miniaturas que forman la fuerza de combate de un jugador."
+  },
+  {
+    "en": "Character",
+    "es": "Personaje / Miniatura",
+    "fuente": "propuesta",
+    "nota": "Cualquier modelo o miniatura individual en el terreno de juego."
+  },
+  {
+    "en": "Round",
+    "es": "Ronda",
+    "fuente": "propuesta",
+    "nota": "Ciclo completo de juego en el que todas las miniaturas se activan."
+  },
+  {
+    "en": "Activation",
+    "es": "Activación",
+    "fuente": "propuesta",
+    "nota": "Turno individual de una miniatura para gastar sus AP y realizar acciones."
+  },
+  {
+    "en": "Feat",
+    "es": "Hazaña",
+    "fuente": "propuesta",
+    "nota": "Prueba de dados D6 para superar una acción con éxito (mínimo de 4+ en cada dado)."
+  },
+  {
+    "en": "Easy Feat",
+    "es": "Hazaña Fácil",
+    "fuente": "propuesta",
+    "nota": "Requiere 1 Éxito (1 dado a 4+)."
+  },
+  {
+    "en": "Medium Feat",
+    "es": "Hazaña Media",
+    "fuente": "propuesta",
+    "nota": "Requiere 2 Éxitos (2 dados a 4+)."
+  },
+  {
+    "en": "Hard Feat",
+    "es": "Hazaña Difícil",
+    "fuente": "propuesta",
+    "nota": "Requiere 3 Éxitos (3 dados a 4+)."
+  },
+  {
+    "en": "Legendary Feat",
+    "es": "Hazaña Legendaria",
+    "fuente": "propuesta",
+    "nota": "Requiere 4 Éxitos (4 dados a 4+)."
+  },
+  {
+    "en": "Narrative Feat",
+    "es": "Hazaña Narrativa",
+    "fuente": "propuesta",
+    "nota": "Tirada especial asociada a elementos de escenografía o interacción con la historia."
+  },
+  {
+    "en": "Bravery Test",
+    "es": "Prueba de Valentía",
+    "fuente": "propuesta",
+    "nota": "Prueba de moral frente al miedo, bajas cercanas o efectos mágicos."
+  },
+  {
+    "en": "Armour",
+    "es": "Armadura",
+    "fuente": "propuesta",
+    "nota": "Valor que reduce el daño directo recibido en los ataques."
+  },
+  {
+    "en": "Power",
+    "es": "Potencia",
+    "fuente": "propuesta",
+    "nota": "Fuerza o efectividad base de un ataque."
+  },
+  {
+    "en": "Critical Hit / Crit",
+    "es": "Impacto Crítico / Crítico",
+    "fuente": "propuesta",
+    "nota": "Resultado de 6 en el dado de ataque que otorga efectos adicionales o ignora armadura."
+  },
+  {
+    "en": "Knocked Out (KO)",
+    "es": "Noqueado / Inconsciente",
+    "fuente": "propuesta",
+    "nota": "Estado de una miniatura reducida a 0 HP."
+  },
+  {
+    "en": "Prone",
+    "es": "Tumbado / Derribado",
+    "fuente": "propuesta",
+    "nota": "Estado en el suelo que limita el movimiento y otorga ventajas a los atacantes."
+  },
+  {
+    "en": "Engaged / Base Contact",
+    "es": "Trabado / Contacto de Peana",
+    "fuente": "propuesta",
+    "nota": "Estar en contacto físico peana con peana con una miniatura enemiga."
+  },
+  {
+    "en": "Disengage",
+    "es": "Destrabarse",
+    "fuente": "propuesta",
+    "nota": "Acción para salir del contacto de peana con un enemigo."
+  },
+  {
+    "en": "Leg It",
+    "es": "Leg It (Corretear)",
+    "fuente": "propuesta",
+    "nota": "Movimiento arriesgado adicional gastando AP donde una tirada fallida deja a la miniatura Tumbada."
+  },
+  {
+    "en": "Commander",
+    "es": "Comandante",
+    "fuente": "propuesta",
+    "nota": "Clase de líder principal de la banda."
+  },
+  {
+    "en": "Mage",
+    "es": "Mago",
+    "fuente": "propuesta",
+    "nota": "Clase de personaje capaz de lanzar hechizos."
+  },
+  {
+    "en": "Unit",
+    "es": "Unidad",
+    "fuente": "propuesta",
+    "nota": "Clase de tropa básica de línea."
+  },
+  {
+    "en": "Elite",
+    "es": "Élite",
+    "fuente": "propuesta",
+    "nota": "Clase de tropa especializada o veterana."
+  },
+  {
+    "en": "Irregular",
+    "es": "Irregular",
+    "fuente": "propuesta",
+    "nota": "Clase de tropa especialista o no convencional."
+  },
+  {
+    "en": "Heavy",
+    "es": "Pesada",
+    "fuente": "propuesta",
+    "nota": "Clase de tropa fuertemente armada o de gran tamaño."
+  },
+  {
+    "en": "Beast",
+    "es": "Bestia",
+    "fuente": "propuesta",
+    "nota": "Clase de criatura animal o bestia de combate."
+  },
+  {
+    "en": "Monster",
+    "es": "Monstruo",
+    "fuente": "propuesta",
+    "nota": "Clase de gran criatura monstruosa."
+  },
+  {
+    "en": "Titan",
+    "es": "Titán",
+    "fuente": "propuesta",
+    "nota": "Clase de criatura colosal o gigante de máximo tamaño."
+  },
+  {
+    "en": "Trait",
+    "es": "Rasgo",
+    "fuente": "propuesta",
+    "nota": "Habilidad especial pasiva o activa inherente a la miniatura."
+  },
+  {
+    "en": "Equipment / Gear",
+    "es": "Equipo / Objetos",
+    "fuente": "propuesta",
+    "nota": "Objetos, armas o armaduras equipables."
+  },
+  {
+    "en": "Common Armoury",
+    "es": "Armería Común",
+    "fuente": "propuesta",
+    "nota": "Lista universal de objetos de equipo disponibles para la mayoría de facciones."
+  },
+  {
+    "en": "Spell",
+    "es": "Hechizo / Conjuro",
+    "fuente": "propuesta",
+    "nota": "Efecto mágico ejecutado por un Mago."
+  },
+  {
+    "en": "Lore",
+    "es": "Saber Mágico / Colegio",
+    "fuente": "propuesta",
+    "nota": "Lista o disciplina temática de hechizos."
+  },
+  {
+    "en": "Required Draw",
+    "es": "Exige / Tirada Requerida",
+    "fuente": "propuesta",
+    "nota": "Valor numérico objetivo necesario para lanzar un hechizo con éxito tras robar cartas o tirada."
+  },
+  {
+    "en": "Arcanite / Arcanite Token",
+    "es": "Arcanita / Ficha de Arcanita",
+    "fuente": "propuesta",
+    "nota": "Recurso místico consumible para potenciar hechizos, tiradas o AP."
+  },
+  {
+    "en": "Cover",
+    "es": "Cobertura",
+    "fuente": "propuesta",
+    "nota": "Protección otorgada por terreno frente a ataques a distancia (Ligera o Pesada)."
+  },
+  {
+    "en": "Melee Attack",
+    "es": "Ataque Cuerpo a Cuerpo",
+    "fuente": "propuesta",
+    "nota": "Ataque realizado contra objetivos en contacto o alcance cuerpo a cuerpo."
+  },
+  {
+    "en": "Ranged Attack",
+    "es": "Ataque a Distancia / Disparo",
+    "fuente": "propuesta",
+    "nota": "Ataque realizado a distancia mediante proyectiles o proyectiles mágicos."
+  },
+  {
+    "en": "Re-roll",
+    "es": "Repetir tirada / Volver a tirar",
+    "fuente": "propuesta",
+    "nota": "Efecto que permite lanzar de nuevo uno o varios dados."
+  },
+  {
+    "en": "Advantage",
+    "es": "Ventaja",
+    "fuente": "propuesta",
+    "nota": "Bonificador que permite lanzar un dado extra y descartar el resultado más bajo."
+  },
+  {
+    "en": "Disadvantage",
+    "es": "Desventaja",
+    "fuente": "propuesta",
+    "nota": "Penalizador que obliga a lanzar un dado extra y descartar el resultado más alto."
+  },
+  {
+    "en": "Mounted",
+    "es": "Montado",
+    "fuente": "propuesta",
+    "nota": "Estado o rasgo de un personaje que combate sobre una montura."
+  },
+  {
+    "en": "Fearsome",
+    "es": "Temible",
+    "fuente": "propuesta",
+    "nota": "Rasgo que obliga a los enemigos cercanos a superar pruebas de Valentía."
+  },
+  {
+    "en": "Fly",
+    "es": "Volar",
+    "fuente": "propuesta",
+    "nota": "Rasgo que permite ignorar elementos de terreno y miniaturas durante el movimiento."
+  },
+  {
+    "en": "Agile",
+    "es": "Ágil",
+    "fuente": "propuesta",
+    "nota": "Rasgo que otorga bonificaciones a la movilidad o la evasión."
+  },
+  {
+    "en": "Insignificant",
+    "es": "Insignificante",
+    "fuente": "propuesta",
+    "nota": "Rasgo de tropas secundarias cuya caída fuera de combate no causa chequeos de moral a sus aliados."
+  },
+  {
+    "en": "Mindless",
+    "es": "Sin Mente",
+    "fuente": "propuesta",
+    "nota": "Rasgo que otorga inmunidad a chequeos de Valentía y efectos de miedo."
+  },
+  {
+    "en": "Summoned",
+    "es": "Invocado",
+    "fuente": "propuesta",
+    "nota": "Criatura traída al campo de batalla mediante habilidades o magia durante la partida."
+  },
+  {
+    "en": "Cast / Conjure",
+    "es": "Lanzar / Conjurar",
+    "fuente": "propuesta",
+    "nota": "Acción de ejecutar un hechizo o invocar criaturas mágicas."
+  },
+  {
+    "en": "Draw (cards)",
+    "es": "Robar (cartas)",
+    "fuente": "propuesta",
+    "nota": "Acción de extraer cartas del mazo de juego (ArcDeck)."
+  },
+  {
+    "en": "Faction Rule",
+    "es": "Regla de Facción",
+    "fuente": "propuesta",
+    "nota": "Regla global o pasiva que afecta a toda la banda de una facción."
+  },
+  {
+    "en": "Bargain",
+    "es": "Ganga / Oferta",
+    "fuente": "propuesta",
+    "nota": "Descuento del 25% en el coste en GP en la fase de campaña o comercio."
+  },
+  {
+    "en": "Wandering Trader",
+    "es": "Comerciante Ambulante",
+    "fuente": "propuesta",
+    "nota": "Paso de la fase de campaña para comprar, vender y contratar."
+  },
+  {
+    "en": "Campaign",
+    "es": "Campaña",
+    "fuente": "propuesta",
+    "nota": "Sistema de juego continuo en el que la banda evoluciona a lo largo de varias partidas."
+  },
+  {
+    "en": "Mission / Scenario",
+    "es": "Misión / Escenario",
+    "fuente": "propuesta",
+    "nota": "Partida estructurada con objetivos específicos y condiciones de victoria."
+  },
+  {
+    "en": "In-between Adventures",
+    "es": "Entre Aventuras",
+    "fuente": "propuesta",
+    "nota": "Fase de campaña entre partidas donde se resuelven eventos aleatorios y lesiones."
+  },
+  {
+    "en": "Injury",
+    "es": "Lesión / Secuela",
+    "fuente": "propuesta",
+    "nota": "Efecto negativo permanente o temporal sufrido por un personaje que quedó Noqueado."
+  },
+  {
+    "en": "Limping",
+    "es": "Cojera",
+    "fuente": "propuesta",
+    "nota": "Lesión de campaña que reduce la capacidad de movimiento."
+  },
+  {
+    "en": "Black Eye",
+    "es": "Ojo Morado",
+    "fuente": "propuesta",
+    "nota": "Lesión de campaña que penaliza los ataques a distancia."
+  },
+  {
+    "en": "Bumped Head",
+    "es": "Chinchón en la Cabeza",
+    "fuente": "propuesta",
+    "nota": "Lesión de campaña que penaliza la concentración o tiradas de hazaña."
+  },
+  {
+    "en": "Arm in a Sling",
+    "es": "Brazo en Cabestrillo",
+    "fuente": "propuesta",
+    "nota": "Lesión de campaña que limita el uso de armas o potencia en combate cuerpo a cuerpo."
+  },
+  {
+    "en": "Wounded",
+    "es": "Herido",
+    "fuente": "propuesta",
+    "nota": "Estado de secuela física en campaña que reduce los HP iniciales en la siguiente partida."
+  }
+]
