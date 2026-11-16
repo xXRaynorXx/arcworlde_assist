@@ -111,12 +111,15 @@ function construirSeccionesFacciones() {
         descripcion: 'Todos los rasgos del juego por orden alfabético.',
         categorias: [{
             nombre_categoria: 'Rasgos',
-            acciones: Object.keys(comp.diccionario_rasgos || {}).map((k) => {
+            acciones: (() => { const vistos = {}; return Object.keys(comp.diccionario_rasgos || {}).map((k) => {
                 const base = Object.assign({ nombre: k }, comp.diccionario_rasgos[k]);
-                const tr = window.AWCompendio ? AWCompendio.trad('rasgos', AWCompendio.enKey(k)) : null;
+                // Un mismo nombre puede repetirse (Bones, Raiser of the Dead...): la 2ª vez se busca como "nombre#2"
+                const ek = window.AWCompendio ? AWCompendio.enKey(k) : k;
+                vistos[ek] = (vistos[ek] || 0) + 1;
+                const tr = window.AWCompendio ? AWCompendio.trad('rasgos', vistos[ek] > 1 ? ek + '#' + vistos[ek] : ek) : null;
                 const t = window.AWCompendio ? AWCompendio.localizado(base, tr) : base;
                 return { nombre: t.nombre, etiqueta: 'Rasgo', resumen: t.resumen, detalles: t.detalles };
-            }).sort((a, b) => a.nombre.localeCompare(b.nombre))
+            }); })().sort((a, b) => a.nombre.localeCompare(b.nombre))
         }]
     });
     return secciones;

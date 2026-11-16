@@ -1,0 +1,625 @@
+[
+  {
+    "en": "Settler Nation",
+    "detalles_en": "Halflings and Imperials are generally distrustful of outsiders, especially within the dangerous lands of the Mildaark. Regardless, they will begrudgingly ally with other settlers of the forest if they know to keep their thieving mitts to themselves. When constructing your Warband, you may also use Characters from the Imperial/Halfling and Njorsvald Factions.",
+    "nombre_es": "Nación Colonizadora (Settler Nation)",
+    "resumen_es": "Permite incluir personajes de las facciones aliadas de colonos al construir la Banda.",
+    "detalles_es": "Los Halflings e Imperiales por lo general desconfían de los extraños, especialmente en las peligrosas tierras del Mildaark. A pesar de todo, se aliarán a regañadientes con otros colonos del bosque si saben mantener sus manos de ladrón para sí mismos. Al construir tu Banda, también puedes utilizar Personajes de las facciones Imperial/Halfling y Njorsvald."
+  },
+  {
+    "en": "Grand Cookbook of Bulbo Chubb",
+    "detalles_en": "These delicious meals, created by the legendary Master Cook Bulbo Chubb himself, are often either brought to or prepared on the battlefield by the Halflings to give them strength in combat. All it takes is a little Arcanite seasoning and the dishes take up a whole new dimension of 'flavour'. Grants access to the Grand Cookbook of Bulbo Chubb spell list.",
+    "nombre_es": "El Gran Libro de Cocina de Bulbo Chubb (Grand Cookbook of Bulbo Chubb)",
+    "resumen_es": "Otorga acceso al Saber mágico gastronómico de los Halflings.",
+    "detalles_es": "Estas deliciosas comidas, creadas por el mismísimo legendario Maestro Cocinero Bulbo Chubb, a menudo son llevadas o preparadas en el campo de batalla por los Halflings para darles fuerza en el combate. Todo lo que se necesita es un poco de sazón de Arcanita y los platos adquieren una dimensión completamente nueva de 'sabor'. Otorga acceso a la lista de Hechizos de El Gran Libro de Cocina de Bulbo Chubb."
+  },
+  {
+    "en": "Afterlife",
+    "detalles_en": "The Ancient Dead believe they are in the afterlife promised by their long-forgotten gods, and as such have no fear of anything that might cause them harm. Characters with this Trait automatically pass all Bravery Tests.",
+    "nombre_es": "El Más Allá (Afterlife)",
+    "resumen_es": "Pasa automáticamente todos los Chequeos de Valentía.",
+    "detalles_es": "Los Antiguos Muertos creen que están en el más allá prometido por sus dioses olvidados desde hace mucho tiempo y, como tales, no tienen miedo de nada que pueda causarles daño. Los Personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía."
+  },
+  {
+    "en": "Bones",
+    "detalles_en": "With their flesh long since gone, the Ancient Dead are proud of their gleaming bones. There are a lot of benefits to not having any skin. Any Character with this Trait may attempt an Easy Feat to 'pull themselves together' and regain D3HP. In addition, they count as in Cover against any Ranged Attacks.",
+    "nombre_es": "Huesos (Bones)",
+    "resumen_es": "Permite recuperar D3 HP con una Hazaña Fácil y otorga Cobertura constante contra disparos.",
+    "detalles_es": "Con su carne desaparecida desde hace mucho tiempo, los Antiguos Muertos están orgullosos de sus brillantes huesos. Hay muchos beneficios en no tener piel. Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para 'recomponerse' y recuperar D3 HP. Además, cuentan como en Cobertura contra cualquier Ataque a distancia."
+  },
+  {
+    "en": "Undead Legions",
+    "detalles_en": "Although the unliving are dismissive of the living, they have been known to ally with other unliving beings whose hunger for power they respect. When constructing your Warband, you may use Characters from the Undead Raiders, Vampire and Ancient Dead Factions.",
+    "nombre_es": "Legiones No-Muertas (Undead Legions)",
+    "resumen_es": "Permite reclutar personajes de otras facciones de No-Muertos al construir la Banda.",
+    "detalles_es": "Aunque los no-muertos desprecian a los vivos, se sabe que se alían con otros seres no-muertos cuyo hambre de poder respetan. Al construir tu Banda, puedes utilizar Personajes de las facciones Saqueadores No-Muertos (Undead Raiders), Vampiros (Vampires) y Antiguos Muertos (Ancient Dead)."
+  },
+  {
+    "en": "Nomadic Clans",
+    "detalles_en": "The Beastfolk live a roaming, nomadic life in the wilds of ArcWorlde and have been known to ally with those who do the same. When constructing your Warband, you may use Characters from the Ourks and Gremlins Factions.",
+    "nombre_es": "Clanes Nómadas (Nomadic Clans)",
+    "resumen_es": "Permite a los Hombres Bestia incluir personajes Ourks y Gremlins en la Banda.",
+    "detalles_es": "Los Hombres Bestia llevan una vida nómada y errante en las tierras salvajes de ArcWorlde y se sabe que se alían con quienes hacen lo mismo. Al construir tu Banda, puedes utilizar Personajes de las facciones Ourks y Gremlins."
+  },
+  {
+    "en": "Beastkin",
+    "detalles_en": "Beasts, Monsters or Titans from the Bestiary taken as part of a Beastfolk Warband are at -20% GP cost.",
+    "nombre_es": "Parentesco Bestial (Beastkin)",
+    "resumen_es": "Descuento del 20% en el coste en GP de criaturas del Bestiario.",
+    "detalles_es": "Las Bestias, Monstruos o Titanes del Bestiario reclutados como parte de una Banda de Hombres Bestia (Beastfolk) tienen un descuento del -20% en su coste en GP."
+  },
+  {
+    "en": "Diminutive & Intimidating",
+    "detalles_en": "When a friendly Character with the Diminutive Trait is Knocked Out, friendly Characters with the Intimidating Trait do not need to make Bravery Tests.",
+    "nombre_es": "Jerarquía de Tamaño (Diminutive & Intimidating)",
+    "resumen_es": "Los aliados Intimidantes no hacen Chequeos de Valentía al caer un Diminuto.",
+    "detalles_es": "Cuando un Personaje aliado con el Rasgo Diminuto (Diminutive) queda Noqueado, los Personajes aliados con el Rasgo Intimidante (Intimidating) no necesitan realizar Chequeos de Valentía."
+  },
+  {
+    "en": "The Dark One's Will",
+    "detalles_en": "Each Dark Lord has a unique combination of obsessions, grudges and fevered goals that make up their twisted personality. Before the game, choose the character traits your Dark Lord embodies: Fell Warrior (+1AP per KO), Dark Warlock (Mage Trait and Lore of Villainy), Master of the Horde (-20% GP for Hobgoblins), or Beast Master (-20% GP for Bestiary creatures).",
+    "nombre_es": "La Voluntad del Oscuro (The Dark One's Will)",
+    "resumen_es": "Permite elegir la personalidad y bonificaciones del Señor Oscuro antes de la partida.",
+    "detalles_es": "Cada Señor Oscuro tiene una combinación única de obsesiones, rencores y objetivos febriles que componen su retorcida personalidad. Antes del juego, elige los rasgos de personalidad que encarna tu Señor Oscuro: Guerrero Maligno (+1 AP por cada enemigo Noqueado), Brujo Oscuro (obtiene el Rasgo Mago y el Saber de la Villanía), Maestro de la Horda (-20% GP para Hobgoblins) o Maestro de Bestias (-20% GP para criaturas del Bestiario)."
+  },
+  {
+    "en": "Fae Beings",
+    "detalles_en": "Fae Beings are mercurial creatures of magic, and on occasion temporarily ally with those whose magical prowess they respect. When constructing your Warband, you may use Characters from the Wizards, Dark Lords and Wild Elven Factions.",
+    "nombre_es": "Seres Fae (Fae Beings)",
+    "resumen_es": "Permite alianzas entre Magos, Señores Oscuros y Elfos Silvanos.",
+    "detalles_es": "Los Seres Fae son criaturas mágicas volubles y, en ocasiones, se alían temporalmente con aquellos cuyo poder mágico respetan. Al construir tu Banda, puedes utilizar Personajes de las facciones Magos (Wizards), Señores Oscuros (Dark Lords) y Elfos Silvanos (Wild Elves)."
+  },
+  {
+    "en": "Born Slippy",
+    "detalles_en": "Gremlins are small and nimble, making them incredibly difficult to pin down in combat. All Characters with this Trait may re-roll any failed Feat attempts to Disengage from Melee Combat.",
+    "nombre_es": "Escurridizo (Born Slippy)",
+    "resumen_es": "Permite Repetir tiradas fallidas para Destrabarse del combate cuerpo a cuerpo.",
+    "detalles_es": "Los Gremlins son pequeños y ágiles, lo que los hace increíblemente difíciles de fijar en combate. Todos los Personajes con este Rasgo pueden Repetir tirada en cualquier intento fallido de Hazaña para Destrabarse del combate cuerpo a cuerpo."
+  },
+  {
+    "en": "Burrow Dweller",
+    "detalles_en": "Gremlins live in vast burrows beneath the ground. Characters with this Trait may use any Gremlin Burrows placed upon the battlefield. If in base contact with a Gremlin Burrow, they may jump down it by attempting an Easy Feat. If successful, the Character is temporarily removed from the game. In the next Round, they must re-appear in base contact with any Gremlin Burrow on the board at the start of their Activation and heal D3HP.",
+    "nombre_es": "Habitante de Madrigueras (Burrow Dweller)",
+    "resumen_es": "Permite ocultarse en Madrigueras Gremlin para curar D3 HP y reaparecer la siguiente Ronda.",
+    "detalles_es": "Los Gremlins viven en vastas madrigueras bajo tierra. Los Personajes con este Rasgo pueden usar cualquier Madriguera Gremlin colocada en el campo de batalla. Si están en contacto de peana con una Madriguera Gremlin, pueden saltar dentro intentando una Hazaña Fácil. Si tienen éxito, el Personaje es retirado temporalmente del juego. En la siguiente Ronda, deben reaparecer en contacto de peana con cualquier Madriguera Gremlin en el tablero al comienzo de su Activación y curar D3 HP."
+  },
+  {
+    "en": "Nomads",
+    "detalles_en": "The Ourks live a roaming, nomadic life in the wilds of ArcWorlde and have been known to ally with those who do the same. When constructing your Warband, you may use Characters from the Beastfolk and Gremlins Factions.",
+    "nombre_es": "Nómadas (Nomads)",
+    "resumen_es": "Permite a los Ourks incluir personajes de los Hombres Bestia y Gremlins.",
+    "detalles_es": "Los Ourks llevan una vida nómada y errante en las tierras salvajes de ArcWorlde y se sabe que se alían con quienes hacen lo mismo. Al construir tu Banda, puedes utilizar Personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins."
+  },
+  {
+    "en": "Power Struggle",
+    "detalles_en": "It is common in an Ourk clan for the Chieftains and the Dreameaters to be in constant competition for leadership. If you take a Chieftain and a Dreameater as part of your Warband, they must each roll a Bravery Test at the start of each Round. The Character with the highest roll receives certain bonuses stated in their stat profile. The loser receives certain negative effects also stated in their profile.",
+    "nombre_es": "Disputa de Poder (Power Struggle)",
+    "resumen_es": "Lucha de liderazgo entre el Chieftain y el Dreameater al inicio de cada Ronda.",
+    "detalles_es": "Es común en un clan Ourk que los Chieftains y los Dreameaters estén en constante competencia por el liderazgo. Si llevas un Chieftain y un Dreameater como parte de tu Banda, cada uno debe realizar un Chequeo de Valentía al comienzo de cada Ronda. El Personaje con la tirada más alta recibe ciertas bonificaciones indicadas en su perfil de atributos. El perdedor recibe ciertos efectos negativos también indicados en su perfil."
+  },
+  {
+    "en": "Raiser of the Dead",
+    "detalles_en": "A Character with the Raiser of the Dead Trait may attempt to resurrect fallen friendly Characters with the Risen Trait. When a Raised Character is Knocked Out, place the model on its side or use a token to mark where they fell. To resurrect a Knocked Out Character, the Raiser of the Dead must roll a Feat and be within 6\" of the marked spot: Easy/Medium for Units/Beasts, Hard for Elites/Irregulars, Legendary for Heavies. Resurrected Characters return at 50% HP.",
+    "nombre_es": "Invocador de No-Muertos (Raiser of the Dead)",
+    "resumen_es": "Permite resucitar a aliados Noqueados con el Rasgo Resucitado a 6\" o menos.",
+    "detalles_es": "Un Personaje con el Rasgo Invocador de No-Muertos puede intentar resucitar a Personajes aliados caídos con el Rasgo Resucitado (Risen). Cuando un Personaje Resucitado queda Noqueado, coloca la miniatura de lado o usa una ficha para marcar dónde cayó. Para resucitar a un Personaje Noqueado, el Invocador de No-Muertos debe realizar una Hazaña y estar a 6\" o menos del punto marcado: Fácil/Media para Unidades/Bestias, Difícil para Élites/Irregulares, Legendaria para Pesadas. Los Personajes resucitados vuelven con el 50% de sus HP."
+  },
+  {
+    "en": "Enthral",
+    "detalles_en": "Vampires are able to cloud the minds of mortals and bend them to their will. A Vampire may attempt to Enthral an enemy Character in base contact by rolling a Feat (Easy for Units, Medium for Elites/Irregulars, Hard for Heavies, Legendary for Commanders). If successful, the target becomes a Thrall under your control.",
+    "nombre_es": "Fascinar (Enthral)",
+    "resumen_es": "Permite al Vampiro dominar a un personaje enemigo en contacto de peana.",
+    "detalles_es": "Los Vampiros son capaces de nublar las mentes de los mortales y doblegarlas a su voluntad. Un Vampiro puede intentar Fascinar a un Personaje enemigo en contacto de peana realizando una Hazaña (Fácil para Unidades, Media para Élites/Irregulares, Difícil para Pesadas, Legendaria para Comandantes). Si tiene éxito, el objetivo se convierte en un Esclavo (Thrall) bajo tu control."
+  },
+  {
+    "en": "Insignificant",
+    "detalles_en": "When this Character is Knocked Out, friendly Characters do not need to make Bravery Tests.",
+    "nombre_es": "Insignificante (Insignificant)",
+    "resumen_es": "La caída fuera de combate de esta miniatura no causa Chequeos de Valentía a sus aliados.",
+    "detalles_es": "Cuando este Personaje queda Noqueado, los Personajes aliados no necesitan realizar Chequeos de Valentía."
+  },
+  {
+    "en": "Summoner & Sacrifice",
+    "detalles_en": "Wild Elf Druids and Warchiefs can summon woodland beings to aid them in battle. In addition, a Druid may perform a Sacrifice: once per activation, attempt a Medium Feat against an enemy in base contact at 25% or less HP. If successful, remove the enemy and replace them with an Arcanite Token.",
+    "nombre_es": "Invocador y Sacrificio (Summoner & Sacrifice)",
+    "resumen_es": "Permite invocar criaturas del bosque y sacrificar enemigos moribundos por Arcanita.",
+    "detalles_es": "Los Druidas y Jefes de Guerra Elfos Silvanos pueden invocar seres del bosque para ayudarlos en la batalla. Además, un Druida puede realizar un Sacrificio: una vez por Activación, intentar una Hazaña Media contra un enemigo en contacto de peana que esté al 25% o menos de sus HP. Si tiene éxito, retira al enemigo y reemplázalo por una Ficha de Arcanita."
+  },
+  {
+    "en": "Fae Beings",
+    "detalles_en": "Fae Beings are mercurial creatures of magic, and on occasion temporarily ally with those whose magical prowess they respect. When constructing your Warband, you may use Characters from the Wizards, Dark Lords and Wild Elven Factions.",
+    "nombre_es": "Seres Fae (Fae Beings)",
+    "resumen_es": "Permite alianzas entre Magos, Señores Oscuros y Elfos Silvanos.",
+    "detalles_es": "Los Seres Fae son criaturas mágicas volubles y, en ocasiones, se alían temporalmente con aquellos cuyo poder mágico respetan. Al construir tu Banda, puedes utilizar Personajes de las facciones Magos (Wizards), Señores Oscuros (Dark Lords) y Elfos Silvanos (Wild Elves)."
+  },
+  {
+    "en": "Colleges of Mt Orion",
+    "detalles_en": "Wizards from the Great College of Mt Orion specialize in one of six elemental colleges: Crimson, Sapphire, Emerald, Ochre, Bronze, or Opal. When building a Wizard warband, choose a College. Your Mage and Apprentices gain access to that College's full spell list.",
+    "nombre_es": "Colegios de Monte Orion (Colleges of Mt Orion)",
+    "resumen_es": "Estructura los hechizos de la facción en seis escuelas elementales distintas.",
+    "detalles_es": "Los Magos del Gran Colegio del Monte Orion se especializan en uno de los seis colegios elementales: Carmesí, Zafiro, Esmeralda, Ocre, Bronce u Ópalo. Al construir una Banda de Magos, elige un Colegio. Tu Mago y tus Aprendices obtienen acceso a la lista completa de Hechizos de ese Colegio."
+  },
+  {
+    "en": "Thing of Magic",
+    "detalles_en": "Characters with this Ability are not deployed on the battlefield. A Character with the Mage Type may attempt to bring them to 'life' on the battlefield by casting the Conjure Sprites Spell. Things of Magic may not be equipped with Equipment before the game. If a Thing of Magic is ever Knocked Out, they may be re-conjured in the following Round.",
+    "nombre_es": "Criatura Mágica (Thing of Magic)",
+    "resumen_es": "No se despliega al inicio y debe ser Invocada en combate mediante Hechizos.",
+    "detalles_es": "Los Personajes con esta habilidad no se despliegan en el campo de batalla. Un Personaje de tipo Mago puede intentar traerlos a la 'vida' en el campo de batalla lanzando el Hechizo Conjurar Sprites (Conjure Sprites). Las Criaturas Mágicas no pueden equiparse con Equipo antes del juego. Si una Criatura Mágica queda Noqueada, puede ser Invocada de nuevo en la siguiente Ronda."
+  },
+  {
+    "en": "Make Orders",
+    "detalles_en": "If a Character has the Make Orders Trait, on an Easy Feat one of the faction commands can be issued to friendly Characters with the Take Orders Trait within 12\". Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders.",
+    "nombre_es": "Emitir Órdenes (Make Orders)",
+    "resumen_es": "Permite emitir órdenes tácticas a aliados con Take Orders a 12\" o menos tras una Hazaña Fácil.",
+    "detalles_es": "Si un Personaje tiene el Rasgo Emitir Órdenes, tras superar una Hazaña Fácil puede emitir una de las órdenes de facción a los Personajes aliados con el Rasgo Recibir Órdenes a 12\" o menos. Al emitir una orden, la Activación de este Personaje finaliza y la Activación pasa a los Personajes que reciben las órdenes."
+  },
+  {
+    "en": "Take Orders",
+    "detalles_en": "A Trait that enables the Character to receive orders issued by a friendly Character with the Make Orders Trait within 12\".",
+    "nombre_es": "Recibir Órdenes (Take Orders)",
+    "resumen_es": "Permite a la miniatura recibir y ejecutar órdenes emitidas por un oficial.",
+    "detalles_es": "Un Rasgo que habilita al Personaje para recibir órdenes emitidas por un Personaje aliado con el Rasgo Emitir Órdenes a 12\" o menos."
+  },
+  {
+    "en": "Rousing Cheer",
+    "detalles_en": "All friendly Characters within 8\" of the Sheriff make Bravery Tests with Advantage.",
+    "nombre_es": "Voz de Ánimo (Rousing Cheer)",
+    "resumen_es": "Otorga Ventaja en Chequeos de Valentía a los aliados a 8\" o menos.",
+    "detalles_es": "Todos los Personajes aliados a 8\" o menos del Sheriff realizan los Chequeos de Valentía con Ventaja."
+  },
+  {
+    "en": "Bodyguard",
+    "detalles_en": "If a friendly Commander within 2\" is targeted by an Attack, this Character may attempt an Easy Feat to become the new target of the Attack instead.",
+    "nombre_es": "Guardaespaldas (Bodyguard)",
+    "resumen_es": "Permite interceptar Ataques dirigidos a un Comandante aliado a 2\" o menos.",
+    "detalles_es": "Si un Comandante aliado a 2\" o menos es objetivo de un Ataque, este Personaje puede intentar una Hazaña Fácil para convertirse en el nuevo objetivo del Ataque en su lugar."
+  },
+  {
+    "en": "Crew & Random Payload",
+    "detalles_en": "Requires 2 crew members to operate at full capacity. When firing, roll a D6 to determine the payload type: explosive, shrapnel, or solid shot.",
+    "nombre_es": "Dotación y Carga Aleatoria (Crew & Random Payload)",
+    "resumen_es": "Determina el funcionamiento y tipo de munición aleatoria del cañón de artillería.",
+    "detalles_es": "Requiere 2 miembros de dotación para funcionar a plena capacidad. Al disparar, tira un D6 para determinar el tipo de carga: explosiva, metralla o proyectil sólido."
+  },
+  {
+    "en": "Lead from the Front",
+    "detalles_en": "If the Commander makes a Charge move into base contact with an enemy, all friendly Characters activating alongside them gain +1AP for that Activation.",
+    "nombre_es": "Liderar desde el Frente (Lead from the Front)",
+    "resumen_es": "Otorga +1 AP a los aliados al cargar en combate junto a su Comandante.",
+    "detalles_es": "Si el Comandante realiza un movimiento de Carga y entra en contacto de peana con un enemigo, todos los Personajes aliados que se activen junto a él ganan +1 AP para esa Activación."
+  },
+  {
+    "en": "Heavy Armour",
+    "detalles_en": "If equipped, a Character gains +2 Armour. This does not stack. In addition, any Leg It rolls are at +1 difficulty.",
+    "nombre_es": "Armadura Pesada (Heavy Armour)",
+    "resumen_es": "Otorga +2 a la Armadura y aplica +1 de dificultad a las tiradas de Leg It.",
+    "detalles_es": "Si se equipa, un Personaje gana +2 de Armadura. Esto no se acumula. Además, cualquier tirada de Leg It tiene +1 de dificultad."
+  },
+  {
+    "en": "Gunpowder Master",
+    "detalles_en": "The Character may re-roll any failed Feat rolls when making Ranged Attacks with gunpowder or arcloque weapons.",
+    "nombre_es": "Maestro de la Pólvora (Gunpowder Master)",
+    "resumen_es": "Permite Repetir tiradas fallidas en disparos con armas de pólvora o arcloque.",
+    "detalles_es": "El Personaje puede Repetir tirada en cualquier tirada de Hazaña fallida al realizar Ataques a distancia con armas de pólvora o arcloque."
+  },
+  {
+    "en": "Tinkered Construct",
+    "detalles_en": "Automatically passes all Bravery Tests. If a Mage or Tinkerer passes a Medium Feat while in base contact, the construct regains D3HP.",
+    "nombre_es": "Constructo Autómata (Tinkered Construct)",
+    "resumen_es": "Autómata inmune a moral que puede ser reparado por un Mago o Tinkerer.",
+    "detalles_es": "Pasa automáticamente todos los Chequeos de Valentía. Si un Mago o Tinkerer supera una Hazaña Media estando en contacto de peana, el constructo recupera D3 HP."
+  },
+  {
+    "en": "Bones",
+    "detalles_en": "With their flesh long since gone, the Ancient Dead are proud of their gleaming bones. Any Character with this Trait may attempt an Easy Feat to 'pull themselves together' and regain D3HP. In addition, they count as in Cover against any Ranged Attacks.",
+    "nombre_es": "Huesos (Bones)",
+    "resumen_es": "Permite recuperar D3 HP con una Hazaña Fácil y otorga Cobertura constante contra disparos.",
+    "detalles_es": "Con su carne desaparecida desde hace mucho tiempo, los Antiguos Muertos están orgullosos de sus brillantes huesos. Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para 'recomponerse' y recuperar D3 HP. Además, cuentan como en Cobertura contra cualquier Ataque a distancia."
+  },
+  {
+    "en": "Buried Horde",
+    "detalles_en": "All Gear from the Common Armoury equipped to a Tomb Guardian is at -25%GP, rounded up to the nearest whole number.",
+    "nombre_es": "Horda Enterrada (Buried Horde)",
+    "resumen_es": "Descuento del 25% en el coste en GP del Equipo de la Armería Común para el Tomb Guardian.",
+    "detalles_es": "Todo el Equipo de la Armería Común equipado en un Guardián de la Tumba (Tomb Guardian) tiene un descuento del -25% GP, redondeado hacia arriba al número entero más cercano."
+  },
+  {
+    "en": "Spirit of the Relic",
+    "detalles_en": "The spirit is bound to the sacred relic of the Warband and cannot move more than 8\" away from the relic or the Character carrying it.",
+    "nombre_es": "Espíritu de la Reliquia (Spirit of the Relic)",
+    "resumen_es": "Vincula el movimiento del espíritu a una distancia máxima de 8\" de la reliquia.",
+    "detalles_es": "El espíritu está vinculado a la reliquia sagrada de la Banda y no puede alejarse a más de 8\" de la reliquia o del Personaje que la porta."
+  },
+  {
+    "en": "Intimidating",
+    "detalles_en": "Enemy Characters within 3\" must re-roll any successful Bravery Tests.",
+    "nombre_es": "Intimidante (Intimidating)",
+    "resumen_es": "Obliga a los enemigos a 3\" o menos a Repetir tiradas en Chequeos de Valentía exitosos.",
+    "detalles_es": "Los Personajes enemigos a 3\" o menos deben Repetir tirada en cualquier Chequeo de Valentía exitoso."
+  },
+  {
+    "en": "Go Get’Em!",
+    "detalles_en": "On an Easy Feat, the Packmaster can order a friendly Beast within 6\" to gain +2\" Movement for its next Activation.",
+    "nombre_es": "¡A por Ellos! (Go Get’Em!)",
+    "resumen_es": "Otorga +2\" de Movimiento a una Bestia aliada a 6\" tras una Hazaña Fácil.",
+    "detalles_es": "Tras superar una Hazaña Fácil, el Packmaster puede ordenar a una Bestia aliada a 6\" o menos que gane +2\" de Movimiento para su siguiente Activación."
+  },
+  {
+    "en": "Ballads of the Beastfolk",
+    "detalles_en": "The Bardo can sing a ballad during activation: War Song (+1 Power to melee attacks for allies within 6\") or Hymn of Resilience (allies within 6\" automatically pass Bravery Tests).",
+    "nombre_es": "Baladas de los Hombres Bestia (Ballads of the Beastfolk)",
+    "resumen_es": "Canciones de guerra que otorgan +1 Power o moral automática a los aliados a 6\".",
+    "detalles_es": "El Bardo puede cantar una balada durante su Activación: Canción de Guerra (+1 al Power en Ataques cuerpo a cuerpo para aliados a 6\" o menos) u Himno de Resistencia (los aliados a 6\" o menos pasan automáticamente los Chequeos de Valentía)."
+  },
+  {
+    "en": "Fiery Essence",
+    "detalles_en": "Underlings are not deployed at the start. The Dark Lord may summon an Underling during activation by losing 2HP and reducing their max HP by 2.",
+    "nombre_es": "Esencia Ígnea (Fiery Essence)",
+    "resumen_es": "El Señor Oscuro invoca esbirros sacrificando HP e HP máximos.",
+    "detalles_es": "Los Underlings no se despliegan al inicio. El Señor Oscuro puede invocar un Underling durante su Activación perdiendo 2 HP y reduciendo su HP máximo en 2."
+  },
+  {
+    "en": "Blazing Demise",
+    "detalles_en": "(2AP) Area attack targeting all models within 2\" with Power 6 (+1 Power against Flammable targets). After resolving, the Underling is automatically Knocked Out.",
+    "nombre_es": "Fin Flameante (Blazing Demise)",
+    "resumen_es": "Ataque suicida de área de Power 6 a 2\" que deja Noqueado al esbirro.",
+    "detalles_es": "(2 AP) Ataque de área dirigido a todas las miniaturas a 2\" o menos con Power 6 (+1 Power contra objetivos Inflamables). Tras resolverlo, el Underling queda Noqueado automáticamente."
+  },
+  {
+    "en": "Slavedriver",
+    "detalles_en": "The Honcho can deal 1 damage to a friendly Hobgoblin within 4\" to grant them +1AP for their next Activation.",
+    "nombre_es": "Capataz de Esclavos (Slavedriver)",
+    "resumen_es": "Inflige 1 daño a un Hobgoblin aliado a 4\" para otorgarle +1 AP.",
+    "detalles_es": "El Honcho puede infligir 1 de daño a un Hobgoblin aliado a 4\" o menos para otorgarle +1 AP en su siguiente Activación."
+  },
+  {
+    "en": "Shield Carriers",
+    "detalles_en": "While in base contact with each other, Shield Carriers grant +1 Armour against Ranged Attacks to all models in the formation.",
+    "nombre_es": "Portadores de Escudo (Shield Carriers)",
+    "resumen_es": "Otorga +1 de Armadura contra disparos a las miniaturas adyacentes en formación.",
+    "detalles_es": "Mientras estén en contacto de peana entre sí, los Portadores de Escudo otorgan +1 de Armadura contra Ataques a distancia a todas las miniaturas de la formación."
+  },
+  {
+    "en": "Burrowing Tools",
+    "detalles_en": "On an Easy Feat, the Character can dig underground, ignoring terrain and re-emerging at any point within 6\".",
+    "nombre_es": "Herramientas de Excavación (Burrowing Tools)",
+    "resumen_es": "Permite excavar bajo tierra para ignorar terreno y reaparecer a 6\".",
+    "detalles_es": "Tras superar una Hazaña Fácil, el Personaje puede excavar bajo tierra, ignorando el terreno y reapareciendo en cualquier punto a 6\" o menos."
+  },
+  {
+    "en": "Hurl Boglin",
+    "detalles_en": "On an Easy Feat, a Brute or Chieftain can pick up a friendly Boglin in base contact and throw them up to 8\". Target takes D6 hits and is Prone.",
+    "nombre_es": "Lanzar Boglin (Hurl Boglin)",
+    "resumen_es": "Permite coger a un Boglin adyacente y lanzarlo hasta 8\" como proyectil.",
+    "detalles_es": "Tras superar una Hazaña Fácil, un Brute o Chieftain puede coger a un Boglin aliado en contacto de peana y lanzarlo hasta 8\". El objetivo sufre D6 impactos y queda Tumbado."
+  },
+  {
+    "en": "Booze Frenzy",
+    "detalles_en": "At the start of activation, roll a D6 to determine drink effect: 1 (-2AP), 2 (+2 Move, +3 Power), 3 (heal D3HP), 4 (re-roll Feat), 5 (fire breath attack), 6 (frenzy).",
+    "nombre_es": "Frenesí de la Bebida (Booze Frenzy)",
+    "resumen_es": "Efectos aleatorios de brebaje al inicio de la Activación del Brewzerker.",
+    "detalles_es": "Al comienzo de la Activación, tira un D6 para determinar el efecto de la bebida: 1 (-2 AP), 2 (+2 Movimiento, +3 Power), 3 (cura D3 HP), 4 (Repetir tirada de Hazaña), 5 (ataque de aliento de fuego), 6 (frenesí)."
+  },
+  {
+    "en": "Risen",
+    "detalles_en": "Indicates the model is a resurrected undead that can be brought back by a Raiser of the Dead within 6\" when Knocked Out.",
+    "nombre_es": "Resucitado (Risen)",
+    "resumen_es": "Indica que la miniatura puede ser resucitada en combate por un Invocador de No-Muertos.",
+    "detalles_es": "Indica que la miniatura es un no-muerto resucitado que puede ser traído de vuelta al juego por un Invocador de No-Muertos a 6\" o menos cuando queda Noqueado."
+  },
+  {
+    "en": "Lure of the Light",
+    "detalles_en": "Enemy Characters within 6\" wishing to move away from the Will o'the Wisp must pass a Bravery Test.",
+    "nombre_es": "Atracción de la Luz (Lure of the Light)",
+    "resumen_es": "Obliga a pasar un Chequeo de Valentía a los enemigos a 6\" que intenten alejarse.",
+    "detalles_es": "Los Personajes enemigos a 6\" o menos que deseen moverse alejándose del Will o'the Wisp deben pasar un Chequeo de Valentía."
+  },
+  {
+    "en": "Vampiric Glare",
+    "detalles_en": "Target within 6\" must pass a Bravery Test or be unable to Move or Attack during their next Activation.",
+    "nombre_es": "Mirada Vampírica (Vampiric Glare)",
+    "resumen_es": "Paraliza a un enemigo a 6\" impidiéndole Moverse o Atacar si falla Valentía.",
+    "detalles_es": "El objetivo a 6\" o menos debe pasar un Chequeo de Valentía o no podrá Moverse ni Atacar durante su siguiente Activación."
+  },
+  {
+    "en": "Raking Claws",
+    "detalles_en": "(Melee) Power 7. A Critical Hit ignores and permanently destroys 1 point of the target's Armour.",
+    "nombre_es": "Garras Desgarradoras (Raking Claws)",
+    "resumen_es": "Ataque melé Power 7 que en Impacto Crítico destruye 1 de Armadura.",
+    "detalles_es": "(Cuerpo a cuerpo) Power 7. Un Impacto Crítico ignora y destruye permanentemente 1 punto de la Armadura del objetivo."
+  },
+  {
+    "en": "Agile",
+    "detalles_en": "The Character ignores movement penalties for difficult terrain and may re-roll any failed Leg It attempts.",
+    "nombre_es": "Ágil (Agile)",
+    "resumen_es": "Ignores terreno difícil y permite Repetir tiradas fallidas de Leg It.",
+    "detalles_es": "El Personaje ignora las penalizaciones de movimiento por terreno difícil y puede Repetir tirada en cualquier intento fallido de Leg It."
+  },
+  {
+    "en": "Flurry of Blades",
+    "detalles_en": "When making Melee Attacks, each Critical Hit scored allows an additional D6 attack die to be rolled.",
+    "nombre_es": "Ráfaga de Hojas (Flurry of Blades)",
+    "resumen_es": "Cada Impacto Crítico en melé otorga un dado D6 adicional de ataque.",
+    "detalles_es": "Al realizar Ataques cuerpo a cuerpo, cada Impacto Crítico obtenido permite lanzar un dado D6 adicional de ataque."
+  },
+  {
+    "en": "Mage",
+    "detalles_en": "The Character belongs to the Mage class and can cast Spells from their faction or college lore using Action Points.",
+    "nombre_es": "Mago (Mage)",
+    "resumen_es": "Habilita a la miniatura para Lanzar Hechizos consumiendo Puntos de Acción.",
+    "detalles_es": "El Personaje pertenece a la clase Mago y puede Lanzar Hechizos del Saber de su facción o colegio consumiendo Puntos de Acción (AP)."
+  },
+  {
+    "en": "Light Armour (Gratis)",
+    "detalles_en": "If equipped, a Character gains +1 Armour. This does not stack.",
+    "nombre_es": "Armadura Ligera de Serie (Light Armour)",
+    "resumen_es": "Otorga +1 de Armadura como equipo de serie sin coste adicional.",
+    "detalles_es": "Si se equipa, un Personaje gana +1 de Armadura. Esto no se acumula."
+  },
+  {
+    "en": "Heavy Armour (Gratis)",
+    "detalles_en": "If equipped, a Character gains +2 Armour. This does not stack. In addition, any Leg It rolls are at +1 difficulty.",
+    "nombre_es": "Armadura Pesada de Serie (Heavy Armour)",
+    "resumen_es": "Otorga +2 de Armadura como equipo de serie sin coste adicional.",
+    "detalles_es": "Si se equipa, un Personaje gana +2 de Armadura. Esto no se acumula. Además, cualquier tirada de Leg It tiene +1 de dificultad."
+  },
+  {
+    "en": "Contraption Trunk",
+    "detalles_en": "Allows the Tinkerer to cast Spells from Tinkerer's Arcane Contraptions using Action Points.",
+    "nombre_es": "Baúl de Artilugios (Contraption Trunk)",
+    "resumen_es": "Permite al Tinkerer Lanzar Hechizos de su inventario místico.",
+    "detalles_es": "Permite al Tinkerer Lanzar Hechizos de la lista de Inventos y Artilugios Arcanos utilizando Puntos de Acción (AP)."
+  },
+  {
+    "en": "Arclance",
+    "detalles_en": "(Melee) Power 7 (+2 Power during an Activation in which the Character made a Mounted Charge move).",
+    "nombre_es": "Lanza de Arcloque (Arclance)",
+    "resumen_es": "Arma melé Power 7 que gana +2 Power al realizar una Carga Montada.",
+    "detalles_es": "(Cuerpo a cuerpo) Power 7 (+2 al Power durante una Activación en la que el Personaje haya realizado un movimiento de Carga Montado)."
+  },
+  {
+    "en": "Enchanted Armour",
+    "detalles_en": "Gives +2 Armour and allows re-rolls on failed defence rolls against enemy Spells.",
+    "nombre_es": "Armadura Encantada (Enchanted Armour)",
+    "resumen_es": "Otorga +2 de Armadura y permite Repetir tiradas de salvación contra Hechizos.",
+    "detalles_es": "Otorga +2 de Armadura y permite Repetir tirada en tiradas de defensa fallidas contra Hechizos enemigos."
+  },
+  {
+    "en": "Diminutive",
+    "detalles_en": "Indicates small size. Can be targeted by the Hurl rule by larger allies or monsters.",
+    "nombre_es": "Diminuto (Diminutive)",
+    "resumen_es": "Miniatura de tamaño reducido que puede ser lanzada por aliados más grandes.",
+    "detalles_es": "Indica un tamaño pequeño. Puede ser objetivo de la regla Lanzar (Hurl) por parte de aliados o monstruos de mayor tamaño."
+  },
+  {
+    "en": "Fearsome",
+    "detalles_en": "Any enemy Character wishing to move into base contact with this Character must first pass a Bravery Test.",
+    "nombre_es": "Temible (Fearsome)",
+    "resumen_es": "Obliga a los enemigos a pasar un Chequeo de Valentía antes de entrar en contacto de peana.",
+    "detalles_es": "Cualquier Personaje enemigo que desee moverse para entrar en contacto de peana con este Personaje debe pasar primero un Chequeo de Valentía."
+  },
+  {
+    "en": "Pack Hunter",
+    "detalles_en": "Gains +1 Power on Melee Attacks for each other friendly Character with Pack Hunter in base contact with the same target.",
+    "nombre_es": "Cazador en Manada (Pack Hunter)",
+    "resumen_es": "Gana +1 Power en melé por cada otro cazador aliado en el mismo combate.",
+    "detalles_es": "Gana +1 al Power en Ataques cuerpo a cuerpo por cada otro Personaje aliado con Cazador en Manada en contacto de peana con el mismo objetivo."
+  },
+  {
+    "en": "Split Activation",
+    "detalles_en": "A Character with this rule may split their Action Points into multiple Activations during the same Round. They can perform some actions, temporarily end activation, and activate again later.",
+    "nombre_es": "Activación Dividida (Split Activation)",
+    "resumen_es": "Permite dividir los AP y activarse varias veces en la misma Ronda.",
+    "detalles_es": "Un Personaje con esta regla puede dividir sus Puntos de Acción (AP) en múltiples Activaciones durante la misma Ronda. Puede realizar algunas acciones, finalizar temporalmente su Activación y volverse a activar más adelante."
+  },
+  {
+    "en": "Dwindling Strength",
+    "detalles_en": "As this Monster or Titan loses HP, its strength fades. For every 25% of starting HP lost, the Power of all its Attacks is reduced by 1.",
+    "nombre_es": "Fuerza Mermante (Dwindling Strength)",
+    "resumen_es": "Reduce en 1 el Power de los ataques por cada 25% de HP perdidos.",
+    "detalles_es": "A medida que este Monstruo o Titán pierde HP, su fuerza decae. Por cada 25% de HP iniciales perdidos, el Power de todos sus Ataques se reduce en 1."
+  },
+  {
+    "en": "Death Throes",
+    "detalles_en": "When this Character is Knocked Out, it immediately deals a Power 5 area attack to all Characters in base contact before being removed.",
+    "nombre_es": "Estertor de Muerte (Death Throes)",
+    "resumen_es": "Inflige un ataque de área de Power 5 al quedar Noqueado.",
+    "detalles_es": "Cuando este Personaje queda Noqueado, inmediatamente realiza un Ataque de área de Power 5 a todos los Personajes en contacto de peana antes de ser retirado."
+  },
+  {
+    "en": "Gobble",
+    "detalles_en": "On a Critical Hit in melee against a 30mm or 40mm base model, the creature can attempt to Gobble the target, dealing D3 hits that ignore Armour.",
+    "nombre_es": "Engullir (Gobble)",
+    "resumen_es": "Permite tragar a un enemigo en melé tras un Impacto Crítico.",
+    "detalles_es": "Con un Impacto Crítico en combate cuerpo a cuerpo contra un modelo de peana de 30mm o 40mm, la criatura puede intentar Engullir al objetivo, infligiendo D3 impactos que ignoran Armadura."
+  },
+  {
+    "en": "Fly",
+    "detalles_en": "This Character can move over terrain features and other Characters without movement penalty. Cannot finish movement on top of another model.",
+    "nombre_es": "Volar (Fly)",
+    "resumen_es": "Mueve sobre terreno y miniaturas sin penalización de movimiento.",
+    "detalles_es": "Este Personaje puede moverse sobre elementos de terreno y otros Personajes sin penalización de movimiento. No puede finalizar su movimiento sobre otra miniatura."
+  },
+  {
+    "en": "Flammable",
+    "detalles_en": "Any fire-based Attack or Spell against a Character with this Trait gains +2 Power and forces the defender to re-roll successful Armour saves.",
+    "nombre_es": "Inflamable (Flammable)",
+    "resumen_es": "Sufre +2 Power y repetición de defensas contra ataques de fuego.",
+    "detalles_es": "Cualquier Ataque o Hechizo basado en fuego contra un Personaje con este Rasgo obtiene +2 al Power y obliga al defensor a Repetir tirada en salvaciones de Armadura exitosas."
+  },
+  {
+    "en": "Summoned",
+    "detalles_en": "This Character is not deployed at the start. Must be brought to the board via a Spell or Summoner Trait. Does not yield VP when Knocked Out.",
+    "nombre_es": "Invocado (Summoned)",
+    "resumen_es": "Criatura traída al juego durante la partida que no otorga PV al caer.",
+    "detalles_es": "Este Personaje no se despliega al inicio. Debe ser traído al tablero mediante un Hechizo o Rasgo de Invocador. No otorga Puntos de Victoria (PV) al quedar Noqueado."
+  },
+  {
+    "en": "Massive",
+    "detalles_en": "Cannot be knocked Prone or moved against its will by smaller models. Can move through 30mm base models dealing 1 Power 4 hit as it passes.",
+    "nombre_es": "Masivo (Massive)",
+    "resumen_es": "Inmune a quedar Tumbado y daña a miniaturas pequeñas al atravesarlas.",
+    "detalles_es": "No puede quedar Tumbado ni ser movido contra su voluntad por modelos más pequeños. Puede moverse a través de modelos de peana de 30mm infligiéndoles 1 impacto de Power 4 al pasar."
+  },
+  {
+    "en": "Undead",
+    "detalles_en": "Undead Characters automatically pass all Bravery Tests and are immune to Fearsome and Intimidating Traits.",
+    "nombre_es": "No-Muerto (Undead)",
+    "resumen_es": "Pasa automáticamente Chequeos de Valentía e inmune a miedos.",
+    "detalles_es": "Los Personajes No-Muertos pasan automáticamente todos los Chequeos de Valentía y son inmunes a los Rasgos Temible (Fearsome) e Intimidante (Intimidating)."
+  },
+  {
+    "en": "Regeneration",
+    "detalles_en": "At the end of its Activation, this Character regains D3HP. Does not function if the Character suffered fire damage this Round.",
+    "nombre_es": "Regeneración (Regeneration)",
+    "resumen_es": "Recupera D3 HP al final de su Activación si no sufrió fuego.",
+    "detalles_es": "Al final de su Activación, este Personaje recupera D3 HP. No funciona si el Personaje sufrió daño de fuego durante la Ronda."
+  },
+  {
+    "en": "Throwable",
+    "detalles_en": "This Character is small enough to be picked up and thrown by larger models using the Hurl rule.",
+    "nombre_es": "Lanzable (Throwable)",
+    "resumen_es": "Miniatura pequeña que puede ser lanzada por modelos más grandes.",
+    "detalles_es": "Este Personaje es lo suficientemente pequeño como para ser cogido y lanzado por modelos más grandes mediante la regla Lanzar (Hurl)."
+  },
+  {
+    "en": "Titan",
+    "detalles_en": "Colossal creature occupying a 100mm+ base, with 5AP per Round and operating under specific Titan rules in the Bestiary manual.",
+    "nombre_es": "Titán (Titan)",
+    "resumen_es": "Criatura colosal en peana de 100mm+ con 5 AP por Ronda.",
+    "detalles_es": "Criatura colosal que ocupa una peana de 100mm o superior, dispone de 5 AP por Ronda y se rige por las reglas específicas de Titanes del manual del Bestiario."
+  },
+  {
+    "en": "Long Limbs",
+    "detalles_en": "Allows Melee Attacks against targets up to 2\" away, even if not in base contact.",
+    "nombre_es": "Extremidades Largas (Long Limbs)",
+    "resumen_es": "Permite atacar cuerpo a cuerpo a hasta 2\" de distancia sin contacto de peana.",
+    "detalles_es": "Permite realizar Ataques cuerpo a cuerpo contra objetivos situados a hasta 2\" de distancia, incluso si no están en contacto de peana."
+  },
+  {
+    "en": "Arc Energy",
+    "detalles_en": "Can consume an Arcanite Token during activation to grant +2 Power or +4\" range to an Attack or Spell.",
+    "nombre_es": "Energía Arcana (Arc Energy)",
+    "resumen_es": "Consume Arcanita para ganar +2 Power o +4\" de alcance.",
+    "detalles_es": "Puede consumir una Ficha de Arcanita durante su Activación para otorgar +2 al Power o +4\" de alcance a un Ataque o Hechizo."
+  },
+  {
+    "en": "Arson Around",
+    "detalles_en": "On an Easy Feat, can ignite terrain within 3\". Any model entering or activating in ignited terrain suffers D3 hits ignoring Armour.",
+    "nombre_es": "Provocar Incendios (Arson Around)",
+    "resumen_es": "Prende fuego a la escenografía a 3\" causando daño a quien entre.",
+    "detalles_es": "Tras una Hazaña Fácil, puede prender fuego a la escenografía a 3\". Cualquier modelo que entre o se active en escenografía encendida sufre D3 impactos que ignoran Armadura."
+  },
+  {
+    "en": "Animal Form",
+    "detalles_en": "Equippable gear option from Beastfolk Armoury granting specialized beast physique and passive traits.",
+    "nombre_es": "Forma Animal (Animal Form)",
+    "resumen_es": "Opción de fisonomía animal de los Hombres Bestia que otorga Rasgos pasivos.",
+    "detalles_es": "Opción de equipo de la Armería de los Hombres Bestia (Beastfolk) que otorga una fisonomía animal especializada y Rasgos pasivos."
+  },
+  {
+    "en": "Lore of Tooth and Fur",
+    "detalles_en": "Spell list native to the Beastfolk faction focusing on wild magic, beasts and nature strength.",
+    "nombre_es": "Saber de Diente y Pelaje (Lore of Tooth and Fur)",
+    "resumen_es": "Saber mágico de los Hombres Bestia centrado en la naturaleza salvaje.",
+    "detalles_es": "Lista de Hechizos nativa de la facción Hombres Bestia (Beastfolk) centrada en la magia salvaje, las bestias y la fuerza de la naturaleza."
+  },
+  {
+    "en": "Waterborne",
+    "detalles_en": "Ignores difficult terrain penalty in water and gains +2\" Movement (including Leg It) in water.",
+    "nombre_es": "Acuático / De Agua (Waterborne)",
+    "resumen_es": "Mueve sin penalización en agua con +2\" de velocidad adicional.",
+    "detalles_es": "Ignera la penalización por terreno difícil en agua y gana +2\" de Movimiento (incluido Leg It) en agua."
+  },
+  {
+    "en": "Rise from Your Grave!",
+    "detalles_en": "The Undead Commander can perform a Feat to resurrect a Knocked Out Risen ally within 6\" at half HP.",
+    "nombre_es": "¡Levántate de tu Tumba! (Rise from Your Grave!)",
+    "resumen_es": "El Comandante No-Muerto resucita a un aliado con el Rasgo Resucitado a 6\".",
+    "detalles_es": "El Comandante No-Muerto puede realizar una Hazaña para resucitar a un aliado Noqueado con el Rasgo Resucitado a 6\" o menos con la mitad de sus HP."
+  },
+  {
+    "en": "Tar Footed",
+    "detalles_en": "All enemy Characters within 3\" have their Movement halved and suffer +1 difficulty on Leg It rolls.",
+    "nombre_es": "Pies de Alquitrán (Tar Footed)",
+    "resumen_es": "Reduce a la mitad el movimiento de los enemigos a 3\" o menos.",
+    "detalles_es": "Todos los Personajes enemigos a 3\" o menos ven reducido su Movimiento a la mitad y sufren +1 de dificultad en las tiradas de Leg It."
+  },
+  {
+    "en": "Undead Lord",
+    "detalles_en": "All friendly Risen Characters within 8\" gain +1 Power on Melee Attacks.",
+    "nombre_es": "Señor No-Muerto (Undead Lord)",
+    "resumen_es": "Otorga +1 al Power en melé a los aliados Resucitados a 8\" o menos.",
+    "detalles_es": "Todos los Personajes aliados con el Rasgo Resucitado a 8\" o menos ganan +1 al Power en sus Ataques cuerpo a cuerpo."
+  },
+  {
+    "en": "Bloodline Powers",
+    "detalles_en": "Allows selection of ancestral Vampire bloodline traits granting unique abilities during warband construction.",
+    "nombre_es": "Poderes de Línea de Sangre (Bloodline Powers)",
+    "resumen_es": "Permite seleccionar poderes ancestrales de línea de sangre para los Vampiros.",
+    "detalles_es": "Permite seleccionar Rasgos ancestrales de línea de sangre para los Vampiros al construir la Banda, otorgando habilidades únicas."
+  },
+  {
+    "en": "Subservient",
+    "detalles_en": "If a friendly Commander within 2\" suffers damage, this model can take the damage instead without rolling.",
+    "nombre_es": "Subserviente (Subservient)",
+    "resumen_es": "Recibe el daño en lugar de un Comandante aliado a 2\" o menos.",
+    "detalles_es": "Si un Comandante aliado a 2\" o menos sufre daño, este modelo puede recibir el daño en su lugar sin necesidad de realizar tirada."
+  },
+  {
+    "en": "Devoted Service",
+    "detalles_en": "While within 4\" of their Commander/Master, may re-roll failed Feat rolls when protecting or making Melee Attacks.",
+    "nombre_es": "Servicio Devoto (Devoted Service)",
+    "resumen_es": "Repite tiradas fallidas de Hazaña en melé o defensa a 4\" del Comandante.",
+    "detalles_es": "Mientras esté a 4\" o menos de su Comandante o Amo, puede Repetir tirada en Hazañas fallidas al proteger o realizar Ataques cuerpo a cuerpo."
+  },
+  {
+    "en": "Raiser of the Dead",
+    "detalles_en": "A Character with this Trait can attempt to resurrect fallen Risen Characters within 6\" via a Feat roll.",
+    "nombre_es": "Invocador de No-Muertos (Raiser of the Dead)",
+    "resumen_es": "Permite resucitar a aliados Noqueados con el Rasgo Resucitado a 6\" o menos.",
+    "detalles_es": "Un Personaje con este Rasgo puede intentar resucitar a Personajes caídos con el Rasgo Resucitado a 6\" o menos mediante una tirada de Hazaña."
+  },
+  {
+    "en": "Outlaw Lord",
+    "detalles_en": "Allows deploying up to 2 Ambush allies in terrain outside the enemy deployment zone at game start.",
+    "nombre_es": "Señor Proscrito (Outlaw Lord)",
+    "resumen_es": "Permite desplegar en Emboscada a hasta 2 aliados al inicio de la partida.",
+    "detalles_es": "Permite desplegar a hasta 2 aliados con el Rasgo Emboscada en terreno fuera de la zona de despliegue enemiga al inicio del juego."
+  },
+  {
+    "en": "Blood Magic",
+    "detalles_en": "Mage can deal 1 damage to self or adjacent ally to gain +2 Power or reduce Spell Required Draw by 2.",
+    "nombre_es": "Magia de Sangre (Blood Magic)",
+    "resumen_es": "Saca 1 daño a sí mismo o a un aliado para ganar +2 Power o reducir en 2 el Exige.",
+    "detalles_es": "El Mago puede infligir 1 de daño a sí mismo o a un aliado adyacente para ganar +2 al Power o reducir en 2 el Exige (Required Draw) de un Hechizo."
+  },
+  {
+    "en": "Woodlore (Lore of the Darkwood)",
+    "detalles_en": "Spell list native to Wild Elves focused on Darkwood magic, plant entanglements and forest spirits.",
+    "nombre_es": "Saber del Bosque Profundo (Woodlore / Lore of the Darkwood)",
+    "resumen_es": "Saber mágico de los Elfos Silvanos centrado en el bosque profundo.",
+    "detalles_es": "Lista de Hechizos nativa de los Elfos Silvanos centrada en la magia del bosque profundo, enredos vegetales y espíritus forestales."
+  },
+  {
+    "en": "Swamp Born",
+    "detalles_en": "Ignores difficult terrain penalty in swamp/bog and re-rolls Leg It in swamp terrain.",
+    "nombre_es": "Nacido en el Pantano (Swamp Born)",
+    "resumen_es": "Ignores terreno difícil de pantano y permite Repetir tirada en Leg It.",
+    "detalles_es": "Ignera la penalización por terreno difícil en ciénagas o pantanos y permite Repetir tirada en Leg It dentro de estos terrenos."
+  },
+  {
+    "en": "War Hides",
+    "detalles_en": "Grants +1 Armour against Melee Attacks. Does not stack with other armour.",
+    "nombre_es": "Pieles de Guerra (War Hides)",
+    "resumen_es": "Otorga +1 de Armadura contra Ataques cuerpo a cuerpo.",
+    "detalles_es": "Otorga +1 de Armadura contra Ataques cuerpo a cuerpo. No se acumula con otras armaduras."
+  },
+  {
+    "en": "Lore of Delusion",
+    "detalles_en": "Spell list native to Ourk Dreameaters focusing on mind manipulation, sleep and illusion.",
+    "nombre_es": "Saber de la Ilusión (Lore of Delusion)",
+    "resumen_es": "Saber mágico de los Ourks enfocado en la manipulación mental e ilusiones.",
+    "detalles_es": "Lista de Hechizos nativa de los Dreameaters Ourks enfocada en la manipulación mental, el sueño y las ilusiones."
+  }
+]
