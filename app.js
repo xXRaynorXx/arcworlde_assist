@@ -8,6 +8,7 @@ const CLASES_CONSULTA = {
 
 function construirSeccionesFacciones() {
     const comp = typeof compendioArcWorlde !== 'undefined' ? compendioArcWorlde : { facciones: [], armeria_comun: [], diccionario_rasgos: {} };
+    const objetoES = (id) => (window.AWCompendio ? AWCompendio.trad('objetos', id) : null);
     const sinParentesis = (t) => String(t || '').replace(/\s*\(.*\)\s*$/, '');
     const nombreEquipo = (id, f) => {
         const g = window.AWGear ? AWGear.find('faccion', id, f.nombre) || AWGear.find('comun', id) : null;
@@ -76,10 +77,16 @@ function construirSeccionesFacciones() {
     }, []);
     const secciones = (comp.facciones || []).map((f) => {
         const apart = f.id === 'bestiary' || f.id === 'swords_for_hire';
-        const armeria = (f.armeria_exclusiva || []).map((a) => Object.assign({}, a, {
-            nombre: a.nombre + ' (' + a.coste + ' GP)',
-            etiqueta: (a.etiqueta || 'Armería') + ' · ' + a.tipo
-        }));
+        const armeria = (f.armeria_exclusiva || []).map((a) => {
+            const t = objetoES(a.id);
+            return Object.assign({}, a, {
+                nombre: (t ? t.nombre : a.nombre) + ' (' + a.coste + ' GP)',
+                etiqueta: (a.etiqueta || 'Armería') + ' · ' + a.tipo,
+                resumen: t ? t.resumen : a.resumen,
+                detalles: t ? t.detalles : a.detalles,
+                restriccion: t ? t.restriccion : a.restriccion
+            });
+        });
         return {
             titulo: (apart ? '' : 'Facción ') + f.nombre,
             descripcion: 'Reglas, miniaturas, rasgos, saberes mágicos y armería exclusiva de ' + f.nombre + '.',
@@ -97,13 +104,17 @@ function construirSeccionesFacciones() {
         descripcion: 'Equipo y objetos que puede comprar cualquier banda.',
         categorias: [{
             nombre_categoria: 'Armería común',
-            acciones: (comp.armeria_comun || []).map((a) => ({
-                id: a.id,
-                nombre: a.nombre + ' (' + a.coste + ' GP)',
-                etiqueta: 'Armería común · ' + a.tipo,
-                detalles: a.efecto || a.detalles || '',
-                restriccion: a.restriccion || ''
-            }))
+            acciones: (comp.armeria_comun || []).map((a) => {
+                const t = objetoES(a.id);
+                return {
+                    id: a.id,
+                    nombre: (t ? t.nombre : a.nombre) + ' (' + a.coste + ' GP)',
+                    etiqueta: 'Armería común · ' + a.tipo,
+                    resumen: t ? t.resumen : undefined,
+                    detalles: t ? t.detalles : (a.efecto || a.detalles || ''),
+                    restriccion: t ? t.restriccion : (a.restriccion || '')
+                };
+            })
         }]
     });
     secciones.push({

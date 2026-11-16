@@ -867,7 +867,170 @@ const traduccionesES = {
       "detalles": "Gana +1 al Power en todos los Ataques cuerpo a cuerpo mientras se encuentra Montado."
     }
   },
-  "objetos": {},
+  "objetos": {
+    "spear": {
+      "nombre": "Lanza (Spear)",
+      "resumen": "Arma de asta que permite atacar a distancia en melé y reaccionar contra cargas.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 5. Permite realizar Ataques cuerpo a cuerpo a hasta 2\" de distancia sin estar en contacto de peana. Si el usuario es cargado por un enemigo, realiza un Ataque cuerpo a cuerpo gratuito antes de que el atacante resuelva su golpe.",
+      "restriccion": "Cualquier personaje (10 GP)."
+    },
+    "torch": {
+      "nombre": "Antorcha (Torch)",
+      "resumen": "Ilumina el entorno y causa daño de fuego a objetivos inflamables.",
+      "detalles": "Ataque cuerpo a cuerpo o a distancia corto: Power 4. Los impactos causados por la antorcha cuentan como ataques de fuego (+2 al Power contra objetivos Inflamables y obliga a repetir defensas exitosas). Además, ilumina un radio de 6\" en escenarios nocturnos o subterráneos.",
+      "restriccion": "Cualquier personaje (5 GP)."
+    },
+    "dual_weapons": {
+      "nombre": "Armas Dobles (Dual Weapons)",
+      "resumen": "Par de armas ligeras que mejoran la precisión en combate cuerpo a cuerpo.",
+      "detalles": "Ataque cuerpo a cuerpo: Si está equipado con un par de armas dobles, el personaje puede Repetir tirada en todos los resultados de 1 en sus dados de ataque al realizar un Ataque cuerpo a cuerpo.",
+      "restriccion": "Cualquier personaje (10 GP). Ocupa ambas manos."
+    },
+    "packed_lunch": {
+      "nombre": "Almuerzo Para Llevar (Packed Lunch)",
+      "resumen": "Consumible gastronómico que cura heridas o devuelve la fuerza a un personaje.",
+      "detalles": "Consumible (1 AP). El personaje puede consumir su almuerzo para restaurar D6 HP de inmediato o eliminar un estado negativo/parálisis.",
+      "restriccion": "Exclusivo de la facción Halfling (10 GP)."
+    },
+    "halfling_ranged_weapon": {
+      "nombre": "Arma a Distancia Halfling (Halfling Ranged Weapon)",
+      "resumen": "Honda, arco corto o ballesta ligera tradicional de Hobbleshire.",
+      "detalles": "(1 AP) Ataque a distancia: Power 4, Alcance 12\". Si el atacante no ha realizado ningún movimiento durante su Activación, gana Ventaja en la tirada para impactar.",
+      "restriccion": "Exclusivo de la facción Halfling (15 GP)."
+    },
+    "town_banner": {
+      "nombre": "Estandarte del Pueblo (Town Banner)",
+      "resumen": "Insignia local que inspira a los milicianos y colonos cercanos.",
+      "detalles": "Todos los personajes aliados a 6\" o menos del portador del estandarte realizan sus Chequeos de Valentía con Ventaja. Además, otorga +1 AP a los aliados adyacentes al inicio de su Activación.",
+      "restriccion": "Exclusivo de la facción Halfling (15 GP)."
+    },
+    "halfling_mount": {
+      "nombre": "Montura Halfling (Halfling Mount)",
+      "resumen": "Oveja lana de hierro (Ironwool) o pony de carga adaptado a la comarca.",
+      "detalles": "Otorga el estado Montado (Mounted), aumentando la capacidad de Movimiento a 6\" e ignorando el terreno difícil. El jinete y la montura se activan como una única unidad y cuentan como en Cobertura frente a disparos.",
+      "restriccion": "Exclusivo de la facción Halfling (30 GP)."
+    },
+    "potbelly_cauldron": {
+      "nombre": "Caldero Panzón (Potbelly Cauldron)",
+      "resumen": "Mito culinario portátil que guisa pociones mágicas en pleno combate.",
+      "detalles": "Al inicio de cada Ronda, genera un caldo mágico. Un personaje en contacto de peana con el caldero puede consumir 1 AP para recuperar D3 HP y ganar +1 al Power en sus ataques durante esa Ronda.",
+      "restriccion": "Exclusivo de la facción Halfling (30 GP)."
+    },
+    "ranger_cloak": {
+      "nombre": "Capa de Explorador (Ranger Cloak)",
+      "resumen": "Prenda de camuflaje que proporciona cobertura extra frente a disparos enemigos.",
+      "detalles": "El personaje cuenta siempre como en Cobertura Pesada contra Ataques a distancia cuando se encuentra a 1\" o menos de cualquier elemento de escenografía o vegetación.",
+      "restriccion": "Exclusivo de las facciones Halfling e Imperial (10 GP)."
+    },
+    "medical_kit": {
+      "nombre": "Kit Médico (Medical Kit)",
+      "resumen": "Instrumentos y vendajes de campaña para tratar a compañeros heridos.",
+      "detalles": "(1 AP) Permite realizar una Hazaña Media sobre un personaje aliado en contacto de peana. Si tiene éxito, el objetivo curado recupera D6 HP.",
+      "restriccion": "Exclusivo de la facción Imperial (10 GP)."
+    },
+    "imperial_crossbow": {
+      "nombre": "Ballesta Imperial (Imperial Crossbow)",
+      "resumen": "Arma a distancia de tiro potente que perfora las armaduras enemigas.",
+      "detalles": "(2 AP) Ataque a distancia: Power 6, Alcance 14\". Perfora armaduras: Ignora 1 punto del valor de Armadura del objetivo.",
+      "restriccion": "Exclusivo de la facción Imperial (15 GP)."
+    },
+    "arcloque_rifle": {
+      "nombre": "Rifle de Arcloque (Arcloque Rifle)",
+      "resumen": "Rifle alquímico de largo alcance y elevada potencia de fuego.",
+      "detalles": "(2 AP) Ataque a distancia: Power 6, Alcance 16\". Regla especial: Los Impactos Críticos ignoran completamente la Armadura del objetivo.",
+      "restriccion": "Exclusivo de la facción Imperial (20 GP)."
+    },
+    "arcloque_pistol": {
+      "nombre": "Pistola de Arcloque (Arcloque Pistol)",
+      "resumen": "Arma de fuego corta alquímica utilizable incluso a corta distancia.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 8\". Se puede disparar a objetivos en contacto de peana sin sufrir penalización por combate.",
+      "restriccion": "Exclusivo de la facción Imperial (15 GP)."
+    },
+    "imperial_gryphon": {
+      "nombre": "Estandarte del Grifo Imperial (Imperial Gryphon Standard)",
+      "resumen": "Símbolo militar de la corona imperial que refuerza el valor y la disciplina.",
+      "detalles": "Todos los personajes aliados a 6\" o menos realizan Chequeos de Valentía con Ventaja. Además, los aliados a 3\" o menos ganan +1 AP al inicio de su Activación.",
+      "restriccion": "Exclusivo de la facción Imperial (15 GP)."
+    },
+    "sergeants_chevrons": {
+      "nombre": "Galones de Sargento (Sergeant's Chevrons)",
+      "resumen": "Distintivo de rango que otorga la capacidad de mando a un soldado veterano.",
+      "detalles": "Otorga el Rasgo Emitir Órdenes (Make Orders). Además, si el usuario recibe una orden de un Capitán, puede retransmitir esa misma orden a otros aliados con Take Orders a 6\" o menos.",
+      "restriccion": "Equipable únicamente en un Imperial Trooper (10 GP)."
+    },
+    "imperial_mount": {
+      "nombre": "Caballo de Guerra Imperial (Imperial Mount)",
+      "resumen": "Corcel adiestrado para la carga en batalla que mejora la movilidad.",
+      "detalles": "Otorga el estado Montado (Mounted), aumentando la velocidad de Movimiento a 7\" e ignorando el terreno difícil. Otorga +1 al Power en Ataques cuerpo a cuerpo realizados en Carga.",
+      "restriccion": "Exclusivo de la facción Imperial (30 GP)."
+    },
+    "black_potion": {
+      "nombre": "Poción Negra (Black Potion)",
+      "resumen": "Brebaje oscuro e hirviente que otorga fuerza bruta momentánea a costa de la salud.",
+      "detalles": "Consumible (1 AP). El personaje obtiene +3 al Power en todos sus Ataques cuerpo a cuerpo durante la Ronda actual, pero sufre D3 de daño automático al final de la misma.",
+      "restriccion": "Exclusivo de la facción Señores Oscuros / Dark Lords (10 GP)."
+    },
+    "dark_lord_ranged_weapon": {
+      "nombre": "Arma a Distancia Oscura (Dark Lord Ranged Weapon)",
+      "resumen": "Ballesta pesada, virote envenenado o arco compuesto de la desolación.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 12\". Causa heridas sangrientas: Los Impactos Críticos infligen 1 punto de daño adicional ignorando Armadura.",
+      "restriccion": "Exclusivo de la facción Señores Oscuros / Dark Lords (15 GP)."
+    },
+    "slaver_whip": {
+      "nombre": "Látigo de Esclavista (Slaver Whip)",
+      "resumen": "Herramienta de sometimiento para castigar a esbirros y azuzarlos en combate.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 4, Alcance 2\". Permite infligir 1 de daño a un Hobgoblin aliado a 4\" para otorgarle +1 AP de inmediato.",
+      "restriccion": "Exclusivo de la facción Señores Oscuros / Dark Lords (10 GP)."
+    },
+    "hobgoblin_mount": {
+      "nombre": "Montura Hobgoblin (Hobgoblin Mount)",
+      "resumen": "Bestia o alimaña de carga de los desiertos árida adaptada al combate.",
+      "detalles": "Otorga el estado Montado (Mounted), aumentando la velocidad de Movimiento a 7\" e ignorando el terreno difícil. El jinete cuenta como en Cobertura y actúa conjuntamente con su montura.",
+      "restriccion": "Exclusivo de la facción Señores Oscuros / Dark Lords (30 GP)."
+    },
+    "cured_meat": {
+      "nombre": "Carne Curada (Cured Meat)",
+      "resumen": "Ración de cecina y vísceras secas que regenera la resistencia de las bestias.",
+      "detalles": "Consumible (1 AP). El personaje o una Bestia aliada adyacente consume la ración para recuperar D3 HP y superar automáticamente su siguiente Chequeo de Valentía.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (10 GP)."
+    },
+    "beastfolk_ranged_weapon": {
+      "nombre": "Arma a Distancia Beastfolk (Beastfolk Ranged Weapon)",
+      "resumen": "Arco compuesto de cuerno, jabalina o fronda salvaje de caza.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 10\". Si se dispara contra una Bestia, Monstruo o Titán, obtiene Ventaja en la tirada de ataque.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (15 GP)."
+    },
+    "protective_hide": {
+      "nombre": "Piel Protectora (Protective Hide)",
+      "resumen": "Piel endurecida y curtida con rituales chamánicos que actúa como armadura natural.",
+      "detalles": "Otorga +1 al valor de Armadura natural. No se considera armadura metálica y no penaliza el movimiento ni las tiradas de Leg It.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
+    },
+    "horns_and_tusks": {
+      "nombre": "Cuernos y Colmillos (Horns & Tusks)",
+      "resumen": "Mutación corporal de astas afiladas para embestir salvajemente al enemigo.",
+      "detalles": "Si el personaje realiza un movimiento de Carga y entra en contacto de peana, obtiene un Ataque cuerpo a cuerpo gratuito de Power 6 con sus cuernos.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
+    },
+    "long_legs": {
+      "nombre": "Patas Largas (Long Legs / Ágil)",
+      "resumen": "Mutación anatómica que aumenta la zancada y la agilidad de la criatura.",
+      "detalles": "Otorga +2\" a la capacidad de Movimiento base del personaje y le permite Repetir tirada en los intentos fallidos de Leg It.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
+    },
+    "bestial_moxie": {
+      "nombre": "Furia Bestial (Bestial Moxie)",
+      "resumen": "Impulso salvaje e indomable que vigoriza la combatividad del personaje.",
+      "detalles": "Otorga Ventaja en todos los Chequeos de Valentía y +1 al Power en el primer Ataque cuerpo a cuerpo realizado en cada Activación.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
+    },
+    "ancient_dead_ranged_weapon": {
+      "nombre": "Arma a Distancia Ancestral (Ancient Dead Ranged Weapon)",
+      "resumen": "Arco largo milenario o jabalina de bronce sepulcral.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 14\". Causa pavor: Obliga al objetivo impactado a superar un Chequeo de Valentía de inmediato.",
+      "restriccion": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (15 GP)."
+    }
+  },
   "reglas": {},
   "saberes": {},
   "unidades": {}
