@@ -1475,6 +1475,66 @@ const traduccionesES = {
       "resumen": "Estilo de vida errante en los pantanos que permite alianzas con Hombres Bestia y Gremlins.",
       "detalles": "Los Ourks llevan una vida nómada y errante en los pantanos y tierras salvajes de ArcWorlde. Al construir tu Banda de Ourks, puedes incluir Personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins sin penalizaciones.",
       "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "power_struggle": {
+      "nombre": "Disputa de Poder (Power Struggle)",
+      "resumen": "Lucha constante por el liderazgo de la banda entre el Chieftain y el Dreameater.",
+      "detalles": "Es común en un clan Ourk que los Chieftains y los Dreameaters estén en constante competencia por el liderazgo. Si llevas un Chieftain y un Dreameater como parte de tu Banda, cada uno debe realizar un Chequeo de Valentía al comienzo de cada Ronda. El Personaje con la tirada más alta recibe ciertas bonificaciones indicadas en su perfil de atributos. El perdedor recibe ciertos efectos negativos también indicados en su perfil. Si el resultado es un empate, se repite la tirada hasta que haya un ganador.",
+      "restriccion": "Aplica al incluir un Chieftain y un Dreameater en la misma Banda."
+    },
+    "nomads_gremlins": {
+      "nombre": "Nómadas (Nomads)",
+      "resumen": "Estilo de vida itinerante que permite a los Gremlins aliar sus fuerzas con Ourks y Hombres Bestia.",
+      "detalles": "Los Gremlins llevan una vida nómada y errante en las tierras salvajes de ArcWorlde y se sabe que se alían con quienes hacen lo mismo. Al construir tu Banda, puedes utilizar Personajes de las facciones Ourks y Hombres Bestia (Beastfolk).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "born_slippy": {
+      "nombre": "Escurridizo (Born Slippy)",
+      "resumen": "Agilidad y tamaño reducido que facilita destrabarse del combate cuerpo a cuerpo.",
+      "detalles": "Los Gremlins son pequeños y ágiles, lo que los hace increíblemente difíciles de fijar en combate. Todos los Personajes con este Rasgo pueden Repetir tirada en cualquier intento fallido de Hazaña para Destrabarse del combate cuerpo a cuerpo.",
+      "restriccion": "Pasivo universal para los Gremlins en combate cuerpo a cuerpo."
+    },
+    "burrow_dweller": {
+      "nombre": "Habitante de Madrigueras (Burrow Dweller)",
+      "resumen": "Capacidad subterránea para refugiarse en madrigueras, curarse D3 HP y reaparecer.",
+      "detalles": "Los Gremlins viven en vastas madrigueras bajo tierra, apareciendo y desapareciendo por los agujeros rápidamente. Los Personajes con este Rasgo pueden usar cualquier Madriguera Gremlin colocada en el campo de batalla. Si están en contacto de peana con una Madriguera Gremlin, pueden saltar dentro intentando una Hazaña Fácil. Si tienen éxito, el Personaje se retira temporalmente del juego. En la siguiente Ronda, debe reaparecer en contacto de peana con cualquier Madriguera Gremlin en el tablero al comienzo de su Activación. Además, mientras está en la madriguera, devora suministros curando D3 HP. Los Personajes que lleven Objetos o Equipo cruciales para el resultado de la partida (como fichas coleccionables que otorgan PV) no pueden usar Madrigueras Gremlin.",
+      "restriccion": "Requiere estar en contacto de peana con una Madriguera Gremlin y superar una Hazaña Fácil; prohibido si transporta objetos de escenario o fichas de PV."
+    },
+    "thing_of_magic": {
+      "nombre": "Criatura Mágica (Thing of Magic)",
+      "resumen": "Entidad invocada que no se despliega al inicio y debe ser traída al juego por un Mago.",
+      "detalles": "Los Personajes con esta Habilidad no se despliegan en el campo de batalla al inicio del juego. Un Personaje de tipo Mago puede intentar traerlos a la 'vida' en el campo de batalla lanzando el Hechizo Conjurar Sprites (Conjure Sprites). Las Criaturas Mágicas no pueden equiparse con Equipo antes del juego. Si una Criatura Mágica queda Noqueada en algún momento, puede volver a ser Invocada en la siguiente Ronda.",
+      "restriccion": "No se despliega al inicio ni puede equipar Equipo previo al juego."
+    },
+    "fae_beings_wizards": {
+      "nombre": "Seres Fae / Pactos Arcanos (Fae Beings)",
+      "resumen": "Afinidad mágica de los Magos con los Señores Oscuros y los Elfos Silvanos.",
+      "detalles": "Los Magos han dedicado su vida a la práctica de la magia y, en ocasiones, se alían temporalmente con aquellos cuyo poder mágico respetan. Los Magos Renegados a menudo hacen pactos con los Señores Oscuros, y los Elfos de Mildaark prestarán sus espadas si se sienten impresionados por el dominio arcano del Mago. Al construir tu Banda, puedes utilizar Personajes de las facciones Señores Oscuros (Dark Lords) y Elfos Silvanos (Wild Elves).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "tamed_beasts": {
+      "nombre": "Bestias Domesticadas (Tamed Beasts)",
+      "resumen": "Permite incluir monstruos y bestias del Bestiario en cualquier Banda de facción.",
+      "detalles": "Es extremadamente común que las Bandas domestiquen criaturas para que luchen a su lado. Ya sea criadas desde el huevo o capturadas en estado salvaje, a menudo se ve a los monstruos de ArcWorlde marchando a la batalla. Al construir tu Banda de cualquier Facción, puedes contratar Personajes del Bestiario.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "bestiary_warband": {
+      "nombre": "Banda del Bestiario (Bestiary Warband)",
+      "resumen": "Permite construir una Banda compuesta íntegramente por criaturas y monstruos del Bestiario.",
+      "detalles": "Puedes construir una Banda compuesta íntegramente por Bestias, Monstruos y Titanes procedentes del Bestiario.",
+      "restriccion": "Aplica al seleccionar la temática de la Banda."
+    },
+    "swords_for_hire_alliance": {
+      "nombre": "Mercenarios y Alianzas (Swords for Hire)",
+      "resumen": "Cualquier facción puede contratar mercenarios del reglamento de Swords for Hire pagando su coste en GP.",
+      "detalles": "En las peligrosas y salvajes tierras de ArcWorlde a veces hace falta un poco de músculo extra, y muchos guerreros recorren el campo ofreciendo sus servicios. Cualquier Facción puede contratar Personajes del reglamento de Espadas de Alquiler (Swords for Hire) de la web de Warp Miniatures. Son mercenarios que lucharán por cualquiera, siempre que tenga los GP para pagarles.",
+      "restriccion": "Fase de construcción de la banda."
+    },
+    "impostor": {
+      "nombre": "¡Impostor! (Impostor!)",
+      "resumen": "Rivalidad cuando dos jugadores reclutan al mismo mercenario o héroe renombrado.",
+      "detalles": "Con muchos héroes vagando por las tierras salvajes de ArcWorlde, es común que algunos se mofen o se disfrazan de los guerreros más famosos para capitalizar su reputación. Cuando una Espada de Alquiler descubre a uno de estos impostores, se indigna con razón. Si más de un jugador contrata al mismo Personaje de Espada de Alquiler, si uno deja Noqueado al otro, obtiene +1 AP durante el resto de la partida. ¡Solo puede quedar uno!",
+      "restriccion": "Aplica únicamente en partidas donde ambos jugadores hayan contratado al mismo personaje mercenario."
     }
   },
   "saberes": {},

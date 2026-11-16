@@ -93,6 +93,7 @@ const reglasBase = {};
 (comp.facciones || [])
   .forEach((f) => (f.reglas_faccion || []).forEach((r) => { reglasBase[r.id] = r; }));
 const MANUAL_REGLAS = {
+  swords_for_hire_alliance: 'En las peligrosas y salvajes tierras de ArcWorlde a veces hace falta un poco de músculo extra, y muchos guerreros recorren el campo ofreciendo sus servicios. Cualquier Facción puede contratar Personajes del reglamento de Espadas de Alquiler (Swords for Hire) de la web de Warp Miniatures. Son mercenarios que lucharán por cualquiera, siempre que tenga los GP para pagarles.',
   order_as_one_halfling: 'Hasta tres Personajes de la misma Clase pueden Activarse juntos. Todos los Ataques realizados deben dirigirse al mismo objetivo y se resuelven uno tras otro.',
   order_stand_firm_halfling: 'Hasta tres Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.',
   order_together_imperial: 'Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Si sus Ataques se dirigen al mismo objetivo, ganan +1 al Power.',

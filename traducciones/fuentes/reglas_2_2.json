@@ -1,0 +1,75 @@
+[
+  {
+    "id": "power_struggle",
+    "nombre_es": "Disputa de Poder (Power Struggle)",
+    "resumen_es": "Lucha constante por el liderazgo de la banda entre el Chieftain y el Dreameater.",
+    "detalles_es": "Es común en un clan Ourk que los Chieftains y los Dreameaters estén en constante competencia por el liderazgo. Si llevas un Chieftain y un Dreameater como parte de tu Banda, cada uno debe realizar un Chequeo de Valentía al comienzo de cada Ronda. El Personaje con la tirada más alta recibe ciertas bonificaciones indicadas en su perfil de atributos. El perdedor recibe ciertos efectos negativos también indicados en su perfil. Si el resultado es un empate, se repite la tirada hasta que haya un ganador.",
+    "restriccion_es": "Aplica al incluir un Chieftain y un Dreameater en la misma Banda."
+  },
+  {
+    "id": "nomads_gremlins",
+    "nombre_es": "Nómadas (Nomads)",
+    "resumen_es": "Estilo de vida itinerante que permite a los Gremlins aliar sus fuerzas con Ourks y Hombres Bestia.",
+    "detalles_es": "Los Gremlins llevan una vida nómada y errante en las tierras salvajes de ArcWorlde y se sabe que se alían con quienes hacen lo mismo. Al construir tu Banda, puedes utilizar Personajes de las facciones Ourks y Hombres Bestia (Beastfolk).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "born_slippy",
+    "nombre_es": "Escurridizo (Born Slippy)",
+    "resumen_es": "Agilidad y tamaño reducido que facilita destrabarse del combate cuerpo a cuerpo.",
+    "detalles_es": "Los Gremlins son pequeños y ágiles, lo que los hace increíblemente difíciles de fijar en combate. Todos los Personajes con este Rasgo pueden Repetir tirada en cualquier intento fallido de Hazaña para Destrabarse del combate cuerpo a cuerpo.",
+    "restriccion_es": "Pasivo universal para los Gremlins en combate cuerpo a cuerpo."
+  },
+  {
+    "id": "burrow_dweller",
+    "nombre_es": "Habitante de Madrigueras (Burrow Dweller)",
+    "resumen_es": "Capacidad subterránea para refugiarse en madrigueras, curarse D3 HP y reaparecer.",
+    "detalles_es": "Los Gremlins viven en vastas madrigueras bajo tierra, apareciendo y desapareciendo por los agujeros rápidamente. Los Personajes con este Rasgo pueden usar cualquier Madriguera Gremlin colocada en el campo de batalla. Si están en contacto de peana con una Madriguera Gremlin, pueden saltar dentro intentando una Hazaña Fácil. Si tienen éxito, el Personaje se retira temporalmente del juego. En la siguiente Ronda, debe reaparecer en contacto de peana con cualquier Madriguera Gremlin en el tablero al comienzo de su Activación. Además, mientras está en la madriguera, devora suministros curando D3 HP. Los Personajes que lleven Objetos o Equipo cruciales para el resultado de la partida (como fichas coleccionables que otorgan PV) no pueden usar Madrigueras Gremlin.",
+    "restriccion_es": "Requiere estar en contacto de peana con una Madriguera Gremlin y superar una Hazaña Fácil; prohibido si transporta objetos de escenario o fichas de PV."
+  },
+  {
+    "id": "thing_of_magic",
+    "nombre_es": "Criatura Mágica (Thing of Magic)",
+    "resumen_es": "Entidad invocada que no se despliega al inicio y debe ser traída al juego por un Mago.",
+    "detalles_es": "Los Personajes con esta Habilidad no se despliegan en el campo de batalla al inicio del juego. Un Personaje de tipo Mago puede intentar traerlos a la 'vida' en el campo de batalla lanzando el Hechizo Conjurar Sprites (Conjure Sprites). Las Criaturas Mágicas no pueden equiparse con Equipo antes del juego. Si una Criatura Mágica queda Noqueada en algún momento, puede volver a ser Invocada en la siguiente Ronda.",
+    "restriccion_es": "No se despliega al inicio ni puede equipar Equipo previo al juego."
+  },
+  {
+    "id": "fae_beings_wizards",
+    "nombre_es": "Seres Fae / Pactos Arcanos (Fae Beings)",
+    "resumen_es": "Afinidad mágica de los Magos con los Señores Oscuros y los Elfos Silvanos.",
+    "detalles_es": "Los Magos han dedicado su vida a la práctica de la magia y, en ocasiones, se alían temporalmente con aquellos cuyo poder mágico respetan. Los Magos Renegados a menudo hacen pactos con los Señores Oscuros, y los Elfos de Mildaark prestarán sus espadas si se sienten impresionados por el dominio arcano del Mago. Al construir tu Banda, puedes utilizar Personajes de las facciones Señores Oscuros (Dark Lords) y Elfos Silvanos (Wild Elves).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "tamed_beasts",
+    "nombre_es": "Bestias Domesticadas (Tamed Beasts)",
+    "resumen_es": "Permite incluir monstruos y bestias del Bestiario en cualquier Banda de facción.",
+    "detalles_es": "Es extremadamente común que las Bandas domestiquen criaturas para que luchen a su lado. Ya sea criadas desde el huevo o capturadas en estado salvaje, a menudo se ve a los monstruos de ArcWorlde marchando a la batalla. Al construir tu Banda de cualquier Facción, puedes contratar Personajes del Bestiario.",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "bestiary_warband",
+    "nombre_es": "Banda del Bestiario (Bestiary Warband)",
+    "resumen_es": "Permite construir una Banda compuesta íntegramente por criaturas y monstruos del Bestiario.",
+    "detalles_es": "Puedes construir una Banda compuesta íntegramente por Bestias, Monstruos y Titanes procedentes del Bestiario.",
+    "restriccion_es": "Aplica al seleccionar la temática de la Banda."
+  },
+  {
+    "id": "swords_for_hire_alliance",
+    "nombre_es": "Mercenarios y Alianzas (Swords for Hire)",
+    "resumen_es": "Contratación de mercenarios y unidades de otras facciones no aliadas con riesgo de indisciplina.",
+    "detalles_es": "Cualquier Facción puede contratar Personajes del reglamento de Espadas de Alquiler (Swords for Hire) pagando su coste en GP. Si contratas Personajes de una Facción aliada especificada en tus Reglas de Facción, se contratan con normalidad sin efectos negativos. Si contratas Personajes de otras Facciones no aliadas, pueden ser más indisciplinados: al ser Activado, cada Personaje de una de estas Facciones debe realizar un Chequeo de Valentía; si lo falla, sus AP se reducen a la mitad durante esa Ronda. Además, los Personajes de distintas Facciones solo pueden acceder a sus propias Armerías y Listas de Hechizos de Facción.",
+    "restriccion_es": "Los personajes no aliados deben superar un Chequeo de Valentía al Activarse o verán sus AP reducidos a la mitad."
+  },
+  {
+    "id": "impostor",
+    "nombre_es": "¡Impostor! (Impostor!)",
+    "resumen_es": "Rivalidad cuando dos jugadores reclutan al mismo mercenario o héroe renombrado.",
+    "detalles_es": "Con muchos héroes vagando por las tierras salvajes de ArcWorlde, es común que algunos se mofen o se disfrazan de los guerreros más famosos para capitalizar su reputación. Cuando una Espada de Alquiler descubre a uno de estos impostores, se indigna con razón. Si más de un jugador contrata al mismo Personaje de Espada de Alquiler, si uno deja Noqueado al otro, obtiene +1 AP durante el resto de la partida. ¡Solo puede quedar uno!",
+    "restriccion_es": "Aplica únicamente en partidas donde ambos jugadores hayan contratado al mismo personaje mercenario."
+  }
+]
+Lista de Dudas de Traducción
+Swords for Hire: Traducido como Mercenarios y Alianzas / Espadas de Alquiler (propuesta).
+Impostor!: Traducido como ¡Impostor! (propuesta).
