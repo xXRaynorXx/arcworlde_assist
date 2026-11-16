@@ -1,0 +1,30 @@
+[
+  {
+    "id": "vitality_gem",
+    "nombre_es": "Gema de Vitalidad (Vitality Gem)",
+    "resumen_es": "Amuleto de arcanita cargado con hechizos de longevidad.",
+    "detalles_es": "Consumible de un solo uso. Al activarse, restaura D6 HP al usuario o a un personaje aliado en contacto de peana.",
+    "restriccion_es": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
+  },
+  {
+    "id": "wizard_ranged_weapon",
+    "nombre_es": "Arma a Distancia Arcana (Wizard Ranged Weapon)",
+    "resumen_es": "Varita o báculo cargado con proyectiles mágicos de energía.",
+    "detalles_es": "(1 AP) Ataque a distancia: Otorga el ataque Disparo Arcano (Shot) con Power 5 y Alcance 14\".",
+    "restriccion_es": "Exclusivo para personajes de tipo Mago / Wizard o Aprendiz (15 GP)."
+  },
+  {
+    "id": "wizard_mount",
+    "nombre_es": "Montura Arcana (Wizard Mount)",
+    "resumen_es": "Alfombra voladora o bestia elemental invocada para desplazarse por el aire.",
+    "detalles_es": "Otorga el estado Montado (Mounted), concediendo +5 HP iniciales, +4\" a la capacidad de Movimiento, el rasgo Ágil (Agile) / Volar (Fly) y cambia la peana a 40mm.",
+    "restriccion_es": "Exclusivo para personajes de tipo Mago / Wizard o Aprendiz (30 GP)."
+  },
+  {
+    "id": "pilfered_tome",
+    "nombre_es": "Tomo Robado (Pilfered Tome)",
+    "resumen_es": "Grimorio sustraído a un rival de otra escuela elemental para lanzar sus hechizos.",
+    "detalles_es": "Permite al Mago Lanzar un Hechizo perteneciente al Saber de un Colegio elemental distinto al suyo. Tras intentarlo (tenga éxito o falle), el libro se quema y queda destruido.",
+    "restriccion_es": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
+  }
+]
