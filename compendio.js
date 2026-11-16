@@ -42,6 +42,24 @@
   function localizado(base, tr) {
     return tr ? Object.assign({}, base, { nombre: tr.nombre || base.nombre, resumen: tr.resumen || base.resumen, detalles: tr.detalles || base.detalles }) : base;
   }
+  // Ataques y hechizos de las fichas de miniatura (solo en castellano): "(2 AP) Nombre: Power 6. Special Rules: ..." -> "... Reglas especiales: ..."
+  function ataqueES(a) {
+    const reglas = trad('unidades', 'reglas');
+    if (!reglas) return a;
+    let t = String(a).replace(/^\(Ranged\)/, '(A distancia)').replace(/^\(Melee\)/, '(Cuerpo a cuerpo)');
+    const i = t.indexOf('Special Rules: ');
+    if (i < 0) return t;
+    const regla = t.slice(i + 15);
+    return t.slice(0, i) + 'Reglas especiales: ' + (reglas[regla] || regla);
+  }
+  function hechizoES(h) {
+    const hs = trad('unidades', 'hechizos');
+    const tx = trad('unidades', 'hechizosTexto');
+    if (tx && tx[h]) return tx[h];
+    const m = hs && String(h).match(/^(.*?) \(Exige (\d+)\): /);
+    const t = m && (hs[traitKey(m[1])] || hs[traitKey(m[1].replace(/\s*\(.*\)\s*$/, ''))]);
+    return t ? t.nombre + ' (Exige ' + m[2] + '): ' + t.efecto : h;
+  }
   function traitInfo(name) {
     const r = traitInfoBase(name);
     if (!r) return r;
@@ -55,5 +73,5 @@
     const base = k.replace(/\s*\(.*\)\s*$/, '');
     return idx[k] || idx[base] || idx[TRAIT_ALIAS[k]] || idx[TRAIT_ALIAS[base]] || null;
   }
-  window.AWCompendio = { traitInfo, traitKey, trad, enKey, localizado };
+  window.AWCompendio = { traitInfo, traitKey, trad, enKey, localizado, ataqueES, hechizoES };
 })();

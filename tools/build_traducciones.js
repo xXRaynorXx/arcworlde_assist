@@ -40,6 +40,9 @@ const pendReglas = [];
 fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
   const kind = f.split('_')[0];
   if (kind === 'glosario') return;
+  // Textos especiales de ataques de miniaturas: objeto { "texto inglés": "texto castellano" } (traducción propia)
+  if (f === 'miniaturas_hechizos.json') { out.unidades.hechizosTexto = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); return; }
+  if (f === 'miniaturas_reglas.json') { out.unidades.reglas = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); return; }
   const arr = firstArray(fs.readFileSync(path.join(dir, f), 'utf8'));
   const visto = {};
   arr.forEach((r) => {
@@ -102,6 +105,18 @@ pendObjetos.forEach((r) => {
   else if (REVISAR.includes(r.id) || (m && Number(m[1]) !== costes[r.id])) return avisos.push('objeto NO aplicado (revisar): ' + r.id + (m ? ' · NotebookLM ' + m[1] + ' GP vs compendio ' + costes[r.id] + ' GP' : ''));
   out.objetos[r.id] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es), restriccion: limpia(r.restriccion_es) };
 });
+// Hechizos en las fichas de miniatura: "Nombre (Exige N): efecto" -> se usa la traducción del saber (nombre y efecto)
+out.unidades.hechizos = {};
+const textoHech = out.unidades.hechizosTexto || {};
+const hechSaber = {};
+Object.values(out.saberes).forEach((sab) => Object.keys(sab.hechizos).forEach((k) => { hechSaber[k] = sab.hechizos[k]; }));
+(comp.facciones || []).forEach((f) => (f.unidades || []).forEach((u) => (u.hechizos || []).forEach((h) => {
+  const nm = String(h).split(' (Exige')[0];
+  if (textoHech[h]) return;
+  const t = hechSaber[key(nm)] || hechSaber[key(nm.replace(/\s*\(.*\)\s*$/, ''))];
+  if (t && t.nombre && t.efecto) out.unidades.hechizos[key(nm)] = { nombre: t.nombre, efecto: t.efecto };
+  else avisos.push('hechizo de miniatura sin traducción: ' + nm);
+})));
 // Reglas de facción: NotebookLM inventó la mecánica de las órdenes y cambió la de Raiser of the Dead; para esas se traduce el texto en inglés del compendio
 const reglasBase = {};
 (comp.facciones || [])
