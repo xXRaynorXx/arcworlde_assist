@@ -868,6 +868,18 @@ const traduccionesES = {
     }
   },
   "objetos": {
+    "arcanite_token": {
+      "nombre": "Ficha de Arcanita (Arcanite Token)",
+      "resumen": "Fragmento de mineral mágico consumible para potenciar habilidades y hechizos.",
+      "detalles": "Un fragmento brillante de Arcanita. Un solo uso. Al usarlo, elige un efecto: • Otorga +1 AP al personaje durante su Activación. • Añade un D6 extra a cualquier tirada. • Permite Lanzar otro Hechizo. • Permite Repetir tirada de un D6.",
+      "restriccion": "Un solo uso (10 GP)."
+    },
+    "shield": {
+      "nombre": "Escudo (Shield)",
+      "resumen": "Protección defensiva para desviar golpes e impactos a distancia.",
+      "detalles": "Si está equipado, el personaje puede Repetir tirada en una Tirada de Defensa fallida por Ronda (ya sea contra Ataques cuerpo a cuerpo o a distancia).",
+      "restriccion": "Cualquier personaje (15 GP). No acumulable."
+    },
     "spear": {
       "nombre": "Lanza (Spear)",
       "resumen": "Arma de asta que permite atacar a distancia en melé y reaccionar contra cargas.",
@@ -880,11 +892,29 @@ const traduccionesES = {
       "detalles": "Ataque cuerpo a cuerpo o a distancia corto: Power 4. Los impactos causados por la antorcha cuentan como ataques de fuego (+2 al Power contra objetivos Inflamables y obliga a repetir defensas exitosas). Además, ilumina un radio de 6\" en escenarios nocturnos o subterráneos.",
       "restriccion": "Cualquier personaje (5 GP)."
     },
+    "two_handed_weapon": {
+      "nombre": "Arma a Dos Manos (Two Handed Weapon)",
+      "resumen": "Arma pesada de gran contundencia que sacrifica la capacidad defensiva.",
+      "detalles": "Ataque cuerpo a cuerpo: Otorga +2 al Power para todos los Ataques cuerpo a cuerpo del personaje. Sin embargo, debido a su peso y manejo, cualquier Defensa Crítica propia se descarta como si fuera un fallo.",
+      "restriccion": "Cualquier personaje (10 GP). Requiere ambas manos."
+    },
     "dual_weapons": {
       "nombre": "Armas Dobles (Dual Weapons)",
       "resumen": "Par de armas ligeras que mejoran la precisión en combate cuerpo a cuerpo.",
       "detalles": "Ataque cuerpo a cuerpo: Si está equipado con un par de armas dobles, el personaje puede Repetir tirada en todos los resultados de 1 en sus dados de ataque al realizar un Ataque cuerpo a cuerpo.",
       "restriccion": "Cualquier personaje (10 GP). Ocupa ambas manos."
+    },
+    "light_armour": {
+      "nombre": "Armadura Ligera (Light Armour)",
+      "resumen": "Protección de cuero o acolchada que otorga +1 de Armadura.",
+      "detalles": "Otorga +1 al valor de Armadura del personaje. Reduce en 1 el daño sufrido de todos los impactos recibidos.",
+      "restriccion": "Cualquier personaje (20 GP). No acumulable con otras armaduras."
+    },
+    "heavy_armour": {
+      "nombre": "Armadura Pesada (Heavy Armour)",
+      "resumen": "Protección metálica completa que otorga +2 de Armadura pero dificulta la huida.",
+      "detalles": "Otorga +2 al valor de Armadura del personaje. Sin embargo, la rigidez del equipo añade +1 de dificultad a todas sus tiradas de Leg It.",
+      "restriccion": "Cualquier personaje (35 GP). No acumulable con otras armaduras."
     },
     "packed_lunch": {
       "nombre": "Almuerzo Para Llevar (Packed Lunch)",
@@ -964,6 +994,12 @@ const traduccionesES = {
       "detalles": "Otorga el estado Montado (Mounted), aumentando la velocidad de Movimiento a 7\" e ignorando el terreno difícil. Otorga +1 al Power en Ataques cuerpo a cuerpo realizados en Carga.",
       "restriccion": "Exclusivo de la facción Imperial (30 GP)."
     },
+    "volley_gun": {
+      "nombre": "Cañón de Volea (Volley Gun)",
+      "resumen": "Arma pesada de cañones múltiples que barre filas enteras de enemigos.",
+      "detalles": "(2 AP) Ataque a distancia: Power 6, Alcance 16\". Exige Hazaña Difícil. Traza una línea recta desde el tirador hasta el objetivo afectando a todas las miniaturas en la trayectoria.",
+      "restriccion": "Equipable únicamente por Imperial Tinkerer o Heavy Trooper (40 GP)."
+    },
     "black_potion": {
       "nombre": "Poción Negra (Black Potion)",
       "resumen": "Brebaje oscuro e hirviente que otorga fuerza bruta momentánea a costa de la salud.",
@@ -1018,17 +1054,53 @@ const traduccionesES = {
       "detalles": "Otorga +2\" a la capacidad de Movimiento base del personaje y le permite Repetir tirada en los intentos fallidos de Leg It.",
       "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
     },
+    "camouflaged_pelt": {
+      "nombre": "Pelaje Camuflado (Camouflaged Pelt)",
+      "resumen": "Mimetismo foliar o pelaje adaptable que dificulta fijar al personaje como blanco.",
+      "detalles": "Los ataques a distancia dirigidos contra este personaje sufren +1 de dificultad en la tirada de Hazaña (o cuentan como en Cobertura Pesada).",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (15 GP)."
+    },
+    "ugly": {
+      "nombre": "Feo (Ugly)",
+      "resumen": "Aspecto repulsivo y grotesco que desorienta a los atacantes en melé.",
+      "detalles": "Cualquier personaje enemigo que intente realizar un Ataque cuerpo a cuerpo contra esta miniatura lo hace con Desventaja.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (15 GP)."
+    },
+    "monster_rider": {
+      "nombre": "Jinete de Monstruos (Monster Rider)",
+      "resumen": "Arnés y adiestramiento para cabalgar sobre criaturas feroces del Bestiario.",
+      "detalles": "Permite al personaje usar el Rasgo Montura Monstruosa (Monstrous Mount) sobre cualquier Bestia, Monstruo o Titán reclutado en la Banda.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (5 GP)."
+    },
     "bestial_moxie": {
       "nombre": "Furia Bestial (Bestial Moxie)",
       "resumen": "Impulso salvaje e indomable que vigoriza la combatividad del personaje.",
       "detalles": "Otorga Ventaja en todos los Chequeos de Valentía y +1 al Power en el primer Ataque cuerpo a cuerpo realizado en cada Activación.",
       "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (20 GP)."
     },
+    "animal_totem": {
+      "nombre": "Tótem Animal (Animal Totem)",
+      "resumen": "Fetiche de hueso y madera que canaliza los espíritus guía de la manada.",
+      "detalles": "Otorga al usuario y a las Bestias aliadas a 6\" o menos una Repetición de tirada por Ronda en cualquier tirada de Hazaña o Valentía fallida.",
+      "restriccion": "Exclusivo de la facción Hombres Bestia / Beastfolk (10 GP)."
+    },
     "ancient_dead_ranged_weapon": {
       "nombre": "Arma a Distancia Ancestral (Ancient Dead Ranged Weapon)",
       "resumen": "Arco largo milenario o jabalina de bronce sepulcral.",
       "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 14\". Causa pavor: Obliga al objetivo impactado a superar un Chequeo de Valentía de inmediato.",
       "restriccion": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (15 GP)."
+    },
+    "sacred_blade": {
+      "nombre": "Hoja Sagrada (Sacred Blade)",
+      "resumen": "Espada ceremonial bendecida por los antiguos dioses para purgar intrusos.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 6. Los Impactos Críticos ignoran la Armadura del objetivo y le impiden regenerar HP durante el resto de la Ronda.",
+      "restriccion": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (20 GP)."
+    },
+    "familiar_jar": {
+      "nombre": "Jarra de Familiar (Familiar Jar)",
+      "resumen": "Recipiente de cristal místico que alberga el espíritu condensado de un duendecillo.",
+      "detalles": "Permite al usuario canalizar y medir el alcance y la línea de visión de sus Hechizos desde la posición de la Jarra de Familiar colocada en el tablero a hasta 8\".",
+      "restriccion": "Exclusivo para personajes de tipo Mago (35 GP)."
     },
     "circlet_of_bronze": {
       "nombre": "Aro de Bronce (Circlet of Bronze)",
