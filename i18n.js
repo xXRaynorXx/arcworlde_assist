@@ -138,11 +138,12 @@
     lang = l;
     try { localStorage.setItem(KEY, l); } catch (e) { /* sin almacenamiento */ }
     renderSwitches();
+    // Los módulos reconstruyen sus datos (compendio) antes de repintar
+    listeners.forEach((f) => f(lang));
     // Vuelve a pintar la pantalla actual y traduce lo que quedó estático
     if (typeof window.renderSidebar === 'function') window.renderSidebar();
     if (typeof window.renderContent === 'function') window.renderContent();
     applyAll();
-    listeners.forEach((f) => f(lang));
   }
 
   function start() {

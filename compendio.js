@@ -34,12 +34,26 @@
       add(String(o.nombre).split(' / ').pop(), { nombre: o.nombre, resumen: o.resumen || '', detalles: o.detalles || o.efecto || '' });
     });
   }
+  // Traducción al castellano de un rasgo (datos_traducciones_es.js). Solo se aplica con la web en castellano.
+  const esActivo = () => !window.AWI18n || AWI18n.lang() === 'es';
+  const trad = (kind, k) => (esActivo() && typeof traduccionesES !== 'undefined' && traduccionesES[kind] && traduccionesES[kind][k]) || null;
+  // Parte inglesa de una clave del diccionario ("Escurridizo / Born Slippy" -> "born slippy")
+  const enKey = (k) => traitKey(String(k).split(' / ').pop());
+  function localizado(base, tr) {
+    return tr ? Object.assign({}, base, { nombre: tr.nombre || base.nombre, resumen: tr.resumen || base.resumen, detalles: tr.detalles || base.detalles }) : base;
+  }
   function traitInfo(name) {
+    const r = traitInfoBase(name);
+    if (!r) return r;
+    const k = traitKey(name);
+    return localizado(r, trad('rasgos', k) || trad('rasgos', k.replace(/\s*\(.*\)\s*$/, '')) || trad('rasgos', TRAIT_ALIAS[k]));
+  }
+  function traitInfoBase(name) {
     if (!idx) build();
     const k = traitKey(name);
     // "Light Armour (Gratis / +1 Armadura)" -> "light armour": se busca también sin el texto entre paréntesis
     const base = k.replace(/\s*\(.*\)\s*$/, '');
     return idx[k] || idx[base] || idx[TRAIT_ALIAS[k]] || idx[TRAIT_ALIAS[base]] || null;
   }
-  window.AWCompendio = { traitInfo, traitKey };
+  window.AWCompendio = { traitInfo, traitKey, trad, enKey, localizado };
 })();

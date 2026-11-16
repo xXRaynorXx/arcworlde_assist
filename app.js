@@ -111,12 +111,12 @@ function construirSeccionesFacciones() {
         descripcion: 'Todos los rasgos del juego por orden alfabético.',
         categorias: [{
             nombre_categoria: 'Rasgos',
-            acciones: Object.keys(comp.diccionario_rasgos || {}).sort((a, b) => a.localeCompare(b)).map((k) => ({
-                nombre: k,
-                etiqueta: 'Rasgo',
-                resumen: comp.diccionario_rasgos[k].resumen,
-                detalles: comp.diccionario_rasgos[k].detalles
-            }))
+            acciones: Object.keys(comp.diccionario_rasgos || {}).map((k) => {
+                const base = Object.assign({ nombre: k }, comp.diccionario_rasgos[k]);
+                const tr = window.AWCompendio ? AWCompendio.trad('rasgos', AWCompendio.enKey(k)) : null;
+                const t = window.AWCompendio ? AWCompendio.localizado(base, tr) : base;
+                return { nombre: t.nombre, etiqueta: 'Rasgo', resumen: t.resumen, detalles: t.detalles };
+            }).sort((a, b) => a.nombre.localeCompare(b.nombre))
         }]
     });
     return secciones;
@@ -160,6 +160,9 @@ const dbUnificada = [
         }))
     }
 ];
+
+// Al cambiar de idioma se vuelven a construir las secciones que salen del compendio
+if (window.AWI18n) AWI18n.onChange(() => { const f = dbUnificada.find(x => x.id === 'factions'); if (f) f.secciones = construirSeccionesFacciones(); });
 
 let currentSectionId = dbUnificada[0].id;
 const navMenu = document.getElementById('nav-menu');
