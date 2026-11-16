@@ -32,6 +32,15 @@ function construirSeccionesFacciones() {
             listas
         };
     };
+    // Las órdenes (As One!, Together!...) se muestran dentro de la tarjeta Make/Take Orders de su facción
+    const enName = (n) => String(n || '').split(' / ').pop().replace(/^Order:\s*/i, '');
+    const ordenesDe = (f) => (f.reglas_faccion || []).filter((r) => /^order_/.test(r.id));
+    const listaOrdenes = (f) => ordenesDe(f).map((r) => enName(r.nombre) + ' — ' + r.detalles + (r.restriccion ? ' (' + r.restriccion + ')' : ''));
+    const reglasDe = (f) => {
+        const ords = ordenesDe(f);
+        return (f.reglas_faccion || []).filter((r) => !/^order_/.test(r.id)).map((r) =>
+            ords.length && /^make_take_orders/.test(r.id) ? Object.assign({}, r, { listas: [{ titulo: 'Órdenes que se pueden emitir', items: listaOrdenes(f) }] }) : r);
+    };
     const rasgosDe = (f) => {
         const vistos = {};
         const out = [];
@@ -41,12 +50,14 @@ function construirSeccionesFacciones() {
             if (!nombre || vistos[k]) return;
             vistos[k] = true;
             const t = window.AWCompendio ? AWCompendio.traitInfo(nombre) : null;
-            out.push({
+            const card = {
                 nombre: nombre,
                 etiqueta: 'Rasgo · ' + f.nombre,
                 resumen: t ? t.resumen : '',
                 detalles: t ? t.detalles : 'Sin descripción cargada todavía.'
-            });
+            };
+            if (/^(make|take) orders$/i.test(nombre) && ordenesDe(f).length) card.listas = [{ titulo: 'Órdenes de ' + f.nombre, items: listaOrdenes(f) }];
+            out.push(card);
         }));
         return out.sort((a, b) => a.nombre.localeCompare(b.nombre));
     };
@@ -73,7 +84,7 @@ function construirSeccionesFacciones() {
             titulo: (apart ? '' : 'Facción ') + f.nombre,
             descripcion: 'Reglas, miniaturas, rasgos, saberes mágicos y armería exclusiva de ' + f.nombre + '.',
             categorias: [
-                { nombre_categoria: 'Reglas de facción', acciones: f.reglas_faccion || [] },
+                { nombre_categoria: 'Reglas de facción', acciones: reglasDe(f) },
                 { nombre_categoria: 'Miniaturas', acciones: (f.unidades || []).map((u) => fichaMiniatura(u, f)) },
                 { nombre_categoria: 'Rasgos de unidades', acciones: rasgosDe(f) },
                 { nombre_categoria: 'Saberes mágicos', acciones: saberesDe(f) },
