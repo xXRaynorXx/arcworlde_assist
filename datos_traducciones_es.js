@@ -238,8 +238,8 @@ const traduccionesES = {
     },
     "agile": {
       "nombre": "Ágil (Agile)",
-      "resumen": "Ignora el terreno difícil y permite Repetir tiradas fallidas de Leg It.",
-      "detalles": "El Personaje ignora las penalizaciones de movimiento por terreno difícil y puede Repetir tirada en cualquier intento fallido de Leg It."
+      "resumen": "Permite Repetir tirada en Leg It e ignora penalizaciones por terreno difícil.",
+      "detalles": "Este Personaje es especialmente ágil y puede Repetir tirada en un intento fallido de Leg It por Ronda. Además, ignora las penalizaciones de Movimiento por terreno difícil."
     },
     "flurry of blades": {
       "nombre": "Ráfaga de Hojas (Flurry of Blades)",
@@ -445,6 +445,426 @@ const traduccionesES = {
       "nombre": "Saber de la Ilusión (Lore of Delusion)",
       "resumen": "Saber mágico de los Ourks enfocado en la manipulación mental e ilusiones.",
       "detalles": "Lista de Hechizos nativa de los Dreameaters Ourks enfocada en la manipulación mental, el sueño y las ilusiones."
+    },
+    "head regeneration": {
+      "nombre": "Regeneración de Cabeza (Head Regeneration)",
+      "resumen": "Permite hacer brotar una nueva cabeza y recuperar 2 HP con una Hazaña Fácil.",
+      "detalles": "Cuando la Marsh Hydra sufre un daño severo, puede intentar una Hazaña Fácil al inicio de su Activación para hacer brotar una nueva cabeza y recuperar 2 HP."
+    },
+    "clout points": {
+      "nombre": "Puntos de Influencia (Clout Points)",
+      "resumen": "Sistema de prestigio del líder Gremlin que modifica sus AP y habilidades.",
+      "detalles": "El Great Gremlin gana y pierde Puntos de Influencia (Clout Points) según sus acciones en batalla. A +6 o más gana +1 AP; entre -1 y -5 pierde Intimidante (Intimidating); a -6 o menos pierde 1 AP y deja de ser Comandante."
+    },
+    "gremlin burrows": {
+      "nombre": "Madrigueras Gremlin (Gremlin Burrows)",
+      "resumen": "Red de túneles subterráneos que permite a los Gremlins curarse y reubicarse.",
+      "detalles": "Los Gremlins viven en vastas madrigueras bajo tierra. Los Personajes con Habitante de Madrigueras (Burrow Dweller) pueden saltar a una Madriguera Gremlin con una Hazaña Fácil, curar D3 HP y reaparecer en cualquier madriguera la siguiente Ronda."
+    },
+    "chocks away!": {
+      "nombre": "¡Despeguen! (Chocks Away!)",
+      "resumen": "Permite realizar un movimiento especial de Vuelo de 12\" consumiendo 2 AP.",
+      "detalles": "Por 2 AP, este Personaje puede realizar un movimiento especial de Vuelo de 12\" sobre cualquier elemento de terreno intermedio."
+    },
+    "fungal regeneration": {
+      "nombre": "Regeneración Fúngica (Fungal Regeneration)",
+      "resumen": "Recupera D6 HP al final de la Ronda si no está en contacto de peana con un enemigo.",
+      "detalles": "Un Forest Troll o Forest Dragon está cubierto de hongos que sanan sus heridas. Si este Personaje no está en contacto de peana con un enemigo al final de una Ronda, recupera D6 HP."
+    },
+    "camouflaged pelt": {
+      "nombre": "Pelaje Camuflado (Camouflaged Pelt)",
+      "resumen": "Aumenta en 1 la dificultad de la Hazaña para los Ataques a distancia contra este personaje.",
+      "detalles": "Los Personajes que realizan un Ataque a distancia contra este Personaje aumentan la dificultad de su Hazaña en 1."
+    },
+    "ugly": {
+      "nombre": "Feo (Ugly)",
+      "resumen": "Los enemigos que realicen Ataques cuerpo a cuerpo contra este personaje lo hacen con Desventaja.",
+      "detalles": "Los Personajes enemigos que realicen Ataques cuerpo a cuerpo contra este Personaje lo hacen con Desventaja."
+    },
+    "monster rider": {
+      "nombre": "Jinete de Monstruos (Monster Rider)",
+      "resumen": "Permite usar el Rasgo Montura Monstruosa en cualquier Bestia, Monstruo o Titán.",
+      "detalles": "Puede utilizar el Rasgo Montura Monstruosa (Monstrous Mount) en cualquier Bestia, Monstruo o Titán."
+    },
+    "horns & tusks": {
+      "nombre": "Cuernos y Colmillos (Horns & Tusks)",
+      "resumen": "Otorga un Ataque cuerpo a cuerpo gratuito de Power 6 al realizar una Carga.",
+      "detalles": "Si este Personaje realiza un movimiento de Carga y entra en contacto de peana, obtiene un Ataque cuerpo a cuerpo gratuito de Power 6 con sus cuernos."
+    },
+    "medical kit": {
+      "nombre": "Kit Médico (Medical Kit)",
+      "resumen": "Permite curar D6 HP a un aliado adyacente tras superar una Hazaña Media por 1 AP.",
+      "detalles": "(1 AP) El Personaje puede intentar una Hazaña Media sobre un Personaje aliado en contacto de peana. Si tiene éxito, el objetivo recupera D6 HP."
+    },
+    "arcloque rifle": {
+      "nombre": "Rifle de Arcloque (Arcloque Rifle)",
+      "resumen": "Ataque a distancia de Power 6 y alcance 16\" cuyos Críticos ignoran Armadura.",
+      "detalles": "(2 AP) Ataque a distancia: Power 6. Reglas especiales: alcance de 16\". Los Impactos Críticos ignoran la Armadura."
+    },
+    "arcloque pistol": {
+      "nombre": "Pistola de Arcloque (Arcloque Pistol)",
+      "resumen": "Ataque a distancia de Power 5 y alcance 8\" utilizable en contacto de peana.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5. Reglas especiales: alcance de 8\". Se puede disparar en contacto de peana sin penalización."
+    },
+    "imperial gryphon standard": {
+      "nombre": "Estandarte del Grifo Imperial (Imperial Gryphon Standard)",
+      "resumen": "Otorga Ventaja en Valentía a 6\" y +1 AP a los aliados a 3\" o menos.",
+      "detalles": "Todos los Personajes aliados a 6\" o menos realizan los Chequeos de Valentía con Ventaja y ganan +1 AP durante su Activación si están a 3\" o menos."
+    },
+    "sergeant's chevrons": {
+      "nombre": "Galones de Sargento (Sergeant's Chevrons)",
+      "resumen": "Otorga Emitir Órdenes a un Imperial Trooper y retransmite órdenes recibidas a 6\".",
+      "detalles": "Solo se puede equipar en un Imperial Trooper. Otorga Emitir Órdenes (Make Orders). Si recibe una orden de un Capitán, puede retransmitir esa misma orden a otros aliados a 6\" o menos."
+    },
+    "advanced fungal regeneration": {
+      "nombre": "Regeneración Fúngica Avanzada (Advanced Fungal Regeneration)",
+      "resumen": "Recupera D3 HP al final de su Activación si no está en contacto de peana con un enemigo.",
+      "detalles": "Un Forest Dragon está cubierto de hongos que sanan sus heridas. Si este Personaje no está en contacto de peana con un enemigo al final de una Activación, recupera D3 HP."
+    },
+    "ambush": {
+      "nombre": "Emboscada (Ambush)",
+      "resumen": "Permite desplegar oculto en una escenografía y revelarse tras cualquier Activación.",
+      "detalles": "Al inicio del juego, elige en secreto un elemento de escenografía del tablero que no esté en la zona de despliegue enemiga y anótalo. Este Personaje permanece oculto allí y no puede ser objetivo de ningún Personaje. En cualquier momento del juego, puedes revelar al Personaje, el cual se Activa inmediatamente después de que finalice la Activación del Personaje activo."
+    },
+    "aquatic": {
+      "nombre": "Acuático (Aquatic)",
+      "resumen": "Mueve por terreno acuático como terreno abierto con +2\" de velocidad adicional.",
+      "detalles": "Este Personaje puede moverse por cualquier terreno acuático como si fuera terreno abierto. Además, gana +2\" en cualquier movimiento realizado en agua, incluidas las tiradas de Leg It."
+    },
+    "arcanite carapace": {
+      "nombre": "Caparazón de Arcanita (Arcanite Carapace)",
+      "resumen": "Otorga +1 de Armadura y genera Fichas de Arcanita al perder AP por Fuerza Mermante.",
+      "detalles": "La Arcanid Queen está cubierta por un grueso caparazón quitinoso tachonado de trozos de Arcanita. Otorga +1 de Armadura. Cada vez que la Arcanid Queen pierde AP debido a Fuerza Mermante (Dwindling Strength), coloca 1 Ficha de Arcanita en contacto de peana."
+    },
+    "bellow": {
+      "nombre": "Bramido (Bellow)",
+      "resumen": "Obliga a pasar un Chequeo de Valentía a los enemigos a 6\" tras una Hazaña Media.",
+      "detalles": "Una vez por Ronda, tras superar una Hazaña Media, todos los Personajes enemigos a 6\" o menos deben realizar un Chequeo de Valentía."
+    },
+    "brewboy": {
+      "nombre": "Chico del Brebaje (Brewboy)",
+      "resumen": "Efectos aleatorios de brebaje ingerido al inicio de la Activación.",
+      "detalles": "Al comienzo de su Activación, tira un D6 para ver qué brebaje ha ingerido el Brewzerker: 1 (-2 AP), 2 (+2 Movimiento, +3 Power, pierde D6 HP), 3 (cura D3 HP), 4 (Repetir tirada de 1 dado por Hazaña), 5 (Ataque de aliento de fuego), 6 (frenesí, pasa Valentía y mueve hacia el enemigo de mayor HP)."
+    },
+    "burrower": {
+      "nombre": "Excavador (Burrower)",
+      "resumen": "Permite excavar bajo tierra con una Hazaña Fácil para evitar ataques y mover bajo miniaturas.",
+      "detalles": "Este Personaje puede intentar excavar bajo tierra con una Hazaña Fácil. Mientras está excavado, no puede ser objetivo de Ataques cuerpo a cuerpo ni a distancia, no necesita realizar Chequeos de Valentía y puede moverse por debajo de otros Personajes."
+    },
+    "can't burn a burn": {
+      "nombre": "Incombustible (Can’t Burn a Burn)",
+      "resumen": "Reduce en 1 el Power de los ataques que causan daño extra contra Inflamables.",
+      "detalles": "Años de manipular fuego han endurecido la piel del Firestarter hasta el punto de no sentir las llamas. Cualquier ataque que cause daño adicional a objetivos Inflamables sufre -1 al Power contra el Firestarter."
+    },
+    "clout chaser": {
+      "nombre": "Buscador de Influencia (Clout Chaser)",
+      "resumen": "Mecánica de prestigio que aumenta o reduce los AP y el liderazgo del personaje.",
+      "detalles": "Gana o pierde Puntos de Influencia (Clout Points) según sus acciones. Un nivel alto de Influencia otorga +1 AP; un nivel negativo reduce atributos y capacidades de liderazgo."
+    },
+    "collection of tomes": {
+      "nombre": "Colección de Tomos (Collection of Tomes)",
+      "resumen": "Genera D3 Tomos Robados de colegios mágicos para uso de Magos a 3\" o menos.",
+      "detalles": "El Charmed Bookcase genera D3 Tomos Robados al inicio de su Activación. Tira un D6 por cada tomo para determinar el Saber de su Colegio. Pueden ser utilizados por cualquier Mago o Aprendiz a 3\" o menos."
+    },
+    "conduit": {
+      "nombre": "Canalizador (Conduit)",
+      "resumen": "Permite a un Mago aliado a 6\" medir el alcance de sus Hechizos desde la posición del Aprendiz.",
+      "detalles": "Los Hechizos lanzados por un Mago aliado a 6\" o menos pueden medir su alcance y línea de visión desde el Aprendiz como si él fuera el lanzador."
+    },
+    "coodolf the griffling": {
+      "nombre": "Coodolf el Griffling (Coodolf the Griffling)",
+      "resumen": "Los disparos contra enemigos a 6\" o menos de Father Griffmas se realizan con Ventaja.",
+      "detalles": "Cualquier disparo contra Personajes enemigos a 6\" o menos de Father Griffmas se realiza con Ventaja."
+    },
+    "crumbling remains": {
+      "nombre": "Restos Desmoronados (Crumbling Remains)",
+      "resumen": "Este personaje pierde 1 HP cada vez que se Activa.",
+      "detalles": "Los harapos del Old Man’o’Bones se mantienen unidos por pura voluntad. Este Personaje pierde 1 HP cada vez que se Activa."
+    },
+    "curse of the wolf": {
+      "nombre": "Maldición del Lobo (Curse of the Wolf)",
+      "resumen": "Transforma al personaje en un monstruo temible con Activación Dividida.",
+      "detalles": "Los afligidos por la maldición parecen normales hasta que se transforman en un monstruo temible que desgarra a sus enemigos, obteniendo Activación Dividida (Split Activation) y Temible (Fearsome)."
+    },
+    "drag": {
+      "nombre": "Arrastrar (Drag)",
+      "resumen": "Permite mover a la miniatura objetivo hasta 2\" hacia el atacante tras un impacto.",
+      "detalles": "Si un Ataque de Arrastrar tiene éxito, el atacante puede mover a la miniatura objetivo hasta 2\" hacia sí mismo."
+    },
+    "dual weapons": {
+      "nombre": "Armas Dobles (Dual Weapons)",
+      "resumen": "Permite Repetir tirada en todos los resultados de 1 al realizar Ataques cuerpo a cuerpo.",
+      "detalles": "Un conjunto de dos armas que el usuario ha entrenado para usar en cada mano. Si se equipa, un Personaje puede Repetir tirada en cada 1 al realizar un Ataque cuerpo a cuerpo."
+    },
+    "expendable": {
+      "nombre": "Prescindible (Expendable)",
+      "resumen": "La caída fuera de combate de este personaje no obliga a sus aliados a pasar Valentía.",
+      "detalles": "Cuando un modelo Prescindible queda Noqueado, los modelos aliados no necesitan realizar un Chequeo de Valentía."
+    },
+    "familiars": {
+      "nombre": "Familiares (Familiars)",
+      "resumen": "Asigna un Boglin como Familiar para medir el alcance de los Hechizos del Dreameater.",
+      "detalles": "Por 10 GP, se puede asignar un Boglin como Familiar. No puede llevar Objetos ni Equipo, pero cualquier Hechizo lanzado por el Dreameater puede medirse desde la posición del Familiar como si fuera el lanzador."
+    },
+    "feast of magic": {
+      "nombre": "Festín de Magia (Feast of Magic)",
+      "resumen": "Consume un Sprite aliado adyacente para recuperar D3 HP y sus reglas de Colegio.",
+      "detalles": "Tras una Hazaña Fácil, un Ensorcelled Beast puede consumir un Sprite aliado en contacto de peana y recuperar D3 HP. Además, durante el resto de la Ronda gana las reglas adicionales del Sprite según el Colegio del que fue Invocado."
+    },
+    "feed": {
+      "nombre": "Alimentarse (Feed)",
+      "resumen": "Recupera D3 HP de inmediato al Dejar Noqueado a un enemigo en contacto de peana.",
+      "detalles": "Cuando este Personaje deja Noqueado a un enemigo en contacto de peana, recupera de inmediato D3 HP."
+    },
+    "firey essence": {
+      "nombre": "Esencia Ígnea (Fiery Essence)",
+      "resumen": "Permite al Señor Oscuro invocar esbirros sacrificando HP e HP máximos.",
+      "detalles": "Los Underlings no se despliegan al inicio. Un Señor Oscuro puede Invocarlos en su Activación sacrificando 2 HP y reduciendo su HP máximo en 2."
+    },
+    "flightless": {
+      "nombre": "No Volador (Flightless)",
+      "resumen": "Especie terrestre sin capacidad de vuelo pero con gran agilidad y velocidad a pie.",
+      "detalles": "Una especie sin la capacidad de volar que lo compensa con mayor velocidad y agilidad a pie."
+    },
+    "flittering": {
+      "nombre": "Revoloteador (Flittering)",
+      "resumen": "Movimiento evasivo que dificulta ser alcanzado por Ataques a distancia.",
+      "detalles": "Las bandadas revolotean entre los árboles, lo que las convierte en objetivos difíciles de alcanzar con Ataques a distancia."
+    },
+    "for honour and glory!": {
+      "nombre": "¡Por el Honor y la Gloria! (For Honour and Glory!)",
+      "resumen": "Grito de guerra que otorga Ventaja en Ataques cuerpo a cuerpo a los aliados cercanos.",
+      "detalles": "Un grito de guerra que inspira a todos los aliados cercanos a realizar sus Ataques cuerpo a cuerpo con Ventaja."
+    },
+    "glittering scales": {
+      "nombre": "Escamas Brillantes (Glittering Scales)",
+      "resumen": "Aumenta en 1 la dificultad de la Hazaña para todos los Ataques a distancia contra la criatura.",
+      "detalles": "La luz que se refleja en las escamas del Faery Dragon dificulta mucho verlo con claridad. Todos los Ataques a distancia contra él tienen +1 de dificultad en la Hazaña."
+    },
+    "grasping talons": {
+      "nombre": "Garras Apresadoras (Grasping Talons)",
+      "resumen": "Ataque melé de Power 5 que en Crítico impide al objetivo salir del contacto de peana.",
+      "detalles": "(Cuerpo a cuerpo) Power 5. Si se obtiene un Impacto Crítico, el objetivo no puede salir del contacto de peana hasta el final de la Ronda."
+    },
+    "griffmas sack": {
+      "nombre": "Saco de Griffmas (Griffmas Sack)",
+      "resumen": "Regala un objeto místico a un aliado adyacente tras superar una Hazaña Fácil.",
+      "detalles": "Tras superar una Hazaña Fácil, Father Griffmas mete la mano en su saco para entregar un regalo a un Personaje aliado en contacto de peana (roba una carta del ArcDeck para determinar el efecto del regalo)."
+    },
+    "grizzled hide": {
+      "nombre": "Piel Curtida (Grizzled Hide)",
+      "resumen": "Otorga +1 de Armadura permanente que no puede ser rota ni ignorada.",
+      "detalles": "Old Grogg es un antiguo Troll cuya piel es tan gruesa como el cuero curtido. Tiene +1 de Armadura que no se puede romper."
+    },
+    "healing song": {
+      "nombre": "Canto Curativo (Healing Song)",
+      "resumen": "Restaura 1 HP a todos los personajes a 6\" o menos tras una Hazaña Fácil.",
+      "detalles": "Tras superar una Hazaña Fácil, el Faery Dragon restaura 1 HP a cada Personaje situado a 6\" o menos."
+    },
+    "hurl": {
+      "nombre": "Lanzar (Hurl)",
+      "resumen": "Permite coger y lanzar a personajes Diminutos en contacto de peana mediante una Hazaña.",
+      "detalles": "Un Personaje con el Rasgo Lanzar puede coger y lanzar a Personajes Diminutos (Diminutive) en contacto de peana realizando una Hazaña."
+    },
+    "incorporeal": {
+      "nombre": "Incorpóreo (Incorporeal)",
+      "resumen": "Todos los Ataques a distancia contra la criatura se realizan con Desventaja.",
+      "detalles": "Cualquier Ataque a distancia contra el Will o’ the Wisp se realiza con Desventaja."
+    },
+    "leader of the pack": {
+      "nombre": "Líder de la Manada (Leader of the Pack)",
+      "resumen": "Permite a criaturas aliadas a 8\" o menos usar el valor de Valentía del líder.",
+      "detalles": "Un Personaje con este Rasgo permite que las Criaturas de peana igual o inferior situadas a 8\" o menos utilicen su atributo de Valentía."
+    },
+    "living lair": {
+      "nombre": "Guarida Viviente (Living Lair)",
+      "resumen": "La guarida ataca a los intrusos con lianas y rocas cuando se le ordena.",
+      "detalles": "La propia guarida ataca a los intrusos con lianas y rocas cuando se le ordena."
+    },
+    "long arms": {
+      "nombre": "Brazos Largos (Long Arms)",
+      "resumen": "Permite realizar Ataques cuerpo a cuerpo a objetivos situados a hasta 2\" de distancia.",
+      "detalles": "Los Jungle Trolls tienen brazos extremadamente largos terminados en garras afiladas. Pueden realizar Ataques cuerpo a cuerpo contra objetivos a hasta 2\" de distancia, incluso sin estar en contacto de peana."
+    },
+    "magical spores": {
+      "nombre": "Esporas Mágicas (Magical Spores)",
+      "resumen": "Esporas volátiles que provocan efectos aleatorios en las miniaturas cercanas.",
+      "detalles": "Las esporas de la Swamp Wyvern causan efectos aleatorios en los modelos cercanos (tabla D6: daño, ganancia de AP, repetición de tiradas o hechizo extra)."
+    },
+    "mindless": {
+      "nombre": "Sin Mente (Mindless)",
+      "resumen": "Pasa automáticamente todos los Chequeos de Valentía y no siente pánico.",
+      "detalles": "Los constructos y no-muertos sin mente pasan automáticamente todos los Chequeos de Valentía y no sufren pánico."
+    },
+    "monologue": {
+      "nombre": "Monólogo (Monologue)",
+      "resumen": "Otorga un intento de Hazaña Fácil gratuito si el jugador interpreta un monólogo villano.",
+      "detalles": "El Señor Oscuro pronuncia un monólogo villano. Si el jugador lo interpreta en voz alta, obtiene un intento de Hazaña Fácil gratuito."
+    },
+    "monstrous mount": {
+      "nombre": "Montura Monstruosa (Monstrous Mount)",
+      "resumen": "Permite montar a una criatura; el jinete cuenta en Cobertura y se activan juntos.",
+      "detalles": "Algunas Criaturas pueden ser montadas por Personajes. Mientras están montados, los jinetes cuentan como en Cobertura. Tanto el jinete como la montura se Activan al mismo tiempo."
+    },
+    "mysterious herbs": {
+      "nombre": "Hierbas Misteriosas (Mysterious Herbs)",
+      "resumen": "Restaura D3 HP a un aliado adyacente tras una Hazaña Fácil.",
+      "detalles": "Una Hedgewitch puede intentar una Hazaña Fácil para restaurar D3 HP a un Personaje aliado en contacto de peana."
+    },
+    "pick up and…": {
+      "nombre": "Coger y... (Pick Up And…)",
+      "resumen": "Un Gigante agarra a un personaje tras un Crítico y tira D6 para aplicar un efecto brutal.",
+      "detalles": "Si un Gigante ha Cogido con éxito a un Personaje al sacar un Crítico, tira un D6 para ver qué le hace: Registrar (Rummage), Guardar (Squirrel Away) o Aplastar (Smush)."
+    },
+    "plot armour": {
+      "nombre": "Armadura del Guión (Plot Armour)",
+      "resumen": "Protección narrativa que evita la muerte permanente del personaje en campaña.",
+      "detalles": "Los personajes principales de la historia no pueden morir permanentemente de forma sencilla en los escenarios de campaña."
+    },
+    "present thy neck": {
+      "nombre": "Ofrece tu Cuello (Present Thy Neck)",
+      "resumen": "Fascina a un enemigo para que exponga su cuello al mordisco del Vampiro.",
+      "detalles": "El Vampiro encandila a un enemigo para que ofrezca voluntariamente su cuello para un mordisco drenador de sangre."
+    },
+    "sacrifice": {
+      "nombre": "Sacrificio (Sacrifice)",
+      "resumen": "Permite Sacrificar a un enemigo al 25% o menos de HP tras una Hazaña Media.",
+      "detalles": "Una vez por Activación, un Personaje con este Rasgo puede intentar Sacrificar a un Personaje enemigo de peana igual o inferior realizando una Hazaña Media si el objetivo está al 25% o menos de sus HP."
+    },
+    "shield": {
+      "nombre": "Escudo (Shield)",
+      "resumen": "Permite Repetir tirada en una Tirada de Defensa fallida por Ronda.",
+      "detalles": "Si se equipa, un Personaje puede Repetir tirada en una Tirada de Defensa fallida por Ronda."
+    },
+    "shifting forms": {
+      "nombre": "Formas Cambiantes (Shifting Forms)",
+      "resumen": "Permite al Woodfiend elegir su forma al ser Invocado (Guerrero, Bestial o Barrera).",
+      "detalles": "Los Woodfiends adoptan diversas formas al ser Invocados: Guerrero (+1 Power en Ataques), Bestial (+2 Movimiento y Rasgo Ágil) o Barrera (+1 de Armadura a un aliado en contacto de peana)."
+    },
+    "soul eater": {
+      "nombre": "Devorador de Almas (Soul Eater)",
+      "resumen": "Consume el alma de una miniatura caída para recuperar HP iguales al total de la víctima.",
+      "detalles": "En lugar de resucitar a un Personaje, el Harbinger consume permanentemente su alma para recuperar tantos HP como el valor total de HP iniciales de la víctima."
+    },
+    "sticky fingers": {
+      "nombre": "Manos Largas (Sticky Fingers)",
+      "resumen": "Roba Objetos de enemigos Tumbados sin tirada y Equipo con una Hazaña Media.",
+      "detalles": "Los Boglins cogen los Objetos de un Personaje Tumbado sin necesidad de realizar una Hazaña. También pueden intentar robar Equipo con una Hazaña Media."
+    },
+    "stinky beast": {
+      "nombre": "Bestia Apestosa (Stinky Beast)",
+      "resumen": "Las bestias enemigas deben pasar un Chequeo de Valentía para acercarse a menos de 3\".",
+      "detalles": "Si una Bestia, Monstruo o Titán desea moverse a 3\" o menos de un Swamp Critter, debe superar primero un Chequeo de Valentía."
+    },
+    "student of magic": {
+      "nombre": "Estudiante de Magia (Student of Magic)",
+      "resumen": "Permite lanzar Hechizos del Colegio robando como máximo 2 cartas.",
+      "detalles": "Los Aprendices pueden Lanzar Hechizos del Saber de su Colegio, sin embargo, solo pueden robar un máximo de 2 cartas al lanzar."
+    },
+    "summoner": {
+      "nombre": "Invocador (Summoner)",
+      "resumen": "Habilita al personaje para invocar criaturas mágicas o del bosque al tablero.",
+      "detalles": "Un Personaje con este Rasgo puede invocar criaturas del bosque o entidades mágicas al campo de batalla utilizando Hechizos o Hazañas."
+    },
+    "swinger": {
+      "nombre": "Balanceador (Swinger)",
+      "resumen": "Se balancea en lianas para cruzar vacíos y elementos de terreno rápidamente.",
+      "detalles": "Utiliza lianas para balancearse y cruzar vacíos y elementos de terreno rápidamente."
+    },
+    "the carven idol": {
+      "nombre": "El Ídolo Tallado (The Carven Idol)",
+      "resumen": "Otorga una Repetición de tirada por Ronda a los Gremlins a 3\" o menos.",
+      "detalles": "Todos los Personajes con Habitante de Madrigueras (Burrow Dweller) que comiencen su Activación a 3\" o menos del Carvenhead ganan una Repetición de tirada por Ronda. El radio aumenta en 1\" por cada pieza de Equipo entregada al ídolo."
+    },
+    "the enchanted journal": {
+      "nombre": "El Diario Encantado (The Enchanted Journal)",
+      "resumen": "Acompaña al Explorador y otorga acceso al Saber mágico del Diario Encantado.",
+      "detalles": "Acompaña al Explorer y otorga acceso a la lista de Hechizos del Saber del Diario Encantado (Lore of the Enchanted Journal)."
+    },
+    "thirst of the forest": {
+      "nombre": "Sed del Bosque (Thirst of the Forest)",
+      "resumen": "Gana bonificaciones de Power al dañar a víctimas heridas en zonas boscosas.",
+      "detalles": "Obtiene bonificaciones de Power al dañar a víctimas heridas en zonas boscosas."
+    },
+    "thorned": {
+      "nombre": "Espinoso (Thorned)",
+      "resumen": "Causa 1 impacto automático a cualquier enemigo que le ataque en melé.",
+      "detalles": "Cualquier Personaje que realice un Ataque cuerpo a cuerpo contra esta miniatura sufre 1 impacto de sus espinas afiladas."
+    },
+    "trophy frenzy": {
+      "nombre": "Frenesí de Trofeos (Trophy Frenzy)",
+      "resumen": "Aumenta en +1 sus AP totales por cada enemigo Noqueado (se reinicia si cae Tumbado).",
+      "detalles": "Por cada Personaje que el Trophy Taker deje Noqueado, sus AP totales aumentan en 1. Sus AP totales se reducen de nuevo a 2 si en algún momento queda Tumbado."
+    },
+    "two-handed weapon": {
+      "nombre": "Arma a Dos Manos (Two-Handed Weapon)",
+      "resumen": "Otorga +2 Power en melé, pero descarta todas las Defensas Críticas propias como fallos.",
+      "detalles": "Si se equipa, un Personaje obtiene +2 al Power en todos los Ataques cuerpo a cuerpo. Sin embargo, cualquiera de sus Defensas Críticas se descarta como si fuera un fallo."
+    },
+    "very flammable": {
+      "nombre": "Muy Inflamable (Very Flammable)",
+      "resumen": "Es Inflamable y explota al ser Noqueado por fuego dañando a todos a 3\".",
+      "detalles": "Este Personaje es Inflamable. Además, si queda Noqueado por un ataque efectivo contra Inflamables, ¡explota! Todos los Personajes a 3\" o menos sufren 3 impactos y quedan Tumbados."
+    },
+    "web spinner": {
+      "nombre": "Tejedor de Telarañas (Web Spinner)",
+      "resumen": "Transforma el terreno a 3\" en Terreno Difícil o Infranqueable.",
+      "detalles": "En terreno abierto, realiza una Hazaña Media para convertir un radio de 3\" en Terreno Difícil. Si está en Terreno Difícil, una Hazaña Difícil lo convierte en Terreno Infranqueable hasta el final de la Ronda."
+    },
+    "web spray": {
+      "nombre": "Pulverización de Telaraña (Web Spray)",
+      "resumen": "Halva el movimiento de un enemigo a 8\" o menos tras una Hazaña Media.",
+      "detalles": "Hazaña Media contra un enemigo en peana de 60mm o inferior a 8\" o menos. Si tiene éxito, el Movimiento del objetivo se reduce a la mitad durante el resto de la Ronda (acumulable)."
+    },
+    "crew": {
+      "nombre": "Dotación (Crew)",
+      "resumen": "La milicia adyacente puede donar sus AP no gastados a la máquina de guerra.",
+      "detalles": "Si hay Halfling Militia en contacto de peana con el Thing-Flinger, durante su Activación pueden donar sus AP no gastados al Thing-Flinger."
+    },
+    "random payload": {
+      "nombre": "Carga Aleatoria (Random Payload)",
+      "resumen": "Tira D6 antes de disparar para determinar efectos secundarios de la munición.",
+      "detalles": "Antes de intentar una Hazaña para disparar, tira un D6 para ver qué efectos adicionales produce (Dotación Desafortunada, Verduras Podridas, Cuchillos y Tenedores, Amigos del Corral, Piedra Honesta)."
+    },
+    "traps": {
+      "nombre": "Trampas (Traps)",
+      "resumen": "Coloca un contador de trampa a 2\" que inflige 6 impactos si el enemigo falla una Hazaña Media.",
+      "detalles": "Una vez por Activación, puede intentar una Hazaña Media para colocar una trampa. Cualquier Personaje a 2\" del contador debe superar una Hazaña Media o activar la trampa y sufrir 6 impactos."
+    },
+    "cling on": {
+      "nombre": "Prenderse (Cling On)",
+      "resumen": "El perro se agarra al Monstruo e inflige un Ataque de Mordisco cada vez que este se Activa.",
+      "detalles": "Si se realiza un Ataque con éxito sobre un Monstruo o Titán y el Trollhound está en contacto de peana, el Monstruo sufre un Ataque de Mordisco cada vez que se Activa."
+    },
+    "expert poacher": {
+      "nombre": "Furtivo Experto (Expert Poacher)",
+      "resumen": "Obtiene Ventaja en todos los Ataques contra Bestias, Monstruos y Titanes.",
+      "detalles": "Gana Ventaja en todos los Ataques contra Bestias, Monstruos y Titanes."
+    },
+    "the scarlet blur": {
+      "nombre": "El Borrón Escarlata (The Scarlet Blur)",
+      "resumen": "Un pícaro legendario capaz de moverse por el tablero a velocidad cegadora.",
+      "detalles": "Un pícaro legendario Halfling capaz de desplazarse por el campo de batalla a una velocidad cegadora."
+    },
+    "hater of the dead": {
+      "nombre": "Odiador de los Muertos (Hater of the Dead)",
+      "resumen": "Gana Ventaja en todos los Ataques realizados contra personajes No-Muertos.",
+      "detalles": "Gana Ventaja en todos los Ataques realizados contra Personajes No-Muertos."
+    },
+    "van halfsing's crossbow": {
+      "nombre": "Ballesta de Van Halfsing (Van Halfsing's Crossbow)",
+      "resumen": "Ataque a distancia de Power 6 que ignora la Armadura de objetivos No-Muertos.",
+      "detalles": "(A distancia) Power 6. Alcance de 12\". Ignora la Armadura contra objetivos No-Muertos."
+    },
+    "leaders of men": {
+      "nombre": "Líderes de Hombres (Leaders of Men)",
+      "resumen": "Permite a las Unidades aliadas a 6\" o menos usar la Valentía del Comandante.",
+      "detalles": "Permite que los Personajes aliados de clase Unidad situados a 6\" o menos utilicen el atributo de Valentía del Comandante."
+    },
+    "mounted specialist": {
+      "nombre": "Especialista Montado (Mounted Specialist)",
+      "resumen": "Gana +1 Power en todos los Ataques cuerpo a cuerpo mientras está Montado.",
+      "detalles": "Gana +1 al Power en todos los Ataques cuerpo a cuerpo mientras se encuentra Montado."
     }
   },
   "objetos": {},
