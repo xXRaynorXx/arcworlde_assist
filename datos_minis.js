@@ -5111,17 +5111,9 @@ const compendioArcWorlde = {
       "resumen": "Expansión militar del Imperio aliada con colonos locales.",
       "detalles": "Efectos: Puedes reclutar personajes de las facciones Halfling y Njorsvald sin penalización de infidelidad."
     },
-    "Dar y Recibir Órdenes / Make/Take Orders": {
-      "resumen": "Cadena de mando para coordinar acciones grupales de la milicia.",
-      "detalles": "Efectos: Un personaje con Make Orders emite una orden a aliados con Take Orders a 12\" tras superar una Hazaña Fácil."
-    },
     "El Gran Libro de Cocina / Grand Cookbook of Bulbo Chubb": {
       "resumen": "Magia gastronómica infundida con Arcanita para potenciar o curar aliados.",
       "detalles": "Efectos: Acceso al saber mágico con hechizos de curación, bonificación al movimiento y potenciadores de combate."
-    },
-    "Comandos Militares / Make/Take Orders": {
-      "resumen": "Los oficiales imperiales emiten Together!, Hold!, Volley! o Form Up! a hasta 4 personajes de la misma clase a 12\".",
-      "detalles": "If a Character has the Make Orders Trait, on an Easy Feat one of the following commands can be issued to friendly Characters with the Take Orders Trait within 12”. Upon issuing a command this Character's Activation ends and Activation passes to the Characters taking orders: Together!, Hold!, Volley! or Form Up! (see the Imperial Orders)."
     },
     "El Más Allá / Afterlife": {
       "resumen": "Convicción absoluta de encontrarse en el paraíso prometido.",
