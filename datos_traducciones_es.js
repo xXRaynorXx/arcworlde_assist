@@ -1343,7 +1343,140 @@ const traduccionesES = {
       "restriccion": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
     }
   },
-  "reglas": {},
+  "reglas": {
+    "settler_nation_halfling": {
+      "nombre": "Nación Colonizadora (Settler Nation)",
+      "resumen": "Alianzas tácticas entre Halflings, Imperiales y Njorsvald en el bosque de Mildaark.",
+      "detalles": "Los Halflings e Imperiales por lo general desconfían de los extraños, especialmente en las peligrosas tierras del Mildaark. A pesar de todo, se aliarán a regañadientes con otros colonos del bosque si saben mantener sus manos de ladrón para sí mismos. Al construir tu Banda, puedes incluir Personajes de las facciones Imperial y Njorsvald sin penalización.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "make_take_orders_halfling": {
+      "nombre": "Dar y Recibir Órdenes (Make/Take Orders)",
+      "resumen": "Sistema de mando para coordinar las acciones grupales de la milicia Halfling.",
+      "detalles": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden de facción a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir una orden, la Activación del oficial finaliza y pasa inmediatamente a los aliados que reciben la orden.",
+      "restriccion": "El emisor debe estar a 12\" o menos de los receptores."
+    },
+    "order_as_one_halfling": {
+      "nombre": "Orden: ¡Como Uno Solo! (As One!)",
+      "resumen": "Orden de facción que activa simultáneamente a hasta 3 personajes de la misma clase.",
+      "detalles": "Hasta tres Personajes de la misma Clase pueden Activarse juntos. Todos los Ataques realizados deben dirigirse al mismo objetivo y se resuelven uno tras otro.",
+      "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Los ataques deben dirigirse al mismo objetivo."
+    },
+    "order_stand_firm_halfling": {
+      "nombre": "Orden: ¡Manteneos Firmes! (Stand Firm!)",
+      "resumen": "Orden de facción que hace pasar automáticamente todas las pruebas de Valentía a hasta 3 personajes de la misma clase.",
+      "detalles": "Hasta tres Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.",
+      "restriccion": "Emitida mediante Make Orders a personajes con Take Orders a 12\". Dura hasta el final de la Ronda."
+    },
+    "settler_nation_imperial": {
+      "nombre": "Nación Colonizadora (Settler Nation)",
+      "resumen": "Integración táctica militar del Imperio con colonos Halflings y Njorsvald.",
+      "detalles": "Los Imperiales y Halflings por lo general desconfían de los extraños en el bosque de Mildaark, pero colaboran estrechamente para defender sus asentamientos. Al construir tu Banda imperial, puedes incluir Personajes de las facciones Halfling y Njorsvald.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "make_take_orders_imperial": {
+      "nombre": "Comandos Militares (Make/Take Orders)",
+      "resumen": "Ordenanza y disciplina militar imperial para coordinar regimientos en batalla.",
+      "detalles": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden táctica imperial a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir la orden, la Activación del oficial finaliza y pasa a las tropas dirigidas.",
+      "restriccion": "El oficial debe estar a 12\" o menos de las unidades receptoras."
+    },
+    "order_together_imperial": {
+      "nombre": "Orden: ¡Juntos! (Order: Together!)",
+      "resumen": "Permite activar juntos a hasta 4 personajes de la misma clase, otorgando +1 Power si atacan al mismo objetivo.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Si sus Ataques se dirigen al mismo objetivo, ganan +1 al Power.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El bonificador de +1 Power requiere concentrar los ataques en la misma miniatura objetivo."
+    },
+    "order_hold_imperial": {
+      "nombre": "Orden: ¡Resistid! (Order: Hold!)",
+      "resumen": "Hasta 4 personajes de la misma clase pasan automáticamente todas las pruebas de Valentía hasta el final de la ronda.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase superan automáticamente todos los Chequeos de Valentía hasta el final de la Ronda.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. El efecto dura hasta el final de la Ronda."
+    },
+    "order_volley_imperial": {
+      "nombre": "Orden: ¡Salva! (Order: Volley!)",
+      "resumen": "Hasta 4 personajes de la misma clase se activan juntos y pueden repetir tiradas de Hazaña fallidas en sus ataques a distancia.",
+      "detalles": "Hasta cuatro Personajes de la misma Clase pueden Activarse juntos. Cualquier tirada de Hazaña fallida en un Ataque a distancia puede Repetirse.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Aplica la repetición de tiradas únicamente a ataques a distancia."
+    },
+    "order_form_up_imperial": {
+      "nombre": "Orden: ¡Formación! (Order: Form Up!)",
+      "resumen": "Hasta 4 personajes de la misma clase pueden realizar un movimiento único de 2\" aunque ya hayan sido activados, si no están trabados.",
+      "detalles": "Aunque ya se hayan Activado, hasta cuatro Personajes de la misma Clase pueden realizar un único movimiento de 2\" si no están en contacto de peana con un Personaje enemigo.",
+      "restriccion": "Hasta 4 personajes de la misma clase a 12\" o menos del emisor. Permite recolocarse 2\" incluso si la unidad ya se activó previamente en la ronda, siempre que no esté en contacto de peana con ningún enemigo."
+    },
+    "the_dark_ones_will": {
+      "nombre": "La Voluntad del Oscuro (The Dark One's Will)",
+      "resumen": "Personalización de las obsesiones y capacidades del Señor Oscuro.",
+      "detalles": "Cada Señor Oscuro tiene una combinación única de obsesiones y metas febriles. Antes del juego, elige los rasgos de personalidad que encarna tu Señor Oscuro: Guerrero Maligno (+1 AP por cada enemigo Noqueado), Brujo Oscuro (obtiene el Rasgo Mago y el Saber de la Villanía), Maestro de la Horda (-20% GP para Hobgoblins) o Maestro de Bestias (-20% GP para criaturas del Bestiario).",
+      "restriccion": "Se elige antes del comienzo de la partida durante la creación de la lista."
+    },
+    "fae_beings_dark_lords": {
+      "nombre": "Seres Fae / Pactos Malevolentes (Fae Beings)",
+      "resumen": "Alianzas oscuras entre los Señores Oscuros y otras criaturas o magos de naturaleza feérica.",
+      "detalles": "Los Seres Fae son criaturas volubles de magia que a veces se alían con aquellos cuyo poder respetan. Al construir tu Banda de Señores Oscuros, puedes utilizar Personajes de las facciones Magos (Wizards) y Elfos Silvanos (Wild Elves).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "nomadic_clans_beastfolk": {
+      "nombre": "Clanes Nómadas (Nomadic Clans)",
+      "resumen": "Vida errante y alianzas de los Hombres Bestia con otras facciones nómadas.",
+      "detalles": "Los Hombres Bestia llevan una vida nómada en las tierras salvajes de ArcWorlde y se alían con quienes hacen lo mismo. Al construir tu Banda de Hombres Bestia, puedes incluir Personajes de las facciones Ourks y Gremlins sin penalizaciones.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "beastkin": {
+      "nombre": "Parentesco Bestial (Beastkin)",
+      "resumen": "Descuento en reclutamiento de criaturas salvajes del Bestiario.",
+      "detalles": "Las Bestias, Monstruos o Titanes del Bestiario reclutados como parte de una Banda de Hombres Bestia (Beastfolk) tienen un descuento del -20% en su coste de GP.",
+      "restriccion": "Aplica al reclutar criaturas del Bestiario."
+    },
+    "afterlife": {
+      "nombre": "El Más Allá (Afterlife)",
+      "resumen": "Inmunidad al miedo al creer que ya se encuentran en el paraíso prometido.",
+      "detalles": "Los Antiguos Muertos creen que están en el más allá prometido por sus dioses olvidados y no temen nada. Los Personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía.",
+      "restriccion": "Pasivo universal para los Antiguos Muertos."
+    },
+    "bones": {
+      "nombre": "Huesos (Bones)",
+      "resumen": "Regeneración de estructura ósea y cobertura natural contra disparos.",
+      "detalles": "Con su carne desaparecida, los Antiguos Muertos están orgullosos de sus brillantes huesos. Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para 'recomponerse' y recuperar D3 HP. Además, cuentan como en Cobertura contra cualquier Ataque a distancia.",
+      "restriccion": "Requiere una Hazaña Fácil para la curación."
+    },
+    "undead_legions_ancient_dead": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Alianza entre las distintas facciones de no-muertos del reino de Vauhaemia.",
+      "detalles": "Aunque los no-muertos desprecian a los vivos, se alían con otros seres no-muertos cuyo hambre de poder respetan. Al construir tu Banda de Antiguos Muertos, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Vampiros (Vampires).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "undead_legions_vampires": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Pactos nobiliarios y de servidumbre entre señores vampiros y otras huestes no-muertas.",
+      "detalles": "Los Vampiros pueden comandar e integrar otras fuerzas de no-muertos. Al construir tu Banda de Vampiros, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Antiguos Muertos (Ancient Dead).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "undead_legions_undead_raiders": {
+      "nombre": "Legiones No-Muertas (Undead Legions)",
+      "resumen": "Alianza de forajidos resucitados con otras legiones de la no-vida.",
+      "detalles": "Los Saqueadores No-Muertos se alían fácilmente con otros seres no-muertos. Al construir tu Banda de Saqueadores No-Muertos, puedes incluir Personajes de las facciones Vampiros (Vampires) y Antiguos Muertos (Ancient Dead).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "raiser_of_the_dead": {
+      "nombre": "Invocador de No-Muertos (Raiser of the Dead)",
+      "resumen": "Permite resucitar a personajes aliados Noqueados a 6\" o menos con el 50% de sus HP.",
+      "detalles": "Un Personaje con el Rasgo Invocador de No-Muertos (Raiser of the Dead) puede intentar resucitar a Personajes aliados caídos con el Rasgo Resucitado (Risen). Cuando un Personaje Resucitado queda Noqueado, coloca la miniatura de lado o usa una ficha para marcar dónde cayó. Para resucitar a un Personaje Noqueado, el Invocador debe realizar una Hazaña estando a 6\" o menos del marcador: para Unidades o Bestias, una Hazaña Media; para Élites o Irregulares, una Hazaña Difícil; para Pesadas o Personajes aliados sin el Rasgo Resucitado, una Hazaña Legendaria. Los Personajes resucitados con éxito se colocan de nuevo en el tablero donde cayeron y pueden Activarse con normalidad, pero con el 50% de sus HP iniciales, redondeando hacia arriba.",
+      "restriccion": "Rango de 6\" del marcador. Hazaña Media (Unidades/Bestias), Difícil (Élites/Irregulares) o Legendaria (Pesadas o sin Risen)."
+    },
+    "fae_beings_wild_elves": {
+      "nombre": "Seres Fae / Pactos Arcanos (Fae Beings)",
+      "resumen": "Afinidad mágica de los Elfos Silvanos con los Magos y los Señores Oscuros.",
+      "detalles": "Los Seres Fae son criaturas volubles de magia y se alían con aquellos cuyo poder respetan. Al construir tu Banda de Elfos Silvanos, puedes incluir Personajes de las facciones Magos (Wizards) y Señores Oscuros (Dark Lords).",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    },
+    "nomads_ourks": {
+      "nombre": "Nómadas (Nomads)",
+      "resumen": "Estilo de vida errante en los pantanos que permite alianzas con Hombres Bestia y Gremlins.",
+      "detalles": "Los Ourks llevan una vida nómada y errante en los pantanos y tierras salvajes de ArcWorlde. Al construir tu Banda de Ourks, puedes incluir Personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins sin penalizaciones.",
+      "restriccion": "Aplica durante la fase de creación de la Banda."
+    }
+  },
   "saberes": {},
   "unidades": {}
 };

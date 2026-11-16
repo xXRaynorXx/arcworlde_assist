@@ -1,0 +1,163 @@
+[
+  {
+    "id": "settler_nation_halfling",
+    "nombre_es": "Nación Colonizadora (Settler Nation)",
+    "resumen_es": "Alianzas tácticas entre Halflings, Imperiales y Njorsvald en el bosque de Mildaark.",
+    "detalles_es": "Los Halflings e Imperiales por lo general desconfían de los extraños, especialmente en las peligrosas tierras del Mildaark. A pesar de todo, se aliarán a regañadientes con otros colonos del bosque si saben mantener sus manos de ladrón para sí mismos. Al construir tu Banda, puedes incluir Personajes de las facciones Imperial y Njorsvald sin penalización.",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "make_take_orders_halfling",
+    "nombre_es": "Dar y Recibir Órdenes (Make/Take Orders)",
+    "resumen_es": "Sistema de mando para coordinar las acciones grupales de la milicia Halfling.",
+    "detalles_es": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden de facción a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir una orden, la Activación del oficial finaliza y pasa inmediatamente a los aliados que reciben la orden.",
+    "restriccion_es": "El emisor debe estar a 12\" o menos de los receptores."
+  },
+  {
+    "id": "order_as_one_halfling",
+    "nombre_es": "Órden: ¡Como Uno Solo! (As One!)",
+    "resumen_es": "Orden táctica que permite a las tropas Halfling avanzar y realizar una carga conjunta.",
+    "detalles_es": "Al recibir esta orden, hasta 4 Personajes aliados con Recibir Órdenes a 12\" o menos del oficial pueden realizar de inmediato un movimiento de Avance o Carga hacia el mismo objetivo o dirección.",
+    "restriccion_es": "Exclusiva de oficiales Halflings a 12\" o menos de unidades con Recibir Órdenes."
+  },
+  {
+    "id": "order_stand_firm_halfling",
+    "nombre_es": "Órden: ¡Manteneos Firmes! (Stand Firm!)",
+    "resumen_es": "Orden defensiva que refuerza la moral y la línea de contención Halfling.",
+    "detalles_es": "Al recibir esta orden, los Personajes aliados con Recibir Órdenes a 12\" o menos del oficial superan automáticamente todos los Chequeos de Valentía y obtienen +1 al valor de Armadura hasta el final de la Ronda actual.",
+    "restriccion_es": "Exclusiva de oficiales Halflings a 12\" o menos de unidades con Recibir Órdenes."
+  },
+  {
+    "id": "settler_nation_imperial",
+    "nombre_es": "Nación Colonizadora (Settler Nation)",
+    "resumen_es": "Integración táctica militar del Imperio con colonos Halflings y Njorsvald.",
+    "detalles_es": "Los Imperiales y Halflings por lo general desconfían de los extraños en el bosque de Mildaark, pero colaboran estrechamente para defender sus asentamientos. Al construir tu Banda imperial, puedes incluir Personajes de las facciones Halfling y Njorsvald.",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "make_take_orders_imperial",
+    "nombre_es": "Comandos Militares (Make/Take Orders)",
+    "resumen_es": "Ordenanza y disciplina militar imperial para coordinar regimientos en batalla.",
+    "detalles_es": "Un Personaje con el Rasgo Emitir Órdenes (Make Orders) puede emitir una orden táctica imperial a los Personajes aliados con el Rasgo Recibir Órdenes (Take Orders) situados a 12\" o menos tras superar una Hazaña Fácil. Al emitir la orden, la Activación del oficial finaliza y pasa a las tropas dirigidas.",
+    "restriccion_es": "El oficial debe estar a 12\" o menos de las unidades receptoras."
+  },
+  {
+    "id": "order_together_imperial",
+    "nombre_es": "Órden: ¡Juntos! (Order: Together!)",
+    "resumen_es": "Orden táctica imperial para realizar un avance colectivo coordinado.",
+    "detalles_es": "Al recibir esta orden, hasta 4 Personajes aliados con Recibir Órdenes a 12\" o menos del oficial pueden realizar de inmediato un movimiento de Avance conjunto hacia el mismo objetivo.",
+    "restriccion_es": "Exclusiva de oficiales Imperiales a 12\" o menos de unidades con Recibir Órdenes."
+  },
+  {
+    "id": "order_hold_imperial",
+    "nombre_es": "Órden: ¡Resistid! (Order: Hold!)",
+    "resumen_es": "Orden militar defensiva para resistir cargas y ataques enemigos.",
+    "detalles_es": "Al recibir esta orden, los Personajes aliados con Recibir Órdenes a 12\" o menos ganan +1 al valor de Armadura y realizan sus Chequeos de Valentía con Ventaja durante el resto de la Ronda.",
+    "restriccion_es": "Exclusiva de oficiales Imperiales a 12\" o menos de unidades con Recibir Órdenes."
+  },
+  {
+    "id": "order_volley_imperial",
+    "nombre_es": "Órden: ¡Salva! (Order: Volley!)",
+    "resumen_es": "Orden de tiro coordinado para descargar proyectiles sobre las filas enemigas.",
+    "detalles_es": "Al recibir esta orden, hasta 4 Personajes aliados con Recibir Órdenes a 12\" o menos equipados con armas a distancia pueden realizar de inmediato un Ataque a distancia colectivo contra el mismo objetivo.",
+    "restriccion_es": "Exclusiva de oficiales Imperiales a 12\" o menos de unidades con armas a distancia."
+  },
+  {
+    "id": "order_form_up_imperial",
+    "nombre_es": "Órden: ¡Formación! (Order: Form Up!)",
+    "resumen_es": "Reorganización defensiva rápida para estrechar filas y apoyarse mutuamente.",
+    "detalles_es": "Al recibir esta orden, los Personajes aliados con Recibir Órdenes a 12\" o menos pueden moverse hasta 2\" de inmediato para entrar en contacto de peana entre sí, obteniendo Ventaja en sus tiradas defensivas en cuerpo a cuerpo.",
+    "restriccion_es": "Exclusiva de oficiales Imperiales a 12\" o menos de unidades con Recibir Órdenes."
+  },
+  {
+    "id": "the_dark_ones_will",
+    "nombre_es": "La Voluntad del Oscuro (The Dark One's Will)",
+    "resumen_es": "Personalización de las obsesiones y capacidades del Señor Oscuro.",
+    "detalles_es": "Cada Señor Oscuro tiene una combinación única de obsesiones y metas febriles. Antes del juego, elige los rasgos de personalidad que encarna tu Señor Oscuro: Guerrero Maligno (+1 AP por cada enemigo Noqueado), Brujo Oscuro (obtiene el Rasgo Mago y el Saber de la Villanía), Maestro de la Horda (-20% GP para Hobgoblins) o Maestro de Bestias (-20% GP para criaturas del Bestiario).",
+    "restriccion_es": "Se elige antes del comienzo de la partida durante la creación de la lista."
+  },
+  {
+    "id": "fae_beings_dark_lords",
+    "nombre_es": "Seres Fae / Pactos Malevolentes (Fae Beings)",
+    "resumen_es": "Alianzas oscuras entre los Señores Oscuros y otras criaturas o magos de naturaleza feérica.",
+    "detalles_es": "Los Seres Fae son criaturas volubles de magia que a veces se alían con aquellos cuyo poder respetan. Al construir tu Banda de Señores Oscuros, puedes utilizar Personajes de las facciones Magos (Wizards) y Elfos Silvanos (Wild Elves).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "nomadic_clans_beastfolk",
+    "nombre_es": "Clanes Nómadas (Nomadic Clans)",
+    "resumen_es": "Vida errante y alianzas de los Hombres Bestia con otras facciones nómadas.",
+    "detalles_es": "Los Hombres Bestia llevan una vida nómada en las tierras salvajes de ArcWorlde y se alían con quienes hacen lo mismo. Al construir tu Banda de Hombres Bestia, puedes incluir Personajes de las facciones Ourks y Gremlins sin penalizaciones.",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "beastkin",
+    "nombre_es": "Parentesco Bestial (Beastkin)",
+    "resumen_es": "Descuento en reclutamiento de criaturas salvajes del Bestiario.",
+    "detalles_es": "Las Bestias, Monstruos o Titanes del Bestiario reclutados como parte de una Banda de Hombres Bestia (Beastfolk) tienen un descuento del -20% en su coste de GP.",
+    "restriccion_es": "Aplica al reclutar criaturas del Bestiario."
+  },
+  {
+    "id": "afterlife",
+    "nombre_es": "El Más Allá (Afterlife)",
+    "resumen_es": "Inmunidad al miedo al creer que ya se encuentran en el paraíso prometido.",
+    "detalles_es": "Los Antiguos Muertos creen que están en el más allá prometido por sus dioses olvidados y no temen nada. Los Personajes con este Rasgo pasan automáticamente todos los Chequeos de Valentía.",
+    "restriccion_es": "Pasivo universal para los Antiguos Muertos."
+  },
+  {
+    "id": "bones",
+    "nombre_es": "Huesos (Bones)",
+    "resumen_es": "Regeneración de estructura ósea y cobertura natural contra disparos.",
+    "detalles_es": "Con su carne desaparecida, los Antiguos Muertos están orgullosos de sus brillantes huesos. Cualquier Personaje con este Rasgo puede intentar una Hazaña Fácil para 'recomponerse' y recuperar D3 HP. Además, cuentan como en Cobertura contra cualquier Ataque a distancia.",
+    "restriccion_es": "Requiere una Hazaña Fácil para la curación."
+  },
+  {
+    "id": "undead_legions_ancient_dead",
+    "nombre_es": "Legiones No-Muertas (Undead Legions)",
+    "resumen_es": "Alianza entre las distintas facciones de no-muertos del reino de Vauhaemia.",
+    "detalles_es": "Aunque los no-muertos desprecian a los vivos, se alían con otros seres no-muertos cuyo hambre de poder respetan. Al construir tu Banda de Antiguos Muertos, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Vampiros (Vampires).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "undead_legions_vampires",
+    "nombre_es": "Legiones No-Muertas (Undead Legions)",
+    "resumen_es": "Pactos nobiliarios y de servidumbre entre señores vampiros y otras huestes no-muertas.",
+    "detalles_es": "Los Vampiros pueden comandar e integrar otras fuerzas de no-muertos. Al construir tu Banda de Vampiros, puedes incluir Personajes de las facciones Saqueadores No-Muertos (Undead Raiders) y Antiguos Muertos (Ancient Dead).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "undead_legions_undead_raiders",
+    "nombre_es": "Legiones No-Muertas (Undead Legions)",
+    "resumen_es": "Alianza de forajidos resucitados con otras legiones de la no-vida.",
+    "detalles_es": "Los Saqueadores No-Muertos se alían fácilmente con otros seres no-muertos. Al construir tu Banda de Saqueadores No-Muertos, puedes incluir Personajes de las facciones Vampiros (Vampires) y Antiguos Muertos (Ancient Dead).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "raiser_of_the_dead",
+    "nombre_es": "Invocador de No-Muertos (Raiser of the Dead)",
+    "resumen_es": "Habilidad para resucitar aliados Noqueados con el rasgo Resucitado.",
+    "detalles_es": "Un Personaje con el Rasgo Invocador de No-Muertos puede intentar resucitar a Personajes aliados caídos con el Rasgo Resucitado (Risen). Al caer Noqueado, marca el lugar. El Invocador debe estar a 6\" o menos y superar una Hazaña según el tipo de tropa (Fácil/Media para Unidades/Bestias, Difícil para Élites, Legendaria para Pesadas). El resucitado vuelve con el 50% de sus HP.",
+    "restriccion_es": "Requiere estar a 6\" o menos del marcador del caído y superar la Hazaña correspondiente."
+  },
+  {
+    "id": "fae_beings_wild_elves",
+    "nombre_es": "Seres Fae / Pactos Arcanos (Fae Beings)",
+    "resumen_es": "Afinidad mágica de los Elfos Silvanos con los Magos y los Señores Oscuros.",
+    "detalles_es": "Los Seres Fae son criaturas volubles de magia y se alían con aquellos cuyo poder respetan. Al construir tu Banda de Elfos Silvanos, puedes incluir Personajes de las facciones Magos (Wizards) y Señores Oscuros (Dark Lords).",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  },
+  {
+    "id": "nomads_ourks",
+    "nombre_es": "Nómadas (Nomads)",
+    "resumen_es": "Estilo de vida errante en los pantanos que permite alianzas con Hombres Bestia y Gremlins.",
+    "detalles_es": "Los Ourks llevan una vida nómada y errante en los pantanos y tierras salvajes de ArcWorlde. Al construir tu Banda de Ourks, puedes incluir Personajes de las facciones Hombres Bestia (Beastfolk) y Gremlins sin penalizaciones.",
+    "restriccion_es": "Aplica durante la fase de creación de la Banda."
+  }
+]
+Lista de Dudas de Traducción
+As One!: Traducido como ¡Como Uno Solo! (propuesta).
+Stand Firm!: Traducido como ¡Manteneos Firmes! (propuesta).
+Order: Together!: Traducido como Órden: ¡Juntos! (propuesta).
+Order: Hold!: Traducido como Órden: ¡Resistid! (propuesta).
+Order: Volley!: Traducido como Órden: ¡Salva! (propuesta).
+Order: Form Up!: Traducido como Órden: ¡Formación! (propuesta).

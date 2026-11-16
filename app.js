@@ -34,12 +34,17 @@ function construirSeccionesFacciones() {
         };
     };
     // Las órdenes (As One!, Together!...) se muestran dentro de la tarjeta Make/Take Orders de su facción
-    const enName = (n) => String(n || '').split(' / ').pop().replace(/^Order:\s*/i, '');
-    const ordenesDe = (f) => (f.reglas_faccion || []).filter((r) => /^order_/.test(r.id));
+    const enName = (n) => String(n || '').split(' / ').pop().replace(/^(?:Order|Orden|Órden):\s*/i, '');
+    // En castellano, las reglas de facción salen con la traducción de datos_traducciones_es.js
+    const reglaES = (r) => {
+        const t = window.AWCompendio ? AWCompendio.trad('reglas', r.id) : null;
+        return t ? Object.assign({}, r, { nombre: t.nombre || r.nombre, resumen: t.resumen || r.resumen, detalles: t.detalles || r.detalles, restriccion: t.restriccion || r.restriccion }) : r;
+    };
+    const ordenesDe = (f) => (f.reglas_faccion || []).filter((r) => /^order_/.test(r.id)).map(reglaES);
     const listaOrdenes = (f) => ordenesDe(f).map((r) => enName(r.nombre) + ' — ' + r.detalles + (r.restriccion ? ' (' + r.restriccion + ')' : ''));
     const reglasDe = (f) => {
         const ords = ordenesDe(f);
-        return (f.reglas_faccion || []).filter((r) => !/^order_/.test(r.id)).map((r) =>
+        return (f.reglas_faccion || []).filter((r) => !/^order_/.test(r.id)).map(reglaES).map((r) =>
             ords.length && /^make_take_orders/.test(r.id) ? Object.assign({}, r, { listas: [{ titulo: 'Órdenes que se pueden emitir', items: listaOrdenes(f) }] }) : r);
     };
     const rasgosDe = (f) => {
