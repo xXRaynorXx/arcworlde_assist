@@ -1078,6 +1078,12 @@ const traduccionesES = {
       "detalles": "Cada vez que este personaje deja Noqueado a un enemigo en combate cuerpo a cuerpo, recupera D6 HP de inmediato.",
       "restriccion": "Exclusivo de la facción Vampiros (20 GP)."
     },
+    "fell_scholar": {
+      "nombre": "Saber Maligno (Fell Scholar)",
+      "resumen": "Iniciación en las artes arcanas oscuras para dominar los hechizos de la villanía.",
+      "detalles": "Otorga la clase Mago al personaje y le concede acceso a la lista completa de Hechizos del Saber de la Villanía (Lore of Villainy).",
+      "restriccion": "Exclusivo de la facción Vampiros (30 GP)."
+    },
     "crimson_knight": {
       "nombre": "Caballero Carmesí (Crimson Knight)",
       "resumen": "Adiestramiento marcial de élite para sembrar el terror en combate cuerpo a cuerpo.",
@@ -1108,6 +1114,18 @@ const traduccionesES = {
       "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 12\". Los Impactos Críticos provocan que el objetivo quede Tumbado (Prone).",
       "restriccion": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (15 GP)."
     },
+    "stolen_arcloque_pistol": {
+      "nombre": "Pistola de Arcloque Robada (Stolen Arcloque Pistol)",
+      "resumen": "Arma corta alquímica sustraída a las patrullas imperiales del Mildaark.",
+      "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 8\". Se puede disparar a objetivos en contacto de peana sin sufrir penalizaciones de combate.",
+      "restriccion": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (20 GP)."
+    },
+    "hangmans_noose": {
+      "nombre": "Soga de Ahorcado (Hangman's Noose)",
+      "resumen": "Lazo macabro para atrapar y estrangular a los enemigos a corta distancia.",
+      "detalles": "(1 AP) Ataque a distancia de alcance 4\". Si impacta, el objetivo sufre 1 impacto de Power 4 y no puede abandonar el contacto de peana ni realizar movimientos durante la Ronda.",
+      "restriccion": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (15 GP)."
+    },
     "wild_elven_mount": {
       "nombre": "Montura Silvana (Wild Elven Mount)",
       "resumen": "Ciervo gigante o felino boscoso invocado para cabalgar por la fronda.",
@@ -1120,11 +1138,29 @@ const traduccionesES = {
       "detalles": "(2 AP) Ataque a distancia: Power 7, Alcance 20\". Perfora armaduras: Ignora 1 punto del valor de Armadura del objetivo.",
       "restriccion": "Exclusivo de la facción Elfos Silvanos / Wild Elves (30 GP)."
     },
+    "blood_stone": {
+      "nombre": "Piedra de Sangre (Blood Stone)",
+      "resumen": "Gema mística que canaliza y almacena la energía vital de las víctimas sacrificadas.",
+      "detalles": "Permite almacenar hasta 2 Fichas de Arcanita obtenidas mediante Sacrificio para consumirlas en turnos o Rondas posteriores sin límite de expiración.",
+      "restriccion": "Exclusivo de la facción Elfos Silvanos / Wild Elves (10 GP)."
+    },
     "wild_elven_ranged_weapon": {
       "nombre": "Arma a Distancia Silvana (Wild Elven Ranged Weapon)",
       "resumen": "Arco largo tradicional de Caledon para tiradores de la arboleda.",
       "detalles": "(1 AP) Ataque a distancia: Power 5, Alcance 16\". Si el tirador se encuentra en terreno boscoso, realiza la tirada para impactar con Ventaja.",
       "restriccion": "Exclusivo de la facción Elfos Silvanos / Wild Elves (15 GP)."
+    },
+    "sacrificial_blade": {
+      "nombre": "Daga de Sacrificio (Sacrificial Blade)",
+      "resumen": "Hoja ritual para cosechar esencias místicas de los enemigos moribundos.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 5. Reduce la dificultad de la habilidad Sacrificio (Sacrifice) de Hazaña Media a Hazaña Fácil.",
+      "restriccion": "Exclusivo de la facción Elfos Silvanos / Wild Elves (20 GP)."
+    },
+    "faeblade": {
+      "nombre": "Hoja Feérica (Faeblade)",
+      "resumen": "Espada imbuida con magia ancestral que desvía defensas con precisión.",
+      "detalles": "Ataque cuerpo a cuerpo: Power 6. Permite Repetir tirada en los dados de ataque que saquen 1 y sus Impactos Críticos ignoran completamente la Armadura.",
+      "restriccion": "Exclusivo de la facción Elfos Silvanos / Wild Elves (30 GP)."
     },
     "healing_broth": {
       "nombre": "Caldo Curativo (Healing Broth)",
@@ -1143,6 +1179,12 @@ const traduccionesES = {
       "resumen": "Licor casero hiperpotente que adormece el dolor e intensifica el ataque.",
       "detalles": "Consumible (1 AP). Otorga +2 al Power en todos los Ataques cuerpo a cuerpo durante la Ronda actual y permite pasar automáticamente el siguiente Chequeo de Valentía.",
       "restriccion": "Exclusivo de la facción Ourks (10 GP)."
+    },
+    "pet_droggo": {
+      "nombre": "Mascota Droggo (Pet Droggo)",
+      "resumen": "Pequeño reptil agresivo de fango que muerde a los enemigos adyacentes.",
+      "detalles": "Otorga un Ataque cuerpo a cuerpo gratuito adicional de Power 3 en cada Activación contra una miniatura en contacto de peana.",
+      "restriccion": "Exclusivo de la facción Ourks (20 GP)."
     },
     "boglin_musical_instrument": {
       "nombre": "Instrumento Musical Boglin (Musical Instrument)",
@@ -1203,6 +1245,30 @@ const traduccionesES = {
       "resumen": "Toxina verde untada en las armas para causar daños residuales.",
       "detalles": "Consumible (1 AP). Un solo uso. Durante esta Ronda, si un objetivo sufre daño por un ataque de este personaje, perderá 1 HP adicional al inicio de su siguiente Activación.",
       "restriccion": "Exclusivo de la facción Gremlins (5 GP)."
+    },
+    "vitality_gem": {
+      "nombre": "Gema de Vitalidad (Vitality Gem)",
+      "resumen": "Amuleto de arcanita cargado con hechizos de longevidad.",
+      "detalles": "Consumible de un solo uso. Al activarse, restaura D6 HP al usuario o a un personaje aliado en contacto de peana.",
+      "restriccion": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
+    },
+    "wizard_ranged_weapon": {
+      "nombre": "Arma a Distancia Arcana (Wizard Ranged Weapon)",
+      "resumen": "Varita o báculo cargado con proyectiles mágicos de energía.",
+      "detalles": "(1 AP) Ataque a distancia: Otorga el ataque Disparo Arcano (Shot) con Power 5 y Alcance 14\".",
+      "restriccion": "Exclusivo para personajes de tipo Mago / Wizard o Aprendiz (15 GP)."
+    },
+    "wizard_mount": {
+      "nombre": "Montura Arcana (Wizard Mount)",
+      "resumen": "Alfombra voladora o bestia elemental invocada para desplazarse por el aire.",
+      "detalles": "Otorga el estado Montado (Mounted), concediendo +5 HP iniciales, +4\" a la capacidad de Movimiento, el rasgo Ágil (Agile) / Volar (Fly) y cambia la peana a 40mm.",
+      "restriccion": "Exclusivo para personajes de tipo Mago / Wizard o Aprendiz (30 GP)."
+    },
+    "pilfered_tome": {
+      "nombre": "Tomo Robado (Pilfered Tome)",
+      "resumen": "Grimorio sustraído a un rival de otra escuela elemental para lanzar sus hechizos.",
+      "detalles": "Permite al Mago Lanzar un Hechizo perteneciente al Saber de un Colegio elemental distinto al suyo. Tras intentarlo (tenga éxito o falle), el libro se quema y queda destruido.",
+      "restriccion": "De un solo uso. Exclusivo de la facción Magos / Wizards (10 GP)."
     }
   },
   "reglas": {},

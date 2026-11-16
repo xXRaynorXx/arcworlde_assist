@@ -71,11 +71,14 @@ if (base) fs.writeFileSync(mp, src.slice(0, i0 + head.length) + JSON.stringify(c
 const costes = {};
 (comp.armeria_comun || []).forEach((a) => { costes[a.id] = a.coste; });
 (comp.facciones || []).forEach((f) => (f.armeria_exclusiva || []).forEach((a) => { costes[a.id] = a.coste; }));
+// Los 7 del lote 2/3 cuyo coste de NotebookLM difiere: el usuario decide que vale el del compendio (se aplica el texto, con el coste del compendio)
+const COSTE_COMPENDIO = ['fell_scholar', 'stolen_arcloque_pistol', 'hangmans_noose', 'blood_stone', 'sacrificial_blade', 'faeblade', 'pet_droggo'];
 const REVISAR = ['arcanite_token']; // el efecto de NotebookLM no coincide con el del manual ya cargado
 pendObjetos.forEach((r) => {
   const m = String(r.restriccion_es || '').match(/\((\d+) GP/);
   if (!(r.id in costes)) return avisos.push('objeto sin equivalente: ' + r.id);
-  if (REVISAR.includes(r.id) || (m && Number(m[1]) !== costes[r.id])) return avisos.push('objeto NO aplicado (revisar): ' + r.id + (m ? ' · NotebookLM ' + m[1] + ' GP vs compendio ' + costes[r.id] + ' GP' : ''));
+  if (COSTE_COMPENDIO.includes(r.id) && m) r.restriccion_es = r.restriccion_es.replace(/\(\d+ GP/, '(' + costes[r.id] + ' GP');
+  else if (REVISAR.includes(r.id) || (m && Number(m[1]) !== costes[r.id])) return avisos.push('objeto NO aplicado (revisar): ' + r.id + (m ? ' · NotebookLM ' + m[1] + ' GP vs compendio ' + costes[r.id] + ' GP' : ''));
   out.objetos[r.id] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es), restriccion: limpia(r.restriccion_es) };
 });
 fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'),
