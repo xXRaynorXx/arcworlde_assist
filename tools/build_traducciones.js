@@ -51,6 +51,12 @@ fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
       if (r.detalles_en) en[k] = r.detalles_en;
     } else if (kind === 'objetos') {
       pendObjetos.push(r);
+    } else if (kind === 'saberes') {
+      // Solo se usan los nombres: NotebookLM cambió exigencias, alcances y efectos de los hechizos, así que los textos se quedan en inglés del compendio
+      const sk = key(r.saber);
+      out.saberes[sk] = out.saberes[sk] || { nombre: '', hechizos: {} };
+      out.saberes[sk].nombre = limpiaNombre(limpia(r.saber_es));
+      (r.hechizos || []).forEach((h) => { out.saberes[sk].hechizos[key(h.nombre)] = limpiaNombre(limpia(h.nombre_es)); });
     } else if (kind === 'reglas') {
       pendReglas.push(r);
     } else avisos.push('tipo de archivo sin soporte todavía: ' + f);

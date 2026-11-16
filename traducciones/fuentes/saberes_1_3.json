@@ -1,0 +1,399 @@
+[
+  {
+    "saber": "The Grand Cookbook of Bulbo Chubb",
+    "saber_es": "El Gran Libro de Cocina de Bulbo Chubb",
+    "reglas_saber_es": "Estas deliciosas comidas, creadas por el mismísimo legendario Maestro Cocinero Bulbo Chubb, son llevadas o preparadas en el campo de batalla por los Halflings para darles fuerza en combate. Los efectos de estos hechizos no se acumulan y se reemplazan si se lanza otro hechizo sobre el mismo personaje.",
+    "hechizos": [
+      {
+        "nombre": "Hearty Veggie Soup",
+        "nombre_es": "Sopa de Verduras (Hearty Veggie Soup)",
+        "efecto_es": "La tierra honesta de Hobbleshire otorga a las verduras un sabor distintivo y potente. Quienes beben este caldo reconfortante dicen que su calor puede calmar incluso las heridas más graves. Un personaje aliado a 6\" o menos recupera 3 HP.",
+        "alcance_es": "Exige 14 | Alcance 6\""
+      },
+      {
+        "nombre": "Marvellous Mutton Stew",
+        "nombre_es": "Estofado de Oveja Maravilloso (Marvellous Mutton Stew)",
+        "efecto_es": "Los Halflings son bien conocidos por criar ovejas de excelente raza, y este estofado es tan delicioso que habrán tenido a honra convertirse en carnero para él. Un personaje aliado a 6\" o menos puede repetir una sola tirada de Leg It fallida en esta Ronda.",
+        "alcance_es": "Exige 16 | Alcance 6\""
+      },
+      {
+        "nombre": "Bullox Burgers",
+        "nombre_es": "Hamburguesas de Buey (Bullox Burgers)",
+        "efecto_es": "Los bueyes son leales bestias de carga para los Halflings, pero ni siquiera ellos pueden trabajar para siempre. Por suerte, también son una comida estupenda una vez se han 'retirado'. Un personaje aliado a 6\" o menos puede repetir todas sus tiradas de Defensa fallidas hasta su siguiente Activación.",
+        "alcance_es": "Exige 17 | Alcance 6\""
+      },
+      {
+        "nombre": "Cocklegriff Madras",
+        "nombre_es": "Curry Cocklegriff Madras (Cocklegriff Madras)",
+        "efecto_es": "Este plato, inspirado en las delicias aromáticas de Raajalan, se ha convertido en el favorito de la gente peleona para ponerse en ambiente de refriega. Un personaje aliado a 6\" o menos obtiene el ataque Fired Up (1 AP, Power 8, +1 al Power contra objetivos Inflamables) hasta el final de la Ronda.",
+        "alcance_es": "Exige 20 | Alcance 6\""
+      },
+      {
+        "nombre": "Mystery Meat Surprise",
+        "nombre_es": "Sorpresa de Carne Misteriosa (Mystery Meat Surprise)",
+        "efecto_es": "La 'pièce de résistance' de la artesanía culinaria Halfling. Otorga de inmediato +2 AP y cura D6 HP a un personaje aliado situado a 6\" o menos.",
+        "alcance_es": "Exige 21 | Alcance 6\""
+      }
+    ]
+  },
+  {
+    "saber": "Tinkerer's Arcane Contraptions",
+    "saber_es": "Creaciones Arcanas del Hojalatero (Tinkerer's Arcane Contraptions)",
+    "reglas_saber_es": "El trabajo del Tinkerer es mantener el equipo de la banda imperial, pero su imaginación desbordante le lleva a llevar baúles de curiosos artilugios al campo de batalla para ayudar a sus aliados. El Tinkerer solo puede lanzar hechizos si está en contacto de peana con su Baúl de Artilugios (Contraption Trunk).",
+    "hechizos": [
+      {
+        "nombre": "Mechanical Griffling",
+        "nombre_es": "Griffling Mecánico (Mechanical Griffling)",
+        "efecto_es": "Con un zumbido y un gorjeo, un Griffling de metal pulido cobra vida. Coloca un Griffling mecánico en contacto de peana con el Tinkerer, el cual se activa inmediatamente tras la activación del Tinkerer. Solo se puede volver a lanzar si el Griffling mecánico anterior ha quedado Noqueado.",
+        "alcance_es": "Exige 14 | Contacto de Peana"
+      },
+      {
+        "nombre": "Revolving Pistol",
+        "nombre_es": "Pistola Giratoria (Revolving Pistol)",
+        "efecto_es": "El Tinkerer saca una estrambótica pistola Arcloque multicañón que dispara ráfagas. Permite realizar el ataque a distancia Revolving Pistol (Power 5, Alcance 8\", lanza un D6 adicional por cada impacto exitoso).",
+        "alcance_es": "Exige 16 | Alcance 8\""
+      },
+      {
+        "nombre": "Arcane Shielding",
+        "nombre_es": "Escudo Arcano (Arcane Shielding)",
+        "efecto_es": "Un artilugio emite un aura de luz azul verdosa que desvía los golpes lejanos. Durante el resto de la Ronda, cualquier personaje a 2\" o menos del lanzador obtiene +1 a la Armadura contra ataques realizados por enemigos desde fuera de esta área.",
+        "alcance_es": "Exige 17 | Área 2\""
+      },
+      {
+        "nombre": "Homing Bullet",
+        "nombre_es": "Bala Teledirigida (Homing Bullet)",
+        "efecto_es": "Un triunfo de la ingeniería que jamás yerra el blanco. Una vez lanzado, un personaje aliado en contacto de peana con el Tinkerer puede realizar un Ataque a distancia que ignora la cobertura y supera automáticamente la tirada de Hazaña de forma gratuita.",
+        "alcance_es": "Exige 20 | Contacto de Peana"
+      },
+      {
+        "nombre": "Magic Gobbler",
+        "nombre_es": "Engullidor de Magia (Magic Gobbler)",
+        "efecto_es": "Un maravilloso artefacto que traga energía mágica y la almacena para el Tinkerer. Absorbe hechizos o efectos mágicos enemigos cercanos y los transforma en reservas de Arcanita útil.",
+        "alcance_es": "Exige 21 | Contacto de Peana / Área"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of Villainy",
+    "saber_es": "Saber de la Villanía (Lore of Villainy)",
+    "reglas_saber_es": "Atrapados durante milenios en los Páramos Desolados, los Señores Oscuros utilizan sus poderes malévolos para causar estragos en el campo de batalla, considerándose superiores a cualquier otro mago.",
+    "hechizos": [
+      {
+        "nombre": "Sickly Screech",
+        "nombre_es": "Chillido Enfermizo (Sickly Screech)",
+        "efecto_es": "Un chillido horrendo brota del yelmo del Señor Oscuro. Cada personaje a 4\" o menos del lanzador debe tirar un D6; si falla, sufre -1 AP en su siguiente Activación. Afecta también al lanzador y sus efectos no se acumulan.",
+        "alcance_es": "Exige 14 | Área 4\""
+      },
+      {
+        "nombre": "Ominous Aura",
+        "nombre_es": "Aura Ominosa (Ominous Aura)",
+        "efecto_es": "Un miasma de maldad rodea al Señor Oscuro, filtrándose en los corazones de quienes están ante él. El lanzador obtiene el rasgo Temible (Fearsome) hasta el final de la Ronda.",
+        "alcance_es": "Exige 17 | Personal"
+      },
+      {
+        "nombre": "Restless Minions",
+        "nombre_es": "Esbirros Inquietos (Restless Minions)",
+        "efecto_es": "La maldad del Señor Oscuro se filtra en las mentes de sus súbditos inconscientes. Coloca una Unidad aliada noqueada a 3\" o menos del lanzador de vuelta en juego con 1 HP.",
+        "alcance_es": "Exige 18 | Alcance 3\""
+      },
+      {
+        "nombre": "Molten Terrain",
+        "nombre_es": "Terreno Fundido (Molten Terrain)",
+        "efecto_es": "El Señor Oscuro invoca el calor volcánico de su reino ceniciento. Elige un área de 4\" de radio a 8\" o menos; hasta el final de la Ronda, cualquier personaje que entre en contacto con esa zona sufre D6 impactos.",
+        "alcance_es": "Exige 20 | Alcance 8\", Área 4\""
+      },
+      {
+        "nombre": "Hellfire",
+        "nombre_es": "Fuego del Infierno (Hellfire)",
+        "efecto_es": "El Señor Oscuro desata una pavorosa llamarada que lo abrasa todo a su paso. Lanza un cono de llamas de Power 8 que afecta a todas las miniaturas en la trayectoria y prende fuego al terreno.",
+        "alcance_es": "Exige 21 | Cono 6\""
+      }
+    ]
+  },
+  {
+    "saber": "Lore of Tooth and Fur",
+    "saber_es": "Saber de Diente y Pelaje (Lore of Tooth and Fur)",
+    "reglas_saber_es": "Los Hombres Bestia están instintivamente sintonizados con la energía de la naturaleza y la canalizan mediante amuletos y pociones hechas con huesos de sus congéneres.",
+    "hechizos": [
+      {
+        "nombre": "Forest Creatures",
+        "nombre_es": "Criaturas del Bosque (Forest Creatures)",
+        "efecto_es": "Las alimañas del bosque acuden desde sus madrigueras para atacar a los intrusos. El personaje objetivo y todas las miniaturas a 3\" o menos de él sufren 3 impactos (3 Hits) automáticos.",
+        "alcance_es": "Exige 14 | Alcance 12\""
+      },
+      {
+        "nombre": "Warging",
+        "nombre_es": "Dominio Bestial (Warging)",
+        "efecto_es": "La Bruja del Bosque entra en la mente de otra criatura y controla todos sus movimientos para activarla inmediatamente.",
+        "alcance_es": "Exige 17 | Alcance 12\""
+      },
+      {
+        "nombre": "Bestial Strength",
+        "nombre_es": "Fuerza Bestial (Bestial Strength)",
+        "efecto_es": "Con un rugido atronador, la bruja otorga la fuerza de una gran bestia a un aliado. El objetivo (que no sea Bestia, Monstruo ni Titán) gana +3 al Power en todos sus Ataques cuerpo a cuerpo hasta que el lanzador decida lanzar otro hechizo.",
+        "alcance_es": "Exige 19 | Alcance 12\""
+      },
+      {
+        "nombre": "Shapeshift",
+        "nombre_es": "Cambio de Forma (Shapeshift)",
+        "efecto_es": "El aire a su alrededor se desdibuja y la bruja adopta la forma de un Monstruo del Bestiario. Se reemplaza la miniatura por un Monstruo con los mismos AP restantes. Al final de la Ronda, la bruja regresa a su forma original con los HP que tenía al lanzar el hechizo.",
+        "alcance_es": "Exige 21 | Personal"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of the Thereafter",
+    "saber_es": "Saber del Más Allá (Lore of the Thereafter)",
+    "reglas_saber_es": "Los Bog Magi de los Antiguos Muertos canalizan las energías mágicas místicas que los reaniman a ellos y a sus congéneres para sanar, dañar o ayudar en la batalla.",
+    "hechizos": [
+      {
+        "nombre": "Tar Pit",
+        "nombre_es": "Pozo de Alquitrán (Tar Pit)",
+        "efecto_es": "El Mago invoca un pozo de pez negra pegajosa desde lo profundo del suelo. Coloca un marcador en el tablero; todos los personajes a 3\" o menos ven su Movimiento reducido a 1\". Este efecto dura hasta que el Bog Magus quede Tumbado o Noqueado.",
+        "alcance_es": "Exige 14 | Alcance 8\""
+      },
+      {
+        "nombre": "Spirit Glaive",
+        "nombre_es": "Glaive Espiritual (Spirit Glaive)",
+        "efecto_es": "Invoca un arma de energía espectral sobre sí mismo o sobre un aliado a 3\" o menos hasta el final de la Ronda. En lugar de perder HP, los objetivos impactados en combate cuerpo a cuerpo pierden 1 AP en su siguiente Activación por cada 3 puntos de daño sufridos.",
+        "alcance_es": "Exige 17 | Alcance 3\""
+      },
+      {
+        "nombre": "Forgotten Ritual",
+        "nombre_es": "Ritual Olvidado (Forgotten Ritual)",
+        "efecto_es": "El Mago recrea un ritual olvidado de su pueblo, cuyos recuerdos y poder reconfortan a sus semejantes. Todos los personajes aliados con el rasgo Huesos (Bones) a 3\" o menos recuperan D3 HP.",
+        "alcance_es": "Exige 20 | Alcance 3\" Área"
+      },
+      {
+        "nombre": "Justice of the Dead",
+        "nombre_es": "Justicia de los Muertos (Justice of the Dead)",
+        "efecto_es": "Los muertos recuerdan las injusticias sufridas. Cada personaje enemigo que haya dejado Noqueado a un personaje aliado hasta el momento de lanzar este hechizo sufre D6 impactos que ignoran Armadura y Escudos.",
+        "alcance_es": "Exige 21 | Alcance Global"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of the Night",
+    "saber_es": "Saber de la Noche (Lore of the Night)",
+    "reglas_saber_es": "Artes oscuras ejercidas por los Señores Vampiros para dominar las sombras, manipular la mente de los mortales y desatar criaturas nocturnas.",
+    "hechizos": [
+      {
+        "nombre": "Darkness",
+        "nombre_es": "Oscuridad (Darkness)",
+        "efecto_es": "Crea una nube de sombras densas. El personaje objetivo y todas las miniaturas situadas a 4\" o menos sufren Desventaja al realizar Ataques a distancia.",
+        "alcance_es": "Exige 14 | Alcance 8\""
+      },
+      {
+        "nombre": "Dramatic Thunderclap",
+        "nombre_es": "Trueno Dramático (Dramatic Thunderclap)",
+        "efecto_es": "Un estruendoso trueno retumba en el campo de batalla. Permite a un personaje aliado repetir cualquier Chequeo Narrativo o Hazaña durante la Ronda actual.",
+        "alcance_es": "Exige 17 | Alcance Global"
+      },
+      {
+        "nombre": "Vampiric Glare",
+        "nombre_es": "Mirada Vampírica (Vampiric Glare / Beguile)",
+        "efecto_es": "El Vampiro fija su mirada hipnótica en un enemigo a 6\" o menos. El objetivo debe superar un Chequeo de Valentía o no podrá Moverse ni Atacar durante su siguiente Activación.",
+        "alcance_es": "Exige 19 | Alcance 6\""
+      },
+      {
+        "nombre": "Cloud of Bats",
+        "nombre_es": "Nube de Murciélagos (Cloud of Bats)",
+        "efecto_es": "Invoca un enjambre hambriento de murciélagos de la cripta a 6\" de distancia. Afecta a una zona de 4\" de radio, infligiendo D3 impactos de Power 3 y reduciendo la visión y movimiento de los enemigos retenidos en ella.",
+        "alcance_es": "Exige 21 | Alcance 6\", Área 4\""
+      }
+    ]
+  },
+  {
+    "saber": "Lore of the Damned",
+    "saber_es": "Saber de los Condenados (Lore of the Damned)",
+    "reglas_saber_es": "Magia nigromántica empleada por los Harbingers y Saqueadores No-Muertos para manipular la carne marchita y alzar hordas de muertos de sus tumbas.",
+    "hechizos": [
+      {
+        "nombre": "Deathly Chill",
+        "nombre_es": "Frío Mortal (Deathly Chill)",
+        "efecto_es": "Los vivos sienten cómo el frío de la tumba se aferra a sus huesos. Elige a un personaje enemigo a 12\" o menos; sus AP se reducen en D3 en su siguiente Activación.",
+        "alcance_es": "Exige 14 | Alcance 12\""
+      },
+      {
+        "nombre": "Bonegnawer",
+        "nombre_es": "Roeehuesos (Bonegnawer)",
+        "efecto_es": "Una Rata de la Carroña reanimada es traída a la no-vida y se abalanza contra el enemigo a 6\" o menos, causándole D6 impactos de Power 4.",
+        "alcance_es": "Exige 17 | Alcance 6\""
+      },
+      {
+        "nombre": "Soul Drain",
+        "nombre_es": "Drenar Alma (Soul Drain)",
+        "efecto_es": "Absorbe la esencia vital de un enemigo a 6\" o menos. El objetivo debe superar un Chequeo de Valentía o sufrirá D3 puntos de daño que son transferidos de inmediato al lanzador para recuperar HP.",
+        "alcance_es": "Exige 18 | Alcance 6\""
+      },
+      {
+        "nombre": "Mass Resurrection",
+        "nombre_es": "Resurrección Masiva (Mass Resurrection)",
+        "efecto_es": "Un canto siniestro devuelve a la vida a múltiples caídos. Todas las tropas aliadas Noqueadas con el rasgo Resucitado (Risen) a 6\" o menos vuelven al juego con 1 HP.",
+        "alcance_es": "Exige 21 | Alcance 6\" Área"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of the Darkwood",
+    "saber_es": "Saber del Bosque Profundo (Lore of the Darkwood)",
+    "reglas_saber_es": "La magia de los Elfos Silvanos está indisolublemente unida a los oscuros bosques en los que habitan. Los Druidas extraen la energía vital de sus sacrificios para moldear la madera a su voluntad.",
+    "hechizos": [
+      {
+        "nombre": "Tangleweed",
+        "nombre_es": "Mala Hierba Enredadera (Tangleweed)",
+        "efecto_es": "Enredaderas con espinas brotan de la tierra y atrapan a quienes están a su alcance. Todos los personajes a 6\" o menos del lanzador reducen su Movimiento y tiradas de Leg It en 2\" hasta el siguiente hechizo del Druida.",
+        "alcance_es": "Exige 14 | Alcance 6\" Área"
+      },
+      {
+        "nombre": "Spirit of the Forest",
+        "nombre_es": "Espíritu del Bosque (Spirit of the Forest)",
+        "efecto_es": "Invoca la voluntad protectora de los árboles ancestrales para otorgar +1 de Armadura a un aliado o invocar a un Woodfiend guardián en un elemento de vegetación situado a 8\" o menos.",
+        "alcance_es": "Exige 17 | Alcance 8\""
+      },
+      {
+        "nombre": "Ominous Whispers",
+        "nombre_es": "Susurros Ominosos (Ominous Whispers)",
+        "efecto_es": "Voces espectrales de la arboleda aterrorizan a las tropas enemigas. Obliga a un objetivo a 12\" y a sus aliados adyacentes a realizar un Chequeo de Valentía inmediato con Desventaja.",
+        "alcance_es": "Exige 18 | Alcance 12\""
+      },
+      {
+        "nombre": "The Merciless Wood",
+        "nombre_es": "El Bosque Inclemente (The Merciless Wood)",
+        "efecto_es": "La arboleda cobra vida con rabia desatada. Todos los elementos de terreno boscoso del tablero atacan a cualquier personaje enemigo en su interior infligiéndoles impactos de Power 6.",
+        "alcance_es": "Exige 21 | Alcance Global / Escenografía"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of Delusion",
+    "saber_es": "Saber de la Ilusión (Lore of Delusion)",
+    "reglas_saber_es": "Saber mágico propio de los Dreameaters Ourks, envueltos en humo y con ojos ardientes, enfocado en envolver a los enemigos en pesadillas y controlar sus mentes.",
+    "hechizos": [
+      {
+        "nombre": "False Foe",
+        "nombre_es": "Enemigo Falso (False Foe)",
+        "efecto_es": "Una niebla enfermiza envuelve al objetivo haciéndole ver enemigos imaginarios a su alrededor. Durante el resto de la Ronda, el objetivo debe pasar una Hazaña Fácil antes de poder realizar cualquier Ataque.",
+        "alcance_es": "Exige 14 | Alcance 8\""
+      },
+      {
+        "nombre": "Stupor",
+        "nombre_es": "Estupor (Stupor)",
+        "efecto_es": "El Dreameater invoca un denso miasma a su alrededor. Todos aquellos que lo respiran caen bajo su influencia soporífera, perdiendo 1 AP y quedando imposibilitados para realizar la acción Leg It.",
+        "alcance_es": "Exige 17 | Alcance 6\" Área"
+      },
+      {
+        "nombre": "Dream Eater",
+        "nombre_es": "Devorador de Sueños (Dream Eater)",
+        "efecto_es": "El Mago se alimenta de las esperanzas y vivencias de su víctima a 6\" de distancia, infligiendo D3 impactos de origen mental que ignoran Armadura y recuperando la misma cantidad en HP.",
+        "alcance_es": "Exige 19 | Alcance 6\""
+      },
+      {
+        "nombre": "Inside your Mind",
+        "nombre_es": "Dentro de tu Mente (Inside your Mind)",
+        "efecto_es": "El Mago penetra en la mente de un enemigo a 4\" o menos. Finaliza la activación del Mago y permite controlar libremente a la miniatura enemiga durante esa ronda gastando hasta 3 AP de la víctima.",
+        "alcance_es": "Exige 21 | Alcance 4\""
+      }
+    ]
+  },
+  {
+    "saber": "Lore of Mischief",
+    "saber_es": "Saber de la Travesura (Lore of Mischief)",
+    "reglas_saber_es": "Hechizos caóticos y extravagantes utilizados por los chamanes Gremlins para sembrar el caos, gastar bromas pesadas y confundir al enemigo en combate.",
+    "hechizos": [
+      {
+        "nombre": "Chittering Bugs",
+        "nombre_es": "Insectos Estridentes (Chittering Bugs)",
+        "efecto_es": "Una nube de sabandijas picadoras acosa a un enemigo a 8\" de distancia. El objetivo sufre Desventaja en todas sus tiradas de Hazaña y Ataque durante la Ronda.",
+        "alcance_es": "Exige 14 | Alcance 8\""
+      },
+      {
+        "nombre": "Slip and Slide",
+        "nombre_es": "Resbalón y Caída (Slip and Slide)",
+        "efecto_es": "Cubre el suelo con baba viscosa a 6\" de distancia. El personaje objetivo resbala de inmediato y queda en estado Tumbado (Prone).",
+        "alcance_es": "Exige 16 | Alcance 6\""
+      },
+      {
+        "nombre": "Peek-a-Boo",
+        "nombre_es": "¡Cucú! (Peek-a-Boo)",
+        "efecto_es": "El chamán Gremlin se desvanece en una pequeña nube de humo y reaparece de inmediato en contacto de peana con cualquier Madriguera Gremlin (Gremlin Burrow) del tablero.",
+        "alcance_es": "Exige 18 | Personal / Madrigueras"
+      },
+      {
+        "nombre": "Great Green Explosion",
+        "nombre_es": "Gran Explosión Verde (Great Green Explosion)",
+        "efecto_es": "Detona una carga mágica de hongos inestables a 10\" de distancia. Todas las miniaturas en un radio de 3\" sufren D6 impactos de Power 6 y quedan Tumbadas.",
+        "alcance_es": "Exige 21 | Alcance 10\", Área 3\""
+      }
+    ]
+  },
+  {
+    "saber": "The Lore of The Crimson College",
+    "saber_es": "El Saber del Colegio Carmesí (The Lore of The Crimson College)",
+    "reglas_saber_es": "Maestros del fuego y la llama. Los Magos Carmesíes son apasionados e impulsivos, capaces de reducir a cenizas a sus oponentes con devastadores hechizos pirotécnicos.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Crimson Sprites",
+        "nombre_es": "Conjurar Sprites Carmesí (Conjure Crimson Sprites)",
+        "efecto_es": "Invoca D3 Sprites de fuego a 3\" o menos del lanzador. Los Sprites de fuego ganan +1 al Power en todos sus Ataques (+2 si el objetivo es Inflamable).",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Sword of Embers",
+        "nombre_es": "Espada de Ascuas (Sword of Embers)",
+        "efecto_es": "Imbuye el arma de un aliado a 6\" con fuego místico. Sus Ataques cuerpo a cuerpo ganan +2 al Power y cuentan como ataques de fuego.",
+        "alcance_es": "Exige 16 | Alcance 6\""
+      },
+      {
+        "nombre": "Fireball",
+        "nombre_es": "Bola de Fuego (Fireball)",
+        "efecto_es": "Lanza un proyectil ardiente a 12\" que causa un Ataque a distancia de Power 6 que ignora la Armadura e inflige impactos a todas las miniaturas en contacto de peana con el objetivo.",
+        "alcance_es": "Exige 18 | Alcance 12\""
+      },
+      {
+        "nombre": "Flame Blast",
+        "nombre_es": "Ráfaga de Llamas (Flame Blast)",
+        "efecto_es": "Emite un cono de fuego de 6\" de alcance que inflige un ataque de Power 8 a todas las miniaturas en la trayectoria y prende fuego al terreno.",
+        "alcance_es": "Exige 20 | Cono 6\""
+      }
+    ]
+  },
+  {
+    "saber": "The Lore of The Sapphire College",
+    "saber_es": "El Saber del Colegio Zafiro (The Lore of The Sapphire College)",
+    "reglas_saber_es": "Maestros del agua, el hielo y las tempestades. Los Magos Zafiro manipulan las corrientes y el frío para helar o arrastrar a sus enemigos.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Sapphire Sprites",
+        "nombre_es": "Conjurar Sprites Zafiro (Conjure Sapphire Sprites)",
+        "efecto_es": "Invoca D3 Sprites acuáticos a 3\" o menos del lanzador. Los Sprites de agua pueden repetir tiradas para Destrabarse del combate y se desplazan por el agua sin penalización.",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Bridge of Ice",
+        "nombre_es": "Puente de Hielo (Bridge of Ice)",
+        "efecto_es": "Crea una pasarela helada de hasta 12\" sobre agua, abismos o ciénagas, permitiendo el paso de tropas sin sufrir penalizaciones de terreno.",
+        "alcance_es": "Exige 19 | Alcance 12\""
+      },
+      {
+        "nombre": "Storm Cloud",
+        "nombre_es": "Nube de Tormenta (Storm Cloud)",
+        "efecto_es": "Convoca una nube descargando rayos a 10\" de distancia. Causa D3 impactos de Power 6 y dificulta los disparos enemigos en esa zona.",
+        "alcance_es": "Exige 18 | Alcance 10\""
+      },
+      {
+        "nombre": "Tidal Wave",
+        "nombre_es": "Marea de Asalto (Tidal Wave)",
+        "efecto_es": "Lanza una ola impetuosa en una línea de 8\". Empuja 3\" hacia atrás e inflige ataques de Power 6 a todos los enemigos en la línea.",
+        "alcance_es": "Exige 17 | Línea 8\""
+      }
+    ]
+  }
+]
+Lista de Dudas de Traducción
+Cocklegriff Madras: Traducido como Curry Cocklegriff Madras (propuesta).
+Mystery Meat Surprise: Traducido como Sorpresa de Carne Misteriosa (propuesta).
+Magic Gobbler: Traducido como Engullidor de Magia (propuesta).
+Bonegnawer: Traducido como Roeehuesos (propuesta).
+The Merciless Wood: Traducido como El Bosque Inclemente (propuesta).
+Peek-a-Boo: Traducido como ¡Cucú! (propuesta).
