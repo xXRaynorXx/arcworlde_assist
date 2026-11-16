@@ -1648,6 +1648,59 @@ const traduccionesES = {
         "storm cloud": "Nube de Tormenta (Storm Cloud)",
         "tidal wave": "Marea de Asalto (Tidal Wave)"
       }
+    },
+    "the lore of the emerald college": {
+      "nombre": "El Saber del Colegio Esmeralda (The Lore of The Emerald College)",
+      "hechizos": {
+        "conjure emerald sprites": "Conjurar Sprites Esmeralda (Conjure Emerald Sprites)",
+        "healing touch": "Toque Curativo (Healing Touch)",
+        "winged swarm": "Enjambre Alado (Winged Swarm)",
+        "soul of the beast": "Alma de la Bestia (Soul of the Beast)"
+      }
+    },
+    "the lore of the ochre college": {
+      "nombre": "El Saber del Colegio Ocre (The Lore of The Ochre College)",
+      "hechizos": {
+        "conjure ochre sprites": "Conjurar Sprites Ocres (Conjure Ochre Sprites)",
+        "rock wall": "Muro de Piedra (Rock Wall)",
+        "stone armour": "Armadura de Piedra (Stone Armour)",
+        "arcworlde's bounty": "Tesoros de ArcWorlde (ArcWorlde's Bounty)"
+      }
+    },
+    "the lore of the bronze college": {
+      "nombre": "El Saber del Colegio de Bronce (The Lore of The Bronze College)",
+      "hechizos": {
+        "conjure bronze sprites": "Conjurar Sprites de Bronce (Conjure Bronze Sprites)",
+        "transfiguration": "Transfiguración (Transfiguration)",
+        "alchemical blast": "Ráfaga Alquímica (Alchemical Blast)",
+        "avatar of gold": "Avatar de Oro (Avatar of Gold)"
+      }
+    },
+    "the lore of the opal college": {
+      "nombre": "El Saber del Colegio Ópalo (The Lore of The Opal College)",
+      "hechizos": {
+        "conjure opal sprites": "Conjurar Sprites Ópalo (Conjure Opal Sprites)",
+        "unnatural aura": "Aura Antinatural (Unnatural Aura)",
+        "spirit leech": "Sanguijuela Espiritual (Spirit Leech)",
+        "spectral host": "Hueste Espectral (Spectral Host)"
+      }
+    },
+    "lore of spiders": {
+      "nombre": "Saber de las Arañas (Lore of Spiders)",
+      "hechizos": {
+        "chittering swarm": "Enjambre Estridente (Chittering Swarm)",
+        "summon arcanid": "Invocación de Arcanida (Summon Arcanid)",
+        "silken salve": "Ungüento Sedoso (Silken Salve)"
+      }
+    },
+    "lore of the enchanted journal": {
+      "nombre": "Saber del Diario Encantado (Lore of the Enchanted Journal)",
+      "hechizos": {
+        "arcleap": "Salto Arcano (Arcleap)",
+        "touch of destiny": "Toque del Destino (Touch of Destiny)",
+        "charmed blade": "Hoja Encantada (Charmed Blade)",
+        "arcane knowledge": "Conocimiento Arcano (Arcane Knowledge)"
+      }
     }
   },
   "unidades": {}
