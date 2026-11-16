@@ -18,11 +18,11 @@ function construirSeccionesFacciones() {
         const st = u.stats || {};
         const v = (x) => (x == null ? '—' : x);
         const listas = [];
-        if ((u.ataques || []).length) listas.push({ titulo: 'Ataques', items: u.ataques });
+        if ((u.ataques || []).length) listas.push({ titulo: 'Ataques', items: window.AWCompendio ? u.ataques.map(AWCompendio.ataqueES) : u.ataques });
         if ((u.rasgos || []).length) listas.push({ titulo: 'Rasgos', items: u.rasgos });
         if ((u.equipo_de_serie || []).length) listas.push({ titulo: 'Equipo de serie', items: u.equipo_de_serie });
         if ((u.equipo_permitido || []).length) listas.push({ titulo: 'Equipo permitido', items: u.equipo_permitido.map((id) => nombreEquipo(id, f)) });
-        if ((u.hechizos || []).length) listas.push({ titulo: 'Hechizos', items: u.hechizos });
+        if ((u.hechizos || []).length) listas.push({ titulo: 'Hechizos', items: window.AWCompendio ? u.hechizos.map(AWCompendio.hechizoES) : u.hechizos });
         const nombreEn = u.nombre_en && u.nombre_en !== u.nombre ? ' / ' + u.nombre_en : '';
         return {
             id: u.id,

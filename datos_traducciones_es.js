@@ -1943,5 +1943,291 @@ const traduccionesES = {
       }
     }
   },
-  "unidades": {}
+  "unidades": {
+    "hechizosTexto": {
+      "Lore of Villainy Spells (if Dark Warlock Trait chosen): Sickly Screech (Required Draw 14), Ominous Aura (Required Draw 17), Restless Minions (Required Draw 18), Molten Terrain (Required Draw 20), Hellfire (Required Draw 21)": "Hechizos del Saber de la Villanía (si se elige el Rasgo Dark Warlock): Chillido Enfermizo (Sickly Screech) (Exige 14), Aura Ominosa (Ominous Aura) (Exige 17), Esbirros Inquietos (Restless Minions) (Exige 18), Terreno Fundido (Molten Terrain) (Exige 20), Fuego del Infierno (Hellfire) (Exige 21)",
+      "Lore of the Night Spells (if equipped with Fell Scholar Bloodline): Darkness (Required Draw 14), Dramatic Thunderclap (Required Draw 17), Vampiric Glare (Required Draw 20), Cloud of Bats (Required Draw 21)": "Hechizos del Saber de la Noche (si está equipado con el Linaje Fell Scholar): Oscuridad (Darkness) (Exige 14), Trueno Dramático (Dramatic Thunderclap) (Exige 17), Mirada Vampírica (Vampiric Glare) (Exige 20), Nube de Murciélagos (Cloud of Bats) (Exige 21)",
+      "Deathly Chill (Required Draw 14): Choose one enemy Character within 12” of the caster. Their AP is reduced by D3 in their next Activation.": "Frío Mortal (Deathly Chill) (Exige 14): Elige un Personaje enemigo a 12\" o menos del lanzador. Sus AP se reducen en D3 en su siguiente Activación.",
+      "Bonegnawer (Required Draw 17): Place a free Carrion Rat within 6” of the caster. It can be Activated this Round, however, if it is Knocked Out it may not be Raised.": "Roehuesos (Bonegnawer) (Exige 17): Coloca una Rata de Carroña gratuita a 6\" o menos del lanzador. Puede Activarse esta Ronda; sin embargo, si queda Noqueada no puede ser Alzada.",
+      "Soul Drain (Required Draw 19): The target Character takes 3 Hits that ignore Armour. For every HP lost by the target, the caster regains 1HP. This Spell may be cast on a friendly Character.": "Drenar Alma (Soul Drain) (Exige 19): El Personaje objetivo sufre 3 Impactos que ignoran la Armadura. Por cada HP que pierda el objetivo, el lanzador recupera 1 HP. Este Hechizo puede lanzarse sobre un Personaje aliado.",
+      "Mass Resurrection (Required Draw 21): Raise up to three Units or Beasts anywhere on the game board.": "Resurrección Masiva (Mass Resurrection) (Exige 21): Alza hasta tres Unidades o Bestias en cualquier lugar del tablero.",
+      "Conjure Sprites (Exige 14): Summons D3 Sprites of the caster's chosen College Lore.": "Conjurar Sprites (Conjure Sprites) (Exige 14): Invoca D3 Sprites del Saber del Colegio elegido por el lanzador.",
+      "College Lore Spells: Access to spells from their chosen College of Mt Orion (Crimson, Sapphire, Emerald, Ochre, Bronze, or Opal College).": "Hechizos de Saber de Colegio: acceso a los hechizos del Colegio del Monte Orion que elija (Carmesí, Zafiro, Esmeralda, Ocre, Bronce u Ópalo).",
+      "Student of Magic: May cast Spells from the Lore of their College, drawing a maximum of 2 cards.": "Estudiante de Magia (Student of Magic): puede lanzar Hechizos del Saber de su Colegio, robando un máximo de 2 cartas."
+    },
+    "reglas": {
+      "If a Critical Hit is rolled, reduce the target Character's AP by 1 for their next Activation. This does not stack.": "Si se obtiene un Impacto Crítico, reduce en 1 los AP del Personaje objetivo en su siguiente Activación. No se acumula.",
+      "Critical Hits ignore Armour": "Los Impactos Críticos ignoran la Armadura.",
+      "A Critical Hit allows the player to re-roll 1 failed Hit.": "Un Impacto Crítico permite al jugador Repetir tirada en 1 Impacto fallido.",
+      "A Critical Hit breaks 1 Armour.": "Un Impacto Crítico rompe 1 de Armadura.",
+      "If a Critical Hit is rolled, the target Character is Prone and the Thing-Flinger may move out of combat without any penalties.": "Si se obtiene un Impacto Crítico, el Personaje objetivo queda Tumbado y el Thing-Flinger puede salir del combate sin penalizaciones.",
+      "20” range. Requires a Hard Feat to Shoot.": "Alcance de 20\". Requiere una Hazaña Difícil para Disparar.",
+      "Re-roll all failed Hits against Monsters or Titans. These cannot be re-rolled again": "Repite tirada en todos los Impactos fallidos contra Monstruos o Titanes. Estos no pueden repetirse de nuevo.",
+      "If this Attack removes HP, the next Character who attempts to Attack the Captain must pass an Easy Feat or lose 1HP.": "Si este Ataque quita HP, el siguiente Personaje que intente Atacar al Captain debe superar una Hazaña Fácil o perder 1 HP.",
+      "If this Character is mounted, re-roll all failed Hits against Targets on 30mm bases.": "Si este Personaje está montado, Repite tirada en todos los Impactos fallidos contra Objetivos en peanas de 30 mm.",
+      "Any failed Hits against the target are dealt as Hits to an enemy Character within 3” of the target.": "Cualquier Impacto fallido contra el objetivo se asigna como Impactos a un Personaje enemigo a 3\" o menos del objetivo.",
+      "If a Critical Hit is made, and the target is on a 30 or 40mm base, the target Character becomes Prone.": "Si se obtiene un Impacto Crítico y el objetivo está en una peana de 30 o 40 mm, el Personaje objetivo queda Tumbado.",
+      "+2 Power if the target is Prone.": "+2 al Power si el objetivo está Tumbado.",
+      "If more Successes are rolled than Failures, the target is knocked Prone if on a 50mm base or less.": "Si se obtienen más Éxitos que Fallos, el objetivo queda Tumbado si está en una peana de 50 mm o menos.",
+      "6” Range.": "Alcance de 6\".",
+      "This Attack’s Power is not boosted by any equipped weapons. If HP is removed by this Attack, enemy models must take a Bravery Test as if the target had been Knocked Out.": "El Power de este Ataque no se ve aumentado por ningún arma equipada. Si este Ataque quita HP, los modelos enemigos deben realizar un Chequeo de Valentía como si el objetivo hubiera quedado Noqueado.",
+      "Each Critical Hit allows one more D6 to be rolled.": "Cada Impacto Crítico permite tirar un D6 más.",
+      "Targets every Character within 2”. This Character is Knocked Out after the Attack has been executed. Only 1HP is returned to the Dark Lord who summoned them (see Firey Essence Trait) and the Dark Lord’s max HP is permanently reduced by 1 for the rest of the game (see Firey Essence Trait). +1 Damage against Flammable targets.": "Afecta a todos los Personajes a 2\" o menos. Este Personaje queda Noqueado tras ejecutar el Ataque. Solo se devuelve 1 HP al Señor Oscuro que lo invocó (ver Rasgo Firey Essence) y los HP máximos del Señor Oscuro se reducen permanentemente en 1 durante el resto de la partida (ver Rasgo Firey Essence). +1 de daño contra objetivos Inflamables.",
+      "If a Crit is rolled, the target is Prone.": "Si se obtiene un Crítico, el objetivo queda Tumbado.",
+      "This Attack may only be made on a Character on a 30mm base size, and if the Hellbeast is not currently using Grasping Talons. On a Crit, the target is moved D6 inches in the direction of the Dark Lord player’s choosing.": "Este Ataque solo puede realizarse contra un Personaje en una peana de 30 mm, y si el Hellbeast no está usando en ese momento Grasping Talons. Con un Crítico, el objetivo se mueve D6 pulgadas en la dirección que elija el jugador Señor Oscuro.",
+      "May target any Character within 4”.": "Puede tener como objetivo a cualquier Personaje a 4\" o menos.",
+      "6” Range. Each Critical Hit causes one Hit against an enemy Character within 2” of the Target.": "Alcance de 6\". Cada Impacto Crítico causa un Impacto a un Personaje enemigo a 2\" o menos del Objetivo.",
+      "If the Target is Prone, if there are more Successes than Failures, the Character is moved 3” in a direction chosen by the Beastfolk player.": "Si el Objetivo está Tumbado y hay más Éxitos que Fallos, el Personaje se mueve 3\" en la dirección que elija el jugador Hombres Bestia.",
+      "Critical Hits break 1 Armour.": "Los Impactos Críticos rompen 1 de Armadura.",
+      "Each Critical Hit allows one more Hit to be rolled.": "Cada Impacto Crítico permite tirar un Impacto más.",
+      "If there are more Failures than Successes when rolling to Hit, the Verman loses D3HP afterwards.": "Si hay más Fallos que Éxitos al tirar para Impactar, el Verman pierde después D3 HP.",
+      "Every non-Beastfolk Character within 6” is affected by this Attack.": "Todos los Personajes que no sean Hombres Bestia a 6\" o menos se ven afectados por este Ataque.",
+      "If a Critical Hit is made, the target Character may not move out of base contact with the Kelpie until the next Round.": "Si se obtiene un Impacto Crítico, el Personaje objetivo no puede moverse fuera del contacto de peana con el Kelpie hasta la siguiente Ronda.",
+      "Every Character within 2” is affected by this Attack.": "Todos los Personajes a 2\" o menos se ven afectados por este Ataque.",
+      "Targets every enemy Character within 4”. May not be modified by Spells or Equipment.": "Tiene como objetivo a todos los Personajes enemigos a 4\" o menos. No puede ser modificado por Hechizos ni Equipo.",
+      "Crit allows 1 more Hit to be rolled.": "Un Crítico permite tirar 1 Impacto más.",
+      "May spend 1 more AP to add 3 Power to this Attack.": "Puedes gastar 1 AP más para añadir 3 al Power de este Ataque.",
+      "+2 Power if this Character is armed with a Shield.": "+2 al Power si este Personaje está armado con un Escudo.",
+      "If the target is on a 30 or 40mm base, on a Crit they are knocked Prone.": "Si el objetivo está en una peana de 30 o 40 mm, con un Crítico queda Tumbado.",
+      "If this Attack Knocks Out a Character, the Bone Goliath regains +1AP.": "Si este Ataque deja Noqueado a un Personaje, el Bone Goliath recupera +1 AP.",
+      "Affects all enemy Characters within 4”.": "Afecta a todos los Personajes enemigos a 4\" o menos.",
+      "Each Crit allows one more D6 to be rolled.": "Cada Crítico permite tirar un D6 más.",
+      "Crit ignores Armour.": "Un Crítico ignora la Armadura.",
+      "This Attack’s Power is not boosted by any Equipment. If HP is removed by this Attack, may re-roll any failed Enthral attempts against the target this Round.": "El Power de este Ataque no se ve aumentado por ningún Equipo. Si este Ataque quita HP, puede Repetir tirada en cualquier intento de Enthral fallido contra el objetivo durante esta Ronda.",
+      "If the target is on a 30mm base, a Crit knocks them Prone.": "Si el objetivo está en una peana de 30 mm, un Crítico lo deja Tumbado.",
+      "+1 Power if the target is Prone.": "+1 al Power si el objetivo está Tumbado.",
+      "A Crit ignores and breaks 1 Armour.": "Un Crítico ignora y rompe 1 de Armadura.",
+      "Each successful Hit allows one more D6 to be rolled.": "Cada Impacto exitoso permite tirar un D6 más.",
+      "Every enemy Character within 6” is affected by this Attack. Ignores Armour. If a Character loses HP to this Attack they must make a Bravery Test.": "Todos los Personajes enemigos a 6\" o menos se ven afectados por este Ataque. Ignora la Armadura. Si un Personaje pierde HP por este Ataque, debe realizar un Chequeo de Valentía.",
+      "If a Critical Hit is rolled, the target loses 1AP in its next Activation.": "Si se obtiene un Impacto Crítico, el objetivo pierde 1 AP en su siguiente Activación.",
+      "Ignores Armour.": "Ignora la Armadura.",
+      "Critical Hit ignores 1 Armour.": "Un Impacto Crítico ignora 1 de Armadura.",
+      "If the target is on a 30mm base, it is Knocked Out if it fails its first Defence Roll.": "Si el objetivo está en una peana de 30 mm, queda Noqueado si falla su primera Tirada de Defensa.",
+      "If a Critical Hit is made against a target on a 30 or 40mm base, the target Character becomes Prone.": "Si se realiza un Impacto Crítico contra un objetivo en una peana de 30 o 40 mm, el Personaje objetivo queda Tumbado.",
+      "6” range. If a Critical Hit is rolled, the target must take an immediate Bravery Test.": "Alcance de 6\". Si se obtiene un Impacto Crítico, el objetivo debe realizar de inmediato un Chequeo de Valentía.",
+      "Effects all Characters within 3”. Ignores Armour, +1 Power if the target is Flammable.": "Afecta a todos los Personajes a 3\" o menos. Ignora la Armadura, +1 al Power si el objetivo es Inflamable.",
+      "6” range. Ignores Armour.": "Alcance de 6\". Ignora la Armadura.",
+      "May target Characters within 2”. After this Attack, move this Character in base contact with the target. If more Failures are rolled than Successes to Hit, this Character is Knocked Out.": "Puede tener como objetivo a Personajes a 2\" o menos. Tras este Ataque, mueve a este Personaje hasta el contacto de peana con el objetivo. Si se obtienen más Fallos que Éxitos al Impactar, este Personaje queda Noqueado.",
+      "Each Critical Hit allows 1 more D6 to be rolled.": "Cada Impacto Crítico permite tirar 1 D6 más.",
+      "This Attack may only be made if the Warchief Knocked Out an enemy Character in the same Activation.": "Este Ataque solo puede realizarse si el Warchief dejó Noqueado a un Personaje enemigo en la misma Activación.",
+      "8” range": "Alcance de 8\"",
+      "Each Critical Hit ignores 1 Armour.": "Cada Impacto Crítico ignora 1 de Armadura.",
+      "Each Critical Hit allows 2 more D6 to be rolled.": "Cada Impacto Crítico permite tirar 2 D6 más.",
+      "Each Critical Hit breaks 1 Armour.": "Cada Impacto Crítico rompe 1 de Armadura.",
+      "May only be used if a Charge was made in this Activation.": "Solo puede usarse si se realizó una Carga en esta Activación.",
+      "If a Critical Hit is made, the target Character is Prone, and this Character may move out of combat without any penalties.": "Si se realiza un Impacto Crítico, el Personaje objetivo queda Tumbado y este Personaje puede salir del combate sin penalizaciones.",
+      "Range 8”.": "Alcance de 8\".",
+      "If the Target is Prone, if there are more Successes than Failures, the Character is moved 3” in a direction chosen by the Ourk player.": "Si el Objetivo está Tumbado y hay más Éxitos que Fallos, el Personaje se mueve 3\" en la dirección que elija el jugador Ourk.",
+      "Critical Hits cause the next Attack to have +1 Power. This does not stack.": "Los Impactos Críticos hacen que el siguiente Ataque tenga +1 al Power. No se acumula.",
+      "Ignores Armour and Shields.": "Ignora la Armadura y los Escudos.",
+      "8” range. Ignores Armour and Shields.": "Alcance de 8\". Ignora la Armadura y los Escudos.",
+      "8” range.": "Alcance de 8\".",
+      "On a Critical Hit, the target may not move or Attack until they have made a successful Medium Feat. If unsuccessful, they take D3 Hits.": "Con un Impacto Crítico, el objetivo no puede moverse ni Atacar hasta que supere una Hazaña Media. Si falla, sufre D3 Impactos.",
+      "After this Attack, this Character becomes Prone.": "Tras este Ataque, este Personaje queda Tumbado.",
+      "+3 Power if target is Prone.": "+3 al Power si el objetivo está Tumbado.",
+      "+1 Power if the target is on a 40mm base or larger.": "+1 al Power si el objetivo está en una peana de 40 mm o mayor.",
+      "A Crit reduces the target’s Movement by 1 for the rest of the Round.": "Un Crítico reduce en 1 el Movimiento del objetivo durante el resto de la Ronda.",
+      "If more Failures than Successes are rolled, the Trophy Hunter is Prone after the Attack has been made.": "Si se obtienen más Fallos que Éxitos, el Trophy Hunter queda Tumbado tras realizar el Ataque.",
+      "Targets every Character (friend or foe) within 2”.": "Tiene como objetivo a todos los Personajes (amigos o enemigos) a 2\" o menos.",
+      "If the target is on a smaller base size, move them back 2” after this Attack has been made.": "Si el objetivo está en una peana de menor tamaño, muévelo 2\" hacia atrás tras realizar este Ataque.",
+      "If a Critical Hit is rolled, remove 1 Armour or Shield from the target.": "Si se obtiene un Impacto Crítico, retira 1 de Armadura o Escudo del objetivo.",
+      "10” range. Ignores Armour. If this Attack causes Damage, the target loses an additional 1HP at the start of their next Activation (even if it isn’t in the same Round).": "Alcance de 10\". Ignora la Armadura. Si este Ataque causa Daño, el objetivo pierde 1 HP adicional al comienzo de su siguiente Activación (aunque no sea en la misma Ronda).",
+      "Crits ignore Armour.": "Los Críticos ignoran la Armadura.",
+      "Every time this Attack is used, the Sprite loses 1AP.": "Cada vez que se usa este Ataque, el Sprite pierde 1 AP.",
+      "If a Crit is rolled, the target must re-roll any successful Feats to leave base contact.": "Si se obtiene un Crítico, el objetivo debe Repetir tirada en cualquier Hazaña superada para abandonar el contacto de peana.",
+      "Affects all Characters without the Thing of Magic Trait within 2”. Ignores Armour.": "Afecta a todos los Personajes sin el Rasgo Thing of Magic a 2\" o menos. Ignora la Armadura.",
+      "A Critical Hit knocks the target Prone if they are on a 30mm base.": "Un Impacto Crítico deja Tumbado al objetivo si está en una peana de 30 mm.",
+      "A Critical Hit knocks the target Prone if they are on a 30mm base": "Un Impacto Crítico deja Tumbado al objetivo si está en una peana de 30 mm",
+      "Must be performed whilst Burrowed. The Troggle comes out of its burrow after this Attack has taken place.": "Debe realizarse mientras está Excavado. El Troggle sale de su madriguera tras realizar este Ataque.",
+      "A Critical Hit ignores Armour.": "Un Impacto Crítico ignora la Armadura.",
+      "This Attack may be made against targets up to 2” away, even if they aren’t in base contact. Attacks may still be made if there is a friendly Character between this Character and the target.": "Este Ataque puede realizarse contra objetivos a hasta 2\" de distancia, aunque no estén en contacto de peana. Aún pueden realizarse Ataques si hay un Personaje aliado entre este Personaje y el objetivo.",
+      "Affects all Characters within 6” and ignores Armour and Shields. On a Critical Hit, the target’s Move stat is halved for this Round. This does stack.": "Afecta a todos los Personajes a 6\" o menos e ignora la Armadura y los Escudos. Con un Impacto Crítico, el atributo de Movimiento del objetivo se reduce a la mitad durante esta Ronda. Esto sí se acumula.",
+      "+2 Power if this Attack is made after a Charge.": "+2 al Power si este Ataque se realiza tras una Carga.",
+      "Affects all Characters within 6” and ignores Armour and Shields. On a Critical Hit, the target’s AP is reduced by 1 for their next Activation. This does stack.": "Afecta a todos los Personajes a 6\" o menos e ignora la Armadura y los Escudos. Con un Impacto Crítico, los AP del objetivo se reducen en 1 en su siguiente Activación. Esto sí se acumula.",
+      "The target receives a number of Hits equal to the amount of HP they are below their starting HP.": "El objetivo recibe un número de Impactos igual a la cantidad de HP que le faltan respecto a sus HP iniciales.",
+      "All Characters within 2” are targeted by this Attack. If a Critical Hit is rolled, and they on a smaller base size, the target Character is Prone.": "Todos los Personajes a 2\" o menos son objetivo de este Ataque. Si se obtiene un Impacto Crítico y están en una peana de menor tamaño, el Personaje objetivo queda Tumbado.",
+      "Critical Hits ignore Armour.": "Los Impactos Críticos ignoran la Armadura.",
+      "If a Critical Hit is made, the target Character may be thrown D6 inches in a direction of the Troll player’s choosing. This Character is Prone.": "Si se realiza un Impacto Crítico, el Personaje objetivo puede ser lanzado D6 pulgadas en la dirección que elija el jugador Trol. Este Personaje queda Tumbado.",
+      "12” range. Requires a Medium Feat.": "Alcance de 12\". Requiere una Hazaña Media.",
+      "If a Critical Hit is rolled, if the target Character is on a smaller base size they become Prone after the Attack has been made.": "Si se obtiene un Impacto Crítico y el Personaje objetivo está en una peana de menor tamaño, queda Tumbado tras realizar el Ataque.",
+      "If a Crit is rolled and the target Character is on a smaller base size they become Prone after the Attack has been made.": "Si se obtiene un Crítico y el Personaje objetivo está en una peana de menor tamaño, queda Tumbado tras realizar el Ataque.",
+      "If a Crit is rolled, Old Grogg may make a single attempt to Gobble the target for only an Easy Feat.": "Si se obtiene un Crítico, Old Grogg puede hacer un único intento de Engullir (Gobble) al objetivo con solo una Hazaña Fácil.",
+      "6” range. Requires a Hard Feat. Draw a line from this Character to the target. Any Character touched by this line is also affected by this Attack. In addition, the targets suffer a number of Hits equal to the amount of HP that they are below their starting HP.": "Alcance de 6\". Requiere una Hazaña Difícil. Traza una línea desde este Personaje hasta el objetivo. Cualquier Personaje tocado por esta línea también se ve afectado por este Ataque. Además, los objetivos sufren un número de Impactos igual a la cantidad de HP que les faltan respecto a sus HP iniciales.",
+      "All Characters within 4” are targets of this attack. If Critical Hit is made, the target Character is thrown D6 inches in a direction of the Dragon player’s choosing. This Character is Prone.": "Todos los Personajes a 4\" o menos son objetivo de este ataque. Si se realiza un Impacto Crítico, el Personaje objetivo es lanzado D6 pulgadas en la dirección que elija el jugador Dragón. Este Personaje queda Tumbado.",
+      "Hits may be split between up to five target Characters. If a Critical Hit is rolled, the target Character suffers an extra Hit if they are the target of this Attack again this Activation.": "Los Impactos pueden repartirse entre hasta cinco Personajes objetivo. Si se obtiene un Impacto Crítico, el Personaje objetivo sufre un Impacto extra si vuelve a ser objetivo de este Ataque en esta Activación.",
+      "If a Critical Hit is rolled, an extra Hit is taken by the target the next time they Activate. If the target fails to Defend it, another Hit is taken in their next Activation, and so on. These additional Hits ignore Armour and Shields.": "Si se obtiene un Impacto Crítico, el objetivo recibe un Impacto extra la próxima vez que se Active. Si no consigue Defenderlo, recibe otro Impacto en su siguiente Activación, y así sucesivamente. Estos Impactos adicionales ignoran la Armadura y los Escudos.",
+      "If a Critical Hit is rolled, the Arcanid Queen may Gobble the target on an Easy Feat during this Activation.": "Si se obtiene un Impacto Crítico, la Arcanid Queen puede Engullir (Gobble) al objetivo con una Hazaña Fácil durante esta Activación.",
+      "Affects all Characters within 2”. All Mages must pass a Bravery Test or automatically Overpower their Spells for the rest of the Round.": "Afecta a todos los Personajes a 2\" o menos. Todos los Magos deben superar un Chequeo de Valentía o Sobrepotenciar automáticamente sus Hechizos durante el resto de la Ronda.",
+      "May only be used if the Swamp Wyvern is Airborne. Pick an area on the board. All Characters within 3” of this Attack are hit by this Attack. After the Attack has been made, place the Swamp Wyvern on the board in the area the Attack was made. It also takes a Power 10 Attack, and its Activation immediately ends. Rearrange any Characters that have not been Knocked Out by this Attack in base contact with the Swamp Wyvern.": "Solo puede usarse si la Swamp Wyvern está en el Aire. Elige una zona del tablero. Todos los Personajes a 3\" o menos de este Ataque son alcanzados por él. Tras realizar el Ataque, coloca a la Swamp Wyvern en el tablero en la zona donde se realizó el Ataque. También sufre un Ataque de Power 10, y su Activación termina de inmediato. Recoloca en contacto de peana con la Swamp Wyvern a todos los Personajes que no hayan quedado Noqueados por este Ataque.",
+      "If this Attack causes the target to lose 5 or more HP, they may be Gobbled in this Activation on an Easy Feat.": "Si este Ataque hace que el objetivo pierda 5 o más HP, puede ser Engullido (Gobbled) en esta Activación con una Hazaña Fácil.",
+      "If a Critical Hit is rolled, the target Character is thrown backwards D6”.": "Si se obtiene un Impacto Crítico, el Personaje objetivo es lanzado hacia atrás D6\".",
+      "All Characters within 4” are targets of this attack. If Critical Hit is made, the target Character is thrown D6 inches in a direction of the Tarrasque player’s choosing. This Character is Prone.": "Todos los Personajes a 4\" o menos son objetivo de este ataque. Si se realiza un Impacto Crítico, el Personaje objetivo es lanzado D6 pulgadas en la dirección que elija el jugador Tarrasque. Este Personaje queda Tumbado.",
+      "Hits are doubled if the Target is Prone.": "Los Impactos se duplican si el Objetivo está Tumbado.",
+      "Hits may be split between up to five target Characters. +1 Power if the target is Prone. The Tarrasque may only Move again on a successful Easy Feat to get up.": "Los Impactos pueden repartirse entre hasta cinco Personajes objetivo. +1 al Power si el objetivo está Tumbado. El Tarrasque solo puede volver a Moverse superando una Hazaña Fácil para levantarse.",
+      "8” range. Requires a Hard Feat. Draw a line from this Character to the target. Any Character touched by this line is also affected by this Attack. +2 Power against Flammable targets.": "Alcance de 8\". Requiere una Hazaña Difícil. Traza una línea desde este Personaje hasta el objetivo. Cualquier Personaje tocado por esta línea también se ve afectado por este Ataque. +2 al Power contra objetivos Inflamables.",
+      "If a Crit is rolled, a Gobble attempt may be made as an Easy Feat.": "Si se obtiene un Crítico, puede intentarse Engullir (Gobble) como una Hazaña Fácil.",
+      "If a Critical Hit is rolled, break 1 Armour.": "Si se obtiene un Impacto Crítico, rompe 1 de Armadura.",
+      "Place a token up to 8” away. Divide the Hits from this Attack between all Characters within 3” of the token. Add an additional +2 Hits against Flammable targets.": "Coloca una ficha a hasta 8\" de distancia. Reparte los Impactos de este Ataque entre todos los Personajes a 3\" o menos de la ficha. Añade +2 Impactos adicionales contra objetivos Inflamables.",
+      "If a Critical Hit is rolled, reduces the Target's AP by 1 for its next Activation. This does not stack.": "Si se obtiene un Impacto Crítico, reduce en 1 los AP del Objetivo en su siguiente Activación. No se acumula.",
+      "On a Crit, one more D6 may be rolled for this Attack.": "Con un Crítico, puede tirarse un D6 más para este Ataque.",
+      "If this Attack removes HP, the next Character who attempts to Attack Bruno must first pass an Easy Feat or lose 1HP instead.": "Si este Ataque quita HP, el siguiente Personaje que intente Atacar a Bruno debe antes superar una Hazaña Fácil o perder 1 HP en su lugar.",
+      "Targets every Character in Melee range. A Crit knocks a Character Prone if on a 50mm base or less.": "Tiene como objetivo a todos los Personajes en alcance cuerpo a cuerpo. Un Crítico deja Tumbado a un Personaje si está en una peana de 50 mm o menos.",
+      "Re-roll all failed Hits against Prone targets.": "Repite tirada en todos los Impactos fallidos contra objetivos Tumbados.",
+      "May only be used against a Character on a 40mm base or less. On a Crit, the target Character is Picked Up. They may not move, and if the Giant moves, they are taken with them and remain in base contact. To escape the target must pass a Medium Feat in their Activation.": "Solo puede usarse contra un Personaje en una peana de 40 mm o menos. Con un Crítico, el Personaje objetivo es Recogido (Picked Up). No puede moverse, y si el Gigante se mueve, se lo lleva consigo y permanece en contacto de peana. Para escapar, el objetivo debe superar una Hazaña Media en su Activación.",
+      "+3 Power if in base contact with more than one enemy Character.": "+3 al Power si está en contacto de peana con más de un Personaje enemigo.",
+      "If a Crit is rolled, the player may choose to move the target 1” in a direction of their choosing. This effect only applies to targets on a 50mm base or less.": "Si se obtiene un Crítico, el jugador puede elegir mover al objetivo 1\" en la dirección que desee. Este efecto solo se aplica a objetivos en una peana de 50 mm o menos.",
+      "If the target is Prone, and from an undead Faction (Undead Raiders, Ancient Dead or Vampires), any Damage caused is doubled.": "Si el objetivo está Tumbado y pertenece a una Facción no-muerta (Undead Raiders, Ancient Dead o Vampires), todo el Daño causado se duplica.",
+      "12” range. Two Shots can be made for every successful Feat.": "Alcance de 12\". Pueden realizarse dos Disparos por cada Hazaña superada."
+    },
+    "hechizos": {
+      "hearty veggie soup": {
+        "nombre": "Sopa de Verduras (Hearty Veggie Soup)",
+        "efecto": "La tierra honesta de Hobbleshire otorga a las verduras que crecen en ella un sabor distintivo y potente. Quienes beben este caldo nutritivo dicen que su calor puede aliviar incluso las heridas más graves. Un Personaje aliado a 6\" o menos recupera 3 HP."
+      },
+      "marvellous mutton stew": {
+        "nombre": "Estofado de Oveja Maravilloso (Marvellous Mutton Stew)",
+        "efecto": "Los Halflings son bien conocidos por criar rebaños de ovejas de buena raza, y este estofado es tan delicioso que seguro que se sintieron honradas de convertirse en cordero para él. Un Personaje aliado a 6\" o menos puede Repetir tirada en una única tirada de Leg It fallida durante esta Ronda."
+      },
+      "bullox burgers": {
+        "nombre": "Hamburguesas de Buey (Bullox Burgers)",
+        "efecto": "Los bueyes son leales bestias de carga para los Halflings, pero ni siquiera ellos pueden trabajar para siempre. Por suerte, también son una comida estupenda una vez que se han... «retirado». Un Personaje aliado a 6\" o menos puede Repetir tirada en todas sus Tiradas de Defensa fallidas hasta su siguiente Activación."
+      },
+      "cocklegriff madras (with rice and naan)": {
+        "nombre": "Curry Cocklegriff Madras (Cocklegriff Madras)",
+        "efecto": "Este plato, inspirado en las fragantes delicias de Raajalan, se ha convertido en el favorito de la gente pendenciera para ponerse a tono antes de una refriega. Aunque la violencia de la mañana siguiente suele eclipsar a cualquiera de las anteriores. Un Personaje aliado a 6\" o menos obtiene el Ataque Fired Up hasta el final de la Ronda: (1 AP) Fired Up: Power 8. Reglas especiales: +1 al Power contra objetivos Inflamables."
+      },
+      "mystery meat surprise": {
+        "nombre": "Sorpresa de Carne Misteriosa (Mystery Meat Surprise)",
+        "efecto": "La «pièce de résistance» (como dirían en Galanaux), esta extraordinaria proeza culinaria es una receta secreta celosamente guardada. Solo los gourmets más refinados pueden dominarla, y sus sutiles sabores e ingredientes caros se desperdician a menudo en la chusma que la engulle con avidez en el campo de batalla. Un Personaje aliado a 6\" o menos gana +2 AP y recupera D6 HP."
+      },
+      "mechanical griffling": {
+        "nombre": "Griffling Mecánico (Mechanical Griffling)",
+        "efecto": "Con un zumbido y un gorjeo, un Griffling hecho de metal pulido cobra vida. Coloca un Griffling (ver Bestiario) en contacto de peana con el Tinkerer, que se Activa inmediatamente después de que termine la Activación del Tinkerer. Este Hechizo solo puede volver a usarse si el Griffling Mecánico ha quedado Noqueado."
+      },
+      "revolving pistol": {
+        "nombre": "Pistola Giratoria (Revolving Pistol)",
+        "efecto": "El Tinkerer saca una extraña pistola Arcloque de varios cañones que dispara muchas balas una tras otra. El Tinkerer puede realizar este Ataque: (A distancia) Revolving Pistol: Power 5. Reglas especiales: alcance de 8\". Tira otro D6 por cada Impacto exitoso."
+      },
+      "arcane shielding": {
+        "nombre": "Escudo Arcano (Arcane Shielding)",
+        "efecto": "Un artilugio emite un aura de luz azul verdosa que se extiende alrededor del Tinkerer y parece desviar los golpes lejanos. Durante el resto de la Ronda, cualquier Personaje a 2\" o menos del Tinkerer gana +1 de Armadura contra los Ataques realizados por Personajes fuera de esta zona."
+      },
+      "homing bullet": {
+        "nombre": "Bala Teledirigida (Homing Bullet)",
+        "efecto": "Un triunfo de la ingeniería: este proyectil parece no fallar nunca su objetivo. Una vez lanzado este Hechizo, durante su Activación un único Personaje en contacto de peana con el Tinkerer puede realizar un único Ataque a distancia que ignora la cobertura y supera automáticamente su tirada de Hazaña sin coste."
+      },
+      "magic gobbler": {
+        "nombre": "Engullidor de Magia (Magic Gobbler)",
+        "efecto": "Un maravilloso aparato que engulle energía mágica y la almacena para que el Tinkerer la use. Hasta la siguiente Activación del Tinkerer, cada vez que un Personaje enemigo lance un Hechizo con éxito, tira un D6. Con un Éxito, el Hechizo no se lanza y el Tinkerer gana una Ficha de Arcanita."
+      },
+      "forest creatures": {
+        "nombre": "Criaturas del Bosque (Forest Creatures)",
+        "efecto": "Las alimañas del bosque son llamadas desde sus guaridas para atacar a los intrusos impíos. El Personaje objetivo y todos los Personajes a 3\" o menos de él sufren 3 Impactos."
+      },
+      "warging": {
+        "nombre": "Dominio Bestial (Warging)",
+        "efecto": "La Bruja del Seto entra en la mente de otra criatura y controla todos sus movimientos. Cuando el lanzador haya terminado su Activación, elige una Bestia aliada en el tablero. Puede Activarse de inmediato, aunque ya se haya Activado en esta Ronda. Cualquier Objeto o Equipo recogido por la Bestia se transfiere al lanzador al final de su activación."
+      },
+      "bestial strength": {
+        "nombre": "Fuerza Bestial (Bestial Strength)",
+        "efecto": "Con un rugido poderoso, la Bruja del Seto aprovecha la fuerza de una criatura poderosa y se la regala a uno de los suyos. Este Hechizo puede lanzarse sobre cualquier Personaje que no sea una Bestia, un Monstruo o un Titán. El objetivo gana +3 al Power en cualquier Ataque cuerpo a cuerpo hasta que el lanzador decida lanzar otro Hechizo."
+      },
+      "shapeshift": {
+        "nombre": "Cambio de Forma (Shapeshift)",
+        "efecto": "Mientras el aire a su alrededor se desdibuja, la Bruja del Seto adopta una nueva forma: ¡un aterrador Monstruo! Sustituye al lanzador por un Monstruo elegido del Bestiario. El Monstruo tiene los mismos AP que le quedaban al lanzador antes del Cambio de Forma, pero por lo demás es idéntico. Al final de la Ronda, el lanzador vuelve a su verdadera forma con los mismos HP que tenía cuando se lanzó el Hechizo."
+      },
+      "tar pit": {
+        "nombre": "Pozo de Alquitrán (Tar Pit)",
+        "efecto": "El Magus hace brotar de las profundidades de la tierra un charco de pez negra y pegajosa para sepultar a sus enemigos, como ellos mismos fueron sepultados hace mucho. Coloca un marcador en el tablero. Todos los Personajes a 3\" o menos de él ven reducido su Movimiento a 1. Este efecto dura hasta que el Bog Magus quede Tumbado o Noqueado."
+      },
+      "spirit glaive": {
+        "nombre": "Glaive Espiritual (Spirit Glaive)",
+        "efecto": "El Mago invoca una hoja etérea hecha de la misma materia espiritual que lo anima. Parece cortar hasta el alma de aquellos contra quienes se usa. Puede lanzarse sobre sí mismo o sobre un Personaje aliado a 3\" o menos, y dura hasta el final de la Ronda. En lugar de perder HP, un objetivo pierde 1 AP de su siguiente Activación por cada 3 puntos de daño que reciba de Ataques cuerpo a cuerpo de quienes empuñen la Spirit Glaive."
+      },
+      "forgotten ritual": {
+        "nombre": "Ritual Olvidado (Forgotten Ritual)",
+        "efecto": "El Mago recrea un ritual olvidado de su pueblo, cuyos recuerdos y poder reaniman a los suyos. Todos los Personajes aliados con el Rasgo Huesos (Bones) a 3\" o menos recuperan D3 HP."
+      },
+      "justice of the dead": {
+        "nombre": "Justicia de los Muertos (Justice of the Dead)",
+        "efecto": "Los muertos recuerdan las injusticias que se cometieron contra ellos. Todo Personaje enemigo que haya dejado Noqueado a un Personaje aliado en el momento de lanzar este Hechizo sufre D6 Impactos que ignoran la Armadura y los Escudos."
+      },
+      "tangleweed": {
+        "nombre": "Mala Hierba Enredadera (Tangleweed)",
+        "efecto": "Enredaderas espinosas brotan de la tierra y atrapan a todos los que tienen la mala suerte de estar a su alcance. Todos los Personajes a 6\" o menos del lanzador ven reducidos en 2\" su Movimiento y sus tiradas de Leg It hasta el siguiente Hechizo del lanzador."
+      },
+      "spirit of the forest": {
+        "nombre": "Espíritu del Bosque (Spirit of the Forest)",
+        "efecto": "La vitalidad de sus víctimas llena al Druida de un vigor antinatural, y sus ojos brillan con el poder del bosque oscuro. Un Personaje aliado a 12\" o menos gana +2 AP en su siguiente Activación. Mientras esté bajo los efectos de este Hechizo, el objetivo no puede recibir ninguna otra bonificación de Hechizos."
+      },
+      "ominous whispers": {
+        "nombre": "Susurros Ominosos (Ominous Whispers)",
+        "efecto": "Con una palabra siseada en una lengua antinatural, los enemigos de los Elfos sienten sus mentes torturadas por la risa y la malicia de los Fae. Un Personaje enemigo a 12\" o menos debe superar un Chequeo de Valentía. Si falla, pierde 3 HP además de los efectos normales del fallo. Todos los modelos enemigos a 3\" o menos del objetivo original, hayan superado o no su Chequeo de Valentía, deben realizar también Chequeos de Valentía."
+      },
+      "the merciless wood": {
+        "nombre": "El Bosque Inclemente (The Merciless Wood)",
+        "efecto": "Power 4. Reglas especiales: si algún Personaje queda Noqueado por los efectos de este hechizo, es sustituido por un Woodfiend. Este Personaje es controlado por el jugador Elfo con normalidad y puede Activarse en la siguiente Ronda."
+      },
+      "false foe": {
+        "nombre": "Enemigo Falso (False Foe)",
+        "efecto": "Una niebla enfermiza envuelve al objetivo, que ve enemigos que quizá no estén realmente allí. Alcance 8\". Durante el resto de la Ronda, el objetivo debe superar una Hazaña Fácil antes de poder realizar cualquier Ataque."
+      },
+      "stupor": {
+        "nombre": "Estupor (Stupor)",
+        "efecto": "El Dreameater invoca un denso miasma a su alrededor, y quienes lo respiran sucumben pronto a su influencia soporífera. Todos los Personajes a 3\" o menos del lanzador caen en un sueño profundo. Cuentan como Tumbados hasta que sean objetivo de un Ataque o Hechizo, o hayan superado una Hazaña Media en su siguiente Activación. Una vez despiertos, pueden Activarse con normalidad."
+      },
+      "dream eater": {
+        "nombre": "Devorador de Sueños (Dream Eater)",
+        "efecto": "Este Dreameater se da un festín con los sueños de los demás y consume su poder con una glotonería desenfrenada. Alcance 2\". Este Hechizo solo puede dirigirse contra quienes estén bajo los efectos del Hechizo Stupor. El objetivo pierde D3 AP en su siguiente Activación, y estos se entregan al lanzador para que los gaste en su Activación actual. Además, este Hechizo no despierta al objetivo."
+      },
+      "inside your mind": {
+        "nombre": "Dentro de tu Mente (Inside your Mind)",
+        "efecto": "Los zarcillos de niebla verde se filtran en la mente del objetivo, y el lanzador puede controlarlo como a una marioneta viviente. Elige un objetivo con peana de 30 mm o 40 mm a 4\" o menos del lanzador. La Activación del lanzador termina de inmediato y el objetivo se Activa, aunque ya se haya Activado en esta Ronda. El jugador Ourk puede gastar 3 AP controlando al objetivo como desee. Una vez gastados los 3 AP, la partida continúa con normalidad."
+      },
+      "chittering bugs": {
+        "nombre": "Insectos Estridentes (Chittering Bugs)",
+        "efecto": "El Chamán invoca un torrente de bichos que trepan por todo su enemigo, para deleite de los Gremlins. Elige un Personaje enemigo a 8\" o menos del lanzador. En su siguiente Activación no puede realizar ninguna Acción de movimiento, pues está ocupado frenéticamente en espantar los bichos."
+      },
+      "slip and slide": {
+        "nombre": "Resbalón y Caída (Slip and Slide)",
+        "efecto": "Con un giro de su bastón, el Chamán cubre las botas de sus enemigos con una sustancia resbaladiza mágica. Las payasadas que siguen son muy divertidas. Este Hechizo afecta a cualquier Personaje enemigo que intente una tirada de Leg It a 8\" o menos del lanzador. Si falla, en lugar de quedar Tumbado se desliza el número obtenido en la tirada en la dirección opuesta a la de su movimiento previsto. Este efecto dura hasta el final de la Ronda."
+      },
+      "peek-a-boo": {
+        "nombre": "¡Cucú! (Peek-a-Boo)",
+        "efecto": "Cacareando como un maníaco, la magia del Chamán hace que un aliado parezca aparecer y desaparecer, para frustración del enemigo. Elige un Personaje aliado como objetivo de este Hechizo. Este Personaje obtiene temporalmente la regla Activación Dividida (Split Activation), si no la tenía ya. Hasta que haya gastado su último AP de la Ronda, cada vez que termine su Activación retíralo del tablero. Colócalo de nuevo en el mismo lugar cuando se vuelva a Activar."
+      },
+      "great green explosion": {
+        "nombre": "Gran Explosión Verde (Great Green Explosion)",
+        "efecto": "(21+) Todos los Personajes a 6\" o menos del lanzador sufren 8 Impactos, más Impactos adicionales por cada 1 que la carta supere 21. Si es Sobrepotenciado, además de perder D6 HP, el Chamán pierde 1 HP por cada 1 que la carta supere 21."
+      },
+      "chittering swarm": {
+        "nombre": "Enjambre Estridente (Chittering Swarm)",
+        "efecto": "La Arcanid Queen convoca una horda de arañas que muerden cualquier carne expuesta. Todos los Personajes enemigos en contacto de peana sufren 1 Impacto."
+      },
+      "summon arcanid": {
+        "nombre": "Invocación de Arcanida (Summon Arcanid)",
+        "efecto": "Con un gesto, la Arcanid Queen llama a otro de sus hijos para reemplazar a los caídos en el campo de batalla. Coloca un Arcanid Noqueado con todos sus HP en un borde de mesa a tu elección."
+      },
+      "silken salve": {
+        "nombre": "Ungüento Sedoso (Silken Salve)",
+        "efecto": "La Arcanid Queen cubre sus heridas con seda impregnada de Arcanita, y la piel y el caparazón rotos empiezan a soldarse. El lanzador recupera D6 HP."
+      },
+      "arcleap": {
+        "nombre": "Salto Arcano (Arcleap)",
+        "efecto": "El Diario se desvanece con un zumbido junto con el Explorer fuera de este plano de existencia. Retira del tablero tanto al Explorer como al Diario, aunque alguno de ellos esté en contacto de peana con un Personaje enemigo. Vuelve a colocarlos en contacto de peana a 6\" o menos de cualquier borde de mesa cuando reaparezcan."
+      },
+      "touch of destiny": {
+        "nombre": "Toque del Destino (Touch of Destiny)",
+        "efecto": "El Diario retuerce el tejido mismo de la realidad, y aquellos a quienes favorece son bendecidos por el destino. Elige un Personaje aliado en el tablero. Durante el resto de la Ronda, puede Repetir tirada en cualquier dado fallido cuando intente Hazañas."
+      },
+      "charmed blade": {
+        "nombre": "Hoja Encantada (Charmed Blade)",
+        "efecto": "Con un crujir de sus páginas, el arma de un aliado vibra con energía mágica. Elige un Personaje aliado a 6\" o menos del Diario. En sus tiradas para Atacar, tanto los 5 como los 6 cuentan como Impactos Críticos."
+      },
+      "arcane knowledge": {
+        "nombre": "Conocimiento Arcano (Arcane Knowledge)",
+        "efecto": "El Diario parece aprovechar una riqueza desconocida de conocimiento, como si estuviera conectado con todos los libros de magia jamás escritos. El lanzador puede elegir un Hechizo de cualquier saber del juego ArcWorlde. Este Hechizo se considera ahora lanzado con éxito."
+      }
+    }
+  }
 };
