@@ -1537,6 +1537,118 @@ const traduccionesES = {
       "restriccion": "Aplica únicamente en partidas donde ambos jugadores hayan contratado al mismo personaje mercenario."
     }
   },
-  "saberes": {},
+  "saberes": {
+    "the grand cookbook of bulbo chubb": {
+      "nombre": "El Gran Libro de Cocina de Bulbo Chubb",
+      "hechizos": {
+        "hearty veggie soup": "Sopa de Verduras (Hearty Veggie Soup)",
+        "marvellous mutton stew": "Estofado de Oveja Maravilloso (Marvellous Mutton Stew)",
+        "bullox burgers": "Hamburguesas de Buey (Bullox Burgers)",
+        "cocklegriff madras": "Curry Cocklegriff Madras (Cocklegriff Madras)",
+        "mystery meat surprise": "Sorpresa de Carne Misteriosa (Mystery Meat Surprise)"
+      }
+    },
+    "tinkerer's arcane contraptions": {
+      "nombre": "Creaciones Arcanas del Hojalatero (Tinkerer's Arcane Contraptions)",
+      "hechizos": {
+        "mechanical griffling": "Griffling Mecánico (Mechanical Griffling)",
+        "revolving pistol": "Pistola Giratoria (Revolving Pistol)",
+        "arcane shielding": "Escudo Arcano (Arcane Shielding)",
+        "homing bullet": "Bala Teledirigida (Homing Bullet)",
+        "magic gobbler": "Engullidor de Magia (Magic Gobbler)"
+      }
+    },
+    "lore of villainy": {
+      "nombre": "Saber de la Villanía (Lore of Villainy)",
+      "hechizos": {
+        "sickly screech": "Chillido Enfermizo (Sickly Screech)",
+        "ominous aura": "Aura Ominosa (Ominous Aura)",
+        "restless minions": "Esbirros Inquietos (Restless Minions)",
+        "molten terrain": "Terreno Fundido (Molten Terrain)",
+        "hellfire": "Fuego del Infierno (Hellfire)"
+      }
+    },
+    "lore of tooth and fur": {
+      "nombre": "Saber de Diente y Pelaje (Lore of Tooth and Fur)",
+      "hechizos": {
+        "forest creatures": "Criaturas del Bosque (Forest Creatures)",
+        "warging": "Dominio Bestial (Warging)",
+        "bestial strength": "Fuerza Bestial (Bestial Strength)",
+        "shapeshift": "Cambio de Forma (Shapeshift)"
+      }
+    },
+    "lore of the thereafter": {
+      "nombre": "Saber del Más Allá (Lore of the Thereafter)",
+      "hechizos": {
+        "tar pit": "Pozo de Alquitrán (Tar Pit)",
+        "spirit glaive": "Glaive Espiritual (Spirit Glaive)",
+        "forgotten ritual": "Ritual Olvidado (Forgotten Ritual)",
+        "justice of the dead": "Justicia de los Muertos (Justice of the Dead)"
+      }
+    },
+    "lore of the night": {
+      "nombre": "Saber de la Noche (Lore of the Night)",
+      "hechizos": {
+        "darkness": "Oscuridad (Darkness)",
+        "dramatic thunderclap": "Trueno Dramático (Dramatic Thunderclap)",
+        "vampiric glare": "Mirada Vampírica (Vampiric Glare / Beguile)",
+        "cloud of bats": "Nube de Murciélagos (Cloud of Bats)"
+      }
+    },
+    "lore of the damned": {
+      "nombre": "Saber de los Condenados (Lore of the Damned)",
+      "hechizos": {
+        "deathly chill": "Frío Mortal (Deathly Chill)",
+        "bonegnawer": "Roeehuesos (Bonegnawer)",
+        "soul drain": "Drenar Alma (Soul Drain)",
+        "mass resurrection": "Resurrección Masiva (Mass Resurrection)"
+      }
+    },
+    "lore of the darkwood": {
+      "nombre": "Saber del Bosque Profundo (Lore of the Darkwood)",
+      "hechizos": {
+        "tangleweed": "Mala Hierba Enredadera (Tangleweed)",
+        "spirit of the forest": "Espíritu del Bosque (Spirit of the Forest)",
+        "ominous whispers": "Susurros Ominosos (Ominous Whispers)",
+        "the merciless wood": "El Bosque Inclemente (The Merciless Wood)"
+      }
+    },
+    "lore of delusion": {
+      "nombre": "Saber de la Ilusión (Lore of Delusion)",
+      "hechizos": {
+        "false foe": "Enemigo Falso (False Foe)",
+        "stupor": "Estupor (Stupor)",
+        "dream eater": "Devorador de Sueños (Dream Eater)",
+        "inside your mind": "Dentro de tu Mente (Inside your Mind)"
+      }
+    },
+    "lore of mischief": {
+      "nombre": "Saber de la Travesura (Lore of Mischief)",
+      "hechizos": {
+        "chittering bugs": "Insectos Estridentes (Chittering Bugs)",
+        "slip and slide": "Resbalón y Caída (Slip and Slide)",
+        "peek-a-boo": "¡Cucú! (Peek-a-Boo)",
+        "great green explosion": "Gran Explosión Verde (Great Green Explosion)"
+      }
+    },
+    "the lore of the crimson college": {
+      "nombre": "El Saber del Colegio Carmesí (The Lore of The Crimson College)",
+      "hechizos": {
+        "conjure crimson sprites": "Conjurar Sprites Carmesí (Conjure Crimson Sprites)",
+        "sword of embers": "Espada de Ascuas (Sword of Embers)",
+        "fireball": "Bola de Fuego (Fireball)",
+        "flame blast": "Ráfaga de Llamas (Flame Blast)"
+      }
+    },
+    "the lore of the sapphire college": {
+      "nombre": "El Saber del Colegio Zafiro (The Lore of The Sapphire College)",
+      "hechizos": {
+        "conjure sapphire sprites": "Conjurar Sprites Zafiro (Conjure Sapphire Sprites)",
+        "bridge of ice": "Puente de Hielo (Bridge of Ice)",
+        "storm cloud": "Nube de Tormenta (Storm Cloud)",
+        "tidal wave": "Marea de Asalto (Tidal Wave)"
+      }
+    }
+  },
   "unidades": {}
 };
