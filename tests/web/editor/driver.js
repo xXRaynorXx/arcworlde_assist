@@ -38,8 +38,8 @@ window.addEventListener('load', async () => {
     const dictNombres = () => JSON.stringify(dbUnificada.find(x => x.id === 'factions').secciones.find(s => s.titulo === 'Diccionario de rasgos').categorias[0].acciones.map(a => a.nombre));
     ok('traducciones: rasgos en castellano con la web en castellano (Born Slippy -> Escurridizo)', AWCompendio.traitInfo('Born Slippy').detalles.includes('Repetir tirada') && AWCompendio.traitInfo('Rousing Cheer').nombre === 'Voz de Ánimo (Rousing Cheer)' && AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja'));
     document.querySelector('[data-lang-switch] [data-lang="en"]').click(); await wait(120);
-    ok('traducciones: con la web en inglés se muestra el texto original', !AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja') && !/Voz de Ánimo/.test(AWCompendio.traitInfo('Rousing Cheer').nombre || ''));
-    ok('traducciones: con la web en inglés el diccionario conserva el nombre original', !dictNombres().includes('Voz de Ánimo (Rousing Cheer)'));
+    ok('traducciones: con la web en inglés no se aplica la traducción (se usa el texto base del compendio, ya alineado con NotebookLM)', AWCompendio.trad('rasgos', 'rousing cheer') === null && AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja'));
+    ok('traducciones: con la web en inglés el diccionario usa el nombre base', dictNombres().includes('Rousing Cheer') && !dictNombres().includes('Voz de Ánimo (Rousing Cheer)'));
     document.querySelector('[data-lang-switch] [data-lang="es"]').click(); await wait(120);
     ok('traducciones: el diccionario de rasgos de la consulta sale traducido y vuelve a cambiar con el idioma', dictNombres().includes('Voz de Ánimo (Rousing Cheer)'));
     // --- idiomas
