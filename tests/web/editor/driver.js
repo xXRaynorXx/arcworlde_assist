@@ -171,7 +171,7 @@ window.addEventListener('load', async () => {
     ok('consulta: cada facción lista todas sus miniaturas', unidadesOk);
     ok('consulta: ficha de miniatura con atributos, ataques y rasgos', tt.includes('Vida 10 · Mov 4 · Armadura 1 · AP 4') && tt.includes('Furious Wallop') && tt.includes('Make Orders'));
     ok('consulta: saberes mágicos con sus hechizos', tt.includes('Hearty Veggie Soup') && tt.includes('Great Green Explosion') && tt.includes('Exige 14'));
-    ok('consulta: armería de Ourks con coste', tt.includes('Aguardiente del Pantano / Swamp Scrumpy (10 GP)'));
+    ok('consulta: armería de Ourks con coste', tt.includes('Brebaje del Pantano (Swamp Scrumpy) (10 GP)'));
     ok('consulta: armería común y diccionario de rasgos', secF.some(x => x.titulo === 'Armería común' && x.categorias[0].acciones.length === datosMinis.armeria_comun.length) && secF.some(x => x.titulo === 'Diccionario de rasgos' && x.categorias[0].acciones.length === Object.keys(datosMinis.diccionario_rasgos).length));
     ok('consulta: equipo permitido con nombre, no con id', tt.includes('Packed Lunch') || tt.includes('Almuerzo'), '');
     // Rasgos: todas las miniaturas del catálogo deben tener descripción

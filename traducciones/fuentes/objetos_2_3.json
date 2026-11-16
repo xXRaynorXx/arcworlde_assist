@@ -1,0 +1,266 @@
+[
+  {
+    "id": "circlet_of_bronze",
+    "nombre_es": "Aro de Bronce (Circlet of Bronze)",
+    "resumen_es": "Diadema sagrada de bronce que otorga una protección armada inexpugnable.",
+    "detalles_es": "Otorga +1 a la Armadura. Esta armadura nunca puede ser ignorada ni reducida por ningún Ataque o Hechizo.",
+    "restriccion_es": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (30 GP)."
+  },
+  {
+    "id": "skeleton_trumpet",
+    "nombre_es": "Trompeta de Esqueleto (Skeleton Trumpet)",
+    "resumen_es": "Cuerno óseo que insufla vigor marcial a las filas de guerreros esqueléticos.",
+    "detalles_es": "Tras superar una Hazaña Fácil para tocar la trompeta, todos los personajes aliados con el rasgo Huesos (Bones) a 6\" o menos ganan +1 al Movimiento durante esa Ronda.",
+    "restriccion_es": "Exclusivo de la facción Antiguos Muertos / Ancient Dead (10 GP)."
+  },
+  {
+    "id": "vengeance_coin",
+    "nombre_es": "Moneda de Venganza (Vengeance Coin)",
+    "resumen_es": "Moneda funeraria imbuida de rabia contra quien profanó la tumba del guerrero.",
+    "detalles_es": "Elige un personaje enemigo al comienzo de la partida. El personaje equipado con este objeto obtiene +2 al Power en todos sus Ataques contra el objetivo elegido.",
+    "restriccion_es": "Afecta a un único objetivo enemigo elegido al inicio de la partida (10 GP)."
+  },
+  {
+    "id": "blood_vial",
+    "nombre_es": "Vial de Sangre (Blood Vial)",
+    "resumen_es": "Frasco con sangre fresca cosechada de víctimas nobles para restaurar la vitalidad.",
+    "detalles_es": "Consumible de un solo uso. Al beberse, restaura D6 HP al usuario o a un Vampiro aliado en contacto de peana.",
+    "restriccion_es": "Exclusivo de la facción Vampiros (10 GP)."
+  },
+  {
+    "id": "vampyr_supreme",
+    "nombre_es": "Vampiro Supremo (Vampyr Supreme)",
+    "resumen_es": "Líder absoluto de la estirpe nobiliaria vampírica con una presencia imponente.",
+    "detalles_es": "Otorga la clase Comandante, +1 AP extra en cada Activación y +6 HP máximos de forma permanente.",
+    "restriccion_es": "Obligatorio 1 en la banda (30 GP)."
+  },
+  {
+    "id": "beguiling_temperament",
+    "nombre_es": "Temperamento Cautivador (Beguiling Temperament)",
+    "resumen_es": "Encanto místico e irresistible para subyugar las mentes mortales.",
+    "detalles_es": "Añade 1D6 adicional a todos los intentos de realizar la habilidad Fascinar (Enthral).",
+    "restriccion_es": "Mejora de la habilidad Fascinar (20 GP)."
+  },
+  {
+    "id": "shapeshifter",
+    "nombre_es": "Cambiaformas (Shapeshifter)",
+    "resumen_es": "Metamorfosis mística que permite transformarse en un murciélago cripta gigante.",
+    "detalles_es": "Tras superar una Hazaña Fácil, el Vampiro se transforma en un Crypt Bat con todos sus HP. Puede regresar a su forma original al inicio de su Activación.",
+    "restriccion_es": "Transformación voluntaria (15 GP)."
+  },
+  {
+    "id": "everlasting_bloodline",
+    "nombre_es": "Linaje Inmortal (Everlasting Bloodline)",
+    "resumen_es": "Aferramiento implacable a la no-vida respaldado por una regeneración voraz.",
+    "detalles_es": "Cada vez que este personaje deja Noqueado a un enemigo en combate cuerpo a cuerpo, recupera D6 HP de inmediato.",
+    "restriccion_es": "Exclusivo de la facción Vampiros (20 GP)."
+  },
+  {
+    "id": "fell_scholar",
+    "nombre_es": "Saber Maligno (Fell Scholar)",
+    "resumen_es": "Iniciación en las artes arcanas oscuras para dominar los hechizos de la villanía.",
+    "detalles_es": "Otorga la clase Mago al personaje y le concede acceso a la lista completa de Hechizos del Saber de la Villanía (Lore of Villainy).",
+    "restriccion_es": "Exclusivo de la facción Vampiros (20 GP)."
+  },
+  {
+    "id": "crimson_knight",
+    "nombre_es": "Caballero Carmesí (Crimson Knight)",
+    "resumen_es": "Adiestramiento marcial de élite para sembrar el terror en combate cuerpo a cuerpo.",
+    "detalles_es": "Otorga +1 al Power en todos los Ataques cuerpo a cuerpo y permite equipar Armadura Pesada de la Armería Común sin sufrir penalizaciones de movimiento.",
+    "restriccion_es": "Exclusivo de la facción Vampiros (20 GP)."
+  },
+  {
+    "id": "soul_jar",
+    "nombre_es": "Jarra de Almas (Soul Jar)",
+    "resumen_es": "Recipiente místico que atrapa la esencia vital de las miniaturas caídas.",
+    "detalles_es": "Cada vez que un personaje a 6\" o menos queda Noqueado, almacena 1 Ficha de Alma. El usuario puede consumir fichas para curar 2 HP o ganar +1 al Power en sus ataques por cada ficha gastada.",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (10 GP)."
+  },
+  {
+    "id": "undead_mount",
+    "nombre_es": "Montura No-Muerta (Undead Mount)",
+    "resumen_es": "Corcel cadavérico o bestia reanimada que lidera la carga de la banda.",
+    "detalles_es": "Otorga el estado Montado (Mounted), aumentando el Movimiento a 7\" e ignorando terreno difícil. Concede +4 HP iniciales y cuenta como en Cobertura frente a disparos.",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (30 GP)."
+  },
+  {
+    "id": "cursed_pipes",
+    "nombre_es": "Gaitas Malditas (Cursed Pipes)",
+    "resumen_es": "Instrumento chirriante que siembra la discordia y perturba a los enemigos.",
+    "detalles_es": "(1 AP) Tras superar una Hazaña Media, todos los personajes enemigos a 6\" o menos sufren Desventaja en sus Chequeos de Valentía y tiradas de Hazaña durante el resto de la Ronda.",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (30 GP)."
+  },
+  {
+    "id": "undead_raiders_ranged_weapon",
+    "nombre_es": "Arma a Distancia No-Muerta (Undead Raiders Ranged Weapon)",
+    "resumen_es": "Arco podrido, trabuco oxidado o ballesta de los forajidos reanimados.",
+    "detalles_es": "(1 AP) Ataque a distancia: Power 5, Alcance 12\". Los Impactos Críticos provocan que el objetivo quede Tumbado (Prone).",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (15 GP)."
+  },
+  {
+    "id": "stolen_arcloque_pistol",
+    "nombre_es": "Pistola de Arcloque Robada (Stolen Arcloque Pistol)",
+    "resumen_es": "Arma corta alquímica sustraída a las patrullas imperiales del Mildaark.",
+    "detalles_es": "(1 AP) Ataque a distancia: Power 5, Alcance 8\". Se puede disparar a objetivos en contacto de peana sin sufrir penalizaciones de combate.",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (15 GP)."
+  },
+  {
+    "id": "hangmans_noose",
+    "nombre_es": "Soga de Ahorcado (Hangman's Noose)",
+    "resumen_es": "Lazo macabro para atrapar y estrangular a los enemigos a corta distancia.",
+    "detalles_es": "(1 AP) Ataque a distancia de alcance 4\". Si impacta, el objetivo sufre 1 impacto de Power 4 y no puede abandonar el contacto de peana ni realizar movimientos durante la Ronda.",
+    "restriccion_es": "Exclusivo de la facción Saqueadores No-Muertos / Undead Raiders (10 GP)."
+  },
+  {
+    "id": "wild_elven_mount",
+    "nombre_es": "Montura Silvana (Wild Elven Mount)",
+    "resumen_es": "Ciervo gigante o felino boscoso invocado para cabalgar por la fronda.",
+    "detalles_es": "Otorga el estado Montado (Mounted), aumentando el Movimiento a 8\" e ignorando el terreno difícil en bosques. Otorga +4 HP iniciales y cuenta como en Cobertura.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (30 GP)."
+  },
+  {
+    "id": "strongbow",
+    "nombre_es": "Gran Arco Silvano (Strongbow)",
+    "resumen_es": "Arco pesado de madera oscura capaz de atravesar armaduras a gran distancia.",
+    "detalles_es": "(2 AP) Ataque a distancia: Power 7, Alcance 20\". Perfora armaduras: Ignora 1 punto del valor de Armadura del objetivo.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (30 GP)."
+  },
+  {
+    "id": "blood_stone",
+    "nombre_es": "Piedra de Sangre (Blood Stone)",
+    "resumen_es": "Gema mística que canaliza y almacena la energía vital de las víctimas sacrificadas.",
+    "detalles_es": "Permite almacenar hasta 2 Fichas de Arcanita obtenidas mediante Sacrificio para consumirlas en turnos o Rondas posteriores sin límite de expiración.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (15 GP)."
+  },
+  {
+    "id": "wild_elven_ranged_weapon",
+    "nombre_es": "Arma a Distancia Silvana (Wild Elven Ranged Weapon)",
+    "resumen_es": "Arco largo tradicional de Caledon para tiradores de la arboleda.",
+    "detalles_es": "(1 AP) Ataque a distancia: Power 5, Alcance 16\". Si el tirador se encuentra en terreno boscoso, realiza la tirada para impactar con Ventaja.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (15 GP)."
+  },
+  {
+    "id": "sacrificial_blade",
+    "nombre_es": "Daga de Sacrificio (Sacrificial Blade)",
+    "resumen_es": "Hoja ritual para cosechar esencias místicas de los enemigos moribundos.",
+    "detalles_es": "Ataque cuerpo a cuerpo: Power 5. Reduce la dificultad de la habilidad Sacrificio (Sacrifice) de Hazaña Media a Hazaña Fácil.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (15 GP)."
+  },
+  {
+    "id": "faeblade",
+    "nombre_es": "Hoja Feérica (Faeblade)",
+    "resumen_es": "Espada imbuida con magia ancestral que desvía defensas con precisión.",
+    "detalles_es": "Ataque cuerpo a cuerpo: Power 6. Permite Repetir tirada en los dados de ataque que saquen 1 y sus Impactos Críticos ignoran completamente la Armadura.",
+    "restriccion_es": "Exclusivo de la facción Elfos Silvanos / Wild Elves (20 GP)."
+  },
+  {
+    "id": "healing_broth",
+    "nombre_es": "Caldo Curativo (Healing Broth)",
+    "resumen_es": "Pócima gastronómica fétida que restaura la vitalidad de los combatientes.",
+    "detalles_es": "Consumible (1 AP). De un solo uso. Restaura D6 HP de inmediato al usuario o a un personaje aliado en contacto de peana.",
+    "restriccion_es": "Exclusivo de la facción Ourks (10 GP)."
+  },
+  {
+    "id": "ourk_ranged_weapon",
+    "nombre_es": "Arma a Distancia Ourk (Ourk/Boglin Ranged Weapon)",
+    "resumen_es": "Arcos rudimentarios, cerbatanas de fango o garrotes arrojadizos de la ciénaga.",
+    "detalles_es": "(1 AP) Ataque a distancia: Power 4, Alcance 10\". Se puede disparar durante el movimiento sin sufrir penalización.",
+    "restriccion_es": "Exclusivo de Ourks y Boglins (15 GP)."
+  },
+  {
+    "id": "swamp_scrumpy",
+    "nombre_es": "Brebaje del Pantano (Swamp Scrumpy)",
+    "resumen_es": "Licor casero hiperpotente que adormece el dolor e intensifica el ataque.",
+    "detalles_es": "Consumible (1 AP). Otorga +2 al Power en todos los Ataques cuerpo a cuerpo durante la Ronda actual y permite pasar automáticamente el siguiente Chequeo de Valentía.",
+    "restriccion_es": "Exclusivo de la facción Ourks (10 GP)."
+  },
+  {
+    "id": "pet_droggo",
+    "nombre_es": "Mascota Droggo (Pet Droggo)",
+    "resumen_es": "Pequeño reptil agresivo de fango que muerde a los enemigos adyacentes.",
+    "detalles_es": "Otorga un Ataque cuerpo a cuerpo gratuito adicional de Power 3 en cada Activación contra una miniatura en contacto de peana.",
+    "restriccion_es": "Exclusivo de la facción Ourks (15 GP)."
+  },
+  {
+    "id": "boglin_musical_instrument",
+    "nombre_es": "Instrumento Musical Boglin (Musical Instrument)",
+    "resumen_es": "Tambor de piel de sapo o cuerno estruendoso para armar gran alboroto.",
+    "detalles_es": "(1 AP) Tras superar una Hazaña Fácil, otorga +1 AP a todos los Boglins aliados a 6\" o menos durante su siguiente Activación.",
+    "restriccion_es": "Exclusivo para Boglins (10 GP)."
+  },
+  {
+    "id": "magical_mushroom",
+    "nombre_es": "Hongo Mágico (Magical Mushroom)",
+    "resumen_es": "Seta alucinógena que sobrecarga la concentración de los invocadores.",
+    "detalles_es": "Consumible (1 AP). Un solo uso. Permite Repetir tirada en todas las cartas o dados fallidos al Lanzar un Hechizo durante la Activación actual.",
+    "restriccion_es": "Exclusivo para Magos / Dreameaters (10 GP)."
+  },
+  {
+    "id": "goading_fork",
+    "nombre_es": "Horca de Arreo (Goading Fork)",
+    "resumen_es": "Lanza provista de puyas para azuzar e impulsar a las bestias del clan.",
+    "detalles_es": "Ataque cuerpo a cuerpo: Cuenta como Lanza (Spear). Además, cualquier Bestia, Monstruo o Titán aliado a 1\" o menos gana +1 AP al ser azuzado.",
+    "restriccion_es": "Exclusivo de la facción Ourks (15 GP)."
+  },
+  {
+    "id": "ourk_mount",
+    "nombre_es": "Montura Ourk/Boglin (Ourk/Boglin Mount)",
+    "resumen_es": "Sapo gigante o caimán ciénaga adiestrado para la guerra en el pantano.",
+    "detalles_es": "Otorga +5 HP iniciales y +4\" al Movimiento. Permite Repetir tirada en 1 intento fallido de Leg It por Ronda. Tamaño de peana: Ourk pasa a 50mm, Boglin pasa a 40mm.",
+    "restriccion_es": "Solo para Ourks y Boglins (30 GP)."
+  },
+  {
+    "id": "pilfered_scran",
+    "nombre_es": "Comida Robada (Pilfered Scran)",
+    "resumen_es": "Botín comestible birlado a viajeros para recuperarse en combate.",
+    "detalles_es": "Consumible (1 AP). Un solo uso. Recupera D6 HP al usuario o a un personaje aliado en contacto de peana.",
+    "restriccion_es": "Exclusivo de la facción Gremlins (10 GP)."
+  },
+  {
+    "id": "gremlin_ranged_weapon",
+    "nombre_es": "Arma a Distancia Gremlin (Gremlin Ranged Weapon)",
+    "resumen_es": "Tirachinas casero, honda o piedras arrojadas en masa por sabandijas.",
+    "detalles_es": "(1 AP) Ataque a distancia: Power 5, Alcance 12\".",
+    "restriccion_es": "Exclusivo de la facción Gremlins (10 GP)."
+  },
+  {
+    "id": "burrowing_tools_item",
+    "nombre_es": "Herramientas de Excavación (Burrowing Tools)",
+    "resumen_es": "Palas y picos para abrir madrigueras subterráneas a gran velocidad.",
+    "detalles_es": "Permite colocar marcadores de Madriguera Gremlin (Gremlin Burrow) en el campo de batalla mediante una Hazaña Media.",
+    "restriccion_es": "Solo para personajes con el rasgo Habitante de Madrigueras / Burrow Dweller (20 GP)."
+  },
+  {
+    "id": "pterra_wings",
+    "nombre_es": "Alas de Pterosaurio (Pterra Wings)",
+    "resumen_es": "Alas de cuero de alimaña voladora sujetas con correas caseras.",
+    "detalles_es": "Otorga el rasgo Volar (Fly) y +4\" a la capacidad de Movimiento base del personaje.",
+    "restriccion_es": "Solo para personajes con el rasgo Habitante de Madrigueras / Burrow Dweller (20 GP)."
+  },
+  {
+    "id": "shield_carriers",
+    "nombre_es": "Portadores de Escudo (Shield Carriers)",
+    "resumen_es": "Esbirros sometidos que transportan sobre un escudo al gran líder Gremlin.",
+    "detalles_es": "Otorga +8 HP iniciales y +1 al valor de Armadura. La miniatura pasa a ocupar una peana de 50mm.",
+    "restriccion_es": "Exclusivo para Great Gremlin / Jefe Gremlin (50 GP)."
+  },
+  {
+    "id": "poison_goop",
+    "nombre_es": "Veneno Pegajoso (Poison Goop)",
+    "resumen_es": "Toxina verde untada en las armas para causar daños residuales.",
+    "detalles_es": "Consumible (1 AP). Un solo uso. Durante esta Ronda, si un objetivo sufre daño por un ataque de este personaje, perderá 1 HP adicional al inicio de su siguiente Activación.",
+    "restriccion_es": "Exclusivo de la facción Gremlins (5 GP)."
+  }
+]
+Lista de Dudas de Traducción
+Dado que las expansiones de facción de ArcWorlde (v2.23) no cuentan con un manual oficial publicado en castellano por el editor para todos estos ítems específicos, se ha aplicado la adaptación más natural y coherente con el glosario de referencia:
+Circlet of Bronze: Traducido como Aro de Bronce (propuesta).
+Beguiling Temperament: Traducido como Temperamento Cautivador (propuesta).
+Fell Scholar: Traducido como Saber Maligno (propuesta).
+Cursed Pipes: Traducido como Gaitas Malditas (propuesta).
+Hangman's Noose: Traducido como Soga de Ahorcado (propuesta).
+Faeblade: Traducido como Hoja Feérica (propuesta).
+Swamp Scrumpy: Traducido como Brebaje del Pantano (propuesta).
+Pet Droggo: Traducido como Mascota Droggo (propuesta).
+Pilfered Scran: Traducido como Comida Robada (propuesta).
+Poison Goop: Traducido como Veneno Pegajoso (propuesta).
