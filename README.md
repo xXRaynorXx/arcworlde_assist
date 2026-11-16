@@ -58,3 +58,10 @@ y abre `http://localhost:8000/`.
 Se carga en `index.html` antes de `usuarios.js`. El editor de bandas ofrece el catálogo de la facción
 elegida, agrupado por tipo, y avisa si la banda no cumple `reglas_banda` o los límites `max_por_banda`.
 Para cambiar costes o añadir miniaturas basta con editar ese archivo.
+
+## Idiomas (castellano / inglés)
+
+- El castellano es el idioma por defecto; el selector **ES / EN** está en el menú lateral (y en la cabecera en móvil) y se recuerda en el navegador.
+- `i18n.js` traduce solo todo lo que sale en pantalla (texto, `placeholder`, `title`, `aria-label`), tanto el de `index.html` como el que generan los módulos. La clave de traducción es el propio texto en castellano.
+- `i18n_en.js` es el diccionario castellano → inglés (`#` = número). Para cadenas armadas en el código se puede usar `AWI18n.t('Texto {nombre}', { nombre })`.
+- Para ver qué falta por traducir: `tests/web/i18n_scan.sh` ejecuta los guiones de prueba con la web en inglés y lista los textos sin traducción (incluye el contenido del compendio, que se traducirá aparte).
