@@ -38,9 +38,10 @@ window.addEventListener('load', async () => {
     const dictNombres = () => JSON.stringify(dbUnificada.find(x => x.id === 'factions').secciones.find(s => s.titulo === 'Diccionario de rasgos').categorias[0].acciones.map(a => a.nombre));
     ok('traducciones: rasgos en castellano con la web en castellano (Born Slippy -> Escurridizo)', AWCompendio.traitInfo('Born Slippy').detalles.includes('Repetir tirada') && AWCompendio.traitInfo('Rousing Cheer').nombre === 'Voz de Ánimo (Rousing Cheer)' && AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja'));
     document.querySelector('[data-lang-switch] [data-lang="en"]').click(); await wait(120);
-    ok('traducciones: con la web en inglés no se aplica la traducción (se usa el texto base del compendio, ya alineado con NotebookLM)', AWCompendio.trad('rasgos', 'rousing cheer') === null && AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja'));
+    ok('traducciones: con la web en inglés no se aplica la traducción (se usa el texto base en inglés del manual)', AWCompendio.trad('rasgos', 'rousing cheer') === null && AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Advantage') && !AWCompendio.traitInfo('Rousing Cheer').detalles.includes('Ventaja'));
     ok('traducciones: con la web en inglés el diccionario usa el nombre base', dictNombres().includes('Rousing Cheer') && !dictNombres().includes('Voz de Ánimo (Rousing Cheer)'));
     document.querySelector('[data-lang-switch] [data-lang="es"]').click(); await wait(120);
+    ok('traducciones: nombres repetidos (Raiser of the Dead) con su traducción cada uno', (() => { const d = dbUnificada.find(x => x.id === 'factions').secciones.find(s => s.titulo === 'Diccionario de rasgos').categorias[0].acciones.filter(a => /Raiser of the Dead/.test(a.nombre)); return d.length === 2 && d[0].detalles !== d[1].detalles; })());
     ok('traducciones: el diccionario de rasgos de la consulta sale traducido y vuelve a cambiar con el idioma', dictNombres().includes('Voz de Ánimo (Rousing Cheer)'));
     // --- idiomas
     const nav = () => document.getElementById('nav-menu').textContent;

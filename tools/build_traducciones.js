@@ -19,28 +19,52 @@ function firstArray(text) {
   }
   throw new Error('JSON sin cerrar');
 }
-// Nombres que se repiten en varias facciones con textos distintos: no se traducen por nombre (se hará por id en las reglas de facción)
-const AMBIGUOS = new Set(['fae beings']);
 // "Seres Fae (Fae Beings) - Dark Lords" -> "Seres Fae (Fae Beings)"
 const limpiaNombre = (n) => String(n || '').replace(/\s+-\s+[^()]*$/, '').trim();
+// Erratas conocidas de las respuestas de NotebookLM (se corrigen al generar; los JSON de fuentes no se tocan)
+const ERRATAS = [
+  [/Ignores terreno difícil/g, 'Ignora el terreno difícil'], [/Ignera la penalización/g, 'Ignora la penalización'],
+  [/Saca 1 daño a sí mismo/g, 'Inflige 1 de daño a sí mismo']
+];
+const limpia = (t) => ERRATAS.reduce((x, [re, to]) => x.replace(re, to), String(t || ''));
 
+// Los nombres pueden repetirse (Bones, Fae Beings, Raiser of the Dead...): la 1ª aparición es "nombre", la 2ª "nombre#2", etc.
+// Es el mismo orden que el diccionario de rasgos del compendio.
 const out = { rasgos: {}, objetos: {}, reglas: {}, saberes: {}, unidades: {} };
+const en = {};   // "nombre" / "nombre#2" -> texto literal en inglés (para el texto base del compendio)
 const avisos = [];
 fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
   const kind = f.split('_')[0];
   if (kind === 'glosario') return;
   const arr = firstArray(fs.readFileSync(path.join(dir, f), 'utf8'));
+  const visto = {};
   arr.forEach((r) => {
     if (kind === 'rasgos') {
-      const k = key(r.en);
-      if (AMBIGUOS.has(k)) { avisos.push('ambiguo, se omite: ' + r.en); return; }
-      if (out.rasgos[k]) { avisos.push('repetido, se conserva el primero: ' + r.en); return; }
-      out.rasgos[k] = { nombre: limpiaNombre(r.nombre_es), resumen: r.resumen_es || '', detalles: r.detalles_es || '' };
+      const base = key(r.en);
+      visto[base] = (visto[base] || 0) + 1;
+      const k = visto[base] > 1 ? base + '#' + visto[base] : base;
+      out.rasgos[k] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es) };
+      if (r.detalles_en) en[k] = r.detalles_en;
     } else avisos.push('tipo de archivo sin soporte todavía: ' + f);
   });
 });
-const js = '// Generado por tools/build_traducciones.js a partir de traducciones/fuentes/*.json. No editar a mano.\n' +
-  'const traduccionesES = ' + JSON.stringify(out, null, 2) + ';\n';
-fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'), js);
-console.log('rasgos traducidos:', Object.keys(out.rasgos).length);
+fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'),
+  '// Generado por tools/build_traducciones.js a partir de traducciones/fuentes/*.json. No editar a mano.\n' +
+  'const traduccionesES = ' + JSON.stringify(out, null, 2) + ';\n');
+
+// Texto base (inglés literal) en el diccionario de rasgos de datos_minis.js
+const mp = path.join(root, 'datos_minis.js');
+let src = fs.readFileSync(mp, 'utf8');
+const head = 'const compendioArcWorlde = ', i0 = src.indexOf(head), j0 = src.indexOf('\n}\n', i0) + 2;
+const comp = JSON.parse(src.slice(i0 + head.length, j0));
+const cuenta = {};
+let base = 0;
+Object.keys(comp.diccionario_rasgos).forEach((dk) => {
+  const b = key(dk.split(' / ').pop());
+  cuenta[b] = (cuenta[b] || 0) + 1;
+  const k = cuenta[b] > 1 ? b + '#' + cuenta[b] : b;
+  if (en[k]) { comp.diccionario_rasgos[dk] = { resumen: '', detalles: en[k] }; base++; }
+});
+if (base) fs.writeFileSync(mp, src.slice(0, i0 + head.length) + JSON.stringify(comp, null, 2) + src.slice(j0));
+console.log('rasgos traducidos:', Object.keys(out.rasgos).length, '· textos base en inglés aplicados:', base);
 avisos.forEach((a) => console.log(' -', a));
