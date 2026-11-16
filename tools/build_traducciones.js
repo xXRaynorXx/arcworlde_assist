@@ -24,7 +24,9 @@ const limpiaNombre = (n) => String(n || '').replace(/\s+-\s+[^()]*$/, '').trim()
 // Erratas conocidas de las respuestas de NotebookLM (se corrigen al generar; los JSON de fuentes no se tocan)
 const ERRATAS = [
   [/Ignores terreno difícil/g, 'Ignora el terreno difícil'], [/Ignera la penalización/g, 'Ignora la penalización'],
-  [/Saca 1 daño a sí mismo/g, 'Inflige 1 de daño a sí mismo']
+  [/Saca 1 daño a sí mismo/g, 'Inflige 1 de daño a sí mismo'], [/Ignera la Armadura/g, 'Ignora la Armadura'],
+  [/Señor Oscuro Invoque esbirros/g, 'Señor Oscuro invocar esbirros'], [/puede Invoque criaturas/g, 'puede invocar criaturas'],
+  [/para Invoque criaturas/g, 'para invocar criaturas']
 ];
 const limpia = (t) => ERRATAS.reduce((x, [re, to]) => x.replace(re, to), String(t || ''));
 
