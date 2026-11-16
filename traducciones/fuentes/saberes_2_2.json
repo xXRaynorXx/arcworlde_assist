@@ -1,0 +1,187 @@
+[
+  {
+    "saber": "The Lore of The Emerald College",
+    "saber_es": "El Saber del Colegio Esmeralda (The Lore of The Emerald College)",
+    "reglas_saber_es": "Los Magos Esmeralda son reclusos que prefieren la compañía de las bestias de ArcWorlde a la de sus congéneres. Estos ermitaños itinerantes estudian el mundo natural, siendo los parajes salvajes su verdadero hogar.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Emerald Sprites",
+        "nombre_es": "Conjurar Sprites Esmeralda (Conjure Emerald Sprites)",
+        "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de pelaje y plumas brillantes. Coloca D3 Sprites a 3\" o menos del lanzador. Se activan de forma normal. Los Sprites conjurados por este hechizo se mimetizan con la maleza, por lo que todos los intentos de Dispararles sufren un penalizador de -1.",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Healing Touch",
+        "nombre_es": "Toque Curativo (Healing Touch)",
+        "efecto_es": "Felechos suaves brotan de las yemas de los dedos del lanzador y alivian las heridas de sus aliados. Un personaje a 3\" o menos del lanzador (o el propio lanzador) recupera D6 HP.",
+        "alcance_es": "Exige 16 | Alcance 3\""
+      },
+      {
+        "nombre": "Winged Swarm",
+        "nombre_es": "Enjambre Alado (Winged Swarm)",
+        "efecto_es": "Un diluvio ensordecedor de aves e insectos voladores revolotea alrededor de los enemigos del lanzador, impidiéndoles ver. Elige un punto del tablero; cualquier personaje a 4\" o menos de dicho punto reduce su Movimiento y tiradas de Leg It en 2\" y no puede realizar Ataques a distancia. Dura hasta que el lanzador lance otro hechizo o quede Noqueado.",
+        "alcance_es": "Exige 18 | Alcance Punto / Área 4\""
+      },
+      {
+        "nombre": "Soul of the Beast",
+        "nombre_es": "Alma de la Bestia (Soul of the Beast)",
+        "efecto_es": "El lanzador conecta con el alma de una criatura salvaje, entablando amistad temporal con ella. El jugador puede Activar una Bestia, Monstruo o Titán enemigo a 8\" o menos del lanzador y gastar 3 AP como desee. Si la criatura ya ha gastado todos sus AP en esta Ronda, no puede ser objetivo de este hechizo.",
+        "alcance_es": "Exige 21 | Alcance 8\""
+      }
+    ]
+  },
+  {
+    "saber": "The Lore of The Ochre College",
+    "saber_es": "El Saber del Colegio Ocre (The Lore of The Ochre College)",
+    "reglas_saber_es": "Los Magos Ocres son gente firme y tenaz que se adentra en las entrañas de la tierra para estudiar sus secretos. Exploran las cavernas más profundas y las grutas más oscuras, contando con la fuerza y la destreza mágica para combatir a cualquier criatura que habite en las profundidades.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Ochre Sprites",
+        "nombre_es": "Conjurar Sprites Ocres (Conjure Ochre Sprites)",
+        "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de minerales valiosos centelleantes. Coloca D3 Sprites a 3\" o menos del lanzador. Se activan de forma normal. Los Sprites conjurados por este hechizo son resistentes y poseen 1 de Armadura.",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Rock Wall",
+        "nombre_es": "Muro de Piedra (Rock Wall)",
+        "efecto_es": "El suelo se hincha y se agrieta, erigiendo un muro de piedra impenetrable. Coloca una barrera de 6\" de largo y hasta 2\" de ancho a 2\" o menos del lanzador. Cuenta como Terreno Infranqueable y permanece hasta el final de la Ronda.",
+        "alcance_es": "Exige 16 | Alcance 2\""
+      },
+      {
+        "nombre": "Stone Armour",
+        "nombre_es": "Armadura de Piedra (Stone Armour)",
+        "efecto_es": "Las túnicas del lanzador se endurecen y cristalizan, protegiéndole de los golpes enemigos. El lanzador obtiene Armadura Pesada hasta el final de la Ronda.",
+        "alcance_es": "Exige 18 | Personal"
+      },
+      {
+        "nombre": "ArcWorlde’s Bounty",
+        "nombre_es": "Tesoros de ArcWorlde (ArcWorlde's Bounty)",
+        "efecto_es": "El propio reino entrega sus tesoros al lanzador y a sus aliados. Coloca D3 Fichas de Arcanita en un punto situado a al menos 8\" de distancia del lanzador.",
+        "alcance_es": "Exige 21 | Alcance 8\""
+      }
+    ]
+  },
+  {
+    "saber": "The Lore of The Bronze College",
+    "saber_es": "El Saber del Colegio de Bronce (The Lore of The Bronze College)",
+    "reglas_saber_es": "Los Magos de Bronce se deleitan con la alquimia y la invención de artilugios mecánicos. Sus talleres están repletos del equipamiento más arcano, y sus expediciones tienen con frecuencia el objetivo de buscar nuevos materiales e ingredientes para sus experimentos.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Bronze Sprites",
+        "nombre_es": "Conjurar Sprites de Bronce (Conjure Bronze Sprites)",
+        "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de metales brillantes. Coloca D3 Sprites a 3\" o menos del lanzador. Se activan de forma normal. Los Sprites conjurados por este hechizo tienden a autorrepararse, recuperando D3 HP al final de cada Ronda.",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Transfiguration",
+        "nombre_es": "Transfiguración (Transfiguration)",
+        "efecto_es": "Los materiales se mezclan y cambian, creando algo nuevo a partir de lo antiguo. Un personaje aliado a 12\" o menos puede optar por cambiar un Objeto o Equipo por otro de la armería de su Facción del mismo valor en GP o inferior.",
+        "alcance_es": "Exige 16 | Alcance 12\""
+      },
+      {
+        "nombre": "Alchemical Blast",
+        "nombre_es": "Ráfaga Alquímica (Alchemical Blast)",
+        "efecto_es": "El Mago proyecta un rayo de energía deformante contra su enemigo que moldea su equipamiento en formas estrambóticas. (A distancia) Power 5. Regla Especial: En impacto Crítico, una pieza de Equipo u Objeto que lleve el objetivo queda inservible hasta el final de la siguiente Ronda tras completarse el ataque.",
+        "alcance_es": "Exige 18 | Alcance 8\""
+      },
+      {
+        "nombre": "Avatar of Gold",
+        "nombre_es": "Avatar de Oro (Avatar of Gold)",
+        "efecto_es": "La piel del lanzador resplandece, transformándose en oro puro. Mientras permanece en esta forma, el lanzador cuenta como provisto de Armadura Pesada y obtiene +2 al Power en todos sus Ataques cuerpo a cuerpo. Sin embargo, no puede lanzar Hechizos en este estado, el cual dura hasta el final de la Ronda.",
+        "alcance_es": "Exige 21 | Personal"
+      }
+    ]
+  },
+  {
+    "saber": "The Lore of The Opal College",
+    "saber_es": "El Saber del Colegio Ópalo (The Lore of The Opal College)",
+    "reglas_saber_es": "El más misterioso de los Colegios de Mt Orion; los Magos Ópalo profundizan en los secretos del mundo espiritual. Son seres de otro mundo y distantes, que comunican con las almas tanto de los vivos como de los muertos.",
+    "hechizos": [
+      {
+        "nombre": "Conjure Opal Sprites",
+        "nombre_es": "Conjurar Sprites Ópalo (Conjure Opal Sprites)",
+        "efecto_es": "Con un movimiento de muñeca, cobran vida Sprites de niebla etérea. Coloca D3 Sprites a 3\" o menos del lanzador. Se activan de forma normal. Los Sprites conjurados por este hechizo flotan sobre el suelo y, por tanto, pueden Volar (Fly).",
+        "alcance_es": "Exige 14 | Alcance 3\""
+      },
+      {
+        "nombre": "Unnatural Aura",
+        "nombre_es": "Aura Antinatural (Unnatural Aura)",
+        "efecto_es": "El Mago emana un aura espeluznante que desconcierta a todos los que le rodean. Todos los personajes enemigos a 6\" o menos deben repetir sus Chequeos de Valentía exitosos. Dura hasta el final de la Ronda.",
+        "alcance_es": "Exige 16 | Área 6\""
+      },
+      {
+        "nombre": "Spirit Leech",
+        "nombre_es": "Sanguijuela Espiritual (Spirit Leech)",
+        "efecto_es": "El Mago drena el poder espiritual del objetivo, dejándolo privado de vida. Un objetivo a 6\" o menos del lanzador debe superar un Chequeo de Valentía o perder D3 HP. Todo daño infligido se transfiere al lanzador para recuperar HP (sin superar sus HP iniciales).",
+        "alcance_es": "Exige 18 | Alcance 6\""
+      },
+      {
+        "nombre": "Spectral Host",
+        "nombre_es": "Hueste Espectral (Spectral Host)",
+        "efecto_es": "El Mago convoca a los espíritus de los ancestros de sus enemigos y los vuelve contra ellos. Invoca D3 seres con los mismos atributos y tamaño de peana que el Tipo de Unidad de la Facción enemiga y los coloca a 1\" o menos. Se activan de forma normal y son Temibles (Fearsome) frente a enemigos. Se retiran al final de la Ronda.",
+        "alcance_es": "Exige 21 | Alcance 1\""
+      }
+    ]
+  },
+  {
+    "saber": "Lore of Spiders",
+    "saber_es": "Saber de las Arañas (Lore of Spiders)",
+    "reglas_saber_es": "Las Reinas Arcanidas están imbuidas de una inteligencia astuta, y la enorme cantidad de Arcanita alojada en sus cuerpos les concede la habilidad de canalizar el poder mágico.",
+    "hechizos": [
+      {
+        "nombre": "Chittering Swarm",
+        "nombre_es": "Enjambre Estridente (Chittering Swarm)",
+        "efecto_es": "La Arcanid Queen convoca una horda de arañas que muerden cualquier carne expuesta. Todos los personajes enemigos en contacto de peana sufren 1 impacto (1 Hit).",
+        "alcance_es": "Exige 14 | Contacto de Peana"
+      },
+      {
+        "nombre": "Summon Arcanid",
+        "nombre_es": "Invocación de Arcanida (Summon Arcanid)",
+        "efecto_es": "Con un gesto, la Arcanid Queen llama a otra de sus crías para reemplazar a las caídas en batalla. Coloca una Arcanida Noqueada de vuelta en juego con todos sus HP en el borde del tablero que elijas.",
+        "alcance_es": "Exige 18 | Borde del Tablero"
+      },
+      {
+        "nombre": "Silken Salve",
+        "nombre_es": "Ungüento Sedoso (Silken Salve)",
+        "efecto_es": "La Arcanid Queen recubre sus heridas con telarañas impregnadas de Arcanita, haciendo que la piel y el caparazón agrietados vuelvan a soldarse. La lanzadora recupera D6 HP.",
+        "alcance_es": "Exige 20 | Personal"
+      }
+    ]
+  },
+  {
+    "saber": "Lore of the Enchanted Journal",
+    "saber_es": "Saber del Diario Encantado (Lore of the Enchanted Journal)",
+    "reglas_saber_es": "Descubierto en una biblioteca polvorienta, el Diario Encantado acompaña al Explorador allá donde va. Sus páginas se erizan con vida propia y canaliza un gran poder mágico para proteger a quienes le importan.",
+    "hechizos": [
+      {
+        "nombre": "Arcleap",
+        "nombre_es": "Salto Arcano (Arcleap)",
+        "efecto_es": "El Diario se impulsa a sí mismo y al Explorador fuera de este plano de existencia. Retira al Explorador y al Diario del tablero, incluso si están en contacto de peana con un enemigo. Vuelve a colocarlos en contacto de peana a 6\" o menos de cualquier borde del tablero.",
+        "alcance_es": "Exige 14 | Borde del Tablero a 6\""
+      },
+      {
+        "nombre": "Touch of Destiny",
+        "nombre_es": "Toque del Destino (Touch of Destiny)",
+        "efecto_es": "El Diario distorsiona el propio tejido de la realidad, bendiciendo con el destino a sus favorecidos. Elige un personaje aliado en el tablero. Durante el resto de la Ronda, puede repetir cualquier dado fallido al intentar Hazañas.",
+        "alcance_es": "Exige 16 | Alcance Global"
+      },
+      {
+        "nombre": "Charmed Blade",
+        "nombre_es": "Hoja Encantada (Charmed Blade)",
+        "efecto_es": "Con un crujido de sus páginas, el arma de un aliado vibra con energía mágica. Elige un personaje aliado a 6\" o menos del Diario. En sus tiradas para Atacar, tanto los 5s como los 6s cuentan como Impactos Críticos.",
+        "alcance_es": "Exige 18 | Alcance 6\""
+      },
+      {
+        "nombre": "Arcane Knowledge",
+        "nombre_es": "Conocimiento Arcano (Arcane Knowledge)",
+        "efecto_es": "El Diario accede a una fuente inagotable de saber, como si estuviera conectado a todos los libros de magia jamás escritos. El lanzador puede elegir un Hechizo de cualquier saber del juego ArcWorlde. Dicho hechizo se considera lanzado con éxito de inmediato.",
+        "alcance_es": "Exige 21 | Especial"
+      }
+    ]
+  }
+]
+Lista de Dudas de Traducción
+Winged Swarm: Traducido como Enjambre Alado (propuesta).
+Silken Salve: Traducido como Ungüento Sedoso (propuesta).
+Arcleap: Traducido como Salto Arcano (propuesta).
+Touch of Destiny: Traducido como Toque del Destino (propuesta).
