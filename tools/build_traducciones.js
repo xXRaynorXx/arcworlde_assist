@@ -35,6 +35,7 @@ const limpia = (t) => ERRATAS.reduce((x, [re, to]) => x.replace(re, to), String(
 const out = { rasgos: {}, objetos: {}, reglas: {}, saberes: {}, unidades: {} };
 const en = {};   // "nombre" / "nombre#2" -> texto literal en inglés (para el texto base del compendio)
 const avisos = [];
+const pendObjetos = [];
 fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
   const kind = f.split('_')[0];
   if (kind === 'glosario') return;
@@ -47,13 +48,11 @@ fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
       const k = visto[base] > 1 ? base + '#' + visto[base] : base;
       out.rasgos[k] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es) };
       if (r.detalles_en) en[k] = r.detalles_en;
+    } else if (kind === 'objetos') {
+      pendObjetos.push(r);
     } else avisos.push('tipo de archivo sin soporte todavía: ' + f);
   });
 });
-fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'),
-  '// Generado por tools/build_traducciones.js a partir de traducciones/fuentes/*.json. No editar a mano.\n' +
-  'const traduccionesES = ' + JSON.stringify(out, null, 2) + ';\n');
-
 // Texto base (inglés literal) en el diccionario de rasgos de datos_minis.js
 const mp = path.join(root, 'datos_minis.js');
 let src = fs.readFileSync(mp, 'utf8');
@@ -68,5 +67,20 @@ Object.keys(comp.diccionario_rasgos).forEach((dk) => {
   if (en[k]) { comp.diccionario_rasgos[dk] = { resumen: '', detalles: en[k] }; base++; }
 });
 if (base) fs.writeFileSync(mp, src.slice(0, i0 + head.length) + JSON.stringify(comp, null, 2) + src.slice(j0));
-console.log('rasgos traducidos:', Object.keys(out.rasgos).length, '· textos base en inglés aplicados:', base);
+// Objetos: solo se aplica la traducción si el coste que cita coincide con el del compendio y no está en REVISAR (se avisa del resto)
+const costes = {};
+(comp.armeria_comun || []).forEach((a) => { costes[a.id] = a.coste; });
+(comp.facciones || []).forEach((f) => (f.armeria_exclusiva || []).forEach((a) => { costes[a.id] = a.coste; }));
+const REVISAR = ['arcanite_token']; // el efecto de NotebookLM no coincide con el del manual ya cargado
+pendObjetos.forEach((r) => {
+  const m = String(r.restriccion_es || '').match(/\((\d+) GP/);
+  if (!(r.id in costes)) return avisos.push('objeto sin equivalente: ' + r.id);
+  if (REVISAR.includes(r.id) || (m && Number(m[1]) !== costes[r.id])) return avisos.push('objeto NO aplicado (revisar): ' + r.id + (m ? ' · NotebookLM ' + m[1] + ' GP vs compendio ' + costes[r.id] + ' GP' : ''));
+  out.objetos[r.id] = { nombre: limpiaNombre(limpia(r.nombre_es)), resumen: limpia(r.resumen_es), detalles: limpia(r.detalles_es), restriccion: limpia(r.restriccion_es) };
+});
+fs.writeFileSync(path.join(root, 'datos_traducciones_es.js'),
+  '// Generado por tools/build_traducciones.js a partir de traducciones/fuentes/*.json. No editar a mano.\n' +
+  'const traduccionesES = ' + JSON.stringify(out, null, 2) + ';\n');
+
+console.log('rasgos traducidos:', Object.keys(out.rasgos).length, '· objetos:', Object.keys(out.objetos).length, '· textos base en inglés aplicados:', base);
 avisos.forEach((a) => console.log(' -', a));
